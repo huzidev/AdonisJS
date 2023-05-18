@@ -1,5 +1,13 @@
-export default function App() {
+export default function App(): JSX.Element {
+  async function test() {
+    const response = await fetch("http://127.0.0.1:3333/test")
+    console.log("Response", response);
+  }
   return (
-    <div>Hello World</div>
+    <div>
+      <button onClick={test}>
+        Check
+      </button>
+    </div>
   )
 }
