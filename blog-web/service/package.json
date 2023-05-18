@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "create-adonis-ts-app": "^4.2.4"
+  }
+}
