@@ -24,7 +24,7 @@ export default function Form(): JSX.Element {
 
   const config = {
     method: 'post',
-    url: "http://127.0.0.1:3333/add",
+    url: "http://127.0.0.1:3333/add_article",
     headers: {
         'Content-Type': 'application/json'
     },
