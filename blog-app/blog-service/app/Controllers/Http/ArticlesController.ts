@@ -29,7 +29,7 @@ export default class ArticlesController {
     public async updateBlog({ request, params }) {
         const body = await request.validate(UpdateArticle);
         console.log("update body", body);
-        const article = await Database.from("articles").where("id", params.id).update({ ...body })
-        return article
+        await Database.from("articles").where("id", params.id).update({ ...body })
+        return { data: body, message: "Article updated successfully" }
     }
 }
