@@ -1,10 +1,10 @@
 import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
 
-export default class CreateArticleValidator {
+export class CreateArticle {
   public schema = schema.create({
     title: schema.string({ trim: true }, [rules.minLength(6)]),
-    image: schema.string(),
-    content: schema.string({ trim: true }, [rules.minLength(12)])
+    content: schema.string({ trim: true }, [rules.minLength(12)]),
+    image: schema.string()
   })
 
   public messages: CustomMessages = {}

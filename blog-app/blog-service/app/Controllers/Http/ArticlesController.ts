@@ -1,5 +1,6 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from "@ioc:Adonis/Lucid/Database";
+import { CreateArticle } from "App/Validators/CreateArticleValidator";
 
 // Controller used to call the functions created in routes here so routes won't get messed up
 
@@ -10,13 +11,13 @@ export default class ArticlesController {
     }
 
     public async addBlog({ request }) {
-        const { title, image, content } = request.body();
+        const body = await request.validate(CreateArticle);
+        console.log("what is body", body);
+        
         await Database.table("articles").insert({
-            title,
-            image,
-            content,
+            ...body,
             slug: Date.now()
         })
-        return { data: request.body() }
+        return { data: body }
     }
 }
