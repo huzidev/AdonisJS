@@ -22,6 +22,12 @@ export default class ArticlesController {
         return { data: body, message: "Article created successfully" }
     }
 
+    public async getById({ params }) {
+        const article = await Database.from("articles").where("id", params.id).first() // .first() to fetch first element of array so data won't be in array because only single article is fetching which will be in array by default
+        console.log("current article id is", params.id);
+        return { data: article }
+    }
+
     public async updateBlog({ params }) {
         const articleId: number = params.id;
         console.log("Current ID", articleId);
