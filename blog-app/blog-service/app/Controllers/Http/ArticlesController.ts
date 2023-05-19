@@ -6,6 +6,17 @@ import Database from "@ioc:Adonis/Lucid/Database";
 export default class ArticlesController {
     public async getBlogs() {
         const response = await Database.from("articles").select("*");
-        return response;  
+        return { data: response };  
+    }
+
+    public async addBlog({ request }) {
+        const { title, image, content } = request.body();
+        await Database.table("articles").insert({
+            title,
+            image,
+            content,
+            slug: Date.now()
+        })
+        return { data: request.body() }
     }
 }
