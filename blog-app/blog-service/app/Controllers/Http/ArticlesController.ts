@@ -18,18 +18,18 @@ export default class ArticlesController {
             ...body,
             slug: Date.now()
         })
-        return { data: body, message: "Article created successfully" }
+        return { data: body, message: "Article created successfully" };
     }
 
     public async getById({ params }) {
-        const article = await Database.from("articles").where("id", params.id).first() // .first() to fetch first element of array so data won't be in array because only single article is fetching which will be in array by default
-        return article
+        const article = await Database.from("articles").where("id", params.id).first(); // .first() to fetch first element of array so data won't be in array because only single article is fetching which will be in array by default
+        return article;
     }
 
     public async updateBlog({ request, params }) {
         const body = await request.validate(UpdateArticle);
         console.log("update body", body);
-        await Database.from("articles").where("id", params.id).update({ ...body })
-        return { data: body, message: "Article updated successfully" }
+        await Database.from("articles").where("id", params.id).update({ ...body });
+        return { data: body, message: "Article updated successfully" };
     }
 }
