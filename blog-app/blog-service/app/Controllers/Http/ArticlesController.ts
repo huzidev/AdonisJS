@@ -11,6 +11,7 @@ export default class ArticlesController {
     }
 
     public async addBlog({ request }) {
+        // body is title, image, content as of request.body
         const body = await request.validate(CreateArticle);
         console.log("what is body", body);
         
