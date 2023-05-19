@@ -17,7 +17,7 @@ export default function App(): JSX.Element {
           Stable-diffsuion
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/add" element={<Form />} />
-          <Route path="/update" element={<Update />} />
+          <Route path="/update/:id" element={<Update />} />
         </Routes>
       </Router>
     </div>

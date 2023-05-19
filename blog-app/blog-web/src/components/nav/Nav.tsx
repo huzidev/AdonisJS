@@ -4,7 +4,7 @@ export default function Nav() {
   return (
     <div>
         <Link to="/blogs">Blogs</Link>
-        <Link to="/add">Add Blogs</Link>
+        <Link to="/add">Add Blog</Link>
     </div>
   )
 }
