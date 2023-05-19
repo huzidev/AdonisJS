@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { ArticleType } from "./types";
 
-export default function Form(): JSX.Element {
+export default function Update(): JSX.Element {
   const initialState: ArticleType = {title: "", image: "", content: ""};
 
   const [article, setArticle] = useState(initialState)
@@ -43,7 +43,7 @@ export default function Form(): JSX.Element {
   return (
     <div>
         <h1>
-            Add blog
+            Update Blog
         </h1>
           <input 
             type="text" 
