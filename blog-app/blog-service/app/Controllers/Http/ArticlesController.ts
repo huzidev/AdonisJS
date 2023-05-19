@@ -15,10 +15,10 @@ export default class ArticlesController {
         const body = await request.validate(CreateArticle);
         console.log("what is body", body);
         
-        await Database.table("articles").insert({
+        const result = await Database.table("articles").insert({
             ...body,
             slug: Date.now()
         })
-        return { data: body }
+        return { data: result, message: "Article created successfully" }
     }
 }
