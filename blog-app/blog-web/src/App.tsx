@@ -5,7 +5,7 @@ export default function App(): JSX.Element {
   const [blogs, setBlogs] = useState([]);
 
   async function test() {
-    const response = await fetch("http://127.0.0.1:3333/articles");
+    const response= await fetch("http://127.0.0.1:3333/articles");
     const result = await response.json();
     console.log("Result", result.data);
     setBlogs(result.data);
