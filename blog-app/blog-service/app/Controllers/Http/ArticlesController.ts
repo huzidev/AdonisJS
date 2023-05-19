@@ -21,4 +21,9 @@ export default class ArticlesController {
         })
         return { data: body, message: "Article created successfully" }
     }
+
+    public async updateBlog({ params }) {
+        const articleId: number = params.id;
+        console.log("Current ID", articleId);
+    }
 }
