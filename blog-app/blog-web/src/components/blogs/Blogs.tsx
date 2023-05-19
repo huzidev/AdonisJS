@@ -21,6 +21,7 @@ export default function Blogs(): JSX.Element {
         <h1>
           ID: {ele.id}
         </h1>
+        <img src={ele.image} alt="Thumbnail" />
         <h2>
           Title : {ele.title}
         </h2>
