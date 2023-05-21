@@ -1,17 +1,22 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArticleType } from "./types";
 
-export default function Update(): JSX.Element {
+export default function Update(props: any): JSX.Element {
   const initialState: ArticleType = {title: "", image: "", content: ""};
+  const params = useParams();
+  const Navigate = useNavigate();
 
-  const [article, setArticle] = useState(initialState)
+  const [updateArticle, setUpdateArticle] = useState(initialState)
 
-  const { title, image, content } = article;
+  const id = params.id;
+
+  const { title, image, content } = updateArticle;
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setArticle({
-      ...article,
+    setUpdateArticle({
+      ...updateArticle,
       [e.target.name]: e.target.value
     });
   };
@@ -23,20 +28,50 @@ export default function Update(): JSX.Element {
   };
 
   const config = {
-    method: 'post',
-    url: "http://127.0.0.1:3333/add_article",
+    method: 'get',
+    url: `http://127.0.0.1:3333/article/${id}`,
+    headers: {
+        'Content-Type': 'application/json'
+    }
+  }
+  
+  async function getSingleBlog() {
+    try {
+      const response = await axios(config);
+      console.log("Response", response.data);
+      setUpdateArticle({
+        title: response.data.title,
+        image,
+        content: response.data.content
+      })
+    } catch (e) {
+      console.log("Error", e);
+    }
+  }
+  
+  useEffect(() => {
+    getSingleBlog()
+  }, [])
+
+  const updateConfig = {
+    method: 'put',
+    url: `http://127.0.0.1:3333/article/edit/${id}`,
     headers: {
         'Content-Type': 'application/json'
     },
     data: JSON.stringify(data)
   }
 
-  async function addBlog() {
+  async function updateBlog() {
     try {
-      const response = await axios(config);
-      console.log("Response", response);
+      const response = await axios(updateConfig);
+      if (response) {
+        alert("Blog updated");
+        Navigate
+      }
+      
     } catch (e) {
-      console.log("Error", e);
+      console.log("Error");
     }
   }
 
@@ -66,8 +101,8 @@ export default function Update(): JSX.Element {
             rows={10} 
             placeholder="Enter Yours Text Here">
           </textarea>
-          <button onClick={addBlog}>
-            Add Blog
+          <button onClick={updateBlog}>
+            Update Blog
           </button>
     </div>
   )

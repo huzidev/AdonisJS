@@ -17,12 +17,6 @@ export default function Blogs(): JSX.Element {
     getBlogs();
   }, [])
 
-  async function getById(id: number) {
-    Navigate(`/update/${id}`);
-    const response = await fetch(`http://127.0.0.1:3333/article/${id}`);
-    console.log("result for update", response);
-  }
-
   const fetchedData = blogs.map((ele: any) => {
     return (
       <div key={ele.id}>
@@ -36,7 +30,7 @@ export default function Blogs(): JSX.Element {
         <h3>
           Text: {ele.content}
         </h3>
-        <button onClick={() => getById(ele.id)}>
+        <button onClick={() => Navigate(`/update/${ele.id}`)}>
           Edit
         </button>
       </div>
