@@ -67,9 +67,8 @@ export default function Update(props: any): JSX.Element {
       const response = await axios(updateConfig);
       if (response) {
         alert("Blog updated");
-        Navigate
+        Navigate("/blogs");
       }
-      
     } catch (e) {
       console.log("Error");
     }
