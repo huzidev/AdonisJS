@@ -13,8 +13,26 @@ export default function Register() {
     };
     const { username, email, password, cpassword } = user;
 
+    var data: RegisterState = {
+        username,
+        email,
+        password,
+        cpassword
+    };
+
+    const config = {
+        method: 'post',
+        url: "http://127.0.0.1:3333/signup",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify(data)
+    }
+
     async function login() {
-        console.log("Regsiter");
+
+
+
     }
 
     return (
