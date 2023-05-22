@@ -7,8 +7,8 @@ export default function login() {
     
     function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         setUser({
-        ...user,
-        [e.target.name]: e.target.value
+            ...user,
+            [e.target.name]: e.target.value
         });
     };
         
