@@ -14,22 +14,22 @@ export default function Blogs(): JSX.Element {
     setBlogs(result.data);
   }
   
-  useEffect(() => {
-    getBlogs();
-  }, [])
-  
   async function deleteBlog(id: number) {
     const config = {
       method: 'delete',
       url: `http://127.0.0.1:3333/article/delete/${id}`,
       headers: {
-          'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       }
     }
     await axios(config);
     alert("Blog deleted successfully");
   }
-
+  
+  useEffect(() => {
+    getBlogs();
+  }, [deleteBlog])
+  
   const fetchedData = blogs.map((ele: any) => {
     return (
       <div key={ele.id}>
