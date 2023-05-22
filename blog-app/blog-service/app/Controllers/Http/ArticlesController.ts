@@ -26,6 +26,9 @@ export default class ArticlesController {
 
     public async getById({ params }) {
         const article = await Article.findBy("id", params.id); // .first() to fetch first element of array so data won't be in array because only single article is fetching which will be in array by default
+        if (!article) {
+            throw { message: 'Article not found', status: 404 }
+        }
         return { 
             data: article, 
             message: "Article fetched successfully" 
