@@ -11,6 +11,8 @@ export default function login() {
             [e.target.name]: e.target.value
         });
     };
+    const { username, password } = user;
+
         
 
     return (
@@ -19,8 +21,18 @@ export default function login() {
                 Login
             </h1>
             <input 
-                type="text" 
+                type="text"
+                name="username"
+                value={username} 
+                onChange={inputHandler}
+                />
+            <input 
+                type="password"
+                name="password"
+                value={password} 
+                onChange={inputHandler}
             />
+            
         </div>
   )
 }
