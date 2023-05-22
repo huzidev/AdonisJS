@@ -18,7 +18,8 @@ export default function Blogs(): JSX.Element {
   }, [])
   
   async function deleteBlog(id: number) {
-    const response = await fetch("http://127.0.0.1:3333/articles");
+    await fetch(`http://127.0.0.1:3333/article/delete/${id}`);
+    alert("Blog deleted successfully");
   }
 
   const fetchedData = blogs.map((ele: any) => {
