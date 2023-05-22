@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { AuthLogin } from "./types";
 
 export default function login() {
-    const initialState = { username: "", password: "" }
+    const initialState: AuthLogin = { username: "", password: "" }
     const [user, setUser] = useState(initialState)
   
     return (
