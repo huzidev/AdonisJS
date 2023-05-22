@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { AuthLogin } from "./types";
+import { RegisterState } from "./types";
 
 export default function Login() {
-    const initialState: AuthLogin = { username: "", password: "" }
+    const initialState: RegisterState = { username: "", email: "", password: "" }
     const [user, setUser] = useState(initialState)
     
     function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
