@@ -16,11 +16,19 @@ export default class UsersController {
         } catch (e) {
             if (e.code === "ER_DUP_ENTRY") {
                 throw {
-                message: "Email already in use",
-                status: 409,
+                    message: "Email already in use",
+                    status: 409
                 }
             }
             throw e
+        }
+    }
+
+    public async signin({ request }) {
+        try {
+            
+        } catch (e) {
+            
         }
     }
 }
