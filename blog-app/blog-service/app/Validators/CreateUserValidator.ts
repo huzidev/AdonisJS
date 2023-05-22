@@ -9,7 +9,13 @@ export class CreateUser {
         column: "username"
       })
     ]),
-    email: schema.string({}, [rules.email()]),
+    email: schema.string({}, [
+      rules.email(),
+      rules.unique({
+        table: "users",
+        column: "email"
+      })
+    ]),
     password: schema.string({}, [rules.minLength(6), rules.confirmed('passwordConfirmation')]),
   })
 
