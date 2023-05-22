@@ -3,10 +3,10 @@ import {
   BrowserRouter as Router,
   Routes
 } from "react-router-dom";
-import Blogs from "./components/blogs/Blogs";
 import Form from "./components/form/Form";
 import Nav from "./components/nav/Nav";
-import Update from "./components/update/Update";
+import Blogs from "./components/pages/articles/blogs/Blogs";
+import Update from "./components/pages/update/Update";
 
 export default function App(): JSX.Element {
   return (

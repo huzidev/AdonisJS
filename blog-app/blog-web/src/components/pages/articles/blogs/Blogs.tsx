@@ -28,7 +28,7 @@ export default function Blogs(): JSX.Element {
   
   useEffect(() => {
     getBlogs();
-  }, [deleteBlog])
+  }, [])
   
   const fetchedData = blogs.map((ele: any) => {
     return (
