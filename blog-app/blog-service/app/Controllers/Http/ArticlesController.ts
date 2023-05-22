@@ -40,6 +40,6 @@ export default class ArticlesController {
 
     public async deleteBlog({ params }) {
         await Database.from("articles").where("id", params.id).delete();
-        return { message: `Article ${params.title} Deleted` }
+        return { message: `Article ${params.id} Deleted` }
     }    
 }
