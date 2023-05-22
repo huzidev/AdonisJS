@@ -10,8 +10,9 @@ export default class extends BaseSchema {
 
 
       // adding these for table
-      table.string("title");
-      table.string("image");
+      table.string("custom_id", 180).unique();
+      table.string("title", 100);
+      table.string("image", 100);
       // text can be long therefore using text instead of string
       table.text("content");
 
