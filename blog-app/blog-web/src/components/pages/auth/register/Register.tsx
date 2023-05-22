@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RegisterState } from "./types";
 
 export default function Register() {
-    const initialState: RegisterState = { username: "", email: "", password: "" }
+    const initialState: RegisterState = { username: "", email: "", password: "", password: "" }
     const [user, setUser] = useState(initialState)
     
     function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
