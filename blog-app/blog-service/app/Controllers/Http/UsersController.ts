@@ -4,7 +4,7 @@ import User from "App/Models/User";
 import { CreateUser } from "App/Validators/CreateUserValidator";
 
 export default class UsersController {
-    public async create({ request }) {
+    public async signup({ request }) {
         try {
             const body = await request.validate(CreateUser);
             console.log("Register user data", body);
