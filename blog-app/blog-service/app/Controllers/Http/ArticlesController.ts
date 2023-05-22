@@ -25,7 +25,7 @@ export default class ArticlesController {
     }
 
     public async getById({ params }) {
-        const article = await Database.from("articles").where("id", params.id).first(); // .first() to fetch first element of array so data won't be in array because only single article is fetching which will be in array by default
+        const article = await Article.findBy("id", params.id); // .first() to fetch first element of array so data won't be in array because only single article is fetching which will be in array by default
         return { 
             data: article, 
             message: "Article fetched successfully" 
