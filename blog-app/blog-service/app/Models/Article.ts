@@ -6,6 +6,16 @@ export default class Article extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  // adding manually
+  @column()
+  public title: string
+
+  @column()
+  public image: string
+
+  @column()
+  public content: string
+  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
