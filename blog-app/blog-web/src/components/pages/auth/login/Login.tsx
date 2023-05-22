@@ -26,12 +26,14 @@ export default function Login() {
                 type="text"
                 name="username"
                 value={username} 
+                placeholder="Username"
                 onChange={inputHandler}
                 />
             <input 
                 type="password"
                 name="password"
-                value={password} 
+                value={password}
+                placeholder="Password" 
                 onChange={inputHandler}
             />
             <button onClick={login}>
