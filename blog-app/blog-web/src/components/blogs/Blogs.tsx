@@ -12,10 +12,14 @@ export default function Blogs(): JSX.Element {
     console.log("Result", result.data);
     setBlogs(result.data);
   }
-
+  
   useEffect(() => {
     getBlogs();
   }, [])
+  
+  async function deleteBlog(id: number) {
+    const response = await fetch("http://127.0.0.1:3333/articles");
+  }
 
   const fetchedData = blogs.map((ele: any) => {
     return (
@@ -32,6 +36,9 @@ export default function Blogs(): JSX.Element {
         </h3>
         <button onClick={() => Navigate(`/update/${ele.id}`)}>
           Edit
+        </button>
+        <button onClick={() => deleteBlog(ele.id)}>
+          Delete
         </button>
       </div>
     )

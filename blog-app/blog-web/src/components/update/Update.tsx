@@ -37,12 +37,11 @@ export default function Update(props: any): JSX.Element {
   
   async function getSingleBlog() {
     try {
-      const response = await axios(config);
-      console.log("Response", response.data);
+      const response: any = await axios(config);
       setUpdateArticle({
-        title: response.data.title,
+        title: response.data.data.title,
         image,
-        content: response.data.content
+        content: response.data.data.content
       })
     } catch (e) {
       console.log("Error", e);
@@ -75,7 +74,7 @@ export default function Update(props: any): JSX.Element {
   }
 
   return (
-    <div>
+    <div> 
         <h1>
             Update Blog
         </h1>
