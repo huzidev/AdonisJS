@@ -26,10 +26,11 @@ export default class UsersController {
     public async signin({ auth, request }) {
         const body = await request.validate(SigninUser);
         console.log("Login user", body);
-        const username = request.input("username");
-        const password = request.input("password");
+        const username = body.username;
+        const password = body.password;
         try {
-            await auth.use('web').attempt(username, password)
+            const result = await auth.use("web").attempt(username, password)
+            return result;
         } catch (e) {
             console.log("Error", e);
         }
