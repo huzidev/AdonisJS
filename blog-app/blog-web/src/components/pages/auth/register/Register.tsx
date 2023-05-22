@@ -28,7 +28,7 @@ export default function Register() {
             'Content-Type': 'application/json'
         },
         data: JSON.stringify(data)
-    }
+    };
 
     async function signup() {
         try {   
@@ -37,7 +37,7 @@ export default function Register() {
         } catch (e) {
             console.log("Error", e);
         }
-    }
+    };
 
     return (
         <div>
