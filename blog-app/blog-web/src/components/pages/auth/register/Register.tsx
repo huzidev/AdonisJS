@@ -22,7 +22,7 @@ export default function Register() {
     };
 
     const config = {
-        method: 'post',
+        method: "post",
         url: "http://127.0.0.1:3333/signup",
         headers: {
             'Content-Type': 'application/json'

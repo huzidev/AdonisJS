@@ -21,7 +21,7 @@ export default function Login() {
     };
 
     const config = {
-        method: 'post',
+        method: "post",
         url: "http://127.0.0.1:3333/signin",
         headers: {
             'Content-Type': 'application/json'
