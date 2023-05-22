@@ -31,13 +31,12 @@ export default function Register() {
     }
 
     async function login() {
-        try {
-            const response = await axios(config);       
+        try {   
+            const response = await axios(config);      
+            console.log("Response", response);
         } catch (e) {
             console.log("Error", e);
-                        
         }
-
     }
 
     return (
