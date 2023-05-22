@@ -7,6 +7,7 @@ export default class UsersController {
     public async create({ request }) {
         try {
             const body = await request.validate(CreateUser);
+            console.log("Register user data", body);
             await User.create({ ...body });
             return {
                 data: body, 
