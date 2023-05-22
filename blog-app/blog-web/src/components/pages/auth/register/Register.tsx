@@ -26,19 +26,22 @@ export default function Register() {
                 type="text"
                 name="username"
                 value={username} 
+                placeholder="Username"
                 onChange={inputHandler}
             />
             <input 
                 type="email"
                 name="email"
                 value={email} 
+                placeholder="Email"
                 onChange={inputHandler}
-            />
+                />
 
             <input 
                 type="password"
                 name="password"
                 value={password} 
+                placeholder="Password"
                 onChange={inputHandler}
             />
             <button onClick={login}>
