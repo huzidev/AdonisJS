@@ -8,13 +8,12 @@ export default class extends BaseSchema {
       // this is already added
       table.increments("id");
 
-
       // adding these for table
-      table.string("custom_id", 180).unique();
-      table.string("title", 100);
-      table.string("image", 100);
+      table.string("custom_id", 180).notNullable().unique();
+      table.string("title", 100).notNullable();
+      table.string("image", 100).notNullable();
       // text can be long therefore using text instead of string
-      table.text("content");
+      table.text("content").notNullable();
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

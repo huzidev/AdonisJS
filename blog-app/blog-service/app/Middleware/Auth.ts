@@ -30,6 +30,8 @@ export default class AuthMiddleware {
      * it can decide the correct response behavior based upon the guard
      * driver
      */
+
+    // created automatically from node ace auth configure
     let guardLastAttempted: string | undefined
 
     for (let guard of guards) {
