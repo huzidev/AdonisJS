@@ -16,9 +16,7 @@ export default class ArticlesController {
         // body is receiving title, image, content as of request.body, we used request.validate instead of req.body
         const body = await request.validate(CreateArticle);
         
-        await Database.table("articles").insert({
-            ...body,
-        })
+        await Article.create({ ...body });
         return { 
             data: body, 
             message: "Article created successfully" 
