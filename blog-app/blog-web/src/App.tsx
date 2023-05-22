@@ -8,6 +8,7 @@ import Blogs from "./components/pages/articles/blogs/Blogs";
 import Form from "./components/pages/articles/form/Form";
 import Update from "./components/pages/articles/update/Update";
 import Login from "./components/pages/auth/login/Login";
+import Register from "./components/pages/auth/register/Register";
 
 export default function App(): JSX.Element {
   return (
@@ -20,6 +21,7 @@ export default function App(): JSX.Element {
           <Route path="/add" element={<Form />} />
           <Route path="/update/:id" element={<Update />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div>

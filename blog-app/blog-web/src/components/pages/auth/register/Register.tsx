@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RegisterState } from "./types";
 
-export default function Login() {
+export default function Register() {
     const initialState: RegisterState = { username: "", email: "", password: "" }
     const [user, setUser] = useState(initialState)
     
@@ -11,7 +11,7 @@ export default function Login() {
             [e.target.name]: e.target.value
         });
     };
-    const { username, password } = user;
+    const { username, email, password } = user;
 
     async function login() {
         console.log("login");
@@ -27,7 +27,14 @@ export default function Login() {
                 name="username"
                 value={username} 
                 onChange={inputHandler}
-                />
+            />
+            <input 
+                type="email"
+                name="email"
+                value={email} 
+                onChange={inputHandler}
+            />
+
             <input 
                 type="password"
                 name="password"
