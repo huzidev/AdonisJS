@@ -37,4 +37,9 @@ export default class ArticlesController {
             message: "Article updated successfully" 
         };
     }
+
+    public async deleteBlog({ params }) {
+        await Database.from("articles").where("id", params.id).delete();
+        return { message: `Article ${params.title} Deleted` }
+    }    
 }
