@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { RegisterState } from "./types";
 
@@ -30,8 +31,12 @@ export default function Register() {
     }
 
     async function login() {
-
-
+        try {
+            const response = await axios(config);       
+        } catch (e) {
+            console.log("Error", e);
+                        
+        }
 
     }
 
