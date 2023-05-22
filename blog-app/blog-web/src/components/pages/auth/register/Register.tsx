@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RegisterState } from "./types";
 
 export default function Register() {
-    const initialState: RegisterState = { username: "", email: "", password: "", password: "" }
+    const initialState: RegisterState = { username: "", email: "", password: "", cpassword: "" }
     const [user, setUser] = useState(initialState)
     
     function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -11,7 +11,7 @@ export default function Register() {
             [e.target.name]: e.target.value
         });
     };
-    const { username, email, password } = user;
+    const { username, email, password, cpassword } = user;
 
     async function login() {
         console.log("login");
@@ -36,12 +36,18 @@ export default function Register() {
                 placeholder="Email"
                 onChange={inputHandler}
                 />
-
             <input 
                 type="password"
                 name="password"
                 value={password} 
                 placeholder="Password"
+                onChange={inputHandler}
+            />
+            <input 
+                type="password"
+                name="cpassword"
+                value={cpassword} 
+                placeholder="Confirm Password"
                 onChange={inputHandler}
             />
             <button onClick={login}>
