@@ -1,5 +1,4 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Database from "@ioc:Adonis/Lucid/Database";
 import Article from "App/Models/Article";
 import { CreateArticle, UpdateArticle } from "App/Validators/CreateArticleValidator";
 
@@ -36,7 +35,7 @@ export default class ArticlesController {
 
     public async updateBlog({ request, params }) {
         const body = await request.validate(UpdateArticle);
-        await Database.from("articles").where("id", params.id).update(body);
+        await Article.query().where("id", params.id).update(body);
         return { 
             data: body, 
             message: "Article updated successfully" 
