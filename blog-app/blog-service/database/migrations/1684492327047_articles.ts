@@ -11,7 +11,6 @@ export default class extends BaseSchema {
 
       // adding these for table
       table.string("title");
-      table.string("slug").unique(); // title can be same for articles so slug can be used to diffenentiate bw them
       table.string("image");
       // text can be long therefore using text instead of string
       table.text("content");

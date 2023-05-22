@@ -7,7 +7,9 @@ export class CreateArticle {
     image: schema.string()
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    required: '{{ field }} is required to create blog',
+  }
 }
 
 export class UpdateArticle {

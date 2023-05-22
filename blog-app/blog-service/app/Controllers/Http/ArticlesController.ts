@@ -16,7 +16,6 @@ export default class ArticlesController {
         
         await Database.table("articles").insert({
             ...body,
-            slug: Date.now()
         })
         return { 
             data: body, 
