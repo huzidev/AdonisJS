@@ -24,11 +24,13 @@ export default class UsersController {
         }
     }
 
-    public async signin({ request }) {
+    public async signin({ auth, request }) {
+        const username = request.input("username");
+        const password = request.input("password");
         try {
-            
+            await auth.use('web').attempt(username, password)
         } catch (e) {
-            
+            console.log("Error", e);
         }
     }
 }
