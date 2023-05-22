@@ -26,9 +26,9 @@ export default class ArticlesController {
         return { data: article, message: "Blog fetched successfully" };
     }
 
-    public async updateBlog({ request }) {
+    public async updateBlog({ request, params }) {
         const body = await request.validate(UpdateArticle);
-        await Database.from("articles").update(body);
+        await Database.from("articles").where("id", params.id).update(body);
         return { data: body, message: "Article updated successfully" };
     }
 }
