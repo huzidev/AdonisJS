@@ -5,7 +5,10 @@ import { CreateArticle, UpdateArticle } from "App/Validators/CreateArticleValida
 
 // Controller used to call the functions created in routes here so routes won't get messed up
 
+const noArticle = { message: "Article not found", status: 404 }
 export default class ArticlesController {
+
+
     public async getBlogs() {
         const response = await Article.all();
         return { data: response };  
@@ -27,7 +30,7 @@ export default class ArticlesController {
     public async getById({ params }) {
         const article = await Article.findBy("id", params.id); // .first() to fetch first element of array so data won't be in array because only single article is fetching which will be in array by default
         if (!article) {
-            throw { message: 'Article not found', status: 404 }
+            throw noArticle
         }
         return { 
             data: article, 
@@ -45,7 +48,11 @@ export default class ArticlesController {
     }
 
     public async deleteBlog({ params }) {
-        await Database.from("articles").where("id", params.id).delete();
+        const article = await Article.findBy("id", params.id);
+        if (!article) {
+            throw noArticle
+        }
+        await article.delete();
         return { message: `Article ${params.id} Deleted` }
     }    
 }
