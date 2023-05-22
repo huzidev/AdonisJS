@@ -3,7 +3,7 @@ import { useState } from "react";
 import { RegisterState } from "./types";
 
 export default function Register() {
-    const initialState: RegisterState = { username: "", email: "", password: "", cpassword: "" }
+    const initialState: RegisterState = { username: "", email: "", password: "", passwordConfirmation: "" }
     const [user, setUser] = useState(initialState)
     
     function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -12,13 +12,13 @@ export default function Register() {
             [e.target.name]: e.target.value
         });
     };
-    const { username, email, password, cpassword } = user;
+    const { username, email, password, passwordConfirmation } = user;
 
     var data: RegisterState = {
         username,
         email,
         password,
-        cpassword
+        passwordConfirmation
     };
 
     const config = {
@@ -30,7 +30,7 @@ export default function Register() {
         data: JSON.stringify(data)
     }
 
-    async function login() {
+    async function signup() {
         try {   
             const response = await axios(config);      
             console.log("Response", response);
@@ -42,7 +42,7 @@ export default function Register() {
     return (
         <div>
             <h1>
-                Login
+                Register
             </h1>
             <input 
                 type="text"
@@ -67,13 +67,13 @@ export default function Register() {
             />
             <input 
                 type="password"
-                name="cpassword"
-                value={cpassword} 
+                name="passwordConfirmation"
+                value={passwordConfirmation} 
                 placeholder="Confirm Password"
                 onChange={inputHandler}
             />
-            <button onClick={login}>
-                Login
+            <button onClick={signup}>
+                Register
             </button>
         </div>
   )

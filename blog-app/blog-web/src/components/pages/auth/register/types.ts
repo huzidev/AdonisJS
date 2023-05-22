@@ -2,5 +2,5 @@ export interface RegisterState {
     username: string
     email: string
     password: string
-    cpassword: string
+    passwordConfirmation: string
 }
