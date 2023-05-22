@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AuthLogin } from "./types";
 
-export default function login() {
+export default function Login() {
     const initialState: AuthLogin = { username: "", password: "" }
     const [user, setUser] = useState(initialState)
     
@@ -13,7 +13,9 @@ export default function login() {
     };
     const { username, password } = user;
 
-        
+    async function login() {
+        console.log("login");
+    }
 
     return (
         <div>
@@ -32,7 +34,9 @@ export default function login() {
                 value={password} 
                 onChange={inputHandler}
             />
-            
+            <button onClick={login}>
+                Login
+            </button>
         </div>
   )
 }
