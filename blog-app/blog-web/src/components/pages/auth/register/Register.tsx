@@ -14,7 +14,7 @@ export default function Register() {
     const { username, email, password, cpassword } = user;
 
     async function login() {
-        console.log("login");
+        console.log("Regsiter");
     }
 
     return (
