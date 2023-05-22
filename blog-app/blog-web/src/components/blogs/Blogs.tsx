@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +19,14 @@ export default function Blogs(): JSX.Element {
   }, [])
   
   async function deleteBlog(id: number) {
-    await fetch(`http://127.0.0.1:3333/article/delete/${id}`);
+    const config = {
+      method: 'delete',
+      url: `http://127.0.0.1:3333/article/delete/${id}`,
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    }
+    await axios(config);
     alert("Blog deleted successfully");
   }
 
