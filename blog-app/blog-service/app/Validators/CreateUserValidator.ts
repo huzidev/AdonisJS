@@ -26,3 +26,14 @@ export class CreateUser {
     required: "{{ field }} is required to signup",
   }
 }
+
+export class SigninUser {
+  public schema = schema.create({
+    username: schema.string(),
+    password: schema.string()
+  })
+
+  public messages: CustomMessages = {
+    required: '{{ field }} is required to create blog',
+  }
+}

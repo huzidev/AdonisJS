@@ -1,13 +1,12 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import User from "App/Models/User";
-import { CreateUser } from "App/Validators/CreateUserValidator";
+import { CreateUser, SigninUser } from "App/Validators/CreateUserValidator";
 
 export default class UsersController {
     public async signup({ request }) {
         try {
             const body = await request.validate(CreateUser);
-            console.log("Register user data", body);
             await User.create({ ...body });
             return {
                 data: body, 
@@ -25,6 +24,8 @@ export default class UsersController {
     }
 
     public async signin({ auth, request }) {
+        const body = await request.validate(SigninUser);
+        console.log("Login user", body);
         const username = request.input("username");
         const password = request.input("password");
         try {
