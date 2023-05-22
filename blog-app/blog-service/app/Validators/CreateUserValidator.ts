@@ -16,7 +16,10 @@ export class CreateUser {
         column: "email"
       })
     ]),
-    password: schema.string({}, [rules.minLength(6), rules.confirmed('passwordConfirmation')]),
+    password: schema.string({}, [
+      rules.minLength(6), 
+      rules.confirmed("passwordConfirmation")
+    ]),
   })
 
   public messages: CustomMessages = {
