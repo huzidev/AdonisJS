@@ -7,8 +7,6 @@ import { CreateArticle, UpdateArticle } from "App/Validators/CreateArticleValida
 
 const noArticle = { message: "Article not found", status: 404 }
 export default class ArticlesController {
-
-
     public async getBlogs() {
         const response = await Article.all();
         return { data: response };  
@@ -53,6 +51,6 @@ export default class ArticlesController {
             throw noArticle
         }
         await article.delete();
-        return { message: `Article ${params.id} Deleted` }
+        return { message: `Article ${params.id} Deleted` };
     }    
 }
