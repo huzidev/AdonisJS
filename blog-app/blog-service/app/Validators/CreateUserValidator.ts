@@ -23,6 +23,6 @@ export class CreateUser {
   })
 
   public messages: CustomMessages = {
-    required: '{{ field }} is required to signup',
+    required: "{{ field }} is required to signup",
   }
 }
