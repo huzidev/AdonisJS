@@ -23,13 +23,12 @@ export default class ArticlesController {
 
     public async getById({ params }) {
         const article = await Database.from("articles").where("id", params.id).first(); // .first() to fetch first element of array so data won't be in array because only single article is fetching which will be in array by default
-        return article;
+        return { data: article, message: "Blog fetched successfully" };
     }
 
-    public async updateBlog({ request, params }) {
+    public async updateBlog({ request }) {
         const body = await request.validate(UpdateArticle);
-        console.log("update body", body);
-        await Database.from("articles").where("id", params.id).update({ ...body });
+        await Database.from("articles").update(body);
         return { data: body, message: "Article updated successfully" };
     }
 }
