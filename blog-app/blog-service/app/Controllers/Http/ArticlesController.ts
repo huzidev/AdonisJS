@@ -18,7 +18,10 @@ export default class ArticlesController {
             ...body,
             slug: Date.now()
         })
-        return { data: body, message: "Article created successfully" };
+        return { 
+            data: body, 
+            message: "Article created successfully" 
+        };
     }
 
     public async getById({ params }) {
@@ -29,6 +32,9 @@ export default class ArticlesController {
     public async updateBlog({ request, params }) {
         const body = await request.validate(UpdateArticle);
         await Database.from("articles").where("id", params.id).update(body);
-        return { data: body, message: "Article updated successfully" };
+        return { 
+            data: body, 
+            message: "Article updated successfully" 
+        };
     }
 }
