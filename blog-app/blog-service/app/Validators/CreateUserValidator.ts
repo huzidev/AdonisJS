@@ -1,0 +1,13 @@
+import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
+
+export class CreateUser {
+  public schema = schema.create({
+    username: schema.string({ trim: true }, [rules.minLength(4)]),
+    email: schema.string({}, [rules.email()]),
+    password: schema.string({}, [rules.minLength(6), rules.confirmed('passwordConfirmation')]),
+  })
+
+  public messages: CustomMessages = {
+    required: '{{ field }} is required to signup',
+  }
+}
