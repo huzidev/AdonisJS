@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { deleteBlog, getBlog, getBlogs } from "../../../../store/articles/actions";
+import { useNavigate } from "react-router-dom";
+import { deleteBlog, getBlogs } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 import { BlogState } from "./types";
 
 export default function Blogs(): JSX.Element {
   const dispatch = useAppDispatch();
   const allBlogs = useAppSelector(state => state.blogs.allBlogs);
+  const Navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getBlogs());
@@ -24,7 +26,7 @@ export default function Blogs(): JSX.Element {
         <h3>
           Text: {ele.content}
         </h3>
-        <button onClick={() => dispatch(getBlog(ele.id))}>
+        <button onClick={() => Navigate(`/update/${ele.id}`)}>
           Edit
         </button>
         <button onClick={() => dispatch(deleteBlog(ele.id))}>

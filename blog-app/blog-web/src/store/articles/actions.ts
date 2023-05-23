@@ -19,10 +19,7 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
 
 export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (id: number) => {
     try {
-        const response = await api.get(endpoints.GET_BLOG + id);     
-        if (response) {
-            window.location.replace("/blogs");
-        }   
+        const response = await api.get(endpoints.GET_BLOG + id);
     } catch (e) {
         console.log("Error", e);
     }
