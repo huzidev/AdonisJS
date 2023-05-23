@@ -32,7 +32,7 @@ export default function Register() {
 
     async function signup() {
         try {   
-            const response = await axios(config);      
+            const response = await axios(config);
             console.log("Response", response);
         } catch (e) {
             console.log("Error", e);
