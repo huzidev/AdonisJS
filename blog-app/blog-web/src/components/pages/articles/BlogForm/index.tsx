@@ -6,9 +6,7 @@ import { ArticleType } from "./types";
 export default function Form(): JSX.Element {
   const dispatch = useAppDispatch();
   const initialState: ArticleType = {title: "", image: "", content: ""};
-
   const [article, setArticle] = useState(initialState)
-
   const { title, image, content } = article;
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -17,10 +15,6 @@ export default function Form(): JSX.Element {
       [e.target.name]: e.target.value
     });
   };
-
-  async function add() {
-    dispatch(addBlog(article));
-  }
 
   return (
     <div>
@@ -48,7 +42,7 @@ export default function Form(): JSX.Element {
             rows={10} 
             placeholder="Enter Yours Text Here">
           </textarea>
-          <button onClick={add}>
+          <button onClick={() => dispatch(addBlog(article))}>
             Add Blog
           </button>
     </div>
