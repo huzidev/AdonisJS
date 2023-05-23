@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../services/api";
 import * as endpoints from "./endpoints";
+import { UserState } from "./types";
 
 
-export const signUp = createAsyncThunk(endpoints.SIGNUP, async () => {
+export const signUp = createAsyncThunk(endpoints.SIGNUP, async (data: UserState) => {
     try {
        const response = await api.get(endpoints.SIGNUP, data);
        return await response.data.data;
