@@ -29,7 +29,8 @@ export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (id: number) =
 
 export const addBlog = createAsyncThunk(endpoints.ADD_BLOG, async () => {
     try {
-        
+        const response = await api.post(endpoints.ADD_BLOG, data);
+        console.log("Add Blog", response);
     } catch (e) {
         console.log("Erro", e);
     }
