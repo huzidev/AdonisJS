@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getBlog, updateBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 import { ArticleType } from "./types";
@@ -9,10 +9,10 @@ export default function Update(): JSX.Element {
   const blog = useAppSelector((s) => s.blogs.getBlog);
   const initialState: ArticleType = {title: "", image: "", content: ""};
   const params = useParams();
-  const Navigate = useNavigate();
 
-  const [updateArticle, setUpdateArticle] = useState(initialState)
+  const [updateArticle, setUpdateArticle] = useState(initialState);
 
+  // chaning params.id type from string to number
   const id = Number(params.id);
 
   const { title, image, content } = updateArticle;
