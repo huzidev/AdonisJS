@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { updateBlog } from "../../../../store/articles/actions";
 import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { ArticleType } from "./types";
 
@@ -63,16 +64,17 @@ export default function Update(): JSX.Element {
     data: JSON.stringify(data)
   }
 
-  async function updateBlog() {
-    try {
-      const response = await axios(updateConfig);
-      if (response) {
-        alert("Blog updated");
-        Navigate("/blogs");
-      }
-    } catch (e) {
-      console.log("Error");
-    }
+  async function update() {
+    dispatch(updateBlog(updateArticle));
+    // try {
+    //   const response = await axios(updateConfig);
+    //   if (response) {
+    //     alert("Blog updated");
+    //     Navigate("/blogs");
+    //   }
+    // } catch (e) {
+    //   console.log("Error");
+    // }
   }
 
   return (
@@ -101,7 +103,7 @@ export default function Update(): JSX.Element {
             rows={10} 
             placeholder="Enter Yours Text Here">
           </textarea>
-          <button onClick={updateBlog}>
+          <button onClick={update}>
             Update Blog
           </button>
     </div>
