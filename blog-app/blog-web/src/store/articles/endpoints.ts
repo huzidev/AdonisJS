@@ -1,5 +1,5 @@
 export const GET_BLOG = '/articles';
-export const EDIT_ME = '/user/v1/edit/me';
+export const DEL_BLOG = '/article/delete/';
 
 export const LIST = '/user/v1/list/';
 export const CREATE = '/user/v1/add';

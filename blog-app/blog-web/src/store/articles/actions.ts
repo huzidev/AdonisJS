@@ -10,13 +10,19 @@ const initialState: BlogState = {
 export const getBlogs = createAsyncThunk(endpoints.GET_BLOG, async () => {
     try {
        const response = await api.get(endpoints.GET_BLOG);
-       console.log(response);
-       
        return await response.data.data;
     } catch (e) {
         console.log("Error", e);
     }
 });
+
+export const deleteBlog = createAsyncThunk(endpoints.DEL_BLOG, async () => {
+    try {
+        const 
+    } catch (e) {
+        console.log("Error", e);
+    }
+})
 
 const getBlogSlice = createSlice({
     name: "blogs",
