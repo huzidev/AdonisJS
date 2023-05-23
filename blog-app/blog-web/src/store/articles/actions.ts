@@ -7,7 +7,7 @@ const initialState: BlogState = {
     blogs: []   
 }
 
-export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async () => {
+export const getBlogs = createAsyncThunk(endpoints.GET_BLOG, async () => {
     try {
        const response = await api.get(endpoints.GET_BLOG);
        console.log("Response from redux", response.data);
@@ -18,11 +18,11 @@ export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async () => {
 });
 
 const getBlogSlice = createSlice({
-    name: "blog",
+    name: "blogs",
     initialState: initialState,
     reducers : {},
     extraReducers: (builder) => {
-        builder.addCase(getBlog.fulfilled, (state, action) => {
+        builder.addCase(getBlogs.fulfilled, (state, action) => {
             state.blogs = action.payload;
         })
     }
