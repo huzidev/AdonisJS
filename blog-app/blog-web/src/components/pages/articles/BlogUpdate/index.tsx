@@ -69,15 +69,6 @@ export default function Update(): JSX.Element {
       ...updateArticle, 
       id
     }));
-    // try {
-    //   const response = await axios(updateConfig);
-    //   if (response) {
-    //     alert("Blog updated");
-    //     Navigate("/blogs");
-    //   }
-    // } catch (e) {
-    //   console.log("Error");
-    // }
   }
 
   return (

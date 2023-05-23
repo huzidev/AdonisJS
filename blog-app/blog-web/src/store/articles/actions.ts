@@ -20,6 +20,7 @@ export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: B
     try {
         console.log("Receving data fir redux", data);
         const response = await api.put(endpoints.UPDATE_BLOG + data.id, data);
+        alert("Blog updated");
         console.log("Update", response);
         
     } catch (e) {
