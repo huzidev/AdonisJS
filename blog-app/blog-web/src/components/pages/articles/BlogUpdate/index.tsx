@@ -64,6 +64,7 @@ export default function Update(): JSX.Element {
 
   function getSingleBlog() {
     dispatch(getBlog(id))
+    setUpdateArticle(blog)
   }
 
   return (

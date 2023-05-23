@@ -1,9 +1,12 @@
 // for update just title, image and content is required
-export interface BlogUpdate {
-    id: number;
+export interface BlogData {
     title: string;
-    image: string
-    content: string
+    image: string;
+    content: string;
+}
+
+export interface BlogUpdate extends BlogData {
+    id: number;
 }
 
 export interface BlogDetails extends BlogUpdate {
@@ -12,5 +15,5 @@ export interface BlogDetails extends BlogUpdate {
 
 export interface BlogState {
     allBlogs: BlogDetails[];
-    getBlog: BlogDetails[];
+    getBlog: BlogState[];
 }
