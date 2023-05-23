@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { ArticleType } from "./types";
 
 export default function Update(): JSX.Element {
+  const dispatch = useAppDispatch();
   const initialState: ArticleType = {title: "", image: "", content: ""};
   const params = useParams();
   const Navigate = useNavigate();
