@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { ArticleType } from "./types";
 
@@ -32,12 +31,7 @@ export default function Form(): JSX.Element {
   }
 
   async function addBlog() {
-    try {
-      const response = await axios(config);
-      console.log("Response", response);
-    } catch (e) {
-      console.log("Error", e);
-    }
+    
   }
 
   return (
