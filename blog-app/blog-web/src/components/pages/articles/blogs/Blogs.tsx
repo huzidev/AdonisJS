@@ -1,11 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getBlog } from "../../../../store/articles/actions";
+import { useAppDispatch } from "../../../../store/hooks/hooks";
 
 export default function Blogs(): JSX.Element {
-
+  const dispatch = useAppDispatch();
   const Navigate = useNavigate()
   const [blogs, setBlogs] = useState([]);
+
+  function callFromRedux() {
+    dispatch(getBlog)
+  }
 
   async function getBlogs() {
     const response = await fetch("http://127.0.0.1:3333/articles");
