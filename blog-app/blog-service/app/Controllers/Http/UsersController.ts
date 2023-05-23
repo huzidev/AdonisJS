@@ -12,10 +12,11 @@ export default class UsersController {
                 data: body, 
                 message: "User registered successfully" 
             }
+        
         } catch (e) {
             if (e.code === "ER_DUP_ENTRY") {
                 throw {
-                    message: "Email already in use",
+                    message: "User already exist",
                     status: 409
                 }
             }
