@@ -24,33 +24,6 @@ export default function Update(): JSX.Element {
     });
   };
 
-  //  var data: ArticleType = {
-  //     title,
-  //     image,
-  //     content
-  // };
-
-  // const config = {
-  //   method: 'get',
-  //   url: `http://127.0.0.1:3333/article/${id}`,
-  //   headers: {
-  //       'Content-Type': 'application/json'
-  //   }
-  // }
-  
-  // async function getSingleBlog() {
-  //   try {
-  //     const response: any = await axios(config);
-  //     setUpdateArticle({
-  //       title: response.data.data.title,
-  //       image,
-  //       content: response.data.data.content
-  //     })
-  //   } catch (e) {
-  //     console.log("Error", e);
-  //   }
-  // }
-  
   useEffect(() => {
     getSingleBlog()
   }, [])
@@ -64,7 +37,7 @@ export default function Update(): JSX.Element {
 
   function getSingleBlog() {
     dispatch(getBlog(id))
-    setUpdateArticle(blog)
+    setUpdateArticle({...updateArticle, ...blog})
   }
 
   return (

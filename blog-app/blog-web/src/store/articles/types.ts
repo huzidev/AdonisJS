@@ -15,5 +15,5 @@ export interface BlogDetails extends BlogUpdate {
 
 export interface BlogState {
     allBlogs: BlogDetails[];
-    getBlog: BlogData;
+    getBlog: BlogData | {};
 }

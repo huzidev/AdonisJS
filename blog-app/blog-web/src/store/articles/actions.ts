@@ -5,6 +5,7 @@ import { BlogState, BlogUpdate } from "./types";
 
 const initialState: BlogState = {
     allBlogs: [],
+    // getBlog: {title: "", image: "", content: ""}
     getBlog: {}
 }
 
@@ -56,7 +57,7 @@ const getBlogSlice = createSlice({
             state.allBlogs = action.payload;
         })
         builder.addCase(getBlog.fulfilled, (state, action) => {
-            state.getBlog = {...action.payload};
+            state.getBlog = action.payload;
         })
     }
 });
