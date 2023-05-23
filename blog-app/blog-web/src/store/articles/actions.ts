@@ -1,20 +1,31 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import * as endpoints from "./endpoints";
 import { BlogState, BlogUpdate } from "./types";
+
+const Navigate = useNavigate();
 
 const initialState: BlogState = {
     allBlogs: []   
 }
 
-export const getBlogs = createAsyncThunk(endpoints.GET_BLOG, async () => {
+export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
     try {
-       const response = await api.get(endpoints.GET_BLOG);
+       const response = await api.get(endpoints.GET_BLOGS);
        return await response.data.data;
     } catch (e) {
         console.log("Error", e);
     }
 });
+
+export const getBlod = createAsyncThunk(endpoints.GET_BLOG, async (id: number) => {
+    try {
+        const response = await api.get(endpoints.GET_BLOG + id);        
+    } catch (e) {
+        console.log("Error", e);
+    }
+})
 
 export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: BlogUpdate) => {
     try {
@@ -22,7 +33,6 @@ export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: B
         const response = await api.put(endpoints.UPDATE_BLOG + data.id, data);
         alert("Blog updated");
         console.log("Update", response);
-        
     } catch (e) {
         console.log("Error", e);
         
@@ -31,7 +41,7 @@ export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: B
 
 export const deleteBlog = createAsyncThunk(endpoints.DELETE_BLOG, async (id: number) => {
     try {
-        const response = await api.delete(endpoints.DELETE_BLOG + id);
+        await api.delete(endpoints.DELETE_BLOG + id);
     } catch (e) {
         console.log("Error", e);
     }

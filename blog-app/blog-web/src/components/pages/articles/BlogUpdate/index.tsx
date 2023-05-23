@@ -55,15 +55,6 @@ export default function Update(): JSX.Element {
     getSingleBlog()
   }, [])
 
-  const updateConfig = {
-    method: 'put',
-    url: `http://127.0.0.1:3333/article/edit/${id}`,
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    data: JSON.stringify(data)
-  }
-
   async function update() {
     dispatch(updateBlog({
       ...updateArticle, 
