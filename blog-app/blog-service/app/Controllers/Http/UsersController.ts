@@ -8,11 +8,14 @@ export default class UsersController {
         try {
             const body = await request.validate(CreateUser);
             await User.create({ ...body });
+            const userExist = await User.findBy("usernmae", body.username);
+            if (userExist) {
+                console.log("Username already taken");
+            }
             return {
                 data: body, 
                 message: "User registered successfully" 
             }
-        
         } catch (e) {
             if (e.code === "ER_DUP_ENTRY") {
                 throw {
