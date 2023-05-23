@@ -24,14 +24,18 @@ export default function Update(): JSX.Element {
     });
   };
   
-  function getSingleBlog() {
+  async function getSingleBlog() {
     dispatch(getBlog(id))
-    setUpdateArticle({...updateArticle, ...blog})
   }
 
   useEffect(() => {
     getSingleBlog()
-  }, [window.location.pathname])
+    console.log("From UI", blog);
+  }, [])
+
+  useEffect(() => {
+    setUpdateArticle({...updateArticle, ...blog})
+  }, [blog])
 
   async function update() {
     dispatch(updateBlog({

@@ -21,7 +21,7 @@ export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (id: number) =
     try {
         const response = await api.get(endpoints.GET_BLOG + id);
         console.log("from redux", response.data.data);
-        return response.data.data;
+        return await response.data.data;
     } catch (e) {
         console.log("Error", e);
     }
