@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { getBlogs } from "./articles/actions";
+import getBlogs from "./articles/actions";
 
 const store = configureStore({
     reducer: {
-        blog: getBlogs
+        blogs: getBlogs
     }
 })
 

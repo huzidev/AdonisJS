@@ -4,7 +4,7 @@ import * as endpoints from "./endpoints";
 import { BlogState } from "./types";
 
 const initialState: BlogState = {
-    blogs: []   
+    allBlogs: []   
 }
 
 export const getBlogs = createAsyncThunk(endpoints.GET_BLOG, async () => {
@@ -23,9 +23,9 @@ const getBlogSlice = createSlice({
     reducers : {},
     extraReducers: (builder) => {
         builder.addCase(getBlogs.fulfilled, (state, action) => {
-            state.blogs = action.payload;
+            state.allBlogs = action.payload;
         })
     }
 })
 
-export const imageAction = getBlogSlice.actions;
+export default getBlogSlice.reducer;

@@ -7,5 +7,5 @@ export interface BlogDetails {
 }
 
 export interface BlogState {
-    blogs: BlogDetails[];
+    allBlogs: BlogDetails[];
 }
