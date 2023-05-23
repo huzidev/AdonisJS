@@ -18,21 +18,6 @@ export default function Form(): JSX.Element {
     });
   };
 
-  //  var data: ArticleType = {
-  //     title,
-  //     image,
-  //     content
-  // };
-
-  // const config = {
-  //   method: 'post',
-  //   url: "http://127.0.0.1:3333/add_article",
-  //   headers: {
-  //       'Content-Type': 'application/json'
-  //   },
-  //   data: JSON.stringify(data)
-  // }
-
   async function add() {
     dispatch(addBlog(article));
   }
