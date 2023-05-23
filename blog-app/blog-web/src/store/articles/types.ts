@@ -4,8 +4,11 @@ export interface BlogData {
     content: string;
 }
 
-export interface BlogUpdate extends BlogData {
+export interface AddBlogState extends BlogData {
     image: string;
+}
+
+export interface BlogUpdate extends AddBlogState {
     id: number;
 }
 
