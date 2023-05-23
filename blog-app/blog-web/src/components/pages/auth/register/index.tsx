@@ -38,7 +38,6 @@ export default function Register() {
             console.log("Error", e);
         }
     };
-
     return (
         <div>
             <h1>

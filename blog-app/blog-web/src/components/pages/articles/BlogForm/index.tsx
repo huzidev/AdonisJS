@@ -6,7 +6,7 @@ import { ArticleType } from "./types";
 export default function Form(): JSX.Element {
   const dispatch = useAppDispatch();
   const initialState: ArticleType = {title: "", image: "", content: ""};
-  const [article, setArticle] = useState(initialState)
+  const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {

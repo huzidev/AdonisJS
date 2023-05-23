@@ -3,9 +3,9 @@ import api from "../../services/api";
 import * as endpoints from "./endpoints";
 
 
-export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
+export const signUp = createAsyncThunk(endpoints.SIGNUP, async () => {
     try {
-       const response = await api.get(endpoints.GET_BLOGS);
+       const response = await api.get(endpoints.SIGNUP, data);
        return await response.data.data;
     } catch (e) {
         console.log("Error", e);
