@@ -1,8 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../services/api";
 import * as endpoints from "./endpoints";
+import { BlogState } from "./types";
 
-const 
+const initialState: BlogState = {
+    blogs: []   
+}
 
 export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async () => {
     try {
@@ -12,3 +15,4 @@ export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async () => {
         console.log("Error", e);
     }
 });
+
