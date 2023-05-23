@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { addBlog } from "../../../../store/articles/actions";
+import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { ArticleType } from "./types";
 
 export default function Form(): JSX.Element {
+  const dispatch = useAppDispatch();
   const initialState: ArticleType = {title: "", image: "", content: ""};
 
   const [article, setArticle] = useState(initialState)
@@ -30,8 +33,8 @@ export default function Form(): JSX.Element {
     data: JSON.stringify(data)
   }
 
-  async function addBlog() {
-    
+  async function add() {
+    dispatch(addBlog(article));
   }
 
   return (
@@ -60,7 +63,7 @@ export default function Form(): JSX.Element {
             rows={10} 
             placeholder="Enter Yours Text Here">
           </textarea>
-          <button onClick={addBlog}>
+          <button onClick={add}>
             Add Blog
           </button>
     </div>
