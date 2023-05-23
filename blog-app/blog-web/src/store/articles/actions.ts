@@ -5,7 +5,8 @@ import { BlogState, BlogUpdate } from "./types";
 
 
 const initialState: BlogState = {
-    allBlogs: []   
+    allBlogs: [],
+    getBlog: []
 }
 
 export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
@@ -20,6 +21,7 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
 export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (id: number) => {
     try {
         const response = await api.get(endpoints.GET_BLOG + id);
+        console.log(response.data.data);
     } catch (e) {
         console.log("Error", e);
     }
@@ -52,6 +54,9 @@ const getBlogSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getBlogs.fulfilled, (state, action) => {
             state.allBlogs = action.payload;
+        }),
+        builder.addCase(getBlog.fulfilled, (state, action) => {
+            
         })
     }
 });

@@ -1,7 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { updateBlog } from "../../../../store/articles/actions";
+import { getBlog, updateBlog } from "../../../../store/articles/actions";
 import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { ArticleType } from "./types";
 
@@ -24,32 +23,32 @@ export default function Update(): JSX.Element {
     });
   };
 
-   var data: ArticleType = {
-      title,
-      image,
-      content
-  };
+  //  var data: ArticleType = {
+  //     title,
+  //     image,
+  //     content
+  // };
 
-  const config = {
-    method: 'get',
-    url: `http://127.0.0.1:3333/article/${id}`,
-    headers: {
-        'Content-Type': 'application/json'
-    }
-  }
+  // const config = {
+  //   method: 'get',
+  //   url: `http://127.0.0.1:3333/article/${id}`,
+  //   headers: {
+  //       'Content-Type': 'application/json'
+  //   }
+  // }
   
-  async function getSingleBlog() {
-    try {
-      const response: any = await axios(config);
-      setUpdateArticle({
-        title: response.data.data.title,
-        image,
-        content: response.data.data.content
-      })
-    } catch (e) {
-      console.log("Error", e);
-    }
-  }
+  // async function getSingleBlog() {
+  //   try {
+  //     const response: any = await axios(config);
+  //     setUpdateArticle({
+  //       title: response.data.data.title,
+  //       image,
+  //       content: response.data.data.content
+  //     })
+  //   } catch (e) {
+  //     console.log("Error", e);
+  //   }
+  // }
   
   useEffect(() => {
     getSingleBlog()
@@ -60,6 +59,10 @@ export default function Update(): JSX.Element {
       ...updateArticle, 
       id
     }));
+  }
+
+  function getSingleBlog() {
+    dispatch(getBlog(id))
   }
 
   return (
@@ -90,6 +93,9 @@ export default function Update(): JSX.Element {
           </textarea>
           <button onClick={update}>
             Update Blog
+          </button>
+          <button onClick={getSingleBlog}>
+            Get Blog
           </button>
     </div>
   )
