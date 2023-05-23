@@ -1,3 +1,4 @@
+// for update just title, image and content is required
 export interface BlogUpdate {
     title: string;
     image: string

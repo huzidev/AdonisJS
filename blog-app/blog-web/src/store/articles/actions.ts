@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../services/api";
 import * as endpoints from "./endpoints";
-import { BlogDetails, BlogState } from "./types";
+import { BlogState, BlogUpdate } from "./types";
 
 const initialState: BlogState = {
     allBlogs: []   
@@ -16,8 +16,9 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOG, async () => {
     }
 });
 
-export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: BlogDetails) => {
+export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: BlogUpdate) => {
     try {
+        console.log("Receving data fir redux", data);
         const response = await api.put(endpoints.UPDATE_BLOG, data);
         console.log("Update", response);
         
