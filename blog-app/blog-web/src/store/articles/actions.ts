@@ -24,7 +24,7 @@ export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (id: number) =
     } catch (e) {
         console.log("Error", e);
     }
-})
+});
 
 export const addBlog = createAsyncThunk(endpoints.ADD_BLOG, async (data: AddBlogState) => {
     try {
@@ -33,7 +33,7 @@ export const addBlog = createAsyncThunk(endpoints.ADD_BLOG, async (data: AddBlog
     } catch (e) {
         console.log("Erro", e);
     }
-})
+});
 
 export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: BlogUpdate) => {
     try {
@@ -44,7 +44,7 @@ export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: B
         console.log("Error", e);
         
     }
-})
+});
 
 export const deleteBlog = createAsyncThunk(endpoints.DELETE_BLOG, async (id: number) => {
     try {
@@ -52,7 +52,7 @@ export const deleteBlog = createAsyncThunk(endpoints.DELETE_BLOG, async (id: num
     } catch (e) {
         console.log("Error", e);
     }
-})
+});
 
 const getBlogSlice = createSlice({
     name: "blogs",
