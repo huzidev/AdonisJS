@@ -7,8 +7,8 @@ import Nav from "./components/nav/Nav";
 import Form from "./components/pages/articles/BlogForm/index";
 import Update from "./components/pages/articles/BlogUpdate/index";
 import Blogs from "./components/pages/articles/BlogView/index";
-import Login from "./components/pages/auth/UserLogin";
-import Register from "./components/pages/auth/UserRegister";
+import Login from "./components/pages/auth/login";
+import Register from "./components/pages/auth/register";
 
 export default function App(): JSX.Element {
   return (
