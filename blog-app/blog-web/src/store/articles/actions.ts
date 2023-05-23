@@ -5,7 +5,6 @@ import { BlogState, BlogUpdate } from "./types";
 
 const initialState: BlogState = {
     allBlogs: [],
-    // getBlog: {title: "", image: "", content: ""}
     getBlog: {}
 }
 

@@ -1,11 +1,11 @@
-// for update just title, image and content is required
+// for getBlog just title and content is required
 export interface BlogData {
     title: string;
-    image: string;
     content: string;
 }
 
 export interface BlogUpdate extends BlogData {
+    image: string;
     id: number;
 }
 
