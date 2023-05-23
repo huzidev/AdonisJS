@@ -1,12 +1,12 @@
 // for update just title, image and content is required
 export interface BlogUpdate {
+    id: number;
     title: string;
     image: string
     content: string
 }
 
 export interface BlogDetails extends BlogUpdate {
-    id: number;
     custom_id: number;
 }
 

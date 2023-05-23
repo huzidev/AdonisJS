@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { updateBlog } from "../../../../store/articles/actions";
 import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { ArticleType } from "./types";
 
@@ -64,16 +65,19 @@ export default function Update(): JSX.Element {
   }
 
   async function update() {
-    // dispatch(updateBlog(updateArticle));
-    try {
-      const response = await axios(updateConfig);
-      if (response) {
-        alert("Blog updated");
-        Navigate("/blogs");
-      }
-    } catch (e) {
-      console.log("Error");
-    }
+    dispatch(updateBlog({
+      ...updateArticle, 
+      id
+    }));
+    // try {
+    //   const response = await axios(updateConfig);
+    //   if (response) {
+    //     alert("Blog updated");
+    //     Navigate("/blogs");
+    //   }
+    // } catch (e) {
+    //   console.log("Error");
+    // }
   }
 
   return (
