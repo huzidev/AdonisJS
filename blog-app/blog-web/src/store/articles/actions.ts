@@ -27,6 +27,14 @@ export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (id: number) =
     }
 })
 
+export const addBlog = createAsyncThunk(endpoints.ADD_BLOG, async () => {
+    try {
+        
+    } catch (e) {
+        
+    }
+})
+
 export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: BlogUpdate) => {
     try {
         console.log("Receving data fir redux", data);
