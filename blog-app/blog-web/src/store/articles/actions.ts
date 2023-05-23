@@ -19,7 +19,6 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOG, async () => {
 export const deleteBlog = createAsyncThunk(endpoints.DEL_BLOG, async (id: number) => {
     try {
         const response = await api.delete(endpoints.DEL_BLOG + id);
-        console.log("delete blog response", response);
     } catch (e) {
         console.log("Error", e);
     }

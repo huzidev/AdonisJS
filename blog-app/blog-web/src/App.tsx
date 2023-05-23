@@ -4,11 +4,11 @@ import {
   Routes
 } from "react-router-dom";
 import Nav from "./components/nav/Nav";
-import Blogs from "./components/pages/articles/blogs/Blogs";
-import Form from "./components/pages/articles/form/Form";
-import Update from "./components/pages/articles/update/Update";
-import Login from "./components/pages/auth/login/Login";
-import Register from "./components/pages/auth/register/Register";
+import Form from "./components/pages/articles/BlogForm/index";
+import Update from "./components/pages/articles/BlogUpdate/index";
+import Blogs from "./components/pages/articles/BlogView/index";
+import Login from "./components/pages/auth/UserLogin";
+import Register from "./components/pages/auth/UserRegister";
 
 export default function App(): JSX.Element {
   return (
@@ -16,7 +16,6 @@ export default function App(): JSX.Element {
       <Router>
         <Nav />
         <Routes>
-          Stable-diffsuion
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/add" element={<Form />} />
           <Route path="/update/:id" element={<Update />} />

@@ -35,7 +35,6 @@ export default function Blogs(): JSX.Element {
       </div>
     )
   })
-
   return (
     <div>
       {fetchedData}
