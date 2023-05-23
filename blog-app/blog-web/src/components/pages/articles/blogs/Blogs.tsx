@@ -10,7 +10,7 @@ export default function Blogs(): JSX.Element {
   const [blogs, setBlogs] = useState([]);
 
   function callFromRedux() {
-    dispatch(getBlog)
+    dispatch(getBlog())
   }
 
   async function getBlogs() {
