@@ -62,6 +62,9 @@ export default function Blogs(): JSX.Element {
   return (
     <div>
       {fetchedData}
+      <button onClick={callFromRedux}>
+        Call from redux
+      </button>
     </div>
   )
 }
