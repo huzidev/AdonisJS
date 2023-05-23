@@ -24,13 +24,8 @@ export default function Update(): JSX.Element {
     });
   };
   
-  async function getSingleBlog() {
-    dispatch(getBlog(id))
-  }
-
   useEffect(() => {
-    getSingleBlog()
-    console.log("From UI", blog);
+    dispatch(getBlog(id))
   }, [])
 
   useEffect(() => {
@@ -43,8 +38,6 @@ export default function Update(): JSX.Element {
       id
     }));
   }
-
-
   return (
     <div> 
         <h1>
