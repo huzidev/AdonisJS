@@ -4,7 +4,7 @@ import User from "App/Models/User";
 import { CreateUser, SigninUser } from "App/Validators/CreateUserValidator";
 
 export default class UsersController {
-    public async signup({ request }) {
+    public async signUp({ request }) {
         try {
             const body = await request.validate(CreateUser);
             await User.create({ ...body });
@@ -24,7 +24,7 @@ export default class UsersController {
         }
     }
 
-    public async signin({ auth, request }) {
+    public async signIn({ auth, request }) {
         const body = await request.validate(SigninUser);
         console.log("Login user", body);
         const username = body.username;
