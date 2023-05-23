@@ -31,7 +31,7 @@ export const addBlog = createAsyncThunk(endpoints.ADD_BLOG, async () => {
     try {
         
     } catch (e) {
-        
+        console.log("Erro", e);
     }
 })
 
