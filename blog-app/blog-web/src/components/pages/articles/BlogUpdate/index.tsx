@@ -23,10 +23,15 @@ export default function Update(): JSX.Element {
       [e.target.name]: e.target.value
     });
   };
+  
+  function getSingleBlog() {
+    dispatch(getBlog(id))
+    setUpdateArticle({...updateArticle, ...blog})
+  }
 
   useEffect(() => {
     getSingleBlog()
-  }, [])
+  }, [window.location.pathname])
 
   async function update() {
     dispatch(updateBlog({
@@ -35,10 +40,6 @@ export default function Update(): JSX.Element {
     }));
   }
 
-  function getSingleBlog() {
-    dispatch(getBlog(id))
-    setUpdateArticle({...updateArticle, ...blog})
-  }
 
   return (
     <div> 
@@ -68,9 +69,6 @@ export default function Update(): JSX.Element {
           </textarea>
           <button onClick={update}>
             Update Blog
-          </button>
-          <button onClick={getSingleBlog}>
-            Get Blog
           </button>
     </div>
   )
