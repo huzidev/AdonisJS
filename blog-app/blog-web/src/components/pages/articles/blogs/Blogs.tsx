@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteBlog, getBlogs } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
+import { BlogState } from "./types";
 
 export default function Blogs(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -12,7 +13,7 @@ export default function Blogs(): JSX.Element {
     dispatch(getBlogs());
   }, [])
 
-  const fetchedData = allBlogs.map((ele: any) => {
+  const fetchedData = allBlogs.map((ele: BlogState) => {
     return (
       <div key={ele.id}>
         <h1>
