@@ -16,9 +16,13 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOG, async () => {
     }
 });
 
-export const deleteBlog = createAsyncThunk(endpoints.DEL_BLOG, async (id: number) => {
+export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async () => {
+    
+})
+
+export const deleteBlog = createAsyncThunk(endpoints.DELETE_BLOG, async (id: number) => {
     try {
-        const response = await api.delete(endpoints.DEL_BLOG + id);
+        const response = await api.delete(endpoints.DELETE_BLOG + id);
     } catch (e) {
         console.log("Error", e);
     }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArticleType } from "./types";
 
-export default function Update(props: any): JSX.Element {
+export default function Update(): JSX.Element {
   const initialState: ArticleType = {title: "", image: "", content: ""};
   const params = useParams();
   const Navigate = useNavigate();
