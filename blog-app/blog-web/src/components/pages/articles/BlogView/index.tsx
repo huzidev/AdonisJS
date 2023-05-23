@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { deleteBlog, getBlog, getBlogs } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 import { BlogState } from "./types";
@@ -7,7 +6,6 @@ import { BlogState } from "./types";
 export default function Blogs(): JSX.Element {
   const dispatch = useAppDispatch();
   const allBlogs = useAppSelector(state => state.blogs.allBlogs);
-  const Navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getBlogs());
