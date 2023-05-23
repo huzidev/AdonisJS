@@ -1,1 +1,1 @@
-export const SIGNUP = "signup";
+export const SIGNUP = "/signup";
