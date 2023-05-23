@@ -19,7 +19,7 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
     }
 });
 
-export const getBlod = createAsyncThunk(endpoints.GET_BLOG, async (id: number) => {
+export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (id: number) => {
     try {
         const response = await api.get(endpoints.GET_BLOG + id);        
     } catch (e) {
