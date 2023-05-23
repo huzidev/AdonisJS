@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 
 export default function Blogs(): JSX.Element {
   const dispatch = useAppDispatch();
-  const allBlogs: any = useAppSelector(state => state.blogs.allBlogs)
+  const allBlogs: any = useAppSelector(state => state.blogs.allBlogs);
   const Navigate = useNavigate()
   const [blogs, setBlogs] = useState(allBlogs);
 

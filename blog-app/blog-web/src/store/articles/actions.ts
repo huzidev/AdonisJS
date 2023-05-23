@@ -10,8 +10,7 @@ const initialState: BlogState = {
 export const getBlogs = createAsyncThunk(endpoints.GET_BLOG, async () => {
     try {
        const response = await api.get(endpoints.GET_BLOG);
-       console.log("Response from redux", response.data);
-       return response.data;
+       return await response.data.data;
     } catch (e) {
         console.log("Error", e);
     }
