@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { AuthState } from "./types";
 
 export default function Login() {
     const initialState: AuthState = { email: "", password: "" }
+    const dispatch = useAppDispatch();
     const [user, setUser] = useState(initialState)
     
     function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
