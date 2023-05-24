@@ -29,7 +29,7 @@ export class CreateUser {
 
 export class SigninUser {
   public schema = schema.create({
-    username: schema.string(),
+    email: schema.string({}, [rules.email()]),
     password: schema.string({}, [rules.minLength(6)])
   })
 
