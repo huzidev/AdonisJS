@@ -17,7 +17,7 @@ export default function Login() {
     
     async function login() {
         dispatch(signIn(user));
-    };
+    }
     return (
         <div>
             <h1>
@@ -26,14 +26,14 @@ export default function Login() {
             <input 
                 type="email"
                 name="email"
-                value={email} 
+                value={user.email} 
                 placeholder="email"
                 onChange={inputHandler}
                 />
             <input 
                 type="password"
                 name="password"
-                value={password}
+                value={user.password}
                 placeholder="Password" 
                 onChange={inputHandler}
             />
