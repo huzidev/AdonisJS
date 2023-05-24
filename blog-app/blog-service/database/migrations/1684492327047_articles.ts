@@ -1,5 +1,16 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema';
 
+// TO UPDATE table create different migration with same name as of the table you wanted to update then use alterTable
+// export default class extends BaseSchema {
+//   protected tableName = 'articles'
+
+//   public async up () {
+//     // for altering the table other wise old data will get removed
+//     this.schema.alterTable(this.tableName, (table) => {
+
+//     })
+//   }
+
 export default class extends BaseSchema {
   protected tableName = "articles";
 
