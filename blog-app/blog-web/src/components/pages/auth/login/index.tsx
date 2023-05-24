@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AuthState } from "./types";
 
 export default function Login() {
-    const initialState: AuthState = { username: "", password: "" }
+    const initialState: AuthState = { email: "", password: "" }
     const [user, setUser] = useState(initialState)
     
     function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {

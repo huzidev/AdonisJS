@@ -37,4 +37,9 @@ api.interceptors.response.use(
   },
 );
 
+export function setToken(token: string | null): void {
+  const parsed = token ? `Bearer ${token}` : token;
+  api.defaults.headers.Authorization = parsed;
+}
+
 export default api;
