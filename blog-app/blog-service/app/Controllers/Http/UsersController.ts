@@ -15,12 +15,11 @@ export default class UsersController {
                     status: 409
                 }
             } else if (!userExist) {
+                // because we used new User() therefore use user.save() for saving at database
                 const user = new User();
                 user.fill(body);
                 await user.save();
                 const { token } = await auth.login(user);
-                console.log("Token", token);
-                await User.create({ ...body });
                 return {
                     token,
                     data: user, 
