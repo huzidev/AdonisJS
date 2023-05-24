@@ -39,7 +39,7 @@ export default class UsersController {
 
     public async signIn({ auth, request }) {
         const body = await request.validate(SigninUser);
-        console.log("Login user", body);
+        const { token } = await auth.attempt(body.username, body.password);
         const username = body.username;
         const password = body.password;
         try {
