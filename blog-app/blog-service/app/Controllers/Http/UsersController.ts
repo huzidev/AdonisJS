@@ -38,13 +38,15 @@ export default class UsersController {
     }
 
     public async signIn({ auth, request }) {
-        const body = await request.validate(SigninUser);
-        const { token } = await auth.attempt(body.username, body.password);
-        const username = body.username;
-        const password = body.password;
         try {
-            const result = await auth.use("web").attempt(username, password)
-            return result;
+            const body = await request.validate(SigninUser);
+            const { token } = await auth.attempt(body?.username!, body.password);
+            console.log("auth", auth);
+            
+            return {
+                token,
+                data: auth
+            }
         } catch (e) {
             console.log("Error", e);
         }
