@@ -16,7 +16,7 @@ export default function Login() {
     };
     
     async function login() {
-        dispatch(signIn(user));
+        dispatch(signIn(user))
     }
     return (
         <div>
