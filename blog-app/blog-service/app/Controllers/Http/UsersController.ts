@@ -8,7 +8,6 @@ export default class UsersController {
     public async signUp({ request, auth }: HttpContextContract) {
         try {
             const body = await request.validate(CreateUser);
-            console.log("Body", body);
             const userExist = await User.findBy("username", body.username);
             if (userExist) {
                 throw {
@@ -18,10 +17,7 @@ export default class UsersController {
             } else if (!userExist) {
                 const user = new User();
                 user.fill(body);
-                console.log("User instacne", user);
-                
                 await user.save();
-                await user.refresh();
                 const { token } = await auth.login(user);
                 console.log("Token", token);
                 await User.create({ ...body });
