@@ -30,7 +30,7 @@ export class CreateUser {
 export class SigninUser {
   public schema = schema.create({
     username: schema.string(),
-    password: schema.string()
+    password: schema.string({}, [rules.minLength(6)])
   })
 
   public messages: CustomMessages = {

@@ -37,12 +37,12 @@ export default class UsersController {
         }
     }
 
-    public async signIn({ auth, request }) {
+    public async signIn({ request, auth }: HttpContextContract) {
         try {
             const body = await request.validate(SigninUser);
+            console.log("body", body);
             const { token } = await auth.attempt(body?.username!, body.password);
             console.log("auth", auth);
-            
             return {
                 token,
                 data: auth
