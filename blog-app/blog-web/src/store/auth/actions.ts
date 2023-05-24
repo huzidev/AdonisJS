@@ -12,6 +12,10 @@ export const signUp = createAsyncThunk(endpoints.SIGNUP, async (data: UserState)
     }
 });
 
+export const signIn = createAsyncThunk(endpoints.SIGNIN, async () => {
+    
+})
+
 
 // const getBlogSlice = createSlice({
 //     name: "blogs",
