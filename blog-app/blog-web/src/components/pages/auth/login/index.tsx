@@ -1,12 +1,12 @@
-import axios from "axios";
 import { useState } from "react";
+import { signIn } from "../../../../store/auth/actions";
 import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { AuthState } from "./types";
 
 export default function Login() {
-    const initialState: AuthState = { email: "", password: "" }
+    const initialState: AuthState = { email: "", password: "" };
     const dispatch = useAppDispatch();
-    const [user, setUser] = useState(initialState)
+    const [user, setUser] = useState(initialState);
     
     function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         setUser({
@@ -15,27 +15,9 @@ export default function Login() {
         });
     };
     
-    const { email, password } = user;
-
-    var data: AuthState = {
-        email,
-        password
-    };
-
-    const config = {
-        method: "post",
-        url: "http://127.0.0.1:3333/signin",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: JSON.stringify(data)
-    };
-
     async function login() {
-        const response = await axios(config);
-        console.log("Response for login", response);
-    }
-
+        dispatch(signIn(user));
+    };
     return (
         <div>
             <h1>
