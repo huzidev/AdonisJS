@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../services/api";
 import * as endpoints from "./endpoints";
-import { UserState } from "./types";
+import { UserSignInState, UserState } from "./types";
 
 export const signUp = createAsyncThunk(endpoints.SIGNUP, async (data: UserState) => {
     try {
@@ -12,8 +12,13 @@ export const signUp = createAsyncThunk(endpoints.SIGNUP, async (data: UserState)
     }
 });
 
-export const signIn = createAsyncThunk(endpoints.SIGNIN, async () => {
-    
+export const signIn = createAsyncThunk(endpoints.SIGNIN, async (data: UserSignInState) => {
+    try {
+        
+    } catch (e) {
+        console.log("Error", e);
+        
+    }
 })
 
 
