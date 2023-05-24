@@ -20,21 +20,4 @@ export const signIn = createAsyncThunk(endpoints.SIGNIN, async (data: UserSignIn
     } catch (e) {
         console.log("Error", e);
     }
-})
-
-
-// const getBlogSlice = createSlice({
-//     name: "blogs",
-//     initialState: initialState,
-//     reducers : {},
-//     extraReducers: (builder) => {
-//         builder.addCase(getBlogs.fulfilled, (state, action) => {
-//             state.allBlogs = action.payload;
-//         })
-//         builder.addCase(getBlog.fulfilled, (state, action) => {
-//             state.getBlog = action.payload;
-//         })
-//     }
-// });
-
-// export default getBlogSlice.reducer;
+});
