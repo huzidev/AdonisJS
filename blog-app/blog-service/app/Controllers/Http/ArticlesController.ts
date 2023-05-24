@@ -26,8 +26,9 @@ export default class ArticlesController {
         if (!article) {
             throw noArticle
         }
+        const { title, content } = article;
         return { 
-            data: article, 
+            data: {title, content}, 
             message: "Article fetched successfully" 
         };
     }
