@@ -13,10 +13,10 @@ export default function Login() {
         });
     };
     
-    const { username, password } = user;
+    const { email, password } = user;
 
     var data: AuthState = {
-        username,
+        email,
         password
     };
 
@@ -40,10 +40,10 @@ export default function Login() {
                 Login
             </h1>
             <input 
-                type="text"
-                name="username"
-                value={username} 
-                placeholder="Username"
+                type="email"
+                name="email"
+                value={email} 
+                placeholder="email"
                 onChange={inputHandler}
                 />
             <input 

@@ -15,7 +15,7 @@ export default function Blogs(): JSX.Element {
   // }, [])
 
   const fetchedData = allBlogs.map((ele: BlogState) => {
-    return (
+    return (  
       <div key={ele.id}>
         <h1>
           ID: {ele.id}
