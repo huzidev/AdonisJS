@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
@@ -12,14 +12,6 @@ export default function BlogView(): JSX.Element {
   const initialState: BlogState = {title: "", image: "", content: ""};
 
   const [blog, setBlog] = useState(initialState)
-
-  // for (let key in allBlogs) {
-  //   const data : any = allBlogs[key]    
-  //   console.log(data);
-  // }
-
-  allBlogs.
-  
 
   const slug: string | undefined = params.slug;
 
