@@ -18,7 +18,7 @@ export default function App(): JSX.Element {
         <Nav />
         <Routes>
           <Route path="/blogs" element={<Blogs />} />
-          <Route path="/blog/:id" element={<BlogView />} />
+          <Route path="/blog/:slug" element={<BlogView />} />
           <Route path="/add" element={<Form />} />
           <Route path="/edit/:slug" element={<Update />} />
           <Route path="/login" element={<Login />} />

@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { getBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 
 export default function BlogView(): JSX.Element {
@@ -6,11 +8,25 @@ export default function BlogView(): JSX.Element {
   const allBlogs = useAppSelector((state) => state.blogs.getBlog);
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getBlog(Number(params.id)))
-  // }, [])
+  const initialState: ArticleType = {title: "", image: "", content: ""};
 
-  // const { title, content } = allBlogs;
+  const [blog, setBlog] = useState({})
+
+  // for (let key in allBlogs) {
+  //   const data : any = allBlogs[key]    
+  //   console.log(data);
+  // }
+
+  allBlogs.
+  
+
+  const slug: string | undefined = params.slug;
+
+  useEffect(() => {
+    dispatch(getBlog(slug!))
+  }, [])
+
+
 
   return (
     <div>
