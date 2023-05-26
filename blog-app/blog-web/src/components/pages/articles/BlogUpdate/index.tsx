@@ -50,12 +50,12 @@ export default function Update(): JSX.Element {
             onChange={inputHandler}
             placeholder="Article's Title"
             />
-          <input 
+          {/* <input 
             type="file" 
             name="image" 
             onChange={inputHandler}
             value={image} 
-            />
+            /> */}
           <textarea 
             name="content" 
             value={content} 

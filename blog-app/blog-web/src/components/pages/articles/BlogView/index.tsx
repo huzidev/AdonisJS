@@ -8,8 +8,7 @@ export default function BlogView(): JSX.Element {
 
   function call() {
     dispatch(getBlog(Number(params.id)))
-    console.log("id", params.id);
-    
+    console.log("id", params);
   }
 
   return (
