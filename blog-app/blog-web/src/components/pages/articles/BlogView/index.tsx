@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
+import { useGetBlogPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
 export default function BlogView(): JSX.Element {
   const params = useParams();
-  const allBlogs = useAppSelector((state) => state.blogs.getBlog);
+  const getBlog = useAppSelector((state) => state.blogs.getBlog);
   const dispatch = useAppDispatch();
+
+  useGetBlogPageHooks();
 
   const initialState: BlogState = {title: "", image: "", content: ""};
 
   const [blog, setBlog] = useState(initialState)
 
-  const slug: string | undefined = params.slug;
-
   useEffect(() => {
-    dispatch(getBlog(slug!))
-  }, [])
-
-
+    setBlog({...blog, ...getBlog})
+  }, [blog])
 
   return (
     <div>

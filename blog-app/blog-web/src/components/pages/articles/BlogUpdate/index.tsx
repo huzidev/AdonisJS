@@ -6,7 +6,7 @@ import { ArticleType } from "./types";
 
 export default function Update(): JSX.Element {
   const dispatch = useAppDispatch();
-  const blog = useAppSelector((s) => s.blogs.getBlog);
+  const getBlog = useAppSelector((s) => s.blogs.getBlog);
   useEditBlogPageHooks();
   
   const initialState: ArticleType = {id: null, title: "", image: "", content: ""};
@@ -22,8 +22,8 @@ export default function Update(): JSX.Element {
   };
   
   useEffect(() => {
-    setUpdateArticle({...updateArticle, ...blog})
-  }, [blog])
+    setUpdateArticle({...updateArticle, ...getBlog})
+  }, [getBlog])
 
   async function update() {
     dispatch(updateBlog({
