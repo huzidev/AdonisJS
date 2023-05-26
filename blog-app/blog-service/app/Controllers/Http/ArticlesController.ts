@@ -22,13 +22,15 @@ export default class ArticlesController {
     }
 
     public async getById({ params }) {
-        const article = await Article.findBy("id", params.id); // .first() to fetch first element of array so data won't be in array because only single article is fetching which will be in array by default
-        if (!article) {
+        const articleId = await Article.findBy("id", params.id);
+        const articleCId = await Article.findBy("custom_id", params.id);
+        const articleState = articleId ? articleId : articleCId
+        if (!articleState) {
             throw noArticle
         }
-        const { title, content } = article;
+        // const { title, content } = article;
         return { 
-            data: {title, content}, 
+            data: articleState, 
             message: "Article fetched successfully" 
         };
     }
