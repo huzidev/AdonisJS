@@ -1,6 +1,6 @@
 export interface BlogState {
     id: number;
-    customId: number;
+    slug: string;
     title: string;
     image: string;
     content: string;

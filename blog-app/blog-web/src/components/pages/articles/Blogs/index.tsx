@@ -36,15 +36,15 @@ export default function Blogs(): JSX.Element {
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {ele.content.length > 38 ? `${ele.content.slice(0, 38)}...` : ele.content}
             </p>
-            <Link
+            {/* <Link
               to={`/blog/${ele.customId}`}
               className="text-sm font-medium text-center text-white hover:text-blue-500"
             > 
               Read More
-            </Link>
+            </Link> */}
             <div>
               <Link
-                to={`/update/${ele.id}`}
+                to={`/update/${ele.slug}`}
                 type="button"
                 className="text-white bg-gray-800 font-medium text-sm py-2.5"
               >
