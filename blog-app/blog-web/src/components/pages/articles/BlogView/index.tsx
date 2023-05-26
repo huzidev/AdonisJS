@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { deleteBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 import { useBlogsPageHooks } from "./hooks";
@@ -8,6 +8,9 @@ export default function Blogs(): JSX.Element {
   const dispatch = useAppDispatch();
   const allBlogs = useAppSelector((state) => state.blogs.allBlogs);
   const Navigate = useNavigate();
+
+  console.log("all blogs", allBlogs);
+  
 
   useBlogsPageHooks();
   // useEffect(() => {
@@ -34,12 +37,13 @@ export default function Blogs(): JSX.Element {
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {ele.content}
             </p>
-            <Link
-              to={ele.custom_id}
+            {/* <Link
+              to={`/${ele.custom_id}`}
               className="inline-flex items-center text-white"
             > 
               Read More
-            </Link>
+            </Link> */}
+            <button onClick={() => console.log("custom id", ele.custom_id)}>Read More</button>
           </div>
         </div>
       </div>
