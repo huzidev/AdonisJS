@@ -12,7 +12,6 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
     try {
        const response = await api.get(endpoints.GET_BLOGS);
        return await response.data.data;
-       
     } catch (e) {
         console.log("Error", e);
     }
