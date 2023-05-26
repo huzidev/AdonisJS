@@ -43,7 +43,12 @@ export default function Blogs(): JSX.Element {
             > 
               Read More
             </Link> */}
-            <button onClick={() => console.log("custom id", ele.custom_id)}>Read More</button>
+            <button 
+            className="text-sm font-medium text-center text-white hover:text-blue-500"
+            onClick={() => console.log("custom id", ele.custom_id)}
+            >
+              Read More
+            </button>
           </div>
         </div>
       </div>
