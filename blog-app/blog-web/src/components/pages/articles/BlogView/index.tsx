@@ -18,9 +18,12 @@ export default function Blogs(): JSX.Element {
 
   const fetchedData = allBlogs.map((ele: BlogState) => {
     return (
-      <div key={ele.id}>
+      <div 
+        key={ele.id}
+      >
         {/* <img src={ele.image} alt="Thumbnail" /> */}
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div 
+        className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <img
             className="rounded-t-lg"
             src="/docs/images/blog/image-1.jpg"
@@ -29,9 +32,9 @@ export default function Blogs(): JSX.Element {
           <div className="p-5">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {ele.title}
-            </h5>
+            </h5> 
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              {ele.content}
+              {ele.content.length > 38 ? `${ele.content.slice(0, 38)}...` : ele.content}
             </p>
             {/* <Link
               to={`/${ele.custom_id}`}
@@ -41,7 +44,7 @@ export default function Blogs(): JSX.Element {
             </Link> */}
             <button
               className="text-sm font-medium text-center text-white hover:text-blue-500"
-              onClick={() => console.log("custom id", ele.custom_id)}
+              onClick={() => console.log("length", ele.content.length)}
             >
               Read More
             </button>
@@ -68,7 +71,7 @@ export default function Blogs(): JSX.Element {
   });
   return (
   <div 
-    className="flex flex-row"
+    className="flex flex-wrap"
   >
     {fetchedData}
     </div>
