@@ -38,9 +38,6 @@ export default function Blogs(): JSX.Element {
   })
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
       {fetchedData}
     </div>
   )
