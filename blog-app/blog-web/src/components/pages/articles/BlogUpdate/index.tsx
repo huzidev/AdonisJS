@@ -7,13 +7,14 @@ import { ArticleType } from "./types";
 export default function Update(): JSX.Element {
   const dispatch = useAppDispatch();
   const blog = useAppSelector((s) => s.blogs.getBlog);
+  console.log("blog", blog);
   const initialState: ArticleType = {title: "", image: "", content: ""};
   const params = useParams();
 
   const [updateArticle, setUpdateArticle] = useState(initialState);
 
   // chaning params.id type from string to number
-  const id = Number(params.id);
+  const slug: any = params.id;
 
   const { title, image, content } = updateArticle;
 
@@ -25,7 +26,7 @@ export default function Update(): JSX.Element {
   };
   
   useEffect(() => {
-    dispatch(getBlog(id))
+    dispatch(getBlog(slug))
   }, [])
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function Update(): JSX.Element {
   async function update() {
     dispatch(updateBlog({
       ...updateArticle, 
-      id
+      slug
     }));
   }
   return (

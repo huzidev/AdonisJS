@@ -8,13 +8,13 @@ export interface AddBlogState extends BlogData {
     image: string;
 }
 
-export interface BlogUpdate extends AddBlogState {
+export interface BlogDetails extends AddBlogState {
     id: number;
-}
-
-export interface BlogDetails extends BlogUpdate {
     slug: string;
 }
+
+// export interface BlogUpdate extends BlogDetails {
+// }
 
 export interface BlogState {
     allBlogs: BlogDetails[];

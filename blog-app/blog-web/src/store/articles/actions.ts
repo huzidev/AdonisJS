@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../services/api";
 import * as endpoints from "./endpoints";
-import { AddBlogState, BlogState, BlogUpdate } from "./types";
+import { AddBlogState, BlogState } from "./types";
 
 const initialState: BlogState = {
     allBlogs: [],
@@ -18,9 +18,11 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
     }
 });
 
-export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (id: number) => {
+export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (slug: string) => {
     try {
-        const response = await api.get(endpoints.GET_BLOG + id);
+        const response = await api.get(endpoints.GET_BLOG + slug);
+        console.log("adas");
+        
         return await response.data.data;
     } catch (e) {
         console.log("Error", e);
@@ -36,9 +38,9 @@ export const addBlog = createAsyncThunk(endpoints.ADD_BLOG, async (data: AddBlog
     }
 });
 
-export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: BlogUpdate) => {
+export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: any) => {
     try {
-        const response = await api.put(endpoints.UPDATE_BLOG + data.id, data);
+        const response = await api.put(endpoints.UPDATE_BLOG + data.slug, data);
         alert("Blog updated");
         console.log("Update", response);
     } catch (e) {

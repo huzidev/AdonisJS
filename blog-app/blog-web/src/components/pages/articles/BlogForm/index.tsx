@@ -15,7 +15,6 @@ export default function Form(): JSX.Element {
       [e.target.name]: e.target.value
     });
   };
-
   return (
     <div>
         <h1>

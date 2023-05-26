@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 
 export default function BlogView(): JSX.Element {
@@ -8,9 +6,9 @@ export default function BlogView(): JSX.Element {
   const allBlogs = useAppSelector((state) => state.blogs.getBlog);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(getBlog(Number(params.id)))
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getBlog(Number(params.id)))
+  // }, [])
 
   // const { title, content } = allBlogs;
 

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { deleteBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
+
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
@@ -8,8 +9,6 @@ export default function Blogs(): JSX.Element {
   const dispatch = useAppDispatch();
   const allBlogs = useAppSelector((state) => state.blogs.allBlogs);
   const Navigate = useNavigate();
-
-  console.log("all blogs", allBlogs);
 
   useBlogsPageHooks();
   // useEffect(() => {
@@ -44,7 +43,7 @@ export default function Blogs(): JSX.Element {
             </Link> */}
             <div>
               <Link
-                to={`/update/${ele.slug}`}
+                to={`/edit/${ele.slug}`}
                 type="button"
                 className="text-white bg-gray-800 font-medium text-sm py-2.5"
               >
