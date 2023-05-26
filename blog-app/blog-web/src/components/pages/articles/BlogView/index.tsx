@@ -66,5 +66,11 @@ export default function Blogs(): JSX.Element {
       </div>
     );
   });
-  return <div>{fetchedData}</div>;
+  return (
+  <div 
+    className="flex flex-row"
+  >
+    {fetchedData}
+    </div>
+  )
 }
