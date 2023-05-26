@@ -27,7 +27,7 @@ export default function Blogs(): JSX.Element {
             <img
               className="rounded-t-lg"
               src="/docs/images/blog/image-1.jpg"
-              alt=""
+              alt="Thumbnail
             />
           </a>
           <div className="p-5">
