@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 import { useBlogsPageHooks } from "./hooks";
@@ -36,18 +36,12 @@ export default function Blogs(): JSX.Element {
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {ele.content.length > 38 ? `${ele.content.slice(0, 38)}...` : ele.content}
             </p>
-            {/* <Link
-              to={`/${ele.custom_id}`}
-              className="inline-flex items-center text-white"
+            <Link
+              to={`/blog/${ele.customId}`}
+              className="text-sm font-medium text-center text-white hover:text-blue-500"
             > 
               Read More
-            </Link> */}
-            <button
-              className="text-sm font-medium text-center text-white hover:text-blue-500"
-              onClick={() => console.log("length", ele.content.length)}
-            >
-              Read More
-            </button>
+            </Link>
             <div>
               <button
                 type="button"
@@ -72,7 +66,7 @@ export default function Blogs(): JSX.Element {
   return (
   <div 
     className="flex flex-wrap"
-  >
+    >
     {fetchedData}
     </div>
   )

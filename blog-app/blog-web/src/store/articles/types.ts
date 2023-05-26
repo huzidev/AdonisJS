@@ -13,7 +13,7 @@ export interface BlogUpdate extends AddBlogState {
 }
 
 export interface BlogDetails extends BlogUpdate {
-    custom_id: number;
+    customId: number;
 }
 
 export interface BlogState {

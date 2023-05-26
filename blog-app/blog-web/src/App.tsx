@@ -6,7 +6,7 @@ import {
 import Nav from "./components/nav/Nav";
 import Form from "./components/pages/articles/BlogForm/index";
 import Update from "./components/pages/articles/BlogUpdate/index";
-import BlogView from "./components/pages/articles/BlogView";
+import BlogView from "./components/pages/articles/BlogView/index";
 import Blogs from "./components/pages/articles/Blogs/index";
 import Login from "./components/pages/auth/login";
 import Register from "./components/pages/auth/register";

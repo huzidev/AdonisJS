@@ -1,10 +1,8 @@
 
-export default function BlogView() {
+export default function BlogView(): JSX.Element {
   return (
     <div>
-        <h1>
-            Blog
-        </h1>
+        Blog
     </div>
   )
 }
