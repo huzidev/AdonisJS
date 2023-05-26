@@ -22,15 +22,10 @@ export default class ArticlesController {
     }
 
     public async getById({ params }) {
-        const articleId = await Article.findBy("slug", params.slug);
-        const articleCId = await Article.findBy("custom_id", params.id);
-        const articleState = articleId ? articleId : articleCId
-        if (!articleState) {
-            throw noArticle
-        }
+        const article = await Article.findBy("slug", params.slug);
         // const { title, content } = article;
         return { 
-            data: articleState, 
+            data: article, 
             message: "Article fetched successfully" 
         };
     }
