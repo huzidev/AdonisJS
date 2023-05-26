@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getBlog, updateBlog } from "../../../../store/articles/actions";
+import { updateBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
+import { useEditBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
 
 export default function Update(): JSX.Element {
   const dispatch = useAppDispatch();
   const blog = useAppSelector((s) => s.blogs.getBlog);
-  const params = useParams();
-
-  const slug: string | undefined = params.slug;
-
+  useEditBlogPageHooks();
+  
   const initialState: ArticleType = {id: null, title: "", image: "", content: ""};
   const [updateArticle, setUpdateArticle] = useState(initialState);
-
+  
   const { id, title, image, content } = updateArticle;
-
-  console.log("id", id);
-
+  
   function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setUpdateArticle({
       ...updateArticle,
@@ -25,10 +21,6 @@ export default function Update(): JSX.Element {
     });
   };
   
-  useEffect(() => {
-    dispatch(getBlog(slug!))
-  }, [])
-
   useEffect(() => {
     setUpdateArticle({...updateArticle, ...blog})
   }, [blog])
