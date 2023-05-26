@@ -2,15 +2,16 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
+import { BlogState } from "./types";
 
 export default function BlogView(): JSX.Element {
   const params = useParams();
   const allBlogs = useAppSelector((state) => state.blogs.getBlog);
   const dispatch = useAppDispatch();
 
-  const initialState: ArticleType = {title: "", image: "", content: ""};
+  const initialState: BlogState = {title: "", image: "", content: ""};
 
-  const [blog, setBlog] = useState({})
+  const [blog, setBlog] = useState(initialState)
 
   // for (let key in allBlogs) {
   //   const data : any = allBlogs[key]    
