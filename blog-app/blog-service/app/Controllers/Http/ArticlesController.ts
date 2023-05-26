@@ -22,7 +22,7 @@ export default class ArticlesController {
     }
 
     public async getById({ params }) {
-        const articleId = await Article.findBy("id", params.id);
+        const articleId = await Article.findBy("slug", params.slug);
         const articleCId = await Article.findBy("custom_id", params.id);
         const articleState = articleId ? articleId : articleCId
         if (!articleState) {
