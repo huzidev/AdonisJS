@@ -1,11 +1,18 @@
 // for getBlog just title and content is required
-export interface AddBlogState {
+export interface AddBlogReq {
     title: string;
     content: string;
     image: string;
 }
 
-export interface BlogDataState extends AddBlogState {
+export interface UpdateByIdReq {
+    id: number;
+    title?: string;
+    content?: string;
+    image?: string;
+}
+
+export interface BlogDataState extends AddBlogReq {
     id: number;
     slug: string;
 }

@@ -7,17 +7,15 @@ import { ArticleType } from "./types";
 export default function Update(): JSX.Element {
   const dispatch = useAppDispatch();
   const blog = useAppSelector((s) => s.blogs.getBlog);
-  console.log("blog ui", blog);
-  
-  const initialState: ArticleType = {title: "", image: "", content: ""};
+
+  const initialState: ArticleType = {id: null, title: "", image: "", content: ""};
   const params = useParams();
 
   const [updateArticle, setUpdateArticle] = useState(initialState);
 
-  // chaning params.id type from string to number
   const slug: any = params.id;
 
-  const { title, image, content } = updateArticle;
+  const { id, title, image, content } = updateArticle;
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setUpdateArticle({
@@ -37,7 +35,7 @@ export default function Update(): JSX.Element {
   async function update() {
     dispatch(updateBlog({
       ...updateArticle, 
-      slug
+      id
     }));
   }
   return (
