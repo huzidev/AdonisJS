@@ -22,12 +22,17 @@ export default class ArticlesController {
     }
 
     public async getById({ params }) {
-        const article = await Article.findBy("slug", params.slug);
+        try {
+            const article = await Article.findBy("slug", params.slug);
+            console.log("params", params.slug);
         // const { title, content } = article;
         return { 
             data: article, 
             message: "Article fetched successfully" 
-        };
+        }
+        } catch (e) {
+            console.log("Error", e);
+        }
     }
 
     public async updateBlog({ request, params }) {
