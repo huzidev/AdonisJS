@@ -6,8 +6,8 @@ export default function ArticlesRoutes() {
     Route.post("/add_article", `${path}.addBlog`);
     Route.get("/article/:slug", `${path}.getById`)
         .where("slug", /^[a-z0-9_-]+$/);
-    Route.put("/article/edit/:slug", `${path}.updateBlog`)
-        .where("slug", /^[a-z0-9_-]+$/);
+    Route.put("/article/edit/:id", `${path}.updateBlog`)
+        .where("id", /^[0-9]+$/);
     Route.delete("/article/delete/:id", `${path}.deleteBlog`)
         .where("id", /^[0-9]+$/);
 }
