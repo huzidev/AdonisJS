@@ -21,8 +21,7 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
 export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (slug: string) => {
     try {
         const response = await api.get(endpoints.GET_BLOG + slug);
-        console.log("adas");
-        
+        console.log("response", response.data.data);
         return await response.data.data;
     } catch (e) {
         console.log("Error", e);

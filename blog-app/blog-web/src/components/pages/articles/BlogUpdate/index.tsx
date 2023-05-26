@@ -7,6 +7,8 @@ import { ArticleType } from "./types";
 export default function Update(): JSX.Element {
   const dispatch = useAppDispatch();
   const blog = useAppSelector((s) => s.blogs.getBlog);
+  console.log("blog ui", blog);
+  
   const initialState: ArticleType = {title: "", image: "", content: ""};
   const params = useParams();
 
