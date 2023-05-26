@@ -43,13 +43,13 @@ export default function Blogs(): JSX.Element {
               Read More
             </Link>
             <div>
-              <button
+              <Link
+                to={`/update/${ele.id}`}
                 type="button"
                 className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                onClick={() => Navigate(`/update/${ele.id}`)}
               >
                 Edit
-              </button>
+              </Link>
               <button
                 type="button"
                 className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
