@@ -6,7 +6,7 @@ export interface AddBlogReq {
 }
 
 export interface UpdateByIdReq {
-    id: number;
+    id: number | null;
     title?: string;
     content?: string;
     image?: string;
