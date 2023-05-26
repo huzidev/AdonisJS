@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 import { useBlogsPageHooks } from "./hooks";
@@ -34,12 +34,12 @@ export default function Blogs(): JSX.Element {
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {ele.content}
             </p>
-            <a
-              href="#"
+            <Link
+              to={ele.custom_id}
               className="inline-flex items-center text-white"
             > 
               Read More
-            </a>
+            </Link>
           </div>
         </div>
       </div>
