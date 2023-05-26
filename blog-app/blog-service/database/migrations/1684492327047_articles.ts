@@ -20,6 +20,7 @@ export default class extends BaseSchema {
       table.increments("id");
 
       // adding these for table
+      // can't change the datatype to int from string for custom_id because maximum value is of 2147 something and date.now in ms is much greater
       table.string("custom_id", 180).notNullable().unique();
       table.string("title", 100).notNullable();
       table.string("image", 100).notNullable();
