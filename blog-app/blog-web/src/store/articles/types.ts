@@ -1,14 +1,11 @@
 // for getBlog just title and content is required
-export interface BlogData {
+export interface AddBlogState {
     title: string;
     content: string;
-}
-
-export interface AddBlogState extends BlogData {
     image: string;
 }
 
-export interface BlogDetails extends AddBlogState {
+export interface BlogDataState extends AddBlogState {
     id: number;
     slug: string;
 }
@@ -17,6 +14,6 @@ export interface BlogDetails extends AddBlogState {
 // }
 
 export interface BlogState {
-    allBlogs: BlogDetails[];
-    getBlog: BlogData | {};
+    allBlogs: BlogDataState[];
+    getBlog: BlogDataState | {};
 }
