@@ -20,3 +20,7 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: UserSignI
         console.log("Error", e);
     }
 });
+
+export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
+    
+})
