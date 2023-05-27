@@ -31,9 +31,10 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: UserSignI
 
 export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
     try {
-        await api.post(endpoints.SIGN_OUT);
+        const response = await api.post(endpoints.SIGN_OUT);
         storage.removeItem(KEYS.TOKEN);
         setToken(null);
+        console.log("signout resp", response);
     } catch (e) {
         console.log("Error", e);
     }

@@ -5,7 +5,6 @@ import { useAppDispatch } from "../../store/hooks/hooks";
 
 export default function Nav() {
   const dispatch = useAppDispatch();
-
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -53,7 +52,7 @@ export default function Nav() {
                   Add Blog
                 </Link>
               </li>
-              {localStorage.getItem(KEYS.TOKEN) ? (
+              {localStorage.getItem(KEYS.TOKEN) === null ? (
                 <>
                   <li>
                     <Link
