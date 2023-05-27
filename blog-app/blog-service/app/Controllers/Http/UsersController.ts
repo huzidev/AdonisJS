@@ -49,4 +49,6 @@ export default class UsersController {
             console.log("Error", e);
         }
     }
+
+    public async signOut({ auth }: HttpContextContract)
 }
