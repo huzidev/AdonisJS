@@ -50,5 +50,8 @@ export default class UsersController {
         }
     }
 
-    public async signOut({ auth }: HttpContextContract)
+    public async signOut({ auth }: HttpContextContract) {
+        await auth.logout();
+        return { message: "User logged out successfully" }
+    }
 }
