@@ -2,6 +2,6 @@ import Route from '@ioc:Adonis/Core/Route';
 
 export default function UsersRoutes() {
     const path = "UsersController";
-    Route.post("/signup", `${path}.signUp`);
-    Route.post("/signin", `${path}.signIn`);
+    Route.post("/sign_up", `${path}.signUp`);
+    Route.post("/sign_in", `${path}.signIn`);
 }
