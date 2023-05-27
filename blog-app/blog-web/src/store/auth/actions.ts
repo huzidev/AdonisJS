@@ -16,7 +16,6 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: UserSignI
     try {
         const response = await api.post(endpoints.SIGN_IN, data);
         console.log("Sign in resp", response);
-        
     } catch (e) {
         console.log("Error", e);
     }
