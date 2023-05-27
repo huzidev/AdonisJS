@@ -2,6 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { deleteBlog } from "../../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 
+import { useEffect } from "react";
+import storage from "../../../../services/storage";
+import KEYS from "../../../../store/auth/keys";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
@@ -14,6 +17,13 @@ export default function Blogs(): JSX.Element {
   // useEffect(() => {
   //   dispatch(getBlogs());
   // }, [])
+
+  async function test() {
+    console.log("Local Storage", await storage.getItem(KEYS.TOKEN));
+  }
+  useEffect( () => {
+    test()
+  }, [])
 
   const fetchedData = allBlogs.map((ele: BlogState) => {
     return (
