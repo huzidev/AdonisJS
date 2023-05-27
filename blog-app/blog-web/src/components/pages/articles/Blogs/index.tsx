@@ -14,9 +14,6 @@ export default function Blogs(): JSX.Element {
   const Navigate = useNavigate();
 
   useBlogsPageHooks();
-  // useEffect(() => {
-  //   dispatch(getBlogs());
-  // }, [])
 
   async function test() {
     console.log("Local Storage", await storage.getItem(KEYS.TOKEN));
