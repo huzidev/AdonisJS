@@ -31,14 +31,9 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: UserSignI
 
 export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
     try {
-        const dataSave = localStorage.getItem(KEYS.TOKEN);
-        console.log("Before Signout local storage", dataSave);
-        const wait = await api.post(endpoints.SIGN_OUT);
+        await api.post(endpoints.SIGN_OUT);
         storage.removeItem(KEYS.TOKEN);
         setToken(null);
-        if (wait) {
-            console.log("after Signout local storage", dataSave);
-        }
     } catch (e) {
         console.log("Error", e);
     }
