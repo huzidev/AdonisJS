@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../services/api";
+import api, { setToken } from "../../services/api";
+import storage from "../../services/storage";
 import * as endpoints from "./endpoints";
+import KEYS from "./keys";
 import { UserSignInState, UserState } from "./types";
 
 export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: UserState) => {
@@ -24,6 +26,8 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: UserSignI
 export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
     try {
         await api.post(endpoints.SIGN_OUT);
+        storage.removeItem(KEYS.TOKEN);
+        setToken(null);
     } catch (e) {
         console.log("Error", e);
     }
