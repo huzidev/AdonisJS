@@ -17,7 +17,9 @@ export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: UserState
 export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: UserSignInState) => {
     try {
         const response = await api.post(endpoints.SIGN_IN, data);
-        console.log("Sign in resp", response);
+        setToken(response.data.token);
+        await storage.setItem(KEYS.TOKEN, response.data.token);
+        console.log("Sign in resp", response.data.token);
     } catch (e) {
         console.log("Error", e);
     }
