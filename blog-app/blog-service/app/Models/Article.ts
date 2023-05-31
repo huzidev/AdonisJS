@@ -1,5 +1,6 @@
-import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeCreate, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import User from './User'
 
 // model name has to be same as of table name of database but singular form
 export default class Article extends BaseModel {
@@ -7,6 +8,13 @@ export default class Article extends BaseModel {
   public id: number
 
   // adding manually
+  @column()
+  public ownerId: number
+
+   @belongsTo(() => User, {
+    foreignKey: 'realtorId',
+  })
+
   @column()
   public slug: string
 

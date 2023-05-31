@@ -1,4 +1,4 @@
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Article from "App/Models/Article";
 import { CreateArticle, UpdateArticle } from "App/Validators/CreateArticleValidator";
 
