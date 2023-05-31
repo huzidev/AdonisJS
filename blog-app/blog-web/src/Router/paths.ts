@@ -3,7 +3,7 @@ const ROUTE_PATHS = {
   USER_SIGNUP: '/user/login',
   USER_SIGNIN: '/user/register/',
 
-  ARTICLES: '/blogs/',
+  ARTICLES: '/blogs',
   ARTICLES_VIEW: '/blog/',
   ARTICLES_CREATE: '/blog/add',
   ARTICLES_UPDATE: '/blog/edit/',
