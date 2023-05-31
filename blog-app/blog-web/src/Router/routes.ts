@@ -1,5 +1,6 @@
 import ROUTE_PATHS from './paths';
 
+import AddBlogPage from '../components/pages/articles/BlogForm';
 import ViewBlogPage from '../components/pages/articles/BlogView';
 import ViewBlogsPage from '../components/pages/articles/Blogs';
 
@@ -18,5 +19,10 @@ export const routes: AppRoute[] = [
     {
         path: `${ROUTE_PATHS.ARTICLE_VIEW}:slug`,
         Component: ViewBlogPage
+    },
+    {
+        exact: true,
+        path: ROUTE_PATHS.ARTICLE_CREATE,
+        Component: AddBlogPage
     },
 ]
