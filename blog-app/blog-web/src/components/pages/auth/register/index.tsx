@@ -16,22 +16,6 @@ export default function UserSignUpPage() {
     };
     const { username, email, password, passwordConfirmation } = user;
 
-    // var data: RegisterState = {
-    //     username,
-    //     email,
-    //     password,
-    //     passwordConfirmation
-    // };
-
-    // const config = {
-    //     method: "post",
-    //     url: "http://127.0.0.1:3333/signup",
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     data: JSON.stringify(data)
-    // };
-
     async function signup() {
         dispatch(signUp(user))
     };
