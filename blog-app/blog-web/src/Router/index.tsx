@@ -14,11 +14,11 @@ export default function AppRouter(): JSX.Element {
         {routes.map(({ Component, ...route }) => {
         return (
             <Route
-            {...route}
-            key={route.path}
-            element={
-                <Component  />
-            }
+              {...route}
+              key={route.path}
+              element={
+                  <Component  />
+              }
             />
         )
         })} 

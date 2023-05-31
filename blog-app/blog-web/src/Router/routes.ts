@@ -1,5 +1,6 @@
 import ROUTE_PATHS from './paths';
 
+import HomePage from '../components/pages/Home';
 import AddBlogPage from '../components/pages/articles/BlogForm';
 import UpdateBlogPage from '../components/pages/articles/BlogUpdate';
 import ViewBlogPage from '../components/pages/articles/BlogView';
@@ -16,6 +17,10 @@ interface AppRoute {
 export const routes: AppRoute[] = [
     {
         exact: true,
+        path: ROUTE_PATHS.HOME,
+        Component: HomePage
+    },
+    {
         path: ROUTE_PATHS.ARTICLES,
         Component: ViewBlogsPage
     },
