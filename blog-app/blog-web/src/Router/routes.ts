@@ -4,6 +4,8 @@ import AddBlogPage from '../components/pages/articles/BlogForm';
 import UpdateBlogPage from '../components/pages/articles/BlogUpdate';
 import ViewBlogPage from '../components/pages/articles/BlogView';
 import ViewBlogsPage from '../components/pages/articles/Blogs';
+import UserSignInPage from '../components/pages/auth/login';
+import UserSignUpPage from '../components/pages/auth/register';
 
 interface AppRoute {
   exact?: boolean;
@@ -27,8 +29,17 @@ export const routes: AppRoute[] = [
         Component: AddBlogPage
     },
     {
-        exact: true,
-        path: ROUTE_PATHS.ARTICLE_UPDATE,
+        path: `${ROUTE_PATHS.ARTICLE_UPDATE}:slug`,
         Component: UpdateBlogPage
+    },
+    {
+        exact: true,
+        path: ROUTE_PATHS.USER_SIGNIN,
+        Component: UserSignInPage
+    },
+    {
+        exact: true,
+        path: ROUTE_PATHS.USER_SIGNUP,
+        Component: UserSignUpPage
     },
 ]
