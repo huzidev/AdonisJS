@@ -1,7 +1,7 @@
 import {
-    Route,
-    BrowserRouter as Router,
-    Routes
+  Route,
+  BrowserRouter as Router,
+  Routes
 } from "react-router-dom";
 import Nav from "../components/nav/Nav";
 import NotFoundPage from "../components/pages/NotFound";
