@@ -8,7 +8,7 @@ export default function AppRouter(): JSX.Element {
   return (
     <Router>
         <Routes>
-        {routes.map(({ Component, path }) => {
+        {routes.map(({ exact, Component, path }) => {
         return (
             <Route
             key={path}
