@@ -23,7 +23,7 @@ export default function NotFoundPage(): JSX.Element {
           <p className="mb-8 text-center text-gray-500 md:text-lg">
             Sorry, the page you visited does not exist.
           </p>
-          <button onClick={() => Navigate("/")}>
+          <button onClick={() => Navigate("/blogs")}>
             Back Home
           </button>
         </div>

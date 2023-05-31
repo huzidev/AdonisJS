@@ -3,6 +3,7 @@ import {
     BrowserRouter as Router,
     Routes
 } from "react-router-dom";
+import NotFoundPage from "../components/pages/NotFound";
 import { routes } from './routes';
 export default function AppRouter(): JSX.Element {
   return (
@@ -19,7 +20,7 @@ export default function AppRouter(): JSX.Element {
             />
         )
         })} 
-        <Route path="*" element={<Error />}/>
+        <Route path="*" element={<NotFoundPage />}/>
         </Routes>
     </Router>
   )
