@@ -1,3 +1,4 @@
+import ROUTE_PATHS from "Router/paths";
 import { Link } from "react-router-dom";
 import { deleteBlog } from "../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
@@ -36,7 +37,7 @@ export default function ViewBlogsPage(): JSX.Element {
             </Link>
             <div>
               <Link
-                to={`/edit/${ele.slug}`}
+                to={ROUTE_PATHS.ARTICLE_UPDATE + ele.slug}
                 type="button"
                 className="text-white bg-gray-800 font-medium text-sm py-2.5"
               >
