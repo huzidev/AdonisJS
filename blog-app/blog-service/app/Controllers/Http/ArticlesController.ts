@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Article from "App/Models/Article";
-import { CreateArticle, UpdateArticle } from "App/Validators/CreateArticleValidator";
+import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 
 // Controller used to call the functions created in routes here so routes won't get messed up
 
@@ -14,9 +14,10 @@ export default class ArticlesController {
     public async addBlog({ request, auth }: HttpContextContract) {
         // body is receiving title, image, content as of request.body, we used request.validate instead of req.body
         const body = await request.validate(CreateArticle);
+        
         await Article.create({ 
             ...body,
-            ownerId: auth.user?.id 
+            ownerId: auth.user?.id
         });
         return { 
             data: body, 

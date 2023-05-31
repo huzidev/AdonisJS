@@ -2,7 +2,7 @@
 
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import User from "App/Models/User";
-import { CreateUser, SigninUser } from "App/Validators/CreateUserValidator";
+import { CreateUser, SigninUser } from "App/Validators/UserValidator";
 
 export default class UsersController {
     public async signUp({ request, auth }: HttpContextContract) {
