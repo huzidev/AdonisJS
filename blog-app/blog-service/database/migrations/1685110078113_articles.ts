@@ -6,6 +6,7 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.alterTable(this.tableName, (table) => {
       table.renameColumn('custom_id', 'slug')
+      table.integer('owner_id').unsigned().references('id').inTable('users').onDelete('CASCADE').notNullable()
     })
   }
 
