@@ -3,7 +3,7 @@ import { signUp } from "../../../../store/auth/actions";
 import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { RegisterState } from "./types";
 
-export default function Register() {
+export default function UserSignUpPage() {
     const initialState: RegisterState = { username: "", email: "", password: "", passwordConfirmation: "" };
     const [user, setUser] = useState(initialState);
     const dispatch = useAppDispatch();

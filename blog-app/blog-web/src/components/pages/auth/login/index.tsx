@@ -3,7 +3,7 @@ import { signIn } from "../../../../store/auth/actions";
 import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { AuthState } from "./types";
 
-export default function LoginUserPage() {
+export default function UserSignInPage() {
     const initialState: AuthState = { email: "", password: "" };
     const dispatch = useAppDispatch();
     const [user, setUser] = useState(initialState);
