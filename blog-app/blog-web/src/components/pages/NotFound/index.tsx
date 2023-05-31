@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 export default function NotFoundPage(): JSX.Element {
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
   return (
     <div
     className="
@@ -23,7 +23,7 @@ export default function NotFoundPage(): JSX.Element {
           <p className="mb-8 text-center text-gray-500 md:text-lg">
             Sorry, the page you visited does not exist.
           </p>
-          <button onClick={() => navigate("/")}>
+          <button onClick={() => Navigate("/")}>
             Back Home
           </button>
         </div>
