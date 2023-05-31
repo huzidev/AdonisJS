@@ -14,8 +14,7 @@ export default class ArticlesController {
     public async addBlog({ request, auth }: HttpContextContract) {
         // body is receiving title, image, content as of request.body, we used request.validate instead of req.body
         const body = await request.validate(CreateArticle);
-        
-        await Article.create({ 
+s        await Article.create({ 
             ...body,
             ownerId: auth.user?.id
         });
