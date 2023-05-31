@@ -1,12 +1,12 @@
 const ROUTE_PATHS = {
   HOME: '/',
   USER_SIGNUP: '/user/login',
-  USER_SIGNIN: '/user/register/',
+  USER_SIGNIN: '/user/register',
 
   ARTICLES: '/blogs',
-  ARTICLES_VIEW: '/blog/',
-  ARTICLES_CREATE: '/blog/add',
-  ARTICLES_UPDATE: '/blog/edit/',
+  ARTICLE_VIEW: '/blog/',
+  ARTICLE_CREATE: '/blog/add',
+  ARTICLE_UPDATE: '/blog/edit/',
 };
 
 export default ROUTE_PATHS;

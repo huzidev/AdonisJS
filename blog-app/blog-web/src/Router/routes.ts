@@ -13,5 +13,9 @@ export const routes: AppRoute[] = [
         exact: true,
         path: ROUTE_PATHS.ARTICLES,
         Component: ViewBlogsPage
-    }
+    },
+    {
+        path: ROUTE_PATHS.ARTICLE_VIEW,
+        Component: ViewBlogsPage
+    },
 ]
