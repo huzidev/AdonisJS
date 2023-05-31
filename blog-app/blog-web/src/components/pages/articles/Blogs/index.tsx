@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
-export default function Blogs(): JSX.Element {
+export default function ViewBlogsPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const allBlogs = useAppSelector((state) => state.blogs.allBlogs);
   const Navigate = useNavigate();

@@ -3,7 +3,7 @@ import { addBlog } from "../../../../store/articles/actions";
 import { useAppDispatch } from "../../../../store/hooks/hooks";
 import { ArticleType } from "./types";
 
-export default function Form(): JSX.Element {
+export default function AddBlogPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const initialState: ArticleType = {title: "", image: "", content: ""};
   const [article, setArticle] = useState(initialState);
