@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { updateBlog } from "../../../../store/articles/actions";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
+import { updateBlog } from "../../../store/articles/actions";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
 import { useEditBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
 

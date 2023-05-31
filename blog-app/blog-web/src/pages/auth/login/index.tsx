@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { signIn } from "../../../../store/auth/actions";
-import { useAppDispatch } from "../../../../store/hooks/hooks";
+import { signIn } from "../../../store/auth/actions";
+import { useAppDispatch } from "../../../store/hooks/hooks";
 import { AuthState } from "./types";
 
 export default function UserSignInPage() {

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { addBlog } from "../../../../store/articles/actions";
-import { useAppDispatch } from "../../../../store/hooks/hooks";
+import { addBlog } from "../../../store/articles/actions";
+import { useAppDispatch } from "../../../store/hooks/hooks";
 import { ArticleType } from "./types";
 
 export default function AddBlogPage(): JSX.Element {

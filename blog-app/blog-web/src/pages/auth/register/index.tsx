@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { signUp } from "../../../../store/auth/actions";
-import { useAppDispatch } from "../../../../store/hooks/hooks";
+import { signUp } from "../../../store/auth/actions";
+import { useAppDispatch } from "../../../store/hooks/hooks";
 import { RegisterState } from "./types";
 
 export default function UserSignUpPage() {

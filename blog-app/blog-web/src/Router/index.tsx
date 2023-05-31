@@ -4,23 +4,25 @@ import {
   Routes
 } from "react-router-dom";
 import Nav from "../components/nav/Nav";
-import NotFoundPage from "../components/pages/NotFound";
-import { routes } from './routes';
+import NotFoundPage from "../pages/NotFound";
+import routes from './routes';
 export default function AppRouter(): JSX.Element {
   return (
     <Router>
         <Nav />
         <Routes>
-        {routes.map(({ Component, ...route }) => {
+        {routes.map(({ Component, path }) => {
+          {console.log("path", path);
+          }
         return (
             <Route
-              {...route}
-              key={route.path}
+              key={path}
+              path={path}
               element={
                   <Component  />
               }
             />
-        )
+          )
         })} 
         <Route path="*" element={<NotFoundPage />}/>
         </Routes>

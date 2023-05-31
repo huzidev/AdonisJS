@@ -1,22 +1,20 @@
 import ROUTE_PATHS from './paths';
 
-import HomePage from '../components/pages/Home';
-import AddBlogPage from '../components/pages/articles/BlogForm';
-import UpdateBlogPage from '../components/pages/articles/BlogUpdate';
-import ViewBlogPage from '../components/pages/articles/BlogView';
-import ViewBlogsPage from '../components/pages/articles/Blogs';
-import UserSignInPage from '../components/pages/auth/login';
-import UserSignUpPage from '../components/pages/auth/register';
+import HomePage from '../pages/Home';
+import AddBlogPage from '../pages/articles/BlogForm';
+import UpdateBlogPage from '../pages/articles/BlogUpdate';
+import ViewBlogPage from '../pages/articles/BlogView';
+import ViewBlogsPage from '../pages/articles/Blogs';
+import UserSignInPage from '../pages/auth/login';
+import UserSignUpPage from '../pages/auth/register';
 
 interface AppRoute {
-  exact?: boolean;
   path: string;
   Component: () => JSX.Element;
 }
 
-export const routes: AppRoute[] = [
+const routes: AppRoute[] = [
     {
-        exact: true,
         path: ROUTE_PATHS.HOME,
         Component: HomePage
     },
@@ -29,7 +27,6 @@ export const routes: AppRoute[] = [
         Component: ViewBlogPage
     },
     {
-        exact: true,
         path: ROUTE_PATHS.ARTICLE_CREATE,
         Component: AddBlogPage
     },
@@ -38,13 +35,13 @@ export const routes: AppRoute[] = [
         Component: UpdateBlogPage
     },
     {
-        exact: true,
         path: ROUTE_PATHS.USER_SIGNIN,
         Component: UserSignInPage
     },
     {
-        exact: true,
         path: ROUTE_PATHS.USER_SIGNUP,
         Component: UserSignUpPage
-    },
+    }
 ]
+
+export default routes;

@@ -1,14 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
-import { deleteBlog } from "../../../../store/articles/actions";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
+import { Link } from "react-router-dom";
+import { deleteBlog } from "../../../store/articles/actions";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
 export default function ViewBlogsPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const allBlogs = useAppSelector((state) => state.blogs.allBlogs);
-  const Navigate = useNavigate();
-
   useBlogsPageHooks();
 
   const fetchedData = allBlogs.map((ele: BlogState) => {
@@ -17,8 +15,7 @@ export default function ViewBlogsPage(): JSX.Element {
         key={ele.id}
       >
         {/* <img src={ele.image} alt="Thumbnail" /> */}
-        <div 
-        className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <img
             className="rounded-t-lg"
             src="/docs/images/blog/image-1.jpg"

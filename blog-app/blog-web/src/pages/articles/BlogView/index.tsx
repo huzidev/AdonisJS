@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../../../store/hooks/hooks";
+import { useAppSelector } from "../../../store/hooks/hooks";
 import { useGetBlogPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
