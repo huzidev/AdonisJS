@@ -12,8 +12,6 @@ export default function AppRouter(): JSX.Element {
         <Nav />
         <Routes>
         {routes.map(({ Component, path }) => {
-          {console.log("path", path);
-          }
         return (
             <Route
               key={path}
