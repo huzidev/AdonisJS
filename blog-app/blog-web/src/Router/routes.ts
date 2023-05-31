@@ -1,5 +1,6 @@
 import ROUTE_PATHS from './paths';
 
+import ViewBlogPage from '../components/pages/articles/BlogView';
 import ViewBlogsPage from '../components/pages/articles/Blogs';
 
 interface AppRoute {
@@ -15,7 +16,7 @@ export const routes: AppRoute[] = [
         Component: ViewBlogsPage
     },
     {
-        path: ROUTE_PATHS.ARTICLE_VIEW,
-        Component: ViewBlogsPage
+        path: `${ROUTE_PATHS.ARTICLE_VIEW}:slug`,
+        Component: ViewBlogPage
     },
 ]
