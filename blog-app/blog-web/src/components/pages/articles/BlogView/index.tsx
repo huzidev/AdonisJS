@@ -3,7 +3,7 @@ import { useAppSelector } from "../../../../store/hooks/hooks";
 import { useGetBlogPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
-export default function BlogView(): JSX.Element {
+export default function ViewBlogPage(): JSX.Element {
   const getBlog = useAppSelector((state) => state.blogs.getBlog);
   useGetBlogPageHooks();
 

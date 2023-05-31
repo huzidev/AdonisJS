@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks/hooks";
 import { useEditBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
 
-export default function Update(): JSX.Element {
+export default function UpdateBlogPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const getBlog = useAppSelector((s) => s.blogs.getBlog);
   useEditBlogPageHooks();
