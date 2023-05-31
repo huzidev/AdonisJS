@@ -1,4 +1,4 @@
-import { BaseModel, beforeCreate, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, beforeCreate, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import User from './User'
 
@@ -8,28 +8,30 @@ export default class Article extends BaseModel {
   public id: number
 
   // adding manually
-  @column()
-  public ownerId: number
-
-   @belongsTo(() => User, {
-    foreignKey: 'realtorId',
-  })
-
+  
   @column()
   public slug: string
 
   @column()
   public title: string
-
+  
   @column()
   public image: string
-
+  
   @column()
   public content: string
   
+  @column()
+  public ownerId: number
+
+  @belongsTo(() => User, {
+    foreignKey: "ownerId"
+  })
+  public owner: BelongsTo<typeof User>
+  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
-
+  
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 

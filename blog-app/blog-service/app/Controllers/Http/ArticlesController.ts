@@ -16,7 +16,7 @@ export default class ArticlesController {
         const body = await request.validate(CreateArticle);
         await Article.create({ 
             ...body,
-            owner_id: auth.user?.id 
+            ownerId: auth.user?.id 
         });
         return { 
             data: body, 
