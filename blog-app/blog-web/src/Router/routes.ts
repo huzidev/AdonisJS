@@ -15,14 +15,6 @@ interface AppRoute {
 
 const routes: AppRoute[] = [
     {
-        path: ROUTE_PATHS.HOME,
-        Component: HomePage
-    },
-    {
-        path: ROUTE_PATHS.ARTICLES,
-        Component: ViewBlogsPage
-    },
-    {
         path: `${ROUTE_PATHS.ARTICLE_VIEW}:slug`,
         Component: ViewBlogPage
     },
@@ -41,7 +33,15 @@ const routes: AppRoute[] = [
     {
         path: ROUTE_PATHS.USER_SIGNUP,
         Component: UserSignUpPage
-    }
+    },
+    {
+        path: ROUTE_PATHS.ARTICLES,
+        Component: ViewBlogsPage
+    },
+    {
+        path: ROUTE_PATHS.HOME,
+        Component: HomePage
+    },
 ]
 
 export default routes;
