@@ -32,7 +32,9 @@ export default class UsersController {
     public async signIn({ request, auth }: HttpContextContract) {
         try {
             const body = await request.validate(SigninUser);
-            const { token } = await auth.attempt(body?.email!, body.password);
+            // const { token } = await auth.attempt(body?.email!, body.password);
+            const token = await auth.use('api').attempt(body?.email!, body.password)
+
             return {
                 token,
                 data: auth.user?.toJSON()
