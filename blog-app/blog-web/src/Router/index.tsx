@@ -4,7 +4,7 @@ import {
     Routes
 } from "react-router-dom";
 import routes from './Router/routes';
-export default function App(): JSX.Element {
+export default function AppRouter(): JSX.Element {
   return (
       <UserState>
         <Router>
