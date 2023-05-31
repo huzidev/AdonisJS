@@ -3,17 +3,19 @@ import {
     BrowserRouter as Router,
     Routes
 } from "react-router-dom";
+import Nav from "../components/nav/Nav";
 import NotFoundPage from "../components/pages/NotFound";
 import { routes } from './routes';
 export default function AppRouter(): JSX.Element {
   return (
     <Router>
+        <Nav />
         <Routes>
-        {routes.map(({ exact, Component, path }) => {
+        {routes.map(({ Component, ...route }) => {
         return (
             <Route
-            key={path}
-            path={path}
+            {...route}
+            key={route.path}
             element={
                 <Component  />
             }
