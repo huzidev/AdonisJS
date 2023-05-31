@@ -8,11 +8,11 @@ export default function NotFoundPage(): JSX.Element {
         flex
         items-center
         justify-center
-        w-screen
         h-screen
-        bg-gradient-to-r
-        from-indigo-600
-        to-blue-400"
+        bg-white 
+        dark:bg-gray-800 
+        dark:border-gray-700
+      "
     >
       <div className="px-40 py-20 bg-white rounded-md shadow-xl">
         <div className="flex flex-col items-center">
