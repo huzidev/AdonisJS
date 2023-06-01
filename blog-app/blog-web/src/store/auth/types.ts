@@ -8,8 +8,12 @@ export interface UserState extends UserSignInState {
     passwordConfirmation: string;
 }
 
-export interface UserDataState {
+export interface UserDetail {
     id: number;
     email: string;
     username: string;    
+}
+
+export interface UserDetailState {
+    getUser: UserDetail | {}
 }
