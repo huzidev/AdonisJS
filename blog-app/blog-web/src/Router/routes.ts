@@ -5,8 +5,8 @@ import AddBlogPage from '../pages/articles/BlogForm';
 import UpdateBlogPage from '../pages/articles/BlogUpdate';
 import ViewBlogPage from '../pages/articles/BlogView';
 import ViewBlogsPage from '../pages/articles/Blogs';
-import UserSignInPage from '../pages/auth/login';
-import UserSignUpPage from '../pages/auth/register';
+import UserSignInPage from '../pages/auth/Login';
+import UserSignUpPage from '../pages/auth/Register';
 
 interface AppRoute {
   path: string;
