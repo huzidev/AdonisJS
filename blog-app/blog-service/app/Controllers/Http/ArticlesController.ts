@@ -4,7 +4,7 @@ import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 
 // Controller used to call the functions created in routes here so routes won't get messed up
 
-const noArticle = { message: "Article not found", status: 404 }
+const noArticle = { message: "No Article found by id ", status: 404 }
 export default class ArticlesController {
     public async getBlogs() {
         const response = await Article.all();
@@ -33,8 +33,9 @@ export default class ArticlesController {
     public async getById({ params }) {
         try {
             const article = await Article.findBy("slug", params.slug);
-            console.log("params", params.slug);
-        // const { title, content } = article;
+            if (!article) {
+                throw noArticle
+            }
         return { 
             data: article, 
             message: "Article fetched successfully" 
@@ -45,19 +46,28 @@ export default class ArticlesController {
     }
 
     public async updateBlog({ request, params }) {
-        const body = await request.validate(UpdateArticle);
-        const blog = await Article.findBy("id", params.id);
-        if (!blog) {
-            throw {
-                message: 'No Blog found by id ' + params.id,
-                status: 404,
+        try {
+            const body = await request.validate(UpdateArticle);
+            console.log("body", body);
+            if (!body) {
+                throw {
+                    message: "Received Empty Field",
+                    status: 404
+                }
+            } else {
+                const blog = await Article.findBy("id", params.id);
+                if (!blog) {
+                    throw noArticle
+                } else {
+                        await Article.query().where("id", params.id).update(body);
+                        return { 
+                        data: body, 
+                        message: "Article updated successfully" 
+                    }
+                }
             }
-        } else {
-            await Article.query().where("id", params.id).update(body);
-            return { 
-                data: body, 
-                message: "Article updated successfully" 
-            };
+        } catch (e) {
+            throw e
         }
     }
 
@@ -65,8 +75,9 @@ export default class ArticlesController {
         const article = await Article.findBy("id", params.id);
         if (!article) {
             throw noArticle
+        } else {
+            await article.delete();
+            return { message: `Article ${params.id} Deleted` };
         }
-        await article.delete();
-        return { message: `Article ${params.id} Deleted` };
     }    
 }

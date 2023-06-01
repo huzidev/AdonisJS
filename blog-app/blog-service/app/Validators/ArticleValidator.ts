@@ -19,5 +19,7 @@ export class UpdateArticle {
     image: schema.string.optional()
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    required: '{{ field }} is required to update blog'
+  }
 }
