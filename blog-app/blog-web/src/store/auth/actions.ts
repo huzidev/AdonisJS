@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api, { setToken } from "../../services/api";
 import storage from "../../services/storage";
 import * as endpoints from "./endpoints";
@@ -52,10 +52,22 @@ export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async () => {
             setToken(token)
             const response = await api.get(endpoints.USER_DETAILS);
             console.log("response for user details", response);
+            return await response.data.data;
         }
     } catch (e) {
         await storage.removeItem(KEYS.TOKEN);
         setToken(null);
         console.log("Error", e);
+    }
+})
+
+const getUserSlice = createSlice({
+    name: "user",
+    initialState: initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(initUser.fulfilled, (state, action) => {
+            state.getUser = action.payload
+        })
     }
 })
