@@ -28,7 +28,6 @@ export default function UserSignUpPage() {
     dispatch(signUp(user));
   }
   return (
-    <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -147,36 +146,5 @@ export default function UserSignUpPage() {
           </p>
         </div>
       </div>
-      {/* <h1>Register</h1>
-      <input
-        type="text"
-        name="username"
-        value={username}
-        placeholder="Username"
-        onChange={inputHandler}
-      />
-      <input
-        type="email"
-        name="email"
-        value={email}
-        placeholder="Email"
-        onChange={inputHandler}
-      />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        placeholder="Password"
-        onChange={inputHandler}
-      />
-      <input
-        type="password"
-        name="passwordConfirmation"
-        value={passwordConfirmation}
-        placeholder="Confirm Password"
-        onChange={inputHandler}
-      />
-      <button onClick={signup}>Register</button> */}
-    </div>
   );
 }
