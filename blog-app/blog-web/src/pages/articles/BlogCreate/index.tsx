@@ -18,7 +18,7 @@ export default function AddBlogPage(): JSX.Element {
   };
 
   function toekenGen() {
-    setToken("Bearer MTQ.nrEW4t_ozIkUvqAwsmlY2OUr0ekqysFBRTLK7m5N-BQnp91uC1Dx1p4bIpmX")
+    setToken("MTQ.nrEW4t_ozIkUvqAwsmlY2OUr0ekqysFBRTLK7m5N-BQnp91uC1Dx1p4bIpmX")
   }
 
   useEffect(() => {
