@@ -7,7 +7,7 @@ import { useAppDispatch } from "../../../store/hooks/hooks";
 export default function UserSignInPage() {
   const dispatch = useAppDispatch();
   const [user, setUser] = useState({ email: "", password: "" });
-  const 
+  const [value, SetValue] = useState<boolean>(false); 
 
   function inputHandler(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -69,7 +69,7 @@ export default function UserSignInPage() {
               <input
                 id="password"
                 name="password"
-                type="password"
+                type={value ? "text" : "password"}
                 value={user.password}
                 onChange={inputHandler}
                 required
