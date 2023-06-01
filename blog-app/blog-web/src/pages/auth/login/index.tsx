@@ -1,3 +1,4 @@
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn } from "../../../store/auth/actions";
@@ -65,6 +66,7 @@ export default function UserSignInPage() {
                         <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
                     </div> */}
             </div>
+            <RemoveRedEyeOutlinedIcon />
             <div className="mt-2">
               <input
                 id="password"
