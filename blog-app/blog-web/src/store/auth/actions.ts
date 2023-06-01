@@ -3,9 +3,9 @@ import api, { setToken } from "../../services/api";
 import storage from "../../services/storage";
 import * as endpoints from "./endpoints";
 import KEYS from "./keys";
-import { UserDataState, UserSignInState, UserState } from "./types";
+import { UserDetailState, UserSignInState, UserState } from "./types";
 
-const initialState: UserDataState = {
+const initialState: UserDetailState = {
     getUser: {}
 }
 
