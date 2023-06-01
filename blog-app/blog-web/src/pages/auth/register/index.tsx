@@ -55,9 +55,9 @@ export default function UserSignUpPage() {
                   id="username"
                   name="username"
                   type="text"
-                  value={user.email}
-                  required
                   onChange={inputHandler}
+                  value={username}
+                  required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -74,9 +74,9 @@ export default function UserSignUpPage() {
                   id="email"
                   name="email"
                   type="email"
-                  value={user.email}
-                  required
+                  value={email}
                   onChange={inputHandler}
+                  required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -120,8 +120,8 @@ export default function UserSignUpPage() {
               <div className="mt-2">
                 <input
                   id="password"
-                  name="passwordConfirmation"
                   type="password"
+                  name="passwordConfirmation"
                   value={passwordConfirmation}
                   onChange={inputHandler}
                   required
