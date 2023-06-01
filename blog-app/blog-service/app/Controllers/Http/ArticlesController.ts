@@ -21,12 +21,12 @@ export default class ArticlesController {
                 ...body,
                 ownerId: auth.user?.id
             });
-        return { 
-            data: body, 
-            message: "Article created successfully" 
-        };
+            return { 
+                data: body, 
+                message: "Article created successfully" 
+            };
         } catch (e) {
-          throw e  
+          throw e
         }
     }
 
@@ -40,17 +40,24 @@ export default class ArticlesController {
             message: "Article fetched successfully" 
         }
         } catch (e) {
-            console.log("Error", e);
+            throw e
         }
     }
 
     public async updateBlog({ request, params }) {
         const body = await request.validate(UpdateArticle);
-        await Article.query().where("id", params.id).update(body);
-        return { 
-            data: body, 
-            message: "Article updated successfully" 
-        };
+        if (!body) {
+            throw {
+                message: 'No Blog found by id ' + params.id,
+                status: 404,
+            }
+        } else {
+            await Article.query().where("id", params.id).update(body);
+            return { 
+                data: body, 
+                message: "Article updated successfully" 
+            };
+        }
     }
 
     public async deleteBlog({ params }) {
