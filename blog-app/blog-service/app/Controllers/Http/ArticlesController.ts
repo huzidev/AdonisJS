@@ -46,7 +46,8 @@ export default class ArticlesController {
 
     public async updateBlog({ request, params }) {
         const body = await request.validate(UpdateArticle);
-        if (!body) {
+        const blog = await Article.findBy("id", params.id);
+        if (!blog) {
             throw {
                 message: 'No Blog found by id ' + params.id,
                 status: 404,
