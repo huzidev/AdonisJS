@@ -1,6 +1,7 @@
 import Hash from '@ioc:Adonis/Core/Hash';
-import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, HasMany, beforeSave, column, hasMany } from '@ioc:Adonis/Lucid/Orm';
 import { DateTime } from 'luxon';
+import Article from './Article';
 
 export default class User extends BaseModel {
   // created automatically from node ace auth configure
@@ -17,7 +18,10 @@ export default class User extends BaseModel {
   public password: string
 
   @column()
-  public rememberMeToken: string | null
+  public rememberMeToken?: string
+  
+  @hasMany(() => Article)
+  public articles: HasMany<typeof Article>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

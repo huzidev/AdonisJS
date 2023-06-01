@@ -35,11 +35,12 @@ export default class ArticlesController {
             const article = await Article.findBy("slug", params.slug);
             if (!article) {
                 throw noArticle
+            } else {
+                return { 
+                    data: article, 
+                    message: "Article fetched successfully" 
+                }
             }
-        return { 
-            data: article, 
-            message: "Article fetched successfully" 
-        }
         } catch (e) {
             throw e
         }
