@@ -10,6 +10,4 @@ export default function ArticlesRoutes() {
         .where("id", /^[0-9]+$/);
     Route.delete("/article/delete/:id", `${path}.deleteBlog`)
         .where("id", /^[0-9]+$/);
-
-
 }
