@@ -33,7 +33,7 @@ export default function UserSignInPage() {
           Sign in to your account
         </h2>
       </div>
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="mb-3">
             <label
               htmlFor="email"
@@ -53,7 +53,7 @@ export default function UserSignInPage() {
               />
             </div>
           </div>
-          <div>
+          <div className="mb-6">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
@@ -85,7 +85,7 @@ export default function UserSignInPage() {
               Sign in
             </button>
           </div>
-        <p className="mt-10 text-center text-sm text-gray-500">
+        <p className="mt-3 text-center text-sm text-gray-500">
           Don't have an account?
           <Link
             to="/user/sign_up"
