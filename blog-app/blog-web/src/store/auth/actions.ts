@@ -5,6 +5,10 @@ import * as endpoints from "./endpoints";
 import KEYS from "./keys";
 import { UserSignInState, UserState } from "./types";
 
+const initialState: UserDataState = {
+    getUser: {}
+}
+
 export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: UserState) => {
     try {
         const response = await api.post(endpoints.SIGN_UP, data);

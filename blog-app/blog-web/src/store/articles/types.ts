@@ -13,6 +13,7 @@ export interface UpdateByIdReq {
 }
 
 export interface BlogDataState extends AddBlogReq {
+    ownerId: number;
     id: number;
     slug: string;
 }
