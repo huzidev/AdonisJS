@@ -39,6 +39,8 @@ export default class ExceptionHandler extends HttpExceptionHandler {
     /**
      * Forward rest of the exceptions to the parent class
      */
+
+    // ?? is just like || for OR
     const message = error?.message ?? 'internal server error'
     return ctx.response.status(error?.status ?? 500).send({message})
   }
