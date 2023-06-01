@@ -13,18 +13,18 @@ export default function ViewBlogPage(): JSX.Element {
   useEffect(() => {
     setBlog({...blog, ...getBlog})
   }, [getBlog])
-
+  
   return (
     <div>
         Blog
         <div 
-          className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          className="w-2/3 m-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <img
             className="rounded-t-lg"
             src="/docs/images/blog/image-1.jpg"
             alt="Thumbnail"
           />
-          <div className="p-5">
+          <div className="p-5 flex flex-col">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {blog.title}
             </h5> 
