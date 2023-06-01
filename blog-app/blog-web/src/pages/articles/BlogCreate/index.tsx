@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addBlog } from "store/articles/actions";
+import { initUser } from "store/auth/actions";
 import { useAppDispatch } from "../../../store/hooks/hooks";
 import { ArticleType } from "./types";
 
@@ -15,6 +16,14 @@ export default function AddBlogPage(): JSX.Element {
       [e.target.name]: e.target.value
     });
   };
+
+  function runOnce() {
+    dispatch(initUser())
+  }
+
+  useEffect(() => {
+    runOnce()
+  }, [])
 
   function createBlog() {
     dispatch(addBlog(article))
