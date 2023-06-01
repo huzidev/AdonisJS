@@ -53,6 +53,21 @@ export default function AddBlogPage(): JSX.Element {
               />
             </div>
           </div>
+          <div>
+            <label
+              htmlFor="image"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Blog Title
+            </label>
+            <input 
+              type="file" 
+              name="image" 
+              onChange={inputHandler}
+              value={image} 
+              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" 
+            />
+          </div>
           <div className="mb-6">
             <div>
               <label htmlFor="content" className="block text-sm font-medium leading-6 text-gray-900">
@@ -60,13 +75,12 @@ export default function AddBlogPage(): JSX.Element {
               </label>
               <div className="mt-2">
                 <textarea 
-                  id="content"
                   name="content" 
                   value={content}
                   cols={30} 
                   rows={10} 
                   onChange={inputHandler}
-                  className="block py-1.5 px-2 w-full text-sm text-gray-900 bg-gray-0 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                   placeholder="Write your blog content here..."
                   ></textarea>
                 </div>
