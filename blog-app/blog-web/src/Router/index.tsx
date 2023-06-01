@@ -1,9 +1,9 @@
+import Nav from "components/Header";
 import {
   Route,
   BrowserRouter as Router,
   Routes
 } from "react-router-dom";
-import Nav from "../components/nav/Nav";
 import NotFoundPage from "../pages/NotFound";
 import routes from './routes';
 export default function AppRouter(): JSX.Element {
