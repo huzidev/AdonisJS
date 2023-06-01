@@ -4,7 +4,7 @@ import { signOut } from "../../store/auth/actions";
 import KEYS from "../../store/auth/keys";
 import { useAppDispatch } from "../../store/hooks/hooks";
 
-export default function Nav() {
+export default function Header() {
   const dispatch = useAppDispatch();
   return (
     <div>
