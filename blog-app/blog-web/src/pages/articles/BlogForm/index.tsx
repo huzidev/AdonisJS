@@ -53,14 +53,14 @@ export default function AddBlogPage(): JSX.Element {
               />
             </div>
           </div>
-          <div>
+          <div className="mb-3">
             <label
               htmlFor="image"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block mb-2 text-sm font-medium leading-6 text-gray-900"
             >
-              Blog Title
+              Image
             </label>
-            <input 
+            <input
               type="file" 
               name="image" 
               onChange={inputHandler}
