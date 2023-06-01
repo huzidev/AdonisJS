@@ -42,5 +42,10 @@ export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
 })
 
 export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async () => {
-    
+    try {
+        
+    } catch (e) {
+        console.log("Error", e);
+        
+    }
 })
