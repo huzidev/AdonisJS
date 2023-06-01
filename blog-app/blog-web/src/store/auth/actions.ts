@@ -43,7 +43,7 @@ export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
 
 export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async () => {
     try {
-        
+        const token = await storage.getItem<string>(KEYS.TOKEN)
     } catch (e) {
         console.log("Error", e);
         
