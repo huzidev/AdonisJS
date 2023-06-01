@@ -18,7 +18,7 @@ export default function UserSignInPage() {
     });
   }
 
-  async function login() {
+  function login() {
     dispatch(signIn(user));
   }
   return (
