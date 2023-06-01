@@ -43,9 +43,15 @@ export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
 
 export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async () => {
     try {
-        const token = await storage.getItem<string>(KEYS.TOKEN)
+        const token = await storage.getItem<string>(KEYS.TOKEN);
+        if (token) {
+            setToken(token)
+            const response = await api.get(endpoints.USER_DETAILS);
+            console.log("response for user details", response);
+        }
     } catch (e) {
+        await storage.removeItem(KEYS.TOKEN);
+        setToken(null);
         console.log("Error", e);
-        
     }
 })
