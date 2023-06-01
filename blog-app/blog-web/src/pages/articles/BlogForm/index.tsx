@@ -21,6 +21,7 @@ export default function AddBlogPage(): JSX.Element {
   }
   return (
     <div>
+
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
@@ -96,34 +97,6 @@ export default function AddBlogPage(): JSX.Element {
           </div>
       </div>
     </div>
-        <h1>
-            Add blog
-        </h1>
-          <input 
-            type="text" 
-            name="title" 
-            value={title}
-            onChange={inputHandler}
-            placeholder="Article's Title"
-            />
-          <input 
-            type="file" 
-            name="image" 
-            onChange={inputHandler}
-            value={image} 
-            />
-          <textarea 
-            name="content" 
-            value={content} 
-            onChange={inputHandler}
-            id="" 
-            cols={30} 
-            rows={10} 
-            placeholder="Enter Yours Text Here">
-          </textarea>
-          <button onClick={createBlog}>
-            Add Blog
-          </button>
     </div>
   )
 }
