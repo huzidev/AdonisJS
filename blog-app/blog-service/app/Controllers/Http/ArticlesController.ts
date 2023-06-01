@@ -49,21 +49,14 @@ export default class ArticlesController {
         try {
             const body = await request.validate(UpdateArticle);
             console.log("body", body);
-            if (!body) {
-                throw {
-                    message: "Received Empty Field",
-                    status: 404
-                }
+            const blog = await Article.findBy("id", params.id);
+            if (!blog) {
+                throw noArticle
             } else {
-                const blog = await Article.findBy("id", params.id);
-                if (!blog) {
-                    throw noArticle
-                } else {
-                        await Article.query().where("id", params.id).update(body);
-                        return { 
-                        data: body, 
-                        message: "Article updated successfully" 
-                    }
+                    await Article.query().where("id", params.id).update(body);
+                    return { 
+                    data: body, 
+                    message: "Article updated successfully" 
                 }
             }
         } catch (e) {
