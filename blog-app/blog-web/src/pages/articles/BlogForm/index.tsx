@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addBlog } from "../../../store/articles/actions";
+import { addBlog } from "store/articles/actions";
 import { useAppDispatch } from "../../../store/hooks/hooks";
 import { ArticleType } from "./types";
 
@@ -15,6 +15,10 @@ export default function AddBlogPage(): JSX.Element {
       [e.target.name]: e.target.value
     });
   };
+
+  function createBlog() {
+    dispatch(addBlog(article))
+  }
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -55,7 +59,7 @@ export default function AddBlogPage(): JSX.Element {
               </label>
               <div className="mt-2">
                 <textarea 
-                  id="message" rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."
+                  id="message" rows={4} className="block py-1.5 px-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."
                   ></textarea>
                 </div>
             </div>
@@ -63,6 +67,7 @@ export default function AddBlogPage(): JSX.Element {
           <div>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={createBlog}
             >
               Add Blog
             </button>
@@ -93,7 +98,7 @@ export default function AddBlogPage(): JSX.Element {
             rows={10} 
             placeholder="Enter Yours Text Here">
           </textarea>
-          <button onClick={() => dispatch(addBlog(article))}>
+          <button onClick={createBlog}>
             Add Blog
           </button>
     </div>
