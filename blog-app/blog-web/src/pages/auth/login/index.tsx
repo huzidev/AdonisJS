@@ -66,8 +66,7 @@ export default function UserSignInPage() {
                         <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
                     </div> */}
             </div>
-            <RemoveRedEyeOutlinedIcon />
-            <div className="mt-2">
+            <div className="mt-2 flex items-center overflow-wrap">
               <input
                 id="password"
                 name="password"
@@ -77,6 +76,9 @@ export default function UserSignInPage() {
                 required
                 className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
+              <span>
+                <RemoveRedEyeOutlinedIcon fontSize='small'/>
+              </span>
             </div>
           </div>
           <div>
