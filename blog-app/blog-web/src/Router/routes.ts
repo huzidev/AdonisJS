@@ -1,7 +1,7 @@
 import ROUTE_PATHS from './paths';
 
 import HomePage from '../pages/Home';
-import AddBlogPage from '../pages/articles/BlogForm';
+import AddBlogPage from '../pages/articles/BlogCreate';
 import UpdateBlogPage from '../pages/articles/BlogUpdate';
 import ViewBlogPage from '../pages/articles/BlogView';
 import ViewBlogsPage from '../pages/articles/Blogs';

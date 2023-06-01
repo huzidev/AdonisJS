@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { setToken } from "services/api";
 import { addBlog } from "store/articles/actions";
 import { useAppDispatch } from "../../../store/hooks/hooks";
 import { ArticleType } from "./types";
@@ -15,6 +16,14 @@ export default function AddBlogPage(): JSX.Element {
       [e.target.name]: e.target.value
     });
   };
+
+  function toekenGen() {
+    setToken("Bearer MTQ.nrEW4t_ozIkUvqAwsmlY2OUr0ekqysFBRTLK7m5N-BQnp91uC1Dx1p4bIpmX")
+  }
+
+  useEffect(() => {
+    toekenGen()
+  }, [])
 
   function createBlog() {
     dispatch(addBlog(article))
