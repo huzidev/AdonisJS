@@ -16,15 +16,14 @@ export default function ViewBlogPage(): JSX.Element {
   
   return (
     <div>
-        Blog
         <div 
-          className="w-2/3 m-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          className="w-2/3 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <img
             className="rounded-t-lg"
             src="/docs/images/blog/image-1.jpg"
             alt="Thumbnail"
           />
-          <div className="p-5 flex flex-col">
+          <div className="p-5 flex flex-col items-center">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {blog.title}
             </h5> 
