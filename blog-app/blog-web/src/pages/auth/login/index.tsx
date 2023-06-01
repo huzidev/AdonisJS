@@ -3,12 +3,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn } from "../../../store/auth/actions";
 import { useAppDispatch } from "../../../store/hooks/hooks";
-import { AuthState } from "./types";
 
 export default function UserSignInPage() {
-  const initialState: AuthState = { email: "", password: "" };
   const dispatch = useAppDispatch();
-  const [user, setUser] = useState(initialState);
+  const [user, setUser] = useState({ email: "", password: "" });
+  const 
 
   function inputHandler(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -66,7 +65,7 @@ export default function UserSignInPage() {
                         <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
                     </div> */}
             </div>
-            <div className="mt-2 flex items-center overflow-wrap">
+            <div className="mt-2 flex items-center overflow-hidden">
               <input
                 id="password"
                 name="password"
