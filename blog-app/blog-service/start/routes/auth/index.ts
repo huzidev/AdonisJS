@@ -1,6 +1,6 @@
 import Route from '@ioc:Adonis/Core/Route';
 
-export default function UsersRoutes() {
+export default function AuthRoutes() {
     const path = "AuthController";
     Route.group(() => {
         Route.post("/sign_up", `${path}.signUp`);
