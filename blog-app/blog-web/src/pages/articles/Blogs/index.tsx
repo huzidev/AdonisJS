@@ -8,6 +8,8 @@ import { BlogState } from "./types";
 export default function ViewBlogsPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const allBlogs = useAppSelector((state) => state.blogs.allBlogs);
+  const getUser = useAppSelector((state) => state.user.getUser);
+
   useBlogsPageHooks();
 
   const ownerId = {
