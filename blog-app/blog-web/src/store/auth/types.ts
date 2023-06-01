@@ -9,5 +9,7 @@ export interface UserState extends UserSignInState {
 }
 
 export interface UserDataState {
-    ownerId: number;    
+    id: number;
+    email: string;
+    username: string;    
 }
