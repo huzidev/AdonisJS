@@ -50,7 +50,7 @@ export default function AddBlogPage(): JSX.Element {
           </div>
           <div className="mb-6">
             <div>
-              <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900">
                 Content
               </label>
               <textarea 
