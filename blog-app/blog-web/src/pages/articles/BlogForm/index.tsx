@@ -49,25 +49,13 @@ export default function AddBlogPage(): JSX.Element {
             </div>
           </div>
           <div className="mb-6">
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
+            <div>
+              <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Content
               </label>
-              {/* <div className="text-sm">
-                        <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-                    </div> */}
-            </div>
-            <div className="mt-2 flex items-center">
-              <input
-                id="password"
-                name="password"
-                onChange={inputHandler}
-                required
-                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
+              <textarea 
+                id="message" rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."
+                ></textarea>
             </div>
           </div>
           <div>
