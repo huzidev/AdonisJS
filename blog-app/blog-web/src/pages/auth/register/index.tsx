@@ -41,7 +41,7 @@ export default function UserSignUpPage() {
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-            <div>
+            <div className="mb-3">
               <label
                 htmlFor="username"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -60,7 +60,7 @@ export default function UserSignUpPage() {
                 />
               </div>
             </div>
-            <div>
+            <div className="mb-3">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -79,7 +79,7 @@ export default function UserSignUpPage() {
                 />
               </div>
             </div>
-            <div>
+            <div className="mb-3">
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
@@ -103,7 +103,7 @@ export default function UserSignUpPage() {
                 />
               </div>
             </div>
-            <div>
+            <div className="mb-6">
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
