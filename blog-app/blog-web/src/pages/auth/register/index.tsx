@@ -40,9 +40,7 @@ export default function UserSignUpPage() {
             Sign Up to your account
           </h2>
         </div>
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" method="POST">
             <div>
               <label
                 htmlFor="username"
@@ -137,7 +135,6 @@ export default function UserSignUpPage() {
                 Sign Up
               </button>
             </div>
-          </form>
           <p className="mt-10 text-center text-sm text-gray-500">
             Already have an account?
             <Link
@@ -150,7 +147,7 @@ export default function UserSignUpPage() {
           </p>
         </div>
       </div>
-      <h1>Register</h1>
+      {/* <h1>Register</h1>
       <input
         type="text"
         name="username"
@@ -179,7 +176,7 @@ export default function UserSignUpPage() {
         placeholder="Confirm Password"
         onChange={inputHandler}
       />
-      <button onClick={signup}>Register</button>
+      <button onClick={signup}>Register</button> */}
     </div>
   );
 }
