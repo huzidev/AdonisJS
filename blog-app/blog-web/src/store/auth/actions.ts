@@ -18,6 +18,7 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: UserSignI
     try {
         const response = await api.post(endpoints.SIGN_IN, data);
         if (response.data) {
+            console.log("signin token", typeof(response.data.token));
             setToken(response.data.token);
             await storage.setItem(KEYS.TOKEN, response.data.token);
         }
