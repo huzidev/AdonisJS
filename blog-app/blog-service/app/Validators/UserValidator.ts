@@ -34,6 +34,6 @@ export class SigninUser {
   })
 
   public messages: CustomMessages = {
-    required: '{{ field }} is required to create blog',
+    required: '{{ field }} is required to Login',
   }
 }
