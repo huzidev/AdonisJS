@@ -6,5 +6,6 @@ export default function UsersRoutes() {
         Route.post("/sign_up", `${path}.signUp`);
         Route.post("/sign_in", `${path}.signIn`);
         Route.post("/sign_out", `${path}.signOut`);
+        Route.get("/get/me", `${path}.getMe`);
     }).prefix('/auth')
 }       

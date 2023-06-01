@@ -8,6 +8,8 @@ export default class UsersController {
     public async signUp({ request, auth }: HttpContextContract) {
         try {
             const body = await request.validate(CreateUser);
+            console.log("body", {...body});
+            
             // because we used new User() therefore use user.save() for saving at database
             const user = new User();
             user.fill(body);
