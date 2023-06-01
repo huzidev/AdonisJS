@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import getBlogs from "./articles/actions";
+import initUser from "./auth/actions";
 
 const store = configureStore({
     reducer: {
-        blogs: getBlogs
+        blogs: getBlogs,
+        user: initUser
     }
 })
 
