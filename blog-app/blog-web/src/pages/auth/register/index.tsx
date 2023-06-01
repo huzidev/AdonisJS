@@ -90,15 +90,12 @@ export default function UserSignUpPage() {
                 >
                   Password
                 </label>
-                {/* <div className="text-sm">
-                        <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-                    </div> */}
               </div>
               <div className="mt-2">
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={valuePass ? "text" : "password"}
                   value={password}
                   onChange={inputHandler}
                   required
@@ -124,7 +121,7 @@ export default function UserSignUpPage() {
               <div className="mt-2">
                 <input
                   id="password"
-                  type="password"
+                  type={valueConfPass ? "text" : "password"}
                   name="passwordConfirmation"
                   value={passwordConfirmation}
                   onChange={inputHandler}
