@@ -12,8 +12,11 @@ export default class ArticlesController {
     }
 
     public async addBlog({ request, auth }: HttpContextContract) {
+        try {
         // body is receiving title, image, content as of request.body, we used request.validate instead of req.body
         const body = await request.validate(CreateArticle);
+        console.log('b', body);
+        
         console.log("Auth ", auth);
         
         await Article.create({ 
@@ -24,6 +27,9 @@ export default class ArticlesController {
             data: body, 
             message: "Article created successfully" 
         };
+        } catch (e) {
+          throw e  
+        }
     }
 
     public async getById({ params }) {

@@ -41,6 +41,7 @@ export default class UsersController {
             }
         } catch (e) {
             console.log("Error", e);
+            throw e
         }
     }
 
