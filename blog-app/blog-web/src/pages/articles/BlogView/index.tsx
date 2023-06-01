@@ -24,7 +24,7 @@ export default function ViewBlogPage(): JSX.Element {
             alt="Thumbnail"
           />
           <div className="p-5 flex flex-col items-center">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {blog.title}
             </h5> 
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
