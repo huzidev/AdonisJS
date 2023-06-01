@@ -1,3 +1,5 @@
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp } from "../../../store/auth/actions";
@@ -12,6 +14,8 @@ export default function UserSignUpPage() {
     passwordConfirmation: "",
   };
   const [user, setUser] = useState(initialState);
+  const [valuePass, SetValuePass] = useState<boolean>(false); 
+  const [valueConfPass, SetValueConfPass] = useState<boolean>(false); 
   const dispatch = useAppDispatch();
 
   function inputHandler(
@@ -100,6 +104,9 @@ export default function UserSignUpPage() {
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                <span onClick={() => SetValuePass(!valuePass)}>
+                    {valuePass ? <RemoveRedEyeOutlinedIcon fontSize='small'/> : <VisibilityOffIcon fontSize='small'/>}
+                </span>
               </div>
             </div>
             <div className="mb-6">
@@ -124,6 +131,9 @@ export default function UserSignUpPage() {
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                <span onClick={() => SetValueConfPass(!valueConfPass)}>
+                    {valueConfPass ? <RemoveRedEyeOutlinedIcon fontSize='small'/> : <VisibilityOffIcon fontSize='small'/>}
+                </span>
               </div>
             </div>
             <div>
