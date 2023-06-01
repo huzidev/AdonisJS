@@ -9,7 +9,7 @@ export class CreateUser {
         column: "username"
       })
     ]),
-    email: schema.string({}, [
+    email: schema.string({ trim: true }, [
       rules.email(),
       rules.unique({
         table: "users",
