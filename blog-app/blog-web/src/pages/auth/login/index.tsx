@@ -82,7 +82,7 @@ export default function UserSignInPage() {
                 </p>
             </div>
             </div>
-        <div>
+        {/* <div>
             <h1>
                 Login
             </h1>
@@ -103,7 +103,7 @@ export default function UserSignInPage() {
             <button onClick={login}>
                 Login
             </button>
-        </div>
+        </div> */}
         </>
   )
 }
