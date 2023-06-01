@@ -1,12 +1,13 @@
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../../../store/auth/actions";
 import { useAppDispatch } from "../../../store/hooks/hooks";
 
 export default function UserSignInPage() {
   const dispatch = useAppDispatch();
+  const Navigate = useNavigate();
   const [user, setUser] = useState({ email: "", password: "" });
   const [value, SetValue] = useState<boolean>(false); 
 
@@ -21,6 +22,7 @@ export default function UserSignInPage() {
 
   function login() {
     dispatch(signIn(user));
+    Navigate("/blogs");
   }
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
