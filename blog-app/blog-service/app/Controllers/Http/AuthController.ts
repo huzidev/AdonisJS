@@ -1,11 +1,11 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import User from "App/Models/User";
-import { CreateUser, SigninUser } from "App/Validators/UserValidator";
+import { AuthSignIn, AuthSignUp } from "App/Validators/AuthValidator";
 
 export default class AuthController {
     public async signUp({ request, auth }: HttpContextContract) {
         try {
-            const body = await request.validate(CreateUser);
+            const body = await request.validate(AuthSignUp);
             console.log("body", {...body});
             
             // because we used new User() therefore use user.save() for saving at database
@@ -31,7 +31,7 @@ export default class AuthController {
 
     public async signIn({ request, auth }: HttpContextContract) {
         try {
-            const body = await request.validate(SigninUser);
+            const body = await request.validate(AuthSignIn);
             const { token } = await auth.attempt(body?.email!, body.password);
             return {
                 token,

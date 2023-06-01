@@ -1,6 +1,6 @@
 import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
 
-export class CreateUser {
+export class AuthSignUp {
   public schema = schema.create({
     username: schema.string({ trim: true }, [
       rules.minLength(4),
@@ -27,7 +27,7 @@ export class CreateUser {
   }
 }
 
-export class SigninUser {
+export class AuthSignIn {
   public schema = schema.create({
     email: schema.string({}, [rules.email()]),
     password: schema.string({}, [rules.minLength(6)])
