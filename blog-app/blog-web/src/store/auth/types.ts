@@ -7,3 +7,7 @@ export interface UserState extends UserSignInState {
     username: string;
     passwordConfirmation: string;
 }
+
+export interface UserDataState {
+    ownerId: number;    
+}
