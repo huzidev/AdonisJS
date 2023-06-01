@@ -66,7 +66,7 @@ export default function UserSignInPage() {
                         <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
                     </div> */}
             </div>
-            <div className="mt-2 flex items-center overflow-hidden">
+            <div className="mt-2 flex items-center">
               <input
                 id="password"
                 name="password"

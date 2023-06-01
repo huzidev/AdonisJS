@@ -91,7 +91,7 @@ export default function UserSignUpPage() {
                   Password
                 </label>
               </div>
-              <div className="mt-2">
+              <div className="mt-2 flex items-center">
                 <input
                   id="password"
                   name="password"
@@ -118,7 +118,7 @@ export default function UserSignUpPage() {
                         <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
                     </div> */}
               </div>
-              <div className="mt-2">
+              <div className="mt-2 flex items-center">
                 <input
                   id="password"
                   type={valueConfPass ? "text" : "password"}
