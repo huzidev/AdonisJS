@@ -1,5 +1,7 @@
 import ROUTE_PATHS from "Router/paths";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { initUser } from "store/auth/actions";
 import { deleteBlog } from "../../../store/articles/actions";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
 import { useBlogsPageHooks } from "./hooks";
@@ -10,12 +12,28 @@ export default function ViewBlogsPage(): JSX.Element {
   const allBlogs = useAppSelector((state) => state.blogs.allBlogs);
   const getUser = useAppSelector((state) => state.user.getUser);
 
-  useBlogsPageHooks();
+  useEffect(() => {
+    dispatch(initUser())
+  }, [])
 
-  const ownerId = {
-
+  interface testUser { 
+    id: number | null;
+    email: string;
+    username: string;    
   }
 
+  const [userId, setUserId] = useState<testUser>({
+    id: null,
+    username: "",
+    email: ""
+  })
+  useEffect(() => {
+    setUserId({ ...userId, ...getUser })
+  }, [getUser])
+  useBlogsPageHooks();
+
+  console.log("user id", userId.id);
+  
   const fetchedData = allBlogs.map((ele: BlogState) => {
     return (
       <div 
@@ -42,7 +60,7 @@ export default function ViewBlogsPage(): JSX.Element {
               Read More
             </Link>
             {
-              ele.ownerId === 4 ? (
+              ele.ownerId === userId.id ? (
               <div>
                 <Link
                   to={ROUTE_PATHS.ARTICLE_UPDATE + ele.slug}

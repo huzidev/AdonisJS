@@ -9,7 +9,7 @@ export interface UserState extends UserSignInState {
 }
 
 export interface UserDetail {
-    id: number;
+    id: number | null;
     email: string;
     username: string;    
 }
