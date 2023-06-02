@@ -7,6 +7,7 @@ import ViewBlogPage from '../pages/articles/BlogView';
 import ViewBlogsPage from '../pages/articles/Blogs';
 import UserSignInPage from '../pages/auth/Login';
 import UserSignUpPage from '../pages/auth/Register';
+import ViewProfilePage from "../pages/user/Profile";
 
 interface AppRoute {
   path: string;
@@ -27,11 +28,11 @@ const routes: AppRoute[] = [
         Component: UpdateBlogPage
     },
     {
-        path: ROUTE_PATHS.USER_SIGNIN,
+        path: ROUTE_PATHS.AUTH_SIGNIN,
         Component: UserSignInPage
     },
     {
-        path: ROUTE_PATHS.USER_SIGNUP,
+        path: ROUTE_PATHS.AUTH_SIGNUP,
         Component: UserSignUpPage
     },
     {
@@ -42,6 +43,10 @@ const routes: AppRoute[] = [
         path: ROUTE_PATHS.HOME,
         Component: HomePage
     },
+    {
+        path: ROUTE_PATHS.VIEW_PROFILE,
+        Component: ViewProfilePage
+    }
 ]
 
 export default routes;
