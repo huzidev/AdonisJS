@@ -38,6 +38,7 @@ export default function ViewBlogsPage(): JSX.Element {
     return (
       <div 
         key={ele.id}
+        className="w-2/3"
       >
         {/* <img src={ele.image} alt="Thumbnail" /> */}
         <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -88,7 +89,7 @@ export default function ViewBlogsPage(): JSX.Element {
   return (
   <div 
     className="flex flex-wrap"
-    >
+  >
     {fetchedData}
     </div>
   )
