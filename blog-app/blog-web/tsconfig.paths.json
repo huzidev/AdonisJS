@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+        // for defined paths to use @store/auth instead of ../store/auth
+            "@store/*": ["store/*"],
+            "@services/*": ["services/*"]
+        }
+    }
+}
