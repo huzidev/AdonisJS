@@ -22,16 +22,10 @@ export default function ViewProfilePage() {
               User Profile
             </h1>
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Name : {" "}
-              <span className="mb-3 text-xl text-gray-700 dark:text-gray-400">
-                {userDetails.username}
-              </span>
+              Name : {userDetails.username}
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Email : {" "}
-              <span className="mb-3 text-xl text-gray-700 dark:text-gray-400">
-                {userDetails.email}
-              </span>
+              Email : {userDetails.email}
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Total Blogs
