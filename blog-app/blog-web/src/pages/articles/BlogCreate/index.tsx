@@ -25,7 +25,7 @@ export default function AddBlogPage(): JSX.Element {
 
   useEffect(() => {
     runOnce();
-  }, []);
+  }, []); 
 
   function createBlog() {
     dispatch(addBlog(article));
