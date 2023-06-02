@@ -16,13 +16,13 @@ export default function ViewBlogsPage(): JSX.Element {
     dispatch(initUser())
   }, [])
 
-  interface testUser { 
+  interface TestUser { 
     id: number | null;
     email: string;
     username: string;    
   }
 
-  const [userId, setUserId] = useState<testUser>({
+  const [userId, setUserId] = useState<TestUser>({
     id: null,
     username: "",
     email: ""

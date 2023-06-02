@@ -5,20 +5,23 @@ import { useAppDispatch, useAppSelector } from "store/hooks/hooks";
 export default function ViewProfilePage() {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.user.getUser);
-  const [userDetails, setUserDetails] = useState({})
-
+  
+  const [userDetails, setUserDetails] = useState<any>({
+    username: "",
+    email: ""
+  })
+  
   function runOnce() {
     dispatch(initUser())
   }
-
+  
   useEffect(() => {
     runOnce();
   }, []); 
-
+  
   useEffect(() => {
-    setUserDetails(userData);
-    console.log("data", userDetails);
-  }, [userDetails])
+    setUserDetails({ ...userDetails, ...userData });
+  }, [userData])
 
   return (
     <div>
@@ -29,10 +32,10 @@ export default function ViewProfilePage() {
               User Profile
             </h1>
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Name
+              Name : {userDetails.username}
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Email
+              Email : {userDetails.email}
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Total Blogs
