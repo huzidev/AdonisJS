@@ -38,7 +38,8 @@ api.interceptors.response.use(
 );
 
 export function setToken(token: string | null): void {
-  const parsed = token ? `Bearer ${token}` : token;
+  const parsed = token ? `bearer ${token}` : token;
+  // to set token in headers like in postman we set authorization token in Headers
   api.defaults.headers.Authorization = parsed;
 }
 
