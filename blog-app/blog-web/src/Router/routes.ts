@@ -1,5 +1,6 @@
 import ROUTE_PATHS from './paths';
 
+import EditProfilePage from 'pages/user/EditProfile';
 import HomePage from '../pages/Home';
 import AddBlogPage from '../pages/articles/BlogCreate';
 import UpdateBlogPage from '../pages/articles/BlogUpdate';
@@ -7,7 +8,7 @@ import ViewBlogPage from '../pages/articles/BlogView';
 import ViewBlogsPage from '../pages/articles/Blogs';
 import UserSignInPage from '../pages/auth/Login';
 import UserSignUpPage from '../pages/auth/Register';
-import ViewProfilePage from "../pages/user/Profile";
+import ViewProfilePage from "../pages/user/ViewProfile";
 
 interface AppRoute {
   path: string;
@@ -46,6 +47,10 @@ const routes: AppRoute[] = [
     {
         path: ROUTE_PATHS.VIEW_PROFILE,
         Component: ViewProfilePage
+    },
+    {
+        path: ROUTE_PATHS.EDIT_PROFILE,
+        Component: EditProfilePage
     }
 ]
 

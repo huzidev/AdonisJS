@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAppSelector } from "store/hooks/hooks";
 import { useGetDataPageHooks } from "./hooks";
 import { UserDetailState } from "./types";
@@ -21,17 +22,29 @@ export default function ViewProfilePage() {
               User Profile
             </h1>
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Name : {userDetails.username}
+              Name : {" "}
+              <span className="mb-3 text-xl text-gray-700 dark:text-gray-400">
+                {userDetails.username}
+              </span>
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Email : {userDetails.email}
+              Email : {" "}
+              <span className="mb-3 text-xl text-gray-700 dark:text-gray-400">
+                {userDetails.email}
+              </span>
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Total Blogs
             </h2> 
+            <Link
+              to="/user/edit/me"
+              type="button"
+              className="text-white bg-gray-800 font-medium text-sm py-2.5"
+            >
+              Edit
+            </Link>
           </div>
         </div>
-      User Profile
     </div>
   )
 }
