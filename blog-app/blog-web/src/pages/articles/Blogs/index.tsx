@@ -41,7 +41,7 @@ export default function ViewBlogsPage(): JSX.Element {
         className="w-[30.33%] mt-8 mx-4"
       >
         {/* <img src={ele.image} alt="Thumbnail" /> */}
-        <div className="h-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="h-52 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <img
             className="rounded-t-lg"
             src="/docs/images/blog/image-1.jpg"
