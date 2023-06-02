@@ -34,6 +34,11 @@ export default function ViewBlogsPage(): JSX.Element {
 
   console.log("user id", userId.id);
   
+  let dum = "Hello, World adding this with the help asdasd asdas adas ads as"
+
+  console.log("len", dum.length);
+  
+
   const fetchedData = allBlogs.map((ele: BlogState) => {
     return (
       <div 
@@ -52,7 +57,7 @@ export default function ViewBlogsPage(): JSX.Element {
               {ele.title}
             </h5> 
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              {ele.content.length > 38 ? `${ele.content.slice(0, 38)}...` : ele.content}
+              {ele.content.length > 60 ? `${ele.content.slice(0, 60)}...` : ele.content}
             </p>
             <Link
               to={`/blog/${ele.slug}`}
