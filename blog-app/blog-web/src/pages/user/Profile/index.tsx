@@ -5,15 +5,18 @@ export default function ViewProfilePage() {
       <div 
           className="w-11/12 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div className="p-5">
-            <h1>
+            <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
               User Profile
             </h1>
-            <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Name
-            </h5> 
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            </h2> 
+            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Email
-            </p>
+            </h2> 
+            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Total Blogs
+            </h2> 
           </div>
         </div>
       User Profile
