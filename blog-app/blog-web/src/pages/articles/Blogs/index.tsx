@@ -38,7 +38,7 @@ export default function ViewBlogsPage(): JSX.Element {
     return (
       <div 
         key={ele.id}
-        className="w-1/3 mt-8 mx-4"
+        className="w-[30.33%] mt-8 mx-4"
       >
         {/* <img src={ele.image} alt="Thumbnail" /> */}
         <div className="h-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
