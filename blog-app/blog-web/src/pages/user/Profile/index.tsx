@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { initUser } from "store/auth/actions";
-import { useAppDispatch } from "store/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks/hooks";
 
 export default function ViewProfilePage() {
   const dispatch = useAppDispatch();
+  const userData = useAppSelector((state) => state.user.getUser);
 
   function runOnce() {
     dispatch(initUser())
