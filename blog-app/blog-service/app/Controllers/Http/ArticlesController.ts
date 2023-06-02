@@ -5,7 +5,7 @@ import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 // Controller used to call the functions created in routes here so routes won't get messed up
 
 const noArticle = { message: "No Article found by id ", status: 404 }
-const noPermission = { message: "You didn't have permission", status: 402 }
+const noPermission = { message: "You didn't have permission", status: 401 }
 export default class ArticlesController {
     public async getBlogs() {
         const response = await Article.all();
