@@ -19,9 +19,7 @@ export default function UpdateBlogPage(): JSX.Element {
 
   const { id, title, image, content } = updateArticle;
 
-  function inputHandler(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setUpdateArticle({
       ...updateArticle,
       [e.target.name]: e.target.value,
@@ -32,7 +30,7 @@ export default function UpdateBlogPage(): JSX.Element {
     setUpdateArticle({ ...updateArticle, ...getBlog });
   }, [getBlog]);
 
-  async function update() {
+  function update() {
     dispatch(
       updateBlog({
         ...updateArticle,
