@@ -31,15 +31,16 @@ export default function UpdateBlogPage(): JSX.Element {
   }, [getBlog]);
 
   function update() {
-    if ((title || image || content )) {
-      
+    if (title === "" || content === "" || image === "") {
+      alert("You can't left a field empty")
+    } else {
+      dispatch(
+        updateBlog({
+          ...updateArticle,
+          id,
+        })
+      );
     }
-    dispatch(
-      updateBlog({
-        ...updateArticle,
-        id,
-      })
-    );
   }
   return (
     <div>

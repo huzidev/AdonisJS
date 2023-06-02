@@ -34,11 +34,6 @@ export default function ViewBlogsPage(): JSX.Element {
 
   console.log("user id", userId.id);
   
-  let dum = "Hello, World adding this with the help asdasd asdas adas ads as"
-
-  console.log("len", dum.length);
-  
-
   const fetchedData = allBlogs.map((ele: BlogState) => {
     return (
       <div 
