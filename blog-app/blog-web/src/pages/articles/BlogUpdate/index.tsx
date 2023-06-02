@@ -31,6 +31,9 @@ export default function UpdateBlogPage(): JSX.Element {
   }, [getBlog]);
 
   function update() {
+    if ((title || image || content )) {
+      
+    }
     dispatch(
       updateBlog({
         ...updateArticle,
