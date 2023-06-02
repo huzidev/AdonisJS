@@ -1,7 +1,9 @@
 const ROUTE_PATHS = {
   HOME: '/',
-  USER_SIGNIN: '/user/sign_in',
-  USER_SIGNUP: '/user/sign_up',
+  AUTH_SIGNIN: '/user/sign_in',
+  AUTH_SIGNUP: '/user/sign_up',
+  
+  VIEW_PROFILE: '/user/view/me',
 
   ARTICLE_CREATE: '/blog/add',
   ARTICLE_UPDATE: '/blog/edit/',
