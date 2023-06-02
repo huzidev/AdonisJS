@@ -1,11 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { initUser } from "store/auth/actions";
+import { useAppDispatch } from "store/hooks/hooks";
 
 export default function ViewProfilePage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   function runOnce() {
-    dispatch(initUser());
+    dispatch(initUser())
   }
 
   useEffect(() => {
