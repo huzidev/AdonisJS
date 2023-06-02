@@ -93,7 +93,7 @@ export default function ViewBlogsPage(): JSX.Element {
   });
   return (
   <div 
-    className="w-10/12 m-auto flex flex-wrap bg-slate-300"
+    className="w-10/12 m-auto flex flex-wrap"
   >
     {fetchedData}
     </div>
