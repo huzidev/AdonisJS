@@ -1,21 +1,14 @@
 import { useEffect, useState } from "react";
-import { initUser } from "store/auth/actions";
-import { useAppDispatch, useAppSelector } from "store/hooks/hooks";
+import { useAppSelector } from "store/hooks/hooks";
+import { useGetDataPageHooks } from "./hooks";
 import { UserDetailState } from "./types";
 
 export default function ViewProfilePage() {
-  const dispatch = useAppDispatch();
+  useGetDataPageHooks()
   const userData = useAppSelector((state) => state.user.getUser);
-  
   const [userDetails, setUserDetails] = useState<UserDetailState>({ username: "", email: "" })
   
-  function runOnce() {
-    dispatch(initUser())
-  }
   
-  useEffect(() => {
-    runOnce();
-  }, []); 
   
   useEffect(() => {
     setUserDetails({ ...userDetails, ...userData });
