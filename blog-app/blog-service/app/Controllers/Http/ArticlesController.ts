@@ -51,18 +51,18 @@ export default class ArticlesController {
         try {
             const body = await request.validate(UpdateArticle);
             console.log("body", body);
-            console.log("auth user", auth.user?.id);
+            
             const article = await Article.findBy("id", params.id);
-            console.log("article owner id", article?.ownerId);
+            const articleId: number = params.id;
             if (!article) {
                 throw noArticle
             } else if (article.ownerId !== auth.user?.id) {
                 throw noPermission
             } else {
-                    await Article.query().where("id", params.id).update(body);
-                    return { 
-                        data: body, 
-                        message: "Article updated successfully" 
+                await Article.query().where("id", articleId).update(body);
+                return { 
+                    data: body, 
+                    message: "Article updated successfully" 
                 }
             }
         } catch (e) {
