@@ -21,7 +21,7 @@ export default Env.rules({
 	APP_NAME: Env.schema.string(),
 	CACHE_VIEWS: Env.schema.boolean(),
 	SESSION_DRIVER: Env.schema.string(),
-  DRIVE_DISK: Env.schema.enum(['local'] as const),
+	DRIVE_DISK: Env.schema.enum(['local'] as const),
 	NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
 	// added this after installing lucid for database
 	DB_CONNECTION: Env.schema.string(),
