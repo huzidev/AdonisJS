@@ -22,6 +22,9 @@ export interface BlogDataState extends AddBlogReq {
 // }
 
 export interface BlogState {
+    currPage: number;
+    loading: boolean;
+    error: string;
     allBlogs: BlogDataState[];
     getBlog: BlogDataState | {};
 }
