@@ -6,3 +6,12 @@ export interface BlogState {
     content: string;
     ownerId: number
 }
+
+export interface GetBlogsState {
+    blogs: BlogState
+}
+
+export interface AllBlogsState {
+    allBlogs: GetBlogsState
+}
+

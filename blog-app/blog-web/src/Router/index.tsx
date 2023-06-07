@@ -1,3 +1,4 @@
+import AuthGuard from "components/AuthGuard";
 import Nav from "components/Header";
 import {
   Route,
@@ -17,7 +18,9 @@ export default function AppRouter(): JSX.Element {
               key={path}
               path={path}
               element={
-                  <Component  />
+                <AuthGuard>
+                    <Component  />
+                </AuthGuard>
               }
             />
           )

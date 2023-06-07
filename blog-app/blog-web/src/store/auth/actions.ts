@@ -63,7 +63,7 @@ export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async () => {
 
 const getUserSlice = createSlice({
     name: "user",
-    initialState: initialState,
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(initUser.fulfilled, (state, action) => {

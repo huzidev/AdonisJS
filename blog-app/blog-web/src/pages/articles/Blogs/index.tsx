@@ -1,16 +1,17 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { initUser } from "store/auth/actions";
+import { useAppDispatch } from "store/hooks/hooks";
 import { deleteBlog } from "../../../store/articles/actions";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
 export default function ViewBlogsPage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const allBlogs = useAppSelector((state) => state.blogs.allBlogs);
-  const getUser = useAppSelector((state) => state.user.getUser);
+  const allBlogs = useSelector((state: any) => state.blogs.allBlogs);
+  const getUser = useSelector((state: any) => state.user.getUser);
 
   useEffect(() => {
     dispatch(initUser())

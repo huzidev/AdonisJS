@@ -15,5 +15,6 @@ export interface UserDetail {
 }
 
 export interface UserDetailState {
+    authToken: "" | null | undefined
     getUser: UserDetail | {}
 }
