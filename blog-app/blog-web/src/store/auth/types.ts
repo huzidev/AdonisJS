@@ -14,7 +14,11 @@ export interface UserDetail {
     username: string;    
 }
 
-export interface UserDetailState {
-    authToken: "" | null | undefined
+interface UserSubState {
+    loading: boolean;
+    error: boolean;
+}
+
+export interface UserDetailState extends UserSubState {
     getUser: UserDetail | {}
 }

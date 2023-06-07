@@ -2,7 +2,6 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { initUser } from "store/auth/actions";
 import { useAppDispatch } from "store/hooks/hooks";
 import { deleteBlog } from "../../../store/articles/actions";
 import { useBlogsPageHooks } from "./hooks";
@@ -13,9 +12,9 @@ export default function ViewBlogsPage(): JSX.Element {
   const allBlogs = useSelector((state: any) => state.blogs.allBlogs);
   const getUser = useSelector((state: any) => state.user.getUser);
 
-  useEffect(() => {
-    dispatch(initUser())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(initUser())
+  // }, [])
 
   interface TestUser { 
     id: number | null;

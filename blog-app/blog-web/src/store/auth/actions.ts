@@ -6,6 +6,8 @@ import KEYS from "./keys";
 import { UserDetailState, UserSignInState, UserState } from "./types";
 
 const initialState: UserDetailState = {
+    loading: false,
+    error: false,
     getUser: {}
 }
 

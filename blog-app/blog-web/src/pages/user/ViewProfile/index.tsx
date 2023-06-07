@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "store/hooks/hooks";
-import { useGetDataPageHooks } from "./hooks";
 import { UserDetailState } from "./types";
 
 export default function ViewProfilePage() {
-  useGetDataPageHooks();
   const userData = useAppSelector((state) => state.user.getUser);
   const [userDetails, setUserDetails] = useState<UserDetailState>({ username: "", email: "" })
   
