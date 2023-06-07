@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api, { setToken } from "../../services/api";
 import storage from "../../services/storage";
 import * as endpoints from "./endpoints";
 import KEYS from "./keys";
-import { UserDetailState, UserSignInState, UserState } from "./types";
+import { UserDetail, UserDetailState, UserSignInState, UserState } from "./types";
 
 const initialState: UserDetailState = {
     loading: false,
@@ -72,12 +72,12 @@ const getUserSlice = createSlice({
             state.loading = true;
             state.error = false
         })
-        builder.addCase(initUser.fulfilled, (state, action) => {
+        builder.addCase(initUser.fulfilled, (state, action: PayloadAction<UserDetail>) => {
             state.loading = false;
             state.getUser = {...state.getUser, ...action.payload}
             state.error = false
         })
-        builder.addCase(initUser.fulfilled, (state) => {
+        builder.addCase(initUser.rejected, (state) => {
             state.loading = false
             state.error = true
         })
