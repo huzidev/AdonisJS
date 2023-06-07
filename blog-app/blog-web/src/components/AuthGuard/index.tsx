@@ -10,4 +10,6 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     useEffect(() => {
         
     }, [])
+
+    return children;
 }
