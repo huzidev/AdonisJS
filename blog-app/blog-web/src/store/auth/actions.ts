@@ -1,17 +1,11 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import api, { setToken } from "../../services/api";
 import storage from "../../services/storage";
 import * as endpoints from "./endpoints";
 import KEYS from "./keys";
-import { UserDetail, UserDetailState, UserSignInState, UserState } from "./types";
+import { AuthSignInPayload, AuthSignUpPayload, User } from "./types";
 
-const initialState: UserDetailState = {
-    loading: false,
-    error: false,
-    getUser: {}
-}
-
-export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: UserState) => {
+export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: AuthSignUpPayload) => {
     try {
         const response = await api.post(endpoints.SIGN_UP, data);
         console.log("Response", response);
@@ -20,7 +14,7 @@ export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: UserState
     }
 });
 
-export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: UserSignInState) => {
+export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: AuthSignInPayload): Promise<User | null> => {
     try {
         const response = await api.post(endpoints.SIGN_IN, data);
         if (response.data) {
@@ -31,8 +25,10 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: UserSignI
         const dataSave = localStorage.getItem(KEYS.TOKEN);
         console.log("local storage", dataSave);
         console.log("Sign in resp", response);
+        return response.data.data;
     } catch (e) {
         console.log("Error", e);
+        throw e;
     }
 });
 
@@ -47,7 +43,7 @@ export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
     }
 })
 
-export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async () => {
+export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async (): Promise<User | null> => {
     try {
         const token = await storage.getItem<string>(KEYS.TOKEN);
         if (token) {
@@ -56,32 +52,12 @@ export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async () => {
             console.log("response for user details", response);
             return await response.data.data;
         }
+        return null;
     } catch (e) {
         await storage.removeItem(KEYS.TOKEN);
         setToken(null);
         console.log("Error", e);
+        throw e;
     }
 })
 
-const getUserSlice = createSlice({
-    name: "user",
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(initUser.pending, (state) => {
-            state.loading = true;
-            state.error = false
-        })
-        builder.addCase(initUser.fulfilled, (state, action: PayloadAction<UserDetail>) => {
-            state.loading = false;
-            state.getUser = {...state.getUser, ...action.payload}
-            state.error = false
-        })
-        builder.addCase(initUser.rejected, (state) => {
-            state.loading = false
-            state.error = true
-        })
-    }
-})
-
-export default getUserSlice.reducer;

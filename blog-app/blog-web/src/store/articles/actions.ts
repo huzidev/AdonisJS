@@ -1,4 +1,4 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../services/api";
 import * as endpoints from "./endpoints";
 import { AddBlogReq, BlogState, UpdateByIdReq } from "./types";
@@ -60,34 +60,3 @@ export const deleteBlog = createAsyncThunk(endpoints.DELETE_BLOG, async (id: num
         console.log("Error", e);
     }
 });
-
-const getBlogSlice = createSlice({
-    name: "blogs",
-    initialState,
-    reducers : {
-        blogsReducer: (state, action: PayloadAction<any>) => {
-            state.allBlogs = action.payload
-        }
-    },
-    extraReducers: (builder) => {
-        builder.addCase(getBlogs.pending, (state) => {
-            state.loading = true;
-            state.error = "";
-        })
-        builder.addCase(getBlogs.fulfilled, (state, action) => {
-            state.loading = false;
-            state.allBlogs = [...action.payload];
-            state.error = "";
-        })
-        builder.addCase(getBlog.rejected, (state) => {
-            state.loading = false;
-            state.error = "Error While loading data";
-        })
-        builder.addCase(getBlog.fulfilled, (state, action) => {
-            state.getBlog = action.payload;
-        })
-    }
-});
-
-export const stateActions = getBlogSlice.actions
-export default getBlogSlice.reducer;

@@ -1,24 +1,29 @@
-export interface UserSignInState {
+import { SubState } from "store/types";
+
+export interface AuthSignInPayload {
     email: string;
     password: string;
 }
 
-export interface UserState extends UserSignInState {
+export interface AuthSignUpPayload extends AuthSignInPayload {
     username: string;
     passwordConfirmation: string;
 }
 
-export interface UserDetail {
+export interface User {
     id: number | null;
     email: string;
     username: string;    
 }
 
-interface UserSubState {
-    loading: boolean;
-    error: boolean;
+export interface AuthInitState extends SubState {
+    init: boolean;
 }
 
-export interface UserDetailState extends UserSubState {
-    getUser: UserDetail | {}
+
+export interface AuthState {
+    user?: User | null,
+    signIn: SubState,
+    signUp: SubState,
+    init: AuthInitState,
 }

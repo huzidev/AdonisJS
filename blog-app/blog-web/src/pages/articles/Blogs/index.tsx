@@ -1,5 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "store/hooks/hooks";
@@ -9,11 +9,6 @@ import { BlogState } from "./types";
 export default function ViewBlogsPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const allBlogs = useSelector((state: any) => state.blogs.allBlogs);
-  const getUser = useSelector((state: any) => state.user.getUser);
-
-  // useEffect(() => {
-  //   dispatch(initUser())
-  // }, [])
 
   interface TestUser { 
     id: number | null;
@@ -26,17 +21,11 @@ export default function ViewBlogsPage(): JSX.Element {
     username: "",
     email: ""
   })
-  useEffect(() => {
-    setUserId({ ...userId, ...getUser })
-  }, [getUser])
-  // useBlogsPageHooks();
 
-  console.log("user id", userId.id);
-  
-  const fetchedData = allBlogs.map((ele: BlogState) => {
+  const fetchedData = allBlogs.map((blog: BlogState) => {
     return (
       <div 
-        key={ele.id}
+        key={blog.id}
         className="w-[30.33%] mt-8 mx-4"
       >
         {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -48,22 +37,22 @@ export default function ViewBlogsPage(): JSX.Element {
           />
           <div className="p-5">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {ele.title}
+              {blog.title}
             </h5> 
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              {ele.content.length > 60 ? `${ele.content.slice(0, 60)}...` : ele.content}
+              {blog.content.length > 60 ? `${blog.content.slice(0, 60)}...` : blog.content}
             </p>
             <Link
-              to={`/blog/${ele.slug}`}
+              to={`/blog/${blog.slug}`}
               className="text-sm font-medium text-center text-white hover:text-blue-500"
             > 
               Read More
             </Link>
             {
-              ele.ownerId === userId.id ? (
+              blog.ownerId === userId.id ? (
               <div>
                 <Link
-                  to={ROUTE_PATHS.ARTICLE_UPDATE + ele.slug}
+                  to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
                   type="button"
                   className="text-white bg-gray-800 font-medium text-sm py-2.5"
                 >
@@ -72,7 +61,7 @@ export default function ViewBlogsPage(): JSX.Element {
                 <button
                   type="button"
                   className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
-                  onClick={() => dispatch(deleteBlog(ele.id))}
+                  onClick={() => dispatch(deleteBlog(blog.id))}
                 >
                   Delete
                 </button>
