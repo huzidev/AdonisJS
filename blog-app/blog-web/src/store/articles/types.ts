@@ -1,34 +1,30 @@
+import { User } from "store/auth/types";
 import { SubState } from "store/types";
 
 // for getBlog just title and content is required
-export interface AddBlogReq {
-    title: string;
-    content: string;
-    image: string;
+export interface BlogGeneral {
+  title: string;
+  content: string;
+  image: string;
 }
 
-export interface UpdateByIdReq {
-    id: number | null;
-    title?: string;
-    content?: string;
-    image?: string;
+export interface BlogUpdateReq {
+  id: number | null;
+  title?: string;
+  content?: string;
+  image?: string;
 }
 
-export interface InitState extends SubState {
-  init: boolean;
+export interface BlogDetail extends BlogGeneral {
+  id: number;
+  ownerId: number;
+  createdAt: string;
+  updatedAt: string;
+  slug: string;
+  owner: User
 }
-
-export interface BlogDetail extends AddBlogReq {
-    ownerId: number;
-    id: number;
-    slug: string;
-}
-
-// export interface BlogUpdate extends BlogDetails {
-// }
 
 export interface BlogState extends SubState {
-    currPage: number;
-    data?: BlogDetail[];
-    getBlog?: UpdateByIdReq | null;
+  data?: BlogDetail[];
+  getBlog?: BlogUpdateReq | null;
 }
