@@ -1,14 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as actions from "./actions";
 
+
 const getBlogSlice = createSlice({
     name: "blogs",
     initialState,
-    reducers : {
-        blogsReducer: (state, action: PayloadAction<any>) => {
-            state.allBlogs = action.payload
-        }
-    },
+    reducers : {},
     extraReducers: (builder) => {
         builder.addCase(actions.getBlogs.pending, (state) => {
             state.loading = true;
