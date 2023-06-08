@@ -1,18 +1,19 @@
+import React from 'react';
 import ROUTE_PATHS from './paths';
 
-import EditProfilePage from 'pages/user/EditProfile';
-import HomePage from '../pages/Home';
-import AddBlogPage from '../pages/articles/BlogCreate';
-import UpdateBlogPage from '../pages/articles/BlogUpdate';
-import ViewBlogPage from '../pages/articles/BlogView';
-import ViewBlogsPage from '../pages/articles/Blogs';
-import UserSignInPage from '../pages/auth/Login';
-import UserSignUpPage from '../pages/auth/Register';
-import ViewProfilePage from "../pages/user/ViewProfile";
+const EditProfilePage = React.lazy(() => import('pages/user/EditProfile'));
+const HomePage = React.lazy(() => import('pages/user/EditProfile'));
+const AddBlogPage = React.lazy(() => import('pages/user/EditProfile'));
+const UpdateBlogPage = React.lazy(() => import('pages/user/EditProfile'));
+const ViewBlogPage = React.lazy(() => import('pages/user/EditProfile'));
+const ViewBlogsPage = React.lazy(() => import('pages/user/EditProfile'));
+const UserSignInPage = React.lazy(() => import('pages/user/EditProfile'));
+const UserSignUpPage = React.lazy(() => import('pages/user/EditProfile'));
+const ViewProfilePage = React.lazy(() => import('pages/user/EditProfile'));
 
 interface AppRoute {
   path: string;
-  Component: () => JSX.Element;
+  Component: React.LazyExoticComponent<() => JSX.Element>;
 }
 
 const routes: AppRoute[] = [

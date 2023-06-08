@@ -72,7 +72,7 @@ const getBlogSlice = createSlice({
         })
         builder.addCase(getBlogs.fulfilled, (state, action) => {
             state.loading = false;
-            state.allBlogs = [...state.allBlogs, ...action.payload];
+            state.allBlogs = [...action.payload];
             state.error = "";
         })
         builder.addCase(getBlog.rejected, (state) => {
