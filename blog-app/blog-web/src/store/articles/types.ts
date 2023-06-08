@@ -12,6 +12,15 @@ export interface UpdateByIdReq {
     image?: string;
 }
 
+export interface SubState {
+  loading: boolean;
+  error: boolean;
+}
+
+export interface InitState extends SubState {
+  init: boolean;
+}
+
 export interface BlogDataState extends AddBlogReq {
     ownerId: number;
     id: number;

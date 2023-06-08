@@ -64,7 +64,9 @@ export const deleteBlog = createAsyncThunk(endpoints.DELETE_BLOG, async (id: num
 const getBlogSlice = createSlice({
     name: "blogs",
     initialState,
-    reducers : {},
+    reducers : {
+        
+    },
     extraReducers: (builder) => {
         builder.addCase(getBlogs.pending, (state) => {
             state.loading = true;

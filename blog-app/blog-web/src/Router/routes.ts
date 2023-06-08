@@ -1,7 +1,7 @@
 import React from 'react';
-import HomePage from '../pages/Home';
 import ROUTE_PATHS from './paths';
 
+const HomePage = React.lazy(() => import('../pages/Home'));
 const EditProfilePage = React.lazy(() => import('pages/user/EditProfile'));
 const AddBlogPage = React.lazy(() => import('../pages/articles/BlogCreate'));
 const UpdateBlogPage = React.lazy(() => import('../pages/articles/BlogUpdate'));
@@ -14,7 +14,7 @@ const ViewProfilePage = React.lazy(() => import('../pages/user/ViewProfile'));
 interface AppRoute {
   path: string;
   Component: React.LazyExoticComponent<() => JSX.Element>;
-}
+}   
 
 const routes: AppRoute[] = [
     {
