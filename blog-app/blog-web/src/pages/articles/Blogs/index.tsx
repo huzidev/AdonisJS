@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "store/hooks/hooks";
 import { deleteBlog } from "../../../store/articles/actions";
-import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
 export default function ViewBlogsPage(): JSX.Element {
@@ -30,7 +29,7 @@ export default function ViewBlogsPage(): JSX.Element {
   useEffect(() => {
     setUserId({ ...userId, ...getUser })
   }, [getUser])
-  useBlogsPageHooks();
+  // useBlogsPageHooks();
 
   console.log("user id", userId.id);
   

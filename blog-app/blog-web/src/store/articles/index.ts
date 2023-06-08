@@ -1,5 +1,9 @@
-import * as actions from "./actions";
+import { useSelector } from 'react-redux';
 
 export const useAuth = () => {
-    blogs: actions.getBlogs();
-}
+  const allBlogsState = useSelector((state: any) => state.blogs.allBlogs);
+
+  return {
+    allBlogsState,
+  };
+};
