@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as actions from "./actions";
+import { BlogList } from "./types";
 
+const initialState: BlogList = {
+    loading: false,
+    error: false
+}
 
 const getBlogSlice = createSlice({
     name: "blogs",

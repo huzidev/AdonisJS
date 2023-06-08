@@ -1,15 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../services/api";
 import * as endpoints from "./endpoints";
-import { AddBlogReq, BlogState, UpdateByIdReq } from "./types";
-
-export const initialState: BlogState = {
-    allBlogs: [],
-    getBlog: {},
-    loading: false,
-    error: "",
-    currPage: 1
-}
+import { BlogAddPayload, UpdateByIdReq } from "./types";
 
 export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async () => {
     try {
@@ -30,7 +22,7 @@ export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (slug: string)
     }
 });
 
-export const addBlog = createAsyncThunk(endpoints.ADD_BLOG, async (data: AddBlogReq) => {
+export const addBlog = createAsyncThunk(endpoints.ADD_BLOG, async (data: BlogAddPayload) => {
     try {
         const response = await api.post(endpoints.ADD_BLOG, data);
         if (response.status === 200) {

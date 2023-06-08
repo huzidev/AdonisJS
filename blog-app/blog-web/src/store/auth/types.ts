@@ -20,7 +20,6 @@ export interface AuthInitState extends SubState {
     init: boolean;
 }
 
-
 export interface AuthState {
     user?: User | null,
     signIn: SubState,

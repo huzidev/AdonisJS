@@ -2,20 +2,20 @@ import { User } from "store/auth/types";
 import { SubState } from "store/types";
 
 // for getBlog just title and content is required
-export interface BlogGeneral {
+export interface BlogAddPayload {
   title: string;
   content: string;
   image: string;
 }
 
-export interface BlogUpdateReq {
+export interface BlogUpdatePayload {
   id: number | null;
   title?: string;
   content?: string;
   image?: string;
 }
 
-export interface BlogDetail extends BlogGeneral {
+export interface BlogDetail extends BlogAddPayload {
   id: number;
   ownerId: number;
   createdAt: string;
@@ -24,7 +24,7 @@ export interface BlogDetail extends BlogGeneral {
   owner: User
 }
 
-export interface BlogState extends SubState {
+export interface BlogList extends SubState {
   data?: BlogDetail[];
-  getBlog?: BlogUpdateReq | null;
+  getBlog?: BlogUpdatePayload | null;
 }

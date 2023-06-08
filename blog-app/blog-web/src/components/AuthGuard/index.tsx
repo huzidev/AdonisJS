@@ -7,7 +7,6 @@ interface AuthGuardProps {
 export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     const [state, setState] = useState<boolean>(false);
     const auth = useAuth();
-
     
     useEffect(() => {
       console.log('logged');
