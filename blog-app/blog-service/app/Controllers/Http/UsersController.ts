@@ -9,9 +9,13 @@ export default class UsersController {
 
     public async update({ request, params, auth }: HttpContextContract) {
         try {
-            
-        } catch (error) {
-            
+            const userId = auth.user?.id
+            let body;
+            if (userId) {
+                body = await request validator
+            }
+        } catch (e) {
+            throw e
         }
     }
 }
