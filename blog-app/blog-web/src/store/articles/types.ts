@@ -8,7 +8,7 @@ export interface AddBlogPayload {
   image: string;
 }
 
-export interface getBlogPayload {
+export interface GetBlogPayload {
   slug: string;
 }
 
@@ -38,4 +38,7 @@ export interface BlogState {
   data?: Blog[] | null;
   getBlogs?: AllBlogs;
   getBlog?: getBlogById;
+  updateBlog?: getBlogById;
+  addBlog: SubState;
+  deleteBlog: SubState;
 }

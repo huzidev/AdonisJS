@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { addBlog } from "store/articles/actions";
-import { useAppDispatch } from "../../../store/hooks/hooks";
+import { useBlogs } from "store/articles";
 import { ArticleType } from "./types";
 
 export default function AddBlogPage(): JSX.Element {
-  const dispatch = useAppDispatch();
+  const blog = useBlogs();
   const initialState: ArticleType = { title: "", image: "", content: "" };
   const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
@@ -16,10 +15,6 @@ export default function AddBlogPage(): JSX.Element {
       ...article,
       [e.target.name]: e.target.value,
     });
-  }
-
-  function createBlog() {
-    dispatch(addBlog(article));
   }
   return (
     <div>
@@ -94,7 +89,7 @@ export default function AddBlogPage(): JSX.Element {
           <div>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={createBlog}
+              onClick={() => blog.addBlog(article)}
             >
               Add Blog
             </button>
