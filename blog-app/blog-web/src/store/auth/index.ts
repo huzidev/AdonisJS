@@ -8,6 +8,7 @@ export function useAuth() {
   const dispatch = useAppDispatch();
   const initUser = () => dispatch(actions.initUser());
   const signOut = () => dispatch(actions.signOut());
+  // to receive the data for signin and signup and use that data in redux therefore used payload
   const signIn = (payload: AuthSignInPayload) => dispatch(actions.signIn(payload));
   const signUp = (payload: AuthSignUpPayload) => dispatch(actions.signUp(payload));
 
