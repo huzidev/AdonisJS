@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { updateBlog } from "../../../store/articles/actions";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
-import { useEditBlogPageHooks } from "./hooks";
+import { useParams } from "react-router-dom";
+import { useBlogs } from "store/articles";
 import { ArticleType } from "./types";
 
 export default function UpdateBlogPage(): JSX.Element {
-  const dispatch = useAppDispatch();
-  const getBlog = useAppSelector((s: any) => s.blogs.getBlog);
-  useEditBlogPageHooks();
+  const blogs = useBlogs();
+  const params = useParams();
+  const slug: any = params.slug;
+  const blog = blogs.state.getBlog?.data;
+  useEffect(() => {
+    blogs.getBlog(slug)
+  }, [])
 
   const initialState: ArticleType = {
     id: null,
@@ -27,19 +30,17 @@ export default function UpdateBlogPage(): JSX.Element {
   }
 
   useEffect(() => {
-    setUpdateArticle({ ...updateArticle, ...getBlog });
-  }, [getBlog]);
+    setUpdateArticle({ ...updateArticle, ...blog });
+  }, [blog]);
 
   function update() {
     if (title === "" || content === "" || image === "") {
       alert("You can't left a field empty")
     } else {
-      dispatch(
-        updateBlog({
-          ...updateArticle,
-          id,
-        })
-      );
+      blogs.updateBlog({
+        ...updateArticle,
+        id
+      })
     }
   }
   return (
