@@ -5,6 +5,7 @@ import { BlogState } from "./types";
 
 const initialState: BlogState = {
     getBlogs: { ...subState, data: [] },
+    getBlog: { ...subState }
 }
 
 const blogSlice = createSlice({
