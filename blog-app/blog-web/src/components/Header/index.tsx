@@ -1,18 +1,10 @@
 import ROUTE_PATHS from "Router/paths";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 
 export default function Header() {
   const auth = useAuth();
-  const [userData, setUserData] = useState({});
   const user = auth.state.user;
-  useEffect(() => {
-    if (user) {
-      setUserData(user)
-    }
-  }, [])
-  
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">

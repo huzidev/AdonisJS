@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "store/auth";
 import { UserDetailState } from "./types";
 
 export default function ViewProfilePage() {
+  const auth = useAuth();
   const [userDetails, setUserDetails] = useState<UserDetailState>({ username: "", email: "" })
+  const userData = auth.state.user;
+
+  useEffect(() => {
+    setUserDetails({...userDetails, ...userData})
+  }, [])
 
   return (
     <div>
