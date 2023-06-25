@@ -6,4 +6,12 @@ export default class UsersController {
     public async getMe({ auth }: HttpContextContract) {
         return { data: auth.user?.toJSON() }
     }
+
+    public async update({ request, params, auth }: HttpContextContract) {
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
 }
