@@ -5,7 +5,7 @@ import { BlogState } from "./types";
 
 const initialState: BlogState = {
     getBlogs: { ...subState, data: [] },
-    getBlog: { ...subState }
+    getBlog: { ...subState, data: null }
 }
 
 const blogSlice = createSlice({
@@ -21,14 +21,27 @@ const blogSlice = createSlice({
             state.getBlogs!.loading = false;
             if (action.payload) {
                 state.getBlogs!.data = [...action.payload];
-                console.log("runs");
-                
             }
             state.getBlogs!.error = false;
         })
         builder.addCase(actions.getBlogs.rejected, (state) => {
             state.getBlogs!.loading = false;
             state.getBlogs!.error = true;
+        })
+         builder.addCase(actions.getBlog.pending, (state) => {
+            state.getBlog!.loading = true;
+            state.getBlog!.error = false;
+        })
+        builder.addCase(actions.getBlog.fulfilled, (state, action) => {
+            state.getBlog!.loading = false;
+            if (action.payload) {
+                state.getBlog!.data = {...action.payload};
+            }
+            state.getBlog!.error = false;
+        })
+        builder.addCase(actions.getBlog.rejected, (state) => {
+            state.getBlog!.loading = false;
+            state.getBlog!.error = true;
         })
     }
 });

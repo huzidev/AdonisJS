@@ -8,6 +8,10 @@ export interface AddBlogPayload {
   image: string;
 }
 
+export interface getBlogPayload {
+  slug: string;
+}
+
 // partial for optional
 export interface UpdateBlogPayload extends Partial<AddBlogPayload> {
   id: number | null;
@@ -27,10 +31,11 @@ export interface AllBlogs extends SubState {
 }
 
 export interface getBlogById extends SubState {
-  data?: Blog;
+  data?: Blog | null;
 }
 
-export interface BlogState extends SubState {
+export interface BlogState {
   data?: Blog[] | null;
   getBlogs?: AllBlogs;
+  getBlog?: getBlogById;
 }

@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../../store/hooks/hooks";
-import { useGetBlogPageHooks } from "./hooks";
+import { useParams } from "react-router-dom";
+import { useBlogs } from "store/articles";
 import { BlogState } from "./types";
 
 export default function ViewBlogPage(): JSX.Element {
-  const getBlog = useAppSelector((state: any) => state.blogs.getBlog);
-  useGetBlogPageHooks();
-
+  const blog = useBlogs();
+  const getBlog = blog.state.getBlog?.data
+  const params: any = useParams();
   const initialState: BlogState = {title: "", image: "", content: ""};
-  const [blog, setBlog] = useState(initialState)
+  const [blogView, setBlogView] = useState(initialState);
 
   useEffect(() => {
-    setBlog({...blog, ...getBlog})
+    blog.getBlog(params.slug)
+  }, [])
+
+  useEffect(() => {
+    setBlogView({...blogView, ...getBlog})
   }, [getBlog])
   
   return (
@@ -25,10 +29,10 @@ export default function ViewBlogPage(): JSX.Element {
           />
           <div className="p-5 flex flex-col items-center">
             <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {blog.title}
+              {blogView.title}
             </h5> 
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              {blog.content}
+              {blogView.content}
             </p>
           </div>
         </div>

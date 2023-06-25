@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../../store/hooks/hooks";
 export function useGetBlogPageHooks(): void {
     const dispatch = useAppDispatch();
     const params = useParams();
-    const slug: string | undefined = params.slug;
+    const slug: any = params.slug;
 
      useEffect(() => {
         dispatch(getBlog(slug!))

@@ -3,10 +3,12 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { deleteBlog } from "store/articles/actions";
+import { useAppDispatch } from "store/hooks/hooks";
 import { BlogState } from "./types";
 
 export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
+  const dispatch = useAppDispatch();
   const allBlogs = blogs.state.getBlogs?.data;
 
   useEffect(() => {
