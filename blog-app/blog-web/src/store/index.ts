@@ -4,7 +4,7 @@ import auth from "./auth/reducer";
 
 const store = configureStore({
     reducer: {
-        blogs: getBlogs,
+        getBlogs,
         auth
     }
 })

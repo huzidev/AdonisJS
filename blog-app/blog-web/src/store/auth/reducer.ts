@@ -5,9 +5,9 @@ import { AuthState, User } from "./types";
 
 
 const initialState: AuthState = {
-    signIn:  {...subState },
-    signUp:  {...subState },
-    init:  {...subState, init: false },
+    signIn:  { ...subState },
+    signUp:  { ...subState },
+    init:  { ...subState, init: false },
 }
 
 const authSlice = createSlice({

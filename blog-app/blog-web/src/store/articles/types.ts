@@ -15,7 +15,7 @@ export interface BlogUpdatePayload {
   image?: string;
 }
 
-export interface BlogDetail extends BlogAddPayload {
+export interface Blog extends BlogAddPayload {
   id: number;
   ownerId: number;
   createdAt: string;
@@ -25,6 +25,6 @@ export interface BlogDetail extends BlogAddPayload {
 }
 
 export interface BlogList extends SubState {
-  data?: BlogDetail[];
+  data?: Blog[];
   getBlog?: BlogUpdatePayload | null;
 }
