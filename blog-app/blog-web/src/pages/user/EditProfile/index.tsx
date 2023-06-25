@@ -1,11 +1,25 @@
+import { useEffect, useState } from "react";
+import { useAuth } from "store/auth";
+import { UserDetailsEdit } from "./types";
 
 export default function EditProfilePage() {
-  // function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
-  //   setUpdateArticle({
-  //     ...updateArticle,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // }
+  const auth = useAuth();
+  const userData = auth.state.user
+  const initialState: UserDetailsEdit = {username: "", email: ""};
+  const [updateDetails, setUpdateDetails] = useState(initialState);
+
+  useEffect(() => {
+    setUpdateDetails({...updateDetails, ...userData})
+  }, [])
+
+  const { username, email } = updateDetails;
+  
+  function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    setUpdateDetails({
+      ...updateDetails,
+      [e.target.name]: e.target.value,
+    });
+  }
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -22,16 +36,18 @@ export default function EditProfilePage() {
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="mb-3">
             <label
-              htmlFor="title"
+              htmlFor="username"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Username
             </label>
             <div className="mt-2">
               <input
-                id="title"
-                name="title"
+                id="username"
+                name="username"
                 type="text"
+                value={username}
+                onChange={inputHandler}
                 required
                 className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -39,16 +55,18 @@ export default function EditProfilePage() {
           </div>
           <div className="mb-6">
             <label
-              htmlFor="title"
+              htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Email
             </label>
             <div className="mt-2">
               <input
-                id="title"
-                name="title"
-                type="text"
+                id="email"
+                name="email"
+                type="email"
+                value={email}
+                onChange={inputHandler}
                 required
                 className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
