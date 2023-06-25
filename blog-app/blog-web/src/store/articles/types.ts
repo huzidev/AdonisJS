@@ -13,7 +13,7 @@ export interface UpdateBlogPayload extends Partial<AddBlogPayload> {
   id: number | null;
 }
 
-export interface BlogDetail extends AddBlogPayload {
+export interface Blog extends AddBlogPayload {
   id: number;
   ownerId: number;
   createdAt: string;
@@ -22,11 +22,11 @@ export interface BlogDetail extends AddBlogPayload {
   owner: User
 }
 
-export interface BlogState {
-  blogsListState: BlogList;
+export interface AllBlogs extends SubState {
+  data?: Blog[]
 }
 
-export interface BlogList extends SubState {
-  data?: BlogDetail[];
-  getBlogs?: BlogDetail | null;
+export interface BlogState {
+  data?: Blog[] | null;
+  getBlogs?: AllBlogs;
 }

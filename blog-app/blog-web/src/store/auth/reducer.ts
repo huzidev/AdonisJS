@@ -18,7 +18,7 @@ const authSlice = createSlice({
             state.init.loading = true;
             state.init.error = false
         });
-        builder.addCase(actions.initUser.fulfilled, (state, action: PayloadAction<User| null>) => {
+        builder.addCase(actions.initUser.fulfilled, (state, action: PayloadAction<User | null>) => {
             state.init.init = true
             state.init.loading = false;
             if (action.payload) {

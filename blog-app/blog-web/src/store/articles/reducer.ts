@@ -1,10 +1,10 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { subState } from "store/states";
 import * as actions from "./actions";
 import { BlogState } from "./types";
 
 const initialState: BlogState = {
-    blogsListState: { ...subState, data: [] }
+    getBlogs: { ...subState, data: [] },
 }
 
 const blogSlice = createSlice({
@@ -13,19 +13,21 @@ const blogSlice = createSlice({
     reducers : {},
     extraReducers: (builder) => {
         builder.addCase(actions.getBlogs.pending, (state) => {
-            state.blogsListState.loading = true;
-            state.blogsListState.error = false;
+            state.getBlogs!.loading = true;
+            state.getBlogs!.error = false;
         })
-        builder.addCase(actions.getBlogs.fulfilled, (state, action: PayloadAction<data[] | null>) => {
-            state.blogsListState.loading = false;
+        builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
+            state.getBlogs!.loading = false;
             if (action.payload) {
-                state.blogsListState.data = [...action.payload];
+                state.getBlogs!.data = [...action.payload];
+                console.log("runs");
+                
             }
-            state.blogsListState.error = false;
+            state.getBlogs!.error = false;
         })
         builder.addCase(actions.getBlogs.rejected, (state) => {
-            state.blogsListState.loading = false;
-            state.blogsListState.error = true;
+            state.getBlogs!.loading = false;
+            state.getBlogs!.error = true;
         })
     }
 });

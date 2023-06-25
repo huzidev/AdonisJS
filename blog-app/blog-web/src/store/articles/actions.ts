@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../services/api";
 import * as endpoints from "./endpoints";
-import { AddBlogPayload, BlogDetail, UpdateBlogPayload } from "./types";
+import { AddBlogPayload, Blog, UpdateBlogPayload } from "./types";
 
-export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async (): Promise<BlogDetail | null> => {
+export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async (): Promise<Blog[] | null> => {
     try {
        const response = await api.get(endpoints.GET_BLOGS);
+       console.log("response", response.data.data);
        return response.data.data;
     } catch (e) {
         console.log("Error", e);

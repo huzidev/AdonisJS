@@ -15,7 +15,6 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       if (!init.init && !init.loading) {
         auth.initUser();
       }
-
       if (init.init) {
         setState(true);
       }

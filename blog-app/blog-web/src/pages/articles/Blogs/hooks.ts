@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useBlogs } from "store/articles";
-import { getBlogs } from "../../../store/articles/actions";
 import { useAppDispatch } from "../../../store/hooks/hooks";
 
 export function useBlogsPageHooks(): void {
@@ -8,9 +7,8 @@ export function useBlogsPageHooks(): void {
     const blogs = useBlogs();
 
     useEffect(() => {
-        if (!blogs.state.data!.length) {
-            dispatch(getBlogs());
-        }
+        blogs.getBlogs();
+        console.log("blogs", blogs);
     }, [])
 
 }
