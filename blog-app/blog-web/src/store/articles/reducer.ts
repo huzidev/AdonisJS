@@ -7,7 +7,7 @@ const initialState: BlogState = {
     getBlog: { ...subState, data: [] }
 }
 
-const getBlogSlice = createSlice({
+const blogSlice = createSlice({
     name: "blogs",
     initialState,
     reducers : {},
@@ -33,5 +33,4 @@ const getBlogSlice = createSlice({
     }
 });
 
-export const stateActions = getBlogSlice.actions
-export default getBlogSlice.reducer;
+export default blogSlice.reducer;
