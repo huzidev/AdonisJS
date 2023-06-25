@@ -24,6 +24,10 @@ export interface BlogDetail extends BlogAddPayload {
   owner: User
 }
 
+export interface BlogActionResult {
+  data: BlogDetail;
+}
+
 export interface BlogState extends SubState {
   data?: BlogDetail[];
   getBlog?: BlogUpdatePayload | null;
