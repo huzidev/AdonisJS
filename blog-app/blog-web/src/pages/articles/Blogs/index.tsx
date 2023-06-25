@@ -2,11 +2,14 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
+import { useAuth } from "store/auth";
 import { BlogState } from "./types";
 
 export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
+  const auth = useAuth()
   const allBlogs = blogs.state.getBlogs?.data;
+  const userId = auth.state.user?.id;
 
   useEffect(() => {
     blogs.getBlogs()
@@ -44,7 +47,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     Read More
                   </Link>
                   {
-                    blog.ownerId === 1 ? (
+                    blog.ownerId === userId ? (
                     <div>
                       <Link
                         to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}

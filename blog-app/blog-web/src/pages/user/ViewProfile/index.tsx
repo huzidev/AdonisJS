@@ -4,7 +4,6 @@ import { UserDetailState } from "./types";
 
 export default function ViewProfilePage() {
   const [userDetails, setUserDetails] = useState<UserDetailState>({ username: "", email: "" })
-  
 
   return (
     <div>

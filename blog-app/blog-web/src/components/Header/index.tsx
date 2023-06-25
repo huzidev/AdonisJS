@@ -1,11 +1,18 @@
 import ROUTE_PATHS from "Router/paths";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { signOut } from "../../store/auth/actions";
-import KEYS from "../../store/auth/keys";
-import { useAppDispatch } from "../../store/hooks/hooks";
+import { useAuth } from "store/auth";
 
 export default function Header() {
-  const dispatch = useAppDispatch();
+  const auth = useAuth();
+  const [userData, setUserData] = useState({});
+  const user = auth.state.user;
+  useEffect(() => {
+    if (user) {
+      setUserData(user)
+    }
+  }, [])
+  
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -45,15 +52,8 @@ export default function Header() {
                   Blogs
                 </Link>
               </li>
-              <li>
-                <Link
-                  to={ROUTE_PATHS.ARTICLE_CREATE}
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Add Blog
-                </Link>
-              </li>
-              {localStorage.getItem(KEYS.TOKEN) === null ? (
+             
+              {!user ? (
                 <>
                   <li>
                     <Link
@@ -76,6 +76,14 @@ export default function Header() {
                 <>
                   <li>
                     <Link
+                      to={ROUTE_PATHS.ARTICLE_CREATE}
+                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    >
+                      Add Blog
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       to={ROUTE_PATHS.VIEW_PROFILE}
                       className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                     >
@@ -84,7 +92,7 @@ export default function Header() {
                   </li>
                   <li>
                     <button
-                      onClick={() => dispatch(signOut())}
+                      onClick={() => auth.signOut()}
                       className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                     >
                       SingOut
