@@ -24,11 +24,11 @@ export interface BlogDetail extends BlogAddPayload {
   owner: User
 }
 
-export interface BlogActionResult {
-  data: BlogDetail;
+export interface BlogState {
+  blogsListState: BlogList;
 }
 
-export interface BlogState extends SubState {
+export interface BlogList extends SubState {
   data?: BlogDetail[];
-  getBlog?: BlogUpdatePayload | null;
+  getBlogs?: BlogUpdatePayload | null;
 }

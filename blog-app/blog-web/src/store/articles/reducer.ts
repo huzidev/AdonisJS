@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { subState } from "store/states";
 import * as actions from "./actions";
-import { Blog, BlogState } from "./types";
+import { BlogDetail, BlogState } from "./types";
 
 const initialState: BlogState = {
-    getBlog: { ...subState, data: [] }
+    blogsListState: { ...subState, data: [] }
 }
 
 const blogSlice = createSlice({
@@ -13,22 +13,19 @@ const blogSlice = createSlice({
     reducers : {},
     extraReducers: (builder) => {
         builder.addCase(actions.getBlogs.pending, (state) => {
-            state.loading = true;
-            state.error = false;
+            state.blogsListState.loading = true;
+            state.blogsListState.error = false;
         })
-        builder.addCase(actions.getBlogs.fulfilled, (state, action: PayloadAction<Blog | null>) => {
-            state.loading = false;
+        builder.addCase(actions.getBlogs.fulfilled, (state, action: PayloadAction<BlogDetail[] | null>) => {
+            state.blogsListState.loading = false;
             if (action.payload) {
-                state.data = [...action.payload];
+                state.blogsListState.data = [...action.payload];
             }
-            state.error = false;
+            state.blogsListState.error = false;
         })
-        builder.addCase(actions.getBlog.rejected, (state) => {
-            state.loading = false;
-            state.error = true;
-        })
-        builder.addCase(actions.getBlog.fulfilled, (state, action) => {
-            state.getBlog = action.payload;
+        builder.addCase(actions.getBlogs.rejected, (state) => {
+            state.blogsListState.loading = false;
+            state.blogsListState.error = true;
         })
     }
 });

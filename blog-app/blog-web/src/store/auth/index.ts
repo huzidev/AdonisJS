@@ -7,9 +7,9 @@ export function useAuth() {
   const state = useSelector((state: any) => state.auth) as AuthState;
   const dispatch = useAppDispatch();
   const initUser = () => dispatch(actions.initUser());
+  const signOut = () => dispatch(actions.signOut());
   const signIn = (payload: AuthSignInPayload) => dispatch(actions.signIn(payload));
   const signUp = (payload: AuthSignUpPayload) => dispatch(actions.signUp(payload));
-  const signOut = () => dispatch(actions.signOut());
 
   return {
     state,
