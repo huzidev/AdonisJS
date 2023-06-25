@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { subState } from "store/states";
 import * as actions from "./actions";
-import { Blog, BlogList } from "./types";
+import { Blog, BlogState } from "./types";
 
-const initialState: BlogList = {
-    loading: false,
+const initialState: BlogState = {
+    getBlog: { ...subState, data: [] }
     error: false
 }
 
