@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import getBlogs from "./articles/actions";
+import blogs from "./articles/reducer";
 import auth from "./auth/reducer";
 
 const store = configureStore({
     reducer: {
-        getBlogs,
+        blogs,
         auth
     }
 })
