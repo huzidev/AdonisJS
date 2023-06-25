@@ -5,7 +5,6 @@ import { Blog, BlogState } from "./types";
 
 const initialState: BlogState = {
     getBlog: { ...subState, data: [] }
-    error: false
 }
 
 const getBlogSlice = createSlice({
