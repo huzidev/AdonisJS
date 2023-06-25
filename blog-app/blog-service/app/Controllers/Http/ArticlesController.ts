@@ -77,7 +77,7 @@ export default class ArticlesController {
         } else if (article.ownerId !== auth.user?.id) {
             throw noPermission
         } 
-         else {
+        else {
             await article.delete();
             return { message: `Article ${params.id} Deleted` };
         }
