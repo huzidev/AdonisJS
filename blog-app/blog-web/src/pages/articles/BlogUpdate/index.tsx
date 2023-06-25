@@ -6,7 +6,7 @@ import { ArticleType } from "./types";
 
 export default function UpdateBlogPage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const getBlog = useAppSelector((s) => s.blogs.getBlog);
+  const getBlog = useAppSelector((s: any) => s.blogs.getBlog);
   useEditBlogPageHooks();
 
   const initialState: ArticleType = {

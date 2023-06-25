@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { subState } from "store/states";
 import * as actions from "./actions";
-import { BlogDetail, BlogState } from "./types";
+import { BlogState } from "./types";
 
 const initialState: BlogState = {
     blogsListState: { ...subState, data: [] }
@@ -16,7 +16,7 @@ const blogSlice = createSlice({
             state.blogsListState.loading = true;
             state.blogsListState.error = false;
         })
-        builder.addCase(actions.getBlogs.fulfilled, (state, action: PayloadAction<BlogDetail[] | null>) => {
+        builder.addCase(actions.getBlogs.fulfilled, (state, action: PayloadAction<data[] | null>) => {
             state.blogsListState.loading = false;
             if (action.payload) {
                 state.blogsListState.data = [...action.payload];

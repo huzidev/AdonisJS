@@ -4,7 +4,7 @@ import { useGetBlogPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
 export default function ViewBlogPage(): JSX.Element {
-  const getBlog = useAppSelector((state) => state.blogs.getBlog);
+  const getBlog = useAppSelector((state: any) => state.blogs.getBlog);
   useGetBlogPageHooks();
 
   const initialState: BlogState = {title: "", image: "", content: ""};
