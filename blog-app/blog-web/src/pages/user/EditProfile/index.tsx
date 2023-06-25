@@ -4,9 +4,10 @@ import { UserDetailsEdit } from "./types";
 
 export default function EditProfilePage() {
   const auth = useAuth();
-  const userData = auth.state.user
-  const initialState: UserDetailsEdit = {username: "", email: ""};
-  const [updateDetails, setUpdateDetails] = useState(initialState);
+  const userData = auth.state.user;
+  const [updateDetails, setUpdateDetails] = useState<UserDetailsEdit>({
+    username: "", email: ""
+  });
 
   useEffect(() => {
     setUpdateDetails({...updateDetails, ...userData})
