@@ -3,10 +3,9 @@ import { subState } from "store/states";
 import * as actions from "./actions";
 import { AuthState, User } from "./types";
 
-
 const initialState: AuthState = {
-    signIn:  { ...subState },
-    signUp:  { ...subState },
+    signInState:  { ...subState },
+    signUpState:  { ...subState },
     init:  { ...subState, init: false },
 }
 
