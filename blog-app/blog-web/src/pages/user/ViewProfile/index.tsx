@@ -5,8 +5,10 @@ import { UserDetailState } from "./types";
 
 export default function ViewProfilePage() {
   const auth = useAuth();
-  const [userDetails, setUserDetails] = useState<UserDetailState>({ username: "", email: "" })
   const userData = auth.state.user;
+  const [userDetails, setUserDetails] = useState<UserDetailState>({ 
+    username: "", email: "" 
+  })
 
   useEffect(() => {
     setUserDetails({...userDetails, ...userData})
