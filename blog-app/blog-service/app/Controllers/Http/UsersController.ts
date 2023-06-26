@@ -9,7 +9,7 @@ export default class UsersController {
         return { data: auth.user?.toJSON() }
     }
 
-    public async update({ request, params, auth }: HttpContextContract) {
+    public async update({ request, auth }: HttpContextContract) {
         try {
             const userId: number | undefined = auth.user?.id;
             let body;
@@ -22,8 +22,7 @@ export default class UsersController {
                     status: 400
                 }
             }
-
-            const user = User.findBy("id", userId);
+            const user = await User.findBy("id", userId);
             if (!user) {
                 throw {
                     message: 'User not found',
@@ -35,6 +34,6 @@ export default class UsersController {
             }
         } catch (e) {
             throw e
-        }
+        }   
     }
 }
