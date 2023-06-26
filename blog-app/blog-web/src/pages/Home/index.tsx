@@ -1,34 +1,13 @@
 
 export default function HomePage() {
   return (
-    // <div>
-    //   <div 
-    //       className="w-11/12 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    //       <div className="p-5">
-    //         <h1 className="mb-4 text-3xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
-    //           Welcome To Blog App
-    //         </h1>
-    //         <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-    //           Name : 
-    //         </h2> 
-    //         <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-    //           Email :
-    //         </h2> 
-    //         <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-    //           Joined Date
-    //         </h2> 
-    //         <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-    //           Total Blogs
-    //         </h2> 
-    //       </div>
-    //     </div>
-    // </div>
     <div id="default-carousel" 
       className="w-11/12 my-8 mx-auto relative bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" data-carousel="slide"
     >
     {/* <!-- Carousel wrapper --> */}
     <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
+          <img src="/docs/images/carousel/carousel-1.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
         </div>
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
         </div>
