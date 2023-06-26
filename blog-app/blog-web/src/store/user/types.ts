@@ -1,8 +1,7 @@
 import { SubState } from "store/types";
 
-export interface UserUpdatePayload extends SubState {
-    id: number | null;
-    username: string;    
+export interface UserUpdatePayload {
+    username?: string;    
 }
 
 export interface UpdateUserId extends  SubState {

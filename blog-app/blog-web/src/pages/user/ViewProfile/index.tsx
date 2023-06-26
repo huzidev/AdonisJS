@@ -12,7 +12,7 @@ export default function ViewProfilePage() {
 
   useEffect(() => {
     setUserDetails({...userDetails, ...userData})
-  }, [])
+  }, [userData])
 
   return (
     <div>

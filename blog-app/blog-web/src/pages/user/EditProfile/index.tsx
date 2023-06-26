@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { UserDetailsEdit } from "./types";
@@ -6,13 +7,16 @@ import { UserDetailsEdit } from "./types";
 export default function EditProfilePage() {
   const auth = useAuth();
   const user = useUser();
+  const Navigate = useNavigate();
   const userData = auth.state.user;
   const [updateDetails, setUpdateDetails] = useState<UserDetailsEdit>({username: ""});
 
+  
+  
   useEffect(() => {
     setUpdateDetails({...updateDetails, ...userData})
   }, [])
-
+  
   function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setUpdateDetails({
       ...updateDetails,
@@ -20,9 +24,8 @@ export default function EditProfilePage() {
     });
   }
 
-  function updateData() {
+  function update() {
     user.updateUser({...updateDetails})
-    )
   }
   return (
     <div>
@@ -60,7 +63,7 @@ export default function EditProfilePage() {
           <div>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={updateData}
+              onClick={update}
             >
               Update Details
             </button>
