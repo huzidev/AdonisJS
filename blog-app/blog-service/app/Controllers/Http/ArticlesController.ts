@@ -34,6 +34,7 @@ export default class ArticlesController {
     public async getById({ params }) {
         try {
             const article = await Article.findBy("slug", params.slug);
+            console.log("article", article);
             if (!article) {
                 throw noArticle
             } else {
