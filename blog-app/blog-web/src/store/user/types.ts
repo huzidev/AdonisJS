@@ -5,7 +5,10 @@ export interface UserUpdatePayload extends SubState {
     username: string;    
 }
 
+export interface UpdateUserId extends  SubState {
+    data?: UserUpdatePayload | null
+}
 
 export interface UserState {
-    updateUser: UserUpdatePayload;
+    updateUser?: UpdateUserId;
 }

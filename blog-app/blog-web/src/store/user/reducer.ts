@@ -25,6 +25,7 @@ const userSlice = createSlice({
             state.updateUser!.loading = false;
             state.updateUser!.error = true;
         })
+    }
 });
 
 export default userSlice.reducer;

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "store/auth";
+import { useUser } from "store/user";
 import { UserDetailsEdit } from "./types";
 
 export default function EditProfilePage() {
   const auth = useAuth();
+  const user = useUser();
   const userData = auth.state.user;
   const [updateDetails, setUpdateDetails] = useState<UserDetailsEdit>({username: ""});
 
@@ -16,6 +18,10 @@ export default function EditProfilePage() {
       ...updateDetails,
       [e.target.name]: e.target.value,
     });
+  }
+
+  function updateData() {
+    
   }
   return (
     <div>
