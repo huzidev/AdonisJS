@@ -1,4 +1,3 @@
-
 export interface SubState {
     loading: boolean;
     error: boolean;
