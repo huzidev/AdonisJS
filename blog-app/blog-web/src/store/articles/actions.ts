@@ -45,7 +45,6 @@ export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: U
         return response.data.data;
     } catch (e) {
         console.log("Error", e);
-        
     }
 });
 
