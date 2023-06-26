@@ -8,6 +8,6 @@ export default function ArticlesRoutes() {
         .where("slug", /^[a-z0-9_-]+$/);
     Route.put("/article/edit/:id", `${path}.updateBlog`).middleware("auth")
         .where("id", /^[0-9]+$/);
-    Route.delete("/article/delete/:id", `${path}.deleteBlog`)
+    Route.delete("/article/delete/:id", `${path}.deleteBlog`).middleware("auth")
         .where("id", /^[0-9]+$/);
 }

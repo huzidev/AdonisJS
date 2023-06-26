@@ -73,6 +73,10 @@ export default class ArticlesController {
 
     public async deleteBlog({ auth, params }: HttpContextContract) {
         const article = await Article.findBy("id", params.id);
+        console.log("blog to be deleted", article);
+        console.log("article owner id", article?.ownerId);
+        console.log("owner id", auth.user?.id);
+        
         if (!article) {
             throw noArticle
         } else if (article.ownerId !== auth.user?.id) {
