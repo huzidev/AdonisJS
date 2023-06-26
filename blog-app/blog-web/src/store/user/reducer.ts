@@ -14,12 +14,14 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         // updateUser
         builder.addCase(actions.updateById.pending, (state) => {
-            state.updateUser!.loading = true;
-            state.updateUser!.error = false;
+            state.updateUser = {loading: true, error: false};
+            // state.updateUser!.loading = true;
+            // state.updateUser!.error = false;
         })
-        builder.addCase(actions.updateById.fulfilled, (state) => {
+        builder.addCase(actions.updateById.fulfilled, (state, action) => {
             state.updateUser!.loading = false;
             state.updateUser!.error = false;
+            state.updateUser!.data = action.payload;
         })
         builder.addCase(actions.updateById.rejected, (state) => {
             state.updateUser!.loading = false;

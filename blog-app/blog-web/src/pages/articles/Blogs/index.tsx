@@ -46,8 +46,7 @@ export default function ViewBlogsPage(): JSX.Element {
                   > 
                     Read More
                   </Link>
-                  {
-                    blog.ownerId === userId && (
+                  {blog.ownerId === userId && (
                     <div>
                       <Link
                         to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
@@ -64,14 +63,12 @@ export default function ViewBlogsPage(): JSX.Element {
                         Delete
                       </button>
                     </div>
-                    )
-                  }
+                    )}
                 </div>
               </div>
             </div>
           );
-        })
-      }
+        })}
     </div>
   )
 }

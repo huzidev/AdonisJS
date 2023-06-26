@@ -7,5 +7,14 @@ export const slides = [
   },
   {
     image: 'react'
+  },
+  {
+    image: 'redux'
+  },
+  {
+    image: 'tailwind'
+  },
+  {
+    image: 'typescript'
   }
 ];

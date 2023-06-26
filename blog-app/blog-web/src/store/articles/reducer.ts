@@ -18,13 +18,14 @@ const blogSlice = createSlice({
     extraReducers: (builder) => {
         // getAllBlogs
         builder.addCase(actions.getBlogs.pending, (state) => {
-            state.getBlogs!.loading = true;
+            state.getBlogs.loading = true;
             state.getBlogs!.error = false;
         })
         builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
             state.getBlogs!.loading = false;
             if (action.payload) {
-                state.getBlogs!.data = [...action.payload];
+                const cleaned = state.getBlogs.data?.filter((dataBlog) => !action.payload?.find((blog => blog.id === dataBlog.id))) ?? []
+                state.getBlogs!.data = [...cleaned, ...action.payload];
             }
             state.getBlogs!.error = false;
         })

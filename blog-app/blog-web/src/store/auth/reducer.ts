@@ -9,10 +9,17 @@ const initialState: AuthState = {
     init:  { ...subState, init: false },
 }
 
-const authSlice = createSlice({
+export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+        updateUser: (state, action:PayloadAction<User>)  => {
+            state.user = {
+                ...(state?.user ?? {}),
+                ...action.payload,
+            };
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(actions.initUser.pending, (state) => {
             state.init.loading = true;

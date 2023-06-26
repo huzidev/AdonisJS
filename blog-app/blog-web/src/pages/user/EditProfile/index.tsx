@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
+import { usePrevious } from "utils";
 import { UserDetailsEdit } from "./types";
 
 export default function EditProfilePage() {
@@ -8,6 +9,11 @@ export default function EditProfilePage() {
   const user = useUser();
   const userData = auth.state.user;
   const [updateDetails, setUpdateDetails] = useState<UserDetailsEdit>({username: ""});
+  const prevUpdateState = usePrevious(user.state.updateUser);
+  const updateState = user.state.updateUser;
+  const x = usePrevious(8997);
+
+  console.log(user);
   
   useEffect(() => {
     setUpdateDetails({...updateDetails, ...userData})
@@ -19,6 +25,14 @@ export default function EditProfilePage() {
       [e.target.name]: e.target.value,
     });
   }
+
+  useEffect(() => {
+    
+    if (prevUpdateState?.loading && !updateState?.loading && updateState?.data) {
+      auth.updateuser(updateState.data!)
+    }
+
+  }, [updateState, prevUpdateState]);
 
   function update() {
     user.updateUser({...updateDetails})

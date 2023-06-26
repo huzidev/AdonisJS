@@ -27,7 +27,7 @@ export interface Blog extends AddBlogPayload {
 }
 
 export interface AllBlogs extends SubState {
-  data?: Blog[];
+  data: Blog[];
 }
 
 export interface getBlogById extends SubState {
@@ -35,9 +35,8 @@ export interface getBlogById extends SubState {
 }
 
 export interface BlogState {
-  data?: Blog[] | null;
-  getBlogs?: AllBlogs;
-  getBlog?: getBlogById;
+  getBlogs: AllBlogs;
+  getBlog: getBlogById;
   updateBlog?: getBlogById;
   addBlog: SubState;
   deleteBlog?: SubState;

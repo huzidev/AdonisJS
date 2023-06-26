@@ -1,3 +1,4 @@
+import { User } from "store/auth/types";
 import { SubState } from "store/types";
 
 export interface UserUpdatePayload {
@@ -5,9 +6,9 @@ export interface UserUpdatePayload {
 }
 
 export interface UpdateUserId extends  SubState {
-    data?: UserUpdatePayload | null
+    data?: User | null
 }
 
 export interface UserState {
-    updateUser?: UpdateUserId;
+    updateUser: UpdateUserId;
 }

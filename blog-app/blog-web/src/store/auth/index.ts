@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'store/hooks/hooks';
 import * as actions from './actions';
-import { AuthSignInPayload, AuthSignUpPayload, AuthState } from './types';
+import { authSlice } from './reducer';
+import { AuthSignInPayload, AuthSignUpPayload, AuthState, User } from './types';
 
 export function useAuth() {
   const state = useSelector((state: any) => state.auth) as AuthState;
@@ -17,6 +18,7 @@ export function useAuth() {
     initUser,
     signIn,
     signUp,
-    signOut
+    signOut,
+    updateuser: (payload: User) => dispatch(authSlice.actions.updateUser(payload)),
   };
 };

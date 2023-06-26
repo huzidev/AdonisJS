@@ -1,10 +1,28 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
-import { slides } from "./data";
 
 export default function HomePage() {
   const auth = useAuth();
   const user = auth.state.user;
+  // const sliderRef = useRef<Slider | null>(null);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (sliderRef.current) {
+  //       sliderRef.current.slickNext();
+  //     }
+  //   }, 3000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1
+  // };
 
   return (
     <div>
@@ -53,13 +71,17 @@ export default function HomePage() {
               </section>
             </main>
           </div>
-          {
-            slides.map((slide, slideIndex) => (
-              <div>
-                <img src={require(`assets/${slide.image}.png`)} alt="logo" />
-              </div>
-            ))
-          }
+          {/* <Slider {...settings}>
+            <div className="text-center">
+              {
+                slides.map((slide, slideIndex) => (
+                  <div key={slideIndex}>
+                    <img src={require(`assets/${slide.image}.png`)} alt={`Icon ${slideIndex}`} />
+                  </div>
+                ))
+              }
+            </div>
+          </Slider> */}
         </div>
       </div>
   )
