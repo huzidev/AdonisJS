@@ -1,44 +1,57 @@
+import { Link } from "react-router-dom";
+import { useAuth } from "store/auth";
 
 export default function HomePage() {
+  const auth = useAuth();
+  const user = auth.state.user;
   return (
-    <div id="default-carousel" 
-      className="w-11/12 my-8 mx-auto relative bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" data-carousel="slide"
-    >
-    {/* <!-- Carousel wrapper --> */}
-    <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-        <div className="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="/docs/images/carousel/carousel-1.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
-        </div>
-        <div className="hidden duration-700 ease-in-out" data-carousel-item>
-        </div>
-        <div className="hidden duration-700 ease-in-out" data-carousel-item>
-        </div>
-        <div className="hidden duration-700 ease-in-out" data-carousel-item>
-        </div>
-        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+    <div>
+      <div 
+          className="w-11/12 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <div className="p-5">
+            <h1 className="mb-4 text-3xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
+              Welcome To Blog App
+            </h1>
+             <main className="container mx-auto py-8">
+              <section className="mb-8">
+                <h2 className="text-2xl text-gray-900 dark:text-white font-bold mb-4">Introduction</h2>
+                <p className="text-lg text-gray-700 dark:text-gray-400">
+                  This blog app is built using Adonis, React, TypeScript, MySQL, and NodeJS.
+                </p>
+              </section>
+              <section className="mb-8">
+                <h2 className="text-2xl text-gray-900 dark:text-white font-bold mb-4">Key Features</h2>
+                <ul className="list-disc list-inside">
+                  <li className="text-lg text-gray-700 dark:text-gray-400 mb-2">User Registration and Authentication</li>
+                  <li className="text-lg text-gray-700 dark:text-gray-400 mb-2">Blog Post Creation and Management</li>
+                  <li className="text-lg text-gray-700 dark:text-gray-400 mb-2">Responsive Design</li>
+                </ul>
+              </section>
+              <section className="mb-8">
+                {!user ? (
+                  <>
+                    <h2 className="text-2xl text-gray-900 dark:text-white font-bold mb-4">Get Started</h2>
+                    <p className="text-lg text-gray-700 dark:text-gray-400 mb-4">Sign up to start creating your own blog posts or explore existing posts.</p>
+                    <Link
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                      to="/user/sign_up">
+                        Sign Up
+                      </Link>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-2xl text-gray-900 dark:text-white font-bold mb-4">Explore Blogs</h2>
+                      <Link
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                      to="/blogs">
+                        Blogs
+                      </Link>
+                  </>
+                )}
+              </section>
+            </main>
+          </div>
         </div>
     </div>
-    {/* <!-- Slider indicators --> */}
-    <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-        <button type="button" className="w-3 h-3 bg-white/30 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-        <button type="button" className="w-3 h-3 bg-white/30 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-        <button type="button" className="w-3 h-3 bg-white/30 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-        <button type="button" className="w-3 h-3 bg-white/30 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-        <button type="button" className="w-3 h-3 bg-white/30 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-    </div>
-    {/* <!-- Slider controls --> */}
-    <button type="button" className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white group-hover:bg-white/30 transition-all duration-300 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg aria-hidden="true" className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-            <span className="sr-only">Previous</span>
-        </span>
-    </button>
-    <button type="button" className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <span className="inline-flex bg-white items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 group-hover:bg-white/30 transition-all duration-300 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg aria-hidden="true" className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-            <span className="sr-only">Next</span>
-        </span>
-    </button>
-</div>
   )
 }
