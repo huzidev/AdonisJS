@@ -11,10 +11,7 @@ export default function EditProfilePage() {
   
   useEffect(() => {
     setUpdateDetails({...updateDetails, ...userData})
-    console.log("runsss");
   }, [])
-  
-  console.log("user data", userData);
   
   function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setUpdateDetails({

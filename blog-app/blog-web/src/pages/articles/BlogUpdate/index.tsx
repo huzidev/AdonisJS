@@ -8,10 +8,6 @@ export default function UpdateBlogPage(): JSX.Element {
   const params = useParams();
   const slug: any = params.slug;
   const blog = blogs.state.getBlog?.data;
-  useEffect(() => {
-    blogs.getBlog(slug)
-  }, [])
-
   const initialState: ArticleType = {
     id: null,
     title: "",
@@ -19,9 +15,13 @@ export default function UpdateBlogPage(): JSX.Element {
     content: "",
   };
   const [updateArticle, setUpdateArticle] = useState(initialState);
-
+  
   const { id, title, image, content } = updateArticle;
-
+  
+  useEffect(() => {
+    blogs.getBlog(slug)
+  }, [])
+  
   function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setUpdateArticle({
       ...updateArticle,

@@ -1,4 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
+import PageLoader from "components/PageLoader";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
@@ -19,6 +20,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       if (!init.init && !init.loading) {
         auth.initUser();
       }
+      // if loggedIn User
       if (auth.state.user && 
         (currentPath === ROUTE_PATHS.AUTH_SIGNIN || currentPath === ROUTE_PATHS.AUTH_SIGNUP)
         ) {
@@ -34,7 +36,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     }, [auth.state]);
 
     if (!state) {
-      return <h1>Loading</h1>;
+      return <PageLoader />;
     }
 
     return children;

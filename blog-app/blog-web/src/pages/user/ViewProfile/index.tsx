@@ -13,10 +13,9 @@ export default function ViewProfilePage() {
 
   useEffect(() => {
     setUserDetails({...userDetails, ...userData})
-  }, [userData])
+  }, [])
 
   console.log("user data", userData);
-
   return (
     <div>
       <div 
