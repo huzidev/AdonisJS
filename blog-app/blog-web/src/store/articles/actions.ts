@@ -50,7 +50,10 @@ export const updateBlog = createAsyncThunk(endpoints.UPDATE_BLOG, async (data: U
 
 export const deleteBlog = createAsyncThunk(endpoints.DELETE_BLOG, async (id: number) => {
     try {
-        await api.delete(endpoints.DELETE_BLOG + id);
+        const response = await api.delete(endpoints.DELETE_BLOG + id);
+        if (response.status === 200) {
+            alert("Blog Deleted Successfully!")
+        }
     } catch (e) {
         console.log("Error", e);
     }
