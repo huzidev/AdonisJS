@@ -9,14 +9,14 @@ export default function HomePage() {
       <div 
           className="w-11/12 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div className="p-5">
-            <h1 className="mb-4 text-3xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
-              Welcome To Blog App
+            <h1 className="mb-2 text-3xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
+              Welcome {user ? `${user.username}` : "To Blog App"}
             </h1>
              <main className="container mx-auto py-8">
               <section className="mb-8">
                 <h2 className="text-2xl text-gray-900 dark:text-white font-bold mb-4">Introduction</h2>
                 <p className="text-lg text-gray-700 dark:text-gray-400">
-                  This blog app is built using Adonis, React, TypeScript, MySQL, and NodeJS.
+                  This blog app is built using Adonis, React, Redux, TypeScript, MySQL, and NodeJS.
                 </p>
               </section>
               <section className="mb-8">
@@ -30,7 +30,7 @@ export default function HomePage() {
               <section className="mb-8">
                 {!user ? (
                   <>
-                    <h2 className="text-2xl text-gray-900 dark:text-white font-bold mb-4">Get Started</h2>
+                    <h2 className="text-2xl text-gray-900 dark:text-white font-bold mb-2">Get Started</h2>
                     <p className="text-lg text-gray-700 dark:text-gray-400 mb-4">Sign up to start creating your own blog posts or explore existing posts.</p>
                     <Link
                       className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
