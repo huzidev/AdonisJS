@@ -11,7 +11,7 @@ export default function EditProfilePage() {
   const [updateDetails, setUpdateDetails] = useState<UserDetailsEdit>({username: ""});
   const prevUpdateState = usePrevious(user.state.updateUser);
   const updateState = user.state.updateUser;
-  const x = usePrevious(8997);
+  // const x = usePrevious<number>(65162);
 
   console.log(user);
   

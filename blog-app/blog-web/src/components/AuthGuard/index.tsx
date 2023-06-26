@@ -10,7 +10,7 @@ interface AuthGuardProps {
 export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     const [state, setState] = useState<boolean>(false);
     const auth = useAuth();
-    const Navigate = useNavigate()
+    const Navigate = useNavigate();
     const currentPath = window.location.pathname;
 
     useEffect(() => {
