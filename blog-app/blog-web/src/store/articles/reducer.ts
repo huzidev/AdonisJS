@@ -63,16 +63,16 @@ const blogSlice = createSlice({
         })
         // deleteBlog
         builder.addCase(actions.deleteBlog.pending, (state) => {
-            state.deleteBlog.loading = true;
-            state.deleteBlog.error = false;
+            state.deleteBlog!.loading = true;
+            state.deleteBlog!.error = false;
         })
         builder.addCase(actions.deleteBlog.fulfilled, (state) => {
-            state.deleteBlog.loading = false;
-            state.deleteBlog.error = false;
+            state.deleteBlog!.loading = false;
+            state.deleteBlog!.error = false;
         })
         builder.addCase(actions.deleteBlog.rejected, (state) => {
-            state.deleteBlog.loading = false;
-            state.deleteBlog.error = true;
+            state.deleteBlog!.loading = false;
+            state.deleteBlog!.error = true;
         })
         // updateBlog
         builder.addCase(actions.updateBlog.pending, (state) => {
