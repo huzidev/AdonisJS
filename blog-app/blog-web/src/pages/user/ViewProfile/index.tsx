@@ -7,12 +7,15 @@ export default function ViewProfilePage() {
   const auth = useAuth();
   const userData = auth.state.user;
   const [userDetails, setUserDetails] = useState<UserDetailState>({ 
-    username: "", email: "" 
+    username: "", email: "", createdAt: ""
   })
+  const formatedDate = new Date(userDetails.createdAt).toLocaleString();
 
   useEffect(() => {
     setUserDetails({...userDetails, ...userData})
   }, [userData])
+
+  console.log("user data", userData);
 
   return (
     <div>
@@ -27,6 +30,9 @@ export default function ViewProfilePage() {
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Email : {userDetails.email}
+            </h2> 
+            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Joined Date : {formatedDate}
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Total Blogs

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { UserDetailsEdit } from "./types";
@@ -7,15 +6,15 @@ import { UserDetailsEdit } from "./types";
 export default function EditProfilePage() {
   const auth = useAuth();
   const user = useUser();
-  const Navigate = useNavigate();
   const userData = auth.state.user;
   const [updateDetails, setUpdateDetails] = useState<UserDetailsEdit>({username: ""});
-
-  
   
   useEffect(() => {
     setUpdateDetails({...updateDetails, ...userData})
+    console.log("runsss");
   }, [])
+  
+  console.log("user data", userData);
   
   function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setUpdateDetails({
