@@ -5,6 +5,7 @@ export interface UserUpdatePayload extends SubState {
     username: string;    
 }
 
+
 export interface UserState {
     updateUser: UserUpdatePayload;
 }
