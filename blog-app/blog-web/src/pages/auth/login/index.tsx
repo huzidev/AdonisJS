@@ -2,8 +2,8 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signIn } from "../../../store/auth/actions";
-import { useAppDispatch } from "../../../store/hooks/hooks";
+import { signIn } from "store/auth/actions";
+import { useAppDispatch } from "store/hooks/hooks";
 
 export default function UserSignInPage() {
   const dispatch = useAppDispatch();

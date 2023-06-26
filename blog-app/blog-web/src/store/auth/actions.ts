@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api, { setToken } from "../../services/api";
-import storage from "../../services/storage";
+import api, { setToken } from "services/api";
+import storage from "services/storage";
 import * as endpoints from "./endpoints";
 import KEYS from "./keys";
 import { AuthSignInPayload, AuthSignUpPayload, User } from "./types";

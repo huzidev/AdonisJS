@@ -75,7 +75,7 @@ export default function HomePage() {
         </div>
         <Slider ref={sliderRef} {...settings}>
           <div className="text-center">
-            <img src="/path/to/icon1.png" alt="Icon 1" className="mx-auto w-24 h-24" />
+            <img src="" alt="Icon 1" className="mx-auto w-24 h-24" />
           </div>
           <div className="text-center">
             <img src="/path/to/icon2.png" alt="Icon 2" className="mx-auto w-24 h-24" />

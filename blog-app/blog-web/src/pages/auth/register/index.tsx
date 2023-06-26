@@ -2,8 +2,8 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signUp } from "../../../store/auth/actions";
-import { useAppDispatch } from "../../../store/hooks/hooks";
+import { signUp } from "store/auth/actions";
+import { useAppDispatch } from "store/hooks/hooks";
 import { RegisterState } from "./types";
 
 export default function UserSignUpPage() {

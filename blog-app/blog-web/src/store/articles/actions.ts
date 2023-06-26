@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../services/api";
+import api from "services/api";
 import * as endpoints from "./endpoints";
 import { AddBlogPayload, Blog, GetBlogPayload, UpdateBlogPayload } from "./types";
 
