@@ -13,7 +13,6 @@ export default function ViewProfilePage() {
     username: "", email: "", createdAt: ""
   })
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
-
   
   const userId = auth.state.user?.id;
 
@@ -24,6 +23,8 @@ export default function ViewProfilePage() {
 
   let blogById = blogs.state.getBlogs?.data; 
   let idBlog = blogById.filter((blogs) => blogs.ownerId === userId)
+
+  const isLoading = blogs.state.getBlogs?.loading;
   return (
     <div>
       <div 
@@ -42,7 +43,7 @@ export default function ViewProfilePage() {
               Joined Date : {formatedDate}
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Total Blogs
+              Total Blogs : {idBlog.length}
             </h2> 
             <Link
               to="/user/edit/me"
@@ -55,7 +56,7 @@ export default function ViewProfilePage() {
         </div>
         <div 
     className="w-10/12 m-auto flex flex-wrap"
-  >
+  > 
     {idBlog.length ? (
       idBlog!.map((blog: any) => {
           return (
@@ -103,7 +104,7 @@ export default function ViewProfilePage() {
               </div>
             </div>
           );
-        })) : "You Haven't uploaded Any Blog Yet"
+        })) : !idBlog.length && !isLoading ? "You Haven't uploaded Any Blog Yet" : ""
         }
     </div>
     </div>

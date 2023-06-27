@@ -15,7 +15,6 @@ export default function ViewBlogsPage(): JSX.Element {
     blogs.getBlogs()
   }, [])
 
-
   return (
   <div 
     className="w-10/12 m-auto flex flex-wrap"
