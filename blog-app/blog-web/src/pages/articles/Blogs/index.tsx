@@ -10,10 +10,11 @@ export default function ViewBlogsPage(): JSX.Element {
   const auth = useAuth()
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
-
+  
   useEffect(() => {
     blogs.getBlogs()
   }, [])
+
 
   return (
   <div 

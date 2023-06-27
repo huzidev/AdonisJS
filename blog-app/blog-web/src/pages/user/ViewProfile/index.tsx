@@ -14,19 +14,16 @@ export default function ViewProfilePage() {
   })
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
 
+  
   const userId = auth.state.user?.id;
 
   useEffect(() => {
     setUserDetails({...userDetails, ...data})
     blogs.getBlogs()
-
   }, [])
 
   let blogById = blogs.state.getBlogs?.data; 
-
-  console.log("Articles Uploaded By User is/are", blogById.filter((blogs) => blogs.ownerId === 1));
   let idBlog = blogById.filter((blogs) => blogs.ownerId === userId)
-
   return (
     <div>
       <div 
@@ -59,7 +56,7 @@ export default function ViewProfilePage() {
         <div 
     className="w-10/12 m-auto flex flex-wrap"
   >
-    {
+    {idBlog.length ? (
       idBlog!.map((blog: any) => {
           return (
             <div 
@@ -106,7 +103,8 @@ export default function ViewProfilePage() {
               </div>
             </div>
           );
-        })}
+        })) : "You Haven't uploaded Any Blog Yet"
+        }
     </div>
     </div>
   )
