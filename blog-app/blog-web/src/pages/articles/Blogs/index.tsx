@@ -41,7 +41,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     {blog.content.length > 50 ? `${blog.content.slice(0, 50)}...` : blog.content}
                   </p>
                   <Link
-                    to={`/blog/${blog.slug}`}
+                    to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
                     className="text-sm font-medium text-center text-white hover:text-blue-500"
                   > 
                     Read More
@@ -63,7 +63,7 @@ export default function ViewBlogsPage(): JSX.Element {
                         Delete
                       </button>
                     </div>
-                    )}
+                  )}
                 </div>
               </div>
             </div>
