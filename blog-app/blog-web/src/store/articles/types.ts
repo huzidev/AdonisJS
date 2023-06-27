@@ -37,7 +37,7 @@ export interface getBlogById extends SubState {
 export interface BlogState {
   getBlogs: AllBlogs;
   getBlog: getBlogById;
-  updateBlog?: getBlogById;
+  updateBlog: getBlogById;
   addBlog: SubState;
-  deleteBlog?: SubState;
+  deleteBlog: SubState;
 }
