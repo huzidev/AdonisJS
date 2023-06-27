@@ -31,7 +31,7 @@ export default class ArticlesController {
         }
     }
 
-    public async getById({ params }) {
+    public async getById({ params }: HttpContextContract) {
         try {
             const article = await Article.findBy("slug", params.slug);
             console.log("article", article);
