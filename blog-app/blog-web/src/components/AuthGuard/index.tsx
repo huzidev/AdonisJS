@@ -14,8 +14,6 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     const currentPath = window.location.pathname;
 
     useEffect(() => {
-      console.log('logged');
-      
       const { init } = auth.state;
       if (!init.init && !init.loading) {
         auth.initUser();
