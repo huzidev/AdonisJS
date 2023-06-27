@@ -1,6 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { BlogState } from "./types";
@@ -8,6 +8,7 @@ import { BlogState } from "./types";
 export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
   const auth = useAuth()
+  const location = useLocation();
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
   

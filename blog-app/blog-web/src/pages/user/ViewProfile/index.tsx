@@ -17,8 +17,8 @@ export default function ViewProfilePage() {
   const userId = auth.state.user?.id;
 
   useEffect(() => {
-    setUserDetails({...userDetails, ...data})
     blogs.getBlogs()
+    setUserDetails({...userDetails, ...data})
   }, [])
 
   let blogById = blogs.state.getBlogs?.data; 
