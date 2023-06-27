@@ -21,8 +21,8 @@ export interface AuthInitState extends SubState {
 }
 
 export interface AuthState {
-    user?: User | null,
-    signInState: SubState,
-    signUpState: SubState,
-    init: AuthInitState,
+    user: User | null
+    signInState: SubState
+    signUpState: SubState
+    init: AuthInitState
 }
