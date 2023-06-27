@@ -10,5 +10,6 @@ export interface UpdateUserId extends SubState {
 }
 
 export interface UserState {
+    user: User | null
     updateUser: UpdateUserId;
 }

@@ -1,16 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { User } from "store/auth/types";
 import { subState } from "store/states";
 import * as actions from "./actions";
 import { UserState } from "./types";
 
 const initialState: UserState = {
     updateUser: { ...subState, data: null },
+    user: null
 }
 
 const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers : {},
+    reducers: {
+        updateUser: (state, action:PayloadAction<User>)  => {
+            state.user = {
+                ...(state?.user ?? {}),
+                ...action.payload,
+            };
+        }
+    },
     extraReducers: (builder) => {
         // updateUser
         builder.addCase(actions.updateById.pending, (state) => {

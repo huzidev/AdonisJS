@@ -12,6 +12,7 @@ export function useAuth() {
   // to receive the data for signin and signup and use that data in redux therefore used payload
   const signIn = (payload: AuthSignInPayload) => dispatch(actions.signIn(payload));
   const signUp = (payload: AuthSignUpPayload) => dispatch(actions.signUp(payload));
+  const updateuser = (payload: User) => dispatch(authSlice.actions.updateUser(payload));
 
   return {
     state,
@@ -19,6 +20,6 @@ export function useAuth() {
     signIn,
     signUp,
     signOut,
-    updateuser: (payload: User) => dispatch(authSlice.actions.updateUser(payload))
+    updateuser
   };
 };
