@@ -13,8 +13,6 @@ export default function EditProfilePage() {
   const updateState = user.state.updateUser;
   // const x = usePrevious<number>(65162);
 
-  console.log(user);
-  
   useEffect(() => {
     setUpdateDetails({...updateDetails, ...userData})
   }, [])

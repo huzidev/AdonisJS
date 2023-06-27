@@ -7,6 +7,7 @@ const initialState: AuthState = {
     signInState:  { ...subState },
     signUpState:  { ...subState },
     init:  { ...subState, init: false },
+    user: null
 }
 
 export const authSlice = createSlice({

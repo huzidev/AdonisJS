@@ -19,6 +19,6 @@ export function useAuth() {
     signIn,
     signUp,
     signOut,
-    updateuser: (payload: User) => dispatch(authSlice.actions.updateUser(payload)),
+    updateuser: (payload: User) => dispatch(authSlice.actions.updateUser(payload))
   };
 };

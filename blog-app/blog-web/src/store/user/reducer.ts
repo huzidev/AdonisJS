@@ -4,7 +4,7 @@ import * as actions from "./actions";
 import { UserState } from "./types";
 
 const initialState: UserState = {
-    updateUser: { ...subState }
+    updateUser: { ...subState, data: null },
 }
 
 const userSlice = createSlice({
@@ -15,17 +15,12 @@ const userSlice = createSlice({
         // updateUser
         builder.addCase(actions.updateById.pending, (state) => {
             state.updateUser = {loading: true, error: false};
-            // state.updateUser!.loading = true;
-            // state.updateUser!.error = false;
         })
         builder.addCase(actions.updateById.fulfilled, (state, action) => {
-            state.updateUser!.loading = false;
-            state.updateUser!.error = false;
-            state.updateUser!.data = action.payload;
+            state.updateUser = {loading: false, error: false, data: action.payload};
         })
         builder.addCase(actions.updateById.rejected, (state) => {
-            state.updateUser!.loading = false;
-            state.updateUser!.error = true;
+            state.updateUser = {loading: false, error: true};
         })
     }
 });

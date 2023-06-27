@@ -8,6 +8,7 @@ export const updateById = createAsyncThunk(endpoints.UPDATE_ME, async (data: Use
     try {
         const response = await api.put(endpoints.UPDATE_ME, data);
         if (response.status === 200) {
+            alert("Details Updated")
         }
         return response.data.data;
     } catch (e) {
