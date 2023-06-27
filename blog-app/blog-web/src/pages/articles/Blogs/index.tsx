@@ -38,7 +38,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     {blog.title.length > 21 ? `${blog.title.slice(0, 21)}...` : blog.title }
                   </h5> 
                   <p title={blog.content} className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {blog.content.length > 60 ? `${blog.content.slice(0, 60)}...` : blog.content}
+                    {blog.content.length > 50 ? `${blog.content.slice(0, 50)}...` : blog.content}
                   </p>
                   <Link
                     to={`/blog/${blog.slug}`}
