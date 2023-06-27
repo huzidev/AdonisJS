@@ -3,13 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "store/auth";
 
 export default function Header() {
+  const location = useLocation();
   const auth = useAuth();
   const user = auth.state.user;
-  const location = useLocation();
 
-  // if (!user && auth.state.init.loading ) {
-  //   return <PageLoader />
-  // }
+  if (!auth.state.init.init) {
+    return null;
+  }
 
   // TRY MAPPING
   return (
