@@ -11,7 +11,6 @@ export default function Header() {
     return null;
   }
 
-  // TRY MAPPING
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
