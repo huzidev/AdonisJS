@@ -8,7 +8,6 @@ export function useBlogsPageHooks(): void {
 
     useEffect(() => {
         blogs.getBlogs();
-        console.log("blogs", blogs);
     }, [])
 
 }
