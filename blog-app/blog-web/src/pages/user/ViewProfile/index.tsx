@@ -5,17 +5,16 @@ import { UserDetailState } from "./types";
 
 export default function ViewProfilePage() {
   const auth = useAuth();
-  const userData = auth.state.user;
+  const data = auth.state.user;
   const [userDetails, setUserDetails] = useState<UserDetailState>({ 
     username: "", email: "", createdAt: ""
   })
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
 
   useEffect(() => {
-    setUserDetails({...userDetails, ...userData})
+    setUserDetails({...userDetails, ...data})
   }, [])
 
-  console.log("user data", userData);
   return (
     <div>
       <div 

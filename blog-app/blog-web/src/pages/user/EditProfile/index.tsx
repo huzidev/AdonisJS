@@ -26,7 +26,7 @@ export default function EditProfilePage() {
 
   useEffect(() => {
     if (prevUpdateState?.loading && !updateState?.loading && updateState?.data) {
-      auth.updateuser(updateState.data!)
+      user.updateUserState(updateState.data!)
     }
     
   }, [updateState, prevUpdateState]);

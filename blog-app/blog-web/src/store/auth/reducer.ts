@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { subState } from "store/states";
+import { userSlice } from "store/user/reducer";
 import * as actions from "./actions";
 import { AuthState, User } from "./types";
 
@@ -13,14 +14,7 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {
-        updateUser: (state, action:PayloadAction<User>)  => {
-            state.user = {
-                ...(state?.user ?? {}),
-                ...action.payload,
-            };
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(actions.initUser.pending, (state) => {
             state.init.loading = true;
@@ -77,6 +71,10 @@ export const authSlice = createSlice({
         builder.addCase(actions.signOut.rejected, (state) => {
             state.init.loading = false
             state.init.error = true
+        });
+        // when userUpdate the data then updated details will saved in state.user
+        builder.addCase(userSlice.actions.updateUser, (state, action: PayloadAction<User>) => {
+            state.user = { ...state.user, ...action.payload };
         });
     }
 })
