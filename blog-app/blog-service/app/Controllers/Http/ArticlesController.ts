@@ -51,16 +51,16 @@ export default class ArticlesController {
     public async updateBlog({ request, auth, params }: HttpContextContract) {
         try {
             const body = await request.validate(UpdateArticle);
-            console.log("body", body);
-            
             const article = await Article.findBy("id", params.id);
-            const articleId: number = params.id;
+            // const articleId: number = params.id;
             if (!article) {
                 throw noArticle
             } else if (article.ownerId !== auth.user?.id) {
                 throw noPermission
             } else {
-                await Article.query().where("id", articleId).update(body);
+                // await Article.query().where("id", articleId).update(body);
+                article.fill({ ...article, ...body });
+                await article.save();
                 return { 
                     data: body, 
                     message: "Article updated successfully" 
