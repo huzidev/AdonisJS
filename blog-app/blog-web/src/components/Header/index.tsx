@@ -1,6 +1,6 @@
-import ROUTE_PATHS from "Router/paths";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "store/auth";
+import { links, loggedInPaths, loggedOutPaths } from "./data";
 
 export default function Header() {
   const location = useLocation();
@@ -17,9 +17,7 @@ export default function Header() {
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            <Link to="/">
-              Blog App
-            </Link>
+            <Link to="/">Blog App</Link>
           </span>
           <button
             data-collapse-toggle="navbar-default"
@@ -45,71 +43,50 @@ export default function Header() {
           </button>
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <li>
-                <Link
-                  to={ROUTE_PATHS.ARTICLES}
-                  className={`
-                        block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${location.pathname === ROUTE_PATHS.ARTICLES ? "dark:text-blue-500" : "dark:text-white"}
-                      `}
-                >
-                  Blogs
-                </Link>
-              </li>
-              {!user ? (
-                <>
-                  <li>
+              {links.map((data, dataIndex) =>
+                user && loggedInPaths.includes(data.link) ? (
+                  <>
+                    <li key={dataIndex}>
+                      <Link
+                        to={data.link}
+                        className={`
+                            block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${
+                              location.pathname === data.link
+                                ? "dark:text-blue-500"
+                                : "dark:text-white"
+                            }
+                          `}
+                      >
+                        {data.title}
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => auth.signOut()}
+                        className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                      >
+                        SingOut
+                      </button>
+                    </li>
+                    </>
+                ) : !user && loggedOutPaths.includes(data.link) ? (
+                  <li key={dataIndex}>
                     <Link
-                      to={ROUTE_PATHS.AUTH_SIGNIN}
+                      to={data.link}
                       className={`
-                        block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${location.pathname === ROUTE_PATHS.AUTH_SIGNIN ? "dark:text-blue-500" : "dark:text-white"}
-                      `}
+                          block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${
+                            location.pathname === data.link
+                              ? "dark:text-blue-500"
+                              : "dark:text-white"
+                          }
+                        `}
                     >
-                      Login
+                      {data.title}
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      to={ROUTE_PATHS.AUTH_SIGNUP}
-                      className={`
-                        block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${location.pathname === ROUTE_PATHS.AUTH_SIGNUP ? "dark:text-blue-500" : "dark:text-white"}
-                      `}
-                    >
-                      Register
-                    </Link>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li>
-                    <Link
-                      to={ROUTE_PATHS.ARTICLE_CREATE}
-                      className={`
-                        block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${location.pathname === ROUTE_PATHS.ARTICLE_CREATE ? "dark:text-blue-500" : "dark:text-white"}
-                      `}
-                    >
-                      Add Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to={ROUTE_PATHS.VIEW_PROFILE}
-                      className={`
-                        block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${location.pathname === ROUTE_PATHS.VIEW_PROFILE ? "dark:text-blue-500" : "dark:text-white"}
-                      `}
-                    >
-                      View Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => auth.signOut()}
-                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                    >
-                      SingOut
-                    </button>
-                  </li>
-                </>
+                ) : null
               )}
+              
             </ul>
           </div>
         </div>
