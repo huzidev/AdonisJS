@@ -24,7 +24,8 @@ const blogSlice = createSlice({
         builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
             state.getBlogs.loading = false;
             if (action.payload) {
-                const cleaned = state.getBlogs.data?.filter((dataBlog) => !action.payload?.find((blog => blog.id === dataBlog.id))) ?? []
+                // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
+                const cleaned = state.getBlogs.data?.filter((dataBlog) => !action.payload?.find(((blog) => blog.id === dataBlog.id))) ?? []
                 state.getBlogs.data = [...cleaned, ...action.payload];
             }
             state.getBlogs.error = false;

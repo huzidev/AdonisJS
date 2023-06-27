@@ -31,6 +31,7 @@ export interface AllBlogs extends SubState {
 }
 
 export interface getBlogById extends SubState {
+  // optional is needed because in getBlog data is required and in updateBlog data is not required
   data?: Blog | null;
 }
 
