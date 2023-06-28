@@ -10,14 +10,13 @@ export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
   const auth = useAuth();
   const user = useUser();
+  const allUsers = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
   
   useEffect(() => {
     blogs.getBlogs()
     user.allUser()
-    console.log("alluser List", user.state.allUser.data);
-    
   }, [])
 
   return (
@@ -67,16 +66,7 @@ export default function ViewBlogsPage(): JSX.Element {
                       >
                         Delete
                       </button>
-                      <span className="ml-5 text-white">
-                        Uploaded By
-                      </span>
-                      <Link
-                        to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
-                        type="button"
-                        className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                      >
-                        {blog.ownerId === userId ? auth.state.user?.username : auth.state.user?.username}
-                      </Link>
+                        
                     </div>
                   )}
                 </div>
