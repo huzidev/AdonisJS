@@ -39,10 +39,10 @@ export default function ViewProfilePage() {
     }
   }, [userDataById]);
 
-  let blogById = blogs.state.getBlogs?.data;
-  console.log("blogs by id", blogById);
-  let userBlogs = blogById.filter((blogs) => blogs.ownerId === userId);
-  console.log("user blogs id", userBlogs);
+  let currentId = params.id === "me" ? userId : Number(params.id);
+
+  let allBlogs = blogs.state.getBlogs?.data;
+  let userBlogs = allBlogs.filter((blogs) => blogs.ownerId === currentId);
 
   return (
     <div>
