@@ -72,9 +72,18 @@ export default function ViewBlogsPage(): JSX.Element {
                       </button>
                     </div>
                   )}
-                  <p>
-                    Uploaded By : {uploadedByUsername}
-                  </p>
+                  <div className="flex justify-end items-center">
+                    <p className="text-white ">
+                      Uploaded By :&nbsp; 
+                    </p>
+                    <Link 
+                        to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                        type="button"
+                        className="text-sm font-medium text-center text-white hover:text-blue-500"
+                      >
+                      {uploadedByUsername}
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
