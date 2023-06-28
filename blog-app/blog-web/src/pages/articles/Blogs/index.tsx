@@ -7,7 +7,7 @@ import { BlogState } from "./types";
 
 export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
-  const auth = useAuth()
+  const auth = useAuth();
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
   
