@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { BlogState } from "./types";
 
@@ -10,7 +11,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
   const auth = useAuth();
   const user = useUser();
-  const allUsers = user.state.allUser?.data;
+  const allUsers: any = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
   
@@ -25,6 +26,9 @@ export default function ViewBlogsPage(): JSX.Element {
   >
     {
       allBlogs.map((blog: BlogState) => {
+        // allUsers? is mandatory as it can be empty
+        const uploadedByUser = allUsers?.find((user: User) => user.id === blog.ownerId);
+        const uploadedByUsername = uploadedByUser && uploadedByUser.username
           return (
             <div 
               key={blog.id}
@@ -66,9 +70,11 @@ export default function ViewBlogsPage(): JSX.Element {
                       >
                         Delete
                       </button>
-                        
                     </div>
                   )}
+                  <p>
+                    Uploaded By : {uploadedByUsername}
+                  </p>
                 </div>
               </div>
             </div>
