@@ -25,3 +25,13 @@ export const allUser = createAsyncThunk(endpoints.LIST, async () => {
         console.log("Error", e);
     }
 })
+
+export const getById = createAsyncThunk(endpoints.GET_BY_ID, async (id: number) => {
+    try {
+        const response = await api.get(endpoints.GET_BY_ID + id);
+        console.log("response", response.data.data);
+    } catch (e) {
+        console.log("Error", e);
+        
+    }
+})
