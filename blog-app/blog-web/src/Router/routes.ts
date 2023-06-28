@@ -1,15 +1,15 @@
 import React from 'react';
 import ROUTE_PATHS from './paths';
 
-const HomePage = React.lazy(() => import('../pages/Home'));
+const HomePage = React.lazy(() => import('pages/Home'));
 const EditProfilePage = React.lazy(() => import('pages/user/EditProfile'));
-const AddBlogPage = React.lazy(() => import('../pages/articles/BlogCreate'));
-const UpdateBlogPage = React.lazy(() => import('../pages/articles/BlogUpdate'));
-const ViewBlogPage = React.lazy(() => import('../pages/articles/BlogView'));
-const ViewBlogsPage = React.lazy(() => import('../pages/articles/Blogs'));
-const UserSignInPage = React.lazy(() => import('../pages/auth/Login'));
-const UserSignUpPage = React.lazy(() => import('../pages/auth/Register'));
-const ViewProfilePage = React.lazy(() => import('../pages/user/ViewProfile'));
+const AddBlogPage = React.lazy(() => import('pages/articles/BlogCreate'));
+const UpdateBlogPage = React.lazy(() => import('pages/articles/BlogUpdate'));
+const ViewBlogPage = React.lazy(() => import('pages/articles/BlogView'));
+const ViewBlogsPage = React.lazy(() => import('pages/articles/Blogs'));
+const UserSignInPage = React.lazy(() => import('pages/auth/Login'));
+const UserSignUpPage = React.lazy(() => import('pages/auth/Register'));
+const ViewProfilePage = React.lazy(() => import('pages/user/ViewProfile'));
 
 interface AppRoute {
   path: string;
