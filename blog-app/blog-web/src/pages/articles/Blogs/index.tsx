@@ -3,16 +3,21 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { useUser } from "store/user";
 import { BlogState } from "./types";
 
 export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
   const auth = useAuth();
+  const user = useUser();
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
   
   useEffect(() => {
     blogs.getBlogs()
+    user.allUser()
+    console.log("alluser List", user.state.allUser.data);
+    
   }, [])
 
   return (
