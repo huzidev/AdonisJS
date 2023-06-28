@@ -14,7 +14,7 @@ export interface AllUserList extends SubState {
 }
 
 export interface UserById extends SubState {
-    data: User | null;
+    data?: User | null;
 }
 
 export interface UserState {

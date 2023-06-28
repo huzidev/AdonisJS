@@ -44,6 +44,17 @@ export const userSlice = createSlice({
         builder.addCase(actions.allUser.rejected, (state) => {
             state.allUser = {loading: false, error: true};
         })
+        // getUserById
+        builder.addCase(actions.getById.pending, (state) => {
+            state.getUser = {loading: true, error: false};
+        })
+        builder.addCase(actions.getById.fulfilled, (state, action) => {
+            state.getUser = {loading: false, error: false, data: action.payload};
+        })
+        // ASKED if to add data: action.payload in error field?
+        builder.addCase(actions.getById.rejected, (state) => {
+            state.getUser = {loading: false, error: true};
+        })
     }
 });
 
