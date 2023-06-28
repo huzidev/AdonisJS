@@ -5,5 +5,6 @@ export default function UsersRoutes() {
     Route.group(() => {
         Route.get("/get/me", `${path}.getMe`).middleware("auth");
         Route.put("/edit/me", `${path}.update`).middleware("auth");
+        Route.put("/all", `${path}.getAllUser`);
     }).prefix('/user')
 }       

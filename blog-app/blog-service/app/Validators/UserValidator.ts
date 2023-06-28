@@ -10,3 +10,15 @@ export class UserUpdate {
     required: '{{ field }} is required to update details'
   }
 }
+
+export class UserList {
+  public static schema = schema.create({
+    id: schema.number.optional(),
+    username: schema.string.optional({ escape: true }),
+    email: schema.string.optional({ escape: true }),
+    created_at: schema.date.optional({ format: 'yyyy-MM-dd' }),
+    updated_at: schema.date.optional({ format: 'yyyy-MM-dd' })
+  })
+  public static messages = {}
+
+}

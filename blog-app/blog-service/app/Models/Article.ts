@@ -8,7 +8,6 @@ export default class Article extends BaseModel {
   public id: number
 
   // adding manually
-  
   @column()
   public slug: string
 

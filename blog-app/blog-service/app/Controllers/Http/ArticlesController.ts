@@ -80,7 +80,7 @@ export default class ArticlesController {
         } 
         else {
             await article.delete();
-            return { message: `Article ${params.id} Deleted`, id: Number(params.id) };
+            return { message: `Article with id ${params.id} Deleted`, id: Number(params.id) };
         }
     }    
 }
