@@ -19,40 +19,30 @@ export default function ViewProfilePage() {
     createdAt: "",
   });
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
-  const isLoading = blogs.state.getBlogs?.loading;
   const userId = auth.state.user?.id;
 
   const userDataById = user.state.getUser?.data;
 
-  console.log("userData ID", userDataById);
-
-  // useEffect(() => {
-  //   if (params.id !== "me") {
-  //     user.getById(params.id);
-  //     setUserDetails({ ...userDetails, ...userDataById });
-  //   } else {
-  //     blogs.getBlogs();
-  //     setUserDetails({ ...userDetails, ...data });
-  //   }
-  // }, []);
-
+  // if user changes URL from user/view/:id to user/view/me
   useEffect(() => {
     if (params.id !== "me") {
       user.getById(params.id);
-    } else {
-      blogs.getBlogs();
-      setUserDetails({ ...userDetails, ...data });
     }
+    setUserDetails({ ...userDetails, ...data });
+    blogs.getBlogs();
   }, [params.id]);
 
+  // to store the data
   useEffect(() => {
     if (params.id !== "me" && userDataById) {
-      setUserDetails({ ...userDetails, ...user.state.getUser.data });
+      setUserDetails({ ...userDetails, ...userDataById });
     }
-  }, [user.state.getUser]);
+  }, [userDataById]);
 
   let blogById = blogs.state.getBlogs?.data;
+  console.log("blogs by id", blogById);
   let userBlogs = blogById.filter((blogs) => blogs.ownerId === userId);
+  console.log("user blogs id", userBlogs);
 
   return (
     <div>
