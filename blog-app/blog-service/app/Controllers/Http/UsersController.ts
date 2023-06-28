@@ -21,8 +21,8 @@ export default class UsersController {
                 throw { message: "No Article found by id", status: 404 }
             } else {
                 return { 
-                    data: article, 
-                    message: "Article fetched successfully" 
+                    message: "User fetched successfully", 
+                    data: user 
                 }
             }
         } catch (e) {
