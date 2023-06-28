@@ -28,6 +28,7 @@ export default function ViewBlogsPage(): JSX.Element {
       allBlogs.map((blog: BlogState) => {
         // allUsers? is mandatory as it can be empty
         const uploadedByUser = allUsers?.find((user: User) => user.id === blog.ownerId);
+        const uploadedByUserId = uploadedByUser && uploadedByUser.id        
         const uploadedByUsername = uploadedByUser && uploadedByUser.username
           return (
             <div 
@@ -73,11 +74,11 @@ export default function ViewBlogsPage(): JSX.Element {
                     </div>
                   )}
                   <div className="flex justify-end items-center">
-                    <p className="text-white ">
+                    <p className="text-white">
                       Uploaded By :&nbsp; 
                     </p>
                     <Link 
-                        to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                        to={blog.ownerId === auth.state.user?.id ? ROUTE_PATHS.VIEW_PROFILE + "me" : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId}
                         type="button"
                         className="text-sm font-medium text-center text-white hover:text-blue-500"
                       >

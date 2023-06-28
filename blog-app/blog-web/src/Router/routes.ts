@@ -46,7 +46,7 @@ const routes: AppRoute[] = [
         Component: HomePage
     },
     {
-        path: ROUTE_PATHS.VIEW_PROFILE,
+        path: `${ROUTE_PATHS.VIEW_PROFILE}:id`,
         Component: ViewProfilePage
     },
     {
