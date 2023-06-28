@@ -139,7 +139,18 @@ export default function ViewProfilePage() {
                 </div>
               );
             })
-          : ""}
+          : (
+            <div className="w-full my-8 py-8 pl-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <h1 className="text-xl font-bold tracking-tight text-white">
+                Opps... You haven't uploaded any blog yet
+              </h1>
+                <Link
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                to="/blogs">
+                  Add Blogs
+                </Link>
+            </div>
+          )}
       </div>
     </div>
   );
