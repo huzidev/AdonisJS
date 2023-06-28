@@ -50,13 +50,18 @@ export default function ViewProfilePage() {
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Total Blogs : {userBlogs.length}
             </h2> 
-            <Link
-              to={ROUTE_PATHS.EDIT_PROFILE}
-              type="button"
-              className="text-white bg-gray-800 font-medium text-sm py-2.5"
-            >
-              Edit
-            </Link>
+            {
+              params.id === "me" && (
+                <Link
+                  to={ROUTE_PATHS.EDIT_PROFILE}
+                  type="button"
+                  className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                >
+                  Edit
+                </Link>
+              )
+            }
+           
           </div>
         </div>
         <div 
