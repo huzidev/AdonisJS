@@ -11,11 +11,11 @@ const initialState: BlogState = {
     updateBlog:  { ...subState }
 }
 
-const blogSlice = createSlice({
+export const blogSlice = createSlice({
     name: "blogs",
     initialState,
     reducers : {
-        updateUser: (state, action:PayloadAction<Blog>) => {
+        updateBlogsState: (state, action:PayloadAction<Blog>) => {
             state.getBlogs.data = {
                 ...(state?.getBlogs.data ?? {}),
                 ...action.payload
