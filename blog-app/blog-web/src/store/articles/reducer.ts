@@ -8,7 +8,7 @@ const initialState: BlogState = {
     getBlog: { ...subState, data: null },
     addBlog:  { ...subState },
     deleteBlog:  { ...subState },
-    updateBlog:  { ...subState }
+    updateBlog:  { ...subState },
 }
 
 export const blogSlice = createSlice({
@@ -75,10 +75,14 @@ export const blogSlice = createSlice({
             state.deleteBlog.loading = true;
             state.deleteBlog.error = false;
         })
-        builder.addCase(actions.deleteBlog.fulfilled, (state) => {
+        builder.addCase(actions.deleteBlog.fulfilled, (state, action) => {
             state.deleteBlog.loading = false;
+            if (action.payload) {
+                const deletedBlogId = action.payload;
+                state.getBlogs.data = state.getBlogs.data.filter((blog) => blog.id !== deletedBlogId);
+            }
             state.deleteBlog.error = false;
-        })
+        });
         builder.addCase(actions.deleteBlog.rejected, (state) => {
             state.deleteBlog.loading = false;
             state.deleteBlog.error = true;

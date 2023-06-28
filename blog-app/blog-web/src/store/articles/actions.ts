@@ -54,6 +54,7 @@ export const deleteBlog = createAsyncThunk(endpoints.DELETE_BLOG, async (id: num
         if (response.status === 200) {
             alert("Blog Deleted Successfully!")
         }
+        return response.data.id
     } catch (e) {
         console.log("Error", e);
     }
