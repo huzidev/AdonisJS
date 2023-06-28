@@ -84,7 +84,7 @@ export default function ViewProfilePage() {
           )}
         </div>
       </div>
-      <div className="w-11/12 my-8 mx-auto">
+      <div className="w-11/12 mx-auto">
         <h1 className="text-2xl font-bold tracking-tight">
           Blogs Uploaded By { params.id !== "me" ? userDetails.username : "You" }
         </h1>
@@ -147,8 +147,6 @@ export default function ViewProfilePage() {
                 </div>
               );
             })
-          : !userBlogs.length && !isLoading
-          ? "You Haven't uploaded Any Blog Yet"
           : ""}
       </div>
     </div>
