@@ -18,7 +18,13 @@ export default function ViewBlogsPage(): JSX.Element {
   useEffect(() => {
     blogs.getBlogs()
     user.allUser()
+    user.getById(1);
   }, [])
+
+  const signleUser = user.state.getUser.data;
+
+  console.log("single user", signleUser);
+  
 
   return (
   <div 
