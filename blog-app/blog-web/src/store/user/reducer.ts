@@ -6,7 +6,8 @@ import { UserState } from "./types";
 
 const initialState: UserState = {
     updateUser: { ...subState, data: null },
-    user: null
+    user: null,
+    allUser: { ...subState, data: null },
 }
 
 export const userSlice = createSlice({
@@ -30,6 +31,17 @@ export const userSlice = createSlice({
         })
         builder.addCase(actions.updateById.rejected, (state) => {
             state.updateUser = {loading: false, error: true};
+        })
+        // getAllUser
+        builder.addCase(actions.allUser.pending, (state) => {
+            state.allUser = {loading: true, error: false};
+        })
+        builder.addCase(actions.allUser.fulfilled, (state, action) => {
+            state.allUser = {loading: false, error: false, data: action.payload};
+        })
+        // ASKED if to add data: action.payload in error field?
+        builder.addCase(actions.allUser.rejected, (state) => {
+            state.allUser = {loading: false, error: true};
         })
     }
 });

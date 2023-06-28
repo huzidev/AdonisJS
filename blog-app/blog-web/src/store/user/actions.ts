@@ -17,7 +17,7 @@ export const updateById = createAsyncThunk(endpoints.UPDATE_ME, async (data: Use
     }
 });
 
-export const allUsers = createAsyncThunk(endpoints.LIST, async () => {
+export const allUser = createAsyncThunk(endpoints.LIST, async () => {
     try {
         const response = await api.put(endpoints.LIST);
         return response.data.data;
