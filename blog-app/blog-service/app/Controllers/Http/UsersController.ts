@@ -16,7 +16,7 @@ export default class UsersController {
 
     public async getById({ params }: HttpContextContract) {
         try {
-            const user = await User.findBy("slug", params.slug);
+            const user = await User.findBy("id", params.id);
             if (!user) {
                 throw { message: "No Article found by id", status: 404 }
             } else {

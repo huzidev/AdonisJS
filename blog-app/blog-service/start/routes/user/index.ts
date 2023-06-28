@@ -6,5 +6,6 @@ export default function UsersRoutes() {
         Route.get("/get/me", `${path}.getMe`).middleware("auth");
         Route.put("/edit/me", `${path}.update`).middleware("auth");
         Route.get("/all", `${path}.getAllUser`);
+        Route.get("/get/:id", `${path}.getById`).where("id", /^[0-9]+$/);;
     }).prefix('/user')
 }       
