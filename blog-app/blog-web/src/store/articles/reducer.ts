@@ -59,46 +59,37 @@ export const blogSlice = createSlice({
         })
         // addBlog
         builder.addCase(actions.addBlog.pending, (state) => {
-            state.addBlog.loading = true;
-            state.addBlog.error = false;
+            state.addBlog = {loading: true, error: false};
         })
         builder.addCase(actions.addBlog.fulfilled, (state) => {
-            state.addBlog.loading = false;
-            state.addBlog.error = false;
+            state.addBlog = {loading: false, error: false};
         })
         builder.addCase(actions.addBlog.rejected, (state) => {
-            state.addBlog.loading = false;
-            state.addBlog.error = true;
+            state.addBlog = {loading: false, error: true};
         })
         // deleteBlog
         builder.addCase(actions.deleteBlog.pending, (state) => {
-            state.deleteBlog.loading = true;
-            state.deleteBlog.error = false;
+            state.deleteBlog = {loading: true, error: false};
         })
         builder.addCase(actions.deleteBlog.fulfilled, (state, action) => {
-            state.deleteBlog.loading = false;
+            state.deleteBlog = {loading: false, error: false};
             if (action.payload) {
                 const deletedBlogId = action.payload;
                 state.getBlogs.data = state.getBlogs.data.filter((blog) => blog.id !== deletedBlogId);
             }
-            state.deleteBlog.error = false;
         });
         builder.addCase(actions.deleteBlog.rejected, (state) => {
-            state.deleteBlog.loading = false;
-            state.deleteBlog.error = true;
+            state.deleteBlog = {loading: false, error: true};
         })
         // updateBlog
         builder.addCase(actions.updateBlog.pending, (state) => {
-            state.updateBlog.loading = true;
-            state.updateBlog.error = false;
+            state.updateBlog = {loading: true, error: false};
         })
         builder.addCase(actions.updateBlog.fulfilled, (state) => {
-            state.updateBlog.loading = false;
-            state.updateBlog.error = false;
+            state.updateBlog = {loading: false, error: false};
         })
         builder.addCase(actions.updateBlog.rejected, (state) => {
-            state.updateBlog.loading = false;
-            state.updateBlog.error = true;
+            state.updateBlog = {loading: false, error: true};
         })
     }
 });
