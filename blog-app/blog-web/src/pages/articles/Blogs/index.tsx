@@ -78,7 +78,10 @@ export default function ViewBlogsPage(): JSX.Element {
                       Uploaded By :&nbsp; 
                     </p>
                     <Link 
-                        to={blog.ownerId === auth.state.user?.id ? ROUTE_PATHS.VIEW_PROFILE + "me" : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId}
+                        to={blog.ownerId === auth.state.user?.id ? 
+                          ROUTE_PATHS.VIEW_PROFILE + "me" : 
+                          ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId
+                        }
                         type="button"
                         className="text-sm font-medium text-center text-white hover:text-blue-500"
                       >

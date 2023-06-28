@@ -18,14 +18,14 @@ export const links = [
   },
   {
     title: 'View Profile',
-    link: ROUTE_PATHS.VIEW_PROFILE
+    link: ROUTE_PATHS.VIEW_PROFILE + "me"
   }
 ];
 
 export const loggedInPaths = [
   ROUTE_PATHS.ARTICLES,
   ROUTE_PATHS.ARTICLE_CREATE,
-  ROUTE_PATHS.VIEW_PROFILE
+  ROUTE_PATHS.VIEW_PROFILE + "me"
 ];
   
 export const loggedOutPaths = [
