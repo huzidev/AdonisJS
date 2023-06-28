@@ -6,8 +6,9 @@ import { UserState } from "./types";
 
 const initialState: UserState = {
     updateUser: { ...subState, data: null },
-    user: null,
     allUser: { ...subState, data: null },
+    getUser: { ...subState, data: null },
+    user: null,
 }
 
 export const userSlice = createSlice({

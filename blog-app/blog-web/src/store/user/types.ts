@@ -13,8 +13,13 @@ export interface AllUserList extends SubState {
     data?: User[] | null;
 }
 
+export interface UserById extends SubState {
+    data: User | null;
+}
+
 export interface UserState {
     user: User | null;
     allUser: AllUserList;
     updateUser: UpdateUserId
+    getUser: UserById
 }
