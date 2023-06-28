@@ -13,7 +13,7 @@ export default function ViewProfilePage() {
     username: "", email: "", createdAt: ""
   })
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
-  
+  const isLoading = blogs.state.getBlogs?.loading;
   const userId = auth.state.user?.id;
 
   useEffect(() => {
@@ -24,7 +24,6 @@ export default function ViewProfilePage() {
   let blogById = blogs.state.getBlogs?.data; 
   let idBlog = blogById.filter((blogs) => blogs.ownerId === userId)
 
-  const isLoading = blogs.state.getBlogs?.loading;
   return (
     <div>
       <div 

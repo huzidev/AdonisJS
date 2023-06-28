@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { subState } from "store/states";
 import * as actions from "./actions";
-import { BlogState } from "./types";
+import { Blog, BlogState } from "./types";
 
 const initialState: BlogState = {
     getBlogs: { ...subState, data: [] },
@@ -14,7 +14,14 @@ const initialState: BlogState = {
 const blogSlice = createSlice({
     name: "blogs",
     initialState,
-    reducers : {},
+    reducers : {
+        updateUser: (state, action:PayloadAction<Blog>) => {
+            state.getBlogs.data = {
+                ...(state?.getBlogs.data ?? {}),
+                ...action.payload
+            };
+        }
+    },
     extraReducers: (builder) => {
         // getAllBlogs
         builder.addCase(actions.getBlogs.pending, (state) => {
@@ -23,6 +30,7 @@ const blogSlice = createSlice({
         })
         builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
             state.getBlogs.loading = false;
+            console.log("data before", state.getBlogs.data);
             if (action.payload) {
                 // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
                 const cleaned = state.getBlogs.data?.filter((dataBlog) => !action.payload?.find(((blog) => blog.id === dataBlog.id))) ?? []
