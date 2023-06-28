@@ -46,7 +46,7 @@ export default function ViewProfilePage() {
 
   return (
     <div>
-      <div className="w-11/12 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-11/12 my-5 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="p-5">
           <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
             User Profile
@@ -140,13 +140,14 @@ export default function ViewProfilePage() {
               );
             })
           : (
-            <div className="w-full my-8 py-8 pl-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <h1 className="text-xl font-bold tracking-tight text-white">
-                Opps... You haven't uploaded any blog yet
+            <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
+                Oops... You haven't uploaded any blog yet
               </h1>
                 <Link
+                to={ROUTE_PATHS.ARTICLE_CREATE}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                to="/blogs">
+                title="Add Blogs">
                   Add Blogs
                 </Link>
             </div>
