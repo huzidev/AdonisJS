@@ -62,6 +62,16 @@ export default function ViewBlogsPage(): JSX.Element {
                       >
                         Delete
                       </button>
+                      <span className="ml-5 text-white">
+                        Uploaded By
+                      </span>
+                      <Link
+                        to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                        type="button"
+                        className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                      >
+                        {blog.ownerId === userId ? auth.state.user?.username : auth.state.user?.username}
+                      </Link>
                     </div>
                   )}
                 </div>

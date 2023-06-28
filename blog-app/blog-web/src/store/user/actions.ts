@@ -17,3 +17,7 @@ export const updateById = createAsyncThunk(endpoints.UPDATE_ME, async (data: Use
         return null;
     }
 });
+
+export const allUsers = createAsyncThunk(endpoints.LIST, async () => {
+    
+})
