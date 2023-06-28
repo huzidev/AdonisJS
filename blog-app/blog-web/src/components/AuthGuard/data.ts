@@ -1,0 +1,9 @@
+import ROUTE_PATHS from "Router/paths";
+
+export const notAllowedPaths = [
+  ROUTE_PATHS.ARTICLE_CREATE,
+  ROUTE_PATHS.ARTICLE_UPDATE,
+  ROUTE_PATHS.EDIT_PROFILE,
+  ROUTE_PATHS.VIEW_PROFILE + "me"
+];
+  

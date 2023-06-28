@@ -3,6 +3,7 @@ import PageLoader from "components/PageLoader";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
+import { notAllowedPaths } from "./data";
 
 interface AuthGuardProps {
   children: JSX.Element;
@@ -22,9 +23,14 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       if (!init.init) {
         return;
       }
-      if (!auth.state.user) {
+      // commented it because when user is any other route than "/" and user reloads the page it was sending the user to home page "/"
+      // if (!auth.state.user) {
+      //   Navigate("/")
+      // } 
+      if (!auth.state.user && notAllowedPaths.includes(currentPath)) {
         Navigate("/")
-      } else if (auth.state.user) {
+      }
+      if (auth.state.user) {
         if (currentPath === ROUTE_PATHS.AUTH_SIGNIN || currentPath === ROUTE_PATHS.AUTH_SIGNUP) {
           Navigate("/");
         } else {
