@@ -9,13 +9,15 @@ export const useUser = () => {
   const state = useSelector((state: any) => state.user) as UserState;
   const dispatch = useAppDispatch();
   const allUser = () => dispatch(actions.allUser())
-  const updateUser = (payload: UserUpdatePayload) => dispatch(actions.updateById(payload)); 
+  const updateUser = (payload: UserUpdatePayload) => dispatch(actions.updateMe(payload)); 
+  const getById = (payload: number) => dispatch(actions.getById(payload));
   const updateUserState = (payload: User) => dispatch(userSlice.actions.updateUser(payload));
   
   return {
     state,
     allUser,
     updateUser,
-    updateUserState
+    updateUserState,
+    getById
   }
 }
