@@ -13,11 +13,15 @@ export const updateById = createAsyncThunk(endpoints.UPDATE_ME, async (data: Use
         return response.data.data;
     } catch (e) {
         console.log("Error", e);
-
         return null;
     }
 });
 
 export const allUsers = createAsyncThunk(endpoints.LIST, async () => {
-    
+    try {
+        const response = await api.put(endpoints.LIST);
+        return response.data.data;
+    } catch (e) {
+        console.log("Error", e);
+    }
 })
