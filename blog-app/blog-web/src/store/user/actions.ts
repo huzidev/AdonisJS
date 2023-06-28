@@ -4,7 +4,7 @@ import { User } from "store/auth/types";
 import * as endpoints from "./endpoints";
 import { UserUpdatePayload } from "./types";
 
-export const updateById = createAsyncThunk(endpoints.UPDATE_ME, async (data: UserUpdatePayload): Promise<User | null> => {
+export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: UserUpdatePayload): Promise<User | null> => {
     try {
         const response = await api.put(endpoints.UPDATE_ME, data);
         if (response.status === 200) {
