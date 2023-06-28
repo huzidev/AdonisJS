@@ -20,7 +20,7 @@ export default function ViewBlogsPage(): JSX.Element {
     className="w-10/12 m-auto flex flex-wrap"
   >
     {
-      allBlogs!.map((blog: BlogState) => {
+      allBlogs.map((blog: BlogState) => {
           return (
             <div 
               key={blog.id}

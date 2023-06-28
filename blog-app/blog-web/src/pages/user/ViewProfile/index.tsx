@@ -22,7 +22,7 @@ export default function ViewProfilePage() {
   }, [])
 
   let blogById = blogs.state.getBlogs?.data; 
-  let idBlog = blogById.filter((blogs) => blogs.ownerId === userId)
+  let userBlogs = blogById.filter((blogs) => blogs.ownerId === userId)
 
   return (
     <div>
@@ -42,10 +42,10 @@ export default function ViewProfilePage() {
               Joined Date : {formatedDate}
             </h2> 
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Total Blogs : {idBlog.length}
+              Total Blogs : {userBlogs.length}
             </h2> 
             <Link
-              to="/user/edit/me"
+              to={ROUTE_PATHS.EDIT_PROFILE}
               type="button"
               className="text-white bg-gray-800 font-medium text-sm py-2.5"
             >
@@ -56,8 +56,8 @@ export default function ViewProfilePage() {
         <div 
     className="w-10/12 m-auto flex flex-wrap"
   > 
-    {idBlog.length ? (
-      idBlog!.map((blog: any) => {
+    {userBlogs.length ? (
+      userBlogs.map((blog: any) => {
           return (
             <div 
               key={blog.id}
@@ -103,7 +103,7 @@ export default function ViewProfilePage() {
               </div>
             </div>
           );
-        })) : !idBlog.length && !isLoading ? "You Haven't uploaded Any Blog Yet" : ""
+        })) : !userBlogs.length && !isLoading ? "You Haven't uploaded Any Blog Yet" : ""
         }
     </div>
     </div>
