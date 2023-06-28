@@ -1,13 +1,16 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { useUser } from "store/user";
 import { UserDetailState } from "./types";
 
 export default function ViewProfilePage() {
   const auth = useAuth();
   const blogs = useBlogs();
+  const user = useUser();
+  const params: any = useParams();
   const data = auth.state.user;
   const [userDetails, setUserDetails] = useState<UserDetailState>({ 
     username: "", email: "", createdAt: ""
@@ -17,6 +20,9 @@ export default function ViewProfilePage() {
   const userId = auth.state.user?.id;
 
   useEffect(() => {
+    if (params.id !== "me") {
+      user.getById(params.id)
+    }
     blogs.getBlogs()
     setUserDetails({...userDetails, ...data})
   }, [])
