@@ -30,7 +30,7 @@ export default class ArticlesController {
           throw e
         }
     }
-
+        
     public async getById({ params }: HttpContextContract) {
         try {
             const article = await Article.findBy("slug", params.slug);
@@ -80,7 +80,7 @@ export default class ArticlesController {
         } 
         else {
             await article.delete();
-            return { message: `Article ${params.id} Deleted` };
+            return { message: `Article ${params.id} Deleted`, id: Number(params.id) };
         }
     }    
 }
