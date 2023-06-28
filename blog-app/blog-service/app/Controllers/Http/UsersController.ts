@@ -14,6 +14,22 @@ export default class UsersController {
         return { message: "All Users fetched successfully", data: response }
     }
 
+    public async getById({ params }: HttpContextContract) {
+        try {
+            const user = await User.findBy("slug", params.slug);
+            if (!user) {
+                throw { message: "No Article found by id", status: 404 }
+            } else {
+                return { 
+                    data: article, 
+                    message: "Article fetched successfully" 
+                }
+            }
+        } catch (e) {
+            throw e
+        }
+    }
+
     public async update({ request, auth }: HttpContextContract) {
         try {
             const body = await request.validate(UserUpdate);
