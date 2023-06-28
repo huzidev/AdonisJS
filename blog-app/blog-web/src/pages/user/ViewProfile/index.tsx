@@ -116,7 +116,8 @@ export default function ViewProfilePage() {
                       >
                         Read More
                       </Link>
-                      <div>
+                      {blog.ownerId === userId && (
+                        <div>
                         <Link
                           to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
                           type="button"
@@ -132,6 +133,7 @@ export default function ViewProfilePage() {
                           Delete
                         </button>
                       </div>
+                      )}
                     </div>
                   </div>
                 </div>
