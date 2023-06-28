@@ -15,9 +15,9 @@ export const blogSlice = createSlice({
     name: "blogs",
     initialState,
     reducers : {
-        updateBlogsState: (state, action:PayloadAction<Blog>) => {
+        updateBlogsState: (state, action:PayloadAction<Blog[]>) => {
             state.getBlogs.data = {
-                ...(state?.getBlogs.data ?? {}),
+                ...(state?.getBlogs.data ?? []),
                 ...action.payload
             };
         }
@@ -30,7 +30,6 @@ export const blogSlice = createSlice({
         })
         builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
             state.getBlogs.loading = false;
-            console.log("data before", state.getBlogs.data);
             if (action.payload) {
                 // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
                 const cleaned = state.getBlogs.data?.filter((dataBlog) => !action.payload?.find(((blog) => blog.id === dataBlog.id))) ?? []

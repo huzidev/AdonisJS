@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'store/hooks/hooks';
 import * as actions from "./actions";
-import { blogSlice } from './reducer';
-import { AddBlogPayload, Blog, BlogState, GetBlogPayload, UpdateBlogPayload } from './types';
+import { AddBlogPayload, BlogState, GetBlogPayload, UpdateBlogPayload } from './types';
 
 export const useBlogs = () => {
   const state = useSelector((state: any) => state.blogs) as BlogState;
@@ -12,7 +11,6 @@ export const useBlogs = () => {
   const addBlog = (payload: AddBlogPayload) => dispatch(actions.addBlog(payload));
   const updateBlog = (payload: UpdateBlogPayload) => dispatch(actions.updateBlog(payload));
   const deleteBlog = (payload: number) => dispatch(actions.deleteBlog(payload));
-  const updateBlogsState = (payload: Blog) => dispatch(blogSlice.actions.updateBlogsState(payload));
 
   return {
     state,
@@ -20,7 +18,6 @@ export const useBlogs = () => {
     getBlog,
     addBlog,
     updateBlog,
-    deleteBlog,
-    updateBlogsState
+    deleteBlog
   }
 }
