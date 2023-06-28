@@ -84,7 +84,12 @@ export default function ViewProfilePage() {
           )}
         </div>
       </div>
-      <div className="w-10/12 m-auto flex flex-wrap">
+      <div className="w-11/12 my-8 mx-auto">
+        <h1 className="text-2xl font-bold tracking-tight">
+          Blogs Uploaded By { params.id !== "me" ? userDetails.username : "You" }
+        </h1>
+      </div>
+      <div className="w-11/12 mx-auto flex flex-wrap">
         {userBlogs.length
           ? userBlogs.map((blog: any) => {
               return (
