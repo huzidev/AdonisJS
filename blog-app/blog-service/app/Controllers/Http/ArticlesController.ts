@@ -7,9 +7,9 @@ import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 const noArticle = { message: "No Article found by id ", status: 404 }
 const noPermission = { message: "You didn't have permission", status: 401 }
 export default class ArticlesController {
-    public async getBlogs() {
-        const response = await Article.all();
-        return { data: response };  
+    public async getBlogs({ params }: HttpContextContract) {
+        const response = await Article.query().paginate(params.page || 1, 5);
+        return { data: response };
     }
 
     public async addBlog({ request, auth }: HttpContextContract) {
