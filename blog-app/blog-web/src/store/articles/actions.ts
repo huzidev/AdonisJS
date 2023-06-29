@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "services/api";
 import * as endpoints from "./endpoints";
-import { AddBlogPayload, AllBlogs, GetBlogPayload, UpdateBlogPayload } from "./types";
+import { AddBlogPayload, AllBlogs, GetBlogPayload, GetBlogsById, UpdateBlogPayload } from "./types";
 
 export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async (page: number): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
@@ -15,16 +15,18 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async (page: numbe
     }
 });
 
-// const getBlogsById = createAsyncThunk(endpoints.GET_BLOGS, async (userId: number, page: number): Promise<AllBlogs | null> => {
-//     try {
-//        const response = await api.get(endpoints.GET_BLOGS + page);
-//        console.log("response for all blogs", response.data);
-//        return response.data;
-//     } catch (e) {
-//         console.log("Error", e);
-//         throw e
-//     }
-// })
+export const getBlogsById = createAsyncThunk(endpoints.GET_BLOGS, async (data: GetBlogsById): Promise<AllBlogs | null> => {
+    // AllBlogs contains Array of blogs and meta
+    try {
+       const { userId, page } = data;
+       const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`);
+       console.log("response for all blogs", response.data);
+       return response.data;
+    } catch (e) {
+        console.log("Error", e);
+        throw e
+    }
+});
 
 export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (slug: GetBlogPayload) => {
     try {

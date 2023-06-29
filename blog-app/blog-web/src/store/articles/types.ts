@@ -26,6 +26,11 @@ export interface Blog extends AddBlogPayload {
   owner: User;
 }
 
+export interface GetBlogsById {
+  userId: number
+  page: number
+}
+
 export interface AllBlogs extends SubState {
   data: Blog[];
   meta: PaginationMeta | null;
@@ -38,6 +43,7 @@ export interface getBlogById extends SubState {
 
 export interface BlogState {
   getBlogs: AllBlogs;
+  getBlogsById: AllBlogs;
   getBlog: getBlogById;
   updateBlog: getBlogById;
   addBlog: SubState;

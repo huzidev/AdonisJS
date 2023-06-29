@@ -5,6 +5,7 @@ import { Blog, BlogState } from "./types";
 
 const initialState: BlogState = {
     getBlogs: { ...subState, data: [], meta: null },
+    getBlogsById: { ...subState, data: [], meta: null },
     getBlog: { ...subState, data: null },
     addBlog:  { ...subState },
     deleteBlog:  { ...subState },
@@ -36,7 +37,6 @@ export const blogSlice = createSlice({
                 const cleaned = state.getBlogs.data?.filter((dataBlog) => !data.find(((blog) => blog.id === dataBlog.id))) ?? []
                 state.getBlogs.data = [...cleaned, ...data];
                 // meta takes pagination data like total, currentPage, LastPage
-                console.log("meta", meta);
                 state.getBlogs.meta = meta
             }
             state.getBlogs.error = false;
@@ -44,6 +44,28 @@ export const blogSlice = createSlice({
         builder.addCase(actions.getBlogs.rejected, (state) => {
             state.getBlogs.loading = false;
             state.getBlogs.error = true;
+        })
+        // getAllBlogsById
+        builder.addCase(actions.getBlogsById.pending, (state) => {
+            state.getBlogsById.loading = true;
+            state.getBlogsById.error = false;
+        })
+        builder.addCase(actions.getBlogsById.fulfilled, (state, action) => {
+            state.getBlogsById.loading = false;
+            if (action.payload) {
+                const { data, meta } = action.payload;
+                // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
+                const cleaned = state.getBlogsById.data?.filter((dataBlog) => !data.find(((blog) => blog.id === dataBlog.id))) ?? []
+                state.getBlogsById.data = [...cleaned, ...data];
+                // meta takes pagination data like total, currentPage, LastPage
+                console.log("meta for ID", meta);
+                state.getBlogsById.meta = meta
+            }
+            state.getBlogsById.error = false;
+        })
+        builder.addCase(actions.getBlogsById.rejected, (state) => {
+            state.getBlogsById.loading = false;
+            state.getBlogsById.error = true;
         })
         // getBlogBySlug
         builder.addCase(actions.getBlog.pending, (state) => {
