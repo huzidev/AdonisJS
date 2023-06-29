@@ -63,6 +63,7 @@ export default function ViewProfilePage() {
   let userBlogs = allBlogsById.filter((blogs) => blogs.ownerId === currentId);
 
   return (
+    <>
     <div>
       <div className="w-11/12 my-5 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="p-5">
@@ -172,11 +173,16 @@ export default function ViewProfilePage() {
             </div>
           )}
       </div>
-      {currentPage !== lastPage && (
-        <button onClick={loadMore}>
-          Load More
-        </button>
-      )}
     </div>
+    <div className="w-11/12 m-auto mt-5">
+        {currentPage !== lastPage && (
+          <button 
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            onClick={loadMore}>
+            Load More
+          </button>
+        )}
+      </div>
+    </>
   );
 }

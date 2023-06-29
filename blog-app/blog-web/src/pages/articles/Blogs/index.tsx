@@ -108,7 +108,7 @@ export default function ViewBlogsPage(): JSX.Element {
         })}
         {/* if both currentPage is = to lastPage means final page hence no more fetching after that */}
       </div>
-      <div className="w-10/12 m-auto">
+      <div className="w-10/12 m-auto mt-5">
         {currentPage !== lastPage && (
           <button 
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
