@@ -23,9 +23,6 @@ export default function ViewBlogsPage(): JSX.Element {
   const currentPage: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogs.meta?.lastPage;
 
-  console.log("curPage", currentPage);
-  console.log("LastPage", lastPage);
-
   return (
   <div 
     className="w-10/12 m-auto flex flex-wrap"

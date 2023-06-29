@@ -44,9 +44,6 @@ export default function ViewProfilePage() {
   let allBlogs = blogs.state.getBlogs?.data;
   let userBlogs = allBlogs.filter((blogs) => blogs.ownerId === currentId);
 
-  console.log("state blogs", blogs.state.getBlogs);
-  
-
   return (
     <div>
       <div className="w-11/12 my-5 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
