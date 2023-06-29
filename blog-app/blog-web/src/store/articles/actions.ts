@@ -15,6 +15,17 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async (page: numbe
     }
 });
 
+// const getBlogsById = createAsyncThunk(endpoints.GET_BLOGS, async (userId: number, page: number): Promise<AllBlogs | null> => {
+//     try {
+//        const response = await api.get(endpoints.GET_BLOGS + page);
+//        console.log("response for all blogs", response.data);
+//        return response.data;
+//     } catch (e) {
+//         console.log("Error", e);
+//         throw e
+//     }
+// })
+
 export const getBlog = createAsyncThunk(endpoints.GET_BLOG, async (slug: GetBlogPayload) => {
     try {
         const response = await api.get(endpoints.GET_BLOG + slug);

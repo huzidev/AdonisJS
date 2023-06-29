@@ -35,6 +35,9 @@ export default function ViewProfilePage() {
     }
   }, [params.id]);
 
+  const currentPage: any = blogs.state.getBlogs.meta?.currentPage;
+  const lastPage: any = blogs.state.getBlogs.meta?.lastPage;
+
   // to store the data
   useEffect(() => {
     if (params.id !== "me" && userDataById) {
@@ -157,6 +160,9 @@ export default function ViewProfilePage() {
             </div>
           )}
       </div>
+      <button onClick={() => blogs.getBlogs(currentPage + 1)}>
+            Load More
+          </button>
     </div>
   );
 }
