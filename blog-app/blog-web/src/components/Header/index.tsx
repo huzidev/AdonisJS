@@ -1,5 +1,4 @@
-import ROUTE_PATHS from "Router/paths";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { links, loggedInPaths, loggedOutPaths } from "./data";
 
@@ -7,15 +6,10 @@ export default function Header() {
   const location = useLocation();
   const auth = useAuth();
   const user = auth.state.user;
-  const Navigate = useNavigate();
 
   // if (!auth.state.init.init) {
   //   return null;
   // }
-
-  function signOut() {
-    Navigate(ROUTE_PATHS.AUTH_SIGNIN);
-  }
 
   return (
     <div>
