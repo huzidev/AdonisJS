@@ -6,8 +6,8 @@ import { AddBlogPayload, Blog, GetBlogPayload, UpdateBlogPayload } from "./types
 export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async (page: number): Promise<Blog[] | null> => {
     try {
        const response = await api.get(endpoints.GET_BLOGS + page);
-       console.log("response", response.data.data);
-       return response.data.data;
+       console.log("response", response.data.data.data);
+       return response.data.data.data;
     } catch (e) {
         console.log("Error", e);
         throw e

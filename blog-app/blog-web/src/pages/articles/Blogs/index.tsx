@@ -94,7 +94,7 @@ export default function ViewBlogsPage(): JSX.Element {
             </div>
           );
         })}
-        <button onClick={() => blogs.getBlogs(blogs.state.meta?.currentPage + 1)}>
+        <button onClick={() => blogs.getBlogs(2)}>
           Load More
         </button>
     </div>
