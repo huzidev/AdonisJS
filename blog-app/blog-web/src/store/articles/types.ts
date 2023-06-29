@@ -42,5 +42,4 @@ export interface BlogState {
   updateBlog: getBlogById;
   addBlog: SubState;
   deleteBlog: SubState;
-  meta?: PaginationMeta;
 }

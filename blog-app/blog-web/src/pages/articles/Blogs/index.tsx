@@ -14,9 +14,9 @@ export default function ViewBlogsPage(): JSX.Element {
   const allUsers: any = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
-
   
   useEffect(() => {
+    // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
     if (!allBlogs.length) {
       blogs.getBlogs(1)
     }

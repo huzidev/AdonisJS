@@ -32,11 +32,10 @@ export const blogSlice = createSlice({
             state.getBlogs.loading = false;
             if (action.payload) {
                 const { data, meta } = action.payload;
-                console.log("Data", data);
-                console.log("meta", meta);
                 // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
                 const cleaned = state.getBlogs.data?.filter((dataBlog) => !data.find(((blog) => blog.id === dataBlog.id))) ?? []
                 state.getBlogs.data = [...cleaned, ...data];
+                // meta takes pagination data like total, currentPage, LastPage
                 state.getBlogs.meta = meta
             }
             state.getBlogs.error = false;

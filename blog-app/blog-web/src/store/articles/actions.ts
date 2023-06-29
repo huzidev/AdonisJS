@@ -4,6 +4,7 @@ import * as endpoints from "./endpoints";
 import { AddBlogPayload, AllBlogs, GetBlogPayload, UpdateBlogPayload } from "./types";
 
 export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async (page: number): Promise<AllBlogs | null> => {
+    // AllBlogs contains Array of blogs and meta
     try {
        const response = await api.get(endpoints.GET_BLOGS + page);
        console.log("response for all blogs", response.data);

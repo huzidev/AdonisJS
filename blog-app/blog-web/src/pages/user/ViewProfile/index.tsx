@@ -29,6 +29,7 @@ export default function ViewProfilePage() {
       user.getById(params.id);
     }
     setUserDetails({ ...userDetails, ...data });
+    // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
     if (!allBlogs.length) {
       blogs.getBlogs(1)
     }
