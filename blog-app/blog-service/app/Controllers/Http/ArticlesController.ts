@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
+import Database from '@ioc:Adonis/Lucid/Database';
 import Article from "App/Models/Article";
 import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 
@@ -7,17 +8,35 @@ import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 const noArticle = { message: "No Article found by id ", status: 404 }
 const noPermission = { message: "You didn't have permission", status: 401 }
 export default class ArticlesController {
-    public async getBlogs({ params }: HttpContextContract) {
-        const response = await Article.query().paginate(params.page || 1, 5);
+    public async getBlogs({ request, auth, params }: HttpContextContract) {
+        let userId: any;
+
+        const byMe = request.url().includes("/me");
+
+        if (params.id) {
+            userId = params.id
+        } else if (byMe) {
+            userId = auth.user?.id;
+        }
+        
+        let response
+        if (userId) {
+            response = await Database.from("articles")
+            .where("owner_id", Number(userId))
+            .paginate(params.page || 1, 5)
+        } else {
+            response = await Article.query()
+            .paginate(params.page || 1, 5)
+        }
+
+        
         return response;
     }
-
+    
     public async addBlog({ request, auth }: HttpContextContract) {
         try {
             // body is receiving title, image, content as of request.body, we used request.validate instead of req.body
             const body = await request.validate(CreateArticle);
-            console.log('b', body);
-            console.log("auth", auth);
             await Article.create({ 
                 ...body,
                 ownerId: auth.user?.id
