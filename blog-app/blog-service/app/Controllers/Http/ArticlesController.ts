@@ -8,16 +8,19 @@ import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 const noArticle = { message: "No Article found by id ", status: 404 }
 const noPermission = { message: "You didn't have permission", status: 401 }
 export default class ArticlesController {
-    public async getBlogs({ request, auth, params }: HttpContextContract) {
-        let userId: any;
+    public async getBlogs({ params }: HttpContextContract) {
+        let userId = params.id;
 
-        const byMe = request.url().includes("/me");
+        console.log("usr id", userId);
 
-        if (params.id) {
-            userId = params.id
-        } else if (byMe) {
-            userId = auth.user?.id;
-        }
+        // const byMe = request.url().includes("/me");
+
+        // if (params.id !== "me") {
+        //     userId = params.id
+        // } else if (byMe) {
+        //     userId = auth.user?.id;
+        // }
+
         
         let response
         if (userId) {
@@ -28,7 +31,6 @@ export default class ArticlesController {
             response = await Article.query()
             .paginate(params.page || 1, 5)
         }
-
         
         return response;
     }
