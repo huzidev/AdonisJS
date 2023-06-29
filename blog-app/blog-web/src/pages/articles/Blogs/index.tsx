@@ -14,9 +14,12 @@ export default function ViewBlogsPage(): JSX.Element {
   const allUsers: any = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
+
   
   useEffect(() => {
-    blogs.getBlogs(1)
+    if (!allBlogs.length) {
+      blogs.getBlogs(1)
+    }
     user.allUser()
   }, [])
   
