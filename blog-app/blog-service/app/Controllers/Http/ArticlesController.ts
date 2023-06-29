@@ -9,7 +9,7 @@ const noPermission = { message: "You didn't have permission", status: 401 }
 export default class ArticlesController {
     public async getBlogs({ params }: HttpContextContract) {
         const response = await Article.query().paginate(params.page || 1, 5);
-        return { data: response };
+        return response;
     }
 
     public async addBlog({ request, auth }: HttpContextContract) {
