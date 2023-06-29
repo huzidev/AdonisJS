@@ -1,6 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -15,6 +15,8 @@ export default function ViewBlogsPage(): JSX.Element {
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
   
+  const params: any = useParams();
+
   useEffect(() => {
     blogs.getBlogs(1)
     user.allUser()
@@ -94,7 +96,7 @@ export default function ViewBlogsPage(): JSX.Element {
             </div>
           );
         })}
-        <button onClick={() => blogs.getBlogs(2)}>
+        <button onClick={() => blogs.getBlogs(Number(params.page) + 1)}>
           Load More
         </button>
     </div>
