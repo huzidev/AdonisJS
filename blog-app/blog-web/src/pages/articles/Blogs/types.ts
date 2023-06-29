@@ -5,6 +5,7 @@ export interface BlogState {
     image: string;
     content: string;
     ownerId: number
+    // createdAt: string
 }
 
 export interface GetBlogsState {
