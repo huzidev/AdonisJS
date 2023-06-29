@@ -12,6 +12,12 @@ export default function ViewProfilePage() {
   const user = useUser();
   const params: any = useParams();
   const data = auth.state.user;
+  const currentPage: any = blogs.state.getBlogsById.meta?.currentPage;
+  const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
+  const [payload, setPayload] = useState({
+    userId : params.id === "me" ? auth.state.user?.id : params.id,
+    page: 1
+  })
 
   const [userDetails, setUserDetails] = useState<UserDetailState>({
     username: "",
@@ -30,13 +36,11 @@ export default function ViewProfilePage() {
     }
     setUserDetails({ ...userDetails, ...data });
     // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
-    if (!allBlogs.length) {
-      blogs.getBlogs(1)
+    
+    if (params.id !== "me" || !userBlogs.length) {
+      blogs.getBlogsById(payload)
     }
   }, [params.id]);
-
-  const currentPage: any = blogs.state.getBlogs.meta?.currentPage;
-  const lastPage: any = blogs.state.getBlogs.meta?.lastPage;
 
   // to store the data
   useEffect(() => {
@@ -45,10 +49,18 @@ export default function ViewProfilePage() {
     }
   }, [userDataById]);
 
-  let currentId = params.id === "me" ? userId : Number(params.id);
+  function loadMore() {
+    const updatedPayload = {
+      ...payload,
+      page: currentPage + 1
+    };
+    setPayload(updatedPayload);
+    blogs.getBlogsById(updatedPayload);
+  }
 
-  let allBlogs = blogs.state.getBlogs?.data;
-  let userBlogs = allBlogs.filter((blogs) => blogs.ownerId === currentId);
+  let currentId = params.id === "me" ? userId : Number(params.id);
+  let allBlogsById = blogs.state.getBlogsById.data;
+  let userBlogs = allBlogsById.filter((blogs) => blogs.ownerId === currentId);
 
   return (
     <div>
@@ -160,9 +172,11 @@ export default function ViewProfilePage() {
             </div>
           )}
       </div>
-      <button onClick={() => blogs.getBlogs(currentPage + 1)}>
-            Load More
-          </button>
+      {currentPage !== lastPage && (
+        <button onClick={loadMore}>
+          Load More
+        </button>
+      )}
     </div>
   );
 }

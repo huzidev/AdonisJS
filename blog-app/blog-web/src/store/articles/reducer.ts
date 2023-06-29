@@ -37,6 +37,7 @@ export const blogSlice = createSlice({
                 const cleaned = state.getBlogs.data?.filter((dataBlog) => !data.find(((blog) => blog.id === dataBlog.id))) ?? []
                 state.getBlogs.data = [...cleaned, ...data];
                 // meta takes pagination data like total, currentPage, LastPage
+                console.log("meta simple state", meta);
                 state.getBlogs.meta = meta
             }
             state.getBlogs.error = false;

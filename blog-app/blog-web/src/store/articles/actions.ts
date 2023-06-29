@@ -15,7 +15,7 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async (page: numbe
     }
 });
 
-export const getBlogsById = createAsyncThunk(endpoints.GET_BLOGS, async (data: GetBlogsById): Promise<AllBlogs | null> => {
+export const getBlogsById = createAsyncThunk(endpoints.GET_BLOGS+"id", async (data: GetBlogsById): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
     try {
        const { userId, page } = data;
