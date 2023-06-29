@@ -29,7 +29,7 @@ export default function ViewProfilePage() {
       user.getById(params.id);
     }
     setUserDetails({ ...userDetails, ...data });
-    blogs.getBlogs();
+    blogs.getBlogs(1);
   }, [params.id]);
 
   // to store the data

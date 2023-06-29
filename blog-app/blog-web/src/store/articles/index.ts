@@ -6,7 +6,7 @@ import { AddBlogPayload, BlogState, GetBlogPayload, UpdateBlogPayload } from './
 export const useBlogs = () => {
   const state = useSelector((state: any) => state.blogs) as BlogState;
   const dispatch = useAppDispatch();
-  const getBlogs = () => dispatch(actions.getBlogs());
+  const getBlogs = (payload: number) => dispatch(actions.getBlogs(payload));
   const getBlog = (payload: GetBlogPayload) => dispatch(actions.getBlog(payload));
   const addBlog = (payload: AddBlogPayload) => dispatch(actions.addBlog(payload));
   const updateBlog = (payload: UpdateBlogPayload) => dispatch(actions.updateBlog(payload));

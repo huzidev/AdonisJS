@@ -1,5 +1,5 @@
 import { User } from "store/auth/types";
-import { SubState } from "store/types";
+import { PaginationMeta, SubState } from "store/types";
 
 // for getBlog just title and content is required
 export interface AddBlogPayload {
@@ -41,4 +41,5 @@ export interface BlogState {
   updateBlog: getBlogById;
   addBlog: SubState;
   deleteBlog: SubState;
+  meta?: PaginationMeta;
 }

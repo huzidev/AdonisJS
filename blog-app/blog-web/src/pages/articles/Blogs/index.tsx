@@ -16,7 +16,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const userId = auth.state.user?.id;
   
   useEffect(() => {
-    blogs.getBlogs()
+    blogs.getBlogs(1)
     user.allUser()
   }, [])
 
@@ -94,6 +94,9 @@ export default function ViewBlogsPage(): JSX.Element {
             </div>
           );
         })}
+        <button onClick={() => blogs.getBlogs(blogs.state.meta?.currentPage + 1)}>
+          Load More
+        </button>
     </div>
   )
 }
