@@ -14,14 +14,13 @@ export default function ViewBlogsPage(): JSX.Element {
   const allUsers: any = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
-  
   const params: any = useParams();
-
+  
   useEffect(() => {
     blogs.getBlogs(1)
     user.allUser()
   }, [])
-
+  
   return (
   <div 
     className="w-10/12 m-auto flex flex-wrap"
