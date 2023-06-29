@@ -38,7 +38,7 @@ const routes: AppRoute[] = [
         Component: UserSignUpPage
     },
     {
-        path: `${ROUTE_PATHS.ARTICLES}:page`,
+        path: ROUTE_PATHS.ARTICLES,
         Component: ViewBlogsPage
     },
     {

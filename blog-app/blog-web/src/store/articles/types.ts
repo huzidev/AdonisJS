@@ -23,11 +23,12 @@ export interface Blog extends AddBlogPayload {
   createdAt: string;
   updatedAt: string;
   slug: string;
-  owner: User
+  owner: User;
 }
 
 export interface AllBlogs extends SubState {
   data: Blog[];
+  meta: PaginationMeta | null;
 }
 
 export interface getBlogById extends SubState {

@@ -4,7 +4,7 @@ import * as actions from "./actions";
 import { Blog, BlogState } from "./types";
 
 const initialState: BlogState = {
-    getBlogs: { ...subState, data: [] },
+    getBlogs: { ...subState, data: [], meta: null },
     getBlog: { ...subState, data: null },
     addBlog:  { ...subState },
     deleteBlog:  { ...subState },
@@ -31,9 +31,13 @@ export const blogSlice = createSlice({
         builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
             state.getBlogs.loading = false;
             if (action.payload) {
+                const { data, meta } = action.payload;
+                console.log("Data", data);
+                console.log("meta", meta);
                 // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-                const cleaned = state.getBlogs.data?.filter((dataBlog) => !action.payload?.find(((blog) => blog.id === dataBlog.id))) ?? []
-                state.getBlogs.data = [...cleaned, ...action.payload];
+                const cleaned = state.getBlogs.data?.filter((dataBlog) => !data.find(((blog) => blog.id === dataBlog.id))) ?? []
+                state.getBlogs.data = [...cleaned, ...data];
+                state.getBlogs.meta = meta
             }
             state.getBlogs.error = false;
         })

@@ -1,6 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -14,13 +14,18 @@ export default function ViewBlogsPage(): JSX.Element {
   const allUsers: any = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
-  const params: any = useParams();
   
   useEffect(() => {
     blogs.getBlogs(1)
     user.allUser()
   }, [])
   
+  const currentPage: any = blogs.state.getBlogs.meta?.currentPage;
+  const lastPage: any = blogs.state.getBlogs.meta?.lastPage;
+
+  console.log("curPage", currentPage);
+  console.log("LastPage", lastPage);
+
   return (
   <div 
     className="w-10/12 m-auto flex flex-wrap"
@@ -95,9 +100,13 @@ export default function ViewBlogsPage(): JSX.Element {
             </div>
           );
         })}
-        <button onClick={() => blogs.getBlogs(Number(params.page) + 1)}>
-          Load More
-        </button>
+        {/* if both currentPage is = to lastPage means final page hence no more fetching after that */}
+        {currentPage !== lastPage && (
+          <button onClick={() => blogs.getBlogs(currentPage + 1)}>
+            Load More
+          </button>
+        )}
+        
     </div>
   )
 }
