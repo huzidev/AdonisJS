@@ -33,11 +33,9 @@ export default function ViewProfilePage() {
     // for getting user info
     if (params.id !== "me" && Number(params.id) !== userDataById?.id) {
       user.getById(params.id);
-      console.log("would it run?");
     }
     if (!userBlogs.length) {
       blogs.getBlogsById(payload)
-      console.log("wiill it run for specifc user");
     }
     // if (params.id === "me" && !userBlogs.length) {
     //   blogs.getBlogsById(payload)
@@ -86,7 +84,7 @@ export default function ViewProfilePage() {
             Joined Date : {formatedDate}
           </h2>
           <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Total Blogs : {userBlogs.length}
+            Total Blogs : {blogs.state.getBlogsById.meta?.total}
           </h2>
           {params.id === "me" && (
             <Link
