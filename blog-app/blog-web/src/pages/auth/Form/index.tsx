@@ -4,6 +4,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
+import { BooleanState } from "./types";
 
 export default function UserFormPage(): JSX.Element {
   const auth = useAuth();
@@ -16,9 +17,11 @@ export default function UserFormPage(): JSX.Element {
     password: "",
     passwordConfirmation: "",
   });
-  const [value, SetValue] = useState<boolean>(false);
-  const [valuePass, SetValuePass] = useState<boolean>(false); 
-  const [valueConfPass, SetValueConfPass] = useState<boolean>(false); 
+  const [booleanState, setBooleanState] = useState<BooleanState>({
+  value: false,
+  valuePass: false,
+  valueConfPass: false,
+});
 
   useEffect(() => {
     const stateCondition = currentPath.includes("/sign_in") ? true : false;
@@ -102,17 +105,17 @@ export default function UserFormPage(): JSX.Element {
               <div className="mt-2 flex items-center">
                 <input
                   name="password"
-                  type={value ? "text" : "password"}
+                  type={booleanState.value ? "text" : "password"}
                   value={userLogIn.password}
                   onChange={inputHandlerLogIn}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 <span
-                  onClick={() => SetValue(!value)}
-                  title={value ? "Hide Password" : "Show Password"}
+                  onClick={() => setBooleanState({...booleanState, value: !booleanState.value})}
+                  title={booleanState.value ? "Hide Password" : "Show Password"}
                 >
-                  {value ? (
+                  {booleanState.value ? (
                     <RemoveRedEyeOutlinedIcon fontSize="small" />
                   ) : (
                     <VisibilityOffIcon fontSize="small" />
@@ -173,14 +176,14 @@ export default function UserFormPage(): JSX.Element {
               <div className="mt-2 flex items-center">
                 <input
                   name="password"
-                  type={valuePass ? "text" : "password"}
+                  type={booleanState.valuePass ? "text" : "password"}
                   value={userSignUp.password}
                   onChange={inputHandlerSignUp}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                <span onClick={() => SetValuePass(!valuePass)}>
-                  {valuePass ? (
+                <span onClick={() => setBooleanState({...booleanState, valuePass: !booleanState.valuePass})}>
+                  {booleanState.valuePass ? (
                     <RemoveRedEyeOutlinedIcon fontSize="small" />
                   ) : (
                     <VisibilityOffIcon fontSize="small" />
@@ -199,15 +202,15 @@ export default function UserFormPage(): JSX.Element {
               </div>
               <div className="mt-2 flex items-center">
                 <input
-                  type={valueConfPass ? "text" : "password"}
+                  type={booleanState.valueConfPass ? "text" : "password"}
                   name="passwordConfirmation"
                   value={userSignUp.passwordConfirmation}
                   onChange={inputHandlerSignUp}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                <span onClick={() => SetValueConfPass(!valueConfPass)}>
-                  {valueConfPass ? (
+                <span onClick={() => setBooleanState({...booleanState, valueConfPass: !booleanState.valueConfPass})}>
+                  {booleanState.valueConfPass ? (
                     <RemoveRedEyeOutlinedIcon fontSize="small" />
                   ) : (
                     <VisibilityOffIcon fontSize="small" />
