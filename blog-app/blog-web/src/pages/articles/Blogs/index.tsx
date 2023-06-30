@@ -20,7 +20,9 @@ export default function ViewBlogsPage(): JSX.Element {
     if (!allBlogs.length) {
       blogs.getBlogs(1);
     }
-    user.allUser();
+    if (!allUsers) {
+      user.allUser();
+    }
   }, []);
 
   const currentPage: any = blogs.state.getBlogs.meta?.currentPage;

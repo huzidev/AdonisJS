@@ -28,7 +28,6 @@ export default function EditProfilePage() {
     if (prevUpdateState?.loading && !updateState?.loading && updateState?.data) {
       user.updateUserState(updateState.data!)
     }
-    
   }, [updateState, prevUpdateState]);
 
   function update() {

@@ -18,7 +18,8 @@ export default function ViewProfilePage() {
     userId : params.id === "me" ? auth.state.user?.id : params.id,
     page: 1
   })
-
+  const userDataById = user.state.getUser?.data;
+  
   const [userDetails, setUserDetails] = useState<UserDetailState>({
     username: "",
     email: "",
@@ -27,24 +28,29 @@ export default function ViewProfilePage() {
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   const userId = auth.state.user?.id;
 
-  const userDataById = user.state.getUser?.data;
-
   // if user changes URL from user/view/:id to user/view/me
   useEffect(() => {
-    if (params.id !== "me") {
+    // for getting user info
+    if (params.id !== "me" && Number(params.id) !== userDataById?.id) {
       user.getById(params.id);
+      console.log("would it run?");
     }
+    if (!userBlogs.length) {
+      blogs.getBlogsById(payload)
+      console.log("wiill it run for specifc user");
+    }
+    // if (params.id === "me" && !userBlogs.length) {
+    //   blogs.getBlogsById(payload)
+    //   console.log("wiill it run for own self");
+    // }
     setUserDetails({ ...userDetails, ...data });
     // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
-    
-    if (params.id !== "me" || !userBlogs.length) {
-      blogs.getBlogsById(payload)
-    }
   }, [params.id]);
 
   // to store the data
   useEffect(() => {
     if (params.id !== "me" && userDataById) {
+      // user.getById(params.id);
       setUserDetails({ ...userDetails, ...userDataById });
     }
   }, [userDataById]);
