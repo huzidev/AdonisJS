@@ -7,9 +7,8 @@ const AddBlogPage = React.lazy(() => import('pages/articles/BlogCreate'));
 const UpdateBlogPage = React.lazy(() => import('pages/articles/BlogUpdate'));
 const ViewBlogPage = React.lazy(() => import('pages/articles/BlogView'));
 const ViewBlogsPage = React.lazy(() => import('pages/articles/Blogs'));
-const UserSignInPage = React.lazy(() => import('pages/auth/Login'));
-const UserSignUpPage = React.lazy(() => import('pages/auth/Register'));
 const ViewProfilePage = React.lazy(() => import('pages/user/ViewProfile'));
+const UserFormPage = React.lazy(() => import('pages/auth/Form'));
 
 interface AppRoute {
   path: string;
@@ -31,11 +30,11 @@ const routes: AppRoute[] = [
     },
     {
         path: ROUTE_PATHS.AUTH_SIGNIN,
-        Component: UserSignInPage
+        Component: UserFormPage
     },
     {
         path: ROUTE_PATHS.AUTH_SIGNUP,
-        Component: UserSignUpPage
+        Component: UserFormPage
     },
     {
         path: ROUTE_PATHS.ARTICLES,

@@ -1,25 +1,45 @@
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useAuth } from 'store/auth';
 
-export default function UserSignInPage() {
-  const auth = useAuth();
-  const [user, setUser] = useState({ email: "", password: "" });
+export default function UserFormPage(): JSX.Element {
+    const auth = useAuth();
+  const [isLogInForm, setIsLogInForm] = useState(true);
+  const [userLogIn, setUserLogIn] = useState({ email: "", password: "" });
+  const [userSignUp, setUserSignUp] = useState({ 
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "", });
   const [value, SetValue] = useState<boolean>(false); 
 
-  function inputHandler(
+  function inputHandlerLogIn(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
-    setUser({
-      ...user,
+    setUserLogIn({
+      ...userLogIn,
+      [e.target.name]: e.target.value,
+    });
+  }
+  function inputHandlerSignUp(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    setUserSignUp({
+      ...userSignUp,
       [e.target.name]: e.target.value,
     });
   }
 
-  function login() {
-    auth.signIn(user)
+  const title = isLogInForm ? 'SignIn' : 'SignUp';
+  const descReverse = isLogInForm ? "Don't have an account ?" : 'Already have an account ?';
+
+  function submit() {
+    if (isLogInForm) {
+        auth.signIn(userLogIn)
+    } else {
+        auth.signIn(userSignUp)
+    }
   }
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -30,7 +50,7 @@ export default function UserSignInPage() {
           alt="Your Company"
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign in to your account
+          {title} To You Account
         </h2>
       </div>
       <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -46,9 +66,9 @@ export default function UserSignInPage() {
                 id="email"
                 name="email"
                 type="email"
-                value={user.email}
+                value={userLogIn.email}
                 required
-                onChange={inputHandler}
+                onChange={inputHandlerLogIn}
                 className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -70,8 +90,8 @@ export default function UserSignInPage() {
                 id="password"
                 name="password"
                 type={value ? "text" : "password"}
-                value={user.password}
-                onChange={inputHandler}
+                value={userLogIn.password}
+                onChange={inputHandlerLogIn}
                 required
                 className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -83,20 +103,20 @@ export default function UserSignInPage() {
           <div>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={login}
+              onClick={submit}
             >
-              Sign in
+              {title}
             </button>
           </div>
         <p className="mt-3 text-center text-sm text-gray-500">
-          Don't have an account?
-          <Link
-            to="/user/sign_up"
+          {descReverse}
+          <button
+            onClick={() => setIsLogInForm((state) => !state)}
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             {" "}
-            Signup
-          </Link>
+            {title}
+          </button>
         </p>
       </div>
     </div>

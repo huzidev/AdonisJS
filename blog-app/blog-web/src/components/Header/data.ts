@@ -13,6 +13,14 @@ export const links = [
     link: ROUTE_PATHS.AUTH_SIGNUP
   },
   {
+    title: 'SignIn',
+    link: ROUTE_PATHS.AUTH_SIGNIN
+  },
+  {
+    title: 'SignUp',
+    link: ROUTE_PATHS.AUTH_SIGNUP
+  },
+  {
     title: 'Add Blog',
     link: ROUTE_PATHS.ARTICLE_CREATE
   },

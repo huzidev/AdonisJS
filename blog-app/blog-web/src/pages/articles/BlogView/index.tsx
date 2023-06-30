@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
+import { useGetBlogPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
 export default function ViewBlogPage(): JSX.Element {
-  const blog = useBlogs();
-  const getBlog = blog.state.getBlog?.data
-  const params: any = useParams();
+  const blogs = useBlogs();
+  const getBlog = blogs.state.getBlog?.data
   const initialState: BlogState = {title: "", image: "", content: ""};
   const [blogView, setBlogView] = useState(initialState);
 
-  useEffect(() => {
-    blog.getBlog(params.slug)
-  }, [])
+  useGetBlogPageHooks();
 
   useEffect(() => {
     setBlogView({...blogView, ...getBlog})

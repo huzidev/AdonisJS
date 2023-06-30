@@ -2,11 +2,11 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signUp } from "store/auth/actions";
-import { useAppDispatch } from "store/hooks/hooks";
+import { useAuth } from 'store/auth';
 import { RegisterState } from "./types";
 
 export default function UserSignUpPage() {
+  const auth = useAuth();
   const initialState: RegisterState = {
     username: "",
     email: "",
@@ -16,7 +16,7 @@ export default function UserSignUpPage() {
   const [user, setUser] = useState(initialState);
   const [valuePass, SetValuePass] = useState<boolean>(false); 
   const [valueConfPass, SetValueConfPass] = useState<boolean>(false); 
-  const dispatch = useAppDispatch();
+  const { username, email, password, passwordConfirmation } = user;
 
   function inputHandler(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -26,10 +26,9 @@ export default function UserSignUpPage() {
       [e.target.name]: e.target.value,
     });
   }
-  const { username, email, password, passwordConfirmation } = user;
 
   async function signup() {
-    dispatch(signUp(user));
+    auth.signUp(user);
   }
   return (
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
