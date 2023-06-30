@@ -17,13 +17,14 @@ export default function UserFormPage(): JSX.Element {
     passwordConfirmation: "",
   });
   const [value, SetValue] = useState<boolean>(false);
+  const [valuePass, SetValuePass] = useState<boolean>(false); 
+  const [valueConfPass, SetValueConfPass] = useState<boolean>(false); 
 
   useEffect(() => {
     const stateCondition = currentPath.includes("/sign_in") ? true : false;
     setIsLogInForm(stateCondition);
     console.log("state condition", stateCondition);
-    
-}, [currentPath]);
+  }, [currentPath]);
 
   function inputHandlerLogIn(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -68,56 +69,154 @@ export default function UserFormPage(): JSX.Element {
         </h2>
       </div>
       <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-        <div className="mb-3">
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Email address
-          </label>
-          <div className="mt-2">
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={userLogIn.email}
-              required
-              onChange={inputHandlerLogIn}
-              className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div>
-        </div>
-        <div className="mb-6">
-          <div className="flex items-center justify-between">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Password
-            </label>
-          </div>
-          <div className="mt-2 flex items-center">
-            <input
-              id="password"
-              name="password"
-              type={value ? "text" : "password"}
-              value={userLogIn.password}
-              onChange={inputHandlerLogIn}
-              required
-              className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-            <span
-              onClick={() => SetValue(!value)}
-              title={value ? "Hide Password" : "Show Password"}
-            >
-              {value ? (
-                <RemoveRedEyeOutlinedIcon fontSize="small" />
-              ) : (
-                <VisibilityOffIcon fontSize="small" />
-              )}
-            </span>
-          </div>
-        </div>
+        {isLogInForm ? (
+          <>
+            <div className="mb-3">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Email address
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={userLogIn.email}
+                  required
+                  onChange={inputHandlerLogIn}
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="mb-6">
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Password
+                </label>
+              </div>
+              <div className="mt-2 flex items-center">
+                <input
+                  name="password"
+                  type={value ? "text" : "password"}
+                  value={userLogIn.password}
+                  onChange={inputHandlerLogIn}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+                <span
+                  onClick={() => SetValue(!value)}
+                  title={value ? "Hide Password" : "Show Password"}
+                >
+                  {value ? (
+                    <RemoveRedEyeOutlinedIcon fontSize="small" />
+                  ) : (
+                    <VisibilityOffIcon fontSize="small" />
+                  )}
+                </span>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="mb-3">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Usernmae
+              </label>
+              <div className="mt-2">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  onChange={inputHandlerSignUp}
+                  value={userSignUp.username}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="mb-3">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Email
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={userSignUp.email}
+                  onChange={inputHandlerSignUp}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="mb-3">
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Password
+                </label>
+              </div>
+              <div className="mt-2 flex items-center">
+                <input
+                  name="password"
+                  type={valuePass ? "text" : "password"}
+                  value={userSignUp.password}
+                  onChange={inputHandlerSignUp}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+                <span onClick={() => SetValuePass(!valuePass)}>
+                  {valuePass ? (
+                    <RemoveRedEyeOutlinedIcon fontSize="small" />
+                  ) : (
+                    <VisibilityOffIcon fontSize="small" />
+                  )}
+                </span>
+              </div>
+            </div>
+            <div className="mb-6">
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Confirm Password
+                </label>
+              </div>
+              <div className="mt-2 flex items-center">
+                <input
+                  type={valueConfPass ? "text" : "password"}
+                  name="passwordConfirmation"
+                  value={userSignUp.passwordConfirmation}
+                  onChange={inputHandlerSignUp}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+                <span onClick={() => SetValueConfPass(!valueConfPass)}>
+                  {valueConfPass ? (
+                    <RemoveRedEyeOutlinedIcon fontSize="small" />
+                  ) : (
+                    <VisibilityOffIcon fontSize="small" />
+                  )}
+                </span>
+              </div>
+            </div>
+          </>
+        )}
         <div>
           <button
             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
