@@ -18,7 +18,6 @@ export default class ArticlesController {
             response = await Article.query()
             .paginate(params.page || 1, 5)
         }
-        
         return response;
     }
     
