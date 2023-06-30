@@ -46,8 +46,8 @@ export default function UserFormPage(): JSX.Element {
     });
   }
 
-  const title = isLogInForm ? "SignIn" : "SignUp";
-  const titleReverse = isLogInForm ? "SignUp" : "SignIn";
+  const title = isLogInForm ? "SignI n" : "Sign Up";
+  const titleReverse = isLogInForm ? "Sign Up" : "Sign In";
   const descReverse = isLogInForm
     ? "Don't have an account ?"
     : "Already have an account ?";
