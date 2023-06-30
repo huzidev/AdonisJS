@@ -1,5 +1,4 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import Database from '@ioc:Adonis/Lucid/Database';
 import Article from "App/Models/Article";
 import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 
@@ -10,22 +9,10 @@ const noPermission = { message: "You didn't have permission", status: 401 }
 export default class ArticlesController {
     public async getBlogs({ params }: HttpContextContract) {
         let userId = params.id;
-
-        console.log("usr id", userId);
-
-        // const byMe = request.url().includes("/me");
-
-        // if (params.id !== "me") {
-        //     userId = params.id
-        // } else if (byMe) {
-        //     userId = auth.user?.id;
-        // }
-
-        
-        let response
+        let response    
         if (userId) {
-            response = await Database.from("articles")
-            .where("owner_id", Number(userId))
+            response = await Article.query()
+            .where("owner_id", userId)
             .paginate(params.page || 1, 5)
         } else {
             response = await Article.query()
