@@ -12,48 +12,65 @@ export default function ViewProfilePage() {
   const user = useUser();
   const params: any = useParams();
   const data = auth.state.user;
+  const userDataById = user.state.getUser?.data;
   const currentPage: any = blogs.state.getBlogsById.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
-  const [payload, setPayload] = useState<any>()
-  const userDataById = user.state.getUser?.data;
+  const [payload, setPayload] = useState<any>({
+    userId: params.id === "me" ? Number(auth.state.user?.id) : Number(params.id),
+    page: 1
+  })
   const [userDetails, setUserDetails] = useState<UserDetailState>({
     username: "",
     email: "",
     createdAt: ""
   });
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
-  const userId = auth.state.user?.id;
+  const userId: any= auth.state.user?.id;
 
   let currentId = params.id === "me" ? userId : Number(params.id);
   let allBlogsById = blogs.state.getBlogsById.data;
   let userBlogs = allBlogsById.filter((blogs) => blogs.ownerId === currentId);
-  let totalBlogs: any;
+  let totalBlogs = blogs.state.getBlogsById.meta?.total; 
+  
+
   // if user changes URL from user/view/:id to user/view/me
   useEffect(() => {
     // for getting user info
-    if (params.id !== "me" && Number(params.id) !== userDataById?.id ) {
-      user.getById(params.id);
-      const updatedPayload = {
-        userId : Number(params.id),
-        page: 1
-      };
-      // setPayload(updatedPayload)
-      setPayload(updatedPayload);
-      console.log("params id run");
-      
-      blogs.getBlogsById(updatedPayload)
+    if (params.id !== "me") {
+      if (Number(params.id) !== userDataById?.id) {
+        user.getById(params.id);
+        blogs.getBlogsById(payload)
+      }
     } 
     if (params.id === "me" && !userBlogs.length) {
-      const updatedPayload = {
-        userId : Number(auth.state.user?.id),
-        page: 1
-      };
-      console.log("params run");
-      setPayload(updatedPayload);
-      blogs.getBlogsById(updatedPayload)
+      blogs.getBlogsById(payload)
     }
     // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
-  }, [params.id]);
+  }, [params.id, userId]);
+
+  // useEffect(() => {
+  //   if (params.id !== "me" && Number(params.id) !== userDataById?.id) {
+  //     // Fetch user info and blogs for the selected user
+  //     user.getById(params.id);
+  //     const updatedPayload = {
+  //       userId: Number(params.id),
+  //       page: 1
+  //     };
+  //     setPayload(updatedPayload);
+  //     blogs.getBlogsById(updatedPayload);
+  //   } else if (params.id === "me") {
+  //     // Fetch user info and blogs for the logged-in user
+  //     const updatedPayload = {
+  //       userId: Number(userId),
+  //       page: 1
+  //     };
+  //     if (!userBlogs.length) {
+  //       user.getById(Number(auth.state.user?.id));
+  //       setPayload(updatedPayload);
+  //       blogs.getBlogsById(updatedPayload);
+  //     }
+  //   }
+  // }, [params.id, currentId]);
 
   // to store the data
   useEffect(() => {
@@ -61,7 +78,6 @@ export default function ViewProfilePage() {
       setUserDetails({ ...userDetails, ...userDataById });
     } else if (params.id === "me" && data) {
       setUserDetails({ ...userDetails, ...data });
-
     }
   }, [userDataById, params.id]);
 
