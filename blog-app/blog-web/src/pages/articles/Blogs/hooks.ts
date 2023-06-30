@@ -17,5 +17,4 @@ export function useBlogsPageHooks(): void {
       user.allUser();
     }
   }, []);
-
 }

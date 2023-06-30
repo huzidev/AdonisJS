@@ -11,7 +11,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
   const auth = useAuth();
   const user = useUser();
-  const allUsers: any = user.state.allUser?.data;
+  const allUsers = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userId = auth.state.user?.id;
 
@@ -19,7 +19,6 @@ export default function ViewBlogsPage(): JSX.Element {
 
   const currentPage: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogs.meta?.lastPage;
-
   return (
     <>
       <div className="w-10/12 m-auto flex flex-wrap">

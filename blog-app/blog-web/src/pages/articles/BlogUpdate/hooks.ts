@@ -1,6 +1,12 @@
-import { useAppDispatch } from "../../../store/hooks/hooks";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useBlogs } from "store/articles";
 
 export function useEditBlogPageHooks(): void {
-    const dispatch = useAppDispatch();
-
+    const blogs = useBlogs();
+    const params = useParams();
+    const slug: any = params.slug;
+    useEffect(() => {
+        blogs.getBlog(slug)
+    }, [])
 }

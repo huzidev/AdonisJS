@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
+import { useEditBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
 
 export default function UpdateBlogPage(): JSX.Element {
@@ -15,12 +16,9 @@ export default function UpdateBlogPage(): JSX.Element {
     content: "",
   };
   const [updateArticle, setUpdateArticle] = useState(initialState);
-  
   const { id, title, image, content } = updateArticle;
   
-  useEffect(() => {
-    blogs.getBlog(slug)
-  }, [])
+  useEditBlogPageHooks();
   
   function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setUpdateArticle({
