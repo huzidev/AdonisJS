@@ -2,27 +2,26 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
-import { BooleanState } from "./types";
+import { AuthSignInPayload, AuthSignUpPayload, BooleanState } from "./types";
 
 export default function UserFormPage(): JSX.Element {
   const auth = useAuth();
-  const Navigate = useNavigate()
   const currentPath = window.location.pathname;
   const [isLogInForm, setIsLogInForm] = useState(true);
-  const [userLogIn, setUserLogIn] = useState({ email: "", password: "" });
-  const [userSignUp, setUserSignUp] = useState({
+  const [userLogIn, setUserLogIn] = useState<AuthSignInPayload>({ email: "", password: "" });
+  const [userSignUp, setUserSignUp] = useState<AuthSignUpPayload>({
     username: "",
     email: "",
     password: "",
-    passwordConfirmation: "",
+    passwordConfirmation: ""
   });
   const [booleanState, setBooleanState] = useState<BooleanState>({
-  value: false,
-  valuePass: false,
-  valueConfPass: false,
-});
+    value: false,
+    valuePass: false,
+    valueConfPass: false
+  });
 
   useEffect(() => {
     const stateCondition = currentPath.includes("/sign_in") ? true : false;
@@ -30,21 +29,18 @@ export default function UserFormPage(): JSX.Element {
     console.log("state condition", stateCondition);
   }, [currentPath]);
 
-  function inputHandlerLogIn(
+  function inputHandler(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
-    setUserLogIn({
-      ...userLogIn,
-      [e.target.name]: e.target.value,
-    });
-  }
-  function inputHandlerSignUp(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
-    setUserSignUp({
-      ...userSignUp,
-      [e.target.name]: e.target.value,
-    });
+    isLogInForm
+      ? setUserLogIn({
+          ...userLogIn,
+          [e.target.name]: e.target.value,
+        })
+      : setUserSignUp({
+          ...userSignUp,
+          [e.target.name]: e.target.value,
+        });
   }
 
   const title = isLogInForm ? "Sign In" : "Sign Up";
@@ -89,7 +85,7 @@ export default function UserFormPage(): JSX.Element {
                   type="email"
                   value={userLogIn.email}
                   required
-                  onChange={inputHandlerLogIn}
+                  onChange={inputHandler}
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -108,12 +104,17 @@ export default function UserFormPage(): JSX.Element {
                   name="password"
                   type={booleanState.value ? "text" : "password"}
                   value={userLogIn.password}
-                  onChange={inputHandlerLogIn}
+                  onChange={inputHandler}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 <span
-                  onClick={() => setBooleanState({...booleanState, value: !booleanState.value})}
+                  onClick={() =>
+                    setBooleanState({
+                      ...booleanState,
+                      value: !booleanState.value,
+                    })
+                  }
                   title={booleanState.value ? "Hide Password" : "Show Password"}
                 >
                   {booleanState.value ? (
@@ -139,7 +140,7 @@ export default function UserFormPage(): JSX.Element {
                   id="username"
                   name="username"
                   type="text"
-                  onChange={inputHandlerSignUp}
+                  onChange={inputHandler}
                   value={userSignUp.username}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -159,7 +160,7 @@ export default function UserFormPage(): JSX.Element {
                   name="email"
                   type="email"
                   value={userSignUp.email}
-                  onChange={inputHandlerSignUp}
+                  onChange={inputHandler}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -179,11 +180,18 @@ export default function UserFormPage(): JSX.Element {
                   name="password"
                   type={booleanState.valuePass ? "text" : "password"}
                   value={userSignUp.password}
-                  onChange={inputHandlerSignUp}
+                  onChange={inputHandler}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                <span onClick={() => setBooleanState({...booleanState, valuePass: !booleanState.valuePass})}>
+                <span
+                  onClick={() =>
+                    setBooleanState({
+                      ...booleanState,
+                      valuePass: !booleanState.valuePass,
+                    })
+                  }
+                >
                   {booleanState.valuePass ? (
                     <RemoveRedEyeOutlinedIcon fontSize="small" />
                   ) : (
@@ -206,11 +214,18 @@ export default function UserFormPage(): JSX.Element {
                   type={booleanState.valueConfPass ? "text" : "password"}
                   name="passwordConfirmation"
                   value={userSignUp.passwordConfirmation}
-                  onChange={inputHandlerSignUp}
+                  onChange={inputHandler}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                <span onClick={() => setBooleanState({...booleanState, valueConfPass: !booleanState.valueConfPass})}>
+                <span
+                  onClick={() =>
+                    setBooleanState({
+                      ...booleanState,
+                      valueConfPass: !booleanState.valueConfPass,
+                    })
+                  }
+                >
                   {booleanState.valueConfPass ? (
                     <RemoveRedEyeOutlinedIcon fontSize="small" />
                   ) : (
