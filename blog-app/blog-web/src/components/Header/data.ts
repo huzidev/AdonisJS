@@ -5,14 +5,6 @@ export const links = [
     link: ROUTE_PATHS.ARTICLES
   },
   {
-    title: 'Login',
-    link: ROUTE_PATHS.AUTH_SIGNIN
-  },
-  {
-    title: 'Register',
-    link: ROUTE_PATHS.AUTH_SIGNUP
-  },
-  {
     title: 'SignIn',
     link: ROUTE_PATHS.AUTH_SIGNIN
   },

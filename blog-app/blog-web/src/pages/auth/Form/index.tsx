@@ -2,12 +2,13 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { BooleanState } from "./types";
 
 export default function UserFormPage(): JSX.Element {
   const auth = useAuth();
+  const Navigate = useNavigate()
   const currentPath = window.location.pathname;
   const [isLogInForm, setIsLogInForm] = useState(true);
   const [userLogIn, setUserLogIn] = useState({ email: "", password: "" });
@@ -46,7 +47,7 @@ export default function UserFormPage(): JSX.Element {
     });
   }
 
-  const title = isLogInForm ? "SignI n" : "Sign Up";
+  const title = isLogInForm ? "Sign In" : "Sign Up";
   const titleReverse = isLogInForm ? "Sign Up" : "Sign In";
   const descReverse = isLogInForm
     ? "Don't have an account ?"
@@ -56,7 +57,7 @@ export default function UserFormPage(): JSX.Element {
     if (isLogInForm) {
       auth.signIn(userLogIn);
     } else {
-      auth.signIn(userSignUp);
+      auth.signUp(userSignUp);
     }
   }
   return (
