@@ -32,46 +32,15 @@ export default function ViewProfilePage() {
   let userBlogs = allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total; 
   
-
-  // if user changes URL from user/view/:id to user/view/me
   useEffect(() => {
-    // for getting user info
-    if (params.id !== "me") {
-      if (Number(params.id) !== userDataById?.id) {
-        user.getById(params.id);
-        blogs.getBlogsById(payload)
+    if (params.id !== "me" && Number(params.id) !== userDataById?.id) {
+      user.getById(params.id);
+      blogs.getBlogsById(payload);
+    } else if (params.id === "me" && !userBlogs.length) {
+        blogs.getBlogsById(payload);
       }
-    } 
-    if (params.id === "me" && !userBlogs.length) {
-      blogs.getBlogsById(payload)
-    }
-    // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
-  }, [params.id, userId]);
-
-  // useEffect(() => {
-  //   if (params.id !== "me" && Number(params.id) !== userDataById?.id) {
-  //     // Fetch user info and blogs for the selected user
-  //     user.getById(params.id);
-  //     const updatedPayload = {
-  //       userId: Number(params.id),
-  //       page: 1
-  //     };
-  //     setPayload(updatedPayload);
-  //     blogs.getBlogsById(updatedPayload);
-  //   } else if (params.id === "me") {
-  //     // Fetch user info and blogs for the logged-in user
-  //     const updatedPayload = {
-  //       userId: Number(userId),
-  //       page: 1
-  //     };
-  //     if (!userBlogs.length) {
-  //       user.getById(Number(auth.state.user?.id));
-  //       setPayload(updatedPayload);
-  //       blogs.getBlogsById(updatedPayload);
-  //     }
-  //   }
-  // }, [params.id, currentId]);
-
+    }, [params.id, currentId]);
+    
   // to store the data
   useEffect(() => {
     if (params.id !== "me" && userDataById) {
