@@ -23,8 +23,9 @@ export default class Article extends BaseModel {
   @column()
   public ownerId: number
 
+  // even if in mysql we've owner_id but here we've to write it in camel case
   @belongsTo(() => User, {
-    foreignKey: "ownerId"
+    foreignKey: "ownerId" 
   })
   public owner: BelongsTo<typeof User>
   
