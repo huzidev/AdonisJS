@@ -68,7 +68,9 @@ export default class User extends BaseModel {
   }
 
   public hasAccess(role: UserRole): boolean {
+    // all roles
     const access = User.getRoleIndex(role)
+    // loggedIn user role
     const myRole = User.getRoleIndex(this.role)
     const check = myRole >= access
     return check
