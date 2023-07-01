@@ -8,16 +8,13 @@ const noArticle = { message: "No Article found by id ", status: 404 }
 const noPermission = { message: "You didn't have permission", status: 401 }
 export default class ArticlesController {
     public async getBlogs({ params }: HttpContextContract) {
-        let userId = params.id;
-        let response    
+        const userId = params.id;
+        const query = Article.query();
+
         if (userId) {
-            response = await Article.query()
-            .where("owner_id", userId)
-            .paginate(params.page || 1, 5)
-        } else {
-            response = await Article.query()
-            .paginate(params.page || 1, 5)
+            query.where('owner_id', userId);
         }
+        const response = await query.paginate(params.page || 1, 5);
         return response;
     }
     
