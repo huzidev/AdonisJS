@@ -37,3 +37,14 @@ export class AuthSignIn {
     required: '{{ field }} is required to Login',
   }
 }
+
+export class AuthVerifyEmailVerificationCode {
+  public schema = schema.create({
+    code: schema.string({ trim: true }, [rules.verificationCode()]),
+  })
+
+  public messages = {
+    'required': '{{ field }} is required for email verification',
+    'code.*': 'Invalid code',
+  }
+}
