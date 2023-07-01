@@ -7,7 +7,7 @@ import { DateTime } from 'luxon';
 
 export default class AuthController {
     public async signUp({ request, auth }: HttpContextContract) {
-        // Used to execute multiple database operations in single time
+        // Used to execute multiple database operations in single time like here we are operating users and EmailVerificationCode two different Tables
         const trx = await Database.transaction()
         try {
             const { isBlogger, ...body } = await request.validate(AuthSignUp);
@@ -84,28 +84,30 @@ export default class AuthController {
     public async verifyEmailVerifyCode({ request, auth }: HttpContextContract) {
         const trx = await Database.transaction()
         try {
-        const body = await request.validate(AuthVerifyEmailVerificationCode)
-        const verificationCode = await EmailVerificationCode.query()
-            .where('userId', auth.user!.id)
-            .where('code', body.code)
-            .where('isActive', true)
-            .first()
+            const body = await request.validate(AuthVerifyEmailVerificationCode)
+            console.log("body", body);
+            
+            const verificationCode = await EmailVerificationCode.query()
+                .where('userId', auth.user!.id)
+                .where('code', body.code)
+                .where('isActive', true)
+                .first()
 
-        if (!verificationCode) {
-            throw { message: 'Invalid Code', status: 404 }
-        }
-        if (verificationCode.expiresAt < DateTime.local()) {
-            throw { message: 'Expired code, Not valid anymore', status: 422 }
-        }
-        verificationCode.useTransaction(trx)
-        verificationCode.isActive = false
-        auth.user!.useTransaction(trx)
-        auth.user!.isVerified = true
-        // Promise.all will wait for bith properties to be saved into database then proceeds further calling both seprately would cause error
-        await Promise.all([auth.user?.save(), verificationCode.save()])
-        await trx.commit()
+            if (!verificationCode) {
+                throw { message: 'Invalid Code', status: 404 }
+            }
+            if (verificationCode.expiresAt < DateTime.local()) {
+                throw { message: 'Expired code, Not valid anymore', status: 422 }
+            }
+            verificationCode.useTransaction(trx)
+            verificationCode.isActive = false
+            auth.user!.useTransaction(trx)
+            auth.user!.isVerified = true
+            // Promise.all will wait for bith properties to be saved into database then proceeds further calling both seprately would cause error
+            await Promise.all([auth.user?.save(), verificationCode.save()])
+            await trx.commit()
 
-        return { message: 'Code verified successfully' }
+            return { message: 'Code verified successfully' }
         } catch (e) {
             await trx.rollback()
             throw e
