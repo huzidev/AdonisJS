@@ -2,6 +2,7 @@ import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
 
 export class AuthSignUp {
   public schema = schema.create({
+    isBlogger: schema.boolean.optional(),
     username: schema.string({ trim: true }, [
       rules.minLength(4),
       rules.unique({

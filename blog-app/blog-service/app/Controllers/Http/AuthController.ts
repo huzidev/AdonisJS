@@ -10,7 +10,7 @@ export default class AuthController {
         // Used to execute multiple database operations in single time
         const trx = await Database.transaction()
         try {
-            const body = await request.validate(AuthSignUp);
+            const { isBlogger, ...body } = await request.validate(AuthSignUp);
             const user = new User();
             const verificationCode = new EmailVerificationCode()
             console.log("body", {...body});
@@ -19,6 +19,9 @@ export default class AuthController {
             user.useTransaction(trx)
             // fill the user with the body received like username, email etc then user.save() to save the data in database
             user.fill(body);
+            if (isBlogger) {
+                user.role = "blogger"
+            }
             // save user to Database
             await user.save();
             // after saving new user data to database calling refresh to get latest data from database
@@ -96,6 +99,7 @@ export default class AuthController {
         verificationCode.isActive = false
         auth.user!.useTransaction(trx)
         auth.user!.isVerified = true
+        // Promise.all will wait for bith properties to be saved into database then proceeds further calling both seprately would cause error
         await Promise.all([auth.user?.save(), verificationCode.save()])
         await trx.commit()
 
