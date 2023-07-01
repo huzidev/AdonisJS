@@ -15,7 +15,7 @@ export default function UserFormPage(): JSX.Element {
     username: "",
     email: "",
     password: "",
-    passwordConfirmation: ""
+    passwordConfirmation: ""    
   });
   const [booleanState, setBooleanState] = useState<BooleanState>({
     value: false,
