@@ -67,6 +67,7 @@ export default class User extends BaseModel {
     return this.role === 'user'
   }
 
+  // boolean type because if loggedIn user role is user then boolean state will be true for user, blogger, admin and super-admin therefore all others role can have the access that a user can have BUT if currentRole is admin then the boolean state will be true for admin and super-admin and false for user and blogger therefore blogger and user can't have the access of those properties which admin and super-admin can
   public hasAccess(role: UserRole): boolean {
     // all roles
     const access = User.getRoleIndex(role)
