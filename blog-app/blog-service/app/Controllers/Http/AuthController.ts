@@ -72,8 +72,10 @@ export default class AuthController {
             throw { message: 'Please wait a minute before sending the code again', status: 422 }
         }
         code?.generateCode()
-        console.log("verification code is", code);
+        console.log("verification code is", code?.code);
         
+        // if already a code is present but isExpired so new code will be appear instead of that old expired code in ours database when user asked for verifyEmailSendCode
+        // if user is already verified then user can't asked for newVerification code because of middleware("auth:no_verify")
         await code?.save()
 
         return {
