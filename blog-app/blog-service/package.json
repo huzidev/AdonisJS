@@ -27,6 +27,7 @@
     "@adonisjs/session": "^6.4.0",
     "@adonisjs/shield": "^7.1.0",
     "@adonisjs/view": "^6.2.0",
+    "@types/lodash": "^4.14.195",
     "lodash": "^4.17.21",
     "luxon": "^3.3.0",
     "mysql2": "^3.3.1",

@@ -1,4 +1,5 @@
 import { BaseModel, BelongsTo, beforeCreate, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import random from 'lodash/random'
 import { DateTime } from 'luxon'
 import User from './User'
 
@@ -7,7 +8,7 @@ export default class EmailVerificationCode extends BaseModel {
   public id: number
 
   @column()
-  public code: string
+  public code: number
 
   @column()
   public userId: number
