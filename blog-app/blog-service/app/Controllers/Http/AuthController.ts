@@ -72,6 +72,8 @@ export default class AuthController {
             throw { message: 'Please wait a minute before sending the code again', status: 422 }
         }
         code?.generateCode()
+        console.log("verification code is", code);
+        
         await code?.save()
 
         return {
