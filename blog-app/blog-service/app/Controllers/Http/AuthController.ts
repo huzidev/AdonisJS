@@ -3,6 +3,7 @@ import Database from '@ioc:Adonis/Lucid/Database';
 import EmailVerificationCode from 'App/Models/EmailVerificationCode';
 import User from "App/Models/User";
 import { AuthSignIn, AuthSignUp } from "App/Validators/AuthValidator";
+import { DateTime } from 'luxon';
 
 export default class AuthController {
     public async signUp({ request, auth }: HttpContextContract) {
@@ -59,6 +60,19 @@ export default class AuthController {
             }
         } catch (e) {
             throw e
+        }
+    }
+
+    public async verifyEmailSendCode({ auth }: HttpContextContract) {
+        const code = await EmailVerificationCode.findBy('user_id', auth.user?.id!)
+        if (code?.updatedAt.plus({ minutes: 1 })! > DateTime.local()) {
+        throw { message: 'Please wait a minute before sending the code again', status: 422 }
+        }
+        code?.generateCode()
+        await code?.save()
+
+        return {
+            message: 'Verification code send',
         }
     }
 
