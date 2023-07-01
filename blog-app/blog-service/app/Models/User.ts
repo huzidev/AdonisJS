@@ -3,10 +3,12 @@ import { BaseModel, HasMany, beforeSave, column, hasMany } from '@ioc:Adonis/Luc
 import { DateTime } from 'luxon';
 import Article from './Article';
 
+// [number] for access the type
 export type UserRole = typeof User.roles[number]
 
 export default class User extends BaseModel {
-  public static roles = ['user', 'blogger', 'admin', 'super-admin'] as const
+  // useing const This means that the array elements cannot be modified
+  public static roles = ['user', 'blogger', 'admin', 'super-admin'] as const 
   public static getRoleIndex = (role: UserRole): number => User.roles.indexOf(role)
   // created automatically from node ace auth configure
   @column({ isPrimary: true })
@@ -18,6 +20,7 @@ export default class User extends BaseModel {
   @column()
   public email: string
 
+  // serializeAs: null means password should not be send to return type as JSON
   @column({ serializeAs: null })
   public password: string
 
