@@ -1,6 +1,7 @@
 import { AuthenticationException } from '@adonisjs/auth/build/standalone'
 import type { GuardsList } from '@ioc:Adonis/Addons/Auth'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import User, { UserRole } from 'App/Models/User'
 
 /**
  * Auth middleware is meant to restrict un-authenticated access to a given route
@@ -65,14 +66,40 @@ export default class AuthMiddleware {
   public async handle (
     { auth }: HttpContextContract,
     next: () => Promise<void>,
-    customGuards: (keyof GuardsList)[]
+    [role]: string[] | UserRole[]
+    // customGuards: (keyof GuardsList)[]
   ) {
+    await this.authenticate(auth, [auth.name])
+    if (!auth.user?.isActive) {
+      await auth.logout()
+      throw { message: "User doesn't exists anymore", status: 404 }
+    }
+
+    if (auth.user?.isBanned) {
+      await auth.logout()
+      throw { message: 'User is banned', status: 403 }
+    } 
+    
+    if (role === 'no_verify' && auth.user?.isVerified) {
+      throw { message: 'User already verified', status: 403 }
+    } else if (!auth.user?.isVerified && role !== 'any' && role !== 'no_verify') {
+      throw { message: 'Please verify your account', status: 403 }
+    } else if (role && role !== 'no_verify') {
+      const parsedRole = role as UserRole
+      const guardRole = User.roles.indexOf(parsedRole)
+      const userRole = User.roles.indexOf(auth.user!.role)
+
+      if (userRole < guardRole) {
+        throw { message: 'Action not allowed', status: 401 }
+      }
+    }
+
     /**
      * Uses the user defined guards or the default guard mentioned in
      * the config file
      */
-    const guards = customGuards.length ? customGuards : [auth.name]
-    await this.authenticate(auth, guards)
+    // const guards = customGuards.length ? customGuards : [auth.name]
+    // await this.authenticate(auth, guards)
     await next()
   }
 }

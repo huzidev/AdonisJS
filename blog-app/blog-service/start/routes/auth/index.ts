@@ -5,6 +5,6 @@ export default function AuthRoutes() {
     Route.group(() => {
         Route.post("/sign_up", `${path}.signUp`);
         Route.post("/sign_in", `${path}.signIn`);
-        Route.post("/sign_out", `${path}.signOut`);
+        Route.post("/sign_out", `${path}.signOut`).middleware('auth:any');
     }).prefix('/auth')
 }       
