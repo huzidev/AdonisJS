@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
 import EmailVerificationCode from 'App/Models/EmailVerificationCode';
 import User from "App/Models/User";
-import { AuthSignIn, AuthSignUp } from "App/Validators/AuthValidator";
+import { AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
 import { DateTime } from 'luxon';
 
 export default class AuthController {
@@ -66,13 +66,43 @@ export default class AuthController {
     public async verifyEmailSendCode({ auth }: HttpContextContract) {
         const code = await EmailVerificationCode.findBy('user_id', auth.user?.id!)
         if (code?.updatedAt.plus({ minutes: 1 })! > DateTime.local()) {
-        throw { message: 'Please wait a minute before sending the code again', status: 422 }
+            throw { message: 'Please wait a minute before sending the code again', status: 422 }
         }
         code?.generateCode()
         await code?.save()
 
         return {
             message: 'Verification code send',
+        }
+    }
+
+    public async verifyEmailVerifyCode({ request, auth }: HttpContextContract) {
+        const trx = await Database.transaction()
+        try {
+        const body = await request.validate(AuthVerifyEmailVerificationCode)
+        const verificationCode = await EmailVerificationCode.query()
+            .where('userId', auth.user!.id)
+            .where('code', body.code)
+            .where('isActive', true)
+            .first()
+
+        if (!verificationCode) {
+            throw { message: 'Invalid Code', status: 404 }
+        }
+        if (verificationCode.expiresAt < DateTime.local()) {
+            throw { message: 'Expired code, Not valid anymore', status: 422 }
+        }
+        verificationCode.useTransaction(trx)
+        verificationCode.isActive = false
+        auth.user!.useTransaction(trx)
+        auth.user!.isVerified = true
+        await Promise.all([auth.user?.save(), verificationCode.save()])
+        await trx.commit()
+
+        return { message: 'Code verified successfully' }
+        } catch (e) {
+            await trx.rollback()
+            throw e
         }
     }
 
