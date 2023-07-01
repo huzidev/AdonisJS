@@ -64,8 +64,10 @@ export default class AuthMiddleware {
    * Handle request
    */
   public async handle (
+    // auth if middleware auth is added for any path
     { auth }: HttpContextContract,
     next: () => Promise<void>,
+    // for user role
     [role]: string[] | UserRole[]
     // customGuards: (keyof GuardsList)[]
   ) {
@@ -80,15 +82,21 @@ export default class AuthMiddleware {
       throw { message: 'User is banned', status: 403 }
     } 
     
+    // role === "no verify" means no need for verification
     if (role === 'no_verify' && auth.user?.isVerified) {
       throw { message: 'User already verified', status: 403 }
     } else if (!auth.user?.isVerified && role !== 'any' && role !== 'no_verify') {
       throw { message: 'Please verify your account', status: 403 }
-    } else if (role && role !== 'no_verify') {
+    }
+     
+    else if (role && role !== 'no_verify') {
       const parsedRole = role as UserRole
+      // allowed role for the path Example Manage Users path can only be done by admin & super-admin
       const guardRole = User.roles.indexOf(parsedRole)
+      // loggedIn user's role
       const userRole = User.roles.indexOf(auth.user!.role)
 
+      // if user tries to access the path for admin
       if (userRole < guardRole) {
         throw { message: 'Action not allowed', status: 401 }
       }
