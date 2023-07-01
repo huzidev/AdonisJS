@@ -11,6 +11,10 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema';
 //     })
 //   }
 
+// if wanted to add some Default values to existing column
+// example already exist column called title and watned to add default value called title = Hello so use .alter() keyword
+// table.integer("title").alter().defaultTo("Hello")
+
 export default class extends BaseSchema {
   protected tableName = "articles";
 
