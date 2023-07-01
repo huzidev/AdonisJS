@@ -100,8 +100,10 @@ export default class AuthController {
                 throw { message: 'Expired code, Not valid anymore', status: 422 }
             }
             verificationCode.useTransaction(trx)
+            // when verificationCode is used then it'll be changed to false
             verificationCode.isActive = false
             auth.user!.useTransaction(trx)
+            // after verification user isVerified will changed to true
             auth.user!.isVerified = true
             // Promise.all will wait for bith properties to be saved into database then proceeds further calling both seprately would cause error
             await Promise.all([auth.user?.save(), verificationCode.save()])
