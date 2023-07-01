@@ -6,7 +6,7 @@ export default class EmailVerificationCodes extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('code', 6).notNullable()
+      table.string('code', 6).notNullable()
       table
         .integer('user_id')
         .unsigned()

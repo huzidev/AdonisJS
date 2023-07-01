@@ -23,7 +23,7 @@ export class AuthSignUp {
   })
 
   public messages: CustomMessages = {
-    required: "{{ field }} is required to signup",
+    required: "{{ field }} is required to signup"
   }
 }
 
@@ -34,7 +34,7 @@ export class AuthSignIn {
   })
 
   public messages: CustomMessages = {
-    required: '{{ field }} is required to Login',
+    required: '{{ field }} is required to Login'
   }
 }
 
@@ -45,6 +45,6 @@ export class AuthVerifyEmailVerificationCode {
 
   public messages = {
     'required': '{{ field }} is required for email verification',
-    'code.*': 'Invalid code',
+    'code.*': 'Invalid code'
   }
 }

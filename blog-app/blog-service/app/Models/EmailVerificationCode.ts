@@ -8,7 +8,7 @@ export default class EmailVerificationCode extends BaseModel {
   public id: number
 
   @column()
-  public code: number
+  public code: string
 
   @column()
   public userId: number
