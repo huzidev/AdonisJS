@@ -44,7 +44,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
         }
       }
       setState(true)
-    }, [auth.initUser, auth.state.init]);
+    }, [auth.initUser, auth.state.init, auth.state.user]);
     if (!state) {
       return <PageLoader />;
     }
