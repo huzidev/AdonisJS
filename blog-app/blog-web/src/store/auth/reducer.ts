@@ -7,6 +7,7 @@ import { AuthState, User } from "./types";
 const initialState: AuthState = {
     signInState:  { ...subState },
     signUpState:  { ...subState },
+    verifyCode:  { ...subState, code: "" },
     init:  { ...subState, init: false },
     user: null
 }
@@ -75,6 +76,19 @@ export const authSlice = createSlice({
         // when userUpdate the data then updated details will saved in state.user
         builder.addCase(userSlice.actions.updateUser, (state, action: PayloadAction<User>) => {
             state.user = { ...state.user, ...action.payload };
+        });
+        // sendVerificationCode
+        builder.addCase(actions.sendVerificationCode.pending, (state) => {
+            state.init.loading = true;
+            state.init.error = false
+        });
+        builder.addCase(actions.sendVerificationCode.fulfilled, (state) => {
+            state.init.loading = false;
+            state.init.error = false
+        });
+        builder.addCase(actions.sendVerificationCode.rejected, (state) => {
+            state.init.loading = false
+            state.init.error = true
         });
     }
 })
