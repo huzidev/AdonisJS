@@ -1,7 +1,16 @@
+import { useState } from "react";
 import { useAuth } from "store/auth";
 
 export default function VerifyUserPage(): JSX.Element {
   const auth = useAuth();
+  const [otp, setOtp] = useState('');
+  console.log("values", otp);
+
+  function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    setOtp((prevOtp) => prevOtp + value)
+  }
+
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
       <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
@@ -17,13 +26,15 @@ export default function VerifyUserPage(): JSX.Element {
           <div>
             <form action="" method="post">
               <div className="flex flex-col space-y-16">
-                <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
+                <div className="flex flex-row items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
                   {Array.from({ length: 6 }, (_, index) => (
                     <div className="w-16 h-16" key={index}>
                       <input
                         className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                         type="text"
+                        maxLength={1}
+                        onChange={handleOtpChange}
                       />
                     </div>
                   ))}
@@ -34,7 +45,6 @@ export default function VerifyUserPage(): JSX.Element {
                       Verify Account
                     </button>
                   </div>
-
                   <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
                     <p>Didn't recieve code?</p>{" "}
                     <a
