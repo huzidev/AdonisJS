@@ -79,16 +79,19 @@ export const authSlice = createSlice({
         });
         // sendVerificationCode
         builder.addCase(actions.sendVerificationCode.pending, (state) => {
-            state.init.loading = true;
-            state.init.error = false
+            state.verifyCode.loading = true;
+            state.verifyCode.error = false
         });
-        builder.addCase(actions.sendVerificationCode.fulfilled, (state) => {
-            state.init.loading = false;
-            state.init.error = false
+        builder.addCase(actions.sendVerificationCode.fulfilled, (state, action: any) => {
+            state.verifyCode.loading = false;
+            if (action.payload) {
+                state.verifyCode.code = action.payload
+            }
+            state.verifyCode.error = false
         });
         builder.addCase(actions.sendVerificationCode.rejected, (state) => {
-            state.init.loading = false
-            state.init.error = true
+            state.verifyCode.loading = false
+            state.verifyCode.error = true
         });
     }
 })

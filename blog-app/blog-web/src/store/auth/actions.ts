@@ -65,6 +65,7 @@ export const sendVerificationCode = createAsyncThunk(endpoints.SEND_CODE, async 
     try {
         const response = await api.post(endpoints.SEND_CODE + id);
         console.log("Verification Cdoe", response);
+        return response
     } catch (e) {
         console.log("Error", e);
     }
