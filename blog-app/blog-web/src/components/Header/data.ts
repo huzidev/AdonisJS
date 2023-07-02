@@ -17,6 +17,10 @@ export const links = [
     link: ROUTE_PATHS.ARTICLE_CREATE
   },
   {
+    title: 'Manage Users',
+    link: ROUTE_PATHS.USERS
+  },
+  {
     title: 'View Profile',
     link: ROUTE_PATHS.VIEW_PROFILE + "me"
   }
