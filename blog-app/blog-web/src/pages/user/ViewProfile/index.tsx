@@ -81,7 +81,7 @@ export default function ViewProfilePage() {
           </h2>
           {params.id === "me" && (
             <Link
-              to={ROUTE_PATHS.EDIT_PROFILE}
+              to={ROUTE_PATHS.EDIT_USER + "me"}
               type="button"
               className="text-white bg-gray-800 font-medium text-sm py-2.5"
             >

@@ -46,7 +46,7 @@ export default function EditProfilePage() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            {!params.id?.includes("me") ? "Edit Yours Details" : `Edit ${user.state.getUser.data?.username} Details` } 
+            {params.id === "me" ? "Edit Yours Details" : `Edit ${user.state.getUser.data?.username} Details` } 
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">

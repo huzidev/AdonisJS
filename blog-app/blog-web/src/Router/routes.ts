@@ -51,10 +51,6 @@ const routes: AppRoute[] = [
         Component: ViewProfilePage
     },
     {
-        path: ROUTE_PATHS.EDIT_PROFILE,
-        Component: EditProfilePage
-    },
-    {
         path: `${ROUTE_PATHS.EDIT_USER}:id`,
         Component: EditProfilePage
     },
