@@ -9,6 +9,7 @@ const ViewBlogPage = React.lazy(() => import('pages/articles/BlogView'));
 const ViewBlogsPage = React.lazy(() => import('pages/articles/Blogs'));
 const ViewProfilePage = React.lazy(() => import('pages/user/ViewProfile'));
 const UserFormPage = React.lazy(() => import('pages/auth/Form'));
+const VerifyUserPage = React.lazy(() => import('pages/user/VerifyUser'))
 
 interface AppRoute {
   path: string;
@@ -51,7 +52,12 @@ const routes: AppRoute[] = [
     {
         path: ROUTE_PATHS.EDIT_PROFILE,
         Component: EditProfilePage
+    },
+    {
+        path: ROUTE_PATHS.VERIFY_USER,
+        Component: VerifyUserPage
     }
+    
 ]
 
 export default routes;

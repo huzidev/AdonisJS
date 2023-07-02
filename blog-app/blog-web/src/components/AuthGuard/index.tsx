@@ -36,7 +36,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
         if (currentPath === ROUTE_PATHS.AUTH_SIGNIN || currentPath === ROUTE_PATHS.AUTH_SIGNUP) {
           Navigate("/");
         } else if (!isVerified) {
-          Navigate("/verify")
+          Navigate(ROUTE_PATHS.VERIFY_USER)
         }
         else {
           setState(true)
