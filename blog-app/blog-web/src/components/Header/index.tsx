@@ -74,7 +74,7 @@ export default function Header() {
                       {data.title}
                     </Link>
                   </li>
-                ) : user && user.role === "super-admin" && adminPaths.includes(data.link) && user?.isVerified && (
+                ) : user && (user.role === "admin" || "super-admin") && adminPaths.includes(data.link) && user?.isVerified && (
                   <li key={dataIndex}>
                     <Link
                       to={data.link}

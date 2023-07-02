@@ -17,6 +17,8 @@ export default function ViewBlogsPage(): JSX.Element {
 
   useBlogsPageHooks();
 
+  const isAdmin = auth.state.user?.role === "admin";
+
   const currentPage: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogs.meta?.lastPage;
   return (
@@ -62,15 +64,15 @@ export default function ViewBlogsPage(): JSX.Element {
                     Read More
                     {/* {blog.createdAt} */}
                   </Link>
-                  {blog.ownerId === userId && (
+                  {blog.ownerId === userId || isAdmin && (
                     <div>
-                      <Link
-                        to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
-                        type="button"
-                        className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                      >
-                        Edit
-                      </Link>
+                        <Link
+                          to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                          type="button"
+                          className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                        >
+                          Edit
+                        </Link>
                       <button
                         type="button"
                         className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
