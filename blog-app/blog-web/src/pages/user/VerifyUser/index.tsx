@@ -10,10 +10,8 @@ export default function VerifyUserPage(): JSX.Element {
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    setOtp({...otp, code: value})
+    setOtp((prevOtp) => ({ ...prevOtp, code: prevOtp.code + value }));
   }
-
-  console.log("otp", otp);
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
