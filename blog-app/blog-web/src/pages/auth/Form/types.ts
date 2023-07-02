@@ -14,4 +14,5 @@ export interface AuthSignUpPayload {
     email: string
     password: string
     passwordConfirmation: string
+    isBlogger: boolean
 }
