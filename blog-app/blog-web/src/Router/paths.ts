@@ -6,6 +6,7 @@ const ROUTE_PATHS = {
   VIEW_PROFILE: '/user/view/',
   EDIT_PROFILE: '/user/edit/me',
   VERIFY_USER: '/user/verify',
+  USERS: '/user/list',
 
   ARTICLE_CREATE: '/blog/add',
   ARTICLE_UPDATE: '/blog/edit/',

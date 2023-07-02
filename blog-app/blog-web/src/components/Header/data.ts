@@ -33,3 +33,10 @@ export const loggedOutPaths = [
   ROUTE_PATHS.AUTH_SIGNIN,
   ROUTE_PATHS.AUTH_SIGNUP
 ];
+
+export const adminPaths = [
+  ROUTE_PATHS.ARTICLES,
+  ROUTE_PATHS.ARTICLE_CREATE,
+  ROUTE_PATHS.USERS,
+  ROUTE_PATHS.VIEW_PROFILE + "me"
+]

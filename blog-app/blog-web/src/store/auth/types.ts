@@ -15,8 +15,9 @@ export interface User {
     email: string;
     username: string;
     isActive: boolean;
-    isVerified: boolean
-    isBanned: boolean
+    isVerified: boolean;
+    isBanned: boolean;
+    role: UserRole;
 }
 
 export interface AuthInitState extends SubState {
@@ -39,3 +40,6 @@ export interface AuthState {
     verifyCode: SubState;
     init: AuthInitState;
 }
+
+export const roles = ['user', 'blogger', 'admin', 'super-admin'] as const 
+export type UserRole = typeof roles[number];
