@@ -71,6 +71,7 @@ export default class AuthController {
     }
 
     public async verifyEmailSendCode({ auth }: HttpContextContract) {
+        console.log("auth id", auth.user?.id);
         const code = await EmailVerificationCode.findBy('user_id', auth.user?.id!)
         if (code?.updatedAt.plus({ minutes: 1 })! > DateTime.local()) {
             throw { message: 'Please wait a minute before sending the code again', status: 422 }
@@ -84,6 +85,7 @@ export default class AuthController {
 
         return {
             message: 'Verification code send',
+            data: code?.code
         }
     }
 
