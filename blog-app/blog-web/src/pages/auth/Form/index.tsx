@@ -11,18 +11,16 @@ export default function UserFormPage(): JSX.Element {
   const currentPath = window.location.pathname;
   const [isLogInForm, setIsLogInForm] = useState(true);
   const [userLogIn, setUserLogIn] = useState<AuthSignInPayload>({ email: "", password: "" });
-  const [isBlogger, setIsBlogger] = useState<boolean>(false);
   const [userSignUp, setUserSignUp] = useState<AuthSignUpPayload>({
     username: "",
     email: "",
     password: "",
     passwordConfirmation: "",
-    isBlogger: isBlogger ? true : false
+    isBlogger: false
   });
 
   console.log("user signUp", userSignUp);
   
-
   const [booleanState, setBooleanState] = useState<BooleanState>({
     value: false,
     valuePass: false,
@@ -242,7 +240,7 @@ export default function UserFormPage(): JSX.Element {
               </div>
             </div>
             <div className="flex items-center mb-4">
-              <input id="checkbox" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600" onClick={() => setIsBlogger(!isBlogger)} />
+              <input id="checkbox" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600" onClick={() => setUserSignUp({...userSignUp, isBlogger: !userSignUp.isBlogger})} />
               <label htmlFor="checkbox" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sign Up As Blogger</label>
             </div>
           </>
