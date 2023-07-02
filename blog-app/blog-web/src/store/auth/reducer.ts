@@ -7,7 +7,8 @@ import { AuthState, User } from "./types";
 const initialState: AuthState = {
     signInState:  { ...subState },
     signUpState:  { ...subState },
-    verifyCode:  { ...subState, code: "" },
+    sendCode:  { ...subState, code: "" },
+    verifyCode:  { ...subState },
     init:  { ...subState, init: false },
     user: null
 }
@@ -79,19 +80,30 @@ export const authSlice = createSlice({
         });
         // sendVerificationCode
         builder.addCase(actions.sendVerificationCode.pending, (state) => {
-            state.verifyCode.loading = true;
-            state.verifyCode.error = false
+            state.sendCode.loading = true;
+            state.sendCode.error = false
         });
         builder.addCase(actions.sendVerificationCode.fulfilled, (state, action: any) => {
-            state.verifyCode.loading = false;
+            state.sendCode.loading = false;
             if (action.payload) {
-                state.verifyCode.code = action.payload
+                state.sendCode.code = action.payload
             }
-            state.verifyCode.error = false
+            state.sendCode.error = false
         });
         builder.addCase(actions.sendVerificationCode.rejected, (state) => {
-            state.verifyCode.loading = false
-            state.verifyCode.error = true
+            state.sendCode.loading = false
+            state.sendCode.error = true
+        });
+        // verifyVerificationCode
+        builder.addCase(actions.verifyVerificationCode.pending, (state) => {
+            state.verifyCode = {loading: true, error: false};
+        });
+        builder.addCase(actions.verifyVerificationCode.fulfilled, (state) => {
+            state.verifyCode = {loading: false, error: false};
+
+        });
+        builder.addCase(actions.verifyVerificationCode.rejected, (state) => {
+            state.verifyCode = {loading: false, error: true};
         });
     }
 })
