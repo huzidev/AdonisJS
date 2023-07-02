@@ -48,15 +48,12 @@ export default function VerifyUserPage(): JSX.Element {
                     </button>
                   </div>
                   <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                    <p>Didn't recieve code?</p>{" "}
-                    <a
+                    <p>Didn't recieve code?</p>
+                    <button
                       className="flex flex-row items-center text-blue-600"
-                      href="http://"
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       Resend
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
