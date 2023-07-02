@@ -24,7 +24,6 @@ export default function VerifyUserPage(): JSX.Element {
             </div>
           </div>
           <div>
-            <form action="" method="post">
               <div className="flex flex-col space-y-16">
                 <div className="flex flex-row items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
@@ -51,13 +50,14 @@ export default function VerifyUserPage(): JSX.Element {
                     <p>Didn't recieve code?</p>
                     <button
                       className="flex flex-row items-center text-blue-600"
+                      // no need for sending id of user because only non-verified user can send this request and id will get fetched automatically in backend
+                      onClick={() => auth.sendCode()}
                     >
                       Resend
                     </button>
                   </div>
                 </div>
               </div>
-            </form>
           </div>
         </div>
       </div>
