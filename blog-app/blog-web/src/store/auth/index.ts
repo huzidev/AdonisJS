@@ -13,6 +13,8 @@ export function useAuth() {
   const signUp = (payload: AuthSignUpPayload) => dispatch(actions.signUp(payload));
   // const updateuser = (payload: User) => dispatch(authSlice.actions.updateUser(payload));
   const sendCode = () => dispatch(actions.sendVerificationCode());
+  const verifyCode = (payload: string) => dispatch(actions.verifyVerificationCode(payload));
+
 
   return {
     state,
@@ -20,6 +22,7 @@ export function useAuth() {
     signIn,
     signUp,
     signOut,
-    sendCode
+    sendCode,
+    verifyCode
   };
 };

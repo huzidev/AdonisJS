@@ -27,8 +27,8 @@ export interface Blog extends AddBlogPayload {
 }
 
 export interface GetBlogsById {
-  userId: number
-  page: number
+  userId: number;
+  page: number;
 }
 
 export interface AllBlogs extends SubState {
