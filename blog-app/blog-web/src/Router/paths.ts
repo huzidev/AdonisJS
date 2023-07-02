@@ -4,9 +4,8 @@ const ROUTE_PATHS = {
   AUTH_SIGNUP: '/user/sign_up',
   
   VIEW_PROFILE: '/user/view/',
-  EDIT_PROFILE: '/user/edit/me',
-  EDIT_USER: '/user/edit/',
   VERIFY_USER: '/user/verify',
+  EDIT_USER: '/user/edit/',
   USERS: '/user/list',
 
   ARTICLE_CREATE: '/blog/add',
