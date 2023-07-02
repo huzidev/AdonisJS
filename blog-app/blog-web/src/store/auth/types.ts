@@ -13,7 +13,10 @@ export interface AuthSignUpPayload extends AuthSignInPayload {
 export interface User {
     id: number | null;
     email: string;
-    username: string;    
+    username: string;
+    isActive: boolean;
+    isVerified: boolean
+    isBanned: boolean
 }
 
 export interface AuthInitState extends SubState {

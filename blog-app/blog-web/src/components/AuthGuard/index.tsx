@@ -14,6 +14,8 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     const auth = useAuth();
     const currentPath = window.location.pathname;
 
+  const isVerified = auth.state.user?.isVerified;  
+
     useEffect(() => {
       const { init } = auth.state;
       if (!init.init && !init.loading) {
@@ -33,7 +35,10 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       if (auth.state.user) {
         if (currentPath === ROUTE_PATHS.AUTH_SIGNIN || currentPath === ROUTE_PATHS.AUTH_SIGNUP) {
           Navigate("/");
-        } else {
+        } else if (!isVerified) {
+          Navigate("/verify")
+        }
+        else {
           setState(true)
         }
       }
