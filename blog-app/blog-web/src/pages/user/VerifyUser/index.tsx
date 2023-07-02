@@ -4,12 +4,13 @@ import { useAuth } from "store/auth";
 export default function VerifyUserPage(): JSX.Element {
   const auth = useAuth();
   const [otp, setOtp] = useState('');
-  console.log("values", otp);
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     setOtp((prevOtp) => prevOtp + value)
   }
+
+  console.log("Verificaiton code", auth.state.sendCode.code);
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
@@ -41,7 +42,8 @@ export default function VerifyUserPage(): JSX.Element {
                 <div className="flex flex-col space-y-5">
                   <div>
                     <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
-                    disabled={otp.length !== 6}
+                    // disabled={otp.length !== 6}
+                    onClick={() => auth.verifyCode(otp)}
                     >
                       Verify Account
                     </button>
