@@ -64,7 +64,6 @@ export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async (): Promi
 export const sendVerificationCode = createAsyncThunk(endpoints.SEND_CODE, async () => {
     try {
         const response = await api.post(endpoints.SEND_CODE);
-        console.log("Verification Code", response.data.data);
         return response.data.data
     } catch (e) {
         console.log("Error", e);
@@ -73,11 +72,9 @@ export const sendVerificationCode = createAsyncThunk(endpoints.SEND_CODE, async 
 
 export const verifyVerificationCode = createAsyncThunk(endpoints.VERIFY_CODE, async (code: string) => {
     try {
-        console.log("coadasdsde is", code);
-        
+        console.log("Verification code from user is", code);
         const response = await api.post(endpoints.VERIFY_CODE, code);
         console.log("Verification Code", response);
-        return response
     } catch (e) {
         console.log("Error", e);
     }

@@ -102,7 +102,6 @@ export const authSlice = createSlice({
         });
         builder.addCase(actions.verifyVerificationCode.fulfilled, (state) => {
             state.verifyCode = {loading: false, error: false};
-
         });
         builder.addCase(actions.verifyVerificationCode.rejected, (state) => {
             state.verifyCode = {loading: false, error: true};
