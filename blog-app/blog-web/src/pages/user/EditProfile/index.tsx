@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { usePrevious } from "utils";
@@ -7,6 +8,7 @@ import { UserDetailsEdit } from "./types";
 export default function EditProfilePage() {
   const auth = useAuth();
   const user = useUser();
+  const params = useParams();
   const userData = auth.state.user;
   const [updateDetails, setUpdateDetails] = useState<UserDetailsEdit>({username: ""});
   const prevUpdateState = usePrevious(user.state.updateUser);
@@ -43,7 +45,7 @@ export default function EditProfilePage() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Edit Yours Details
+            {params.id === "me" ? "Edit Yours Details" : `Edit ${user.state.getUser.data?.username} Details` } 
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">

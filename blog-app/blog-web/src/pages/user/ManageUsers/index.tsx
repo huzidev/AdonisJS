@@ -1,3 +1,4 @@
+import ROUTE_PATHS from "Router/paths";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "store/user";
 import { useUsersPageHooks } from "./hooks";
@@ -87,7 +88,7 @@ export default function UsersPage() {
                   <div className="pl-4">
                     <button 
                       className="text-blue-600"
-                      onClick={() => Navigate}
+                      onClick={() => Navigate(ROUTE_PATHS.EDIT_USER + user.id)}
                     >
                       Edit
                     </button>
