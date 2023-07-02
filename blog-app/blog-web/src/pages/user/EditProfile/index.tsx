@@ -33,9 +33,16 @@ export default function EditProfilePage() {
     }
   }, [updateState, prevUpdateState]);
 
-  function update() {
-    user.updateUser({...updateDetails})
-  }
+  useEffect(() => {
+    if (params.id !== "me") {
+      user.getById(Number(params.id))
+    }
+  }, [params.id])
+
+  useEffect(() => {
+    console.log("information", user.state.getUser.data?.username);
+}, [user.state.getUser.data]);
+
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -46,7 +53,7 @@ export default function EditProfilePage() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            {params.id === "me" ? "Edit Yours Details" : `Edit ${user.state.getUser.data?.username} Details` } 
+            {params.id === "me" ? "Edit Yours Details" : `Edit ${user.state.getUser.data?.username} Details`} 
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -72,7 +79,7 @@ export default function EditProfilePage() {
           <div>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={update}
+              onClick={() => user.updateUser({...updateDetails})}
             >
               Update Details
             </button>
