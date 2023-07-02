@@ -3,7 +3,7 @@ import api, { setToken } from "services/api";
 import storage from "services/storage";
 import * as endpoints from "./endpoints";
 import KEYS from "./keys";
-import { AuthSignInPayload, AuthSignUpPayload, User } from "./types";
+import { AuthSignInPayload, AuthSignUpPayload, AuthVerificationPayload, User } from "./types";
 
 export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: AuthSignUpPayload) => {
     try {
@@ -70,7 +70,7 @@ export const sendVerificationCode = createAsyncThunk(endpoints.SEND_CODE, async 
     }
 })
 
-export const verifyVerificationCode = createAsyncThunk(endpoints.VERIFY_CODE, async (code: string) => {
+export const verifyVerificationCode = createAsyncThunk(endpoints.VERIFY_CODE, async (code: AuthVerificationPayload) => {
     try {
         console.log("Verification code from user is", code);
         const response = await api.post(endpoints.VERIFY_CODE, code);

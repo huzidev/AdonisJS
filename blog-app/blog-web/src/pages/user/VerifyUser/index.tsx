@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { useAuth } from "store/auth";
+import { OtpPayload } from "./types";
 
 export default function VerifyUserPage(): JSX.Element {
   const auth = useAuth();
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState<OtpPayload>({
+    code: ""
+  });
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    setOtp((prevOtp) => prevOtp + value)
+    setOtp({...otp, code: value})
   }
+
+  console.log("otp", otp);
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">

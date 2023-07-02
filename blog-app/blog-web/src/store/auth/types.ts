@@ -23,8 +23,11 @@ export interface AuthInitState extends SubState {
     init: boolean;
 }
 
-
 export interface AuthVerificationCode extends SubState {
+    code: string;
+}
+
+export interface AuthVerificationPayload {
     code: string;
 }
 
