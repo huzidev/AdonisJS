@@ -11,6 +11,10 @@ export default class AuthController {
         const trx = await Database.transaction()
         try {
             const { isBlogger, ...body } = await request.validate(AuthSignUp);
+            console.log("body", body);
+            console.log("isBlogger", isBlogger);
+            
+            
             const user = new User();
             const verificationCode = new EmailVerificationCode()
             console.log("body", {...body});
