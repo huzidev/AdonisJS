@@ -10,9 +10,9 @@ export default function VerifyUserPage(): JSX.Element {
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
+    // if user removes any character then the length will not changes
+    // otherwise if we didn't use this suppose user enter the code 2645 and removes the 5 from UI then the 5 will remains stored in ours otp.code state therefore we've used slice() function
      if (value === "") {
-      // if user removes any character then the length will not changes
-      // otherwise if we didn't use this suppose user enter the code 2645 and removes the 5 from UI then the 5 will remains stored in ours otp.code state therefore we've used slice() function
       setOtp((prevOtp) => ({
         ...prevOtp,
         code: prevOtp.code.slice(0, prevOtp.code.length - 1),
@@ -22,9 +22,6 @@ export default function VerifyUserPage(): JSX.Element {
       setOtp((prevOtp) => ({ ...prevOtp, code: prevOtp.code + value }));
     }
   }
-
-  console.log("otp", otp);
-  
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
