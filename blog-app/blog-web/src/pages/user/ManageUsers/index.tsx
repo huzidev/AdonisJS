@@ -18,8 +18,8 @@ export default function UsersPage() {
     <div className="flex items-center justify-between">
       <div className="ml-10 space-x-8 lg:ml-40">
         <button className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="h-4 w-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-4 w-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75" />
           </svg>
 
           CSV
@@ -35,121 +35,38 @@ export default function UsersPage() {
             <th className="px-5 py-3">ID</th>
             <th className="px-5 py-3">Full Name</th>
             <th className="px-5 py-3">User Role</th>
-            <th className="px-5 py-3">Created at</th>
+            <th className="px-5 py-3">Is Verified</th>
+            <th className="px-5 py-3">Is Banned</th>
             <th className="px-5 py-3">Status</th>
           </tr>
         </thead>
         <tbody className="text-gray-500">
-          <tr>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">3</p>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <div className="flex items-center">
-                <div className="ml-3">
-                  <p className="whitespace-no-wrap">Besique Monroe</p>
+          {allUsers?.map((user, userIndex) => (
+            <tr key={userIndex}>
+              <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                <p className="whitespace-no-wrap">{user.id}</p>
+              </td>
+              <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                <div className="flex items-center">
+                  <div className="ml-3">
+                    <p className="whitespace-no-wrap">{user.username}</p>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Administrator</p>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Sep 28, 2022</p>
-            </td>
-
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <span className="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Active</span>
-            </td>
-          </tr>
-          <tr>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">7</p>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <div className="flex items-center">
-                <div className="ml-3">
-                  <p className="whitespace-no-wrap">James Cavier</p>
-                </div>
-              </div>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Author</p>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Sep 28, 2022</p>
-            </td>
-
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <span className="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Active</span>
-            </td>
-          </tr>
-          <tr>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">12</p>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <div className="flex items-center">
-                <div className="ml-3">
-                  <p className="whitespace-no-wrap">Elvis Son</p>
-                </div>
-              </div>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Editor</p>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Sep 28, 2022</p>
-            </td>
-
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <span className="rounded-full bg-yellow-200 px-3 py-1 text-xs font-semibold text-yellow-900">Suspended</span>
-            </td>
-          </tr>
-          <tr>
-            <td className="bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">66</p>
-            </td>
-            <td className="bg-white px-5 py-5 text-sm">
-              <div className="flex items-center">
-                <div className="ml-3">
-                  <p className="whitespace-no-wrap">Dana White</p>
-                </div>
-              </div>
-            </td>
-            <td className="bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Administrator</p>
-            </td>
-            <td className="bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Sep 28, 2022</p>
-            </td>
-
-            <td className="bg-white px-5 py-5 text-sm">
-              <span className="rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900">Inactive</span>
-            </td>
-          </tr>
-          <tr>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">12</p>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <div className="flex items-center">
-                <div className="ml-3">
-                  <p className="whitespace-no-wrap">Elvis Son</p>
-                </div>
-              </div>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Editor</p>
-            </td>
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p className="whitespace-no-wrap">Sep 28, 2022</p>
-            </td>
-
-            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <span className="rounded-full bg-yellow-200 px-3 py-1 text-xs font-semibold text-yellow-900">Suspended</span>
-            </td>
-          </tr>
+              </td>
+              <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                <p className="whitespace-no-wrap">{user.role}</p>
+              </td>
+              <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                <p className="whitespace-no-wrap">{user.isVerified ? "Verified" : "Not Verified"}</p>
+              </td>
+              <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                <span className="whitespace-no-wrap">{user.isBanned ? "Banned" : "Not Banned"}</span>
+              </td>
+              <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                <span className="whitespace-no-wrap">{user.isActive ? "Active" : "In Active"}</span>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
