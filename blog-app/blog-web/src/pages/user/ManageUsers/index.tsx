@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { useUser } from "store/user";
 import { useUsersPageHooks } from "./hooks";
 
 export default function UsersPage() {
   const user = useUser();
   const allUsers = user.state.allUser?.data;
+  const Navigate = useNavigate();
   console.log("all users", allUsers);
 
   useUsersPageHooks();
@@ -83,7 +85,10 @@ export default function UsersPage() {
                     </td>
                 <td className="border-b border-gray-200 bg-white p-5 text-sm">
                   <div className="pl-4">
-                    <button className="text-blue-600">
+                    <button 
+                      className="text-blue-600"
+                      onClick={() => Navigate}
+                    >
                       Edit
                     </button>
                   </div>
