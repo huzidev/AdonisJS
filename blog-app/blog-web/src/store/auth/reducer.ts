@@ -7,9 +7,9 @@ import { AuthState, User } from "./types";
 const initialState: AuthState = {
     signInState:  { ...subState },
     signUpState:  { ...subState },
+    init:  { ...subState, init: false },
     sendCode:  { ...subState, code: "" },
     verifyCode:  { ...subState },
-    init:  { ...subState, init: false },
     user: null
 }
 

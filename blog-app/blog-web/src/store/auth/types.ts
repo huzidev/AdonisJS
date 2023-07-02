@@ -25,14 +25,14 @@ export interface AuthInitState extends SubState {
 
 
 export interface AuthVerificationCode extends SubState {
-    code?: string;
+    code: string;
 }
 
 export interface AuthState {
-    user: User | null
-    signInState: SubState
-    signUpState: SubState
-    sendCode: AuthVerificationCode
-    verifyCode: AuthVerificationCode
-    init: AuthInitState
+    user: User | null;
+    signInState: SubState;
+    signUpState: SubState;
+    sendCode: AuthVerificationCode;
+    verifyCode: SubState;
+    init: AuthInitState;
 }
