@@ -96,15 +96,16 @@ export default class AuthController {
                 .where('userId', auth.user!.id)
                 .where('code', body.code) // verify the code from user with the code in EmailVerificationCode table
                 .where('isActive', true)
-                .first() // gets First matching result and FirstOrFail() give exception when no matching rows are found firstOrFail() only used when we know that row can be null or notFound
-                // in this case first is used because all the values WILL match then return the result
+                .first() 
+                // in this case first is used because all the values WILL match then return the result and the result can't be null or NotFound
+                // FirstOrFail() give exception when no matching rows are found firstOrFail() only used when we know that row can be null or notFound
 
             if (!verificationCode) {
                 throw { message: 'Invalid Code', status: 404 }
             }
             if (verificationCode.expiresAt < DateTime.local()) {
                 throw { message: 'Expired code, Not valid anymore', status: 422 }
-            }
+            }   
             verificationCode.useTransaction(trx)
             // when verificationCode is used then it'll be changed to false
             verificationCode.isActive = false
