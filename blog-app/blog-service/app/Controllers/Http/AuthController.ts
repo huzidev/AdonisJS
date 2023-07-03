@@ -12,12 +12,9 @@ export default class AuthController {
         try {
             const { isBlogger, ...body } = await request.validate(AuthSignUp);
             console.log("body", body);
-            console.log("isBlogger", isBlogger);
-            
             
             const user = new User();
             const verificationCode = new EmailVerificationCode()
-            console.log("body", {...body});
             
             // because we used new User() therefore use user.save() for saving at database
             user.useTransaction(trx)
@@ -97,7 +94,7 @@ export default class AuthController {
             
             const verificationCode = await EmailVerificationCode.query()
                 .where('userId', auth.user!.id)
-                .where('code', body.code)
+                .where('code', body.code) // verify the code from user with the code in EmailVerificationCode table
                 .where('isActive', true)
                 .first()
 
