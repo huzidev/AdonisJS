@@ -79,6 +79,7 @@ export default function EditProfilePage() {
               </div>
               </>
           ) : (
+            // if admin clicked on user to edit info
             <>
               <label
                 htmlFor="username"
