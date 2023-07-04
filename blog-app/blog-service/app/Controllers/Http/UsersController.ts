@@ -32,6 +32,7 @@ export default class UsersController {
 
     public async update({ request, auth }: HttpContextContract) {
         try {
+            const userId = 
             const body = await request.validate(UserUpdate);
             // once use merge then call the save method
             auth.user?.merge(body)
