@@ -1,5 +1,6 @@
-import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
+import { rules, schema } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
+import pick from 'lodash/pick'
 
 // when user is updating own self
 
@@ -23,15 +24,10 @@ export class UserUpdate {
   public messages = UserUpdate.messages
 }
 
+// because of public static schemaMap we can access that properties their as well because of the keyword static
 export class UserUpdateMe {
-  public schema = schema.create({
-    // no need to add optional here becayse if user gets on to update route then user will update info
-    username: schema.string({ trim: true }, [rules.minLength(4)])
-  })
-
-  public messages: CustomMessages = {
-    required: '{{ field }} is required to update details'
-  }
+  public schema = schema.create(pick(UserUpdate.schemaMap, ['username']))
+  public messages = UserUpdate.messages
 }
 
 export class UserList {
