@@ -1,2 +1,4 @@
+import './fullName';
 import './verificationCode';
+
 
