@@ -3,10 +3,10 @@ import { validator } from '@ioc:Adonis/Core/Validator'
 validator.rule(
   'fullName',
   async (value, _, { pointer, arrayExpressionPointer, errorReporter }) => {
-    const regex = /^[a-zA-Z ]*$/
+    const regex = /^[a-zA-Z0-9]*$/
 
     if (!regex.test(value)) {
-      errorReporter.report(pointer, 'match', 'Only alphabets are allowed', arrayExpressionPointer)
+      errorReporter.report(pointer, 'match', 'Only alphabets and numbers are allowed', arrayExpressionPointer)
       return
     }
 
