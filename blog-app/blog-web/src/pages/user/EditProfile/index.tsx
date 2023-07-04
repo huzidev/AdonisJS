@@ -12,8 +12,8 @@ export default function EditProfilePage() {
   const params = useParams();
   const userData = auth.state.user;
   const [updateDetails, setUpdateDetails] = useState<UserDetailsEdit>({username: ""});
-  const prevUpdateState = usePrevious(user.state.updateUser);
-  const updateState = user.state.updateUser;
+  const prevUpdateState = usePrevious(user.state.updateMe);
+  const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
 
 
