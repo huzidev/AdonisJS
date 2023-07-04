@@ -106,17 +106,23 @@ export default function EditProfilePage() {
               <div className="flex items-center my-4">
                 <input id="checkbox" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600" 
                 />
-                <label htmlFor="checkbox" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"></label>
+                <label htmlFor="checkbox" className="ml-2 text-sm font-medium">
+                  {isActive ? "Active" : "Not Active"}
+                </label>
               </div>
               <div className="flex items-center mb-4">
                 <input id="checkbox" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600" 
                 />
-                <label htmlFor="checkbox" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sign Up As Blogger</label>
+                <label htmlFor="checkbox" className="ml-2 text-sm font-medium">
+                  {isBanned ? "Banned" : "Not Banned"}
+                </label>
               </div>
               <div className="flex items-center">
                 <input id="checkbox" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600" 
                 />
-                <label htmlFor="checkbox" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sign Up As Blogger</label>
+                <label htmlFor="checkbox" className="ml-2 text-sm font-medium">
+                  {isVerified ? "Verified" : "Not Verified"}
+                </label>
               </div>
               </>
             )}
