@@ -58,8 +58,8 @@ export default class UsersController {
                 }
             }
             // once use merge then call the save method
-            auth.user?.merge(body);
-            auth.user?.save();
+            user.merge(body);
+            await user.save();
             return { message: 'User updated successfully', data: auth.user?.toObject() }
         } catch (e) {
             throw e
