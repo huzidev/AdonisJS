@@ -4,7 +4,7 @@ export class AuthSignUp {
   public schema = schema.create({
     isBlogger: schema.boolean.optional(),
     username: schema.string({ trim: true }, [
-      rules.minLength(4),
+      rules.fullName(),
       rules.unique({
         table: "users",
         column: "username"
