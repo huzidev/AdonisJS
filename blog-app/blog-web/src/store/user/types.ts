@@ -1,4 +1,4 @@
-import { User, UserRole } from "store/auth/types";
+import { User } from "store/auth/types";
 import { SubState } from "store/types";
 
 export interface UpdateMePayload {
@@ -7,12 +7,7 @@ export interface UpdateMePayload {
 
 export interface UpdateByIdPayload extends SubState {
     id?: number;
-    username?: string;
-    email?: string;
-    isActive?: boolean;
-    isVerified?: boolean;
-    isBanned?: boolean;
-    role?: UserRole;
+    data?: User | null;
 }
 
 export interface UpdateUserId extends SubState {
