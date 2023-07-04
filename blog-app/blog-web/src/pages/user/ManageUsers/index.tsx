@@ -90,6 +90,7 @@ export default function UsersPage() {
                   <div className="pl-4">
                     <button 
                       className="text-blue-600"
+                      // if admin clicked on own self then redirect to EditProfile instead on EditUser
                       onClick={() => Navigate(ROUTE_PATHS.EDIT_USER + (user.id === auth.state.user?.id ? "me" : user.id))}
                     >
                       Edit
