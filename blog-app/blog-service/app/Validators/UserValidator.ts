@@ -1,7 +1,7 @@
 import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
 
-export class UserUpdate {
+export class UserUpdateMe {
   public schema = schema.create({
     // no need to add optional here becayse if user gets on to update route then user will update info
     username: schema.string({ trim: true }, [rules.minLength(4)])
@@ -12,7 +12,7 @@ export class UserUpdate {
   }
 }
 
-export class UserV1Update {
+export class UserUpdate {
   public static schemaMap = {
     name: schema.string.optional({ trim: true }, [rules.fullName()]),
     role: schema.enum.optional(User.roles),
@@ -22,12 +22,8 @@ export class UserV1Update {
   }
 
   public static messages = {
-    ...authValidationMessages,
     required: '{{ field }} is required to update user',
   }
-
-  public schema = schema.create(UserV1Update.schemaMap)
-  public messages = UserV1Update.messages
 }
 
 export class UserList {
