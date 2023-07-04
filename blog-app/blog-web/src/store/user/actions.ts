@@ -19,7 +19,8 @@ export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: Updat
 
 export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: UpdateByIdPayload): Promise<User | null> => {
     try {
-        const response = await api.put(endpoints.UPDATE_USER + data.id, data);
+        console.log("data received", data);
+        const response = await api.put(endpoints.UPDATE_USER + 21, data);
         if (response.status === 200) {
             alert("Details Updated")
         }

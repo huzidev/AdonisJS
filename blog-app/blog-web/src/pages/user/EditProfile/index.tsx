@@ -14,13 +14,17 @@ export default function EditProfilePage() {
   const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>({
     username: ""
   });
-  const [updateDetailsId, setUpdateDetailsId] = useState({
+  const [updateDetailsId, setUpdateDetailsId] = useState<any>({
     username: "",
     role: "",
     isVerified: false,
     isBanned: false,
     isActive: false
   });
+  
+  console.log("inof", updateDetailsId);
+  
+
   const prevUpdateState = usePrevious(user.state.updateMe);
   const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
@@ -36,12 +40,7 @@ export default function EditProfilePage() {
     });
   }
 
-  function inputCheckHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    setUpdateDetailsId({
-      ...updateDetailsId,
-      [e.target.name]: e.target.value,
-    });
-  }
+ 
 
   useEffect(() => {
     if (
@@ -68,14 +67,23 @@ export default function EditProfilePage() {
     role: userRole
   } = userInfo || {};
   
+  
   useEffect(() => {
     setUpdateDetailsId({
-      ...updateDetailsId,
+      username,
+      role: userRole,
       isActive: isActive ? true : false,
       isBanned: isBanned ? true : false,
       isVerified: isVerified ? true : false,
     });
   }, [user.state.getUser.data]);
+
+   function inputCheckHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    setUpdateDetailsId({
+      ...updateDetailsId,
+      [e.target.name]: e.target.value,
+    });
+  }
 
   return (
     <div>
@@ -134,8 +142,8 @@ export default function EditProfilePage() {
                     id="username"
                     name="username"
                     type="text"
-                    value={username}
-                    onChange={inputHandler}
+                    value={updateDetailsId.username}
+                    onChange={inputCheckHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -211,7 +219,7 @@ export default function EditProfilePage() {
                     onClick={() =>
                       setUpdateDetailsId({
                         ...updateDetailsId,
-                        isVerified: !updateDetailsId.isVerified,
+                        isVerified: !updateDetailsId.isVerified
                       })
                     }
                   />

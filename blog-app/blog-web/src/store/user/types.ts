@@ -6,7 +6,7 @@ export interface UpdateMePayload {
 }
 
 export interface UpdateByIdPayload extends SubState {
-    id: number;
+    id?: number;
     username?: string;
     email?: string;
     isActive?: boolean;
