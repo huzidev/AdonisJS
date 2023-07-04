@@ -26,13 +26,13 @@ export const userSlice = createSlice({
     extraReducers: (builder) => {
         // updateUser
         builder.addCase(actions.updateMe.pending, (state) => {
-            state.updateUser = {loading: true, error: false};
+            state.updateMe = {loading: true, error: false};
         })
         builder.addCase(actions.updateMe.fulfilled, (state, action) => {
-            state.updateUser = {loading: false, error: false, data: action.payload};
+            state.updateMe = {loading: false, error: false, data: action.payload};
         })
         builder.addCase(actions.updateMe.rejected, (state) => {
-            state.updateUser = {loading: false, error: true};
+            state.updateMe = {loading: false, error: true};
         })
         // getAllUser
         builder.addCase(actions.allUser.pending, (state) => {

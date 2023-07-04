@@ -2,6 +2,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
+import { columns } from "./data";
 import { useUsersPageHooks } from "./hooks";
 
 export default function UsersPage() {
@@ -49,13 +50,9 @@ export default function UsersPage() {
           <table className="w-full">
             <thead>
               <tr className="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-                <th className="px-5 py-3">ID</th>
-                <th className="px-5 py-3">Full Name</th>
-                <th className="px-5 py-3">User Role</th>
-                <th className="px-5 py-3">Is Verified</th>
-                <th className="px-5 py-3">Is Banned</th>
-                <th className="px-5 py-3">Status</th>
-                <th className="px-5 py-3">Actions</th>
+                {columns.map((data) => (
+                  <th className="px-5 py-3">{data.title}</th>
+                ))}
               </tr>
             </thead>
             {allUsers?.map((user, userIndex) => (
@@ -73,17 +70,17 @@ export default function UsersPage() {
                     </td>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <p className="whitespace-no-wrap">
-                        {user.isVerified ? "Verified" : "Not Verified"}
+                        {user.isVerified ? "True" : "False"}
                       </p>
                     </td>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <span className="whitespace-no-wrap">
-                        {user.isBanned ? "Banned" : "Not Banned"}
+                        {user.isBanned ? "True" : "False"}
                       </span>
                     </td>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <span className="whitespace-no-wrap">
-                        {user.isActive ? "Active" : "In Active"}
+                        {user.isActive ? "True" : "In False"}
                       </span>
                     </td>
                 <td className="border-b border-gray-200 bg-white p-5 text-sm">
