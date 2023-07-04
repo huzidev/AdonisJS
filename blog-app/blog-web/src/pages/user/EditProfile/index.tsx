@@ -22,9 +22,6 @@ export default function EditProfilePage() {
     isActive: false
   });
   
-  console.log("inof", updateDetailsId);
-  
-
   const prevUpdateState = usePrevious(user.state.updateMe);
   const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
@@ -39,8 +36,6 @@ export default function EditProfilePage() {
       [e.target.name]: e.target.value,
     });
   }
-
- 
 
   useEffect(() => {
     if (
@@ -236,7 +231,7 @@ export default function EditProfilePage() {
           <div>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => user.updateById({ ...updateDetailsId })}
+              onClick={() => user.updateById({ ...updateDetailsId, id: params.id })}
             >
               Update Details
             </button>
