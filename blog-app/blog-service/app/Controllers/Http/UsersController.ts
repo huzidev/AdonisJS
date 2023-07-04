@@ -32,14 +32,33 @@ export default class UsersController {
 
     public async update({ request, params, auth }: HttpContextContract) {
         try {
-            let body;
+            const userId = params.id || auth.user?.id
+            console.log("what is user ID", userId);
+            
+            let body;   
             if (params.id) {
                 body = await request.validate(UserUpdate)
             } else {
                 body = await request.validate(UserUpdateMe);
             }
+
+            // if admin tries to update user who doesn't exist
+            const user = await User.findBy('id', userId)
+            if (!user) {
+                throw {
+                message: 'User not found',
+                status: 404
+                }
+            }
+            // if admin tries to update super-admin
+            if (!auth.user!.hasAccess(user.role)) {
+                throw {
+                message: 'In sufficient access',
+                status: 401
+                }
+            }
             // once use merge then call the save method
-            auth.user?.merge(body)
+            auth.user?.merge(body);
             auth.user?.save();
             return { message: 'User updated successfully', data: auth.user?.toObject() }
         } catch (e) {
