@@ -147,7 +147,7 @@ export default function EditProfilePage() {
                     onClick={() =>
                       setIsBoolean({
                         ...isBoolean,
-                        isBanned: !isBoolean.isBanned,
+                        isActive: !isBoolean.isActive,
                       })
                     }
                   />
@@ -155,7 +155,7 @@ export default function EditProfilePage() {
                     htmlFor="checkbox"
                     className="ml-2 text-sm font-medium"
                   >
-                    {isActive ? "Active" : "Not Active"}
+                    {isBoolean.isActive ? "Active" : "Not Active"}
                   </label>
                 </div>
                 <div className="flex items-center mb-4">
@@ -175,7 +175,7 @@ export default function EditProfilePage() {
                     htmlFor="checkbox"
                     className="ml-2 text-sm font-medium"
                   >
-                    {isBanned ? "Banned" : "Not Banned"}
+                    {isBoolean.isBanned ? "Banned" : "Not Banned"}
                   </label>
                 </div>
                 <div className="flex items-center">
@@ -187,7 +187,7 @@ export default function EditProfilePage() {
                     onClick={() =>
                       setIsBoolean({
                         ...isBoolean,
-                        isBanned: !isBoolean.isBanned,
+                        isVerified: !isBoolean.isVerified,
                       })
                     }
                   />
@@ -195,7 +195,7 @@ export default function EditProfilePage() {
                     htmlFor="checkbox"
                     className="ml-2 text-sm font-medium"
                   >
-                    {isVerified ? "Verified" : "Not Verified"}
+                    {isBoolean.isVerified ? "Verified" : "Not Verified"}
                   </label>
                 </div>
               </>
