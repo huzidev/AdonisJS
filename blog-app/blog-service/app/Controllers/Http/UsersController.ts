@@ -34,7 +34,6 @@ export default class UsersController {
         try {
             const userId = params.id || auth.user?.id
             console.log("what is user ID", userId);
-            
             let body;   
             if (params.id) {
                 body = await request.validate(UserUpdate)
