@@ -12,14 +12,14 @@ export default function EditProfilePage() {
   const params = useParams();
   const userData = auth.state.user;
   const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>({
-    username: "",
+    username: ""
   });
   const [updateDetailsId, setUpdateDetailsId] = useState({
     username: "",
     role: "",
     isVerified: false,
     isBanned: false,
-    isActive: false,
+    isActive: false
   });
   const prevUpdateState = usePrevious(user.state.updateMe);
   const updateState = user.state.updateMe;
@@ -107,7 +107,7 @@ export default function EditProfilePage() {
                     id="username"
                     name="username"
                     type="text"
-                    value={updateDetails.username}
+                    value={updateDetailsMe.username}
                     onChange={inputHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -115,7 +115,7 @@ export default function EditProfilePage() {
                 </div>
                 <button
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={() => user.updateUser({ ...updateDetails })}
+                  onClick={() => user.updateMe({ ...updateDetailsMe })}
                 >
                   Update Details
                 </button>
@@ -162,11 +162,11 @@ export default function EditProfilePage() {
                     type="checkbox"
                     name="isActive"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
-                    checked={isBoolean.isActive ? true : false}
+                    checked={updateDetailsId.isActive ? true : false}
                     onClick={() =>
-                      setIsBoolean({
-                        ...isBoolean,
-                        isActive: !isBoolean.isActive,
+                      setUpdateDetailsId({
+                        ...updateDetailsId,
+                        isActive: !updateDetailsId.isActive,
                       })
                     }
                     onChange={inputCheckHandler}
@@ -175,7 +175,7 @@ export default function EditProfilePage() {
                     htmlFor="checkbox"
                     className="ml-2 text-sm font-medium"
                   >
-                    {isBoolean.isActive ? "Active" : "Not Active"}
+                    {updateDetailsId.isActive ? "Active" : "Not Active"}
                   </label>
                 </div>
                 <div className="flex items-center mb-4">
@@ -184,12 +184,12 @@ export default function EditProfilePage() {
                     type="checkbox"
                     name="isBanned"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
-                    checked={isBoolean.isBanned ? true : false}
+                    checked={updateDetailsId.isBanned ? true : false}
                     onChange={inputCheckHandler}
                     onClick={() =>
-                      setIsBoolean({
-                        ...isBoolean,
-                        isBanned: !isBoolean.isBanned,
+                      setUpdateDetailsId({
+                        ...updateDetailsId,
+                        isBanned: !updateDetailsId.isBanned,
                       })
                     }
                   />
@@ -197,7 +197,7 @@ export default function EditProfilePage() {
                     htmlFor="checkbox"
                     className="ml-2 text-sm font-medium"
                   >
-                    {isBoolean.isBanned ? "Banned" : "Not Banned"}
+                    {updateDetailsId.isBanned ? "Banned" : "Not Banned"}
                   </label>
                 </div>
                 <div className="flex items-center">
@@ -206,12 +206,12 @@ export default function EditProfilePage() {
                     type="checkbox"
                     name="isVerified"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
-                    checked={isBoolean.isVerified ? true : false}
+                    checked={updateDetailsId.isVerified ? true : false}
                     onChange={inputCheckHandler}
                     onClick={() =>
-                      setIsBoolean({
-                        ...isBoolean,
-                        isVerified: !isBoolean.isVerified,
+                      setUpdateDetailsId({
+                        ...updateDetailsId,
+                        isVerified: !updateDetailsId.isVerified,
                       })
                     }
                   />
@@ -219,7 +219,7 @@ export default function EditProfilePage() {
                     htmlFor="checkbox"
                     className="ml-2 text-sm font-medium"
                   >
-                    {isBoolean.isVerified ? "Verified" : "Not Verified"}
+                    {updateDetailsId.isVerified ? "Verified" : "Not Verified"}
                   </label>
                 </div>
               </>
@@ -228,7 +228,7 @@ export default function EditProfilePage() {
           <div>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => user.updateUser({ ...updateDetails })}
+              onClick={() => user.updateById({ ...updateDetailsId })}
             >
               Update Details
             </button>

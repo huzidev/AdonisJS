@@ -9,7 +9,7 @@ const initialState: UserState = {
     updateById: { ...subState, data: null },
     allUser: { ...subState, data: null },
     getUser: { ...subState, data: null },
-    user: null,
+    user: null
 }
 
 export const userSlice = createSlice({
@@ -54,6 +54,16 @@ export const userSlice = createSlice({
         })
         builder.addCase(actions.getById.rejected, (state) => {
             state.getUser = {loading: false, error: true};
+        })
+        // updateUserById
+        builder.addCase(actions.updateById.pending, (state) => {
+            state.updateById = {loading: true, error: false};
+        })
+        builder.addCase(actions.updateById.fulfilled, (state, action) => {
+            state.updateById = {loading: false, error: false, data: action.payload};
+        })
+        builder.addCase(actions.updateById.rejected, (state) => {
+            state.updateById = {loading: false, error: true};
         })
     }
 });

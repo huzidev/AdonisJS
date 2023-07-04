@@ -6,7 +6,7 @@ export interface UpdateMePayload {
 }
 
 export interface UpdateByIdPayload extends SubState {
-    data: User | null
+    data?: User | null
 }
 
 export interface UpdateUserId extends SubState {
