@@ -11,10 +11,12 @@ export default function EditProfilePage() {
   const user = useUser();
   const params = useParams();
   const userData = auth.state.user;
-  const [updateDetails, setUpdateDetails] = useState<UserDetailsEdit>({
+  const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>({
     username: "",
   });
-  const [isBoolean, setIsBoolean] = useState({
+  const [updateDetailsId, setUpdateDetailsId] = useState({
+    username: "",
+    role: "",
     isVerified: false,
     isBanned: false,
     isActive: false,
@@ -24,12 +26,19 @@ export default function EditProfilePage() {
   // const x = usePrevious<number>(65162);
 
   useEffect(() => {
-    setUpdateDetails({ ...updateDetails, ...userData });
+    setUpdateDetailsMe({ ...updateDetailsMe, ...userData });
   }, []);
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    setUpdateDetails({
-      ...updateDetails,
+    setUpdateDetailsMe({
+      ...updateDetailsMe,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  function inputCheckHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    setUpdateDetailsId({
+      ...updateDetailsId,
       [e.target.name]: e.target.value,
     });
   }
@@ -60,8 +69,8 @@ export default function EditProfilePage() {
   } = userInfo || {};
   
   useEffect(() => {
-    setIsBoolean({
-      ...isBoolean,
+    setUpdateDetailsId({
+      ...updateDetailsId,
       isActive: isActive ? true : false,
       isBanned: isBanned ? true : false,
       isVerified: isVerified ? true : false,
@@ -104,6 +113,12 @@ export default function EditProfilePage() {
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
+                <button
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => user.updateUser({ ...updateDetails })}
+                >
+                  Update Details
+                </button>
               </>
             ) : (
               // if admin clicked on user to edit info
@@ -145,6 +160,7 @@ export default function EditProfilePage() {
                   <input
                     id="checkbox"
                     type="checkbox"
+                    name="isActive"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
                     checked={isBoolean.isActive ? true : false}
                     onClick={() =>
@@ -153,6 +169,7 @@ export default function EditProfilePage() {
                         isActive: !isBoolean.isActive,
                       })
                     }
+                    onChange={inputCheckHandler}
                   />
                   <label
                     htmlFor="checkbox"
@@ -165,8 +182,10 @@ export default function EditProfilePage() {
                   <input
                     id="checkbox"
                     type="checkbox"
+                    name="isBanned"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
                     checked={isBoolean.isBanned ? true : false}
+                    onChange={inputCheckHandler}
                     onClick={() =>
                       setIsBoolean({
                         ...isBoolean,
@@ -185,8 +204,10 @@ export default function EditProfilePage() {
                   <input
                     id="checkbox"
                     type="checkbox"
+                    name="isVerified"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
                     checked={isBoolean.isVerified ? true : false}
+                    onChange={inputCheckHandler}
                     onClick={() =>
                       setIsBoolean({
                         ...isBoolean,
