@@ -1,10 +1,12 @@
 import ROUTE_PATHS from "Router/paths";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { useUsersPageHooks } from "./hooks";
 
 export default function UsersPage() {
   const user = useUser();
+  const auth = useAuth();
   const allUsers = user.state.allUser?.data;
   const Navigate = useNavigate();
   console.log("all users", allUsers);
@@ -88,7 +90,7 @@ export default function UsersPage() {
                   <div className="pl-4">
                     <button 
                       className="text-blue-600"
-                      onClick={() => Navigate(ROUTE_PATHS.EDIT_USER + user.id)}
+                      onClick={() => Navigate(ROUTE_PATHS.EDIT_USER + user.id )}
                     >
                       Edit
                     </button>
