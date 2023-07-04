@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "services/api";
 import { User } from "store/auth/types";
 import * as endpoints from "./endpoints";
-import { UpdateMePayload } from "./types";
+import { UpdateByIdPayload, UpdateMePayload } from "./types";
 
 export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: UpdateMePayload): Promise<User | null> => {
     try {
@@ -17,7 +17,7 @@ export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: Updat
     }
 });
 
-export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: User): Promise<User | null> => {
+export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: UpdateByIdPayload): Promise<User | null> => {
     try {
         const response = await api.put(endpoints.UPDATE_USER + data.id, data);
         if (response.status === 200) {
