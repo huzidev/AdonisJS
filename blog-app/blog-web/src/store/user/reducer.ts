@@ -5,7 +5,8 @@ import * as actions from "./actions";
 import { UserState } from "./types";
 
 const initialState: UserState = {
-    updateUser: { ...subState, data: null },
+    updateMe: { ...subState, data: null },
+    updateById: { ...subState, data: null },
     allUser: { ...subState, data: null },
     getUser: { ...subState, data: null },
     user: null,
