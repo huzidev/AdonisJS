@@ -68,7 +68,7 @@ export default function ViewProfilePage() {
             User Profile
           </h1>
           <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Name : {userDetails.username}
+            Name : {userDetails.username + ` (${user.state.getUser.data?.role})`} 
           </h2>
           <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             Email : {userDetails.email}
