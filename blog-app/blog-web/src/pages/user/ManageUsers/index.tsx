@@ -90,7 +90,7 @@ export default function UsersPage() {
                   <div className="pl-4">
                     <button 
                       className="text-blue-600"
-                      onClick={() => Navigate(ROUTE_PATHS.EDIT_USER + user.id )}
+                      onClick={() => Navigate(ROUTE_PATHS.EDIT_USER + (user.id === auth.state.user?.id ? "me" : user.id))}
                     >
                       Edit
                     </button>
