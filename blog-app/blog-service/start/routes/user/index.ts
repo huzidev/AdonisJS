@@ -6,7 +6,7 @@ export default function UsersRoutes() {
         Route.get("/get/me", `${path}.getMe`).middleware("auth:any");
         Route.put("/edit/me", `${path}.update`)
             .middleware("auth")
-            .where('id', /^[0-9]+$/);
+            .where('id', /^[0-9]+$/); // while updating ownslef get the id of the loggedIn User
         Route.put("/edit/:id", `${path}.update`)
             .middleware('auth:admin')
             .where('id', /^[0-9]+$/);
