@@ -2,7 +2,7 @@
 
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import User from 'App/Models/User';
-import { UserUpdateMe } from 'App/Validators/UserValidator';
+import { UserUpdate, UserUpdateMe } from 'App/Validators/UserValidator';
 
 export default class UsersController {
     public async getMe({ auth }: HttpContextContract) {
@@ -32,11 +32,12 @@ export default class UsersController {
 
     public async update({ request, params, auth }: HttpContextContract) {
         try {
-            let userId;
+            let body;
             if (params.id) {
-                userId = params.id
+                body = await request.validate(UserUpdate)
+            } else {
+                body = await request.validate(UserUpdateMe);
             }
-            const body = await request.validate(UserUpdateMe);
             // once use merge then call the save method
             auth.user?.merge(body)
             auth.user?.save();
