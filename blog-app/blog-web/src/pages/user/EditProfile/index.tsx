@@ -50,13 +50,16 @@ export default function EditProfilePage() {
     }
   }, [params.id]);
 
-  let userName = user.state.getUser.data?.username;
-  let isActive = user.state.getUser.data?.isActive;
-  let isBanned = user.state.getUser.data?.isBanned;
-  let isVerified = user.state.getUser.data?.isVerified;
-  let userRole = user.state.getUser.data?.role;
+  let userInfo = user.state.getUser.data;
+  const {
+    username,
+    isActive,
+    isBanned,
+    isVerified,
+    role: userRole
+  } = userInfo || {};
+  
   useEffect(() => {
-    console.log("information", user.state.getUser.data);
     setIsBoolean({
       ...isBoolean,
       isActive: isActive ? true : false,
@@ -77,7 +80,7 @@ export default function EditProfilePage() {
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             {params.id === "me"
               ? "Edit Yours Details"
-              : `Edit ${userName} Details`}
+              : `Edit ${username} Details`}
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -116,7 +119,7 @@ export default function EditProfilePage() {
                     id="username"
                     name="username"
                     type="text"
-                    value={userName}
+                    value={username}
                     onChange={inputHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
