@@ -14,6 +14,7 @@ export default function EditProfilePage() {
   const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>({
     username: ""
   });
+
   const [updateDetailsId, setUpdateDetailsId] = useState<any>({
     username: "",
     role: "",
@@ -62,16 +63,18 @@ export default function EditProfilePage() {
     role: userRole
   } = userInfo || {};
   
-  
   useEffect(() => {
     setUpdateDetailsId({
       username,
       role: userRole,
       isActive: isActive ? true : false,
       isBanned: isBanned ? true : false,
-      isVerified: isVerified ? true : false,
+      isVerified: isVerified ? true : false
     });
-  }, [user.state.getUser.data]);
+  }, [userInfo]);
+
+  console.log("user info", updateDetailsId);
+  
 
    function inputCheckHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setUpdateDetailsId({
@@ -151,10 +154,11 @@ export default function EditProfilePage() {
                 </label>
                 <select
                   id="roles"
+                  value={updateDetailsId.role} // Add this line
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
                   {roles.map((role, roleIndex) => (
-                    <option key={roleIndex} selected={role === userRole}>
+                    <option key={roleIndex} value={role}>
                       {role}
                     </option>
                   ))}
