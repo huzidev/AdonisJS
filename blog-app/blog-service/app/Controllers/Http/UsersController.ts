@@ -46,21 +46,21 @@ export default class UsersController {
             const user = await User.findBy('id', userId)
             if (!user) {
                 throw {
-                message: 'User not found',
-                status: 404
+                    message: 'User not found',
+                    status: 404
                 }
             }
             // if admin tries to update super-admin
             if (!auth.user!.hasAccess(user.role)) {
                 throw {
-                message: 'In sufficient access',
-                status: 401
+                    message: 'In sufficient access',
+                    status: 401
                 }
             }
             // once use merge then call the save method
-            user.merge(body);
-            await user.save();
-            return { message: 'User updated successfully', data: auth.user?.toObject() }
+            user?.merge(body);
+            await user?.save();
+            return { message: 'User updated successfully', data: user?.toObject() }
         } catch (e) {
             throw e
         }   
