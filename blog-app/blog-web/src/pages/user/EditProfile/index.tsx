@@ -96,7 +96,7 @@ export default function EditProfilePage() {
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-          <div className="mb-6">
+          <div>
             {params.id === "me" ? (
               <>
                 <label
@@ -117,7 +117,7 @@ export default function EditProfilePage() {
                   />
                 </div>
                 <button
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full mt-6 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   onClick={() => user.updateMe({ ...updateDetailsMe })}
                 >
                   Update Details
@@ -227,7 +227,7 @@ export default function EditProfilePage() {
                 </div>
                  <div>
                   <button
-                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={() => user.updateById({ ...updateDetailsId, id: params.id })}
                   >
                     Update Details
@@ -236,7 +236,6 @@ export default function EditProfilePage() {
               </>
             )}
           </div>
-         
         </div>
       </div>
     </div>
