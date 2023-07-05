@@ -2,7 +2,7 @@ import React from 'react';
 import ROUTE_PATHS from './paths';
 
 const HomePage = React.lazy(() => import('pages/Home'));
-const EditProfilePage = React.lazy(() => import('pages/user/UserForm'));
+const UserForm = React.lazy(() => import('pages/user/UserForm'));
 const AddBlogPage = React.lazy(() => import('pages/articles/BlogCreate'));
 const UpdateBlogPage = React.lazy(() => import('pages/articles/BlogUpdate'));
 const ViewBlogPage = React.lazy(() => import('pages/articles/BlogView'));
@@ -52,7 +52,11 @@ const routes: AppRoute[] = [
     },
     {
         path: `${ROUTE_PATHS.EDIT_USER}:id`,
-        Component: EditProfilePage
+        Component: UserForm
+    },
+    {
+        path: ROUTE_PATHS.USER_CREATE,
+        Component: UserForm
     },
     {
         path: ROUTE_PATHS.VERIFY_USER,
