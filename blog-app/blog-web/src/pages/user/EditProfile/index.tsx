@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
@@ -15,10 +15,11 @@ export default function EditProfilePage() {
     username: ""
   });
 
+  const value = useRef("");
+
   const fetchedData: any = user.state.getUser?.data;
 
   const [updateDetailsId, setUpdateDetailsId] = useState<User>({
-    id: undefined,
     username: "",
     role: "",
     isVerified: false,
@@ -60,6 +61,10 @@ export default function EditProfilePage() {
 
   useEffect(() => {
     setUpdateDetailsId({ ...updateDetailsId, ...fetchedData })
+    // so value will only be fetched if fetchedData is not undefined
+    if (fetchedData) {
+      value.current = fetchedData.username;
+    }
   }, [params.id, fetchedData])
 
 
@@ -82,7 +87,7 @@ export default function EditProfilePage() {
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             {params.id === "me"
               ? "Edit Yours Details"
-              : `Edit ${updateDetailsId.username} Details`}
+              : `Edit ${value.current} Details`}
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -220,7 +225,7 @@ export default function EditProfilePage() {
                  <div>
                   <button
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    onClick={() => user.updateById({ ...updateDetailsId, id: updateDetailsId.id })}
+                    onClick={() => user.updateById({ ...updateDetailsId, id: Number(params.id) })}
                   >
                     Update Details
                   </button>
