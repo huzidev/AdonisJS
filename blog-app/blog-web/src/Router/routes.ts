@@ -2,7 +2,7 @@ import React from 'react';
 import ROUTE_PATHS from './paths';
 
 const HomePage = React.lazy(() => import('pages/Home'));
-const EditProfilePage = React.lazy(() => import('pages/user/EditProfile'));
+const EditProfilePage = React.lazy(() => import('pages/user/UserForm'));
 const AddBlogPage = React.lazy(() => import('pages/articles/BlogCreate'));
 const UpdateBlogPage = React.lazy(() => import('pages/articles/BlogUpdate'));
 const ViewBlogPage = React.lazy(() => import('pages/articles/BlogView'));

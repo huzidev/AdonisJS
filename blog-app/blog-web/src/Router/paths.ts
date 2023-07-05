@@ -7,6 +7,7 @@ const ROUTE_PATHS = {
   VERIFY_USER: '/user/verify',
   EDIT_USER: '/user/edit/',
   USERS_PAGE: '/user/list/',
+  USER_CREATE: '/user/create',
 
   ARTICLE_CREATE: '/blog/add',
   ARTICLE_UPDATE: '/blog/edit/',
