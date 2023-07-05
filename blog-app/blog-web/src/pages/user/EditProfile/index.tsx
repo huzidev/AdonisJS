@@ -45,15 +45,16 @@ export default function EditProfilePage() {
   }, [params.id, fetchedData]);
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) {
+    const { name, value, type, checked } = e.target as HTMLInputElement;
     if (params.id === "me") {
       setUpdateDetailsMe({
         ...updateDetailsMe,
-        [e.target.name]: e.target.value,
+        [name]: value
       });
     } else {
       setUpdateDetailsId({
         ...updateDetailsId,
-        [e.target.name]: e.target.value,
+        [name]: type === "checkbox" ? checked : value
       });
     }
   }
