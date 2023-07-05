@@ -1,5 +1,5 @@
 import { User } from "store/auth/types";
-import { SubState } from "store/types";
+import { PaginationMeta, SubState } from "store/types";
 
 export interface UpdateMePayload {
     username?: string;    
@@ -24,6 +24,7 @@ export interface UserById extends SubState {
 
 export interface UserByPage extends SubState {
     data?: User | null;
+    meta: PaginationMeta | null;
 }
 
 export interface UserState {
