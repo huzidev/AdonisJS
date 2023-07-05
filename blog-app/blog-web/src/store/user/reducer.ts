@@ -9,7 +9,7 @@ const initialState: UserState = {
     updateById: { ...subState, data: null },
     allUser: { ...subState, data: null },
     getUser: { ...subState, data: null },
-    getUserPage: { ...subState, data: [], meta: null },
+    getUserPage: { ...subState, data: null, meta: null },
     user: null
 }
 
@@ -42,9 +42,22 @@ export const userSlice = createSlice({
         builder.addCase(actions.allUser.fulfilled, (state, action) => {
             state.allUser = {loading: false, error: false, data: action.payload};
         })
+        // getUserByPage
+        builder.addCase(actions.allUserByPage.pending, (state) => {
+            state.getUserPage.loading = true;
+            state.getUserPage.error = false;
+        })
+        builder.addCase(actions.allUserByPage.fulfilled, (state, action) => {
+            state.getUserPage.loading = true;
+            if (action.payload) {
+                state.getUserPage.data = action.payload;
+            }
+            state.getUserPage.error = false;
+        })
         // ASKED if to add data: action.payload in error field?
-        builder.addCase(actions.allUser.rejected, (state) => {
-            state.allUser = {loading: false, error: true};
+        builder.addCase(actions.allUserByPage.rejected, (state) => {
+            state.getUserPage.loading = false;
+            state.getUserPage.error = true;
         })
         // getUserById
         builder.addCase(actions.getById.pending, (state) => {

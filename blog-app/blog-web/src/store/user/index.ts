@@ -9,6 +9,7 @@ export const useUser = () => {
   const state = useSelector((state: any) => state.user) as UserState;
   const dispatch = useAppDispatch();
   const allUser = () => dispatch(actions.allUser())
+  const allUserPage = (payload: number) => dispatch(actions.allUserByPage(payload));
   const updateMe = (payload: UpdateMePayload) => dispatch(actions.updateMe(payload)); 
   const updateById = (payload: UpdateByIdPayload) => dispatch(actions.updateById(payload)); 
   const getById = (payload: number) => dispatch(actions.getById(payload));
