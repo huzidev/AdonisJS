@@ -30,6 +30,21 @@ export class UserUpdateMe {
   public messages = UserUpdate.messages
 }
 
+export class UserV1Create {
+  public schema = schema.create({
+    username: schema.string({ trim: true }, [rules.fullName()]),
+    email: schema.string({}, [rules.email()]),
+    role: schema.enum.optional(User.roles),
+    isVerified: schema.boolean.optional(),
+    isActive: schema.boolean.optional(),
+    password: schema.string({}, [rules.minLength(6), rules.confirmed('passwordConfirmation')])
+  })
+
+  public static messages = {
+    required: '{{ field }} is required to update user',
+  }
+}
+
 export class UserList {
   public static schema = schema.create({
     id: schema.number.optional(),

@@ -10,8 +10,17 @@ export default class UsersController {
     }
 
     public async getAllUser({ params }: HttpContextContract) {
-        const response = await User.all();
-        return { message: "All Users fetched successfully", data: response }
+        // const response = await User.all();
+        const query = User.query();
+
+        let response;
+        // if user wanted to see allBlogs uploaded by him
+        if (params.page) {
+            response = await query.paginate(params.page || 1, 10);
+        } else {
+            response = await query.exec();
+        }
+        return { message: "Users fetched successfully", data: response }
     }
 
     public async getById({ params }: HttpContextContract) {
