@@ -175,28 +175,6 @@ export default function UserFormPage() {
                     {createUser.isActive ? "Active" : "Not Active"}
                   </label>
                 </div>
-                <div className="flex items-center mb-4">
-                  <input
-                    id="checkbox"
-                    type="checkbox"
-                    name="isBanned"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
-                    checked={createUser.isBanned ? true : false}
-                    onChange={inputHandler}
-                    onClick={() =>
-                      setCreateUser({
-                        ...createUser,
-                        isBanned: !createUser.isBanned,
-                      })
-                    }
-                  />
-                  <label
-                    htmlFor="checkbox"
-                    className="ml-2 text-sm font-medium"
-                  >
-                    {createUser.isBanned ? "Banned" : "Not Banned"}
-                  </label>
-                </div>
                 <div className="flex items-center">
                   <input
                     id="checkbox"

@@ -17,7 +17,6 @@ export const detailsCreateUser: User = {
     email: "",
     role: "",
     isVerified: false,
-    isBanned: false,
     isActive: false,
     password: "",
     passwordConfirmation: ""
