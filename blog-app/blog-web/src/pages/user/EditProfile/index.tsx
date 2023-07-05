@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
+import { roles } from "store/auth/types";
 import { useUser } from "store/user";
 import { usePrevious } from "utils";
 import { User, UserDetailsEdit } from "./types";
@@ -14,8 +15,10 @@ export default function EditProfilePage() {
     username: ""
   });
 
+  const fetchedData: any = user.state.getUser?.data;
+
   const [updateDetailsId, setUpdateDetailsId] = useState<User>({
-    id: 21,
+    id: undefined,
     username: "",
     role: "",
     isVerified: false,
@@ -54,18 +57,10 @@ export default function EditProfilePage() {
     }
   }, [params.id]);
   
-  let userInfo: any = user.state.getUser.data;
 
-  // useEffect(() => {
-  //   setUpdateDetailsId({
-  //     username: userInfo.username,
-  //     role: userInfo.role,
-  //     isActive: userInfo.isActive ? true : false,
-  //     isBanned: userInfo.isBanned ? true : false,
-  //     isVerified: userInfo.isVerified ? true : false,
-  //     id: userInfo.id
-  //   });
-  // }, [userInfo, params.id]);
+  useEffect(() => {
+    setUpdateDetailsId({ ...updateDetailsId, ...fetchedData })
+  }, [params.id, fetchedData])
 
 
    function inputCheckHandler(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) {
@@ -105,7 +100,7 @@ export default function EditProfilePage() {
                     id="username"
                     name="username"
                     type="text"
-                    value={userInfo.username}
+                    value={"helo"}
                     onChange={inputHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -121,7 +116,7 @@ export default function EditProfilePage() {
             ) : (
               // if admin clicked on user to edit info
               <>
-                {/* <label
+                <label
                   htmlFor="username"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
@@ -225,11 +220,11 @@ export default function EditProfilePage() {
                  <div>
                   <button
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    onClick={() => user.updateById({...updateDetailsId, id: 24})}
+                    onClick={() => user.updateById({ ...updateDetailsId, id: updateDetailsId.id })}
                   >
                     Update Details
                   </button>
-                </div> */}
+                </div>
               </>
             )}
           </div>
