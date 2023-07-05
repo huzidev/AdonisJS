@@ -2,7 +2,7 @@
 
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import User from 'App/Models/User';
-import { UserUpdate, UserUpdateMe } from 'App/Validators/UserValidator';
+import { UserCreate, UserUpdate, UserUpdateMe } from 'App/Validators/UserValidator';
 
 export default class UsersController {
     public async getMe({ auth }: HttpContextContract) {
@@ -36,6 +36,24 @@ export default class UsersController {
             }
         } catch (e) {
             throw e
+        }
+    }
+
+    public async create({ request }: HttpContextContract) {
+        try {
+        const body = await request.validate(UserCreate);
+        const user = await User.create(body);
+        // after saving new user data to database calling refresh to get latest data from database
+        await user.refresh();
+        return { message: 'User created successfully', data: user }
+        } catch (e) {
+        if (e.code === 'ER_DUP_ENTRY') {
+            throw {
+                message: 'Email already in use',
+                status: 409,
+            }
+        }
+        throw e
         }
     }
 

@@ -30,7 +30,7 @@ export class UserUpdateMe {
   public messages = UserUpdate.messages
 }
 
-export class UserV1Create {
+export class UserCreate {
   public schema = schema.create({
     username: schema.string({ trim: true }, [rules.fullName()]),
     email: schema.string({}, [rules.email()]),
