@@ -44,7 +44,7 @@ export default function EditProfilePage() {
     }
   }, [params.id, fetchedData]);
 
-  function inputHandler(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) {
+  function inputHandler(e: React.ChangeEvent) {
     const { name, value, type, checked } = e.target as HTMLInputElement;
     if (params.id === "me") {
       setUpdateDetailsMe({
