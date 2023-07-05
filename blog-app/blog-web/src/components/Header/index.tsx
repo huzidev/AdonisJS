@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "store/auth";
+import { hasPermission } from "utils";
 import { adminPaths, links, loggedInPaths, loggedOutPaths } from "./data";
 
 export default function Header() {
@@ -74,7 +75,7 @@ export default function Header() {
                       {data.title}
                     </Link>
                   </li>
-                ) : user && (user.role === "admin" || "super-admin") && adminPaths.includes(data.link) && user?.isVerified && (
+                ) : user && hasPermission("admin" || "super-admin", user.role)&& adminPaths.includes(data.link) && user?.isVerified && (
                   <li key={dataIndex}>
                     <Link
                       to={data.link}
