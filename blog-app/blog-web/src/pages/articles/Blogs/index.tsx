@@ -63,13 +63,13 @@ export default function ViewBlogsPage(): JSX.Element {
                     Read More
                     {/* {blog.createdAt} */}
                   </Link>
-                  {blog.ownerId === userData?.id || hasPermission("admin" || "super-admin", userData?.role) && (
+                  {blog.ownerId === userData?.id || hasPermission("admin" || "super-admin", userData?.role) ? (
                     <div>
                         <Link
                           to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
                           type="button"
                           className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                        >
+                          >
                           Edit
                         </Link>
                       <button
@@ -80,7 +80,7 @@ export default function ViewBlogsPage(): JSX.Element {
                         Delete
                       </button>
                     </div>
-                  )}
+                  ) : ""}
                   <div className="flex justify-end items-center">
                     <p className="text-white">Uploaded By :&nbsp;</p>
                     <Link
