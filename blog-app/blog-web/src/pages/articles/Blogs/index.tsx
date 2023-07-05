@@ -4,6 +4,7 @@ import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
+import { hasPermission } from "utils";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
@@ -13,11 +14,9 @@ export default function ViewBlogsPage(): JSX.Element {
   const user = useUser();
   const allUsers = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
-  const userId = auth.state.user?.id;
+  const userData = auth.state.user;
 
   useBlogsPageHooks();
-
-  const isAdmin = auth.state.user?.role === "admin";
 
   const currentPage: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogs.meta?.lastPage;
@@ -64,7 +63,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     Read More
                     {/* {blog.createdAt} */}
                   </Link>
-                  {blog.ownerId === userId || isAdmin && (
+                  {blog.ownerId === userData?.id || hasPermission("admin" || "super-admin", userData?.role) && (
                     <div>
                         <Link
                           to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
