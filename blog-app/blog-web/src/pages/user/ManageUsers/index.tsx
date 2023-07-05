@@ -10,7 +10,6 @@ export default function UsersPage() {
   const auth = useAuth();
   const allUsers = user.state.allUser?.data;
   const Navigate = useNavigate();
-  console.log("all users", allUsers);
 
   useUsersPageHooks();
 

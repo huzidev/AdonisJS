@@ -32,14 +32,30 @@ export default function EditProfilePage() {
   // const x = usePrevious<number>(65162);
 
   useEffect(() => {
-    setUpdateDetailsMe({ ...updateDetailsMe, ...userData });
-  }, []);
+    if (params.id === "me") {
+      setUpdateDetailsMe({ ...updateDetailsMe, ...userData })
+    } else {
+      setUpdateDetailsId({ ...updateDetailsId, ...fetchedData })
+      // so value will only be fetched if fetchedData is not undefined
+      // using useRef other wise the value is updating on own on the heading as well where Edit ${value.current} Details is written
+      if (fetchedData) {
+        value.current = fetchedData.username;
+      }
+    }
+  }, [params.id, fetchedData]);
 
-  function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    setUpdateDetailsMe({
-      ...updateDetailsMe,
-      [e.target.name]: e.target.value,
-    });
+  function inputHandler(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) {
+    if (params.id === "me") {
+      setUpdateDetailsMe({
+        ...updateDetailsMe,
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      setUpdateDetailsId({
+        ...updateDetailsId,
+        [e.target.name]: e.target.value,
+      });
+    }
   }
 
   useEffect(() => {
@@ -57,23 +73,6 @@ export default function EditProfilePage() {
       user.getById(Number(params.id));
     }
   }, [params.id]);
-  
-
-  useEffect(() => {
-    setUpdateDetailsId({ ...updateDetailsId, ...fetchedData })
-    // so value will only be fetched if fetchedData is not undefined
-    if (fetchedData) {
-      value.current = fetchedData.username;
-    }
-  }, [params.id, fetchedData])
-
-
-   function inputCheckHandler(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) {
-    setUpdateDetailsId({
-      ...updateDetailsId,
-      [e.target.name]: e.target.value,
-    });
-  }
 
   return (
     <div>
@@ -105,7 +104,7 @@ export default function EditProfilePage() {
                     id="username"
                     name="username"
                     type="text"
-                    value={"helo"}
+                    value={updateDetailsMe.username}
                     onChange={inputHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -133,7 +132,7 @@ export default function EditProfilePage() {
                     name="username"
                     type="text"
                     value={updateDetailsId.username}
-                    onChange={inputCheckHandler}
+                    onChange={inputHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -148,7 +147,7 @@ export default function EditProfilePage() {
                   id="roles"
                   value={updateDetailsId.role}
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={inputCheckHandler}
+                  onChange={inputHandler}
                 >
                   {roles.map((role, roleIndex) => (
                     <option key={roleIndex} value={role}>
@@ -169,7 +168,7 @@ export default function EditProfilePage() {
                         isActive: !updateDetailsId.isActive,
                       })
                     }
-                    onChange={inputCheckHandler}
+                    onChange={inputHandler}
                   />
                   <label
                     htmlFor="checkbox"
@@ -185,7 +184,7 @@ export default function EditProfilePage() {
                     name="isBanned"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
                     checked={updateDetailsId.isBanned ? true : false}
-                    onChange={inputCheckHandler}
+                    onChange={inputHandler}
                     onClick={() =>
                       setUpdateDetailsId({
                         ...updateDetailsId,
@@ -207,7 +206,7 @@ export default function EditProfilePage() {
                     name="isVerified"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
                     checked={updateDetailsId.isVerified ? true : false}
-                    onChange={inputCheckHandler}
+                    onChange={inputHandler}
                     onClick={() =>
                       setUpdateDetailsId({
                         ...updateDetailsId,
