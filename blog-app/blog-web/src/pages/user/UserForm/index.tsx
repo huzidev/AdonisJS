@@ -101,7 +101,7 @@ export default function UserFormPage() {
                     id="username"
                     name="username"
                     type="text"
-                    value={updateDetailsId.username}
+                    value={createUser.username}
                     onChange={inputHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -118,7 +118,7 @@ export default function UserFormPage() {
                     id="email"
                     name="email"
                     type="email"
-                    value={updateDetailsId.username}
+                    value={createUser.email}
                     onChange={inputHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -133,13 +133,13 @@ export default function UserFormPage() {
                 <select
                   id="roles"
                   name="role" // MANDATORY to use name otherwise the inputHandler won't work
-                  value={updateDetailsId.role}
+                  value={createUser.role}
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={inputHandler}
                 >
                   {roles.map((role, roleIndex) =>
                     // if loggedIn user is admin then admin can't update user to super-admin
-                    updateDetailsId.role === "admin" &&
+                    createUser.role === "admin" &&
                     role === "super-admin" ? null : (
                       <option key={roleIndex} value={role}>
                         {role}
@@ -166,7 +166,7 @@ export default function UserFormPage() {
                     htmlFor="checkbox"
                     className="ml-2 text-sm font-medium"
                   >
-                    {updateDetailsId.isActive ? "Active" : "Not Active"}
+                    {createUser.isActive ? "Active" : "Not Active"}
                   </label>
                 </div>
                 <div className="flex items-center mb-4">
@@ -188,7 +188,7 @@ export default function UserFormPage() {
                     htmlFor="checkbox"
                     className="ml-2 text-sm font-medium"
                   >
-                    {updateDetailsId.isBanned ? "Banned" : "Not Banned"}
+                    {createUser.isBanned ? "Banned" : "Not Banned"}
                   </label>
                 </div>
                 <div className="flex items-center">
@@ -210,7 +210,7 @@ export default function UserFormPage() {
                     htmlFor="checkbox"
                     className="ml-2 text-sm font-medium"
                   >
-                    {updateDetailsId.isVerified ? "Verified" : "Not Verified"}
+                    {createUser.isVerified ? "Verified" : "Not Verified"}
                   </label>
                 </div>
                 <div>
