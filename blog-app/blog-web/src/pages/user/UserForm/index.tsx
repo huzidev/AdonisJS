@@ -139,7 +139,7 @@ export default function UserFormPage() {
                 >
                   Password
                 </label>
-                <div className="mt-2">
+                <div className="mt-2 flex items-center">
                   <input
                     id="password"
                     name="password"
@@ -170,7 +170,7 @@ export default function UserFormPage() {
                 >
                   Confirm Password
                 </label>
-                <div className="mt-2">
+                <div className="mt-2 flex items-center">
                   <input
                     id="cpassword"
                     name="passwordConfirmation"
