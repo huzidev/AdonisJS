@@ -4,7 +4,7 @@ import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
 import { usePrevious } from "utils";
-import { UserDetailsEdit } from "./types";
+import { User, UserDetailsEdit } from "./types";
 
 export default function EditProfilePage() {
   const auth = useAuth();
@@ -15,7 +15,7 @@ export default function EditProfilePage() {
     username: ""
   });
 
-  const [updateDetailsId, setUpdateDetailsId] = useState<any>({
+  const [updateDetailsId, setUpdateDetailsId] = useState<User>({
     username: "",
     role: "",
     isVerified: false,
@@ -234,7 +234,7 @@ export default function EditProfilePage() {
                  <div>
                   <button
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    onClick={() => user.updateById({ ...updateDetailsId, id: params.id })}
+                    onClick={() => user.updateById({ id: params.id, ...updateDetailsId })}
                   >
                     Update Details
                   </button>
