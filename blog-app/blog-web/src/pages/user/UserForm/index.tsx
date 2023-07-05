@@ -4,6 +4,7 @@ import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
+import { detailsCreateUser, detailsId, detailsMe } from "./data";
 import { User, UserDetailsEdit } from "./types";
 
 export default function UserFormPage() {
@@ -11,17 +12,10 @@ export default function UserFormPage() {
   const user = useUser();
   const params = useParams();
   const userData = auth.state.user;
-  const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>({
-    username: "",
-  });
+  const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>(detailsMe);
   const value = useRef("");
-  const [updateDetailsId, setUpdateDetailsId] = useState<User>({
-    username: "",
-    role: "",
-    isVerified: false,
-    isBanned: false,
-    isActive: false,
-  });
+  const [updateDetailsId, setUpdateDetailsId] = useState<User>(detailsId);
+  const [createUser, setCreateUser] = useState<User>(detailsCreateUser);
   const fetchedData: any = user.state.getUser?.data;
 
   const isUpdate = window.location.pathname.includes("create");
