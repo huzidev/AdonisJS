@@ -10,7 +10,10 @@ export default function UsersRoutes() {
         Route.put("/edit/:id", `${path}.update`)
             .middleware('auth:admin')
             .where('id', /^[0-9]+$/);
-        Route.get("/all", `${path}.getAllUser`);
+        Route.get("/list", `${path}.getAllUser`);
+        Route.get("/list/:page", `${path}.getAllUser`)
+            .where('page', /^[0-9]+$/)
+            .middleware("auth:admin");
         Route.get("/get/:id", `${path}.getById`).where("id", /^[0-9]+$/);;
     }).prefix('/user')
 }       

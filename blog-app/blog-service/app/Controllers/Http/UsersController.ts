@@ -9,7 +9,7 @@ export default class UsersController {
         return { data: auth.user?.toJSON() }
     }
 
-    public async getAllUser() {
+    public async getAllUser({ params }: HttpContextContract) {
         const response = await User.all();
         return { message: "All Users fetched successfully", data: response }
     }
