@@ -11,3 +11,14 @@ export const detailsId: User = {
     isBanned: false,
     isActive: false,
 }
+
+export const detailsCreateUser: User = {
+    username: "",
+    email: "",
+    role: "",
+    isVerified: false,
+    isBanned: false,
+    isActive: false,
+    password: "",
+    passwordConfirmation: ""
+}
