@@ -2,6 +2,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
+import { hasPermission } from "utils";
 import { columns } from "./data";
 import { useUsersPageHooks } from "./hooks";
 
@@ -84,18 +85,33 @@ export default function UsersPage() {
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <div className="pl-4">
-                      <button
+                      {/* so admin can't get the access to edit super-admin */}
+                      {auth.state.user && !hasPermission(user.role, auth.state.user.role) ? (
+                        <button
                         className="text-blue-600"
                         // if admin clicked on own self then redirect to EditProfile instead on EditUser
                         onClick={() =>
                           Navigate(
-                            ROUTE_PATHS.EDIT_USER +
-                              (user.id === auth.state.user?.id ? "me" : user.id)
+                            ROUTE_PATHS.VIEW_PROFILE + user.id 
                           )
                         }
                       >
-                        Edit
+                        View Profile
                       </button>
+                      ) : (
+                        <button
+                          className="text-blue-600"
+                          // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                          onClick={() =>
+                            Navigate(
+                              ROUTE_PATHS.EDIT_USER +
+                                (user.id === auth.state.user?.id ? "me" : user.id)
+                            )
+                          }
+                        >
+                          Edit
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

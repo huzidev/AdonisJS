@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
-import { usePrevious } from "utils";
+import { usePrevious } from "utils/hooks";
 import { User, UserDetailsEdit } from "./types";
 
 export default function EditProfilePage() {
