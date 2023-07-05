@@ -9,11 +9,8 @@ import { useUsersPageHooks } from "./hooks";
 export default function UsersPage() {
   const user = useUser();
   const auth = useAuth();
-  const allUsers = user.state.allUser?.data;
+  const allUsers = user.state.getUserPage?.data;
   const Navigate = useNavigate();
-
-  console.log("all users from UI", allUsers);
-  
 
   useUsersPageHooks();
 

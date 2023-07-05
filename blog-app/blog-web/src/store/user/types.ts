@@ -23,7 +23,7 @@ export interface UserById extends SubState {
 }
 
 export interface UserByPage extends SubState {
-    data?: User | null;
+    data?: User[] | null;
     meta: PaginationMeta | null;
 }
 

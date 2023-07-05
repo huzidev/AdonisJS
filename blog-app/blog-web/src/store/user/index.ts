@@ -8,7 +8,7 @@ import { UpdateByIdPayload, UpdateMePayload, UserState } from './types';
 export const useUser = () => {
   const state = useSelector((state: any) => state.user) as UserState;
   const dispatch = useAppDispatch();
-  const allUser = () => dispatch(actions.allUser())
+  const allUser = () => dispatch(actions.allUser());
   const allUserPage = (payload: number) => dispatch(actions.allUserByPage(payload));
   const updateMe = (payload: UpdateMePayload) => dispatch(actions.updateMe(payload)); 
   const updateById = (payload: UpdateByIdPayload) => dispatch(actions.updateById(payload)); 
@@ -21,6 +21,7 @@ export const useUser = () => {
     updateMe,
     updateUserState,
     getById,
-    updateById
+    updateById,
+    allUserPage
   }
 }

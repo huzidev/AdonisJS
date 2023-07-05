@@ -42,7 +42,7 @@ export const allUser = createAsyncThunk(endpoints.USER_LIST, async () => {
 export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (page: number) => {
     try {
         const response = await api.get(endpoints.USER_LIST_PAGE + page);
-        return response.data.data;
+        return response.data.data.data;
     } catch (e) {
         console.log("Error", e);
     }
