@@ -59,7 +59,7 @@ export default function UsersPage() {
             </thead>
             <tbody className="text-gray-500">
             {allUsers?.map((user, userIndex) => (
-              // ket={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
+              // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                   <tr key={userIndex}>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <p className="whitespace-no-wrap">{user.id}</p>
