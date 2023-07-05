@@ -59,7 +59,7 @@ const routes: AppRoute[] = [
         Component: VerifyUserPage
     },
     {
-        path: ROUTE_PATHS.USERS,
+        path: `${ROUTE_PATHS.USERS_PAGE}:page`,
         Component: UsersPage
     }
 ]

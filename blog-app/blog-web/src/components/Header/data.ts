@@ -18,7 +18,7 @@ export const links = [
   },
   {
     title: 'Manage Users',
-    link: ROUTE_PATHS.USERS
+    link: ROUTE_PATHS.USERS_PAGE + 1
   },
   {
     title: 'View Profile',
@@ -41,6 +41,6 @@ export const loggedOutPaths = [
 export const adminPaths = [
   ROUTE_PATHS.ARTICLES,
   ROUTE_PATHS.ARTICLE_CREATE,
-  ROUTE_PATHS.USERS,
+  ROUTE_PATHS.USERS_PAGE + 1,
   ROUTE_PATHS.VIEW_PROFILE + "me"
 ]
