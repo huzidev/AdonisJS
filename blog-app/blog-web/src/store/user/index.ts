@@ -14,6 +14,7 @@ export const useUser = () => {
   const updateById = (payload: UpdateByIdPayload) => dispatch(actions.updateById(payload)); 
   const getById = (payload: number) => dispatch(actions.getById(payload));
   const updateUserState = (payload: User) => dispatch(userSlice.actions.updateUser(payload));
+  const createUser = (payload: User) => dispatch(actions.createUser(payload));
   
   return {
     state,
@@ -22,6 +23,7 @@ export const useUser = () => {
     updateUserState,
     getById,
     updateById,
-    allUserPage
+    allUserPage,
+    createUser
   }
 }
