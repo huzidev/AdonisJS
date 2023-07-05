@@ -22,10 +22,15 @@ export interface UserById extends SubState {
     data?: User | null;
 }
 
+export interface UserByPage extends SubState {
+    data?: User | null;
+}
+
 export interface UserState {
     user: User | null;
     allUser: AllUserList;
     updateMe: UpdateUserId;
     updateById: UpdateByIdPayload;
     getUser: UserById;
+    getUserPage: UserByPage;
 }

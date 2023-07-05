@@ -9,6 +9,7 @@ const initialState: UserState = {
     updateById: { ...subState, data: null },
     allUser: { ...subState, data: null },
     getUser: { ...subState, data: null },
+    getUserPage: { ...subState, data: [], meta: null },
     user: null
 }
 
