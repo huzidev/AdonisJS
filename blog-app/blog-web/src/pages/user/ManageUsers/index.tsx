@@ -25,22 +25,20 @@ export default function UsersPage() {
         </div>
         <div className="flex items-center justify-between">
           <div className="ml-10 space-x-8 lg:ml-40">
-            <button className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700">
+            <button 
+              className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700"
+              title="Create User"
+            >
               <svg
+                className="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="h-4 w-4"
+                fill="currentColor"
+                viewBox="0 0 18 20"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75"
-                />
+                <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z" />
               </svg>
-              CSV
+              Create User
             </button>
           </div>
         </div>
@@ -58,53 +56,51 @@ export default function UsersPage() {
               </tr>
             </thead>
             <tbody className="text-gray-500">
-            {allUsers?.map((user, userIndex) => (
-              // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
-                  <tr key={userIndex}>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <p className="whitespace-no-wrap">{user.id}</p>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <p className="whitespace-no-wrap">{user.username}</p>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <p className="whitespace-no-wrap">{user.role}</p>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <p className="whitespace-no-wrap">
-                        {user.isVerified ? "True" : "False"}
-                      </p>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <span className="whitespace-no-wrap">
-                        {user.isBanned ? "True" : "False"}
-                      </span>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <span className="whitespace-no-wrap">
-                        {user.isActive ? "True" : "In False"}
-                      </span>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <div className="pl-4">
-                        <button
-                          className="text-blue-600"
-                          // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                          onClick={() =>
-                            Navigate(
-                              ROUTE_PATHS.EDIT_USER +
-                                (user.id === auth.state.user?.id
-                                  ? "me"
-                                  : user.id)
-                            )
-                          }
-                        >
-                          Edit
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-            ))}
+              {allUsers?.map((user, userIndex) => (
+                // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
+                <tr key={userIndex}>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <p className="whitespace-no-wrap">{user.id}</p>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <p className="whitespace-no-wrap">{user.username}</p>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <p className="whitespace-no-wrap">{user.role}</p>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <p className="whitespace-no-wrap">
+                      {user.isVerified ? "True" : "False"}
+                    </p>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <span className="whitespace-no-wrap">
+                      {user.isBanned ? "True" : "False"}
+                    </span>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <span className="whitespace-no-wrap">
+                      {user.isActive ? "True" : "In False"}
+                    </span>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <div className="pl-4">
+                      <button
+                        className="text-blue-600"
+                        // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                        onClick={() =>
+                          Navigate(
+                            ROUTE_PATHS.EDIT_USER +
+                              (user.id === auth.state.user?.id ? "me" : user.id)
+                          )
+                        }
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
