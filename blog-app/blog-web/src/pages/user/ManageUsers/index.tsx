@@ -50,15 +50,17 @@ export default function UsersPage() {
           <table className="w-full">
             <thead>
               <tr className="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-                {columns.map((data) => (
-                  <th className="px-5 py-3">{data.title}</th>
+                {columns.map((data, columnIndex) => (
+                  <th className="px-5 py-3" key={columnIndex}>
+                    {data.title}
+                  </th>
                 ))}
               </tr>
             </thead>
+            <tbody className="text-gray-500">
             {allUsers?.map((user, userIndex) => (
               <>
-                <tbody className="text-gray-500">
-                  <tr>
+                  <tr key={Math.random()}>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <p className="whitespace-no-wrap">{user.id}</p>
                     </td>
@@ -102,9 +104,9 @@ export default function UsersPage() {
                       </div>
                     </td>
                   </tr>
-                </tbody>
               </>
             ))}
+            </tbody>
           </table>
         </div>
         <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
