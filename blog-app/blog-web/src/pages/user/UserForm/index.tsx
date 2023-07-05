@@ -42,7 +42,7 @@ export default function UserFormPage() {
     isUpdate ? (
       setCreateUser({
         ...createUser,
-        [name]: value,
+        [name]: type === "checkbox" ? checked : value,
       })
     ) : (
       params.id === "me" ? (
@@ -159,11 +159,11 @@ export default function UserFormPage() {
                     type="checkbox"
                     name="isActive"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
-                    checked={updateDetailsId.isActive ? true : false}
+                    checked={createUser.isActive ? true : false}
                     onClick={() =>
-                      setUpdateDetailsId({
-                        ...updateDetailsId,
-                        isActive: !updateDetailsId.isActive,
+                      setCreateUser({
+                        ...createUser,
+                        isActive: !createUser.isActive
                       })
                     }
                     onChange={inputHandler}
@@ -181,12 +181,12 @@ export default function UserFormPage() {
                     type="checkbox"
                     name="isBanned"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
-                    checked={updateDetailsId.isBanned ? true : false}
+                    checked={createUser.isBanned ? true : false}
                     onChange={inputHandler}
                     onClick={() =>
-                      setUpdateDetailsId({
-                        ...updateDetailsId,
-                        isBanned: !updateDetailsId.isBanned,
+                      setCreateUser({
+                        ...createUser,
+                        isBanned: !createUser.isBanned,
                       })
                     }
                   />
@@ -203,12 +203,12 @@ export default function UserFormPage() {
                     type="checkbox"
                     name="isVerified"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
-                    checked={updateDetailsId.isVerified ? true : false}
+                    checked={createUser.isVerified ? true : false}
                     onChange={inputHandler}
                     onClick={() =>
-                      setUpdateDetailsId({
-                        ...updateDetailsId,
-                        isVerified: !updateDetailsId.isVerified,
+                      setCreateUser({
+                        ...createUser,
+                        isVerified: !createUser.isVerified,
                       })
                     }
                   />
