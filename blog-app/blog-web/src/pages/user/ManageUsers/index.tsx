@@ -47,7 +47,7 @@ export default function UsersPage() {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+              <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
                 {columns.map((data, columnIndex) => (
                   <th className="px-5 py-3" key={columnIndex}>
                     {data.title}
