@@ -11,6 +11,7 @@ export default class ArticlesController {
         const userId = params.id;
         const query = Article.query();
 
+        // if user wanted to see allBlogs uploaded by him
         if (userId) {
             query.where('owner_id', userId);
         }
