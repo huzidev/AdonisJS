@@ -6,36 +6,35 @@ import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { User, UserDetailsEdit } from "./types";
 
-export default function EditProfilePage() {
+export default function UserFormPage() {
   const auth = useAuth();
   const user = useUser();
   const params = useParams();
   const userData = auth.state.user;
   const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>({
-    username: ""
+    username: "",
   });
-
   const value = useRef("");
-
-  const fetchedData: any = user.state.getUser?.data;
-
   const [updateDetailsId, setUpdateDetailsId] = useState<User>({
     username: "",
     role: "",
     isVerified: false,
     isBanned: false,
-    isActive: false
+    isActive: false,
   });
-  
+  const fetchedData: any = user.state.getUser?.data;
+
+  const isUpdate = window.location.pathname.includes("create");
+
   const prevUpdateState = usePrevious(user.state.updateMe);
   const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
 
   useEffect(() => {
     if (params.id === "me") {
-      setUpdateDetailsMe({ ...updateDetailsMe, ...userData })
+      setUpdateDetailsMe({ ...updateDetailsMe, ...userData });
     } else {
-      setUpdateDetailsId({ ...updateDetailsId, ...fetchedData })
+      setUpdateDetailsId({ ...updateDetailsId, ...fetchedData });
       // so value will only be fetched if fetchedData is not undefined
       // using useRef other wise the value is updating on own on the heading as well where Edit ${value.current} Details is written
       if (fetchedData) {
@@ -49,12 +48,12 @@ export default function EditProfilePage() {
     if (params.id === "me") {
       setUpdateDetailsMe({
         ...updateDetailsMe,
-        [name]: value
+        [name]: value,
       });
     } else {
       setUpdateDetailsId({
         ...updateDetailsId,
-        [name]: type === "checkbox" ? checked : value
+        [name]: type === "checkbox" ? checked : value,
       });
     }
   }
@@ -85,7 +84,9 @@ export default function EditProfilePage() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            {params.id === "me"
+            {isUpdate
+              ? "Create User"
+              : params.id === "me"
               ? "Edit Yours Details"
               : `Edit ${value.current} Details`}
           </h2>
@@ -153,9 +154,8 @@ export default function EditProfilePage() {
                 >
                   {roles.map((role, roleIndex) =>
                     // if loggedIn user is admin then admin can't update user to super-admin
-                    updateDetailsId.role === "admin" && role === "super-admin" ? (
-                      null
-                    ) : (
+                    updateDetailsId.role === "admin" &&
+                    role === "super-admin" ? null : (
                       <option key={roleIndex} value={role}>
                         {role}
                       </option>
@@ -217,7 +217,7 @@ export default function EditProfilePage() {
                     onClick={() =>
                       setUpdateDetailsId({
                         ...updateDetailsId,
-                        isVerified: !updateDetailsId.isVerified
+                        isVerified: !updateDetailsId.isVerified,
                       })
                     }
                   />
@@ -228,10 +228,15 @@ export default function EditProfilePage() {
                     {updateDetailsId.isVerified ? "Verified" : "Not Verified"}
                   </label>
                 </div>
-                 <div>
+                <div>
                   <button
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    onClick={() => user.updateById({ ...updateDetailsId, id: Number(params.id) })}
+                    onClick={() =>
+                      user.updateById({
+                        ...updateDetailsId,
+                        id: Number(params.id),
+                      })
+                    }
                   >
                     Update Details
                   </button>
