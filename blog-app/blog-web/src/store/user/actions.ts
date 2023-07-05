@@ -30,9 +30,18 @@ export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: U
     }
 });
 
-export const allUser = createAsyncThunk(endpoints.LIST, async () => {
+export const allUser = createAsyncThunk(endpoints.USER_LIST, async () => {
     try {
-        const response = await api.get(endpoints.LIST);
+        const response = await api.get(endpoints.USER_LIST);
+        return response.data.data;
+    } catch (e) {
+        console.log("Error", e);
+    }
+})
+
+export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (page: number) => {
+    try {
+        const response = await api.get(endpoints.USER_LIST_PAGE + page);
         return response.data.data;
     } catch (e) {
         console.log("Error", e);
