@@ -10,6 +10,7 @@ const initialState: UserState = {
     allUser: { ...subState, data: null },
     getUser: { ...subState, data: null },
     getUserPage: { ...subState, data: null, meta: null },
+    createUser: { ...subState },
     user: null
 }
 
@@ -83,6 +84,16 @@ export const userSlice = createSlice({
         })
         builder.addCase(actions.updateById.rejected, (state) => {
             state.updateById = {loading: false, error: true};
+        })
+        // createUserByAdmin
+        builder.addCase(actions.createUser.pending, (state) => {
+            state.createUser = {loading: true, error: false};
+        })
+        builder.addCase(actions.createUser.fulfilled, (state) => {
+            state.createUser = {loading: false, error: false};
+        })
+        builder.addCase(actions.createUser.rejected, (state) => {
+            state.createUser = {loading: false, error: true};
         })
     }
 });

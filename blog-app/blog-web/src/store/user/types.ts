@@ -33,5 +33,6 @@ export interface UserState {
     updateMe: UpdateUserId;
     updateById: UpdateByIdPayload;
     getUser: UserById;
+    createUser: SubState;
     getUserPage: UserByPage;
 }

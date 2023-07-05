@@ -30,9 +30,9 @@ export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: U
     }
 });
 
-export const createUser = createAsyncThunk(endpoints.UPDATE_USER, async (data: UpdateByIdPayload): Promise<User | null> => {
+export const createUser = createAsyncThunk(endpoints.CREATE_USER, async (data: User) => {
     try {
-        const response = await api.put(endpoints.UPDATE_USER + data.id, data);
+        const response = await api.put(endpoints.CREATE_USER, data);
         if (response.status === 200) {
             alert("Details Updated")
         }
