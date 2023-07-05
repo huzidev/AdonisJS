@@ -156,7 +156,7 @@ export default function UserFormPage() {
                 <div className="mt-2">
                   <input
                     id="cpassword"
-                    name="cpassword"
+                    name="passwordConfirmation"
                     type="password"
                     value={createUser.passwordConfirmation}
                     onChange={inputHandler}
