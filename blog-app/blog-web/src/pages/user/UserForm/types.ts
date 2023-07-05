@@ -3,9 +3,12 @@ export interface UserDetailsEdit {
 }
 
 export interface User {
+    email: string;
     username: string;
     role: string;
     isActive: boolean;
     isVerified: boolean;
     isBanned: boolean;
+    password: string;
+    passwordConfirmation?: string;
 }
