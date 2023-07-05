@@ -12,3 +12,8 @@ export interface User {
     password?: string;
     passwordConfirmation?: string;
 }
+
+export interface BooleanState {
+  valuePass: boolean;
+  valueConfPass: boolean;
+}

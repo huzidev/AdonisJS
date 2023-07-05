@@ -1,11 +1,13 @@
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
-import { detailsCreateUser, detailsId, detailsMe } from "./data";
-import { User, UserDetailsEdit } from "./types";
+import { detailsBoolean, detailsCreateUser, detailsId, detailsMe } from "./data";
+import { BooleanState, User, UserDetailsEdit } from "./types";
 
 export default function UserFormPage() {
   const auth = useAuth();
@@ -16,6 +18,7 @@ export default function UserFormPage() {
   const value = useRef("");
   const [updateDetailsId, setUpdateDetailsId] = useState<User>(detailsId);
   const [createUser, setCreateUser] = useState<any>(detailsCreateUser);
+  const [booleanState, setBooleanState] = useState<BooleanState>(detailsBoolean);
   const fetchedData: any = user.state.getUser?.data;
 
   const isUpdate = window.location.pathname.includes("create");
@@ -140,12 +143,26 @@ export default function UserFormPage() {
                   <input
                     id="password"
                     name="password"
-                    type="password"
+                    type={booleanState.valuePass ? "text" : "password"}
                     value={createUser.password}
                     onChange={inputHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
+                  <span
+                    onClick={() =>
+                      setBooleanState({
+                        ...booleanState,
+                        valuePass: !booleanState.valuePass,
+                      })
+                    }
+                  >
+                    {booleanState.valuePass ? (
+                      <RemoveRedEyeOutlinedIcon fontSize="small" />
+                    ) : (
+                      <VisibilityOffIcon fontSize="small" />
+                    )}
+                  </span>
                 </div>
                 <label
                   htmlFor="cpassword"
@@ -157,12 +174,26 @@ export default function UserFormPage() {
                   <input
                     id="cpassword"
                     name="passwordConfirmation"
-                    type="password"
+                    type={booleanState.valueConfPass ? "text" : "password"}
                     value={createUser.passwordConfirmation}
                     onChange={inputHandler}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
+                  <span
+                    onClick={() =>
+                      setBooleanState({
+                        ...booleanState,
+                        valueConfPass: !booleanState.valueConfPass,
+                      })
+                    }
+                  >
+                    {booleanState.valueConfPass ? (
+                      <RemoveRedEyeOutlinedIcon fontSize="small" />
+                    ) : (
+                      <VisibilityOffIcon fontSize="small" />
+                    )}
+                  </span>
                 </div>
                 <label
                   htmlFor="roles"
