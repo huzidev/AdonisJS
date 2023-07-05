@@ -11,7 +11,7 @@ export default function ViewProfilePage() {
   const blogs = useBlogs();
   const user = useUser();
   const params: any = useParams();
-  const data = auth.state.user;
+  const data  = auth.state.user;
   const userDataById = user.state.getUser?.data;
   const currentPage: any = blogs.state.getBlogsById.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
@@ -22,7 +22,8 @@ export default function ViewProfilePage() {
   const [userDetails, setUserDetails] = useState<UserDetailState>({
     username: "",
     email: "",
-    createdAt: ""
+    createdAt: "",
+    role: ""
   });
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   const userId: any= auth.state.user?.id;
@@ -31,7 +32,7 @@ export default function ViewProfilePage() {
   let allBlogsById = blogs.state.getBlogsById.data;
   let userBlogs = allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total; 
-  
+
   useEffect(() => {
     if (params.id !== "me" && Number(params.id) !== userDataById?.id) {
       user.getById(params.id);
@@ -68,7 +69,7 @@ export default function ViewProfilePage() {
             User Profile
           </h1>
           <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Name : {userDetails.username + ` (${user.state.getUser.data?.role})`} 
+            Name : {userDetails.username + ` (${userDetails.role})`} 
           </h2>
           <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             Email : {userDetails.email}
