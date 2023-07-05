@@ -14,6 +14,7 @@ export default function UsersRoutes() {
         Route.get("/list/:page", `${path}.getAllUser`)
             .where('page', /^[0-9]+$/)
             .middleware("auth:admin");
-        Route.get("/get/:id", `${path}.getById`).where("id", /^[0-9]+$/);;
+        Route.post('/create', `${path}.create`).middleware('auth:admin');
+        Route.get("/get/:id", `${path}.getById`).where("id", /^[0-9]+$/);
     }).prefix('/user')
 }       
