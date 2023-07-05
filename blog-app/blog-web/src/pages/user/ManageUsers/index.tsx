@@ -12,6 +12,9 @@ export default function UsersPage() {
   const allUsers = user.state.allUser?.data;
   const Navigate = useNavigate();
 
+  console.log("all users from UI", allUsers);
+  
+
   useUsersPageHooks();
 
   return (

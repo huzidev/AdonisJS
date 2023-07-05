@@ -3,12 +3,12 @@ import { useUser } from "store/user";
 
 export function useUsersPageHooks(): void {
   const user = useUser();
-  const allUsers: any = user.state.allUser?.data;
+  const allUsers: any = user.state.allUser.data;
 
     useEffect(() => {
     // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
     if (!allUsers) {
-        user.allUser()
+      user.allUser()
     }
   }, []);
 }
