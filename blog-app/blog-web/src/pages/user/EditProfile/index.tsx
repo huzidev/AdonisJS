@@ -54,14 +54,15 @@ export default function EditProfilePage() {
     }
   }, [params.id]);
 
-  let userInfo = user.state.getUser.data;
+  let userInfo: any = user.state.getUser.data;
+  
   const {
     username,
     isActive,
     isBanned,
     isVerified,
     role: userRole
-  } = userInfo || {};
+  } = userInfo;
   
   useEffect(() => {
     setUpdateDetailsId({
