@@ -40,17 +40,24 @@ export default function UserFormPage() {
 
   function inputHandler(e: React.ChangeEvent) {
     const { name, value, type, checked } = e.target as HTMLInputElement;
-    if (params.id === "me") {
-      setUpdateDetailsMe({
-        ...updateDetailsMe,
+    isUpdate ? (
+      setCreateUser({
+        ...createUser,
         [name]: value,
-      });
-    } else {
-      setUpdateDetailsId({
-        ...updateDetailsId,
-        [name]: type === "checkbox" ? checked : value,
-      });
-    }
+      })
+    ) : (
+      params.id === "me" ? (
+        setUpdateDetailsMe({
+          ...updateDetailsMe,
+          [name]: value,
+        })
+       ) : (
+        setUpdateDetailsId({
+          ...updateDetailsId,
+          [name]: type === "checkbox" ? checked : value,
+        })
+       )
+    )
   }
 
   useEffect(() => {
