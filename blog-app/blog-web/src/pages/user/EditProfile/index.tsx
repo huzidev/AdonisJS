@@ -16,6 +16,7 @@ export default function EditProfilePage() {
   });
 
   const [updateDetailsId, setUpdateDetailsId] = useState<User>({
+    id: 21,
     username: "",
     role: "",
     isVerified: false,
@@ -55,27 +56,18 @@ export default function EditProfilePage() {
   }, [params.id]);
 
   let userInfo: any = user.state.getUser.data;
-  
-  const {
-    username,
-    isActive,
-    isBanned,
-    isVerified,
-    role: userRole
-  } = userInfo;
-  
+
   useEffect(() => {
     setUpdateDetailsId({
-      username,
-      role: userRole,
-      isActive: isActive ? true : false,
-      isBanned: isBanned ? true : false,
-      isVerified: isVerified ? true : false
+      username: userInfo.username,
+      role: userInfo.role,
+      isActive: userInfo.isActive ? true : false,
+      isBanned: userInfo.isBanned ? true : false,
+      isVerified: userInfo.isVerified ? true : false,
+      id: userInfo.id
     });
   }, [userInfo]);
 
-  console.log("user info", updateDetailsId);
-  
 
    function inputCheckHandler(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) {
     setUpdateDetailsId({
@@ -96,7 +88,7 @@ export default function EditProfilePage() {
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             {params.id === "me"
               ? "Edit Yours Details"
-              : `Edit ${username} Details`}
+              : `Edit ${updateDetailsId.username} Details`}
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -234,7 +226,7 @@ export default function EditProfilePage() {
                  <div>
                   <button
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    onClick={() => user.updateById({ id: params.id, ...updateDetailsId })}
+                    onClick={() => user.updateById({...updateDetailsId, id: 24})}
                   >
                     Update Details
                   </button>

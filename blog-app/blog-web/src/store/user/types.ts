@@ -5,7 +5,7 @@ export interface UpdateMePayload {
     username?: string;    
 }
 
-export interface UpdateByIdPayload extends SubState {
+export interface UpdateByIdPayload extends Partial<SubState> {
     id?: number;
     data?: User | null;
 }

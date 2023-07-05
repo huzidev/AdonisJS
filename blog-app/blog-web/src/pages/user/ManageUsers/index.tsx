@@ -58,7 +58,7 @@ export default function UsersPage() {
             {allUsers?.map((user, userIndex) => (
               <>
                 <tbody className="text-gray-500">
-                  <tr key={userIndex}>
+                  <tr>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <p className="whitespace-no-wrap">{user.id}</p>
                     </td>
@@ -83,17 +83,24 @@ export default function UsersPage() {
                         {user.isActive ? "True" : "In False"}
                       </span>
                     </td>
-                <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                  <div className="pl-4">
-                    <button 
-                      className="text-blue-600"
-                      // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                      onClick={() => Navigate(ROUTE_PATHS.EDIT_USER + (user.id === auth.state.user?.id ? "me" : user.id))}
-                    >
-                      Edit
-                    </button>
-                  </div>
-                </td>
+                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                      <div className="pl-4">
+                        <button
+                          className="text-blue-600"
+                          // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                          onClick={() =>
+                            Navigate(
+                              ROUTE_PATHS.EDIT_USER +
+                                (user.id === auth.state.user?.id
+                                  ? "me"
+                                  : user.id)
+                            )
+                          }
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 </tbody>
               </>

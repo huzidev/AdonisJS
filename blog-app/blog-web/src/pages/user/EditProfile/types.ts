@@ -3,6 +3,7 @@ export interface UserDetailsEdit {
 }
 
 export interface User {
+    id: number | null;
     username: string;
     role: string;
     isActive: boolean;
