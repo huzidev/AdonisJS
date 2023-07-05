@@ -12,8 +12,7 @@ export default function UserFormPage() {
   const user = useUser();
   const params = useParams();
   const userData = auth.state.user;
-  const [updateDetailsMe, setUpdateDetailsMe] =
-    useState<UserDetailsEdit>(detailsMe);
+  const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>(detailsMe);
   const value = useRef("");
   const [updateDetailsId, setUpdateDetailsId] = useState<User>(detailsId);
   const [createUser, setCreateUser] = useState<User>(detailsCreateUser);
@@ -146,7 +145,7 @@ export default function UserFormPage() {
                 >
                   {roles.map((role, roleIndex) =>
                     // if loggedIn user is admin then admin can't update user to super-admin
-                    createUser.role === "admin" &&
+                    auth.state.user?.role === "admin" &&
                     role === "super-admin" ? null : (
                       <option key={roleIndex} value={role}>
                         {role}
