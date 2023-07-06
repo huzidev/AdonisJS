@@ -15,8 +15,10 @@ export default function ViewProfilePage() {
   const userDataById = user.state.getUser?.data;
   const currentPage: any = blogs.state.getBlogsById.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
+  const isUser = auth.state.user?.role === "user";
+  const isMe = params.id === "me";
   const [payload, setPayload] = useState<any>({
-    userId: params.id === "me" ? Number(auth.state.user?.id) : Number(params.id),
+    userId: isMe ? Number(auth.state.user?.id) : Number(params.id),
     page: 1
   })
   const [userDetails, setUserDetails] = useState<UserDetailState>({
@@ -28,7 +30,7 @@ export default function ViewProfilePage() {
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   const userId: any= auth.state.user?.id;
 
-  let currentId = params.id === "me" ? userId : Number(params.id);
+  let currentId = isMe ? userId : Number(params.id);
   let allBlogsById = blogs.state.getBlogsById.data;
   let userBlogs = allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total; 
@@ -37,7 +39,7 @@ export default function ViewProfilePage() {
     if (params.id !== "me" && Number(params.id) !== userDataById?.id) {
       user.getById(params.id);
       blogs.getBlogsById(payload);
-    } else if (params.id === "me" && !userBlogs.length) {
+    } else if (isMe && !userBlogs.length) {
         blogs.getBlogsById(payload);
       }
     }, [params.id, currentId]);
@@ -46,7 +48,7 @@ export default function ViewProfilePage() {
   useEffect(() => {
     if (params.id !== "me" && userDataById) {
       setUserDetails({ ...userDetails, ...userDataById });
-    } else if (params.id === "me" && data) {
+    } else if (isMe && data) {
       setUserDetails({ ...userDetails, ...data });
     }
   }, [userDataById, params.id]);
@@ -60,8 +62,7 @@ export default function ViewProfilePage() {
     blogs.getBlogsById(updatedPayload);
   }
 
-  const isUser = auth.state.user?.role === "user";
-  const isMe = params.id === "me";
+  
 
   return (
     <>
@@ -86,7 +87,7 @@ export default function ViewProfilePage() {
               : `Total Blogs : ${totalBlogs}`
             }
           </h2>
-          {params.id === "me" && (
+          {isMe && (
             <Link
               to={ROUTE_PATHS.EDIT_USER + "me"}
               type="button"
@@ -100,9 +101,9 @@ export default function ViewProfilePage() {
       <div className="w-11/12 mx-auto">
         <h1 className="text-2xl font-bold tracking-tight">
           {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
-          {isUser && params.id === "me"
+          {isUser && isMe
             ? "Blogs Liked By You"
-            : `Blogs Uploaded By ${params.id !== "me" ? userDetails.username : "You"}`
+            : `Blogs Uploaded By ${!isMe ? userDetails.username : "You"}`
           }
         </h1>
       </div>
@@ -170,13 +171,13 @@ export default function ViewProfilePage() {
           : !blogs.state.getBlogs?.loading && (
             <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
-                Oops... You haven't uploaded any blog yet
+                Oops... You haven't {isUser && isMe ? "Liked" : "Uploaded"} any blog yet
               </h1>
                 <Link
                 to={ROUTE_PATHS.ARTICLE_CREATE}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
                 title="Add Blogs">
-                  Add Blogs
+                  {isUser && isMe ? "Explore Blogs" : "Add Blog"}
                 </Link>
             </div>
           )}
