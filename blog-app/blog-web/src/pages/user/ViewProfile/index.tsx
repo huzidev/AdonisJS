@@ -189,7 +189,7 @@ export default function ViewProfilePage() {
                     className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
                     title="Add Blogs"
                   >
-                    {isUser && isMe ? "Explore Blogs" : "Add Blog"}
+                    {isMe ? "Add Blog" : "Explore Blogs"}
                   </Link>
                 </div>
               )}
