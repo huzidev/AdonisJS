@@ -164,8 +164,13 @@ export default class AuthController {
             let verificationCode = await ResetPasswordCode.query()
                 .where("code", body.code)
                 .where("isActive", true)
+                // preload is working because in ResetPasswordCode model we've created a relation 
+                // @belongsTo(() => User)
+                //  public user: BelongsTo<typeof User>
+                // this allows preloads to make relationship with two tables and to be executed in a single query()
                 .preload("user", (query) => query.where("isActive", true))
                 .first()
+                
             if (!verificationCode || verificationCode?.user?.email !== body.email) {
                 throw { message: 'Invalid Code', status: 404 }
             }
