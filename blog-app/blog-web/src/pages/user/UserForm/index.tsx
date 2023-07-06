@@ -364,7 +364,7 @@ export default function UserFormPage() {
                 </div>
                 <div className="flex items-center mb-4">
                   <input
-                    id="checkbox"
+                    id="checkboxB"
                     type="checkbox"
                     name="isBanned"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
@@ -378,7 +378,7 @@ export default function UserFormPage() {
                     }
                   />
                   <label
-                    htmlFor="checkbox"
+                    htmlFor="checkboxB"
                     className="ml-2 text-sm font-medium"
                   >
                     {updateDetailsId.isBanned ? "Banned" : "Not Banned"}
@@ -386,7 +386,7 @@ export default function UserFormPage() {
                 </div>
                 <div className="flex items-center">
                   <input
-                    id="checkbox"
+                    id="checkboxV"
                     type="checkbox"
                     name="isVerified"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
@@ -400,7 +400,7 @@ export default function UserFormPage() {
                     }
                   />
                   <label
-                    htmlFor="checkbox"
+                    htmlFor="checkboxV"
                     className="ml-2 text-sm font-medium"
                   >
                     {updateDetailsId.isVerified ? "Verified" : "Not Verified"}
