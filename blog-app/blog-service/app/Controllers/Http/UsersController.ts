@@ -51,7 +51,7 @@ export default class UsersController {
             throw {
                 message: 'User already in use',
                 status: 409,
-            }
+            }   
         }
         throw e
         }

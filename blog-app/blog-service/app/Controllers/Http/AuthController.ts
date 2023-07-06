@@ -67,6 +67,7 @@ export default class AuthController {
         }
     }
 
+    // send Verification code
     public async verifyEmailSendCode({ auth }: HttpContextContract) {
         console.log("auth id", auth.user?.id);
         const code = await EmailVerificationCode.findBy('user_id', auth.user?.id!)
@@ -86,6 +87,7 @@ export default class AuthController {
         }
     }
 
+    // verify Verification code
     public async verifyEmailVerifyCode({ request, auth }: HttpContextContract) {
         const trx = await Database.transaction()
         try {
