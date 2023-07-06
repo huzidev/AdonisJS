@@ -72,6 +72,11 @@ export default class AuthController {
     public async verifyEmailSendCode({ auth }: HttpContextContract) {
         console.log("auth id", auth.user?.id);
         const code = await EmailVerificationCode.findBy('user_id', auth.user?.id!)
+            if (!code) {
+                const verificationCode = new EmailVerificationCode();
+                verificationCode.userId = auth.user!.id;
+                await verificationCode.save();
+            }
         if (code?.updatedAt.plus({ minutes: 1 })! > DateTime.local()) {
             throw { message: 'Please wait a minute before sending the code again', status: 422 }
         }
@@ -122,7 +127,7 @@ export default class AuthController {
     public async verifyEmailVerifyCode({ request, auth }: HttpContextContract) {
         const trx = await Database.transaction()
         try {
-            const body = await request.validate(AuthVerifyEmailVerificationCode)
+            const body = await request.validate(AuthVerifyEmailVerificationCode);
             console.log("body", body);
             
             let verificationCode = await EmailVerificationCode.query()
@@ -139,16 +144,17 @@ export default class AuthController {
             if (verificationCode.expiresAt < DateTime.local()) {
                 throw { message: 'Expired code, Not valid anymore', status: 422 }
             }   
+            
+            // here we can't use verificationCode.user.useTransaction(trx) as we've in resetPassword because we haven't used preload here
             verificationCode.useTransaction(trx)
-            verificationCode.user.useTransaction(trx);
-            // when verificationCode is used then it'll be changed to false
             verificationCode.isActive = false;
-            verificationCode.user.isVerified = true;
-            // auth.user!.useTransaction(trx)
+            // when verificationCode is used then it'll be changed to false
+            auth.user!.useTransaction(trx)
             // after verification user isVerified will changed to true
-            // auth.user!.isVerified = true
+            auth.user!.isVerified = true
             // Promise.all will wait for bith properties to be saved into database then proceeds further calling both seprately would cause error
-            await Promise.all([verificationCode.save(), verificationCode.user.save()])
+
+            await Promise.all([auth.user?.save(), verificationCode.save()])
             await trx.commit();
 
             return { message: 'Code verified successfully' }
@@ -171,7 +177,7 @@ export default class AuthController {
                 // @belongsTo(() => User)
                 //  public user: BelongsTo<typeof User>
                 // this allows preloads to make relationship with two tables and to be executed in a single query()
-                .preload("user", (query) => query.where("isActive", true))
+                .preload("user", (query) => query.where("isActive", true)) // using Preload here to check if user is Active or Not
                 .first()
                 
             if (!verificationCode || verificationCode?.user?.email !== body.email) {
