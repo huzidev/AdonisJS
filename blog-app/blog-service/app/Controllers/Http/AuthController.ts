@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
 import EmailVerificationCode from 'App/Models/EmailVerificationCode';
+import ResetPasswordCode from 'App/Models/ResetPasswordCode';
 import User from "App/Models/User";
 import { AuthResetPasswordSendCode, AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
 import { DateTime } from 'luxon';
@@ -97,9 +98,23 @@ export default class AuthController {
         if (!user) {
             throw { message: 'No user is registered with this email', status: 404 }
         }
-        let verificationCode = await Reset
+        let verificationCode = await ResetPasswordCode.findBy("userId", user.id);
 
-        
+        if (!verificationCode) {
+            // if No verificationCode then creates a new ResetPasswordCode record associated with the user's ID
+            verificationCode = await ResetPasswordCode.create({ userId: user.id })
+        } else {
+            // if user asked for new verification code before a minute
+            if (verificationCode.isActive && verificationCode.updatedAt.plus({ minutes: 1 }) > DateTime.local()) {
+                throw { message: 'Please wait a minute before sending the code again', status: 422 }
+            }
+            verificationCode.generateCode();
+            await verificationCode.save();
+        }
+        return {
+            message: 'Reset password code send',
+            data: verificationCode?.code
+        }
     }
 
     // verify Verification code

@@ -11,6 +11,7 @@ export default class EmailVerificationCode extends BaseModel {
   public code: string
 
   @column()
+  // in database it is user_id but we've to write it in camelCase
   public userId: number
 
   @belongsTo(() => User)
