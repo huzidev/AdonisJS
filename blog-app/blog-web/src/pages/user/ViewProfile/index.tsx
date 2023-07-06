@@ -182,14 +182,15 @@ export default function ViewProfilePage() {
                   </h1>
                   <Link
                     to={
-                      isUser && isMe
-                        ? ROUTE_PATHS.ARTICLES
-                        : ROUTE_PATHS.ARTICLE_CREATE
+                      isMe && !isUser
+                        ? ROUTE_PATHS.ARTICLE_CREATE
+                        : ROUTE_PATHS.ARTICLES
                     }
                     className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                    title="Add Blogs"
+                    title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
                   >
-                    {isMe ? "Add Blog" : "Explore Blogs"}
+                    {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
+                    {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
                   </Link>
                 </div>
               )}
