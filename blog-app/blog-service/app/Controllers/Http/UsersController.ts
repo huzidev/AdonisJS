@@ -43,13 +43,13 @@ export default class UsersController {
         try {
         const body = await request.validate(UserCreate);
         const user = await User.create(body);
-        // after saving new user data to database calling refresh to get latest data from database
+        // calling refresh to get latest data from database
         await user.refresh();
         return { message: 'User created successfully', data: user }
         } catch (e) {
         if (e.code === 'ER_DUP_ENTRY') {
             throw {
-                message: 'Email already in use',
+                message: 'User already in use',
                 status: 409,
             }
         }
