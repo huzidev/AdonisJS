@@ -60,6 +60,9 @@ export default function ViewProfilePage() {
     blogs.getBlogsById(updatedPayload);
   }
 
+  const isUser = auth.state.user?.role === "user";
+  const isMe = params.id === "me";
+
   return (
     <>
     <div>
@@ -78,7 +81,10 @@ export default function ViewProfilePage() {
             Joined Date : {formatedDate}
           </h2>
           <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Total Blogs : {totalBlogs}
+            {isUser && isMe
+              ? "Total Blogs Liked :"
+              : `Total Blogs : ${totalBlogs}`
+            }
           </h2>
           {params.id === "me" && (
             <Link
@@ -94,7 +100,7 @@ export default function ViewProfilePage() {
       <div className="w-11/12 mx-auto">
         <h1 className="text-2xl font-bold tracking-tight">
           {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
-          {auth.state.user?.role === "user" && params.id === "me"
+          {isUser && params.id === "me"
             ? "Blogs Liked By You"
             : `Blogs Uploaded By ${params.id !== "me" ? userDetails.username : "You"}`
           }
