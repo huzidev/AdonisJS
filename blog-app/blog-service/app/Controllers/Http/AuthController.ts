@@ -161,6 +161,28 @@ export default class AuthController {
         const trx = await Database.transaction();
         try {
             const body = await request.validate(AuthResetPassword);
+            let verificationCode = await ResetPasswordCode.query()
+                .where("code", body.code)
+                .where("isActive", true)
+                .preload("user", (query) => query.where("isActive", true))
+                .first()
+            if (!verificationCode || verificationCode?.user?.email !== body.email) {
+                throw { message: 'Invalid Code', status: 404 }
+            }
+            if (verificationCode.expiresAt < DateTime.local()) {
+                throw { message: 'Expired code', status: 422 }
+            }
+            verificationCode.useTransaction(trx);
+            verificationCode.user.useTransaction(trx);
+
+            verificationCode.isActive = false;
+            //  user's password is updated with the new password provided in the request body
+            verificationCode.user.password = body.password;
+
+            await Promise.all([verificationCode.save(), verificationCode.user.save()])
+            await trx.commit();
+        
+            return { message: "Password reset successfully" }
         } catch (e) {
             trx.rollback();
             throw e
