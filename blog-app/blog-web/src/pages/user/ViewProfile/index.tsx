@@ -93,7 +93,11 @@ export default function ViewProfilePage() {
       </div>
       <div className="w-11/12 mx-auto">
         <h1 className="text-2xl font-bold tracking-tight">
-          Blogs Uploaded By { params.id !== "me" ? userDetails.username : "You" }
+          {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
+          {auth.state.user?.role === "user" && params.id === "me"
+            ? "Blogs Liked By You"
+            : `Blogs Uploaded By ${params.id !== "me" ? userDetails.username : "You"}`
+          }
         </h1>
       </div>
       <div className="w-11/12 mx-auto flex flex-wrap">
