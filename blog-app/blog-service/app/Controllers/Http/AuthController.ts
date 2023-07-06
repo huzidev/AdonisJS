@@ -72,6 +72,7 @@ export default class AuthController {
     public async verifyEmailSendCode({ auth }: HttpContextContract) {
         console.log("auth id", auth.user?.id);
         const code = await EmailVerificationCode.findBy('user_id', auth.user?.id!)
+        // if user's details is not saved in EmailVerificationCode table this happened when admin creates a user
             if (!code) {
                 const verificationCode = new EmailVerificationCode();
                 verificationCode.userId = auth.user!.id;
