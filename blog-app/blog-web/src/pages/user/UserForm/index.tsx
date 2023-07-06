@@ -92,7 +92,7 @@ export default function UserFormPage() {
               ? "Create User"
               : params.id === "me"
               ? "Edit Yours Details"
-              : `Edit ${value.current} Details`}
+              : `Edit ${value.current}'s Details`}
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
