@@ -8,6 +8,9 @@ const ROUTE_PATHS = {
   EDIT_USER: '/user/edit/',
   USERS_PAGE: '/user/list/',
   USER_CREATE: '/user/create',
+  
+  RESET_PASSWORD: '/reset_password',
+  SEND_RESET_PASSWORD: '/send_reset_password',
 
   ARTICLE_CREATE: '/blog/add',
   ARTICLE_UPDATE: '/blog/edit/',
