@@ -44,7 +44,7 @@ export default function Header() {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               {auth.state.init.init && links.map((data, dataIndex) =>
-                // user has to be verified to access the links
+                // user has to be verified to access the links and if user role is "user" then not to show addBlog Page
                 user && (user.role === "blogger" ? loggedInPathsBlogger.includes(data.link) : loggedInPathsUser.includes(data.link)) && user.isVerified ? (
                     <li key={dataIndex}>
                       <Link
