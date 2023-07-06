@@ -14,7 +14,7 @@ export default class AuthController {
             console.log("body", body);
             
             const user = new User();
-            const verificationCode = new EmailVerificationCode()
+            const verificationCode = new EmailVerificationCode();
             
             // because we used new User() therefore use user.save() for saving at database
             user.useTransaction(trx)

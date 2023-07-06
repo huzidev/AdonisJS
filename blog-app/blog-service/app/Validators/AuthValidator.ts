@@ -49,3 +49,13 @@ export class AuthVerifyEmailVerificationCode {
     'code.*': 'Invalid code'
   }
 }
+
+export class AuthResetPasswordSendCode {
+  public schema = schema.create({
+    email: schema.string({}, [rules.email()]),
+  })
+
+  public messages = {
+    required: '{{ field }} is required to reset password',
+  }
+}
