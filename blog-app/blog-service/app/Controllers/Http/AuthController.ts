@@ -3,7 +3,7 @@ import Database from '@ioc:Adonis/Lucid/Database';
 import EmailVerificationCode from 'App/Models/EmailVerificationCode';
 import ResetPasswordCode from 'App/Models/ResetPasswordCode';
 import User from "App/Models/User";
-import { AuthResetPasswordSendCode, AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
+import { AuthResetPassword, AuthResetPasswordSendCode, AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
 import { DateTime } from 'luxon';
 
 export default class AuthController {
@@ -159,6 +159,12 @@ export default class AuthController {
     public async resetPassword({ request }: HttpContextContract) {
         // transaction ensures that either all operations succeed or none of them are committed
         const trx = await Database.transaction();
+        try {
+            const body = await request.validate(AuthResetPassword);
+        } catch (e) {
+            trx.rollback();
+            throw e
+        }
     }
 
     public async signOut({ auth }: HttpContextContract) {
