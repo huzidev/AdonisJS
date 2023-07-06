@@ -177,7 +177,8 @@ export default function ViewProfilePage() {
                       // if LoggedIn user's role is user and path includes "me"
                       : (isUser && isMe)
                       ? "You haven't Liked"
-                      : `${userDetails.username} haven't Uploaded`} any blog yet
+                      // if user role is not user and path includes "me" then show You haven't Uploaded any blog yet
+                      : `${isMe ? "You" : userDetails.username} haven't Uploaded`} any blog yet
                   </h1>
                   <Link
                     to={
