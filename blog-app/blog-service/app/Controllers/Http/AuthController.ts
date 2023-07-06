@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
 import EmailVerificationCode from 'App/Models/EmailVerificationCode';
 import User from "App/Models/User";
-import { AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
+import { AuthResetPasswordSendCode, AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
 import { DateTime } from 'luxon';
 
 export default class AuthController {
@@ -85,6 +85,21 @@ export default class AuthController {
             message: 'Verification code send',
             data: code?.code
         }
+    }
+
+    public async resetPasswordSendCode({ request }: HttpContextContract) {
+        // email is necessary for resetPassword
+        const body = await request.validate(AuthResetPasswordSendCode);
+        // user must be active for reset password
+        // using .first() because we knew data can't be null as for calling this request email is mandatory if no email then this won't even run if data can be null then firstOrFail
+        const user = await User.query().where("email", body.email).where("isActive", true).first();
+
+        if (!user) {
+            throw { message: 'No user is registered with this email', status: 404 }
+        }
+        let verificationCode = await Reset
+
+        
     }
 
     // verify Verification code
