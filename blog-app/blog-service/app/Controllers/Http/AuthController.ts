@@ -102,7 +102,7 @@ export default class AuthController {
 
         if (!verificationCode) {
             // if No verificationCode then creates a new ResetPasswordCode record associated with the user's ID
-            // resetPasswordCode is different as of verifyEmailCode because in verifyEmail Record will filled during signUp call
+            // resetPasswordCode is different as of verifyEmailCode because in verifyEmailCode Record will filled during signUp call
             verificationCode = await ResetPasswordCode.create({ userId: user.id })
         } else {
             // if user asked for new verification code before a minute
@@ -154,6 +154,11 @@ export default class AuthController {
             await trx.rollback()
             throw e
         }
+    }
+
+    public async resetPassword({ request }: HttpContextContract) {
+        // transaction ensures that either all operations succeed or none of them are committed
+        const trx = await Database.transaction();
     }
 
     public async signOut({ auth }: HttpContextContract) {
