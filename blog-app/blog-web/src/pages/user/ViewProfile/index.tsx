@@ -174,7 +174,7 @@ export default function ViewProfilePage() {
                 Oops... You haven't {isUser && isMe ? "Liked" : "Uploaded"} any blog yet
               </h1>
                 <Link
-                to={ROUTE_PATHS.ARTICLE_CREATE}
+                to={isUser && isMe ? ROUTE_PATHS.ARTICLES : ROUTE_PATHS.ARTICLE_CREATE}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
                 title="Add Blogs">
                   {isUser && isMe ? "Explore Blogs" : "Add Blog"}
