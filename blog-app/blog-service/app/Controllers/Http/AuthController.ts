@@ -102,6 +102,7 @@ export default class AuthController {
 
         if (!verificationCode) {
             // if No verificationCode then creates a new ResetPasswordCode record associated with the user's ID
+            // resetPasswordCode is different as of verifyEmailCode because in verifyEmail Record will filled during signUp call
             verificationCode = await ResetPasswordCode.create({ userId: user.id })
         } else {
             // if user asked for new verification code before a minute
