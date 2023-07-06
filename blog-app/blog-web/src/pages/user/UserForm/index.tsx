@@ -92,7 +92,8 @@ export default function UserFormPage() {
               ? "Create User"
               : params.id === "me"
               ? "Edit Yours Details"
-              : `Edit ${value.current}'s Details`}
+              // using ref Hook value.current so the username field won't re-render when admin edit the username
+              : `Edit ${value.current}'s Details`} 
           </h2>
         </div>
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
