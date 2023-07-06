@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { hasPermission } from "utils";
-import { adminPaths, links, loggedInPaths, loggedOutPaths } from "./data";
+import { adminPaths, links, loggedInPathsBlogger, loggedInPathsUser, loggedOutPaths } from "./data";
 
 export default function Header() {
   const location = useLocation();
@@ -11,7 +11,7 @@ export default function Header() {
   if (!auth.state.init.init) {
     return null;
   }
-
+  
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -45,7 +45,7 @@ export default function Header() {
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               {auth.state.init.init && links.map((data, dataIndex) =>
                 // user has to be verified to access the links
-                user && loggedInPaths.includes(data.link) && user.isVerified ? (
+                user && (user.role === "blogger" ? loggedInPathsBlogger.includes(data.link) : loggedInPathsUser.includes(data.link)) && user.isVerified ? (
                     <li key={dataIndex}>
                       <Link
                         to={data.link}

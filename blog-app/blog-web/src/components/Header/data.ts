@@ -26,9 +26,14 @@ export const links = [
   }
 ];
 
-export const loggedInPaths = [
+export const loggedInPathsBlogger = [
   ROUTE_PATHS.ARTICLES,
   ROUTE_PATHS.ARTICLE_CREATE,
+  ROUTE_PATHS.VIEW_PROFILE + "me"
+];
+
+export const loggedInPathsUser = [
+  ROUTE_PATHS.ARTICLES,
   ROUTE_PATHS.VIEW_PROFILE + "me"
 ];
   
