@@ -125,7 +125,7 @@ export default class AuthController {
             const body = await request.validate(AuthVerifyEmailVerificationCode)
             console.log("body", body);
             
-            const verificationCode = await EmailVerificationCode.query()
+            let verificationCode = await EmailVerificationCode.query()
                 .where('userId', auth.user!.id)
                 .where('code', body.code) // verify the code from user with the code in EmailVerificationCode table
                 .where('isActive', true)
@@ -140,14 +140,16 @@ export default class AuthController {
                 throw { message: 'Expired code, Not valid anymore', status: 422 }
             }   
             verificationCode.useTransaction(trx)
+            verificationCode.user.useTransaction(trx);
             // when verificationCode is used then it'll be changed to false
-            verificationCode.isActive = false
-            auth.user!.useTransaction(trx)
+            verificationCode.isActive = false;
+            verificationCode.user.isVerified = true;
+            // auth.user!.useTransaction(trx)
             // after verification user isVerified will changed to true
-            auth.user!.isVerified = true
+            // auth.user!.isVerified = true
             // Promise.all will wait for bith properties to be saved into database then proceeds further calling both seprately would cause error
-            await Promise.all([auth.user?.save(), verificationCode.save()])
-            await trx.commit()
+            await Promise.all([verificationCode.save(), verificationCode.user.save()])
+            await trx.commit();
 
             return { message: 'Code verified successfully' }
         } catch (e) {
@@ -156,6 +158,7 @@ export default class AuthController {
         }
     }
 
+    // resetPassword
     public async resetPassword({ request }: HttpContextContract) {
         // transaction ensures that either all operations succeed or none of them are committed
         const trx = await Database.transaction();
@@ -175,7 +178,7 @@ export default class AuthController {
                 throw { message: 'Invalid Code', status: 404 }
             }
             if (verificationCode.expiresAt < DateTime.local()) {
-                throw { message: 'Expired code', status: 422 }
+                throw { message: 'Expired code, Not valid anymore', status: 422 }
             }
             verificationCode.useTransaction(trx);
             verificationCode.user.useTransaction(trx);
