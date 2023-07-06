@@ -106,7 +106,7 @@ export default function UserFormPage() {
                   Username
                 </label>
                 <div className="mt-2">
-                  <input
+                  <input  
                     id="username"
                     name="username"
                     type="text"
@@ -118,7 +118,7 @@ export default function UserFormPage() {
                 </div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block mt-2 text-sm font-medium leading-6 text-gray-900"
                 >
                   Email
                 </label>
@@ -135,7 +135,7 @@ export default function UserFormPage() {
                 </div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block mt-2 text-sm font-medium leading-6 text-gray-900"
                 >
                   Password
                 </label>
@@ -166,7 +166,7 @@ export default function UserFormPage() {
                 </div>
                 <label
                   htmlFor="cpassword"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block mt-2 text-sm font-medium leading-6 text-gray-900"
                 >
                   Confirm Password
                 </label>
