@@ -99,8 +99,8 @@ export default class AuthController {
                 .where('code', body.code) // verify the code from user with the code in EmailVerificationCode table
                 .where('isActive', true)
                 .first() 
-                // in this case first is used because all the values WILL match then return the result and the result can't be null or NotFound
-                // FirstOrFail() give exception when no matching rows are found firstOrFail() only used when we know that row can be null or notFound
+                // in this case first is used because all the values from user WILL match then return the result and the result can't be null or NotFound
+                // FirstOrFail() give exception when no matching rows are found firstOrFail() only used when we know that row CAN BE NULL or notFound
 
             if (!verificationCode) {
                 throw { message: 'Invalid Code', status: 404 }
