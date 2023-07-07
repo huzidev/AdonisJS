@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
+import { hasPermission } from "utils";
 import { UserDetailState } from "./types";
 
 export default function ViewProfilePage() {
@@ -143,7 +144,7 @@ export default function ViewProfilePage() {
                         >
                           Read More
                         </Link>
-                        {blog.ownerId === userId && (
+                        {blog.ownerId === userId || hasPermission("admin" || "super-admin", auth.state.user?.role) && (
                           <div>
                             <Link
                               to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
