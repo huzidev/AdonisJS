@@ -15,7 +15,6 @@ export function useAuth() {
   const verifyCode = (payload: AuthVerificationPayload) => dispatch(actions.verifyVerificationCode(payload));
   // const updateuser = (payload: User) => dispatch(authSlice.actions.updateUser(payload));
 
-
   return {
     state,
     initUser,

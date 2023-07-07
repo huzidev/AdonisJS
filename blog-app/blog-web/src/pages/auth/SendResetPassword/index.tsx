@@ -1,18 +1,28 @@
 import ROUTE_PATHS from "Router/paths";
-import { useState } from "react";
+import qs from 'query-string';
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useResetPassword } from "store/resetPassword";
+import { usePrevious } from "utils/hooks";
 import { sendResetCode } from "./types";
 
 export default function SendResetPasswordPage(): JSX.Element {
   const [email, setEmail] = useState<sendResetCode>({ email: "" });
-  const reset = useResetPassword();
+  const state = useResetPassword();
+  const prev = usePrevious(state);
   const Navigate = useNavigate();
-  const state = reset.state.sendState;
+  const resetState = state.state.sendState;
 
-  if (!state.loading && state.status === 200) {
-    Navigate(ROUTE_PATHS.RESET_PASSWORD);
-  }
+  console.log("qurery string", qs.stringify(email as any));
+  
+  useEffect(() => {
+    if (prev?.state.sendState.loading) {
+      if (!resetState.loading) {
+        // Navigate(ROUTE_PATHS.RESET_PASSWORD);
+        Navigate(ROUTE_PATHS.RESET_PASSWORD + '?' + qs.stringify(email));
+      }
+    }
+  }, [state])
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -53,7 +63,7 @@ export default function SendResetPasswordPage(): JSX.Element {
             <button
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 my-6 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => reset.sendResetPasswordCode(email)}
+              onClick={() => state.sendResetPasswordCode(email)}
             >
                 Send Code
             </button>

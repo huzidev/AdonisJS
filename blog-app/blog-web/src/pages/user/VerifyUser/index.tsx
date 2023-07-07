@@ -15,7 +15,7 @@ export default function VerifyUserPage(): JSX.Element {
      if (value === "") {
       setOtp((prevOtp) => ({
         ...prevOtp,
-        code: prevOtp.code.slice(0, prevOtp.code.length - 1),
+        code: prevOtp.code.slice(0, prevOtp.code.length - 1)
       }));
     } else {
       // Concatenate the value with otp.code

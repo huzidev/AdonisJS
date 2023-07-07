@@ -1,10 +1,11 @@
+import qs from 'query-string';
 import { useState } from "react";
 import { useResetPassword } from "store/resetPassword";
-import { ResetPasswordPayload } from "./types";
+import { ResetPasswordCode } from "./types";
 
 export default function ResetPasswordPage(): JSX.Element {
-  const reset = useResetPassword();
-  const [otp, setOtp] = useState<ResetPasswordPayload>({
+  const state = useResetPassword();
+  const [otp, setOtp] = useState<ResetPasswordCode>({
     code: ""
   });
 
@@ -15,13 +16,17 @@ export default function ResetPasswordPage(): JSX.Element {
      if (value === "") {
       setOtp((prevOtp) => ({
         ...prevOtp,
-        code: prevOtp.code.slice(0, prevOtp.code.length - 1),
+        code: prevOtp.code.slice(0, prevOtp.code.length - 1)
       }));
     } else {
       // Concatenate the value with otp.code
       setOtp((prevOtp) => ({ ...prevOtp, code: prevOtp.code + value }));
     }
   }
+
+  const params: any = {
+    ...qs.parse(window.location.search)
+  };
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50">
@@ -32,7 +37,7 @@ export default function ResetPasswordPage(): JSX.Element {
               <p>Reset Password</p>
             </div>
             <div className="flex flex-row text-sm font-medium text-gray-400">
-              <p>We have sent a code to your email {auth.state.user?.email}</p>
+              <p>We have sent a code to your email {params.email}</p>
             </div>
           </div>
           <div>
@@ -51,10 +56,10 @@ export default function ResetPasswordPage(): JSX.Element {
                   ))}
                 </div>
                 <div className="flex flex-col space-y-5">
-                  <div>
+                  <div> 
                     <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
                     // disabled={otp.length !== 6}
-                    onClick={() => auth.verifyCode(otp)}
+                      onClick={() => state.verifyCode(otp)}
                     >
                       Verify Account
                     </button>
@@ -63,8 +68,8 @@ export default function ResetPasswordPage(): JSX.Element {
                     <p>Didn't recieve code?</p>
                     <button
                       className="flex flex-row items-center text-blue-600"
+                      onClick={() => state.sendResetPasswordCode(params)}
                       // no need for sending id of user because only non-verified user can send this request and id will get fetched automatically in backend
-                      onClick={() => reset.resetPassword()}
                     >
                       Resend
                     </button>
