@@ -14,6 +14,5 @@ export const sendResetPasswordCode = createAsyncThunk(endpoints.SEND_CODE, async
         return response.data.data;
     } catch (e) {
         console.log("Error", e);
-        
     }
 })

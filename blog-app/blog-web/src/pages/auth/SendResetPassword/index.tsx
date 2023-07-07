@@ -1,7 +1,13 @@
 import ROUTE_PATHS from "Router/paths";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useResetPassword } from "store/resetPassword";
+import { sendResetCode } from "./types";
 
 export default function SendResetPasswordPage(): JSX.Element {
+  const [email, setEmail] = useState<sendResetCode>("");
+  const reset = useResetPassword();
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -14,7 +20,6 @@ export default function SendResetPasswordPage(): JSX.Element {
           Sign in to your account
         </h2>
       </div>
-
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" action="#" method="POST">
           <div>
@@ -35,7 +40,6 @@ export default function SendResetPasswordPage(): JSX.Element {
               />
             </div>
           </div>
-
           <div>
             <button
               type="submit"
