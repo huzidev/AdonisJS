@@ -1,12 +1,18 @@
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useResetPassword } from "store/resetPassword";
 import { sendResetCode } from "./types";
 
 export default function SendResetPasswordPage(): JSX.Element {
   const [email, setEmail] = useState<sendResetCode>({ email: "" });
   const reset = useResetPassword();
+  const Navigate = useNavigate();
+  const state = reset.state.sendState;
+
+  if (!state.loading && state.status === 200) {
+    Navigate(ROUTE_PATHS.RESET_PASSWORD);
+  }
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
