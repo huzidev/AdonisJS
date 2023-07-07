@@ -5,7 +5,15 @@ import { ResetPasswordCode } from "./types";
 
 export default function ResetPasswordPage(): JSX.Element {
   const state = useResetPassword();
-  const [resetState, setResetState] = useState<ResetPasswordCode>({code: "", password: "", passwordConfirmation: ""});
+  const params: any = {
+    ...qs.parse(window.location.search)
+  };
+  const [resetState, setResetState] = useState<ResetPasswordCode>({
+    email: params.email,
+    code: "", 
+    password: "", 
+    passwordConfirmation: ""
+  });
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -29,9 +37,7 @@ export default function ResetPasswordPage(): JSX.Element {
     })
   }
 
-  const params: any = {
-    ...qs.parse(window.location.search)
-  };
+  
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50">
@@ -42,7 +48,7 @@ export default function ResetPasswordPage(): JSX.Element {
               <p>Reset Password</p>
             </div>
             <div className="flex flex-row text-sm font-medium text-gray-400">
-              <p>We have sent a code to your email {params.email}</p>
+              <p>We have sent a code to your email {resetState.email}</p>
             </div>
           </div>
           <div>
@@ -104,9 +110,9 @@ export default function ResetPasswordPage(): JSX.Element {
                   <div> 
                     <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
                     // disabled={otp.length !== 6}
-                      onClick={() => state.verifyCode({...resetState})}
+                      onClick={() => state.resetPassword({...resetState})}
                     >
-                      Verify Account
+                      Change Password
                     </button>
                   </div>
                   <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
