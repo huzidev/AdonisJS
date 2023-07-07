@@ -81,7 +81,7 @@ export default class ArticlesController {
         const article = await Article.findBy("id", params.id);
         if (!article) {
             throw noArticle
-        } else if (article.ownerId !== auth.user?.id) {
+        } else if (article.ownerId !== auth.user?.id && !auth.user?.isAdmin()) {
             throw noPermission
         } 
         else {
