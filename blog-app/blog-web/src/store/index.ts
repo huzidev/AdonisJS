@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import blogs from "./articles/reducer";
 import auth from "./auth/reducer";
+import reset from "./resetPassword/reducer";
 import user from "./user/reducer";
 
 const store = configureStore({
     reducer: {
         blogs,
         auth,
-        user
+        user,
+        reset
     }
 })
 

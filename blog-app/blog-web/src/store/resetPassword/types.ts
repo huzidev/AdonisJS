@@ -7,5 +7,4 @@ export interface ResetPasswordSendCodeRequest {
 export interface ResetPasswordState {
   sendState: SubState;
   resetState: SubState;
- 
 }
