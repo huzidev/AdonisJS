@@ -26,6 +26,5 @@ export const resetPassword = createAsyncThunk(endpoints.RESET_PASSWORD, async (d
         return response;
     } catch (e) {
         console.log("Error", e);
-        
     }
 })
