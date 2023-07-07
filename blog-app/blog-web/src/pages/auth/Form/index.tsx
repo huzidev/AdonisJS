@@ -93,7 +93,7 @@ export default function UserFormPage(): JSX.Element {
                 />
               </div>
             </div>
-            <div className="mb-6">
+            <div className="my-6">
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
@@ -101,6 +101,14 @@ export default function UserFormPage(): JSX.Element {
                 >
                   Password
                 </label>
+                 <div className="text-sm">
+                  <Link 
+                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                    to={ROUTE_PATHS.SEND_RESET_PASSWORD}
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
               </div>
               <div className="mt-2 flex items-center">
                 <input
