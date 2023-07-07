@@ -5,7 +5,8 @@ import { ResetPasswordState } from "./types";
 
 const initialState: ResetPasswordState = {
     sendState: { ...subState },
-    resetState: { ...subState }
+    resetState: { ...subState },
+    verifyState : { ...subState }
 }
 
 export const resetSlice = createSlice({
@@ -26,6 +27,16 @@ export const resetSlice = createSlice({
         })
         builder.addCase(actions.sendResetPasswordCode.rejected, (state) => {
             state.sendState = {loading: false, error: true};
+        })
+        // verifyResetPasswordCode
+        builder.addCase(actions.verifyResetPasswordCode.pending, (state) => {
+            state.verifyState = {loading: true, error: false};
+        })
+        builder.addCase(actions.verifyResetPasswordCode.fulfilled, (state) => {
+            state.verifyState = {loading: false, error: false};
+        })
+        builder.addCase(actions.verifyResetPasswordCode.rejected, (state) => {
+            state.verifyState = {loading: false, error: true};
         })
         // resetPassword
         builder.addCase(actions.resetPassword.pending, (state) => {
