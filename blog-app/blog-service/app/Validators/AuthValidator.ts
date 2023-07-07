@@ -52,11 +52,11 @@ export class AuthVerifyEmailVerificationCode {
 
 export class AuthResetPasswordSendCode {
   public schema = schema.create({
-    email: schema.string({}, [rules.email()]),
+    email: schema.string({}, [rules.email()])
   })
 
   public messages = {
-    required: '{{ field }} is required to reset password',
+    required: '{{ field }} is required to reset password'
   }
 }
 
@@ -64,10 +64,10 @@ export class AuthResetPassword {
   public schema = schema.create({
     email: schema.string({}, [rules.email()]),
     code: schema.string({}, [rules.verificationCode()]),
-    password: schema.string({}, [rules.minLength(6), rules.confirmed('passwordConfirmation')]),
+    password: schema.string({}, [rules.minLength(6), rules.confirmed('passwordConfirmation')])
   })
 
   public messages = {
-    required: '{{ field }} is required to reset password',
+    required: '{{ field }} is required to reset password'
   }
 }

@@ -180,6 +180,9 @@ export default class AuthController {
                 // this allows preloads to make relationship with two tables and to be executed in a single query()
                 .preload("user", (query) => query.where("isActive", true)) // using Preload here to check if user is Active or Not
                 .first()
+                console.log("body", body);
+                
+                console.log("verifcaiton code", verificationCode);
                 
             if (!verificationCode || verificationCode?.user?.email !== body.email) {
                 throw { message: 'Invalid Code', status: 404 }
