@@ -5,23 +5,28 @@ import { ResetPasswordCode } from "./types";
 
 export default function ResetPasswordPage(): JSX.Element {
   const state = useResetPassword();
-  const [otp, setOtp] = useState<ResetPasswordCode>({
-    code: ""
-  });
+  const [resetState, setResetState] = useState<ResetPasswordCode>({code: "", password: "", passwordConfirmation: ""});
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     // if user removes any character then the length will not changes
     // otherwise if we didn't use this suppose user enter the code 2645 and removes the 5 from UI then the 5 will remains stored in ours otp.code state therefore we've used slice() function
      if (value === "") {
-      setOtp((prevOtp) => ({
+      setResetState((prevOtp) => ({
         ...prevOtp,
         code: prevOtp.code.slice(0, prevOtp.code.length - 1)
       }));
     } else {
       // Concatenate the value with otp.code
-      setOtp((prevOtp) => ({ ...prevOtp, code: prevOtp.code + value }));
+      setResetState((prevOtp) => ({ ...prevOtp, code: prevOtp.code + value }));
     }
+  }
+  
+  function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    setResetState({
+      ...resetState,
+      [e.target.name]: e.target.value
+    })
   }
 
   const params: any = {
@@ -42,6 +47,45 @@ export default function ResetPasswordPage(): JSX.Element {
           </div>
           <div>
               <div className="flex flex-col space-y-16">
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    New Password
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      value={resetState.password}
+                      onChange={inputHandler}
+                      autoComplete="email"
+                      required
+                      className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="cpassword"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Confirm New Password
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="cpassword"
+                      name="passwordConfirmation"
+                      type="password"
+                      onChange={inputHandler}
+                      value={resetState.passwordConfirmation}
+                      autoComplete="email"
+                      required
+                      className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
                 <div className="flex flex-row items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
                   {Array.from({ length: 6 }, (_, index) => (
@@ -55,11 +99,12 @@ export default function ResetPasswordPage(): JSX.Element {
                     </div>
                   ))}
                 </div>
+                </div>
                 <div className="flex flex-col space-y-5">
                   <div> 
                     <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
                     // disabled={otp.length !== 6}
-                      onClick={() => state.verifyCode(otp)}
+                      onClick={() => state.verifyCode({...resetState})}
                     >
                       Verify Account
                     </button>
