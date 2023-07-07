@@ -60,7 +60,8 @@ export default class ArticlesController {
             // const articleId: number = params.id;
             if (!article) {
                 throw noArticle
-            } else if (article.ownerId !== auth.user?.id) {
+            // isAdmin created in User Model
+            } else if (article.ownerId !== auth.user?.id && !auth.user?.isAdmin()) {
                 throw noPermission
             } else {
                 // await Article.query().where("id", articleId).update(body);
