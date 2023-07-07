@@ -16,5 +16,6 @@ export interface SeneResetCodeState extends SubState {
 
 export interface ResetPasswordState {
   sendState: SeneResetCodeState;
+  verifyState: SubState;
   resetState: SubState;
 }

@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { useAuth } from "store/auth";
+import { useResetPassword } from "store/resetPassword";
 import { ResetPasswordPayload } from "./types";
 
 export default function ResetPasswordPage(): JSX.Element {
-  const auth = useAuth();
+  const reset = useResetPassword();
   const [otp, setOtp] = useState<ResetPasswordPayload>({
-    code: "",
-    password: "",
-    passwordConfirmation: ""
+    code: ""
   });
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -26,7 +24,7 @@ export default function ResetPasswordPage(): JSX.Element {
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
+    <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50">
       <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
         <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
           <div className="flex flex-col items-center justify-center text-center space-y-2">
@@ -66,7 +64,7 @@ export default function ResetPasswordPage(): JSX.Element {
                     <button
                       className="flex flex-row items-center text-blue-600"
                       // no need for sending id of user because only non-verified user can send this request and id will get fetched automatically in backend
-                      onClick={() => auth.sendCode()}
+                      onClick={() => reset.resetPassword()}
                     >
                       Resend
                     </button>
