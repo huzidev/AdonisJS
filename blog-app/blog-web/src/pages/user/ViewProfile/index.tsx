@@ -38,7 +38,7 @@ export default function ViewProfilePage() {
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
 
   useEffect(() => {
-    if (params.id !== "me" && Number(params.id) !== userDataById?.id) {
+    if (!isMe && Number(params.id) !== userDataById?.id) {
       user.getById(params.id);
       blogs.getBlogsById(payload);
     } else if (isMe && !userBlogs.length) {
