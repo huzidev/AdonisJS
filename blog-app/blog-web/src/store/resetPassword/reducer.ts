@@ -3,7 +3,8 @@ import { subState } from "store/states";
 import { ResetPasswordState } from "./types";
 
 const initialState: ResetPasswordState = {
-    sendState: { ...subState }
+    sendState: { ...subState },
+    resetState: { ...subState }
 }
 
 export const resetSlice = createSlice({
@@ -15,4 +16,4 @@ export const resetSlice = createSlice({
     }
 })
 
-export default authSlice.reducer;
+export default resetSlice.reducer;
