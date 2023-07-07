@@ -4,7 +4,11 @@ export interface ResetPasswordSendCodeRequest {
   email: string; // only email is required for reset password code
 }
 
+export interface SeneResetCodeState extends SubState {
+  status?: number;
+}
+
 export interface ResetPasswordState {
-  sendState: SubState;
+  sendState: SeneResetCodeState;
   resetState: SubState;
 }

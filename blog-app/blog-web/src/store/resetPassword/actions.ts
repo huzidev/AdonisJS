@@ -10,8 +10,8 @@ export const sendResetPasswordCode = createAsyncThunk(endpoints.SEND_CODE, async
         if (response.status === 200) {
             alert("Code send successfully!")
         }
-        console.log("response for reset password code");
-        return response.data.data;
+        console.log("response for reset password code", response);
+        return response;
     } catch (e) {
         console.log("Error", e);
     }

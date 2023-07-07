@@ -16,8 +16,12 @@ export const resetSlice = createSlice({
         builder.addCase(actions.sendResetPasswordCode.pending, (state) => {
             state.sendState = {loading: true, error: false};
         })
-        builder.addCase(actions.sendResetPasswordCode.fulfilled, (state) => {
-            state.sendState = {loading: false, error: false};
+        builder.addCase(actions.sendResetPasswordCode.fulfilled, (state, action) => {
+            state.sendState.loading = false
+            if (action.payload?.status === 200) {
+                state.sendState.status = action.payload?.status
+            }
+            state.sendState.error = false
         })
         builder.addCase(actions.sendResetPasswordCode.rejected, (state) => {
             state.sendState = {loading: false, error: true};
