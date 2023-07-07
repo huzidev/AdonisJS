@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "services/api";
 import * as endpoints from "./endpoints";
-import { ResetPasswordSendCodeRequest } from "./types";
+import { ResetPasswordRequest, ResetPasswordSendCodeRequest } from "./types";
 
 
 export const sendResetPasswordCode = createAsyncThunk(endpoints.SEND_CODE, async (data: ResetPasswordSendCodeRequest) => {
@@ -17,7 +17,7 @@ export const sendResetPasswordCode = createAsyncThunk(endpoints.SEND_CODE, async
     }
 })
 
-export const resetPassword = createAsyncThunk(endpoints.RESET_PASSWORD, async (data) => {
+export const resetPassword = createAsyncThunk(endpoints.RESET_PASSWORD, async (data: ResetPasswordRequest) => {
     try {
         const response = await api.post(endpoints.RESET_PASSWORD, data);
         if (response.status === 200) {
