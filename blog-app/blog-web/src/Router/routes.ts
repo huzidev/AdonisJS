@@ -12,6 +12,7 @@ const UserFormPage = React.lazy(() => import('pages/auth/Form'));
 const VerifyUserPage = React.lazy(() => import('pages/user/VerifyUser'));
 const UsersPage = React.lazy(() => import("pages/user/ManageUsers"));
 const SendResetPasswordPage = React.lazy(() => import("pages/auth/SendResetPassword"));
+const ResetPasswordPage = React.lazy(() => import("pages/auth/ResetPassword"));
 
 interface AppRoute {
   path: string;
@@ -70,6 +71,10 @@ const routes: AppRoute[] = [
     {
         path: ROUTE_PATHS.SEND_RESET_PASSWORD,
         Component: SendResetPasswordPage
+    },
+    {
+        path: ROUTE_PATHS.RESET_PASSWORD,
+        Component: ResetPasswordPage
     }
 ]
 
