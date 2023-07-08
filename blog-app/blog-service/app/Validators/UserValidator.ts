@@ -4,7 +4,6 @@ import pick from 'lodash/pick'
 
 // when user is updating own self
 
-
 // when admin is updating a user
 export class UserUpdate {
   public static schemaMap = {
