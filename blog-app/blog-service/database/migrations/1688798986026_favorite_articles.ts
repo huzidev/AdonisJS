@@ -13,6 +13,7 @@ export default class FavoriteArticles extends BaseSchema {
       
       // this unique is useful if a user with id 1 have article with id 5 and tries to add the same article with id 5 then user CAN'T
       table.unique(['user_id', 'article_id'])
+      // table.index is helpful for fetching data with specifc index
       table.index(['user_id', 'article_id'])
 
       /**
