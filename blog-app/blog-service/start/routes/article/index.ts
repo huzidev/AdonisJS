@@ -3,6 +3,7 @@ import Route from '@ioc:Adonis/Core/Route';
 export default function ArticlesRoutes() {
     const path = "ArticlesController";
     Route.group(() => {
+        // when user is at main blogs page
         Route.get("/list/:page", `${path}.getBlogs`) // .getBlogs is function created in app/controllers/ArticlesController.ts
             .where("page", /^[0-9]+$/);
         Route.get("/list/:id/:page", `${path}.getBlogs`)
