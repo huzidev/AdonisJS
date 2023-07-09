@@ -8,6 +8,7 @@ export const useBlogs = () => {
   const dispatch = useAppDispatch();
   const getBlogs = (payload: number) => dispatch(actions.getBlogs(payload));
   const getBlogsById = (payload: GetBlogsById) => dispatch(actions.getBlogsById(payload));
+  const getFavoriteBlogs = (payload: GetBlogsById) => dispatch(actions.getFavoriteBlogs(payload));
   const getBlog = (payload: GetBlogPayload) => dispatch(actions.getBlog(payload));
   const addBlog = (payload: AddBlogPayload) => dispatch(actions.addBlog(payload));
   const updateBlog = (payload: UpdateBlogPayload) => dispatch(actions.updateBlog(payload));
@@ -20,6 +21,7 @@ export const useBlogs = () => {
     addBlog,
     updateBlog,
     deleteBlog,
-    getBlogsById
+    getBlogsById,
+    getFavoriteBlogs
   }
 }

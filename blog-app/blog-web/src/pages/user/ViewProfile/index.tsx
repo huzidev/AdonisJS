@@ -68,6 +68,9 @@ export default function ViewProfilePage() {
   console.log("users blogs", userBlogs);
   console.log("IsClicked User", isClickedUser);
 
+  console.log("favorite blogs", blogs.state.getFavoriteBlogs.data);
+  
+
   return (
     <>
       <div>
@@ -113,7 +116,7 @@ export default function ViewProfilePage() {
           </h1>
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
-          {userBlogs.length
+          {userBlogs.length 
             ? userBlogs.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
@@ -200,6 +203,9 @@ export default function ViewProfilePage() {
                 </div>
               )}
         </div>
+        <button onClick={() => blogs.getFavoriteBlogs(payload)}>
+          Get fav blogs
+        </button>
       </div>
       <div className="w-11/12 m-auto mt-5">
         {currentPage !== lastPage && (
