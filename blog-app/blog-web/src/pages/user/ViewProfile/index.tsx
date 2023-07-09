@@ -24,6 +24,7 @@ export default function ViewProfilePage() {
     page: 1,
   });
   const [userDetails, setUserDetails] = useState<UserDetailState>({
+    id: null,
     username: "",
     email: "",
     createdAt: "",
@@ -75,6 +76,9 @@ export default function ViewProfilePage() {
             <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
               User Profile
             </h1>
+            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Id : {userDetails.id}
+            </h2>
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Name : {userDetails.username + ` (${userDetails.role})`}
             </h2>
