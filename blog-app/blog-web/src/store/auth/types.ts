@@ -36,8 +36,6 @@ export interface AuthState {
     user: User | null;
     signInState: SubState;
     signUpState: SubState;
-    sendCode: AuthVerificationCode;
-    verifyCode: SubState;
     init: AuthInitState;
 }
 
