@@ -15,11 +15,24 @@ export const getBlogs = createAsyncThunk(endpoints.GET_BLOGS, async (page: numbe
     }
 });
 
-export const getBlogsById = createAsyncThunk(endpoints.GET_BLOGS + "id", async (data: GetBlogsById): Promise<AllBlogs | null> => {
+export const getBlogsById = createAsyncThunk(endpoints.GET_BLOGS, async (data: GetBlogsById): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
     try {
        const { userId, page } = data;
        const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`);
+       console.log("response for all blogs BY ID", response.data);
+       return response.data;
+    } catch (e) {
+        console.log("Error", e);
+        throw e
+    }
+});
+
+export const getFavoriteBlogs = createAsyncThunk(endpoints.GET_FAVORITE_BLOGS, async (data: GetBlogsById): Promise<AllBlogs | null> => {
+    // AllBlogs contains Array of blogs and meta
+    try {
+       const { userId, page } = data;
+       const response = await api.get(`${endpoints.GET_FAVORITE_BLOGS + userId}/${page}`);
        console.log("response for all blogs BY ID", response.data);
        return response.data;
     } catch (e) {
