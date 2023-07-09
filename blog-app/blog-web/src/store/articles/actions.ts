@@ -33,7 +33,7 @@ export const getFavoriteBlogs = createAsyncThunk(endpoints.GET_FAVORITE_BLOGS, a
     try {
        const { userId, page } = data;
        const response = await api.get(`${endpoints.GET_FAVORITE_BLOGS + userId}/${page}`);
-       console.log("response for all blogs BY ID", response.data);
+       console.log("response for all Favorite blogs", response.data);
        return response.data;
     } catch (e) {
         console.log("Error", e);
