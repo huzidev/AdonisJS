@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useAuth } from "store/auth";
+import { useEmailVerification } from "store/emailVerification";
 import { OtpPayload } from "./types";
 
 export default function VerifyUserPage(): JSX.Element {
   const auth = useAuth();
+  const verify = useEmailVerification();
   const [otp, setOtp] = useState<OtpPayload>({
     code: ""
   });
@@ -54,7 +56,7 @@ export default function VerifyUserPage(): JSX.Element {
                   <div>
                     <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
                     // disabled={otp.length !== 6}
-                    onClick={() => auth.verifyCode(otp)}
+                    onClick={() => verify.verifyCode(otp)}
                     >
                       Verify Account
                     </button>
@@ -64,7 +66,7 @@ export default function VerifyUserPage(): JSX.Element {
                     <button
                       className="flex flex-row items-center text-blue-600"
                       // no need for sending id of user because only non-verified user can send this request and id will get fetched automatically in backend
-                      onClick={() => auth.sendCode()}
+                      onClick={() => verify.sendCode()}
                     >
                       Resend
                     </button>
