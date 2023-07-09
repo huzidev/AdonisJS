@@ -12,6 +12,7 @@ export function useEmailVerification() {
 
   return {
     state,
-   
+    sendCode,
+    verifyCode
   };
 };

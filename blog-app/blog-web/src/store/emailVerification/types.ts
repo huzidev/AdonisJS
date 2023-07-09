@@ -1,10 +1,10 @@
 import { SubState } from "store/types";
 
-export interface AuthVerificationCode extends SubState {
+export interface EmailVerificationCode extends SubState {
     code: string;
 }
 
-export interface AuthVerificationPayload {
+export interface EmailVerificationPayload {
     code: string;
 }
 
