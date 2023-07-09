@@ -8,8 +8,6 @@ const initialState: AuthState = {
     signInState:  { ...subState },
     signUpState:  { ...subState },
     init:  { ...subState, init: false },
-    sendCode:  { ...subState, code: "" },
-    verifyCode:  { ...subState },
     user: null
 }
 
@@ -78,34 +76,7 @@ export const authSlice = createSlice({
         builder.addCase(userSlice.actions.updateUser, (state, action: PayloadAction<User>) => {
             state.user = { ...state.user, ...action.payload };
         });
-        // sendVerificationCode
-        builder.addCase(actions.sendVerificationCode.pending, (state) => {
-            state.sendCode.loading = true;
-            state.sendCode.error = false
-        });
-        builder.addCase(actions.sendVerificationCode.fulfilled, (state, action: any) => {
-            state.sendCode.loading = false;
-            if (action.payload) {
-                console.log("action payload for code", action.payload);
-                
-                state.sendCode.code = action.payload
-            }
-            state.sendCode.error = false
-        });
-        builder.addCase(actions.sendVerificationCode.rejected, (state) => {
-            state.sendCode.loading = false
-            state.sendCode.error = true
-        });
-        // verifyVerificationCode
-        builder.addCase(actions.verifyVerificationCode.pending, (state) => {
-            state.verifyCode = {loading: true, error: false};
-        });
-        builder.addCase(actions.verifyVerificationCode.fulfilled, (state) => {
-            state.verifyCode = {loading: false, error: false};
-        });
-        builder.addCase(actions.verifyVerificationCode.rejected, (state) => {
-            state.verifyCode = {loading: false, error: true};
-        });
+        
     }
 })
 
