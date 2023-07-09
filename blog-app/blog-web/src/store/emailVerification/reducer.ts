@@ -22,7 +22,6 @@ export const emailVerificationSlice = createSlice({
             state.sendCode.loading = false;
             if (action.payload) {
                 console.log("action payload for code", action.payload);
-                
                 state.sendCode.code = action.payload
             }
             state.sendCode.error = false
