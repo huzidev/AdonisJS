@@ -7,3 +7,8 @@ export interface AuthVerificationCode extends SubState {
 export interface AuthVerificationPayload {
     code: string;
 }
+
+export interface EmailVerificationState {
+  sendCode: AuthVerificationCode;
+    verifyCode: SubState;
+}
