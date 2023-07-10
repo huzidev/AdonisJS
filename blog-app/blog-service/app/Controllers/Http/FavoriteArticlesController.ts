@@ -25,4 +25,15 @@ export default class FavoriteArticlesController {
         const response = await Article.query().whereIn("id", query).paginate(params.page || 1, 5);
         return response;
     }
+
+    public async remove({ params }: HttpContextContract) {
+        try {
+            const article = await FavoriteArticle.findBy("article_id", params.id);
+            await article!.delete();
+            return { message: `Article with id ${params.id} Deleted`, id: Number(params.id) };
+        } catch (e) {
+            throw e
+        }
+    }
+
 }
