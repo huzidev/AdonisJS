@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useBlogs } from "store/articles";
+import { useUser } from "store/user";
 import { useGetBlogPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
 export default function ViewBlogPage(): JSX.Element {
-  const blogs = useBlogs();
-  const getBlog = blogs.state.getBlog?.data
+  const user = useUser();
+  const blog = useBlogs();
+  const getBlog = blog.state.getBlog?.data;
+
   const initialState: BlogState = {title: "", image: "", content: ""};
   const [blogView, setBlogView] = useState(initialState);
 
