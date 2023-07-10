@@ -45,7 +45,8 @@ export default function ViewProfilePage() {
   
   useEffect(() => {
       blogs.getFavoriteBlogs(payload)
-  }, [auth.state.user?.role, params.id])
+      console.log("PAYLOAD", payload);
+  }, [isMe, user.state.getUser.data])
 
   // to store the data
   useEffect(() => {
