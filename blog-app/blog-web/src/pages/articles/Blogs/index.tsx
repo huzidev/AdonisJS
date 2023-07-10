@@ -14,6 +14,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const auth = useAuth();
   const user = useUser();
   const allUsers = user.state.allUser?.data;
+  const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
 
@@ -25,10 +26,18 @@ export default function ViewBlogsPage(): JSX.Element {
   
   useBlogsPageHooks();
   
-  console.log("favorite blogs", blogs.state.getFavoriteBlogs?.data);
-  
-  const currentPage: any = blogs.state.getBlogs.meta?.currentPage;
-  const lastPage: any = blogs.state.getBlogs.meta?.lastPage;
+  const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
+  const currentPageFvrtBlogs: any = blogs.state.getFavoriteBlogs.meta?.currentPage;
+  const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
+  const lastPageFvrtBlogs: any = blogs.state.getFavoriteBlogs.meta?.lastPage;
+
+  function loadMore() {
+    blogs.getBlogs(currentPageBlogs + 1)
+    if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
+      blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1)
+    }
+  }
+
   return (
     <>
       <div className="w-10/12 m-auto flex flex-wrap">
@@ -60,7 +69,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     </h5>
                     <div
                       className={`p-2 rounded-full transition-colors duration-300 ${
-                        isClicked ? "text-red-500" : "text-gray-500"
+                        favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) ? "text-red-500" : "text-gray-500"
                       }`}
                       onClick={handleClick}
                     >
@@ -144,10 +153,10 @@ export default function ViewBlogsPage(): JSX.Element {
         {/* if both currentPage is = to lastPage means final page hence no more fetching after that */}
       </div>
       <div className="w-10/12 m-auto mt-5">
-        {currentPage !== lastPage && (
+        {currentPageBlogs !== lastPageBlogs && (
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            onClick={() => blogs.getBlogs(currentPage + 1)}
+            onClick={loadMore}
           >
             Load More
           </button>

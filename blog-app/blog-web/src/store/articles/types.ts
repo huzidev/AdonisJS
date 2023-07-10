@@ -26,6 +26,11 @@ export interface Blog extends AddBlogPayload {
   owner: User;
 }
 
+export interface AddFavoriteBlogPayload {
+  userId: number;
+  articleId: number
+}
+
 export interface GetBlogsById {
   userId: number;
   page: number;
