@@ -5,6 +5,7 @@ import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
+import { userDetailsData } from "./data";
 import { UserDetailState } from "./types";
 
 export default function ViewProfilePage() {
@@ -23,13 +24,7 @@ export default function ViewProfilePage() {
     userId: isMe ? Number(auth.state.user?.id) : Number(params.id),
     page: 1,
   });
-  const [userDetails, setUserDetails] = useState<UserDetailState>({
-    id: null,
-    username: "",
-    email: "",
-    createdAt: "",
-    role: "",
-  });
+  const [userDetails, setUserDetails] = useState<UserDetailState>(userDetailsData);
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   const userId: any = auth.state.user?.id;
 
