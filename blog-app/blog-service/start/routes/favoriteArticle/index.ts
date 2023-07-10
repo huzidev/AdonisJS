@@ -7,6 +7,5 @@ export default function FavoriteArticlesRoutes() {
     Route.get("/get_favorite_article/:id/:page", `${path}.get`)
         .where("id", /^[0-9]+$/)
         .where("page", /^[0-9]+$/)
-        // .middleware("auth");
   }).prefix("/article");
 }
