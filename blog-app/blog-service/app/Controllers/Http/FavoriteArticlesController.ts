@@ -20,9 +20,8 @@ export default class FavoriteArticlesController {
     public async get({ params }: HttpContextContract) {
         const userId = params.id;
         const query = FavoriteArticle.query()
-        if (userId) {
-            query.where("user_id", userId).select("article_id");
-        }
+            .where("user_id", userId)
+            .select("article_id");
         const response = await Article.query().whereIn("id", query).paginate(params.page || 1, 5);
         return response;
     }
