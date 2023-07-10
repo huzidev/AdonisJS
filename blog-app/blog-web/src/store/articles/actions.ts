@@ -89,7 +89,7 @@ export const addBlog = createAsyncThunk(
   }
 );
 
-export const addFavoriteBlogs = createAsyncThunk(
+export const addFavoriteBlog = createAsyncThunk(
   endpoints.ADD_FAVORITE_BLOG,
   async (data: AddFavoriteBlogPayload) => {
     try {

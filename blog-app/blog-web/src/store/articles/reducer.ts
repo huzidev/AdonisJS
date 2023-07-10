@@ -153,13 +153,13 @@ export const blogSlice = createSlice({
       state.getFavoriteBlogs.error = true;
     });
     // addFavoriteBlog
-    builder.addCase(actions.addFavoriteBlogs.pending, (state) => {
+    builder.addCase(actions.addFavoriteBlog.pending, (state) => {
       state.addFavoriteBlog = { loading: true, error: false };
     });
-    builder.addCase(actions.addFavoriteBlogs.fulfilled, (state) => {
+    builder.addCase(actions.addFavoriteBlog.fulfilled, (state) => {
       state.addFavoriteBlog = { loading: false, error: false };
     });
-    builder.addCase(actions.addFavoriteBlogs.rejected, (state) => {
+    builder.addCase(actions.addFavoriteBlog.rejected, (state) => {
       state.addFavoriteBlog = { loading: false, error: true };
     });
   },
