@@ -38,18 +38,22 @@ export default function ViewProfilePage() {
   useEffect(() => {
     if (!isMe && Number(params.id) !== userDataById?.id) {
       user.getById(params.id);
-      blogs.getBlogsById(payload);
+      if (!isUser || !isClickedUser) {
+        blogs.getBlogsById(payload);
+      }
     } else if (isMe && !userBlogs.length) {
       // because when user's role is user then we only wanted to fetch favoriteBlogs
-      if (!isUser) {
+      if (!isUser || !isClickedUser) {
         blogs.getBlogsById(payload);
       }
     }
   }, [params.id, currentId]);
   
   useEffect(() => {
+    if (isClickedUser || isUser) {
       blogs.getFavoriteBlogs(payload)
-  }, [isMe, user.state.getUser.data])
+    }
+  }, [isMe, isClickedUser])
 
   // to store the data
   useEffect(() => {
