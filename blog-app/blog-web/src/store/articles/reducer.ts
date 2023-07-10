@@ -122,7 +122,16 @@ export const blogSlice = createSlice({
     builder.addCase(actions.updateBlog.pending, (state) => {
       state.updateBlog = { loading: true, error: false };
     });
-    builder.addCase(actions.updateBlog.fulfilled, (state) => {
+    builder.addCase(actions.updateBlog.fulfilled, (state, action) => {
+      const { data, id } = action.payload; 
+      const updatedAllBlogs = state.getBlogs.data.map((blog) => {
+        if (blog.id === id) {
+          return data;
+        }
+        return blog;
+      });
+      // Update the allBlogs data in the state
+      state.getBlogs.data = updatedAllBlogs;
       state.updateBlog = { loading: false, error: false };
     });
     builder.addCase(actions.updateBlog.rejected, (state) => {

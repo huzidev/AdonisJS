@@ -113,7 +113,6 @@ export const removeFavoriteBlog = createAsyncThunk(
       if (response.status === 200) {
         alert("Blog Removed From Favorite");
       }
-      console.log("Remove Blog", response);
       return response.data.id;
     } catch (e) {
       console.log("Erro", e);
@@ -126,9 +125,11 @@ export const updateBlog = createAsyncThunk(
   async (data: UpdateBlogPayload) => {
     try {
       const response = await api.put(endpoints.UPDATE_BLOG + data.id, data);
-      alert("Blog updated");
-      console.log("Update", response);
-      return response.data.data;
+      if (response.status === 200) {
+        alert("Blog updated");
+      }
+      console.log("Update blog resp", response.data);
+      return response.data;
     } catch (e) {
       console.log("Error", e);
     }
