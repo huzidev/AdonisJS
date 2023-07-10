@@ -12,6 +12,7 @@ const initialState: BlogState = {
   deleteBlog: { ...subState },
   addBlog: { ...subState },
   addFavoriteBlog: { ...subState },
+  removeFavoriteBlog: { ...subState }
 };
 
 export const blogSlice = createSlice({
@@ -161,6 +162,16 @@ export const blogSlice = createSlice({
     });
     builder.addCase(actions.addFavoriteBlog.rejected, (state) => {
       state.addFavoriteBlog = { loading: false, error: true };
+    });
+    // removeFavoriteBlog
+    builder.addCase(actions.removeFavoriteBlog.pending, (state) => {
+      state.removeFavoriteBlog = { loading: true, error: false };
+    });
+    builder.addCase(actions.removeFavoriteBlog.fulfilled, (state) => {
+      state.removeFavoriteBlog = { loading: false, error: false };
+    });
+    builder.addCase(actions.removeFavoriteBlog.rejected, (state) => {
+      state.removeFavoriteBlog = { loading: false, error: true };
     });
   },
 });

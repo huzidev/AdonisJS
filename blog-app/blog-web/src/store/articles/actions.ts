@@ -2,12 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "services/api";
 import * as endpoints from "./endpoints";
 import {
-    AddBlogPayload,
-    AddFavoriteBlogPayload,
-    AllBlogs,
-    GetBlogPayload,
-    GetBlogsById,
-    UpdateBlogPayload,
+  AddBlogPayload,
+  AddFavoriteBlogPayload,
+  AllBlogs,
+  GetBlogPayload,
+  GetBlogsById,
+  UpdateBlogPayload,
 } from "./types";
 
 export const getBlogs = createAsyncThunk(
@@ -98,6 +98,22 @@ export const addFavoriteBlog = createAsyncThunk(
         alert("Blog added To Favorite");
       }
       console.log("Add Blog", response);
+      return response.data.data;
+    } catch (e) {
+      console.log("Erro", e);
+    }
+  }
+);
+
+export const removeFavoriteBlog = createAsyncThunk(
+  endpoints.REMOVE_FAVORITE_BLOG,
+  async (id: number) => {
+    try {
+      const response = await api.post(endpoints.REMOVE_FAVORITE_BLOG + id);
+      if (response.status === 200) {
+        alert("Blog Removed From Favorite");
+      }
+      console.log("Remove Blog", response);
       return response.data.data;
     } catch (e) {
       console.log("Erro", e);

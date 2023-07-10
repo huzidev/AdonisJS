@@ -10,11 +10,11 @@ export const useBlogs = () => {
   const getBlogsById = (payload: GetBlogsById) => dispatch(actions.getBlogsById(payload));
   const getFavoriteBlogs = (payload: GetBlogsById) => dispatch(actions.getFavoriteBlogs(payload));
   const addFavoriteBlog = (payload: AddFavoriteBlogPayload) => dispatch(actions.addFavoriteBlog(payload));
+  const removeFavoriteBlog = (payload: number) => dispatch(actions.removeFavoriteBlog(payload));
   const getBlog = (payload: GetBlogPayload) => dispatch(actions.getBlog(payload));
   const addBlog = (payload: AddBlogPayload) => dispatch(actions.addBlog(payload));
   const updateBlog = (payload: UpdateBlogPayload) => dispatch(actions.updateBlog(payload));
   const deleteBlog = (payload: number) => dispatch(actions.deleteBlog(payload));
-  const  = (payload: number) => dispatch(actions.deleteBlog(payload));
 
   return {
     state,
@@ -25,6 +25,7 @@ export const useBlogs = () => {
     deleteBlog,
     getBlogsById,
     getFavoriteBlogs,
-    addFavoriteBlog
+    addFavoriteBlog,
+    removeFavoriteBlog
   }
 }

@@ -71,7 +71,11 @@ export default function ViewBlogsPage(): JSX.Element {
                       className={`p-2 rounded-full transition-colors duration-300 ${
                         favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) ? "text-red-500" : "text-gray-500"
                       }`}
-                      onClick={handleClick}
+                      onClick={() => 
+                        favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) 
+                        ? blogs.addFavoriteBlog({ userId: auth.state.user?.id, articleId: blog.id })
+                        : 
+                      }
                     >
                       <svg
                         className="w-6 h-6"
@@ -111,7 +115,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     {/* {blog.createdAt} */}
                   </Link>
                   {blog.ownerId === userData?.id ||
-                  hasPermission("admin" || "super-admin", userData?.role) ? (
+                  hasPermission("admin" || "super-admin", userData?.role) && (
                     <div>
                       <Link
                         to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
@@ -128,8 +132,6 @@ export default function ViewBlogsPage(): JSX.Element {
                         Delete
                       </button>
                     </div>
-                  ) : (
-                    ""
                   )}
                   <div className="flex justify-end items-center">
                     <p className="text-white">Uploaded By :&nbsp;</p>
