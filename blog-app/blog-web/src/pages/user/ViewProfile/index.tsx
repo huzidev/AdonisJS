@@ -70,7 +70,7 @@ export default function ViewProfilePage() {
     blogs.getBlogsById(updatedPayload);
   }
 
-  console.log("favorite blogs", favoriteBlogs.data);
+  console.log("favorite blogs", favoriteBlogs.data.length);
 
   return (
     <>
@@ -173,7 +173,7 @@ export default function ViewProfilePage() {
                     </div>
                   </div>
                 );
-              }) : (favoriteBlogs.data && favoriteBlogs.data.map((blog: any) => {
+              }) : favoriteBlogs.data.length ? (favoriteBlogs.data.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                     {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -210,10 +210,8 @@ export default function ViewProfilePage() {
                     </div>
                   </div>
                 )
-              }))
-              }
-             {/* so when user reload the page this won't be shown for the time page is reloading */}
-              {!blogs.state.getBlogs?.loading && (!userBlogs.length || !favoriteBlogs.data.length) && (
+                {/* so when user reload the page this won't be shown for the time page is reloading */}
+              })) : (!blogs.state.getBlogs?.loading && (!userBlogs.length || !favoriteBlogs.data) && (
                 <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                     Oops...
@@ -239,7 +237,7 @@ export default function ViewProfilePage() {
                     {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
                   </Link>
                 </div>
-              )}
+              ))}
         </div>
       </div>
       <div className="w-11/12 m-auto mt-5">
