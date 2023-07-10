@@ -1,4 +1,6 @@
+import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useUser } from "store/user";
 import { useGetBlogPageHooks } from "./hooks";
@@ -8,16 +10,15 @@ export default function ViewBlogPage(): JSX.Element {
   const user = useUser();
   const blog = useBlogs();
   const getBlog = blog.state.getBlog?.data;
-
+  const owner = user.state.getUser.data;
   const initialState: BlogState = {title: "", image: "", content: ""};
   const [blogView, setBlogView] = useState(initialState);
 
   useGetBlogPageHooks();
-
+  
   useEffect(() => {
     setBlogView({...blogView, ...getBlog})
   }, [getBlog])
-  
   return (
     <div>
         <div 
@@ -34,6 +35,13 @@ export default function ViewBlogPage(): JSX.Element {
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {blogView.content}
             </p>
+          </div>
+          <div className="flex justify-end mr-3">
+            <Link
+              to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}
+            >
+              Uploaded By : {owner?.username}
+            </Link>
           </div>
         </div>
     </div>

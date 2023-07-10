@@ -9,9 +9,11 @@ export function useGetBlogPageHooks(): void {
     const user = useUser();
     const ownerId: any = blog.state.getBlog.data?.ownerId;
 
-
     useEffect(() => {
       blog.getBlog(params.slug)
-  }, [])
+      if (ownerId) {
+        user.getById(ownerId);
+      }
+  }, [ownerId])
 
 }
