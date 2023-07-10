@@ -73,8 +73,8 @@ export default function ViewBlogsPage(): JSX.Element {
                       }`}
                       onClick={() => 
                         favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) 
-                        ? blogs.addFavoriteBlog({ userId: auth.state.user?.id, articleId: blog.id })
-                        : 
+                        ? blogs.removeFavoriteBlog(blog.id)
+                        : blogs.addFavoriteBlog({ userId: auth.state.user?.id, articleId: blog.id })
                       }
                     >
                       <svg

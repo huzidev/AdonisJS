@@ -109,7 +109,7 @@ export const removeFavoriteBlog = createAsyncThunk(
   endpoints.REMOVE_FAVORITE_BLOG,
   async (id: number) => {
     try {
-      const response = await api.post(endpoints.REMOVE_FAVORITE_BLOG + id);
+      const response = await api.delete(endpoints.REMOVE_FAVORITE_BLOG + id);
       if (response.status === 200) {
         alert("Blog Removed From Favorite");
       }
