@@ -11,6 +11,7 @@ const initialState: BlogState = {
   updateBlog: { ...subState },
   deleteBlog: { ...subState },
   addBlog: { ...subState },
+  addFavoriteBlog: { ...subState },
 };
 
 export const blogSlice = createSlice({
@@ -150,6 +151,16 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getFavoriteBlogs.rejected, (state) => {
       state.getFavoriteBlogs.loading = false;
       state.getFavoriteBlogs.error = true;
+    });
+    // addFavoriteBlog
+    builder.addCase(actions.addFavoriteBlogs.pending, (state) => {
+      state.addFavoriteBlog = { loading: true, error: false };
+    });
+    builder.addCase(actions.addFavoriteBlogs.fulfilled, (state) => {
+      state.addFavoriteBlog = { loading: false, error: false };
+    });
+    builder.addCase(actions.addFavoriteBlogs.rejected, (state) => {
+      state.addFavoriteBlog = { loading: false, error: true };
     });
   },
 });
