@@ -40,14 +40,15 @@ export default function ViewProfilePage() {
       user.getById(params.id);
       blogs.getBlogsById(payload);
     } else if (isMe && !userBlogs.length) {
-      blogs.getBlogsById(payload);
+      // because when user's role is user then we only wanted to fetch favoriteBlogs
+      if (!isUser) {
+        blogs.getBlogsById(payload);
+      }
     }
   }, [params.id, currentId]);
   
   useEffect(() => {
-    if (isClickedUser) {
       blogs.getFavoriteBlogs(payload)
-    }
   }, [isMe, user.state.getUser.data])
 
   // to store the data
@@ -58,12 +59,6 @@ export default function ViewProfilePage() {
       setUserDetails({ ...userDetails, ...data });
     }
   }, [userDataById, params.id]);
-
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
 
   function loadMore() {
     const updatedPayload = {

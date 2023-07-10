@@ -20,10 +20,6 @@ export default function ViewBlogsPage(): JSX.Element {
 
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-  
   useBlogsPageHooks();
   
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
