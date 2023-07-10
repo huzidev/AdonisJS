@@ -22,7 +22,7 @@ export default function ViewProfilePage() {
   const isMe = params.id === "me";
   const [payload, setPayload] = useState<any>({
     userId: isMe ? Number(auth.state.user?.id) : Number(params.id),
-    page: 1,
+    page: 1
   });
   const [userDetails, setUserDetails] = useState<UserDetailState>(userDetailsData);
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
@@ -45,7 +45,6 @@ export default function ViewProfilePage() {
   
   useEffect(() => {
       blogs.getFavoriteBlogs(payload)
-      console.log("PAYLOAD", payload);
   }, [isMe, user.state.getUser.data])
 
   // to store the data
@@ -67,6 +66,7 @@ export default function ViewProfilePage() {
   }
 
   console.log("favorite blogs", favoriteBlogs.data.length);
+  console.log("userBlogs", userBlogs.length);
 
   return (
     <>
