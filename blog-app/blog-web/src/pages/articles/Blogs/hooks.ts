@@ -9,7 +9,7 @@ export function useBlogsPageHooks(): void {
   const auth = useAuth();
   const allUsers: any = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
-  const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
+  const favoriteBlogs = blogs.state.getFavoriteBlogs;
   const payload: any = {
     userId: auth.state.user?.id,
     page: 1
@@ -22,8 +22,12 @@ export function useBlogsPageHooks(): void {
     if (!allUsers) {
       user.allUser();
     }
-    if (!favoriteBlogs.length) {
-      blogs.getFavoriteBlogs(payload)
+  }, []);
+  
+  useEffect(() => {
+    console.log("favortie Blogs", favoriteBlogs.data.length);
+    if (!favoriteBlogs.data.length) {
+      blogs.getFavoriteBlogs(payload);
     }
   }, []);
 }

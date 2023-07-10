@@ -1,5 +1,4 @@
 import ROUTE_PATHS from "Router/paths";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -17,8 +16,6 @@ export default function ViewBlogsPage(): JSX.Element {
   const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
-
-  const [isClicked, setIsClicked] = useState(false);
 
   useBlogsPageHooks();
   
@@ -63,37 +60,41 @@ export default function ViewBlogsPage(): JSX.Element {
                         ? `${blog.title.slice(0, 21)}...`
                         : blog.title}
                     </h5>
-                    <div
-                      className={`p-2 rounded-full transition-colors duration-300 ${
-                        favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) ? "text-red-500" : "text-gray-500"
-                      }`}
-                      onClick={() => 
-                        favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) 
-                        ? blogs.removeFavoriteBlog(blog.id)
-                        : blogs.addFavoriteBlog({ userId: auth.state.user?.id, articleId: blog.id })
-                      }
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        {isClicked ? (
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M17.725 5.275a5.5 5.5 0 1 0-7.778 0L10 6.293l-.947-.948a5.5 5.5 0 1 0-7.778 7.778l.947.947L10 18.243l6.725-6.725.947-.947a5.5 5.5 0 0 0 0-7.778z"
-                          />
-                        ) : (
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M17.725 5.275a5.5 5.5 0 1 0-7.778 0L10 6.293l-.947-.948a5.5 5.5 0 1 0-7.778 7.778l.947.947L10 18.243l6.725-6.725.947-.947a5.5 5.5 0 0 0 0-7.778l-.947-.947z"
-                          />
-                        )}
-                      </svg>
-                    </div>
+                    {
+                      auth.state.user && (
+                        <div
+                          className={`p-2 rounded-full transition-colors duration-300 ${
+                            favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) ? "text-red-500" : "text-gray-500"
+                          }`}
+                          onClick={() => 
+                            favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) 
+                            ? blogs.removeFavoriteBlog(blog.id)
+                            : blogs.addFavoriteBlog({ userId: auth.state.user?.id, articleId: blog.id })
+                          }
+                        >
+                          <svg
+                            className="w-6 h-6"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            {favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) ? (
+                              <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M17.725 5.275a5.5 5.5 0 1 0-7.778 0L10 6.293l-.947-.948a5.5 5.5 0 1 0-7.778 7.778l.947.947L10 18.243l6.725-6.725.947-.947a5.5 5.5 0 0 0 0-7.778z"
+                              />
+                            ) : (
+                              <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M17.725 5.275a5.5 5.5 0 1 0-7.778 0L10 6.293l-.947-.948a5.5 5.5 0 1 0-7.778 7.778l.947.947L10 18.243l6.725-6.725.947-.947a5.5 5.5 0 0 0 0-7.778l-.947-.947z"
+                              />
+                            )}
+                          </svg>
+                        </div>
+                      )
+                    }
                   </div>
                   <p
                     title={blog.content}

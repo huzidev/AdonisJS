@@ -43,7 +43,6 @@ export const blogSlice = createSlice({
           ) ?? [];
         state.getBlogs.data = [...cleaned, ...data];
         // meta takes pagination data like total, currentPage, LastPage
-        console.log("meta simple state", meta);
         state.getBlogs.meta = meta;
       }
       state.getBlogs.error = false;
@@ -68,7 +67,6 @@ export const blogSlice = createSlice({
           ) ?? [];
         state.getBlogsById.data = [...cleaned, ...data];
         // meta takes pagination data like total, currentPage, LastPage
-        console.log("meta for ID", meta);
         state.getBlogsById.meta = meta;
       }
       state.getBlogsById.error = false;
@@ -109,6 +107,7 @@ export const blogSlice = createSlice({
     });
     builder.addCase(actions.deleteBlog.fulfilled, (state, action) => {
       state.deleteBlog = { loading: false, error: false };
+      // so after deleting the blog the blogs data will updated
       if (action.payload) {
         const deletedBlogId = action.payload;
         state.getBlogs.data = state.getBlogs.data.filter(
