@@ -37,6 +37,7 @@ export default function ViewProfilePage() {
   let allBlogsById = blogs.state.getBlogsById.data;
   let userBlogs = allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
+  let favoriteBlogs = blogs.state.getFavoriteBlogs;
 
   useEffect(() => {
     if (!isMe && Number(params.id) !== userDataById?.id) {
@@ -46,10 +47,14 @@ export default function ViewProfilePage() {
       blogs.getBlogsById(payload);
     }
   }, [params.id, currentId]);
+  
+  useEffect(() => {
+      blogs.getFavoriteBlogs(payload)
+  }, [auth.state.user?.role])
 
   // to store the data
   useEffect(() => {
-    if (params.id !== "me" && userDataById) {
+    if (!isMe && userDataById) {
       setUserDetails({ ...userDetails, ...userDataById });
     } else if (isMe && data) {
       setUserDetails({ ...userDetails, ...data });
@@ -65,11 +70,7 @@ export default function ViewProfilePage() {
     blogs.getBlogsById(updatedPayload);
   }
 
-  console.log("users blogs", userBlogs);
-  console.log("IsClicked User", isClickedUser);
-
-  console.log("favorite blogs", blogs.state.getFavoriteBlogs.data);
-  
+  console.log("favorite blogs", favoriteBlogs.data);
 
   return (
     <>
@@ -93,7 +94,7 @@ export default function ViewProfilePage() {
             </h2>
             <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               {(isUser && isMe) || isClickedUser
-                ? "Total Blogs Liked :"
+                ? `Total Blogs Liked : ${favoriteBlogs.meta?.total}`
                 : `Total Blogs : ${totalBlogs}`}
             </h2>
             {isMe && (

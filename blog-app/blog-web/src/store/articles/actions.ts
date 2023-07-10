@@ -32,6 +32,7 @@ export const getFavoriteBlogs = createAsyncThunk(endpoints.GET_FAVORITE_BLOGS, a
     // AllBlogs contains Array of blogs and meta
     try {
        const { userId, page } = data;
+       console.log("data from redux", data);
        const response = await api.get(`${endpoints.GET_FAVORITE_BLOGS + userId}/${page}`);
        console.log("response for all Favorite blogs", response.data);
        return response.data;
