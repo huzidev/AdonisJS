@@ -1,4 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -16,8 +17,16 @@ export default function ViewBlogsPage(): JSX.Element {
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
 
-  useBlogsPageHooks();
+  const [isClicked, setIsClicked] = useState(false);
 
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+  
+  useBlogsPageHooks();
+  
+  console.log("favorite blogs", blogs.state.getFavoriteBlogs?.data);
+  
   const currentPage: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogs.meta?.lastPage;
   return (
@@ -40,14 +49,43 @@ export default function ViewBlogsPage(): JSX.Element {
                   alt="Thumbnail"
                 />
                 <div className="p-5">
-                  <h5
-                    title={blog.title}
-                    className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-                  >
-                    {blog.title.length > 21
-                      ? `${blog.title.slice(0, 21)}...`
-                      : blog.title}
-                  </h5>
+                  <div className="flex justify-between">
+                    <h5
+                      title={blog.title}
+                      className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                    >
+                      {blog.title.length > 21
+                        ? `${blog.title.slice(0, 21)}...`
+                        : blog.title}
+                    </h5>
+                    <div
+                      className={`p-2 rounded-full transition-colors duration-300 ${
+                        isClicked ? "text-red-500" : "text-gray-500"
+                      }`}
+                      onClick={handleClick}
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        {isClicked ? (
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M17.725 5.275a5.5 5.5 0 1 0-7.778 0L10 6.293l-.947-.948a5.5 5.5 0 1 0-7.778 7.778l.947.947L10 18.243l6.725-6.725.947-.947a5.5 5.5 0 0 0 0-7.778z"
+                          />
+                        ) : (
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M17.725 5.275a5.5 5.5 0 1 0-7.778 0L10 6.293l-.947-.948a5.5 5.5 0 1 0-7.778 7.778l.947.947L10 18.243l6.725-6.725.947-.947a5.5 5.5 0 0 0 0-7.778l-.947-.947z"
+                          />
+                        )}
+                      </svg>
+                    </div>
+                  </div>
                   <p
                     title={blog.content}
                     className="mb-3 font-normal text-gray-700 dark:text-gray-400"
@@ -63,15 +101,16 @@ export default function ViewBlogsPage(): JSX.Element {
                     Read More
                     {/* {blog.createdAt} */}
                   </Link>
-                  {blog.ownerId === userData?.id || hasPermission("admin" || "super-admin", userData?.role) ? (
+                  {blog.ownerId === userData?.id ||
+                  hasPermission("admin" || "super-admin", userData?.role) ? (
                     <div>
-                        <Link
-                          to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
-                          type="button"
-                          className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                          >
-                          Edit
-                        </Link>
+                      <Link
+                        to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                        type="button"
+                        className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                      >
+                        Edit
+                      </Link>
                       <button
                         type="button"
                         className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
@@ -80,7 +119,9 @@ export default function ViewBlogsPage(): JSX.Element {
                         Delete
                       </button>
                     </div>
-                  ) : ""}
+                  ) : (
+                    ""
+                  )}
                   <div className="flex justify-end items-center">
                     <p className="text-white">Uploaded By :&nbsp;</p>
                     <Link
@@ -104,9 +145,10 @@ export default function ViewBlogsPage(): JSX.Element {
       </div>
       <div className="w-10/12 m-auto mt-5">
         {currentPage !== lastPage && (
-          <button 
+          <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            onClick={() => blogs.getBlogs(currentPage + 1)}>
+            onClick={() => blogs.getBlogs(currentPage + 1)}
+          >
             Load More
           </button>
         )}

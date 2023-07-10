@@ -21,9 +21,10 @@ export default function ViewProfilePage() {
   const isClickedUser = user.state.getUser.data?.role === "user";
   const isMe = params.id === "me";
   const [payload, setPayload] = useState<any>({
-    userId: isMe ? Number(auth.state.user?.id) : Number(params.id),
+    userId: isMe ? auth.state.user?.id : Number(params.id),
     page: 1
   });
+
   const [userDetails, setUserDetails] = useState<UserDetailState>(userDetailsData);
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   const userId: any = auth.state.user?.id;
@@ -44,7 +45,9 @@ export default function ViewProfilePage() {
   }, [params.id, currentId]);
   
   useEffect(() => {
+    if (isClickedUser) {
       blogs.getFavoriteBlogs(payload)
+    }
   }, [isMe, user.state.getUser.data])
 
   // to store the data
@@ -56,6 +59,12 @@ export default function ViewProfilePage() {
     }
   }, [userDataById, params.id]);
 
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+
   function loadMore() {
     const updatedPayload = {
       ...payload,
@@ -64,13 +73,10 @@ export default function ViewProfilePage() {
     setPayload(updatedPayload);
     blogs.getBlogsById(updatedPayload);
   }
-
-  console.log("favorite blogs", favoriteBlogs.data.length);
-  console.log("userBlogs", userBlogs.length);
-
   return (
     <>
       <div>
+       
         <div className="w-11/12 my-5 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div className="p-5">
             <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
@@ -124,15 +130,15 @@ export default function ViewProfilePage() {
                         src="/docs/images/blog/image-1.jpg"
                         alt="Thumbnail"
                       />
-                      <div className="p-5">
-                        <h5
-                          title={blog.title}
-                          className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-                        >
-                          {blog.title.length > 21
-                            ? `${blog.title.slice(0, 21)}...`
-                            : blog.title}
-                        </h5>
+                        <div>
+                          <h5
+                            title={blog.title}
+                            className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                          >
+                            {blog.title.length > 21
+                              ? `${blog.title.slice(0, 21)}...`
+                              : blog.title}
+                          </h5>
                         <p
                           title={blog.content}
                           className="mb-3 font-normal text-gray-700 dark:text-gray-400"
@@ -243,7 +249,7 @@ export default function ViewProfilePage() {
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
             onClick={loadMore}
-          >
+            >
             Load More
           </button>
         )}
