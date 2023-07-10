@@ -168,7 +168,7 @@ export const blogSlice = createSlice({
     });
     builder.addCase(actions.removeFavoriteBlog.fulfilled, (state, action) => {
       state.removeFavoriteBlog = { loading: false, error: false };
-      console.log("action", action.payload);
+      // to update the getFavoriteBlogs field when removed the blog
       if (action.payload) {
         const deletedBlogId = action.payload;
         state.getFavoriteBlogs.data = state.getFavoriteBlogs.data.filter(
