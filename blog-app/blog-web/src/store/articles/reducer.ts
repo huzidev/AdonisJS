@@ -166,8 +166,15 @@ export const blogSlice = createSlice({
     builder.addCase(actions.removeFavoriteBlog.pending, (state) => {
       state.removeFavoriteBlog = { loading: true, error: false };
     });
-    builder.addCase(actions.removeFavoriteBlog.fulfilled, (state) => {
+    builder.addCase(actions.removeFavoriteBlog.fulfilled, (state, action) => {
       state.removeFavoriteBlog = { loading: false, error: false };
+      console.log("action", action.payload);
+      if (action.payload) {
+        const deletedBlogId = action.payload;
+        state.getFavoriteBlogs.data = state.getFavoriteBlogs.data.filter(
+          (blog) => blog.id !== deletedBlogId
+        );
+      }
     });
     builder.addCase(actions.removeFavoriteBlog.rejected, (state) => {
       state.removeFavoriteBlog = { loading: false, error: true };

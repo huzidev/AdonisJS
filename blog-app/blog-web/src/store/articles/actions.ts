@@ -114,7 +114,7 @@ export const removeFavoriteBlog = createAsyncThunk(
         alert("Blog Removed From Favorite");
       }
       console.log("Remove Blog", response);
-      return response.data.data;
+      return response.data.id;
     } catch (e) {
       console.log("Erro", e);
     }
@@ -134,7 +134,7 @@ export const updateBlog = createAsyncThunk(
     }
   }
 );
-
+  
 export const deleteBlog = createAsyncThunk(
   endpoints.DELETE_BLOG,
   async (id: number) => {
