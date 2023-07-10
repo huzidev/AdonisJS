@@ -18,7 +18,7 @@ export default class UsersController {
         if (params.page) {
             response = await query.paginate(params.page || 1, 10);
         } else {
-            response = await query.exec();
+            response = await query;
         }
         return { message: "Users fetched successfully", data: response }
     }
