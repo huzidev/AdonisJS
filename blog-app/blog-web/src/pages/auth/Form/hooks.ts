@@ -1,3 +1,23 @@
+import { useEffect } from "react";
+import { toast } from 'react-toastify';
+import { useAuth } from "store/auth";
+import { usePrevious } from "utils/hooks";
+
 export function useHomeFormHook(): void {
-  
+  const auth = useAuth();
+  const state = auth.state;
+  const prevAuth = usePrevious(state);
+  useEffect(() => {
+    if (!prevAuth?.signInState?.error && state.signInState.error) {
+      toast.error('Failed to login');
+    }
+    else if (prevAuth?.signInState?.loading && state.signInState.loading) {
+      toast.success('Logged in');
+    }
+    if (!prevAuth?.signUpState?.error && state.signUpState.error) {
+      toast.error('Failed to register');
+    } else if (prevAuth?.signUpState?.loading && !state.signUpState.loading) {
+      toast.success('User registered');
+    }
+  }, [state.signInState, state.signUpState]);
 }
