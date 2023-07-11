@@ -1,12 +1,17 @@
 import { useEffect } from "react";
+import { toast } from 'react-toastify';
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
+import { usePrevious } from "utils/hooks";
+
 
 export function useBlogsPageHooks(): void {
   const blogs = useBlogs();
   const user = useUser();
   const auth = useAuth();
+  const state = blogs.state.getBlogs;
+  const prev = usePrevious(state);
   const allUsers: any = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const favoriteBlogs = blogs.state.getFavoriteBlogs;
@@ -31,4 +36,13 @@ export function useBlogsPageHooks(): void {
       blogs.getFavoriteBlogs(payload);
     }
   }, []);
+  useEffect(() => {
+    if (prev?.loading) {
+      if (state.error) {
+        toast.error(`Error ${state.error}`);
+      } else if (!state.loading) {
+        toast.success(`Success ${state.message}`);
+      }
+    }
+  }, [state]);
 }

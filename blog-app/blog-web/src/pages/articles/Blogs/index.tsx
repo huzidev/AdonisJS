@@ -1,6 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
 import { Link } from "react-router-dom";
-import { toast } from 'react-toastify';
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -30,11 +29,6 @@ export default function ViewBlogsPage(): JSX.Element {
     if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
       blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1)
     }
-  }
-
-
-  function success() {
-    toast.success("Blog fetched") 
   }
 
   return (
@@ -158,17 +152,12 @@ export default function ViewBlogsPage(): JSX.Element {
       </div>
       <div className="w-10/12 m-auto mt-5">
         {currentPageBlogs !== lastPageBlogs && (
-          <>
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
             onClick={loadMore}
           >
             Load More
           </button>
-          <button onClick={success}>
-            Notify
-          </button>
-          </>
         )}
       </div>
     </>

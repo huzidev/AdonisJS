@@ -34,8 +34,9 @@ export const blogSlice = createSlice({
     });
     builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
       state.getBlogs.loading = false;
+      console.log("action payload adasdasdas", action.payload);
       if (action.payload) {
-        const { data, meta } = action.payload;
+        const { data, meta, message } = action.payload;
         // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
         const cleaned =
           state.getBlogs.data?.filter(
