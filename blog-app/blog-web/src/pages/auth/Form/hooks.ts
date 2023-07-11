@@ -9,10 +9,9 @@ export function useHomeFormHook(): void {
   const prevAuth = usePrevious(state);
   useEffect(() => {
     if (!prevAuth?.signInState?.error && state.signInState.error) {
-      toast.error('Failed to login');
-    }
-    else if (prevAuth?.signInState?.loading && state.signInState.loading) {
-      toast.success('Logged in');
+      toast.error(state.signInState.message);
+    } else if (prevAuth?.signInState?.loading && state.signInState.loading) {
+      toast.success(state.signInState.message);
     }
     if (!prevAuth?.signUpState?.error && state.signUpState.error) {
       toast.error('Failed to register');

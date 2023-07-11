@@ -30,7 +30,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       if (!auth.state.user && notAllowedPaths.includes(currentPath)) {
         Navigate("/")
       }
-      if (auth.state.user) {
+      else if (auth.state.user) {
         const { isVerified, isBanned } = auth.state.user;
         if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {
           Navigate(ROUTE_PATHS.BANNED_USER);
@@ -39,14 +39,18 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
         } else if (!isVerified && currentPath !== ROUTE_PATHS.VERIFY_USER) {
           Navigate(ROUTE_PATHS.VERIFY_USER)
         } else if (isVerified && currentPath === ROUTE_PATHS.VERIFY_USER) {
+          Navigate("/");
+        } else if (isVerified && currentPath === ROUTE_PATHS.VERIFY_USER) {
           Navigate("/")
         }
         else {
           setState(true)
         }
       }
-      setState(true)
-    }, [auth.initUser, auth.state.init, auth.state.user]);
+      else {
+        setState(true)
+      }
+      }, [auth.state.user, auth.state.init]);
     if (!state) {
       return <PageLoader />;
     }
