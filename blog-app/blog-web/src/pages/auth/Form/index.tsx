@@ -10,7 +10,7 @@ import { AuthSignInPayload, AuthSignUpPayload, BooleanState } from "./types";
 export default function UserFormPage(): JSX.Element {
   const auth = useAuth();
   const currentPath = window.location.pathname;
-  const [isLogInForm, setIsLogInForm] = useState(true);
+  const [isLogInForm, setIsLogInForm] = useState<boolean>(true);
   const [userLogIn, setUserLogIn] = useState<AuthSignInPayload>(userSignInData);
   const [userSignUp, setUserSignUp] = useState<AuthSignUpPayload>(userSignUpData);
 
