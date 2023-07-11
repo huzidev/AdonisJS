@@ -34,21 +34,17 @@ export const authSlice = createSlice({
         });
         // signUp User
         builder.addCase(actions.signUp.pending, (state) => {
-            state.init.loading = true;
-            state.init.error = false
+            state.signUpState = { loading: true, error: false }
         });
         builder.addCase(actions.signUp.fulfilled, (state) => {
-            state.init.loading = false;
-            state.init.error = false
+            state.signUpState = { loading: false, error: false }
         });
         builder.addCase(actions.signUp.rejected, (state) => {
-            state.init.loading = false
-            state.init.error = true
+            state.signUpState = { loading: false, error: true }
         });
         // signInUser
         builder.addCase(actions.signIn.pending, (state) => {
-            state.signInState.loading = true;
-            state.signInState.error = false
+            state.signInState = { loading: true, error: false }
         });
         builder.addCase(actions.signIn.fulfilled, (state, action: PayloadAction<User| null>) => {
             state.signInState.loading = false;
@@ -58,8 +54,7 @@ export const authSlice = createSlice({
             state.signInState.error = false
         });
         builder.addCase(actions.signIn.rejected, (state) => {
-            state.signInState.loading = false
-            state.signInState.error = true
+            state.signInState = { loading: false, error: true }
             state.signInState.message = "Cannot connect to server"
         });
         // signOutUser

@@ -72,7 +72,7 @@ export default function Header() {
                     </Link>
                   </li>
                   // only admin and super-admin can see Manage Users page
-                ) : user && hasPermission("admin" || "super-admin", user.role) && adminPaths.includes(data.link) && user?.isVerified && (
+                ) : user && hasPermission("admin", user.role) && adminPaths.includes(data.link) && user?.isVerified && (
                   <li key={dataIndex}>
                     <Link
                       to={data.link}
