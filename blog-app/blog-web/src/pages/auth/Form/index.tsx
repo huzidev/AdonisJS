@@ -4,20 +4,15 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
+import { userSignInData, userSignUpData } from "./data";
 import { AuthSignInPayload, AuthSignUpPayload, BooleanState } from "./types";
 
 export default function UserFormPage(): JSX.Element {
   const auth = useAuth();
   const currentPath = window.location.pathname;
   const [isLogInForm, setIsLogInForm] = useState(true);
-  const [userLogIn, setUserLogIn] = useState<AuthSignInPayload>({ email: "", password: "" });
-  const [userSignUp, setUserSignUp] = useState<AuthSignUpPayload>({
-    username: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-    isBlogger: false
-  });
+  const [userLogIn, setUserLogIn] = useState<AuthSignInPayload>(userSignInData);
+  const [userSignUp, setUserSignUp] = useState<AuthSignUpPayload>(userSignUpData);
 
   const [booleanState, setBooleanState] = useState<BooleanState>({
     value: false,
