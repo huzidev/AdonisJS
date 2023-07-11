@@ -20,6 +20,8 @@ export function useBlogsPageHooks(): void {
     page: 1
   }
 
+  console.log("state", state);
+
     useEffect(() => {
     // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
     if (!allBlogs.length) {
@@ -39,9 +41,9 @@ export function useBlogsPageHooks(): void {
   useEffect(() => {
     if (prev?.loading) {
       if (state.error) {
-        toast.error(`Error ${state.error}`);
+        toast.error(state.message);
       } else if (!state.loading) {
-        toast.success(`Success ${state.message}`);
+        toast.success(state.message);
       }
     }
   }, [state]);

@@ -34,9 +34,8 @@ export const blogSlice = createSlice({
     });
     builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
       state.getBlogs.loading = false;
-      console.log("action payload adasdasdas", action.payload);
       if (action.payload) {
-        const { data, meta, message } = action.payload;
+        const { data, meta } = action.payload;
         // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
         const cleaned =
           state.getBlogs.data?.filter(
@@ -44,6 +43,7 @@ export const blogSlice = createSlice({
           ) ?? [];
         state.getBlogs.data = [...cleaned, ...data];
         // meta takes pagination data like total, currentPage, LastPage
+        state.getBlogs.message = "Blogs fetched successfully"
         state.getBlogs.meta = meta;
       }
       state.getBlogs.error = false;
@@ -51,6 +51,7 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlogs.rejected, (state) => {
       state.getBlogs.loading = false;
       state.getBlogs.error = true;
+      state.getBlogs.message = "Something went wrong"
     });
     // getAllBlogsById
     builder.addCase(actions.getBlogsById.pending, (state) => {
