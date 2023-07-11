@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { subState } from "store/states";
 import * as actions from "./actions";
-import { Blog, BlogState } from "./types";
+import { AddBlogPayload, BlogState } from "./types";
 
 const initialState: BlogState = {
   getBlogsById: { ...subState, data: [], meta: null },
@@ -19,7 +19,7 @@ export const blogSlice = createSlice({
   name: "blogs",
   initialState,
   reducers: {
-    updateBlogsState: (state, action: PayloadAction<Blog[]>) => {
+    updateBlog: (state, action: PayloadAction<AddBlogPayload>) => {
       state.getBlogs.data = {
         ...(state?.getBlogs.data ?? []),
         ...action.payload,
@@ -123,15 +123,15 @@ export const blogSlice = createSlice({
       state.updateBlog = { loading: true, error: false };
     });
     builder.addCase(actions.updateBlog.fulfilled, (state, action) => {
-      const { data, id } = action.payload; 
-      const updatedAllBlogs = state.getBlogs.data.map((blog) => {
-        if (blog.id === id) {
-          return data;
-        }
-        return blog;
-      });
-      // Update the allBlogs data in the state
-      state.getBlogs.data = updatedAllBlogs;
+      // const { data, id } = action.payload; 
+      // const updatedAllBlogs = state.getBlogs.data.map((blog) => {
+      //   if (blog.id === id) {
+      //     return data;
+      //   }
+      //   return blog;
+      // });
+      // // Update the allBlogs data in the state
+      // state.getBlogs.data = updatedAllBlogs;
       state.updateBlog = { loading: false, error: false };
     });
     builder.addCase(actions.updateBlog.rejected, (state) => {

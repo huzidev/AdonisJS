@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
+import { usePrevious } from "utils/hooks";
 import { useEditBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
 
@@ -9,6 +10,10 @@ export default function UpdateBlogPage(): JSX.Element {
   const params = useParams();
   const slug: any = params.slug;
   const blog = blogs.state.getBlog?.data;
+  const prevUpdateState = usePrevious(blogs.state.updateBlog);
+  const updateState = blogs.state.updateBlog;
+
+
   const initialState: ArticleType = {
     id: null,
     title: "",
@@ -26,6 +31,16 @@ export default function UpdateBlogPage(): JSX.Element {
       [e.target.name]: e.target.value,
     });
   }
+
+  useEffect(() => {
+    if (
+      prevUpdateState?.loading &&
+      !updateState?.loading &&
+      updateState?.data
+    ) {
+      blogs.updateBlogState(updateState.data!);
+    }
+  }, [updateState, prevUpdateState]);
 
   useEffect(() => {
     setUpdateArticle({ ...updateArticle, ...blog });
