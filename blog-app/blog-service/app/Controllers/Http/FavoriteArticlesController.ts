@@ -22,7 +22,7 @@ export default class FavoriteArticlesController {
         const query = FavoriteArticle.query()
             .where("user_id", userId)
             .select("article_id");
-        const response = await Article.query().whereIn("id", query).paginate(params.page || 1, 5);
+        const response = await Article.query().whereIn("id", query).paginate(params.page || 1, 10);
         return response;
     }
 
@@ -30,6 +30,7 @@ export default class FavoriteArticlesController {
         try {
             const article = await FavoriteArticle.findBy("article_id", params.id);
             await article!.delete();
+            console.log("params id", params.id);
             return { message: `Article with id ${params.id} Deleted`, id: Number(params.id) };
         } catch (e) {
             throw e

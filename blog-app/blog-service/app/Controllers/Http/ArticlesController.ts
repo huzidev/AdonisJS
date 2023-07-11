@@ -8,15 +8,15 @@ const noArticle = { message: "No Article found by id ", status: 404 }
 const noPermission = { message: "You didn't have permission", status: 401 }
 export default class ArticlesController {
     public async getBlogs({ params }: HttpContextContract) {
-        const userId = params.id;
-        const query = Article.query();
-
-        // if user wanted to see allBlogs uploaded by him
-        if (userId) {
-            query.where('owner_id', userId);
-        }
-        const response = await query.paginate(params.page || 1, 5);
-        return response;
+            const userId = params.id;
+            const query = Article.query();
+    
+            // if user wanted to see allBlogs uploaded by him
+            if (userId) {
+                query.where('owner_id', userId);
+            }
+            const response = await query.paginate(params.page || 1, 5);
+            return response
     }
     
     public async addBlog({ request, auth }: HttpContextContract) {
@@ -66,9 +66,10 @@ export default class ArticlesController {
             } else {
                 // await Article.query().where("id", articleId).update(body);
                 article.fill({ ...article, ...body });
+                article.merge(body);
                 await article.save();
                 return { 
-                    data: body, 
+                    data: article,
                     message: "Article updated successfully" 
                 }
             }
