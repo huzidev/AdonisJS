@@ -4,7 +4,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
-import { userSignInData, userSignUpData } from "./data";
+import { booleanValues, userSignInData, userSignUpData } from "./data";
 import { AuthSignInPayload, AuthSignUpPayload, BooleanState } from "./types";
 
 export default function UserFormPage(): JSX.Element {
@@ -13,12 +13,7 @@ export default function UserFormPage(): JSX.Element {
   const [isLogInForm, setIsLogInForm] = useState<boolean>(true);
   const [userLogIn, setUserLogIn] = useState<AuthSignInPayload>(userSignInData);
   const [userSignUp, setUserSignUp] = useState<AuthSignUpPayload>(userSignUpData);
-
-  const [booleanState, setBooleanState] = useState<BooleanState>({
-    value: false,
-    valuePass: false,
-    valueConfPass: false
-  });
+  const [booleanState, setBooleanState] = useState<BooleanState>(booleanValues);
 
   useEffect(() => {
     const stateCondition = currentPath.includes("/sign_in") ? true : false;

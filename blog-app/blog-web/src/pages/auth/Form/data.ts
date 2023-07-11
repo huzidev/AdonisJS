@@ -1,4 +1,4 @@
-import { AuthSignInPayload, AuthSignUpPayload } from "./types";
+import { AuthSignInPayload, AuthSignUpPayload, BooleanState } from "./types";
 
 export const userSignInData: AuthSignInPayload = {
     email: "", 
@@ -11,4 +11,10 @@ export const userSignUpData: AuthSignUpPayload = {
     password: "",
     passwordConfirmation: "",
     isBlogger: false
+}
+
+export const booleanValues: BooleanState = {
+    value: false,
+    valuePass: false,
+    valueConfPass: false
 }
