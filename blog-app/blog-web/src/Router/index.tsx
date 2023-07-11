@@ -1,13 +1,15 @@
 import AuthGuard from "components/AuthGuard";
 import Nav from "components/Header";
 import PageLoader from "components/PageLoader";
+import NotFoundPage from "pages/NotFound";
 import { Suspense } from "react";
 import {
   Route,
   BrowserRouter as Router,
   Routes
 } from "react-router-dom";
-import NotFoundPage from "../pages/NotFound";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import routes from './routes';
 export default function AppRouter(): JSX.Element {
   return (
@@ -31,6 +33,7 @@ export default function AppRouter(): JSX.Element {
           <Route path="*" element={<NotFoundPage />}/>
           </Routes>
         </Suspense>
+        <ToastContainer />
     </Router>
   )
 }

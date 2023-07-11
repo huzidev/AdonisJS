@@ -14,6 +14,7 @@ export function useBlogsPageHooks(): void {
     userId: auth.state.user?.id,
     page: 1
   }
+
     useEffect(() => {
     // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
     if (!allBlogs.length) {
