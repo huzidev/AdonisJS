@@ -154,7 +154,7 @@ import { UserDetailState } from "./types";
                           >
                             Read More
                           </Link>
-                          {blog.ownerId === userId || hasPermission("admin" || "super-admin", auth.state.user?.role) && (
+                          {(blog.ownerId === userId || hasPermission("admin" || "super-admin", auth.state.user?.role)) && (
                             <div>
                               <Link
                                 to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}

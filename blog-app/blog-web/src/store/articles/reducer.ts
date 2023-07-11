@@ -44,7 +44,6 @@ export const blogSlice = createSlice({
         state.getBlogs.data = [...cleaned, ...data];
         // meta takes pagination data like total, currentPage, LastPage
         state.getBlogs.meta = meta;
-        console.log("GET BLGOS DATA REDUCER", state.getBlogs.data);
       }
       state.getBlogs.error = false;
     });

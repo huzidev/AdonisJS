@@ -111,8 +111,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     Read More
                     {/* {blog.createdAt} */}
                   </Link>
-                  {blog.ownerId === userData?.id ||
-                  hasPermission("admin" || "super-admin", userData?.role) && (
+                  {(blog.ownerId === userData?.id || hasPermission("admin" || "super-admin", userData?.role)) && (
                     <div>
                       <Link
                         to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
