@@ -128,7 +128,6 @@ export const updateBlog = createAsyncThunk(
       if (response.status === 200) {
         alert("Blog updated");
       }
-      console.log("Update blog resp", response.data);
       return response.data;
     } catch (e) {
       console.log("Error", e);
