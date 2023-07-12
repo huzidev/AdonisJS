@@ -43,10 +43,17 @@ export default class AuthController {
             }
         } catch (e) {
             console.log("ERROR type", e);
+            console.log("ERROR type", e.sqlMessage.includes("users.users_username_unique"));
+            console.log("ERROR type", e.sqlMessage.includes("users.users_email_unique"));
             trx.rollback()
-            if (e.code === "ER_DUP_ENTRY") {
+            if (e.sqlMessage.includes("users.users_username_unique")) {
                 throw {
-                    message: "User already exist",
+                    message: "Username already exist",
+                    status: 409
+                }
+            } else if (e.sqlMessage.includes("users.users_email_unique")) {
+                throw {
+                    message: "Email already exist",
                     status: 409
                 }
             }
