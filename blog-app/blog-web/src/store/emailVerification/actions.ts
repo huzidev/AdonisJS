@@ -12,8 +12,11 @@ export const sendVerificationCode = createAsyncThunk(endpoints.SEND_CODE, async 
         return response.data.message;
     } catch (e: any) {
         const err = mapErrorToState(e);
+        // if user clicked resend before a minute then this errorNotifcation will get triggered
         errorNotification(err);
         console.log("Error", e);
+        // it is COMPULSORY to use throw e otherwise reducer.rejected condition will not be triggered
+        throw e;
     }
 })
 
@@ -26,5 +29,7 @@ export const verifyVerificationCode = createAsyncThunk(endpoints.VERIFY_CODE, as
         const err = mapErrorToState(e);
         console.log("Error", e);
         errorNotification(err);
+        // it is COMPULSORY to use throw e otherwise reducer.rejected condition will not be triggered
+        throw e;
     }
 })

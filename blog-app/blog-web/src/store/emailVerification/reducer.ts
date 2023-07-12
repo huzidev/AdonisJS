@@ -20,6 +20,7 @@ export const emailVerificationSlice = createSlice({
         });
         builder.addCase(actions.sendVerificationCode.fulfilled, (state, action: any) => {
             state.sendCode.loading = false;
+            // only newVerification message will be shown the other message wait a minute before sending code again will shown through action
             if (action.payload) {
                 state.sendCode.message = action.payload;
             }
