@@ -14,7 +14,7 @@ export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: AuthSignU
             await storage.setItem(KEYS.TOKEN, response.data.token);
         }
         localStorage.getItem(KEYS.TOKEN);
-        console.log("Sign Up resp", response);
+        console.log("Sign Up resp", response.data);
         return response.data.data;
     } catch (e) {
         console.log("Error", e);
@@ -30,8 +30,8 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: AuthSignI
             await storage.setItem(KEYS.TOKEN, response.data.token);
         }
         localStorage.getItem(KEYS.TOKEN);
-        console.log("Sign in resp", response);
-        return response.data.data;
+        console.log("Sign in resp", response.data);
+        return response.data;
     } catch (e: any) {
         const err = mapErrorToState(e);
         console.log("Error", err);
@@ -50,7 +50,7 @@ export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
         console.log("Error", err);
     }
 })
-
+    
 export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async (): Promise<User | null> => {
     try {
         const token = await storage.getItem<string>(KEYS.TOKEN);

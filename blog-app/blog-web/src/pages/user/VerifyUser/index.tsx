@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useAuth } from "store/auth";
 import { useEmailVerification } from "store/emailVerification";
+import { useVerifyPageHook } from "./hooks";
 import { OtpPayload } from "./types";
 
 export default function VerifyUserPage(): JSX.Element {
   const auth = useAuth();
   const verify = useEmailVerification();
   const [otp, setOtp] = useState<OtpPayload>({
-    code: ""
+    code: ''
   });
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -24,6 +25,8 @@ export default function VerifyUserPage(): JSX.Element {
       setOtp((prevOtp) => ({ ...prevOtp, code: prevOtp.code + value }));
     }
   }
+
+  useVerifyPageHook();
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">

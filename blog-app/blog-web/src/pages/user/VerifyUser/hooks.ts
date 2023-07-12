@@ -3,12 +3,11 @@ import { toast } from 'react-toastify';
 import { useAuth } from "store/auth";
 import { usePrevious } from "utils/hooks";
 
-export function useHomeFormHook(): void {
+export function useVerifyPageHook(): void {
   const auth = useAuth();
   const state = auth.state;
   const prevAuth = usePrevious(state);
   useEffect(() => {
-    
     if (!prevAuth?.signInState?.error && state.signInState.error) {
       toast.error(state.signInState.message);
     } else if (prevAuth?.signInState?.loading && state.signInState.loading) {

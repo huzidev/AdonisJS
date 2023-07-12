@@ -41,6 +41,7 @@ export const authSlice = createSlice({
             state.signUpState.loading = false;
             if (action.payload) {
                 state.user = {...action.payload};
+                // state.signUpState.message = action.payload;
             }
             state.signUpState.error = false
         });
@@ -54,8 +55,10 @@ export const authSlice = createSlice({
         builder.addCase(actions.signIn.fulfilled, (state, action: PayloadAction<User | null>) => {
             state.signInState.loading = false;
             if (action.payload) {
-                console.log("Action PAYLOAD", action.payload);
-                state.user = {...action.payload};
+                const { data, message }: any = action.payload;
+                console.log("SIGN IN PAYLOAD", action.payload);
+                state.user = {...data};
+                state.signInState.message = message;
             }
             state.signInState.error = false
         });
