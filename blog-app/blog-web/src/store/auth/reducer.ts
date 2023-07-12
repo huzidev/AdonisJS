@@ -7,6 +7,7 @@ import { AuthState, User } from "./types";
 const initialState: AuthState = {
     signInState:  { ...subState },
     signUpState:  { ...subState },
+    signOutState:  { ...subState },
     initState:  { ...subState, init: false },
     user: null
 }
@@ -69,17 +70,17 @@ export const authSlice = createSlice({
         });
         // signOutUser
         builder.addCase(actions.signOut.pending, (state) => {
-            state.initState.loading = true;
-            state.initState.error = false
+            state.signOutState.loading = true;
+            state.signOutState.error = false
         });
-        builder.addCase(actions.signOut.fulfilled, (state) => {
-            state.initState.loading = false;
+        builder.addCase(actions.signOut.fulfilled, (state, action) => {
+            state.signOutState.loading = false;
             state.user = null;
-            state.initState.error = false
+            state.signOutState.error = false
         });
         builder.addCase(actions.signOut.rejected, (state) => {
-            state.initState.loading = false
-            state.initState.error = true
+            state.signOutState.loading = false
+            state.signOutState.error = true
         });
         // when userUpdate the data then updated details will saved in state.user
         builder.addCase(userSlice.actions.updateUser, (state, action: PayloadAction<User>) => {

@@ -28,6 +28,7 @@ export interface AuthState {
     user: User | null;
     signInState: SubState;
     signUpState: SubState;
+    signOutState: SubState;
     initState: AuthInitState;
 }
 

@@ -49,6 +49,7 @@ export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
         storage.removeItem(KEYS.TOKEN);
         setToken(null);
         console.log("signout resp", response);
+        return response.data.message;
     } catch (e: any) {
         const err = mapErrorToState(e);
         console.log("Error", err);
