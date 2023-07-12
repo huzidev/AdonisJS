@@ -19,7 +19,6 @@ export default function UserFormPage(): JSX.Element {
   useEffect(() => {
     const stateCondition = currentPath.includes("/sign_in") ? true : false;
     setIsLogInForm(stateCondition);
-    console.log("state condition", stateCondition);
   }, [currentPath]);
 
   function inputHandler(

@@ -16,8 +16,6 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
 
     useEffect(() => {
       const { initState } = auth.state;
-      console.log("init Auth Guard", initState);
-      
       if (!initState.init && !initState.loading) {
         auth.initUser();
         return;
@@ -50,7 +48,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       else {
         setState(true)
       }
-      }, [auth.state.user, auth.state.initState]);
+      }, [auth.initUser, auth.state.initState]);
     if (!state) {
       return <PageLoader />;
     }
