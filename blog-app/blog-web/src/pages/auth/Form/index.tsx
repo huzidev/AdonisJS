@@ -13,7 +13,8 @@ export default function UserFormPage(): JSX.Element {
   const currentPath = window.location.pathname;
   const [isLogInForm, setIsLogInForm] = useState<boolean>(true);
   const [userLogIn, setUserLogIn] = useState<AuthSignInPayload>(userSignInData);
-  const [userSignUp, setUserSignUp] = useState<AuthSignUpPayload>(userSignUpData);
+  const [userSignUp, setUserSignUp] =
+    useState<AuthSignUpPayload>(userSignUpData);
   const [booleanState, setBooleanState] = useState<BooleanState>(booleanValues);
 
   useEffect(() => {
@@ -41,7 +42,8 @@ export default function UserFormPage(): JSX.Element {
     ? "Don't have an account ?"
     : "Already have an account ?";
 
-  function submit() {
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     if (isLogInForm) {
       auth.signIn(userLogIn);
     } else {
@@ -61,7 +63,8 @@ export default function UserFormPage(): JSX.Element {
           {title} To You Account
         </h2>
       </div>
-      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+      {/* MANDATORY to use form otherwise the required property of input will not work */}
+      <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
         {isLogInForm ? (
           <>
             <div className="mb-3">
@@ -77,7 +80,7 @@ export default function UserFormPage(): JSX.Element {
                   name="email"
                   type="email"
                   value={userLogIn.email}
-                  required
+                  required={isLogInForm}
                   onChange={inputHandler}
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -91,8 +94,8 @@ export default function UserFormPage(): JSX.Element {
                 >
                   Password
                 </label>
-                 <div className="text-sm">
-                  <Link 
+                <div className="text-sm">
+                  <Link
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                     to={ROUTE_PATHS.SEND_RESET_PASSWORD}
                   >
@@ -106,7 +109,7 @@ export default function UserFormPage(): JSX.Element {
                   type={booleanState.value ? "text" : "password"}
                   value={userLogIn.password}
                   onChange={inputHandler}
-                  required
+                  required={isLogInForm}
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 <span
@@ -126,7 +129,7 @@ export default function UserFormPage(): JSX.Element {
                 </span>
               </div>
             </div>
-          </>
+            </>
         ) : (
           <>
             <div className="mb-3">
@@ -236,20 +239,32 @@ export default function UserFormPage(): JSX.Element {
               </div>
             </div>
             <div className="flex items-center mb-4">
-              <input id="checkbox" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600" 
-              onClick={() => setUserSignUp({...userSignUp, isBlogger: !userSignUp.isBlogger})} 
+              <input
+                id="checkbox"
+                type="checkbox"
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
+                onClick={() =>
+                  setUserSignUp({
+                    ...userSignUp,
+                    isBlogger: !userSignUp.isBlogger,
+                  })
+                }
               />
-              <label htmlFor="checkbox" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sign Up As Blogger</label>
+              <label
+                htmlFor="checkbox"
+                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                Sign Up As Blogger
+              </label>
             </div>
           </>
         )}
         <div>
-          <button
+          <input
             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            onClick={submit}
-          >
-            {title}
-          </button>
+            type="submit"
+            value={title}
+           />
         </div>
         <p className="mt-3 text-center text-sm text-gray-500">
           {descReverse}
@@ -261,7 +276,7 @@ export default function UserFormPage(): JSX.Element {
             {titleReverse}
           </Link>
         </p>
-      </div>
+      </form>
     </div>
   );
 }

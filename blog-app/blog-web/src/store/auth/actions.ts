@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import api, { setToken } from "services/api";
 import storage from "services/storage";
 import { mapErrorToState } from "store/utils";
+import { errorNotification } from "utils/notifications";
 import * as endpoints from "./endpoints";
 import KEYS from "./keys";
 import { AuthSignInPayload, AuthSignUpPayload, User } from "./types";
@@ -16,9 +17,11 @@ export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: AuthSignU
         localStorage.getItem(KEYS.TOKEN);
         console.log("Sign Up resp", response.data);
         return response.data.data;
-    } catch (e) {
+    } catch (e: any) {
         console.log("Error", e);
-        return null;
+        const err = mapErrorToState(e);
+        errorNotification(err);
+        throw e
     }
 });
 
@@ -34,8 +37,9 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: AuthSignI
         return response.data;
     } catch (e: any) {
         const err = mapErrorToState(e);
+        errorNotification(err);
         console.log("Error", err);
-        return null
+        throw e
     }
 });
 
