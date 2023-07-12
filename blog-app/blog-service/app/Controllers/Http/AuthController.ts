@@ -39,11 +39,10 @@ export default class AuthController {
             return {
                 token,
                 data: auth.user?.toJSON(), 
-                message: "User registered successfully" 
+                message: `User registered successfully, Verification code is ${verificationCode.code}`
             }
         } catch (e) {
             trx.rollback()
-            console.log("Error", e);
             if (e.sqlMessage) {
                 if (e.sqlMessage.includes("users.users_username_unique")) {
                     throw {
@@ -89,7 +88,6 @@ export default class AuthController {
 
     // send Verification code
     public async verifyEmailSendCode({ auth }: HttpContextContract) {
-        console.log("auth id", auth.user?.id);
         const code = await EmailVerificationCode.findBy('user_id', auth.user?.id!)
         // if user's details is not saved in EmailVerificationCode table this happened when admin creates a user
             if (!code) {
@@ -106,7 +104,6 @@ export default class AuthController {
         // if already a code is present but isExpired so new code will be appear instead of that old expired code in ours database when user asked for verifyEmailSendCode
         // if user is already verified then user can't asked for newVerification code because of middleware("auth:no_verify")
         await code?.save()
-
         return {
             message: `New verification code is ${code?.code}`,
         }
