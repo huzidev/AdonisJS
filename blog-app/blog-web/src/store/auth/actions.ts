@@ -16,7 +16,7 @@ export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: AuthSignU
         }
         localStorage.getItem(KEYS.TOKEN);
         console.log("Sign Up resp", response.data);
-        return response.data.data;
+        return response.data;
     } catch (e: any) {
         console.log("Error", e);
         const err = mapErrorToState(e);

@@ -242,7 +242,7 @@ export default function UserFormPage(): JSX.Element {
               </div>
               <p
                 className={`transition-opacity duration-200 ${
-                  (userSignUp.password !== userSignUp.passwordConfirmation && userSignUp.password.length > 6) ? "opacity-100" : "opacity-0"
+                  (userSignUp.password !== userSignUp.passwordConfirmation && userSignUp.password.length > 5) ? "opacity-100" : "opacity-0"
                 } text-red-500`}
               >
                 Password doesn't match

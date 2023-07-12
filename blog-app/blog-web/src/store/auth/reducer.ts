@@ -40,8 +40,9 @@ export const authSlice = createSlice({
         builder.addCase(actions.signUp.fulfilled, (state, action: PayloadAction<User | null>) => {
             state.signUpState.loading = false;
             if (action.payload) {
-                state.user = {...action.payload};
-                // state.signUpState.message = action.payload;
+                const { data, message }: any = action.payload;
+                state.user = {...data};
+                state.signUpState.message = message;
             }
             state.signUpState.error = false
         });
