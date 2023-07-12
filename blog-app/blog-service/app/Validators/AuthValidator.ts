@@ -1,5 +1,12 @@
 import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
 
+export const authValidationMessages = {
+  'required': '{{ field }} is required to sign up',
+  'name.alpha': 'Invalid name',
+  'email.email': 'Invalid email address',
+  'password.minLength': 'Password should be at least 6 characters long',
+}
+
 export class AuthSignUp {
   public schema = schema.create({
     isBlogger: schema.boolean.optional(),
@@ -26,7 +33,7 @@ export class AuthSignUp {
   public messages: CustomMessages = {
     // 'name.alpha': 'Invalid name',\
     'email.email': 'Invalid email address',
-      'username.unique': 'Username not available',
+    'username.unique': 'Username not available',
     'email.unique': 'Email not available',
     required: "{{ field }} is required to signup"
   }
@@ -37,9 +44,10 @@ export class AuthSignIn {
     email: schema.string({}, [rules.email()]),
     password: schema.string()
   })
-  public messages: CustomMessages = {
+  public messages = {
+    // if didn't put correct email format
     'email.email': 'Invalid email address',
-    required: '{{ field }} is required to login'
+    required: '{{ field }} is required to sign in'
   }
 }
 

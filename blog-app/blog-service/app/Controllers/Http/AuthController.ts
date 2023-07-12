@@ -36,7 +36,6 @@ export default class AuthController {
             // if no error occured then commit all the transaction other wise rollback the tranasction which created in catch(e) trx.rollback() rollback every changes created if any error occured like rollback in database
             await trx.commit();
             const { token } = await auth.login(user);
-            console.log("VERIFICATION CODE IS", verificationCode.code);
             return {
                 token,
                 data: auth.user?.toJSON(), 
@@ -44,12 +43,12 @@ export default class AuthController {
             }
         } catch (e) {
             trx.rollback()
-            if (e.code === "ER_DUP_ENTRY") {
-                throw {
-                    message: "User already exist",
-                    status: 409
-                }
-            }
+            // if (e.code === "ER_DUP_ENTRY") {
+            //     throw {
+            //         message: "User already exist",
+            //         status: 409
+            //     }
+            // }
             throw e
         }
     }
@@ -74,7 +73,7 @@ export default class AuthController {
             }
         } catch (e) {
             if (e.code === ("E_INVALID_AUTH_PASSWORD" || "E_INVALID_AUTH_UID")) {
-                throw { message: "Email or Password is incorrect!", status: 400 }
+                throw { message: "Email or Password is incorrect", status: 400 }
             }
             throw e
         }
