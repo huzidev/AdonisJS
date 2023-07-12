@@ -64,6 +64,8 @@ export default class AuthController {
                 code?.generateCode();
                 await code?.save();
                 message = `Verification code is ${code?.code}` 
+            } else {
+                message = "User loggedIn successfully"
             }
             return {
                 message,
@@ -71,6 +73,9 @@ export default class AuthController {
                 data: auth.user?.toJSON()
             }
         } catch (e) {
+            if (e.code === "E_INVALID_AUTH_PASSWORD") {
+                throw { message: "Email or Password is incorrect!", status: 400 }
+            }
             throw e
         }
     }
