@@ -43,16 +43,19 @@ export default class AuthController {
             }
         } catch (e) {
             trx.rollback()
-            if (e.sqlMessage.includes("users.users_username_unique")) {
-                throw {
-                    message: "Username already exist",
-                    status: 409
-                }
-            } else if (e.sqlMessage.includes("users.users_email_unique")) {
-                throw {
-                    message: "Email already exist",
-                    status: 409
-                }
+            console.log("Error", e);
+            if (e.sqlMessage) {
+                if (e.sqlMessage.includes("users.users_username_unique")) {
+                    throw {
+                        message: "Username already exist",
+                        status: 409
+                    }
+                } else if (e.sqlMessage.includes("users.users_email_unique")) {
+                    throw {
+                        message: "Email already exist",
+                        status: 409
+                    }
+                } 
             }
             throw e
         }
