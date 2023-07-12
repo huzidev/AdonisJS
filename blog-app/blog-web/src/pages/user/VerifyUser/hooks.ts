@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { toast } from 'react-toastify';
 import { useEmailVerification } from "store/emailVerification";
 import { usePrevious } from "utils/hooks";
+import { successNotification } from "utils/notifications";
 
 export function useVerifyPageHook(): void {
   const verify = useEmailVerification();
@@ -16,7 +17,7 @@ export function useVerifyPageHook(): void {
     }
     if (prevState?.sendCode?.loading) {
       if (!state?.sendCode?.loading && !state.sendCode.error) {
-        toast.success(state.sendCode.message);
+        successNotification(state.sendCode.message);
       }
     }
   }, [state.verifyCode, state.sendCode]);

@@ -12,7 +12,7 @@ export const sendVerificationCode = createAsyncThunk(endpoints.SEND_CODE, async 
         return response.data.message;
     } catch (e: any) {
         const err = mapErrorToState(e);
-        errorNotification("Error", err);
+        errorNotification(err);
         console.log("Error", e);
     }
 })
@@ -25,6 +25,6 @@ export const verifyVerificationCode = createAsyncThunk(endpoints.VERIFY_CODE, as
     } catch (e: any) {
         const err = mapErrorToState(e);
         console.log("Error", e);
-        errorNotification("Error", err);
+        errorNotification(err);
     }
 })
