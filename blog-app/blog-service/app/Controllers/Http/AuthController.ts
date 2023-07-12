@@ -42,13 +42,14 @@ export default class AuthController {
                 message: "User registered successfully" 
             }
         } catch (e) {
+            console.log("ERROR type", e);
             trx.rollback()
-            // if (e.code === "ER_DUP_ENTRY") {
-            //     throw {
-            //         message: "User already exist",
-            //         status: 409
-            //     }
-            // }
+            if (e.code === "ER_DUP_ENTRY") {
+                throw {
+                    message: "User already exist",
+                    status: 409
+                }
+            }
             throw e
         }
     }

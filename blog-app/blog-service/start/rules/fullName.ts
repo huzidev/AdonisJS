@@ -6,7 +6,7 @@ validator.rule(
     const regex = /^[a-zA-Z0-9\s]*$/
 
     if (!regex.test(value)) {
-      errorReporter.report(pointer, 'match', 'Only alphabets and numbers are allowed', arrayExpressionPointer)
+      errorReporter.report(pointer, 'match', 'Only alphabets and numbers are allowed for username', arrayExpressionPointer)
       return
     }
 
