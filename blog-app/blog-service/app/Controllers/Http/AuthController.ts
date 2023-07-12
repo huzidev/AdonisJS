@@ -85,9 +85,9 @@ export default class AuthController {
                 verificationCode.userId = auth.user!.id;
                 await verificationCode.save();
             }
-        // if (code?.updatedAt.plus({ minutes: 1 })! > DateTime.local()) {
-        //     throw { message: 'Please wait a minute before sending the code again', status: 422 }
-        // }
+        if (code?.updatedAt.plus({ minutes: 1 })! > DateTime.local()) {
+            throw { message: 'Please wait a minute before requesting for new code', status: 422 }
+        }
         code?.generateCode()
         console.log("verification code is", code?.code);
         
