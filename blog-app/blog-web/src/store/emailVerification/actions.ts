@@ -9,8 +9,7 @@ export const sendVerificationCode = createAsyncThunk(endpoints.SEND_CODE, async 
     try {
         const response = await api.post(endpoints.SEND_CODE);
         console.log("response for send code", response.data.message);
-        
-        return response.data.message
+        return response.data.message;
     } catch (e) {
         console.log("Error", e);
     }

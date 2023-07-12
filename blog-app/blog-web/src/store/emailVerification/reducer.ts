@@ -21,7 +21,7 @@ export const emailVerificationSlice = createSlice({
         builder.addCase(actions.sendVerificationCode.fulfilled, (state, action: any) => {
             state.sendCode.loading = false;
             if (action.payload) {
-                state.verifyCode.message = action.payload;
+                state.sendCode.message = action.payload;
             }
             state.sendCode.error = false
         });
