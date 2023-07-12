@@ -42,9 +42,6 @@ export default class AuthController {
                 message: "User registered successfully" 
             }
         } catch (e) {
-            console.log("ERROR type", e);
-            console.log("ERROR type", e.sqlMessage.includes("users.users_username_unique"));
-            console.log("ERROR type", e.sqlMessage.includes("users.users_email_unique"));
             trx.rollback()
             if (e.sqlMessage.includes("users.users_username_unique")) {
                 throw {
