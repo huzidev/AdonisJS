@@ -18,7 +18,7 @@ export default class AuthController {
             const verificationCode = new EmailVerificationCode();
             
             // because we used new User() therefore use user.save() for saving at database
-            user.useTransaction(trx)
+            user.useTransaction(trx);
             // fill the user with the body received like username, email etc then user.save() to save the data in database
             user.fill(body);
             if (isBlogger) {
@@ -37,10 +37,9 @@ export default class AuthController {
             await trx.commit();
             const { token } = await auth.login(user);
             console.log("VERIFICATION CODE IS", verificationCode.code);
-            
             return {
                 token,
-                data: user, 
+                data: auth.user?.toJSON(), 
                 message: "User registered successfully" 
             }
         } catch (e) {
@@ -86,9 +85,9 @@ export default class AuthController {
                 verificationCode.userId = auth.user!.id;
                 await verificationCode.save();
             }
-        if (code?.updatedAt.plus({ minutes: 1 })! > DateTime.local()) {
-            throw { message: 'Please wait a minute before sending the code again', status: 422 }
-        }
+        // if (code?.updatedAt.plus({ minutes: 1 })! > DateTime.local()) {
+        //     throw { message: 'Please wait a minute before sending the code again', status: 422 }
+        // }
         code?.generateCode()
         console.log("verification code is", code?.code);
         
@@ -97,8 +96,7 @@ export default class AuthController {
         await code?.save()
 
         return {
-            message: 'Verification code send',
-            data: code?.code
+            message: `New verification code is ${code?.code}`,
         }
     }
 
@@ -166,7 +164,7 @@ export default class AuthController {
             await Promise.all([auth.user?.save(), verificationCode.save()])
             await trx.commit();
 
-            return { message: 'Code verified successfully' }
+            return { message: 'User verified successfully' }
         } catch (e) {
             await trx.rollback()
             throw e

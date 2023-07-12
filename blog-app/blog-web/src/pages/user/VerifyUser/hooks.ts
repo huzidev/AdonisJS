@@ -8,15 +8,13 @@ export function useVerifyPageHook(): void {
   const state = verify.state;
   const prevAuth = usePrevious(state);
   useEffect(() => {
-    if (!prevAuth?.verifyCode?.error && state.verifyCode.error) {
-      toast.error(state.verifyCode.message);
-    } else if (prevAuth?.verifyCode?.loading && !state.verifyCode.loading) {
+    if (!state.verifyCode.loading && !state.verifyCode.error) {
       toast.success(state.verifyCode.message);
     }
     if (!prevAuth?.sendCode?.error && state.sendCode.error) {
-      toast.error('Failed to register');
+      toast.error(state.sendCode.message);
     } else if (prevAuth?.sendCode?.loading && !state.sendCode.loading) {
-      toast.success('User registered');
+      toast.success(state.sendCode.message);
     }
   }, [state.verifyCode, state.sendCode]);
 }
