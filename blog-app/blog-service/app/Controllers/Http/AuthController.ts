@@ -59,7 +59,15 @@ export default class AuthController {
         try {
             const body = await request.validate(AuthSignIn);
             const { token } = await auth.attempt(body?.email!, body.password);
+            let message = '';
+            if (!auth.user?.isVerified) {
+                const code = await EmailVerificationCode.findBy("user_id", auth.user?.id);
+                code?.generateCode();
+                await code?.save();
+                message = `Verification code is ${code?.code}` 
+            }
             return {
+                message,
                 token,
                 data: auth.user?.toJSON()
             }
