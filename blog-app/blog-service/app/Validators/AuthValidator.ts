@@ -5,17 +5,17 @@ export class AuthSignUp {
     isBlogger: schema.boolean.optional(),
     username: schema.string({ trim: true }, [
       rules.fullName(),
-      rules.unique({
-        table: "users",
-        column: "username"
-      })
+      // rules.unique({
+      //   table: "users",
+      //   column: "username"
+      // })
     ]),
     email: schema.string({ trim: true }, [
       rules.email(),
-      rules.unique({
-        table: "users",
-        column: "email"
-      })
+      // rules.unique({
+      //   table: "users",
+      //   column: "email"
+      // })
     ]),
     password: schema.string({}, [
       rules.minLength(6), 
@@ -24,6 +24,10 @@ export class AuthSignUp {
   })
 
   public messages: CustomMessages = {
+    // 'name.alpha': 'Invalid name',\
+    'email.email': 'Invalid email address',
+      'username.unique': 'Username not available',
+    'email.unique': 'Email not available',
     required: "{{ field }} is required to signup"
   }
 }
@@ -31,11 +35,11 @@ export class AuthSignUp {
 export class AuthSignIn {
   public schema = schema.create({
     email: schema.string({}, [rules.email()]),
-    password: schema.string({}, [rules.minLength(6)])
+    password: schema.string()
   })
-
   public messages: CustomMessages = {
-    required: '{{ field }} is required to Login'
+    'email.email': 'Invalid email address',
+    required: '{{ field }} is required to login'
   }
 }
 
