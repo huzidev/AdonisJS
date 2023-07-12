@@ -64,6 +64,7 @@ export default function UserFormPage(): JSX.Element {
         </h2>
       </div>
       {/* MANDATORY to use form otherwise the required property of input will not work */}
+      {/* ALSO to use <input type="submit" /> while using form and e.preventDefault() in submit function otherwise the data will append in URL */}
       <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
         {isLogInForm ? (
           <>
