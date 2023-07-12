@@ -4,8 +4,8 @@ import * as actions from "./actions";
 import { EmailVerificationState } from "./types";
 
 const initialState: EmailVerificationState = {
-sendCode:  { ...subState, code: "" },
-verifyCode:  { ...subState }
+    sendCode:  { ...subState, code: '' },
+    verifyCode:  { ...subState }
 }
 
 export const emailVerificationSlice = createSlice({

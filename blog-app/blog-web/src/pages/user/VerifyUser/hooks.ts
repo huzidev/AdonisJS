@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useAuth } from "store/auth";
 import { usePrevious } from "utils/hooks";
 
-export function useHomeFormHook(): void {
+export function useVerifyPageHook(): void {
   const auth = useAuth();
   const state = auth.state;
   const prevAuth = usePrevious(state);
@@ -11,7 +11,7 @@ export function useHomeFormHook(): void {
     if (!prevAuth?.signInState?.error && state.signInState.error) {
       toast.error(state.signInState.message);
     } else if (prevAuth?.signInState?.loading && !state.signInState.loading) {
-      toast.success(state.signInState.message);
+      toast.success("Success");
     }
     if (!prevAuth?.signUpState?.error && state.signUpState.error) {
       toast.error('Failed to register');
