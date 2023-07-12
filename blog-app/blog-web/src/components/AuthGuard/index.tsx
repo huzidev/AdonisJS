@@ -15,12 +15,14 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     const currentPath = window.location.pathname;
 
     useEffect(() => {
-      const { init } = auth.state;
-      if (!init.init && !init.loading) {
+      const { initState } = auth.state;
+      console.log("init Auth Guard", initState);
+      
+      if (!initState.init && !initState.loading) {
         auth.initUser();
         return;
       }
-      if (!init.init) {
+      if (!initState.init) {
         return;
       }
       // commented it because when user is any other route than "/" and user reloads the page it was sending the user to home page "/"
@@ -36,7 +38,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
           Navigate(ROUTE_PATHS.BANNED_USER);  
         } else if (currentPath === ROUTE_PATHS.AUTH_SIGNIN || currentPath === ROUTE_PATHS.AUTH_SIGNUP) {
           Navigate("/");
-        } else if (!isVerified && currentPath !== ROUTE_PATHS.VERIFY_USER) {
+        } else if ((!isVerified) && currentPath !== ROUTE_PATHS.VERIFY_USER) {
           Navigate(ROUTE_PATHS.VERIFY_USER)
         } else if (isVerified && currentPath === ROUTE_PATHS.VERIFY_USER) {
           Navigate("/")
@@ -48,7 +50,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       else {
         setState(true)
       }
-      }, [auth.state.user, auth.state.init]);
+      }, [auth.state.user, auth.state.initState]);
     if (!state) {
       return <PageLoader />;
     }

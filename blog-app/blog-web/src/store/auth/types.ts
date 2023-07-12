@@ -28,7 +28,7 @@ export interface AuthState {
     user: User | null;
     signInState: SubState;
     signUpState: SubState;
-    init: AuthInitState;
+    initState: AuthInitState;
 }
 
 export const roles = ['user', 'blogger', 'admin', 'super-admin'] as const 

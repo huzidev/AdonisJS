@@ -7,7 +7,7 @@ import { AuthState, User } from "./types";
 const initialState: AuthState = {
     signInState:  { ...subState },
     signUpState:  { ...subState },
-    init:  { ...subState, init: false },
+    initState:  { ...subState, init: false },
     user: null
 }
 
@@ -16,28 +16,33 @@ export const authSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        // initUser
         builder.addCase(actions.initUser.pending, (state) => {
-            state.init.loading = true;
-            state.init.error = false
+            state.initState.loading = true;
+            state.initState.error = false
         });
         builder.addCase(actions.initUser.fulfilled, (state, action: PayloadAction<User | null>) => {
-            state.init.init = true
-            state.init.loading = false;
+            state.initState.init = true
+            state.initState.loading = false;
             if (action.payload) {
                 state.user = {...action.payload};
             }
-            state.init.error = false
+            state.initState.error = false
         });
         builder.addCase(actions.initUser.rejected, (state) => {
-            state.init.loading = false
-            state.init.error = true
+            state.initState.loading = false
+            state.initState.error = true
         });
         // signUp User
         builder.addCase(actions.signUp.pending, (state) => {
             state.signUpState = { loading: true, error: false }
         });
-        builder.addCase(actions.signUp.fulfilled, (state) => {
-            state.signUpState = { loading: false, error: false }
+        builder.addCase(actions.signUp.fulfilled, (state, action: PayloadAction<User | null>) => {
+            state.signUpState.loading = false;
+            if (action.payload) {
+                state.user = {...action.payload};
+            }
+            state.signUpState.error = false
         });
         builder.addCase(actions.signUp.rejected, (state) => {
             state.signUpState = { loading: false, error: true }
@@ -57,21 +62,20 @@ export const authSlice = createSlice({
         builder.addCase(actions.signIn.rejected, (state, action) => {
             state.signInState.loading = false;
             state.signInState.error = true;
-            console.log("action payload", action.payload);
         });
         // signOutUser
         builder.addCase(actions.signOut.pending, (state) => {
-            state.init.loading = true;
-            state.init.error = false
+            state.initState.loading = true;
+            state.initState.error = false
         });
         builder.addCase(actions.signOut.fulfilled, (state) => {
-            state.init.loading = false;
+            state.initState.loading = false;
             state.user = null;
-            state.init.error = false
+            state.initState.error = false
         });
         builder.addCase(actions.signOut.rejected, (state) => {
-            state.init.loading = false
-            state.init.error = true
+            state.initState.loading = false
+            state.initState.error = true
         });
         // when userUpdate the data then updated details will saved in state.user
         builder.addCase(userSlice.actions.updateUser, (state, action: PayloadAction<User>) => {
