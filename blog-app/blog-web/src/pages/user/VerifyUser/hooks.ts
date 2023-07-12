@@ -15,9 +15,7 @@ export function useVerifyPageHook(): void {
       }
     }
     if (prevState?.sendCode?.loading) {
-      if (!prevState?.sendCode?.error && state.sendCode.error) {
-        toast.error("Error");
-      } else if (prevState?.sendCode?.loading && !state.sendCode.error) {
+      if (!state?.sendCode?.loading && !state.sendCode.error) {
         toast.success(state.sendCode.message);
       }
     }
