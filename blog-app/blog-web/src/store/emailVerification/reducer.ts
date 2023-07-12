@@ -34,11 +34,16 @@ export const emailVerificationSlice = createSlice({
         builder.addCase(actions.verifyVerificationCode.pending, (state) => {
             state.verifyCode = {loading: true, error: false};
         });
-        builder.addCase(actions.verifyVerificationCode.fulfilled, (state) => {
+        builder.addCase(actions.verifyVerificationCode.fulfilled, (state, action) => {
             state.verifyCode = {loading: false, error: false};
+            if (action.payload) {
+                state.verifyCode.message = action.payload.message;
+            }
         });
         builder.addCase(actions.verifyVerificationCode.rejected, (state) => {
             state.verifyCode = {loading: false, error: true};
+            console.log("RUN");
+            
         });
     }
 })
