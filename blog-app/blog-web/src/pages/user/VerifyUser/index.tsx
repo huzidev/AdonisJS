@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "store/auth";
 import { useEmailVerification } from "store/emailVerification";
-import { useVerifyPageHook } from "./hooks";
 import { OtpPayload } from "./types";
 
 export default function VerifyUserPage(): JSX.Element {
@@ -25,9 +24,6 @@ export default function VerifyUserPage(): JSX.Element {
       setOtp((prevOtp) => ({ ...prevOtp, code: prevOtp.code + value }));
     }
   }
-
-  useVerifyPageHook();
-
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
       <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">

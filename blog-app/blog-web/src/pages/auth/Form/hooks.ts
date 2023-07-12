@@ -11,7 +11,7 @@ export function useHomeFormHook(): void {
     
     if (!prevAuth?.signInState?.error && state.signInState.error) {
       toast.error(state.signInState.message);
-    } else if (prevAuth?.signInState?.loading && state.signInState.loading) {
+    } else if (prevAuth?.signInState?.loading && !state.signInState.loading) {
       toast.success(state.signInState.message);
     }
     if (!prevAuth?.signUpState?.error && state.signUpState.error) {
