@@ -33,13 +33,11 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       else if (auth.state.user) {
         const { isVerified, isBanned } = auth.state.user;
         if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {
-          Navigate(ROUTE_PATHS.BANNED_USER);
+          Navigate(ROUTE_PATHS.BANNED_USER);  
         } else if (currentPath === ROUTE_PATHS.AUTH_SIGNIN || currentPath === ROUTE_PATHS.AUTH_SIGNUP) {
           Navigate("/");
         } else if (!isVerified && currentPath !== ROUTE_PATHS.VERIFY_USER) {
           Navigate(ROUTE_PATHS.VERIFY_USER)
-        } else if (isVerified && currentPath === ROUTE_PATHS.VERIFY_USER) {
-          Navigate("/");
         } else if (isVerified && currentPath === ROUTE_PATHS.VERIFY_USER) {
           Navigate("/")
         }

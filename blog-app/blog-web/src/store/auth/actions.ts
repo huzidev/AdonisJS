@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api, { setToken } from "services/api";
 import storage from "services/storage";
+import { mapErrorToState } from "store/utils";
 import * as endpoints from "./endpoints";
 import KEYS from "./keys";
 import { AuthSignInPayload, AuthSignUpPayload, User } from "./types";
@@ -8,7 +9,14 @@ import { AuthSignInPayload, AuthSignUpPayload, User } from "./types";
 export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: AuthSignUpPayload) => {
     try {
         const response = await api.post(endpoints.SIGN_UP, data);
-        console.log("Response", response);
+         if (response.data) {
+            console.log("signin token", typeof(response.data.token));
+            setToken(response.data.token);
+            await storage.setItem(KEYS.TOKEN, response.data.token);
+        }
+        localStorage.getItem(KEYS.TOKEN);
+        console.log("Sign in resp", response);
+        return response.data.data;
     } catch (e) {
         console.log("Error", e);
     }
@@ -25,9 +33,10 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: AuthSignI
         localStorage.getItem(KEYS.TOKEN);
         console.log("Sign in resp", response);
         return response.data.data;
-    } catch (e) {
-        console.log("Error", e);
-        throw e;
+    } catch (e: any) {
+        const err = mapErrorToState(e);
+        console.log("Error", err);
+        return null
     }
 });
 
@@ -37,8 +46,9 @@ export const signOut = createAsyncThunk(endpoints.SIGN_OUT, async () => {
         storage.removeItem(KEYS.TOKEN);
         setToken(null);
         console.log("signout resp", response);
-    } catch (e) {
-        console.log("Error", e);
+    } catch (e: any) {
+        const err = mapErrorToState(e);
+        console.log("Error", err);
     }
 })
 

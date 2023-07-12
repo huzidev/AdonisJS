@@ -46,16 +46,18 @@ export const authSlice = createSlice({
         builder.addCase(actions.signIn.pending, (state) => {
             state.signInState = { loading: true, error: false }
         });
-        builder.addCase(actions.signIn.fulfilled, (state, action: PayloadAction<User| null>) => {
+        builder.addCase(actions.signIn.fulfilled, (state, action: PayloadAction<User | null>) => {
             state.signInState.loading = false;
             if (action.payload) {
+                console.log("Action PAYLOAD", action.payload);
                 state.user = {...action.payload};
             }
             state.signInState.error = false
         });
-        builder.addCase(actions.signIn.rejected, (state) => {
-            state.signInState = { loading: false, error: true }
-            state.signInState.message = "Cannot connect to server"
+        builder.addCase(actions.signIn.rejected, (state, action) => {
+            state.signInState.loading = false;
+            state.signInState.error = true;
+            console.log("action payload", action.payload);
         });
         // signOutUser
         builder.addCase(actions.signOut.pending, (state) => {
