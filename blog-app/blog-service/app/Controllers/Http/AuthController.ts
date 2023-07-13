@@ -139,10 +139,16 @@ export default class AuthController {
         const body = await request.validate(AuthResendResetPasswordCode);
         // using first because we are receving array therefore
         let userId = await User.query().where("email", body.email).first();
-        console.log("Body for resend", body);
         let verificationCode = await ResetPasswordCode.findBy("userId", userId!.id);
-        verificationCode!.generateCode();
-        await verificationCode!.save();
+        if (
+            verificationCode!.isActive &&
+            verificationCode!.updatedAt.plus({ minute: 1 }) > DateTime.local()
+        ) {
+            throw { message: `Please wait a minute before requesting for new code`, status: 422 }
+        } else {
+            verificationCode!.generateCode();
+            await verificationCode!.save();
+        }
         return {
             message: `New verification code is ${verificationCode?.code}`,
         }
