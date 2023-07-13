@@ -100,6 +100,16 @@ export default function ResetPasswordPage(): JSX.Element {
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
+                <p
+                  className={`transition-opacity duration-200 ${
+                    resetState.password !== resetState.passwordConfirmation &&
+                    resetState.password.length > 5
+                      ? "opacity-100"
+                      : "opacity-0"
+                  } text-red-500`}
+                >
+                  Password doesn't match
+                </p>
                 <div className="flex flex-row mt-8 items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
                   {Array.from({ length: 6 }, (_, index) => (
@@ -114,7 +124,6 @@ export default function ResetPasswordPage(): JSX.Element {
                   ))}
                 </div>
               </div>
-
               <div className="flex flex-col space-y-5">
                 <div>
                   <input
