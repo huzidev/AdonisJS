@@ -12,6 +12,7 @@ export default function AuthRoutes() {
         Route.post("/verify_email/verify_code", `${path}.verifyEmailVerifyCode`).middleware("auth:no_verify");
     
         Route.post('/reset_password/send_code', `${path}.resetPasswordSendCode`);
+        Route.post('/reset_password/resend_code', `${path}.resendResetPasswordCode`);
         Route.post('/reset_password', `${path}.resetPassword`);
     }).prefix('/auth')
 }       

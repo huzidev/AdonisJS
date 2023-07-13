@@ -3,7 +3,7 @@ import Database from '@ioc:Adonis/Lucid/Database';
 import EmailVerificationCode from 'App/Models/EmailVerificationCode';
 import ResetPasswordCode from 'App/Models/ResetPasswordCode';
 import User from "App/Models/User";
-import { AuthResetPassword, AuthResetPasswordSendCode, AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
+import { AuthResendResetPasswordCode, AuthResetPassword, AuthResetPasswordSendCode, AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
 import { DateTime } from 'luxon';
 
 export default class AuthController {
@@ -127,15 +127,24 @@ export default class AuthController {
             verificationCode = await ResetPasswordCode.create({ userId: user.id })
         } else {
             // if user asked for new verification code before a minute
-            if (verificationCode.isActive && verificationCode.updatedAt.plus({ minutes: 1 }) > DateTime.local()) {
-                throw { message: 'Please wait a minute before sending the code again', status: 422 }
-            }
             verificationCode.generateCode();
             await verificationCode.save();
         }
         return {
-            message: 'Reset password code send',
-            data: verificationCode?.code
+            message: `Verification code is ${verificationCode?.code}`,
+        }
+    }
+
+    public async resendResetPasswordCode({ request }: HttpContextContract) {
+        const body = await request.validate(AuthResendResetPasswordCode);
+        // using first because we are receving array therefore
+        let userId = await User.query().where("email", body.email).first();
+        console.log("Body for resend", body);
+        let verificationCode = await ResetPasswordCode.findBy("userId", userId!.id);
+        verificationCode!.generateCode();
+        await verificationCode!.save();
+        return {
+            message: `New verification code is ${verificationCode?.code}`,
         }
     }
 
@@ -191,7 +200,7 @@ export default class AuthController {
                 .where("isActive", true)
                 // preload is working because in ResetPasswordCode model we've created a relation 
                 // @belongsTo(() => User)
-                //  public user: BelongsTo<typeof User>
+                //  public user: BelongsTo<typeof User>D
                 // this allows preloads to make relationship with two tables and to be executed in a single query()
                 .preload("user", (query) => query.where("isActive", true)) // using Preload here to check if user is Active or Not
                 .first()
