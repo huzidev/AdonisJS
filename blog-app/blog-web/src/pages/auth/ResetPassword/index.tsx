@@ -42,6 +42,11 @@ export default function ResetPasswordPage(): JSX.Element {
 
   useResetPasswordPageHooks();
 
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    state.resetPassword({ ...resetState });
+  }
+
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50">
       <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
@@ -54,7 +59,7 @@ export default function ResetPasswordPage(): JSX.Element {
               <p>We have sent a code to your email {resetState.email}</p>
             </div>
           </div>
-          <div>
+          <form onSubmit={submit}>
             <div className="flex flex-col space-y-16">
               <div>
                 <label
@@ -109,25 +114,15 @@ export default function ResetPasswordPage(): JSX.Element {
                   ))}
                 </div>
               </div>
-              <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                <p>Didn't recieve code?</p>
-                <button
-                      className="flex flex-row items-center text-blue-600"
-                      onClick={() => state.resendResetPasswordCode(params)}
-                      // no need for sending id of user because only non-verified user can send this request and id will get fetched automatically in backend
-                    >
-                      Resend
-                    </button>
-              </div>
+
               <div className="flex flex-col space-y-5">
                 <div>
-                  <button
+                  <input
                     className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
                     // disabled={otp.length !== 6}
-                    onClick={() => state.resetPassword({ ...resetState })}
-                  >
-                    Change Password
-                  </button>
+                    type="submit"
+                    value="Change Password"
+                  />
                 </div>
                 <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
                   <p className="text-center text-sm text-gray-500">
@@ -140,11 +135,19 @@ export default function ResetPasswordPage(): JSX.Element {
                       Sign In
                     </Link>
                   </p>
-                  
-                  
                 </div>
               </div>
             </div>
+          </form>
+          <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
+            <p>Didn't recieve code?</p>
+            <button
+              className="flex flex-row items-center text-blue-600"
+              onClick={() => state.resendResetPasswordCode(params)}
+              // no need for sending id of user because only non-verified user can send this request and id will get fetched automatically in backend
+            >
+              Resend
+            </button>
           </div>
         </div>
       </div>

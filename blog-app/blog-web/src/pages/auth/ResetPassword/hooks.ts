@@ -1,4 +1,3 @@
-import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useResetPassword } from "store/resetPassword";
@@ -14,9 +13,8 @@ export default function useResetPasswordPageHooks(): void {
   useEffect(() => {
     if (prev?.resetState.loading) {
       if (!state?.sendState?.loading && !state.sendState.error) {
-        successNotification(state.sendState.message);
-        navigate(ROUTE_PATHS.HOME);
-      }
+          successNotification(state.resetState.message);
+        }
     }
     if (prev?.resendState.loading) {
       if (!state?.resendState?.loading && !state.resendState.error) {
