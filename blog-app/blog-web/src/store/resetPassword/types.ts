@@ -13,6 +13,10 @@ export interface ResetPasswordOtp {
   code: string; 
 }
 
+export interface ResetPasswordAuth extends SubState {
+  status?: number;
+}
+
 export interface ResetPasswordRequest extends ResetPasswordSendCodeRequest, ResetPasswordOtp {
   password: string; // while resting password needs verification code, password, ConfirmPassword and email for email we've used extends ResetPasswordSendCodeRequest in which type for email is defined
   passwordConfirmation: string;
@@ -21,5 +25,5 @@ export interface ResetPasswordRequest extends ResetPasswordSendCodeRequest, Rese
 export interface ResetPasswordState {
   sendState: SubState;
   resendState: SubState;
-  resetState: SubState;
+  resetState: ResetPasswordAuth;
 }

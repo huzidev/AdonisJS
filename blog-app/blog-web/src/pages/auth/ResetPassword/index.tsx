@@ -145,7 +145,7 @@ export default function ResetPasswordPage(): JSX.Element {
             </div>
           </form>
           <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-            <p>Didn't recieve code?</p>
+            <p>Didn't recieved code?</p>
             <button
               className="flex flex-row items-center text-blue-600"
               onClick={() => state.resendResetPasswordCode(params)}
