@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useResetPassword } from "store/resetPassword";
 import { usePrevious } from "utils/hooks";
+import useResetPasswordPageHooks from "./hooks";
 import { sendResetCode } from "./types";
 
 export default function SendResetPasswordPage(): JSX.Element {
@@ -23,6 +24,8 @@ export default function SendResetPasswordPage(): JSX.Element {
       }
     }
   }, [state])
+
+  useResetPasswordPageHooks();
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
