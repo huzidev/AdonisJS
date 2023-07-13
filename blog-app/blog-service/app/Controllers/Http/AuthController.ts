@@ -115,7 +115,6 @@ export default class AuthController {
         // user must be active for reset password
         // using .first() because we knew data can't be null as for calling this request email is mandatory if no email then this won't even run if data can be null then firstOrFail
         const user = await User.query().where("email", body.email).where("isActive", true).first();
-
         if (!user) {
             throw { message: 'No user is registered with this email', status: 404 }
         }
@@ -139,8 +138,11 @@ export default class AuthController {
         // for resend password we are only receving email hence use that email to fetch user's id
         const body = await request.validate(AuthResetPasswordSendCode);
         // using first because we are receving array therefore
-        let userId = await User.query().where("email", body.email).first();
-        let verificationCode = await ResetPasswordCode.findBy("userId", userId!.id);
+        const user = await User.query().where("email", body.email).where("isActive", true).first();
+        if (!user) {
+            throw { message: 'No user is registered with this email', status: 404 }
+        }
+        let verificationCode = await ResetPasswordCode.findBy("userId", user.id);
         if (
             verificationCode!.isActive &&
             verificationCode!.updatedAt.plus({ minute: 1 }) > DateTime.local()
