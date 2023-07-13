@@ -4,6 +4,11 @@ export interface ResetPasswordSendCodeRequest {
   email: string; // only email is required for reset password code
 }
 
+export interface ResendResetPasswordCodeRequest {
+  id: number;
+  email: string; // only email is required for reset password code
+}
+
 export interface ResetPasswordOtp {
   code: string; 
 }
