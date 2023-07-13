@@ -28,8 +28,9 @@ export default function SendResetPasswordPage(): JSX.Element {
   useResetPasswordPageHooks();
 
 
-  function submit() {
-      state.sendResetPasswordCode(email)
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    state.sendResetPasswordCode(email);
   }
 
   return (
