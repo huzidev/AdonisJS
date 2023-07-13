@@ -1,26 +1,13 @@
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useResetPassword } from "store/resetPassword";
-import { usePrevious } from "utils/hooks";
 import useResetPasswordPageHooks from "./hooks";
 import { sendResetCode } from "./types";
 
 export default function SendResetPasswordPage(): JSX.Element {
   const [email, setEmail] = useState<sendResetCode>({ email: "" });
   const state = useResetPassword();
-  const prev = usePrevious(state);
-  const Navigate = useNavigate();
-  const resetState = state.state.sendState;
-
-  // useEffect(() => {
-  //   if (prev?.state.sendState.loading) {
-  //     if (!resetState.loading) {
-  //       // Navigate(ROUTE_PATHS.RESET_PASSWORD);
-  //       Navigate(ROUTE_PATHS.RESET_PASSWORD + "?" + qs.stringify(email));
-  //     }
-  //   }
-  // }, [state]);
 
   useResetPasswordPageHooks(email);
 

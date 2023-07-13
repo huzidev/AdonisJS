@@ -13,11 +13,8 @@ export interface ResetPasswordRequest extends ResetPasswordSendCodeRequest, Rese
   passwordConfirmation: string;
 }
 
-export interface SeneResetCodeState extends SubState {
-  status?: number;
-}
-
 export interface ResetPasswordState {
-  sendState: SeneResetCodeState;
+  sendState: SubState;
+  resendState: SubState;
   resetState: SubState;
 }

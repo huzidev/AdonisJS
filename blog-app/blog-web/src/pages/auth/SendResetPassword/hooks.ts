@@ -12,13 +12,13 @@ export default function useResetPasswordPageHooks(email: any): void {
   const prev = usePrevious(state);
   const navigate = useNavigate();
 
-    console.log("Email from hook", email);
+  console.log("Email from hook", email);
 
-    useEffect(() => {
+  useEffect(() => {
     if (prev?.sendState.loading) {
       if (!state?.sendState?.loading && !state.sendState.error) {
         successNotification(state.sendState.message);
-        navigate(ROUTE_PATHS.RESET_PASSWORD + "?" + qs.stringify(email))
+        navigate(ROUTE_PATHS.RESET_PASSWORD + "?" + qs.stringify(email));
       }
     }
   }, [state]);

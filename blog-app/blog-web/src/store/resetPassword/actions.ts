@@ -10,7 +10,19 @@ export const sendResetPasswordCode = createAsyncThunk(endpoints.SEND_CODE, async
     try {
         const response = await api.post(endpoints.SEND_CODE, data);
         console.log("response for reset password code", response);
-        return response;
+        return response.data.message;
+    } catch (e: any) {
+        const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
+    }
+})
+export const resendResetPasswordCode = createAsyncThunk(endpoints.RESEND_CODE, async (data: ResetPasswordSendCodeRequest) => {
+    try {
+        const response = await api.post(endpoints.RESEND_CODE, data);
+        console.log("response for reset password code", response);
+        return response.data.message;
     } catch (e: any) {
         const err = mapErrorToState(e);
         errorNotification(err);

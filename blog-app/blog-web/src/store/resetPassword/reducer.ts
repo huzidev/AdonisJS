@@ -5,6 +5,7 @@ import { ResetPasswordState } from "./types";
 
 const initialState: ResetPasswordState = {
     sendState: { ...subState },
+    resendState: { ...subState },
     resetState: { ...subState }
 }
 
@@ -19,13 +20,27 @@ export const resetSlice = createSlice({
         })
         builder.addCase(actions.sendResetPasswordCode.fulfilled, (state, action) => {
             state.sendState.loading = false
-            // if (action.payload) {
-            //     state.sendState.message = action.payload
-            // }
+            if (action.payload) {
+                state.sendState.message = action.payload
+            }
             state.sendState.error = false
         })
         builder.addCase(actions.sendResetPasswordCode.rejected, (state) => {
             state.sendState = {loading: false, error: true};
+        })
+        // resendResetPasswordCode
+        builder.addCase(actions.resendResetPasswordCode.pending, (state) => {
+            state.resendState = {loading: true, error: false};
+        })
+        builder.addCase(actions.resendResetPasswordCode.fulfilled, (state, action) => {
+            state.resendState.loading = false
+            if (action.payload) {
+                state.resendState.message = action.payload
+            }
+            state.resendState.error = false
+        })
+        builder.addCase(actions.resendResetPasswordCode.rejected, (state) => {
+            state.resendState = {loading: false, error: true};
         })
         // resetPassword
         builder.addCase(actions.resetPassword.pending, (state) => {

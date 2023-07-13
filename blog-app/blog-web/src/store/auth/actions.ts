@@ -14,7 +14,7 @@ export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: AuthSignU
             setToken(response.data.token);
             await storage.setItem(KEYS.TOKEN, response.data.token);
         }
-        localStorage.getItem(KEYS.TOKEN);
+        // localStorage.getItem(KEYS.TOKEN);
         console.log("Sign Up resp", response.data);
         return response.data;
     } catch (e: any) {
@@ -32,7 +32,7 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: AuthSignI
             setToken(response.data.token);
             await storage.setItem(KEYS.TOKEN, response.data.token);
         }
-        localStorage.getItem(KEYS.TOKEN);
+        // await storage.getItem(KEYS.TOKEN);
         console.log("Sign in resp", response.data);
         return response.data;
     } catch (e: any) {
