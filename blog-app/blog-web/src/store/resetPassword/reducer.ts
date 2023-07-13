@@ -49,9 +49,7 @@ export const resetSlice = createSlice({
         builder.addCase(actions.resetPassword.fulfilled, (state, action) => {
             state.resetState.loading = false
             if (action.payload) {
-                const { data, status } = action.payload
-                state.resetState.message = data.message;
-                state.resetState.status = status;
+                state.resetState.message = action.payload;
             }
             state.resetState.error = false
         })

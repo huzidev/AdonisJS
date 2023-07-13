@@ -15,9 +15,7 @@ export default function useResetPasswordPageHooks(): void {
     if (prev?.resetState.loading) {
       if (!state?.sendState?.loading && !state.sendState.error) {
           successNotification(state.resetState.message);
-        }
-        if (state.resetState.status) {
-          navigate(ROUTE_PATHS.AUTH_SIGNIN)
+          state.resetState.message?.includes("successfully") && navigate(ROUTE_PATHS.AUTH_SIGNIN)
         }
     }
     if (prev?.resendState.loading) {

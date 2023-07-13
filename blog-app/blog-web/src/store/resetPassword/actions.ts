@@ -36,7 +36,7 @@ export const resetPassword = createAsyncThunk(endpoints.RESET_PASSWORD, async (d
     try {
         const response = await api.post(endpoints.RESET_PASSWORD, data);
         console.log("response asdsaasds", response);
-        return response;
+        return response.data.message;
     } catch (e: any) {
         const err = mapErrorToState(e);
         errorNotification(err);
