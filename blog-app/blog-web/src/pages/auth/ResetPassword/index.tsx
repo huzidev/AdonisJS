@@ -3,20 +3,16 @@ import qs from "query-string";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useResetPassword } from "store/resetPassword";
+import { resetPasswordState } from "./data";
 import useResetPasswordPageHooks from "./hooks";
 import { ResetPasswordCode } from "./types";
 
 export default function ResetPasswordPage(): JSX.Element {
   const state = useResetPassword();
+  const [resetState, setResetState] = useState<ResetPasswordCode>(resetPasswordState);
   const params: any = {
     ...qs.parse(window.location.search),
   };
-  const [resetState, setResetState] = useState<ResetPasswordCode>({
-    email: params.email,
-    code: "",
-    password: "",
-    passwordConfirmation: "",
-  });
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
