@@ -58,6 +58,7 @@ export class AuthResetPasswordSendCode {
   })
 
   public messages = {
+    'email.email': 'Invalid email address',
     required: '{{ field }} is required to reset password'
   }
 }

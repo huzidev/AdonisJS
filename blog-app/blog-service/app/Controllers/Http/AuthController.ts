@@ -39,7 +39,7 @@ export default class AuthController {
             return {
                 token,
                 data: auth.user?.toJSON(), 
-                message: `User registered successfully, Verification code is ${verificationCode.code}`
+                message: `User registered successfully, Verification code is ${verificationCode.code}`,
             }
         } catch (e) {
             trx.rollback()
