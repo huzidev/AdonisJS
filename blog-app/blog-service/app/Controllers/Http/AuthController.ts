@@ -3,7 +3,7 @@ import Database from '@ioc:Adonis/Lucid/Database';
 import EmailVerificationCode from 'App/Models/EmailVerificationCode';
 import ResetPasswordCode from 'App/Models/ResetPasswordCode';
 import User from "App/Models/User";
-import { AuthResendResetPasswordCode, AuthResetPassword, AuthResetPasswordSendCode, AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
+import { AuthResetPassword, AuthResetPasswordSendCode, AuthSignIn, AuthSignUp, AuthVerifyEmailVerificationCode } from "App/Validators/AuthValidator";
 import { DateTime } from 'luxon';
 
 export default class AuthController {
@@ -136,7 +136,8 @@ export default class AuthController {
     }
 
     public async resendResetPasswordCode({ request }: HttpContextContract) {
-        const body = await request.validate(AuthResendResetPasswordCode);
+        // for resend password we are only receving email hence use that email to fetch user's id
+        const body = await request.validate(AuthResetPasswordSendCode);
         // using first because we are receving array therefore
         let userId = await User.query().where("email", body.email).first();
         let verificationCode = await ResetPasswordCode.findBy("userId", userId!.id);

@@ -63,17 +63,6 @@ export class AuthResetPasswordSendCode {
   }
 }
 
-export class AuthResendResetPasswordCode {
-  public schema = schema.create({
-    email: schema.string({}, [rules.email()])
-  })
-
-  public messages = {
-    'email.email': 'Invalid email address',
-    required: '{{ field }} is required to reset password'
-  }
-}
-
 export class AuthResetPassword {
   public schema = schema.create({
     email: schema.string({}, [rules.email()]),
