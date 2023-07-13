@@ -7,7 +7,7 @@ export function useResetPassword() {
   const state = useSelector((state: any) => state.reset) as ResetPasswordState;
   const dispatch = useAppDispatch();
   const sendResetPasswordCode = (payload: ResetPasswordSendCodeRequest) => dispatch(actions.sendResetPasswordCode(payload));
-  const resendResetPasswordCode = (payload: ResendResetPasswordCodeRequest) => dispatch(actions.sendResetPasswordCode(payload));
+  const resendResetPasswordCode = (payload: ResendResetPasswordCodeRequest) => dispatch(actions.resendResetPasswordCode(payload));
   const resetPassword = (payload: ResetPasswordRequest) => dispatch(actions.resetPassword(payload));
 
   return {

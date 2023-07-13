@@ -18,6 +18,7 @@ export const sendResetPasswordCode = createAsyncThunk(endpoints.SEND_CODE, async
         throw e
     }
 })
+
 export const resendResetPasswordCode = createAsyncThunk(endpoints.RESEND_CODE, async (data: ResetPasswordSendCodeRequest) => {
     try {
         const response = await api.post(endpoints.RESEND_CODE, data);

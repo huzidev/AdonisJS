@@ -3,6 +3,7 @@ import qs from "query-string";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useResetPassword } from "store/resetPassword";
+import useResetPasswordPageHooks from "./hooks";
 import { ResetPasswordCode } from "./types";
 
 export default function ResetPasswordPage(): JSX.Element {
@@ -38,6 +39,8 @@ export default function ResetPasswordPage(): JSX.Element {
       [e.target.name]: e.target.value,
     });
   }
+
+  useResetPasswordPageHooks();
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50">
@@ -110,7 +113,7 @@ export default function ResetPasswordPage(): JSX.Element {
                 <p>Didn't recieve code?</p>
                 <button
                       className="flex flex-row items-center text-blue-600"
-                      onClick={() => state.sendResetPasswordCode(params)}
+                      onClick={() => state.resendResetPasswordCode(params)}
                       // no need for sending id of user because only non-verified user can send this request and id will get fetched automatically in backend
                     >
                       Resend
