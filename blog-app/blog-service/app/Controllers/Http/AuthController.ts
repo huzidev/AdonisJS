@@ -96,7 +96,7 @@ export default class AuthController {
                 await verificationCode.save();
             }
         if (code?.updatedAt.plus({ minutes: 1 })! > DateTime.local()) {
-            throw { message: `Please wait a minute before requesting for new code`, status: 422 }
+            throw { message: `Code is already send, please wait a minute before requesting for new code`, status: 422 }
         }
         code?.generateCode()
         console.log("verification code is", code?.code);
@@ -139,6 +139,7 @@ export default class AuthController {
         const body = await request.validate(AuthResetPasswordSendCode);
         // using first because we are receving array therefore
         const user = await User.query().where("email", body.email).where("isActive", true).first();
+        // so if user tries to change email through URL
         if (!user) {
             throw { message: 'No user is registered with this email', status: 404 }
         }
@@ -147,7 +148,7 @@ export default class AuthController {
             verificationCode!.isActive &&
             verificationCode!.updatedAt.plus({ minute: 1 }) > DateTime.local()
         ) {
-            throw { message: `Please wait a minute before requesting for new code`, status: 422 }
+            throw { message: `Code is already send, please wait a minute before requesting for new code`, status: 422 }
         } else {
             verificationCode!.generateCode();
             await verificationCode!.save();
