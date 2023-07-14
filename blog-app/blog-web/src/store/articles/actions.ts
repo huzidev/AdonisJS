@@ -160,7 +160,8 @@ export const deleteBlog = createAsyncThunk(
   async (id: number) => {
     try {
       const response = await api.delete(endpoints.DELETE_BLOG + id);
-      return response.data.id;
+      console.log("Delete blog response", response);
+      return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);

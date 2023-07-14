@@ -18,6 +18,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
   const [showModal, setShowModal] = useState(false);
+  // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
 
   useBlogsPageHooks();

@@ -113,10 +113,13 @@ export const blogSlice = createSlice({
       state.deleteBlog = { loading: false, error: false };
       // so after deleting the blog the blogs data will updated
       if (action.payload) {
-        const deletedBlogId = action.payload;
+        const { id, message } = action.payload;
+        const deletedBlogId = id;
+        // calling .filter to updated the allBlogs data after removing the deleted blog with id
         state.getBlogs.data = state.getBlogs.data.filter(
-          (blog) => blog.id !== deletedBlogId
+          (blog: any) => blog.id !== deletedBlogId
         );
+        state.deleteBlog.message = message;
       }
     });
     builder.addCase(actions.deleteBlog.rejected, (state) => {

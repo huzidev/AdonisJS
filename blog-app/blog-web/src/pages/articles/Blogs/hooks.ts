@@ -9,7 +9,7 @@ export function useBlogsPageHooks(): void {
   const blogs = useBlogs();
   const user = useUser();
   const auth = useAuth();
-  const state = blogs.state.getBlogs;
+  const state = blogs.state;
   const prev = usePrevious(state);
   const allUsers: any = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
@@ -33,15 +33,15 @@ export function useBlogsPageHooks(): void {
     }
   }, []);
 
-  // useEffect(() => {
-  //   console.log("favortie Blogs", favoriteBlogs.data.length);
-
-  // }, []);
-
   useEffect(() => {
-    if (prev?.loading) {
-      if (!state.loading && !state.error) {
-        successNotification(state.message);
+    if (prev?.getBlogs.loading) {
+      if (!state.getBlogs.loading && !state.getBlogs.error) {
+        successNotification(state.getBlogs.message);
+      }
+    }
+    if (prev?.deleteBlog.loading) {
+      if (!state.deleteBlog.loading && !state.deleteBlog.error) {
+        successNotification(state.deleteBlog.message)
       }
     }
   }, [state]);
