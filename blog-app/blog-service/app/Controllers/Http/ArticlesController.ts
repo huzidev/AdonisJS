@@ -4,7 +4,7 @@ import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 
 // Controller used to call the functions created in routes here so routes won't get messed up
 
-const noArticle = { message: "No Article found by id ", status: 404 }
+const noArticle = { message: "No such article is found ", status: 404 }
 const noPermission = { message: "You didn't have permission", status: 401 }
 export default class ArticlesController {
     public async getBlogs({ params }: HttpContextContract) {
@@ -16,7 +16,7 @@ export default class ArticlesController {
                 query.where('owner_id', userId);
             }
             const response = await query.paginate(params.page || 1, 5);
-            return response
+            return response;
     }
     
     public async addBlog({ request, auth }: HttpContextContract) {
@@ -44,8 +44,8 @@ export default class ArticlesController {
                 throw noArticle
             } else {
                 return { 
-                    data: article, 
-                    message: "Article fetched successfully" 
+                    article, 
+                    message: "Blog fetched successfully"
                 }
             }
         } catch (e) {
