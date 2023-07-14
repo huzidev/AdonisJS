@@ -39,6 +39,7 @@ export default class Article extends BaseModel {
   // here before creating ours article therefore used beforeCreate assigning random value to custom_id
   @beforeCreate()
   public static async generateSlug(data: Article) {
+    // to add - between every words in title to create a slug
     const titleSlug = data.title.toLocaleLowerCase().replace(/ /g, "-");
     data.slug = `${titleSlug}-${Date.now()}`;
   }
