@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Article from "App/Models/Article";
+import User from 'App/Models/User';
 import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 
 // Controller used to call the functions created in routes here so routes won't get messed up
@@ -39,13 +40,13 @@ export default class ArticlesController {
     public async getById({ params }: HttpContextContract) {
         try {
             const article = await Article.findBy("slug", params.slug);
-            console.log("article", article);
+            const user = await User.query().where("id", article!.ownerId).first();
             if (!article) {
                 throw noArticle
             } else {
                 return { 
                     article, 
-                    message: "Blog fetched successfully"
+                    message: `Blog by ${user?.username} fetched successfully`
                 }
             }
         } catch (e) {
