@@ -38,11 +38,6 @@ export default function ViewBlogsPage(): JSX.Element {
     blogs.deleteBlog(blogId);
     setShowModal(false);
   }
-
-  function cancelDeletion() {
-    ;
-  }
-
   return (
     <>
       <div className="w-10/12 m-auto flex flex-wrap">
