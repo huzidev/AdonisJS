@@ -92,7 +92,7 @@ export default class UsersController {
             // once use merge then call the save method
             user?.merge(body);
             await user?.save();
-            return { message: params.id ? 'User' : "Yours" + " details updated successfully", data: user?.toObject() }
+            return { message: (params.id ? 'User' : "Yours") + " details updated successfully", data: user?.toObject() }
         } catch (e) {
             if (e.sqlMessage) {
                 if (e.sqlMessage.includes("users.users_username_unique")) {
