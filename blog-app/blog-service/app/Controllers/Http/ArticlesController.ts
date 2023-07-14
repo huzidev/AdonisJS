@@ -40,6 +40,7 @@ export default class ArticlesController {
     public async getById({ params }: HttpContextContract) {
         try {
             const article = await Article.findBy("slug", params.slug);
+            // using .first() because we are receving array[]
             const user = await User.query().where("id", article!.ownerId).first();
             if (!article) {
                 throw noArticle
