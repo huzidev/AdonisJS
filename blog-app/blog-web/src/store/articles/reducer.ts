@@ -104,7 +104,6 @@ export const blogSlice = createSlice({
       if (action.payload) {
         const { data, message } = action.payload;
         console.log("Recevied Payload for add blog", action.payload);
-        
         state.addBlog.message = message;
       }
     });
