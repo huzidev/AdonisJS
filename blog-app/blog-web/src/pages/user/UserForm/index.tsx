@@ -15,7 +15,7 @@ export default function UserFormPage() {
   const params = useParams();
   const userData = auth.state.user;
   const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>(detailsMe);
-  const value = useRef("");
+  const value = useRef('');
   const [updateDetailsId, setUpdateDetailsId] = useState<User>(detailsId);
   const [createUser, setCreateUser] = useState<any>(detailsCreateUser);
   const [booleanState, setBooleanState] = useState<BooleanState>(detailsBoolean);
@@ -78,6 +78,10 @@ export default function UserFormPage() {
     }
   }, [params.id]);
 
+  function submit() {
+    
+  }
+
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -96,7 +100,7 @@ export default function UserFormPage() {
               : `Edit ${value.current}'s Details`} 
           </h2>
         </div>
-        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <div>
             {isUpdate ? (
               <>
@@ -408,8 +412,12 @@ export default function UserFormPage() {
                   </label>
                 </div>
                 <div>
-                  <button
+                  <input 
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    type="submit"
+                    value="Update Details"
+                  />
+                  <button
                     onClick={() =>
                       user.updateById({
                         ...updateDetailsId,
@@ -423,7 +431,7 @@ export default function UserFormPage() {
               </>
             )}
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
