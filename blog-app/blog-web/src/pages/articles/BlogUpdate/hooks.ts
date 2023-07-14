@@ -2,19 +2,23 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { usePrevious } from "utils/hooks";
+import { successNotification } from "utils/notifications";
 
 export function useEditBlogPageHooks(): void {
-    const blog = useBlogs();
-    const params = useParams();
-    const state = blog.getBlog;
-    const prev = usePrevious(state);
-    const slug: any = params.slug;
-    useEffect(() => {
-        blog.getBlog(slug)
-    }, [])
+  const blog = useBlogs();
+  const params = useParams();
+  const state = blog.state.getBlog;
+  const prev = usePrevious(state);
+  const slug: any = params.slug;
+  useEffect(() => {
+    blog.getBlog(slug);
+  }, []);
 
-    useEffect(() => {
-
-    }, [state])
-
+  useEffect(() => {
+    if (prev?.loading) {
+      if (!state.loading && !state.error) {
+        successNotification(state.message);
+      }
+    }
+  }, [state]);
 }
