@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useBlogs } from "store/articles";
+import { useCreateBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
 
 export default function AddBlogPage(): JSX.Element {
@@ -16,6 +17,13 @@ export default function AddBlogPage(): JSX.Element {
       [e.target.name]: e.target.value,
     });
   }
+
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    
+  }
+
+  useCreateBlogPageHooks();
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -29,7 +37,7 @@ export default function AddBlogPage(): JSX.Element {
             Add Blog
           </h2>
         </div>
-        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="mb-3">
             <label
               htmlFor="title"
@@ -60,6 +68,7 @@ export default function AddBlogPage(): JSX.Element {
             <input
               type="file"
               name="image"
+              required
               onChange={inputHandler}
               value={image}
               className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -79,22 +88,22 @@ export default function AddBlogPage(): JSX.Element {
                   value={content}
                   cols={30}
                   rows={10}
+                  required
                   onChange={inputHandler}
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Write your blog content here..."
+                  placeholder="Write yours blog content here..."
                 ></textarea>
               </div>
             </div>
           </div>
           <div>
-            <button
+            <input 
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => blog.addBlog(article)}
-            >
-              Add Blog
-            </button>
+              type="submit" 
+              value="Add Blog"
+            />
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
