@@ -30,7 +30,7 @@ export default class ArticlesController {
             });
             return { 
                 data: body, 
-                message: "Article created successfully" 
+                message: "Blog created successfully" 
             };
         } catch (e) {
           throw e
