@@ -23,11 +23,17 @@ export function useUserFormHook(): void {
     if (prevAuth?.updateMe.loading) {
       if (!state.updateMe.loading && !state.updateMe.error) {
        successNotification(state.updateMe.message);
+       if (state.updateMe.message?.includes("successfully")) {
+            navigate(ROUTE_PATHS.USERS_PAGE)
+        }
      }
     }
     if (prevAuth?.updateById.loading) {
       if (!state.updateById.loading && !state.updateById.error) {
        successNotification(state.updateById.message);
+       if (state.updateById.message?.includes("successfully")) {
+            navigate(ROUTE_PATHS.USERS_PAGE)
+        }
      }
     }
   }, [state.createUser, state.updateMe, state.updateById]);
