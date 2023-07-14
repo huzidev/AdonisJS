@@ -14,13 +14,13 @@ export function useViewProfilePageHook(): void {
   useEffect(() => {
     if (params.id === "me") {
       successNotification("Your details fetched successfully!");
-    } 
-if (prev?.loading) {
-    if (!state.loading && !state.error) {
+    }
+    if (prev?.loading) {
+      if (!state.loading && !state.error) {
         if (username) {
           successNotification(`${username}'s details fetched successfully`);
         }
+      }
     }
-}
   }, [username, params.id, state]);
 }
