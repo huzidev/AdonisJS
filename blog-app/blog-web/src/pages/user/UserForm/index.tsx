@@ -82,15 +82,15 @@ export default function UserFormPage() {
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (isMe) {
-      // user.updateMe({ ...updateDetailsMe })
-    } else if (!isMe) {
-      user.createUser({...createUser})
-    } 
-    else {
+      user.updateMe({ ...updateDetailsMe })
+    } else if (Number(params.id) === user.state.getUser.data?.id) {
       user.updateById({
         ...updateDetailsId,
-        id: Number(params.id),
+        id: Number(params.id)
       })
+    } 
+    else {
+      user.createUser({...createUser})
     }
   }
   useUserFormHook();

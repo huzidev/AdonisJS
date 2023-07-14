@@ -22,7 +22,7 @@ export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: Updat
 export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: UpdateByIdPayload): Promise<User | null> => {
     try {
         const response = await api.put(endpoints.UPDATE_USER + data.id, data);
-        console.log("Response for upate by id", updateById);
+        console.log("Response for upate by id", response);
         return response.data;
     } catch (e: any) {
         const err = mapErrorToState(e);
