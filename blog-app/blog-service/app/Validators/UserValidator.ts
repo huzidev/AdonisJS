@@ -40,7 +40,8 @@ export class UserCreate {
   })
 
   public static messages = {
-    required: '{{ field }} is required to update user',
+    'email.email': 'Invalid email address',
+    required: '{{ field }} is required to update user'
   }
 }
 

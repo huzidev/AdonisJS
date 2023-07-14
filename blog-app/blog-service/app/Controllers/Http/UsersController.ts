@@ -45,14 +45,21 @@ export default class UsersController {
         const user = await User.create(body);
         // calling refresh to get latest data from database
         await user.refresh();
-        return { message: 'User created successfully', data: user }
+        return { message: `User ${user.username} registered successfully`, data: user.toJSON() }
         } catch (e) {
-        if (e.code === 'ER_DUP_ENTRY') {
-            throw {
-                message: 'User already in use',
-                status: 409,
-            }   
-        }
+        if (e.sqlMessage) {
+                if (e.sqlMessage.includes("users.users_username_unique")) {
+                    throw {
+                        message: "Username already exist",
+                        status: 409
+                    }
+                } else if (e.sqlMessage.includes("users.users_email_unique")) {
+                    throw {
+                        message: "Email already exist",
+                        status: 409
+                    }
+                } 
+            }
         throw e
         }
     }
