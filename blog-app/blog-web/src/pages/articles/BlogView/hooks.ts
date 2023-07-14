@@ -29,6 +29,8 @@ export function useGetBlogPageHooks(): void {
       if (!state.getBlog.loading && !state.getBlog.error) {
         // if success then it'll show notification of success
         successNotification(state.getBlog.message);
+      } else if (!state.getBlog.loading && state.getBlog.error) {
+        alert("GETTING ERROR")
       }
     }
   }, [state]);

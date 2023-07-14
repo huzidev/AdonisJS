@@ -1,7 +1,8 @@
+import ROUTE_PATHS from "Router/paths";
 import { useNavigate } from "react-router-dom";
 
 export default function NotFoundPage(): JSX.Element {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div
     className="
@@ -25,7 +26,7 @@ export default function NotFoundPage(): JSX.Element {
           </p>
           <button 
             className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" 
-            onClick={() => Navigate("/blogs")}
+            onClick={() => navigate(ROUTE_PATHS.ARTICLES)}
           >
             Back Home
           </button>
