@@ -73,9 +73,22 @@ export default class UsersController {
             } else {
                 body = await request.validate(UserUpdateMe);
             }
-
             // if admin tries to update user who doesn't exist
             const user = await User.findBy('id', userId)
+
+            if (
+                body.username === user?.username &&
+                body.role === user?.role &&
+                body.isActive === user?.isActive &&
+                body.isVerified === user?.isVerified &&
+                body.isBanned === user?.isBanned
+                ) {
+                throw {
+                    message: 'Values are same as of before',
+                    status: 401
+                }
+            }
+
             if (!user) {
                 throw {
                     message: 'User not found',
