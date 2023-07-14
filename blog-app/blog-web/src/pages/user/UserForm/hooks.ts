@@ -25,7 +25,7 @@ export function useUserFormHook(): void {
       if (!state.updateMe.loading && !state.updateMe.error) {
        successNotification(state.updateMe.message);
        if (state.updateMe.message?.includes("successfully")) {
-            navigate(ROUTE_PATHS.VIEW_PROFILE)
+            navigate(ROUTE_PATHS.VIEW_PROFILE + "me")
         }
      }
     }
@@ -37,5 +37,5 @@ export function useUserFormHook(): void {
         }
      }
     }
-  }, [state.createUser, state.updateMe, state.updateById]);
+  }, [state]);
 }
