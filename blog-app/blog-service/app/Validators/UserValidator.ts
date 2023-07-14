@@ -1,4 +1,4 @@
-import { rules, schema } from '@ioc:Adonis/Core/Validator'
+import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
 import pick from 'lodash/pick'
 
@@ -32,16 +32,19 @@ export class UserUpdateMe {
 export class UserCreate {
   public schema = schema.create({
     username: schema.string({ trim: true }, [rules.fullName()]),
-    email: schema.string({}, [rules.email()]),
+    email: schema.string({ trim: true }, [
+      rules.email()
+    ]),
     role: schema.enum.optional(User.roles),
     isVerified: schema.boolean.optional(),
     isActive: schema.boolean.optional(),
     password: schema.string({}, [rules.minLength(6), rules.confirmed('passwordConfirmation')])
   })
 
-  public static messages = {
+  public messages: CustomMessages = {
+    // if didn't put correct email format
     'email.email': 'Invalid email address',
-    required: '{{ field }} is required to update user'
+    required: "{{ field }} is required to signup"
   }
 }
 

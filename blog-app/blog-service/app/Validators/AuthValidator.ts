@@ -12,7 +12,7 @@ export class AuthSignUp {
     isBlogger: schema.boolean.optional(),
     username: schema.string({ trim: true }, [rules.fullName()]),
     email: schema.string({ trim: true }, [
-      rules.email(),
+      rules.email()
     ]),
     password: schema.string({}, [
       rules.minLength(6), 
@@ -21,7 +21,7 @@ export class AuthSignUp {
   })
 
   public messages: CustomMessages = {
-    // if didn't put correct email format
+    // if user didn't put correct email format
     'email.email': 'Invalid email address',
     required: "{{ field }} is required to signup"
   }
