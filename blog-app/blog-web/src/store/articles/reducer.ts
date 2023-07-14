@@ -51,7 +51,7 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlogs.rejected, (state) => {
       state.getBlogs.loading = false;
       state.getBlogs.error = true;
-      state.getBlogs.message = "Something went wrong"
+      // state.getBlogs.message = "Something went wrong"
     });
     // getAllBlogsById
     builder.addCase(actions.getBlogsById.pending, (state) => {

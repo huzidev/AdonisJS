@@ -66,10 +66,12 @@ export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async (): Promi
             return response.data.data;
         }
         return null;
-    } catch (e) {
+    } catch (e: any) {
         await storage.removeItem(KEYS.TOKEN);
         setToken(null);
-        console.log("Error", e);
+        const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
         throw e;
     }
 })

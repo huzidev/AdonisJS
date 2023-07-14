@@ -6,6 +6,7 @@ import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { userDetailsData } from "./data";
+import { useViewProfilePageHook } from "./hooks";
 import { UserDetailState } from "./types";
 
   export default function ViewProfilePage(): JSX.Element {
@@ -74,6 +75,7 @@ import { UserDetailState } from "./types";
       setPayload(updatedPayload);
       blogs.getBlogsById(updatedPayload);
     }
+    useViewProfilePageHook();
     return (
       <>
         <div>
