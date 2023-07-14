@@ -123,7 +123,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
                     className="text-sm font-medium text-center text-white hover:text-blue-500"
                   >
-                    Read More {blog.id}
+                    Read More
                     {/* {blog.createdAt} */}
                   </Link>
                   {(blog.ownerId === userData?.id ||
