@@ -79,7 +79,7 @@ export default class AuthController {
                 data: auth.user?.toJSON()
             }
         } catch (e) {
-            if (e.code === ("E_INVALID_AUTH_PASSWORD" || "E_INVALID_AUTH_UID")) {
+            if (e.code === "E_INVALID_AUTH_PASSWORD" || e.code ===  "E_INVALID_AUTH_UID") {
                 throw { message: "Email or Password is incorrect", status: 400 }
             }
             throw e
