@@ -100,7 +100,7 @@ export default class UsersController {
                         message: "Username already exist",
                         status: 409
                     }
-                }
+                }   
             }
             throw e
         }   

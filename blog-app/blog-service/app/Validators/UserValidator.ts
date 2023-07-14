@@ -44,7 +44,7 @@ export class UserCreate {
   public messages: CustomMessages = {
     // if user didn't put correct email format
     'email.email': 'Invalid email address',
-    required: "{{ field }} is required to signup"
+    required: "{{ field }} is required to create user"
   }
 }
 
