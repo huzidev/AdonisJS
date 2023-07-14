@@ -35,6 +35,7 @@ export default function ViewBlogsPage(): JSX.Element {
   }
 
   function deleteBlogConfirmed(blogId: number) {
+    console.log("Recevied id", blogId);
     blogs.deleteBlog(blogId);
     setShowModal(false);
   }
@@ -127,7 +128,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
                     className="text-sm font-medium text-center text-white hover:text-blue-500"
                   >
-                    Read More
+                    Read More {blog.id}
                     {/* {blog.createdAt} */}
                   </Link>
                   {(blog.ownerId === userData?.id ||
