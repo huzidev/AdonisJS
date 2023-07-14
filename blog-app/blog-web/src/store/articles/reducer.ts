@@ -127,15 +127,20 @@ export const blogSlice = createSlice({
       state.updateBlog = { loading: true, error: false };
     });
     builder.addCase(actions.updateBlog.fulfilled, (state, action) => {
-      const { data } = action.payload; 
+      state.updateBlog.loading = false;
+      console.log("ACTION PAYLOAD UPDATE", action.payload);
+      const { data, message } = action.payload; 
       const updatedAllBlogs = state.getBlogs.data.map((blog) => {
         if (blog.id === data.id) {
           return data;
         }
         return blog;
       });
+      state.updateBlog.message = message;
       // Update the allBlogs data in the state
+      // getBlogs because updating the updated blog value in getBlogs list
       state.getBlogs.data = updatedAllBlogs;
+      state.updateBlog.error = false;
     });
     builder.addCase(actions.updateBlog.rejected, (state) => {
       state.updateBlog = { loading: false, error: true };

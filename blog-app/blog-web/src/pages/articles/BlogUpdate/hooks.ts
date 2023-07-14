@@ -7,7 +7,7 @@ import { successNotification } from "utils/notifications";
 export function useEditBlogPageHooks(): void {
   const blog = useBlogs();
   const params = useParams();
-  const state = blog.state.getBlog;
+  const state = blog.state.updateBlog;
   const prev = usePrevious(state);
   const slug: any = params.slug;
   useEffect(() => {

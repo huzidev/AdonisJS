@@ -144,9 +144,7 @@ export const updateBlog = createAsyncThunk(
   async (data: UpdateBlogPayload) => {
     try {
       const response = await api.put(endpoints.UPDATE_BLOG + data.id, data);
-      if (response.status === 200) {
-        alert("Blog updated");
-      }
+      console.log("Update Blog Response", response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
