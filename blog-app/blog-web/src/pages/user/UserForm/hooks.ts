@@ -16,7 +16,8 @@ export function useUserFormHook(): void {
       if (!state?.createUser?.loading && !state.createUser.error) {
         successNotification(state.createUser.message);
         if (state.createUser.message?.includes("successfully")) {
-            navigate(ROUTE_PATHS.USERS_PAGE)
+          // users page take pagination meta therefore + 1
+          navigate(ROUTE_PATHS.USERS_PAGE + 1)
         }
       }
     }
@@ -24,7 +25,7 @@ export function useUserFormHook(): void {
       if (!state.updateMe.loading && !state.updateMe.error) {
        successNotification(state.updateMe.message);
        if (state.updateMe.message?.includes("successfully")) {
-            navigate(ROUTE_PATHS.USERS_PAGE)
+            navigate(ROUTE_PATHS.VIEW_PROFILE)
         }
      }
     }
@@ -32,7 +33,7 @@ export function useUserFormHook(): void {
       if (!state.updateById.loading && !state.updateById.error) {
        successNotification(state.updateById.message);
        if (state.updateById.message?.includes("successfully")) {
-            navigate(ROUTE_PATHS.USERS_PAGE)
+            navigate(ROUTE_PATHS.USERS_PAGE  + 1)
         }
      }
     }
