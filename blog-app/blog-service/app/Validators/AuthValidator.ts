@@ -12,6 +12,7 @@ export class AuthSignUp {
     isBlogger: schema.boolean.optional(),
     username: schema.string({ trim: true }, [
       rules.fullName(),
+      rules.minLength(4)
     ]),
     email: schema.string({ trim: true }, [
       rules.email(),
