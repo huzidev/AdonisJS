@@ -21,8 +21,8 @@ export default function UserFormPage() {
   const [booleanState, setBooleanState] = useState<BooleanState>(detailsBoolean);
   const fetchedData: any = user.state.getUser?.data;
   const isMe = params.id === "me";
-
   const isCreate = window.location.pathname.includes("create");
+
 
   const prevUpdateState = usePrevious(user.state.updateMe);
   const updateState = user.state.updateMe;
@@ -43,13 +43,13 @@ export default function UserFormPage() {
 
   function inputHandler(e: React.ChangeEvent) {
     const { name, value, type, checked } = e.target as HTMLInputElement;
-    isUpdate ? (
+    isCreate ? (
       setCreateUser({
         ...createUser,
         [name]: type === "checkbox" ? checked : value,
       })
     ) : (
-      params.id === "me" ? (
+      isMe ? (
         setUpdateDetailsMe({
           ...updateDetailsMe,
           [name]: value,
@@ -104,7 +104,7 @@ export default function UserFormPage() {
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             {isCreate
               ? "Create User"
-              : params.id === "me"
+              : isMe
               ? "Edit Yours Details"
               // using ref Hook value.current so the username field won't re-render when admin edit the username
               : `Edit ${value.current}'s Details`} 
@@ -128,6 +128,7 @@ export default function UserFormPage() {
                     type="text"
                     value={createUser.username}
                     onChange={inputHandler}
+                    minLength={4}
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -211,6 +212,14 @@ export default function UserFormPage() {
                     )}
                   </span>
                 </div>
+                {/* Creaate password length validation error */}
+                <p
+                  className={`transition-opacity duration-200 ${
+                    (createUser.password !== createUser.passwordConfirmation && createUser.password.length > 5) ? "opacity-100" : "opacity-0"
+                  } text-red-500`}
+                >
+                  Password doesn't match
+                </p>
                 <label
                   htmlFor="roles"
                   className="block text-sm font-medium leading-6 my-2 text-gray-900"
