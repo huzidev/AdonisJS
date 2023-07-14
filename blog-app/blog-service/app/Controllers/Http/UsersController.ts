@@ -94,6 +94,14 @@ export default class UsersController {
             await user?.save();
             return { message: params.id ? 'User' : "Yours" + " details updated successfully", data: user?.toObject() }
         } catch (e) {
+            if (e.sqlMessage) {
+                if (e.sqlMessage.includes("users.users_username_unique")) {
+                    throw {
+                        message: "Username already exist",
+                        status: 409
+                    }
+                }
+            }
             throw e
         }   
     }
