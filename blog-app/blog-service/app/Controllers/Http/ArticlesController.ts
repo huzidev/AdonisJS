@@ -92,7 +92,8 @@ export default class ArticlesController {
         } 
         else {
             await article.delete();
-            return { message: `Article with id ${params.id} Deleted`, id: Number(params.id) };
+            // returning id because we'll call filter on ours redux store to updated the state after filter out the deleted blog with id
+            return { message: `Blog with id ${params.id} deleted successfully`, id: Number(params.id) };
         }
     }    
 }
