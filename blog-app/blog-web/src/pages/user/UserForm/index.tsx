@@ -78,8 +78,20 @@ export default function UserFormPage() {
     }
   }, [params.id]);
 
+  console.log("params", params);
+  
+
   function submit() {
-    
+    if (params.id === "me") {
+      user.updateMe({ ...updateDetailsMe })
+    } else if (params.id !== "me") {
+      user.updateById({
+        ...updateDetailsId,
+        id: Number(params.id),
+      })
+    } else {
+      user.createUser({...createUser})
+    }
   }
 
   return (
@@ -417,16 +429,6 @@ export default function UserFormPage() {
                     type="submit"
                     value="Update Details"
                   />
-                  <button
-                    onClick={() =>
-                      user.updateById({
-                        ...updateDetailsId,
-                        id: Number(params.id),
-                      })
-                    }
-                  >
-                    Update Details
-                  </button>
                 </div>
               </>
             )}
