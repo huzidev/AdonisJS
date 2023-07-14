@@ -24,7 +24,6 @@ export default function UserFormPage() {
   const isMe = params.id === "me";
   const isCreate = window.location.pathname.includes("create");
 
-
   const prevUpdateState = usePrevious(user.state.updateMe);
   const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
@@ -83,10 +82,11 @@ export default function UserFormPage() {
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (isMe) {
-      user.updateMe({ ...updateDetailsMe })
+      // user.updateMe({ ...updateDetailsMe })
     } else if (!isMe) {
       user.createUser({...createUser})
-    } else {
+    } 
+    else {
       user.updateById({
         ...updateDetailsId,
         id: Number(params.id),
@@ -315,13 +315,12 @@ export default function UserFormPage() {
                     required
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
+                  <input 
+                    className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    type="submit"
+                    value="Update Details"
+                  />
                 </div>
-                <button
-                  className="flex w-full mt-6 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={() => user.updateMe({ ...updateDetailsMe })}
-                >
-                  Update Details
-                </button>
               </>
             ) : (
               // if admin clicked on user to edit info
