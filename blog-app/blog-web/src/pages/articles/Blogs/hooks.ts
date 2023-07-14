@@ -29,15 +29,16 @@ export function useBlogsPageHooks(): void {
     if (!allUsers) {
       user.allUser();
     }
-  }, []);
-  
-  useEffect(() => {
-    console.log("favortie Blogs", favoriteBlogs.data.length);
-    // so only is user with the role of user loggedIn then fetch favorite blogs
     if (auth.state.user?.role === "user" && !favoriteBlogs.data.length) {
       blogs.getFavoriteBlogs(payload);
     }
   }, []);
+  
+  // useEffect(() => {
+  //   console.log("favortie Blogs", favoriteBlogs.data.length);
+  //   // so only is user with the role of user loggedIn then fetch favorite blogs
+    
+  // }, []);
   
   useEffect(() => {
     if (prev?.loading) {
