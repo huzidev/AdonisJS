@@ -12,6 +12,7 @@ export function useEditBlogPageHooks(): void {
   const prev = usePrevious(state);
   const slug: any = params.slug;
   const navigate = useNavigate();
+  
   useEffect(() => {
     blog.getBlog(slug);
   }, []);

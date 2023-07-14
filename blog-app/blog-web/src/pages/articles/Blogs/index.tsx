@@ -1,4 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -16,19 +17,30 @@ export default function ViewBlogsPage(): JSX.Element {
   const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
+  const [showModal, setShowModal] = useState(false);
 
   useBlogsPageHooks();
-  
+
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
-  const currentPageFvrtBlogs: any = blogs.state.getFavoriteBlogs.meta?.currentPage;
+  const currentPageFvrtBlogs: any =
+    blogs.state.getFavoriteBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
   const lastPageFvrtBlogs: any = blogs.state.getFavoriteBlogs.meta?.lastPage;
 
   function loadMore() {
-    blogs.getBlogs(currentPageBlogs + 1)
+    blogs.getBlogs(currentPageBlogs + 1);
     if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
-      blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1)
+      blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1);
     }
+  }
+
+  function deleteBlogConfirmed(blogId: number) {
+    blogs.deleteBlog(blogId);
+    setShowModal(false);
+  }
+
+  function cancelDeletion() {
+    ;
   }
 
   return (
@@ -65,12 +77,21 @@ export default function ViewBlogsPage(): JSX.Element {
                       auth.state.user && auth.state.user.role === "user" && (
                         <div
                           className={`p-2 rounded-full transition-colors duration-300 ${
-                            favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) ? "text-red-500" : "text-gray-500"
+                            favoriteBlogs.find(
+                              (favoriteBlog) => favoriteBlog.id === blog.id
+                            )
+                              ? "text-red-500"
+                              : "text-gray-500"
                           }`}
-                          onClick={() => 
-                            favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) 
-                            ? blogs.removeFavoriteBlog(blog.id)
-                            : blogs.addFavoriteBlog({ userId: auth.state.user?.id, articleId: blog.id })
+                          onClick={() =>
+                            favoriteBlogs.find(
+                              (favoriteBlog) => favoriteBlog.id === blog.id
+                            )
+                              ? blogs.removeFavoriteBlog(blog.id)
+                              : blogs.addFavoriteBlog({
+                                  userId: auth.state.user?.id,
+                                  articleId: blog.id,
+                                })
                           }
                         >
                           <svg
@@ -79,7 +100,9 @@ export default function ViewBlogsPage(): JSX.Element {
                             viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            {favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) ? (
+                            {favoriteBlogs.find(
+                              (favoriteBlog) => favoriteBlog.id === blog.id
+                            ) ? (
                               <path
                                 fillRule="evenodd"
                                 clipRule="evenodd"
@@ -112,7 +135,11 @@ export default function ViewBlogsPage(): JSX.Element {
                     Read More
                     {/* {blog.createdAt} */}
                   </Link>
-                  {(blog.ownerId === userData?.id || hasPermission("admin" || "super-admin", userData?.role)) && (
+                  {(blog.ownerId === userData?.id ||
+                    hasPermission(
+                      "admin" || "super-admin",
+                      userData?.role
+                    )) && (
                     <div>
                       <Link
                         to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
@@ -124,10 +151,34 @@ export default function ViewBlogsPage(): JSX.Element {
                       <button
                         type="button"
                         className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
-                        onClick={() => blogs.deleteBlog(blog.id)}
+                        // onClick={() => blogs.deleteBlog(blog.id)}
+                        onClick={() => setShowModal(true)}
                       >
                         Delete
                       </button>
+                      {showModal && (
+                        <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
+                          <div className="bg-white p-8 w-96">
+                            <p className="text-lg text-center mb-4">
+                              Are you sure you want to delete this blog?
+                            </p>
+                            <div className="flex justify-center space-x-4">
+                              <button
+                                className="bg-red-500 text-white px-4 py-2 rounded"
+                                onClick={() => deleteBlogConfirmed(blog.id)}
+                              >
+                                Yes
+                              </button>
+                              <button
+                                className="bg-gray-500 text-white px-4 py-2 rounded"
+                                onClick={() => setShowModal(false)}
+                              >
+                                No
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                   <div className="flex justify-end items-center">

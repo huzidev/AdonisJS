@@ -36,6 +36,7 @@ export default function UpdateBlogPage(): JSX.Element {
 
   function update(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // if users tries to update without changing any value
     const isSameValues =
       updateArticle.title === prevState.title &&
       updateArticle.content === prevState.content;
@@ -43,7 +44,7 @@ export default function UpdateBlogPage(): JSX.Element {
       ? toast.error("Can't update, Values are same as of before")
       : blogs.updateBlog({
           ...updateArticle,
-          id,
+          id
         });
   }
   return (
