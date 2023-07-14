@@ -128,7 +128,6 @@ export const blogSlice = createSlice({
     });
     builder.addCase(actions.updateBlog.fulfilled, (state, action) => {
       state.updateBlog.loading = false;
-      console.log("ACTION PAYLOAD UPDATE", action.payload);
       const { data, message } = action.payload; 
       const updatedAllBlogs = state.getBlogs.data.map((blog) => {
         if (blog.id === data.id) {

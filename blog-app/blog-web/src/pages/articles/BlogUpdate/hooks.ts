@@ -1,5 +1,6 @@
+import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
@@ -10,6 +11,7 @@ export function useEditBlogPageHooks(): void {
   const state = blog.state.updateBlog;
   const prev = usePrevious(state);
   const slug: any = params.slug;
+  const navigate = useNavigate();
   useEffect(() => {
     blog.getBlog(slug);
   }, []);
@@ -18,6 +20,9 @@ export function useEditBlogPageHooks(): void {
     if (prev?.loading) {
       if (!state.loading && !state.error) {
         successNotification(state.message);
+        if (state.message?.includes("successfully")) {
+          navigate(ROUTE_PATHS.ARTICLES);
+        }
       }
     }
   }, [state]);
