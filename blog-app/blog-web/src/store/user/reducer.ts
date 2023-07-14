@@ -88,8 +88,8 @@ export const userSlice = createSlice({
             state.updateById = {loading: false, error: false};
             if (action.payload) {
                 const { data, message }: any = action.payload;
-                state.updateMe.data = {...data};
-                state.updateMe.message = message;
+                state.updateById.data = {...data};
+                state.updateById.message = message;
             }
         })
         builder.addCase(actions.updateById.rejected, (state) => {
@@ -99,8 +99,11 @@ export const userSlice = createSlice({
         builder.addCase(actions.createUser.pending, (state) => {
             state.createUser = {loading: true, error: false};
         })
-        builder.addCase(actions.createUser.fulfilled, (state) => {
+        builder.addCase(actions.createUser.fulfilled, (state, action) => {
             state.createUser = {loading: false, error: false};
+            if (action.payload) {
+                state.createUser.message = action.payload;
+            }
         })
         builder.addCase(actions.createUser.rejected, (state) => {
             state.createUser = {loading: false, error: true};

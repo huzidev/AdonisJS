@@ -35,13 +35,13 @@ export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: U
 export const createUser = createAsyncThunk(endpoints.CREATE_USER, async (data: User) => {
     try {
         const response = await api.post(endpoints.CREATE_USER, data);
-        if (response.status === 200) {
-            alert("Details Updated")
-        }
-        return response.data.data;
-    } catch (e) {
-        console.log("Error", e);
-        return null;
+        console.log("Response for Craete User", updateById);
+        return response.data.message;
+    } catch (e: any) {
+        const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
 });
 
