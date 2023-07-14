@@ -61,7 +61,7 @@ export default function ViewBlogsPage(): JSX.Element {
                         : blog.title}
                     </h5>
                     {
-                      auth.state.user && (
+                      auth.state.user && auth.state.user.role === "user" && (
                         <div
                           className={`p-2 rounded-full transition-colors duration-300 ${
                             favoriteBlogs.find((favoriteBlog) => favoriteBlog.id === blog.id) ? "text-red-500" : "text-gray-500"
