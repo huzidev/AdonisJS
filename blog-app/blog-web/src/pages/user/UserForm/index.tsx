@@ -7,6 +7,7 @@ import { roles } from "store/auth/types";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { detailsBoolean, detailsCreateUser, detailsId, detailsMe } from "./data";
+import { useUserFormHook } from "./hooks";
 import { BooleanState, User, UserDetailsEdit } from "./types";
 
 export default function UserFormPage() {
@@ -91,7 +92,7 @@ export default function UserFormPage() {
       user.createUser({...createUser})
     }
   }
-
+  useUserFormHook();
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -288,15 +289,14 @@ export default function UserFormPage() {
                   </label>
                 </div>
                 <div>
-                  <button
+                  <input 
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    onClick={() => user.createUser({...createUser})}
-                  >
-                    Create User
-                  </button>
+                    type="submit" 
+                    value="Create User"
+                  />
                 </div>
               </>
-            ) : params.id === "me" ? (
+            ) : isMe ? (
               <>
                 <label
                   htmlFor="username"

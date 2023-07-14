@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { useAuth } from "store/auth";
+import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 
-export function useAuthFormHook(): void {
-  const auth = useAuth();
-  const state = auth.state;
+export function useUserFormHook(): void {
+  const user = useUser();
+  const state = user.state;
   const prevAuth = usePrevious(state);
+  
   useEffect(() => {
     if (prevAuth?.signInState.loading) {
       if (!state?.signInState?.loading && !state.signInState.error) {
