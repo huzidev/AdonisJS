@@ -22,7 +22,7 @@ export default function NotFoundPage(): JSX.Element {
             <span className="text-red-500">Oops!</span> Page not found
           </h6>
           <p className="mb-8 text-center text-gray-400 md:text-lg">
-            Sorry, the page you visited does not exist.
+            Sorry, the page you requested for does not exist.
           </p>
           <button 
             className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" 
