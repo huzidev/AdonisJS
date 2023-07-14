@@ -60,7 +60,6 @@ export default class UsersController {
     public async update({ request, params, auth }: HttpContextContract) {
         try {
             const userId = params.id || auth.user?.id
-            console.log("what is user ID", userId);
             let body;   
             if (params.id) {
                 body = await request.validate(UserUpdate)
@@ -86,7 +85,7 @@ export default class UsersController {
             // once use merge then call the save method
             user?.merge(body);
             await user?.save();
-            return { message: 'User updated successfully', data: user?.toObject() }
+            return { message: params.id ? 'User' : "Yours" + " details updated successfully", data: user?.toObject() }
         } catch (e) {
             throw e
         }   
