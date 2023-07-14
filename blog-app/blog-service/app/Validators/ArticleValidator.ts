@@ -8,7 +8,9 @@ export class CreateArticle {
   })
 
   public messages: CustomMessages = {
-    required: '{{ field }} is required to create blog',
+    'minLength': 'The content must have minimum of {{ options.minLength }} characters',
+    'regex': "Kindly use only alphabets or numbers in title",
+    required: '{{ field }} is required to create blog'
   }
 }
 
@@ -20,6 +22,8 @@ export class UpdateArticle {
   })
 
   public messages: CustomMessages = {
+    'minLength': 'The content must have minimum of {{ options.minLength }} characters',
+    'regex': "Kindly use only alphabets or numbers in title",
     required: '{{ field }} is required to update blog'
   }
 }

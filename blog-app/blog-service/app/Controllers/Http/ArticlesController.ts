@@ -41,7 +41,10 @@ export default class ArticlesController {
         try {
             const article = await Article.findBy("slug", params.slug);
             // using .first() because we are receving array[]
-            const user = await User.query().where("id", article!.ownerId).first();
+            let user;
+            if (article) {
+                user = await User.query().where("id", article!.ownerId).first();
+            }
             if (!article) {
                 throw noArticle
             } else {
@@ -72,10 +75,10 @@ export default class ArticlesController {
                 await article.save();
                 return { 
                     data: article,
-                    message: "Article updated successfully" 
+                    message: "Blog updated successfully" 
                 }
             }
-        } catch (e) {
+        } catch (e: any) {
             throw e
         }
     }
