@@ -1,5 +1,6 @@
+import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
@@ -11,6 +12,7 @@ export function useGetBlogPageHooks(): void {
   const user = useUser();
   const state = blog.state;
   const prev = usePrevious(state);
+  const navigate = useNavigate();
   const ownerId: any = blog.state.getBlog.data?.ownerId;
 
   // seprately making with different useEffect because while creating in same useEffect as of ownerId it's fetching data multiple times
@@ -30,7 +32,7 @@ export function useGetBlogPageHooks(): void {
         // if success then it'll show notification of success
         successNotification(state.getBlog.message);
       } else if (!state.getBlog.loading && state.getBlog.error) {
-        alert("GETTING ERROR")
+        navigate(ROUTE_PATHS.NOT_FOUND);
       }
     }
   }, [state]);
