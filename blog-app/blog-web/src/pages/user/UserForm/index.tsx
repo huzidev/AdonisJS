@@ -20,15 +20,16 @@ export default function UserFormPage() {
   const [createUser, setCreateUser] = useState<any>(detailsCreateUser);
   const [booleanState, setBooleanState] = useState<BooleanState>(detailsBoolean);
   const fetchedData: any = user.state.getUser?.data;
+  const isMe = params.id === "me";
 
-  const isUpdate = window.location.pathname.includes("create");
+  const isCreate = window.location.pathname.includes("create");
 
   const prevUpdateState = usePrevious(user.state.updateMe);
   const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
 
   useEffect(() => {
-    if (params.id === "me") {
+    if (isMe) {
       setUpdateDetailsMe({ ...updateDetailsMe, ...userData });
     } else {
       setUpdateDetailsId({ ...updateDetailsId, ...fetchedData });
@@ -73,18 +74,15 @@ export default function UserFormPage() {
   }, [updateState, prevUpdateState]);
 
   useEffect(() => {
-    if (params.id !== "me" && !isUpdate) {
+    if (!isMe && !isCreate) {
       user.getById(Number(params.id));
     }
   }, [params.id]);
 
-  console.log("params", params);
-  
-
   function submit() {
-    if (params.id === "me") {
+    if (isMe) {
       user.updateMe({ ...updateDetailsMe })
-    } else if (params.id !== "me") {
+    } else if (!isMe) {
       user.updateById({
         ...updateDetailsId,
         id: Number(params.id),
@@ -104,7 +102,7 @@ export default function UserFormPage() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            {isUpdate
+            {isCreate
               ? "Create User"
               : params.id === "me"
               ? "Edit Yours Details"
@@ -114,7 +112,8 @@ export default function UserFormPage() {
         </div>
         <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <div>
-            {isUpdate ? (
+            {/* admin creating the user */}
+            {isCreate ? (
               <>
                 <label
                   htmlFor="username"
