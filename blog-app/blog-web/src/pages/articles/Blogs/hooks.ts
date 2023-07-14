@@ -16,12 +16,10 @@ export function useBlogsPageHooks(): void {
   const favoriteBlogs = blogs.state.getFavoriteBlogs;
   const payload: any = {
     userId: auth.state.user?.id,
-    page: 1
-  }
-
-  console.log("state", state);
-
-    useEffect(() => {
+    page: 1,
+  };
+  
+  useEffect(() => {
     // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
     if (!allBlogs.length) {
       blogs.getBlogs(1);
@@ -29,17 +27,17 @@ export function useBlogsPageHooks(): void {
     if (!allUsers) {
       user.allUser();
     }
+    //   // so only if loggedIn user's role is user then fetch favorite blogs
     if (auth.state.user?.role === "user" && !favoriteBlogs.data.length) {
       blogs.getFavoriteBlogs(payload);
     }
   }, []);
-  
+
   // useEffect(() => {
   //   console.log("favortie Blogs", favoriteBlogs.data.length);
-  //   // so only is user with the role of user loggedIn then fetch favorite blogs
-    
+
   // }, []);
-  
+
   useEffect(() => {
     if (prev?.loading) {
       if (!state.loading && !state.error) {
