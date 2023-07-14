@@ -88,10 +88,7 @@ export const addBlog = createAsyncThunk(
   async (data: AddBlogPayload) => {
     try {
       const response = await api.post(endpoints.ADD_BLOG, data);
-      if (response.status === 200) {
-        alert("Blog added");
-      }
-      console.log("Add Blog", response);
+      console.log("Add Blog Response", response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
@@ -144,7 +141,6 @@ export const updateBlog = createAsyncThunk(
   async (data: UpdateBlogPayload) => {
     try {
       const response = await api.put(endpoints.UPDATE_BLOG + data.id, data);
-      console.log("Update Blog Response", response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
@@ -160,7 +156,6 @@ export const deleteBlog = createAsyncThunk(
   async (id: number) => {
     try {
       const response = await api.delete(endpoints.DELETE_BLOG + id);
-      console.log("Delete blog response", response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);

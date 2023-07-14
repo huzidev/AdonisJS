@@ -99,8 +99,11 @@ export const blogSlice = createSlice({
     builder.addCase(actions.addBlog.pending, (state) => {
       state.addBlog = { loading: true, error: false };
     });
-    builder.addCase(actions.addBlog.fulfilled, (state) => {
+    builder.addCase(actions.addBlog.fulfilled, (state, action) => {
       state.addBlog = { loading: false, error: false };
+      if (action.payload) {
+        state.addBlog.message = action.payload;
+      }
     });
     builder.addCase(actions.addBlog.rejected, (state) => {
       state.addBlog = { loading: false, error: true };
