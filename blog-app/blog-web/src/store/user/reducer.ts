@@ -33,7 +33,7 @@ export const userSlice = createSlice({
         builder.addCase(actions.updateMe.fulfilled, (state, action) => {
             state.updateMe = {loading: false, error: false};
             if (action.payload) {
-                const { data, message }: any= action.payload;
+                const { data, message }: any = action.payload;
                 state.updateMe.data = {...data};
                 state.updateMe.message = message;
             }
@@ -85,7 +85,12 @@ export const userSlice = createSlice({
             state.updateById = {loading: true, error: false};
         })
         builder.addCase(actions.updateById.fulfilled, (state, action) => {
-            state.updateById = {loading: false, error: false, data: action.payload};
+            state.updateById = {loading: false, error: false};
+            if (action.payload) {
+                const { data, message }: any = action.payload;
+                state.updateMe.data = {...data};
+                state.updateMe.message = message;
+            }
         })
         builder.addCase(actions.updateById.rejected, (state) => {
             state.updateById = {loading: false, error: true};

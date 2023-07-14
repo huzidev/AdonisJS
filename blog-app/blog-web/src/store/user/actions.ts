@@ -9,7 +9,7 @@ import { UpdateByIdPayload, UpdateMePayload } from "./types";
 export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: UpdateMePayload): Promise<User | null> => {
     try {
         const response = await api.put(endpoints.UPDATE_ME, data);
-        console.log("Response for updateMe");
+        console.log("Response for updateMe", updateMe);
         return response.data;
     } catch (e: any) {
         const err = mapErrorToState(e);
@@ -22,13 +22,13 @@ export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: Updat
 export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: UpdateByIdPayload): Promise<User | null> => {
     try {
         const response = await api.put(endpoints.UPDATE_USER + data.id, data);
-        if (response.status === 200) {
-            alert("Details Updated")
-        }
-        return response.data.data;
-    } catch (e) {
-        console.log("Error", e);
-        return null;
+        console.log("Response for upate by id", updateById);
+        return response.data;
+    } catch (e: any) {
+        const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
 });
 
