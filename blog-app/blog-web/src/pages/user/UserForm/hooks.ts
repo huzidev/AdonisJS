@@ -9,15 +9,20 @@ export function useUserFormHook(): void {
   const prevAuth = usePrevious(state);
   
   useEffect(() => {
-    if (prevAuth?.signInState.loading) {
-      if (!state?.signInState?.loading && !state.signInState.error) {
-        successNotification(state.signInState.message);
+    if (prevAuth?.createUser.loading) {
+      if (!state?.createUser?.loading && !state.createUser.error) {
+        successNotification(state.createUser.message);
       }
     }
-    if (prevAuth?.signUpState.loading) {
-      if (!state.signUpState.loading && !state.signUpState.error) {
-       successNotification(state.signUpState.message);
+    if (prevAuth?.updateMe.loading) {
+      if (!state.updateMe.loading && !state.updateMe.error) {
+       successNotification(state.updateMe.message);
      }
     }
-  }, [state.signInState, state.signUpState]);
+    if (prevAuth?.updateById.loading) {
+      if (!state.updateById.loading && !state.updateById.error) {
+       successNotification(state.updateById.message);
+     }
+    }
+  }, [state.createUser, state.updateMe, state.updateById]);
 }

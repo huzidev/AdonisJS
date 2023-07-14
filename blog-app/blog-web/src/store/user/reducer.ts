@@ -31,7 +31,12 @@ export const userSlice = createSlice({
             state.updateMe = {loading: true, error: false};
         })
         builder.addCase(actions.updateMe.fulfilled, (state, action) => {
-            state.updateMe = {loading: false, error: false, data: action.payload};
+            state.updateMe = {loading: false, error: false};
+            if (action.payload) {
+                const { data, message }: any= action.payload;
+                state.updateMe.data = {...data};
+                state.updateMe.message = message;
+            }
         })
         builder.addCase(actions.updateMe.rejected, (state) => {
             state.updateMe = {loading: false, error: true};

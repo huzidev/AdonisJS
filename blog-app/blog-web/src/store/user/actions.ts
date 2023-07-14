@@ -1,19 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "services/api";
 import { User } from "store/auth/types";
+import { mapErrorToState } from "store/utils";
+import { errorNotification } from "utils/notifications";
 import * as endpoints from "./endpoints";
 import { UpdateByIdPayload, UpdateMePayload } from "./types";
 
 export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: UpdateMePayload): Promise<User | null> => {
     try {
         const response = await api.put(endpoints.UPDATE_ME, data);
-        if (response.status === 200) {
-            alert("Details Updated")
-        }
-        return response.data.data;
-    } catch (e) {
-        console.log("Error", e);
-        return null;
+        console.log("Response for updateMe");
+        return response.data;
+    } catch (e: any) {
+        const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
 });
 
