@@ -102,7 +102,10 @@ export const blogSlice = createSlice({
     builder.addCase(actions.addBlog.fulfilled, (state, action) => {
       state.addBlog = { loading: false, error: false };
       if (action.payload) {
-        state.addBlog.message = action.payload;
+        const { data, message } = action.payload;
+        console.log("Recevied Payload for add blog", action.payload);
+        
+        state.addBlog.message = message;
       }
     });
     builder.addCase(actions.addBlog.rejected, (state) => {
