@@ -11,11 +11,11 @@ validator.rule(
     }
 
     const trimmed = value.trim()
-    if (trimmed.length < 2) {
+    if (trimmed.length < 4) {
       errorReporter.report(
         pointer,
         'minLength',
-        `${pointer} should me at least 2 characters long`,
+        `${pointer} should me at least 4 characters long`,
         arrayExpressionPointer
       )
     }

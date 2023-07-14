@@ -10,10 +10,7 @@ export const authValidationMessages = {
 export class AuthSignUp {
   public schema = schema.create({
     isBlogger: schema.boolean.optional(),
-    username: schema.string({ trim: true }, [
-      rules.fullName(),
-      rules.minLength(4)
-    ]),
+    username: schema.string({ trim: true }, [rules.fullName()]),
     email: schema.string({ trim: true }, [
       rules.email(),
     ]),
