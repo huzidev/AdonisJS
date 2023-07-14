@@ -9,7 +9,7 @@ export default class FavoriteArticles extends BaseSchema {
       table.increments("id");
       // no need for OnDelte("Cascade") because OnDelete("Cascade") is used when user with that id is delete then all the blogs related to that user must also delete
       table.integer('user_id').unsigned().references('id').inTable('users').notNullable()
-      table.integer('article_id').unsigned().references('id').inTable('articles').notNullable()
+      table.integer('article_id').unsigned().references('id').inTable('articles').onDelete('CASCADE').notNullable()
       
       // this unique is useful if a user with id 1 have article with id 5 and tries to add the same article with id 5 then user CAN'T
       table.unique(['user_id', 'article_id'])

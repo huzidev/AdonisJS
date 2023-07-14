@@ -78,7 +78,7 @@ export default class ArticlesController {
                     message: "Blog updated successfully" 
                 }
             }
-        } catch (e: any) {
+        } catch (e) {
             throw e
         }
     }
