@@ -42,8 +42,8 @@ export const blogSlice = createSlice({
             (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
           ) ?? [];
         state.getBlogs.data = [...cleaned, ...data];
-        // meta takes pagination data like total, currentPage, LastPage
         state.getBlogs.message = "Blogs fetched successfully"
+        // meta takes pagination data like total, currentPage, LastPage
         state.getBlogs.meta = meta;
       }
       state.getBlogs.error = false;
@@ -85,7 +85,9 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlog.fulfilled, (state, action) => {
       state.getBlog.loading = false;
       if (action.payload) {
-        state.getBlog.data = { ...action.payload };
+        const { article, message } = action.payload
+        state.getBlog.data = { ...article };
+        state.getBlog.message = message;
       }
       state.getBlog.error = false;
     });

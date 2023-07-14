@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import { toast } from 'react-toastify';
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
-
+import { successNotification } from "utils/notifications";
 
 export function useBlogsPageHooks(): void {
   const blogs = useBlogs();
@@ -40,10 +39,8 @@ export function useBlogsPageHooks(): void {
   }, []);
   useEffect(() => {
     if (prev?.loading) {
-      if (state.error) {
-        toast.error(state.message);
-      } else if (!state.loading) {
-        toast.success(state.message);
+      if (!state.loading && !state.error) {
+        successNotification(state.message);
       }
     }
   }, [state]);

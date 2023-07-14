@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "services/api";
+import { mapErrorToState } from "store/utils";
+import { errorNotification } from "utils/notifications";
 import * as endpoints from "./endpoints";
 import {
   AddBlogPayload,
@@ -16,10 +18,13 @@ export const getBlogs = createAsyncThunk(
     // AllBlogs contains Array of blogs and meta
     try {
       const response = await api.get(endpoints.GET_BLOGS + page);
+      console.log("Respose for all blogs", response);
       return response.data;
-    } catch (e) {
-      console.log("Error", e);
-      throw e;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
   }
 );
@@ -33,9 +38,11 @@ export const getBlogsById = createAsyncThunk(
       const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`);
       console.log("response for all blogs BY ID", response.data);
       return response.data;
-    } catch (e) {
-      console.log("Error", e);
-      throw e;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
   }
 );
@@ -51,9 +58,11 @@ export const getFavoriteBlogs = createAsyncThunk(
       );
       console.log("response for all Favorite blogs", response.data);
       return response.data;
-    } catch (e) {
-      console.log("Error", e);
-      throw e;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
   }
 );
@@ -63,10 +72,13 @@ export const getBlog = createAsyncThunk(
   async (slug: GetBlogPayload) => {
     try {
       const response = await api.get(endpoints.GET_BLOG + slug);
-      console.log("response", response.data.data);
-      return response.data.data;
-    } catch (e) {
-      console.log("Error", e);
+      console.log("response for getblogs by slug", response);
+      return response.data;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
   }
 );
@@ -80,9 +92,12 @@ export const addBlog = createAsyncThunk(
         alert("Blog added");
       }
       console.log("Add Blog", response);
-      return response.data.data;
-    } catch (e) {
-      console.log("Erro", e);
+      return response.data;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
   }
 );
@@ -97,8 +112,11 @@ export const addFavoriteBlog = createAsyncThunk(
       }
       console.log("Add Blog", response);
       return response.data.data;
-    } catch (e) {
-      console.log("Erro", e);
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
   }
 );
@@ -112,8 +130,11 @@ export const removeFavoriteBlog = createAsyncThunk(
         alert("Blog Removed From Favorite");
       }
       return response.data.id;
-    } catch (e) {
-      console.log("Erro", e);
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
   }
 );
@@ -127,8 +148,11 @@ export const updateBlog = createAsyncThunk(
         alert("Blog updated");
       }
       return response.data;
-    } catch (e) {
-      console.log("Error", e);
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
   }
 );
@@ -142,8 +166,11 @@ export const deleteBlog = createAsyncThunk(
         alert("Blog Deleted Successfully!");
       }
       return response.data.id;
-    } catch (e) {
-      console.log("Error", e);
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
   }
 );

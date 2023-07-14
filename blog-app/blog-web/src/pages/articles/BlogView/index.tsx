@@ -13,12 +13,13 @@ export default function ViewBlogPage(): JSX.Element {
   const owner = user.state.getUser.data;
   const initialState: BlogState = {title: "", image: "", content: ""};
   const [blogView, setBlogView] = useState(initialState);
-
-  useGetBlogPageHooks();
   
   useEffect(() => {
     setBlogView({...blogView, ...getBlog})
   }, [getBlog])
+  
+  useGetBlogPageHooks();
+  
   return (
     <div>
         <div 
