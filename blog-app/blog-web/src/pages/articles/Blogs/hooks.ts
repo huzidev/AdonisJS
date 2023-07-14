@@ -33,10 +33,12 @@ export function useBlogsPageHooks(): void {
   
   useEffect(() => {
     console.log("favortie Blogs", favoriteBlogs.data.length);
-    if (!favoriteBlogs.data.length) {
+    // so only is user with the role of user loggedIn then fetch favorite blogs
+    if (auth.state.user?.role === "user" && !favoriteBlogs.data.length) {
       blogs.getFavoriteBlogs(payload);
     }
   }, []);
+  
   useEffect(() => {
     if (prev?.loading) {
       if (!state.loading && !state.error) {
