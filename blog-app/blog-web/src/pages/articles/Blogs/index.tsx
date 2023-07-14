@@ -18,6 +18,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
   const [showModal, setShowModal] = useState(false);
+  const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
 
   useBlogsPageHooks();
 
@@ -32,12 +33,6 @@ export default function ViewBlogsPage(): JSX.Element {
     if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
       blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1);
     }
-  }
-
-  function deleteBlogConfirmed(blogId: number) {
-    console.log("Recevied id", blogId);
-    blogs.deleteBlog(blogId);
-    setShowModal(false);
   }
   return (
     <>
@@ -148,11 +143,14 @@ export default function ViewBlogsPage(): JSX.Element {
                         type="button"
                         className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
                         // onClick={() => blogs.deleteBlog(blog.id)}
-                        onClick={() => setShowModal(true)}
+                        onClick={() => {
+                          setDeleteBlogId(blog.id);
+                          setShowModal(true);
+                        }}
                       >
                         Delete
                       </button>
-                      {showModal && (
+                      {showModal && deleteBlogId === blog.id && (
                         <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
                           <div className="bg-white p-8 w-96">
                             <p className="text-lg text-center mb-4">
@@ -161,7 +159,10 @@ export default function ViewBlogsPage(): JSX.Element {
                             <div className="flex justify-center space-x-4">
                               <button
                                 className="bg-red-500 text-white px-4 py-2 rounded"
-                                onClick={() => deleteBlogConfirmed(blog.id)}
+                                onClick={() => {
+                                  blogs.deleteBlog(blog.id);
+                                  setShowModal(false);
+                                }}
                               >
                                 Yes
                               </button>
