@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useBlogs } from "store/articles";
 import { useEditBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
 
 export default function UpdateBlogPage(): JSX.Element {
   const blogs = useBlogs();
-  const params = useParams();
-  const slug: any = params.slug;
   const blog = blogs.state.getBlog?.data;
 
   const initialState: ArticleType = {
@@ -17,11 +15,14 @@ export default function UpdateBlogPage(): JSX.Element {
     content: "",
   };
   const [updateArticle, setUpdateArticle] = useState(initialState);
+  const [prevState, setPrevState] = useState(initialState);
   const { id, title, image, content } = updateArticle;
-  
+
   useEditBlogPageHooks();
-  
-  function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+
+  function inputHandler(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     setUpdateArticle({
       ...updateArticle,
       [e.target.name]: e.target.value,
@@ -30,17 +31,20 @@ export default function UpdateBlogPage(): JSX.Element {
 
   useEffect(() => {
     setUpdateArticle({ ...updateArticle, ...blog });
+    setPrevState({ ...prevState, ...blog });
   }, [blog]);
 
-  function update() {
-    if (title === "" || content === "" || image === "") {
-      alert("You can't left a field empty")
-    } else {
-      blogs.updateBlog({
-        ...updateArticle,
-        id
-      })
-    }
+  function update(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const isSameValues =
+      updateArticle.title === prevState.title &&
+      updateArticle.content === prevState.content;
+    isSameValues
+      ? toast.error("Can't update, Values are same as of before")
+      : blogs.updateBlog({
+          ...updateArticle,
+          id,
+        });
   }
   return (
     <div>
@@ -55,7 +59,10 @@ export default function UpdateBlogPage(): JSX.Element {
             Edit Yours Blog
           </h2>
         </div>
-        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form
+          onSubmit={update}
+          className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm"
+        >
           <div className="mb-3">
             <label
               htmlFor="title"
@@ -70,6 +77,7 @@ export default function UpdateBlogPage(): JSX.Element {
                 value={title}
                 type="text"
                 required
+                minLength={6}
                 onChange={inputHandler}
                 className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -103,6 +111,7 @@ export default function UpdateBlogPage(): JSX.Element {
                   cols={30}
                   rows={10}
                   value={content}
+                  required
                   onChange={inputHandler}
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 ></textarea>
@@ -110,14 +119,13 @@ export default function UpdateBlogPage(): JSX.Element {
             </div>
           </div>
           <div>
-            <button
+            <input
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={update}
-            >
-              Update Blog
-            </button>
+              type="submit"
+              value="Update Blog"
+            />
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
