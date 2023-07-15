@@ -1,6 +1,6 @@
 import { ArticleType } from "./types";
 
-export const userSignUpData: ArticleType = {
+export const updateBlogData: ArticleType = {
     id: null,
     title: '',
     image: '',

@@ -30,7 +30,7 @@ export default function UpdateBlogPage(): JSX.Element {
     e.preventDefault();
     blogs.updateBlog({
       ...updateArticle,
-      id,
+      id
     });
   }
 
