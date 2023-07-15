@@ -16,6 +16,10 @@ export default function ViewBlogsPage(): JSX.Element {
   const allUsers = user.state.allUser?.data;
   const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
+
+  console.log("All Blogs", allBlogs);
+  
+
   const userData = auth.state.user;
   const [showModal, setShowModal] = useState(false);
   // to hold delete blog id as we can't directly called the modal in map
@@ -45,8 +49,6 @@ export default function ViewBlogsPage(): JSX.Element {
           );
           const uploadedByUserId = uploadedByUser && uploadedByUser.id;
           const uploadedByUsername = uploadedByUser && uploadedByUser.username;
-          console.log("uploadedByUsername", uploadedByUsername);
-          
           return (
             <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
               {/* <img src={ele.image} alt="Thumbnail" /> */}
