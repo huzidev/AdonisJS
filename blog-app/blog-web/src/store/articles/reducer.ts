@@ -103,7 +103,7 @@ export const blogSlice = createSlice({
       state.addBlog = { loading: false, error: false };
       if (action.payload) {
         const { data, message } = action.payload;
-        console.log("Recevied Payload for add blog", action.payload);
+        state.getBlogs.data = [...state.getBlogs.data, data]
         state.addBlog.message = message;
       }
     });
