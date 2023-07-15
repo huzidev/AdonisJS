@@ -63,11 +63,11 @@ export default class ArticlesController {
       const body = await request.validate(UpdateArticle);
       const article = await Article.findBy("id", params.id);
       // const articleId: number = params.id;
-      // if user didn't change any value and tries to update
+      // if user didn't change any value and tries to update blog
       if (body.title === article?.title && body.content === article?.content) {
         throw {
-          message: "Values are same as of before",
-          status: 401,
+          message: "Can't update, values are same as of before",
+          status: 401
         };
       }
       if (!article) {
