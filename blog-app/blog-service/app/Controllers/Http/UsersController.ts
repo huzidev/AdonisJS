@@ -1,9 +1,9 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import User from "App/Models/User";
 import {
-    UserCreate,
-    UserUpdate,
-    UserUpdateMe,
+  UserCreate,
+  UserUpdate,
+  UserUpdateMe,
 } from "App/Validators/UserValidator";
 
 export default class UsersController {
@@ -80,11 +80,6 @@ export default class UsersController {
       }
       // if admin tries to update user who doesn't exist
       const user = await User.findBy("id", userId);
-
-      console.log("BODY", body.username);
-      console.log("USER", user?.username);
-      
-      console.log("IS true", body.username === user?.username);
 
       if (
         // so if user tries to udpate own self then only username will fetch therefore we've created a condition !params.id when user update own self then check username
