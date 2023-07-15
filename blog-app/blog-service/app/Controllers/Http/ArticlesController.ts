@@ -24,12 +24,13 @@ export default class ArticlesController {
     try {
       // body is receiving title, image, content as of request.body, we used request.validate instead of req.body
       const body = await request.validate(CreateArticle);
-      await Article.create({
+      const blog = await Article.create({
         ...body,
         ownerId: auth.user?.id,
       });
+      
       return {
-        data: body,
+        data: blog,
         message: "Blog created successfully",
       };
     } catch (e) {
