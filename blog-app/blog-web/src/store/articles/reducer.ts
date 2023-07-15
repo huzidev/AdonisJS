@@ -121,7 +121,12 @@ export const blogSlice = createSlice({
         const { id, message } = action.payload;
         const deletedBlogId = id;
         // calling .filter to updated the allBlogs data after removing the deleted blog with id
+        // when user delete the blog from main blogs page
         state.getBlogs.data = state.getBlogs.data.filter(
+          (blog: any) => blog.id !== deletedBlogId
+        );
+        // when user delete the blog from ViewProfile page
+        state.getBlogsById.data = state.getBlogsById.data.filter(
           (blog: any) => blog.id !== deletedBlogId
         );
         state.deleteBlog.message = message;
