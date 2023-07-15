@@ -19,6 +19,9 @@ export function useViewProfilePageHook(): void {
     if (params.id === "me") {
       successNotification("Your details fetched successfully!");
     }
+  }, [params.id]);
+
+  useEffect(() => {
     if (prevUser?.loading) {
       if (!userState.loading && !userState.error) {
         if (username) {
@@ -28,8 +31,8 @@ export function useViewProfilePageHook(): void {
     }
     if (prevBlog?.loading) {
       if (!blogState.loading && !blogState.error) {
-        successNotification(blogState.message)
+        successNotification(blogState.message);
       }
     }
-  }, [username, params.id, userState, blogState]);
+  }, [userState, blogState]);
 }
