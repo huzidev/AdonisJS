@@ -1,21 +1,13 @@
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { useBlogs } from "store/articles";
+import { updateBlogData } from "./data";
 import { useEditBlogPageHooks } from "./hooks";
-import { ArticleType } from "./types";
 
 export default function UpdateBlogPage(): JSX.Element {
   const blogs = useBlogs();
   const blog = blogs.state.getBlog?.data;
-
-  const initialState: ArticleType = {
-    id: null,
-    title: "",
-    image: "",
-    content: "",
-  };
-  const [updateArticle, setUpdateArticle] = useState(initialState);
-  const [prevState, setPrevState] = useState(initialState);
+  const [updateArticle, setUpdateArticle] = useState(updateBlogData);
+  const [prevState, setPrevState] = useState(updateBlogData);
   const { id, title, image, content } = updateArticle;
 
   useEditBlogPageHooks();
@@ -36,17 +28,12 @@ export default function UpdateBlogPage(): JSX.Element {
 
   function update(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // if users tries to update without changing any value
-    const isSameValues =
-      updateArticle.title === prevState.title &&
-      updateArticle.content === prevState.content;
-    isSameValues
-      ? toast.error("Can't update, Values are same as of before")
-      : blogs.updateBlog({
-          ...updateArticle,
-          id
-        });
+    blogs.updateBlog({
+      ...updateArticle,
+      id,
+    });
   }
+
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
