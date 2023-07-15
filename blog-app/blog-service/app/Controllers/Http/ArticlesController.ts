@@ -29,9 +29,10 @@ export default class ArticlesController {
         ownerId: auth.user?.id,
       });
       
+      // returning blog as data because blog contains all info like id, ownerId, title etc so when user add new blog then uploadedBy username error won't appear and with the ownerId we can fetch the user and shows the name of owner of the blog
       return {
         data: blog,
-        message: "Blog created successfully",
+        message: "Blog created successfully"
       };
     } catch (e) {
       throw e;
