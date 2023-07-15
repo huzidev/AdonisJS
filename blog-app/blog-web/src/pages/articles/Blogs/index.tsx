@@ -45,7 +45,7 @@ export default function ViewBlogsPage(): JSX.Element {
           );
           const uploadedByUserId = uploadedByUser && uploadedByUser.id;
           const uploadedByUsername = uploadedByUser && uploadedByUser.username;
-          console.log("uploadByUsername", uploadedByUsername)
+          console.log("uploadedByUsername", uploadedByUsername);
           
           return (
             <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
