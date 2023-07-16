@@ -83,7 +83,6 @@ export const getBlog = createAsyncThunk(
   }
 );
 
-
 export const addBlog = createAsyncThunk(
   endpoints.ADD_BLOG,
   async (data: AddBlogPayload) => {
@@ -109,7 +108,6 @@ export const addFavoriteBlog = createAsyncThunk(
         alert("Blog added To Favorite");
       }
       console.log("Add Blog", response);
-      return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);
