@@ -35,12 +35,12 @@ export function useViewProfilePageHook(): void {
         successNotification(blogState.deleteBlog.message);
       }
     }
-    if (prevBlog?.getBlogs.loading) {
-      if (!blogState.getBlogs.loading && !blogState.getBlogs.error) {
+    if (prevBlog?.getBlogsById.loading) {
+      if (!blogState.getBlogsById.loading && !blogState.getBlogsById.error) {
         if (username) {
           successNotification(`${username}'s blogs fetched successfully`);
         } else {
-          successNotification(`${username}'s blogs fetched successfully`);
+          successNotification("Yours blogs fetched successfully");
         }
       }
     }
