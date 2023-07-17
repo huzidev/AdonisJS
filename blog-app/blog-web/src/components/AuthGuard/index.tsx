@@ -3,6 +3,7 @@ import routes from "Router/routes";
 import PageLoader from "components/PageLoader";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "store/auth";
 import UrlPattern from "url-pattern";
 import { hasPermission } from "utils";
@@ -20,17 +21,19 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   const route = routes.find((r) =>
     r.exact ? r.path === currentPath : new UrlPattern(r.path).match(currentPath)
   );
-  console.log("Current path", currentPath);
-  console.log("Route path", route?.path);
   console.log("Route result", route);
 
   // so user can't access the protected path
   // Ex user can't access the path for blogger and user and blogger and can't access the path for admins
-
   const isProtected = !!route?.role;
-
+  const allowedRole = route?.role;
+  console.log("isProtected", isProtected);
+  console.log("Allowed Role", allowedRole);
+  
   useEffect(() => {
     const { initState, user } = auth.state;
+    console.log("Current Role", user?.role);
+    
     if (!initState.init && !initState.loading) {
       auth.initUser();
       return;
@@ -45,8 +48,10 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     // if (!auth.state.user && notAllowedPaths.includes(currentPath)) {
     //   navigate("/")
     // }
-    if (isProtected && (user && !hasPermission(user.role, route.role))) {
+
+    if (isProtected && (user && !hasPermission(allowedRole, user.role))) {
       navigate("/");
+      toast.error("Insufficient Access")
     } else if (user) {
       const { isVerified, isBanned } = user;
       if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {

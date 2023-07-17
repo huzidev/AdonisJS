@@ -66,8 +66,7 @@ const routes: AppRoute[] = [
         Component: ViewBlogsPage
     },
     {
-        // loggedIn is necessary for view profile and minimum role is at index 0
-        role: roles[0],
+        // loggedIn is not necessary for view profile
         path: `${ROUTE_PATHS.VIEW_PROFILE}:id`,
         Component: ViewProfilePage
     },
