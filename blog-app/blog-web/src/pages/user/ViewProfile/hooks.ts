@@ -1,5 +1,6 @@
+import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
@@ -14,6 +15,7 @@ export function useViewProfilePageHook(): void {
   const blogState = blogs.state;
   const prevUser = usePrevious(userState);
   const prevBlog = usePrevious(blogState);
+  const navigate = useNavigate();
 
   // created a spearte useEffect because while calling it in the one defined below causes problem when user delete the blog then (Your details fetched successfully) notification fetching two times therefore created a seprate useEffect
   useEffect(() => {
@@ -28,6 +30,8 @@ export function useViewProfilePageHook(): void {
         if (username) {
           successNotification(`${username}'s details fetched successfully`);
         }
+      } else if (!userState.loading && userState.error) {
+        navigate(ROUTE_PATHS.NOT_FOUND)
       }
     }
     if (prevBlog?.deleteBlog.loading) {
