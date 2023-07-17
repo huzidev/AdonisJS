@@ -37,7 +37,8 @@ export function useGetBlogPageHooks(): void {
         } else {
           successNotification(state.getBlog.message);
         }
-      } else if (!state.getBlog.loading && state.getBlog.error) {
+      } // if user tries to change to URL id which doesn't exist in database 
+      else if (!state.getBlog.loading && state.getBlog.error) {
         navigate(ROUTE_PATHS.NOT_FOUND);
       }
     }
