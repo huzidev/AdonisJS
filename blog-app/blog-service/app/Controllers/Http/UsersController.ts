@@ -22,7 +22,7 @@ export default class UsersController {
     } else {
       response = await query;
     }
-    return { message: "Users fetched successfully", data: response };
+    return { message: `Users page ${params.page} fetched successfully`, data: response };
   }
 
   public async getById({ params }: HttpContextContract) {
@@ -56,12 +56,12 @@ export default class UsersController {
         if (e.sqlMessage.includes("users.users_username_unique")) {
           throw {
             message: "Username already exist",
-            status: 409,
+            status: 409
           };
         } else if (e.sqlMessage.includes("users.users_email_unique")) {
           throw {
             message: "Email already exist",
-            status: 409,
+            status: 409
           };
         }
       }
