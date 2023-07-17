@@ -83,6 +83,8 @@ const routes: AppRoute[] = [
         Component: UserForm
     },
     {
+        exact: true,
+        role: roles[2], // only admins can create users
         path: ROUTE_PATHS.USER_CREATE,
         Component: UserForm
     },
