@@ -18,11 +18,21 @@ export default class UsersController {
     let response;
     // if user wanted to see allBlogs uploaded by him
     if (params.page) {
-      response = await query.paginate(params.page || 1, 10);
+      if (params.page > response.lastPage) {
+        throw {
+          message: `Users page limit exceeds, Total pages are ${response.lastPage}`,
+          status: 404
+        };
+      } else {
+        response = await query.paginate(params.page || 1, 10);
+      }
     } else {
       response = await query;
     }
-    return { message: `Users list ${params.page} fetched successfully`, data: response };
+    return {
+      message: `Users list ${params.page} fetched successfully`,
+      data: response,
+    };
   }
 
   public async getById({ params }: HttpContextContract) {
@@ -33,7 +43,7 @@ export default class UsersController {
       } else {
         return {
           message: "User fetched successfully",
-          data: user
+          data: user,
         };
       }
     } catch (e) {
@@ -56,12 +66,12 @@ export default class UsersController {
         if (e.sqlMessage.includes("users.users_username_unique")) {
           throw {
             message: "Username already exist",
-            status: 409
+            status: 409,
           };
         } else if (e.sqlMessage.includes("users.users_email_unique")) {
           throw {
             message: "Email already exist",
-            status: 409
+            status: 409,
           };
         }
       }
@@ -84,16 +94,16 @@ export default class UsersController {
       if (
         // so if user tries to udpate own self then only username will fetch therefore we've created a condition !params.id when user update own self then check username
         (!params.id && body.username === user?.username) ||
-        body.username === user?.username &&
-        body.role === user?.role &&
-        body.isActive === user?.isActive &&
-        body.isVerified === user?.isVerified &&
-        body.isBanned === user?.isBanned
+        (body.username === user?.username &&
+          body.role === user?.role &&
+          body.isActive === user?.isActive &&
+          body.isVerified === user?.isVerified &&
+          body.isBanned === user?.isBanned)
       ) {
         throw {
           message: "Can't update, values are same as of before",
           status: 401,
-        }
+        };
       }
 
       if (!user) {
