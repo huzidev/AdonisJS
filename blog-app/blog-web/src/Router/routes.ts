@@ -30,11 +30,13 @@ interface AppRoute {
 
 const routes: AppRoute[] = [
     {
-        path: `${ROUTE_PATHS.ARTICLE_VIEW}:slug`,
-        Component: ViewBlogPage
+        Component: ViewBlogPage,
+        path: `${ROUTE_PATHS.ARTICLE_VIEW}:slug`
     },
     {
-        
+        // exact true because no additional (CHANGEABLE) params/id and role[1] so blogger and admin can add blogs
+        exact: true,
+        role: roles[1],
         path: ROUTE_PATHS.ARTICLE_CREATE,
         Component: AddBlogPage
     },
