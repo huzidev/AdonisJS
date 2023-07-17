@@ -10,7 +10,7 @@ interface AuthGuardProps {
 }
 export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     const [state, setState] = useState<boolean>(false);
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
     const auth = useAuth();
     const currentPath = window.location.pathname;
 
@@ -28,18 +28,18 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       //   Navigate("/")
       // } 
       if (!auth.state.user && notAllowedPaths.includes(currentPath)) {
-        Navigate("/")
+        navigate("/")
       }
       else if (auth.state.user) {
         const { isVerified, isBanned } = auth.state.user;
         if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {
-          Navigate(ROUTE_PATHS.BANNED_USER);  
+          navigate(ROUTE_PATHS.BANNED_USER);  
         } else if (currentPath === ROUTE_PATHS.AUTH_SIGNIN || currentPath === ROUTE_PATHS.AUTH_SIGNUP) {
-          Navigate("/");
+          navigate("/");
         } else if ((!isVerified) && currentPath !== ROUTE_PATHS.VERIFY_USER) {
-          Navigate(ROUTE_PATHS.VERIFY_USER)
+          navigate(ROUTE_PATHS.VERIFY_USER)
         } else if (isVerified && currentPath === ROUTE_PATHS.VERIFY_USER) {
-          Navigate("/")
+          navigate("/")
         }
         else {
           setState(true)

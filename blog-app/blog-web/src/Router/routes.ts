@@ -16,7 +16,12 @@ const ResetPasswordPage = React.lazy(() => import("pages/auth/ResetPassword"));
 const BannedUserPage = React.lazy(() => import("pages/user/BannedUser"));
 const NotFoundPage = React.lazy(() => import("pages/NotFound"))
 
+// exact is used for those URL where their won't be an additional (CHANGEABLE) params/id 
+// - ARTICLE_CREATE: '/blog/add here we can use exact: true because their is no additional (CHANGEABLE) params/id 
+// - path: `${ROUTE_PATHS.EDIT_USER}me`, here exact is true because the params is not (CHANGEABLE) its static property me
+// - path: `${ROUTE_PATHS.EDIT_USER}:id`, here we can't use exact true because here their is additional (CHANGEABLE) params/id and params.id can be 1, 2, 3
 interface AppRoute {
+  exact?: boolean;
   path: string;
   Component: React.LazyExoticComponent<() => JSX.Element>;
 }   
@@ -27,6 +32,7 @@ const routes: AppRoute[] = [
         Component: ViewBlogPage
     },
     {
+        
         path: ROUTE_PATHS.ARTICLE_CREATE,
         Component: AddBlogPage
     },
@@ -53,6 +59,11 @@ const routes: AppRoute[] = [
     {
         path: `${ROUTE_PATHS.VIEW_PROFILE}:id`,
         Component: ViewProfilePage
+    },
+    {
+        exact: true,
+        path: `${ROUTE_PATHS.EDIT_USER}me`,
+        Component: UserForm
     },
     {
         path: `${ROUTE_PATHS.EDIT_USER}:id`,
