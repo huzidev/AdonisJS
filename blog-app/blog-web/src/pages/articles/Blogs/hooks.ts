@@ -36,7 +36,7 @@ export function useBlogsPageHooks(): void {
     if (auth.state.user?.role === "user" && !favoriteBlogs.data.length) {
       blogs.getFavoriteBlogs(payload);
     }
-  }, [allUsers, favoriteBlogs.data.length]);
+  }, [favoriteBlogs.data.length]);
 
   useEffect(() => {
     if (prev?.getBlogs.loading) {
