@@ -103,7 +103,10 @@ export const blogSlice = createSlice({
       state.addBlog = { loading: false, error: false };
       if (action.payload) {
         const { data, message } = action.payload;
+        // Update new blog in allBlogs page
         state.getBlogs.data = [...state.getBlogs.data, data]
+        // Update new blog in ViewProfile page
+        state.getBlogsById.data = [...state.getBlogsById.data, data]
         state.addBlog.message = message;
       }
     });
