@@ -39,25 +39,21 @@ export default class ArticlesController {
     }
   }
 
-  public async getById({ params, auth }: HttpContextContract) {
+  public async getById({ params }: HttpContextContract) {
     try {
       const article: any = await Article.findBy("slug", params.slug);
-      console.log("auth id", auth.user?.id);
-      
-      // using .first() because we are receving array[]
       let user;
       if (article) {
-        user = await User.query().where("id", article!.ownerId).first();
+        // using .first() because we are receving array[]
+        user = await User.query().where("id", article.ownerId).first();
       }
       if (!article) {
         throw noArticle;
       } 
-      else {
-        return {
-          article,
-          message: `Blog by ${user?.username} fetched successfully`,
-        };
-      }
+      return {
+        article,
+        message: `Blog by ${user?.username} fetched successfully`,
+      };
     } catch (e) {
       throw e;
     }
