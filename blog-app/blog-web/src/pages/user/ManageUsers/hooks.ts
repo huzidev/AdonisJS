@@ -22,6 +22,7 @@ export function useManageUsersPageHooks(): void {
       if (!state.loading && !state.error) {
         successNotification(state.message);
       } 
+      // if user enter the page exceeding the page limit
       else if (!state.loading && state.error) {
         navigate(ROUTE_PATHS.NOT_FOUND);
       }
