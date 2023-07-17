@@ -27,8 +27,11 @@ export function useBlogsPageHooks(): void {
     if (!allUsers) {
       user.allUser();
     }
-    
+
+    if (!allBlogs.length) {
       blogs.getBlogs(1);
+    }
+    
     // so only if loggedIn user's role is user then fetch favorite blogs
     if (auth.state.user?.role === "user" && !favoriteBlogs.data.length) {
       blogs.getFavoriteBlogs(payload);
@@ -43,7 +46,7 @@ export function useBlogsPageHooks(): void {
     }
     if (prev?.deleteBlog.loading) {
       if (!state.deleteBlog.loading && !state.deleteBlog.error) {
-        successNotification(state.deleteBlog.message)
+        successNotification(state.deleteBlog.message);
       }
     }
   }, [state]);
