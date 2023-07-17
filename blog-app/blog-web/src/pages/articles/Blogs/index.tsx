@@ -16,10 +16,6 @@ export default function ViewBlogsPage(): JSX.Element {
   const allUsers = user.state.allUser?.data;
   const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
-
-  console.log("All Blogs", allBlogs);
-  
-
   const userData = auth.state.user;
   const [showModal, setShowModal] = useState(false);
   // to hold delete blog id as we can't directly called the modal in map
