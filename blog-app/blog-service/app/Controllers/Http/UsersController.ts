@@ -18,20 +18,19 @@ export default class UsersController {
     let response;
     // if user wanted to see allBlogs uploaded by him
     if (params.page) {
-      if (params.page > response.lastPage) {
+      response = await query.paginate(params.page || 1, 10);
+      if (Number(params.page) > response.lastPage) {
         throw {
           message: `Users page limit exceeds, Total pages are ${response.lastPage}`,
           status: 404
         };
-      } else {
-        response = await query.paginate(params.page || 1, 10);
       }
     } else {
       response = await query;
     }
     return {
       message: `Users list ${params.page} fetched successfully`,
-      data: response,
+      data: response
     };
   }
 
