@@ -9,10 +9,10 @@ import { useManageUsersPageHooks } from "./hooks";
 export default function UsersPage() {
   const user = useUser();
   const auth = useAuth();
+  const navigate = useNavigate();
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;
   let lastPage = user.state.getUserPage.meta?.lastPage;
-  const Navigate = useNavigate();
   
   useManageUsersPageHooks();
   return (
@@ -93,7 +93,7 @@ export default function UsersPage() {
                         className="text-blue-600"
                         // if admin clicked on own self then redirect to EditProfile instead on EditUser
                         onClick={() =>
-                          Navigate(
+                          navigate(
                             ROUTE_PATHS.VIEW_PROFILE + user.id 
                           )
                         }
@@ -105,7 +105,7 @@ export default function UsersPage() {
                           className="text-blue-600"
                           // if admin clicked on own self then redirect to EditProfile instead on EditUser
                           onClick={() =>
-                            Navigate(
+                            navigate(
                               ROUTE_PATHS.EDIT_USER +
                                 (user.id === auth.state.user?.id ? "me" : user.id)
                             )
@@ -129,7 +129,7 @@ export default function UsersPage() {
             {currentPage !== 1 && (
               <button 
                 className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
-                onClick={() => Navigate(ROUTE_PATHS.USERS_PAGE + (currentPage! - 1))}
+                onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + (currentPage! - 1))}
               >
                 Prev
               </button>
@@ -138,7 +138,7 @@ export default function UsersPage() {
               <button 
                 className="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
                 // onClick={next}
-                onClick={() => Navigate(ROUTE_PATHS.USERS_PAGE + (currentPage! + 1))}
+                onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + (currentPage! + 1))}
               >
                 Next
               </button>
