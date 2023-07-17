@@ -107,14 +107,20 @@ const routes: AppRoute[] = [
         Component: SendResetPasswordPage
     },
     {
+        exact: true,
         path: ROUTE_PATHS.RESET_PASSWORD,
         Component: ResetPasswordPage
     },
     {
+        exact: true,
+        // user can only see if user is Banned or Not if user is loggedIn therefore using roles
+        role: roles[0],
         path: ROUTE_PATHS.BANNED_USER,
         Component: BannedUserPage
     },
     {
+        exact: true,
+        // even if user is not loggedIn and tries to change URL for view some user's profile and then tries to change the URL
         path: ROUTE_PATHS.NOT_FOUND,
         Component: NotFoundPage
     }
