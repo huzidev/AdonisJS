@@ -1,10 +1,10 @@
 import ROUTE_PATHS from "Router/paths";
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { columns } from "./data";
+import { useManageUsersPageHooks } from "./hooks";
 
 export default function UsersPage() {
   const user = useUser();
@@ -13,13 +13,8 @@ export default function UsersPage() {
   let currentPage = user.state.getUserPage.meta?.currentPage;
   let lastPage = user.state.getUserPage.meta?.lastPage;
   const Navigate = useNavigate();
-  const params = useParams();
-
-  useEffect(() => {
-    // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
-    user.allUserPage(Number(params.page) || 1)
-  }, [params.page]);
   
+  useManageUsersPageHooks();
   return (
     <div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">

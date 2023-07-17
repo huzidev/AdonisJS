@@ -21,8 +21,6 @@ export default function ViewBlogsPage(): JSX.Element {
   // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
 
-  useBlogsPageHooks();
-
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const currentPageFvrtBlogs: any =
     blogs.state.getFavoriteBlogs.meta?.currentPage;
@@ -35,6 +33,7 @@ export default function ViewBlogsPage(): JSX.Element {
       blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1);
     }
   }
+  useBlogsPageHooks();
   return (
     <>
       <div className="w-10/12 m-auto flex flex-wrap">

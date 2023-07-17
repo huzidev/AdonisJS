@@ -18,5 +18,5 @@ export const columns = columnsKeys.map((key) => ({
   key,
   dataIndex: key,
   // startCase will make first letter Capital of any word
-  title: startCase(key),
+  title: startCase(key)
 }));
