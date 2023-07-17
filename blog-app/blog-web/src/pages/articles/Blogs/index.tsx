@@ -21,10 +21,6 @@ export default function ViewBlogsPage(): JSX.Element {
   // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
 
-  const [testState, setTestState] = useState<boolean>(false);
-
-  console.log("Test State", testState);
-
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const currentPageFvrtBlogs: any =
     blogs.state.getFavoriteBlogs.meta?.currentPage;
