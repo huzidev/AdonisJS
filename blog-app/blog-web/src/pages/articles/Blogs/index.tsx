@@ -1,5 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -208,6 +209,13 @@ export default function ViewBlogsPage(): JSX.Element {
             Load More
           </button>
         )}
+        <RotatingLines 
+          strokeColor="black"
+          strokeWidth="5"
+          animationDuration="0.80"
+          width="55"
+          visible={true}
+        />
       </div>
     </>
   );
