@@ -120,7 +120,7 @@ export default function AddBlogPage(): JSX.Element {
           strokeColor="black"
           strokeWidth="5"
           animationDuration="0.80"
-          width="55"
+          width="47"
           visible={true}
         />
       </div>
