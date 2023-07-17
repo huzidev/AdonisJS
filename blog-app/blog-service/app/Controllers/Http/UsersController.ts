@@ -22,7 +22,7 @@ export default class UsersController {
     } else {
       response = await query;
     }
-    return { message: `Users page ${params.page} fetched successfully`, data: response };
+    return { message: `Users list ${params.page} fetched successfully`, data: response };
   }
 
   public async getById({ params }: HttpContextContract) {
