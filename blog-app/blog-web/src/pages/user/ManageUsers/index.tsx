@@ -29,7 +29,7 @@ export default function UsersPage() {
             <button 
               className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700"
               title="Create User"
-              onClick={() => Navigate(ROUTE_PATHS.USER_CREATE)}
+              onClick={() => navigate(ROUTE_PATHS.USER_CREATE)}
             >
               <svg
                 className="w-6 h-6 text-gray-800 dark:text-white"
