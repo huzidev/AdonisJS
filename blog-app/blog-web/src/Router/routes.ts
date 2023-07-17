@@ -30,6 +30,11 @@ interface AppRoute {
 
 const routes: AppRoute[] = [
     {
+        exact: true,
+        path: ROUTE_PATHS.HOME,
+        Component: HomePage
+    },
+    {
         Component: ViewBlogPage,
         path: `${ROUTE_PATHS.ARTICLE_VIEW}:slug`
     },
@@ -51,18 +56,18 @@ const routes: AppRoute[] = [
         Component: UserFormPage
     },
     {
+        exact: true,
         path: ROUTE_PATHS.AUTH_SIGNUP,
         Component: UserFormPage
     },
     {
+        exact: true, // even if user is not signedIn then user can still see all the blogs
         path: ROUTE_PATHS.ARTICLES,
         Component: ViewBlogsPage
     },
     {
-        path: ROUTE_PATHS.HOME,
-        Component: HomePage
-    },
-    {
+        // loggedIn is necessary for view profile and minimum role is at index 0
+        role: roles[0],
         path: `${ROUTE_PATHS.VIEW_PROFILE}:id`,
         Component: ViewProfilePage
     },
@@ -73,6 +78,7 @@ const routes: AppRoute[] = [
         Component: UserForm
     },
     {
+        role: roles[2], // only admins can edit users by id
         path: `${ROUTE_PATHS.EDIT_USER}:id`,
         Component: UserForm
     },

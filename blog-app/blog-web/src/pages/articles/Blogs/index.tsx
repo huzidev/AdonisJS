@@ -24,7 +24,6 @@ export default function ViewBlogsPage(): JSX.Element {
   const [testState, setTestState] = useState<boolean>(false);
 
   console.log("Test State", testState);
-  
 
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const currentPageFvrtBlogs: any =

@@ -37,5 +37,10 @@ export function useUserFormHook(): void {
         }
      }
     }
+    if (prevAuth?.getUser.loading) {
+      if (!state.getUser.loading && state.getUser.error) {
+        navigate(ROUTE_PATHS.NOT_FOUND)
+      }
+    }
   }, [state]);
 }
