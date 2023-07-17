@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { RotatingLines } from "react-loader-spinner";
 import { useBlogs } from "store/articles";
 import { useCreateBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
@@ -111,7 +110,7 @@ export default function AddBlogPage(): JSX.Element {
           </div>
         </form>
       </div>
-          <div className={`inset-0 ${flexClass} fixed`}>
+      {/* <div className={`inset-0 ${flexClass} fixed`}>
       <div className={`${flexClass} transition ease-in-out delay-750 opacity-1`}>
         <h1 className="text-3xl font-bold mr-1">
           Blog App 
@@ -124,7 +123,7 @@ export default function AddBlogPage(): JSX.Element {
           visible={true}
         />
       </div>
-    </div>
+    </div> */}
     </div>
   );
 }
