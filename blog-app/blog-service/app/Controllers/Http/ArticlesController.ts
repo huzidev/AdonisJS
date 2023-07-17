@@ -39,9 +39,11 @@ export default class ArticlesController {
     }
   }
 
-  public async getById({ params }: HttpContextContract) {
+  public async getById({ params, auth }: HttpContextContract) {
     try {
-      const article = await Article.findBy("slug", params.slug);
+      const article: any = await Article.findBy("slug", params.slug);
+      console.log("auth id", auth.user?.id);
+      
       // using .first() because we are receving array[]
       let user;
       if (article) {
@@ -49,7 +51,8 @@ export default class ArticlesController {
       }
       if (!article) {
         throw noArticle;
-      } else {
+      } 
+      else {
         return {
           article,
           message: `Blog by ${user?.username} fetched successfully`,

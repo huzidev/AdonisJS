@@ -11,7 +11,8 @@ export default function ArticlesRoutes() {
             .where("page", /^[0-9]+$/)
         Route.post("/create", `${path}.addBlog`).middleware("auth:blogger");
         Route.get("/:slug", `${path}.getById`)
-            .where("slug", /^[a-z0-9_-]+$/);
+            .where("slug", /^[a-z0-9_-]+$/)
+            .middleware("auth");
         Route.put("/edit/:id", `${path}.updateBlog`).middleware("auth:blogger")
             .where("id", /^[0-9]+$/);
         Route.delete("/delete/:id", `${path}.deleteBlog`).middleware("auth:blogger")
