@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function PageLoader(): JSX.Element {
-  const [state, setState] = useState(false);
+  const [state, setState] = useState<boolean>(false);
 
   useEffect(() => {
     setState(true);
-  }, []);
+  }, [])
   return (
-    <div>
-      Blog App
-      {!state && (
-      <>
-        <div
-          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-          role="status">
-          </div>
-        </>
-      ) }
+    <div className="inset-0 flex items-center justify-center fixed">
+      <div className={`transition-all duration-700 ${state ? "opacity-1" : "opacity-0"}`}>
+        Blog App 
+        <RotatingLines 
+          strokeColor="black"
+          strokeWidth="5"
+          animationDuration="0.80"
+          width="55"
+          visible={true}
+        />
+      </div>
     </div>
   )
 }

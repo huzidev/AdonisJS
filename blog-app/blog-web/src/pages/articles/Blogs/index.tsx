@@ -1,6 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
-import { RotatingLines } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -21,6 +20,11 @@ export default function ViewBlogsPage(): JSX.Element {
   const [showModal, setShowModal] = useState(false);
   // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
+
+  const [testState, setTestState] = useState<boolean>(false);
+
+  console.log("Test State", testState);
+  
 
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const currentPageFvrtBlogs: any =
@@ -209,13 +213,6 @@ export default function ViewBlogsPage(): JSX.Element {
             Load More
           </button>
         )}
-        <RotatingLines 
-          strokeColor="black"
-          strokeWidth="5"
-          animationDuration="0.80"
-          width="55"
-          visible={true}
-        />
       </div>
     </>
   );
