@@ -9,7 +9,6 @@ import { UpdateByIdPayload, UpdateMePayload } from "./types";
 export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: UpdateMePayload): Promise<User | null> => {
     try {
         const response = await api.put(endpoints.UPDATE_ME, data);
-        console.log("Response for updateMe", updateMe);
         return response.data;
     } catch (e: any) {
         const err = mapErrorToState(e);
@@ -22,7 +21,6 @@ export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: Updat
 export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: UpdateByIdPayload): Promise<User | null> => {
     try {
         const response = await api.put(endpoints.UPDATE_USER + data.id, data);
-        console.log("Response for upate by id", response);
         return response.data;
     } catch (e: any) {
         const err = mapErrorToState(e);
@@ -35,7 +33,6 @@ export const updateById = createAsyncThunk(endpoints.UPDATE_USER, async (data: U
 export const createUser = createAsyncThunk(endpoints.CREATE_USER, async (data: User) => {
     try {
         const response = await api.post(endpoints.CREATE_USER, data);
-        console.log("Response for Craete User", updateById);
         return response.data.message;
     } catch (e: any) {
         const err = mapErrorToState(e);
@@ -60,7 +57,6 @@ export const allUser = createAsyncThunk(endpoints.USER_LIST, async () => {
 export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (page: number) => {
     try {
         const response = await api.get(endpoints.USER_LIST_PAGE + page);
-        console.log("Response for all Users page", response);
         return response.data;
     } catch (e: any) {
         const err = mapErrorToState(e);
