@@ -24,9 +24,6 @@ export default function UserFormPage() {
   const isMe = window.location.pathname.includes("/me");
   const isCreate = window.location.pathname.includes("create");
 
-  console.log("params.id", params.id);
-  
-
   const prevUpdateState = usePrevious(user.state.updateMe);
   const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
