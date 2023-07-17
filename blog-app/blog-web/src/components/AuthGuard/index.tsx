@@ -21,19 +21,14 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   const route = routes.find((r) =>
     r.exact ? r.path === currentPath : new UrlPattern(r.path).match(currentPath)
   );
-  console.log("Route result", route);
 
   // so user can't access the protected path
   // Ex user can't access the path for blogger and user and blogger and can't access the path for admins
   const isProtected = !!route?.role;
   const allowedRole = route?.role;
-  console.log("isProtected", isProtected);
-  console.log("Allowed Role", allowedRole);
   
   useEffect(() => {
     const { initState, user } = auth.state;
-    console.log("Current Role", user?.role);
-    
     if (!initState.init && !initState.loading) {
       auth.initUser();
       return;
@@ -41,7 +36,6 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     if (!initState.init) {
       return;
     }
-    // commented it because when user is any other route than "/" and user reloads the page it was sending the user to home page "/"
     // if (!auth.state.user) {
     //   Navigate("/")
     // }
