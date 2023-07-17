@@ -47,7 +47,6 @@ export const userSlice = createSlice({
         })
         builder.addCase(actions.allUser.fulfilled, (state, action) => {
             state.allUser = {loading: false, error: false, data: action.payload};
-            
         })
         builder.addCase(actions.allUser.rejected, (state) => {
             state.allUser = {loading: false, error: true};
@@ -58,7 +57,7 @@ export const userSlice = createSlice({
             state.getUserPage.error = false;
         })
         builder.addCase(actions.allUserByPage.fulfilled, (state, action) => {
-            state.getUserPage.loading = true;
+            state.getUserPage.loading = false;
             if (action.payload) {
                 const { data, message } = action.payload;
                 state.getUserPage.data = data.data;

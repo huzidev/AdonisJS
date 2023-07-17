@@ -6,7 +6,7 @@ import { successNotification } from "utils/notifications";
 
 export function useManageUsersPageHooks(): void {
   const user = useUser();
-  const state = user.state.allUser;
+  const state = user.state.getUserPage;
   const prev = usePrevious(state);
   const params = useParams();
 
