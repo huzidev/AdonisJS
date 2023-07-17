@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
 import { useBlogs } from "store/articles";
 import { useCreateBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
@@ -8,6 +9,8 @@ export default function AddBlogPage(): JSX.Element {
   const initialState: ArticleType = { title: "", image: "", content: "" };
   const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
+
+  const [state, setState] = useState<boolean>(false);
 
   function inputHandler(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -22,6 +25,8 @@ export default function AddBlogPage(): JSX.Element {
     e.preventDefault();
     blog.addBlog(article)
   }
+  
+  const flexClass = "flex items-center justify-center";
 
   useCreateBlogPageHooks();
   return (
@@ -106,6 +111,20 @@ export default function AddBlogPage(): JSX.Element {
           </div>
         </form>
       </div>
+          <div className={`inset-0 ${flexClass} fixed`}>
+      <div className={`${flexClass} transition ease-in-out delay-750 opacity-1`}>
+        <h1 className="text-3xl font-bold mr-1">
+          Blog App 
+        </h1>
+        <RotatingLines 
+          strokeColor="black"
+          strokeWidth="5"
+          animationDuration="0.80"
+          width="55"
+          visible={true}
+        />
+      </div>
+    </div>
     </div>
   );
 }
