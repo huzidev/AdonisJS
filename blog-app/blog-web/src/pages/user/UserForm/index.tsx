@@ -21,8 +21,11 @@ export default function UserFormPage() {
   const [createUser, setCreateUser] = useState<any>(detailsCreateUser);
   const [booleanState, setBooleanState] = useState<BooleanState>(detailsBoolean);
   const fetchedData: any = user.state.getUser?.data;
-  const isMe = params.id === "me";
+  const isMe = window.location.pathname.includes("/me");
   const isCreate = window.location.pathname.includes("create");
+
+  console.log("params.id", params.id);
+  
 
   const prevUpdateState = usePrevious(user.state.updateMe);
   const updateState = user.state.updateMe;

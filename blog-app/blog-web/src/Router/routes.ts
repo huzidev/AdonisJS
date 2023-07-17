@@ -1,4 +1,5 @@
 import React from 'react';
+import { UserRole, roles } from 'store/auth/types';
 import ROUTE_PATHS from './paths';
 
 const HomePage = React.lazy(() => import('pages/Home'));
@@ -23,6 +24,7 @@ const NotFoundPage = React.lazy(() => import("pages/NotFound"))
 interface AppRoute {
   exact?: boolean;
   path: string;
+  role?: UserRole;
   Component: React.LazyExoticComponent<() => JSX.Element>;
 }   
 
@@ -62,6 +64,7 @@ const routes: AppRoute[] = [
     },
     {
         exact: true,
+        role: roles[0],
         path: `${ROUTE_PATHS.EDIT_USER}me`,
         Component: UserForm
     },
