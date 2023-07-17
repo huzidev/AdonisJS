@@ -1,8 +1,10 @@
 import ROUTE_PATHS from "Router/paths";
+import routes from "Router/routes";
 import PageLoader from "components/PageLoader";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
+import UrlPattern from "url-pattern";
 import { notAllowedPaths } from "./data";
 
 interface AuthGuardProps {
@@ -13,6 +15,16 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     const navigate = useNavigate();
     const auth = useAuth();
     const currentPath = window.location.pathname;
+
+    const route = routes.find((r) => (
+      r.exact ? r.path === currentPath : new UrlPattern(r.path).match(currentPath)
+    ))
+
+    // so user can't access the protected path 
+    // Ex user can't access the path for blogger and user and blogger and can't access the path for admins 
+    const isProtected = !!route?.role;
+
+    
 
     useEffect(() => {
       const { initState } = auth.state;
