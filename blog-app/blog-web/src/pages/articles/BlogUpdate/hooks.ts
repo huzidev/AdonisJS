@@ -24,17 +24,15 @@ export function useEditBlogPageHooks(): void {
 
   useEffect(() => {
     // if user other than admins try to access edit blog path then redirect the user to blog/list path
-    if (prev?.getBlog.loading) {
-      if (
-        !hasPermission("admin" || "super-admin", userRole) &&
-        state.getBlog.data?.ownerId !== auth.state.user?.id &&
-        !userRole
-      ) {
-        toast.error("Insufficient Access, You can't edit someone else blog");
-        navigate(ROUTE_PATHS.ARTICLES);
-      }
+    if (
+      !hasPermission("admin" || "super-admin", userRole) &&
+      state.getBlog.data?.ownerId !== auth.state.user?.id &&
+      !userRole
+    ) {
+      toast.error("Insufficient Access, You can't edit someone else blog");
+      navigate(ROUTE_PATHS.ARTICLES);
     }
-  }, [state.getBlog, auth.state.user]);
+  }, [state.getBlog, userRole]);
 
   useEffect(() => {
     if (prev?.updateBlog.loading) {
