@@ -11,7 +11,7 @@ export function useViewProfilePageHook(): void {
   const username = user.state.getUser.data?.username;
   const params = useParams();
   const userState = user.state.getUser;
-  const blogState = blogs.state.deleteBlog;
+  const blogState = blogs.state;
   const prevUser = usePrevious(userState);
   const prevBlog = usePrevious(blogState);
 
@@ -30,9 +30,18 @@ export function useViewProfilePageHook(): void {
         }
       }
     }
-    if (prevBlog?.loading) {
-      if (!blogState.loading && !blogState.error) {
-        successNotification(blogState.message);
+    if (prevBlog?.deleteBlog.loading) {
+      if (!blogState.deleteBlog.loading && !blogState.deleteBlog.error) {
+        successNotification(blogState.deleteBlog.message);
+      }
+    }
+    if (prevBlog?.getBlogs.loading) {
+      if (!blogState.getBlogs.loading && !blogState.getBlogs.error) {
+        if (username) {
+          successNotification(`${username}'s blogs fetched successfully`);
+        } else {
+          successNotification(`${username}'s blogs fetched successfully`);
+        }
       }
     }
   }, [userState, blogState]);
