@@ -22,16 +22,19 @@ export function useEditBlogPageHooks(): void {
     blog.getBlog(slug);
   }, []);
 
-  console.log("Blog owner id", state.getBlog.data?.ownerId);
-// state.getBlog.data?.ownerId !== auth.state.user?.id || 
   useEffect(() => {
+    // if user other than admins try to access edit blog path then redirect the user to blog/list path
     if (prev?.getBlog.loading) {
-      if (!hasPermission("admin" || "super-admin", userRole) && (state.getBlog.data?.ownerId !== auth.state.user?.id)) {
+      if (
+        !hasPermission("admin" || "super-admin", userRole) &&
+        state.getBlog.data?.ownerId !== auth.state.user?.id &&
+        !userRole
+      ) {
         toast.error("Insufficient Access, You can't edit someone else blog");
         navigate(ROUTE_PATHS.ARTICLES);
       }
     }
-  }, [state.getBlog]);
+  }, [state.getBlog, auth.state.user]);
 
   useEffect(() => {
     if (prev?.updateBlog.loading) {
