@@ -33,7 +33,7 @@ export default class UsersController {
       } else {
         return {
           message: "User fetched successfully",
-          data: user,
+          data: user
         };
       }
     } catch (e) {
