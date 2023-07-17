@@ -49,17 +49,24 @@ export const allUser = createAsyncThunk(endpoints.USER_LIST, async () => {
     try {
         const response = await api.get(endpoints.USER_LIST);
         return response.data.data;
-    } catch (e) {
-        console.log("Error", e);
+    } catch (e: any) {
+        const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
 })
 
 export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (page: number) => {
     try {
         const response = await api.get(endpoints.USER_LIST_PAGE + page);
-        return response.data.data;
-    } catch (e) {
-        console.log("Error", e);
+        console.log("Response for all Users page", response);
+        return response.data;
+    } catch (e: any) {
+        const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
 })
 
@@ -67,8 +74,10 @@ export const getById = createAsyncThunk(endpoints.GET_BY_ID, async (id: number) 
     try {
         const response = await api.get(endpoints.GET_BY_ID + id);
         return response.data.data;
-    } catch (e) {
-        console.log("Error", e);
-        
+    } catch (e: any) {
+        const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
     }
 })

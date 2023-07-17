@@ -60,8 +60,10 @@ export const userSlice = createSlice({
         builder.addCase(actions.allUserByPage.fulfilled, (state, action) => {
             state.getUserPage.loading = true;
             if (action.payload) {
-                state.getUserPage.data = action.payload.data;
-                state.getUserPage.meta = action.payload.meta;
+                const { data, message } = action.payload;
+                state.getUserPage.data = data.data;
+                state.getUserPage.meta = data.meta;
+                state.getUserPage.message = message;
             }
             state.getUserPage.error = false;
         })
