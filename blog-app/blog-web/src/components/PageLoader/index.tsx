@@ -7,10 +7,15 @@ export default function PageLoader(): JSX.Element {
   useEffect(() => {
     setState(true);
   }, [])
+
+  const flexClass = "flex items-center justify-center"
+
   return (
-    <div className="inset-0 flex items-center justify-center fixed">
-      <div className={`transition-all duration-700 ${state ? "opacity-1" : "opacity-0"}`}>
-        Blog App 
+    <div className={`inset-0 ${flexClass} fixed`}>
+      <div className={`${flexClass} transition ease-in-out delay-750 ${state ? "opacity-1" : "opacity-0"}`}>
+        <h1>
+          Blog App 
+        </h1>
         <RotatingLines 
           strokeColor="black"
           strokeWidth="5"
