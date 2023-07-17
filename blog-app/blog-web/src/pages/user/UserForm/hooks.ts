@@ -37,6 +37,7 @@ export function useUserFormHook(): void {
         }
      }
     }
+    // if user tries to change the id in the URL and that id doesn't exist then redirect the user to Not Found page
     if (prevAuth?.getUser.loading) {
       if (!state.getUser.loading && state.getUser.error) {
         navigate(ROUTE_PATHS.NOT_FOUND)
