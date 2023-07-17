@@ -41,10 +41,12 @@ const routes: AppRoute[] = [
         Component: AddBlogPage
     },
     {
+        role: roles[1],
         path: `${ROUTE_PATHS.ARTICLE_UPDATE}:slug`,
         Component: UpdateBlogPage
     },
     {
+        exact: true, // didn't used role because everyone even if user is not loggedIn then user can access signIn page
         path: ROUTE_PATHS.AUTH_SIGNIN,
         Component: UserFormPage
     },
