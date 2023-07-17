@@ -89,14 +89,20 @@ const routes: AppRoute[] = [
         Component: UserForm
     },
     {
+        exact: true,
+        // usign role because user get loggedIn first then verify
+        role: roles[0],
         path: ROUTE_PATHS.VERIFY_USER,
         Component: VerifyUserPage
     },
     {
+        role: roles[2], // only admins see users page
         path: `${ROUTE_PATHS.USERS_PAGE}:page`,
         Component: UsersPage
     },
     {
+        exact: true,
+        // no need for using role because while sending reset passsword user is not initially loggedIn
         path: ROUTE_PATHS.SEND_RESET_PASSWORD,
         Component: SendResetPasswordPage
     },
