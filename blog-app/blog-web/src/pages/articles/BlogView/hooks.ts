@@ -1,4 +1,3 @@
-import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
@@ -39,7 +38,7 @@ export function useGetBlogPageHooks(): void {
         }
       } // if user tries to change to URL id which doesn't exist in database 
       else if (!state.getBlog.loading && state.getBlog.error) {
-        navigate(ROUTE_PATHS.NOT_FOUND);
+        navigate("/");
       }
     }
   }, [state]);

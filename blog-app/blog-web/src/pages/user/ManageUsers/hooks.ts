@@ -1,4 +1,3 @@
-import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "store/user";
@@ -24,7 +23,7 @@ export function useManageUsersPageHooks(): void {
       } 
       // if user enter the page exceeding the page limit
       else if (!state.loading && state.error) {
-        navigate(ROUTE_PATHS.NOT_FOUND);
+        navigate("/");
       }
     }
   }, [state])

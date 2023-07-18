@@ -1,4 +1,3 @@
-import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
@@ -31,7 +30,7 @@ export function useViewProfilePageHook(): void {
           successNotification(`${username}'s details fetched successfully`);
         }
       } else if (!userState.loading && userState.error) {
-        navigate(ROUTE_PATHS.NOT_FOUND)
+        navigate("/");
       }
     }
     if (prevBlog?.deleteBlog.loading) {
