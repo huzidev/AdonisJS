@@ -130,8 +130,8 @@ export default function ViewBlogsPage(): JSX.Element {
                   </Link>
                   {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
                   {(blog.ownerId === userData?.id ||
-                    (hasPermission("admin", userData?.role) &&
-                      uploadedByUserRole !== "super-admin") ||
+                    ((hasPermission("admin", userData?.role) &&
+                      uploadedByUserRole !== "super-admin")) ||
                     hasPermission("super-admin", userData?.role)) && (
                     <div>
                       <Link
