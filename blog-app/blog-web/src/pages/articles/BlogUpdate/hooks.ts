@@ -48,6 +48,8 @@ export function useEditBlogPageHooks(): void {
         if (state.updateBlog.message?.includes("successfully")) {
           navigate(ROUTE_PATHS.ARTICLES);
         }
+      } else if (!state.updateBlog.loading && state.updateBlog.error) {
+          navigate("/");
       }
     }
     if (prev?.getBlog.loading) {
