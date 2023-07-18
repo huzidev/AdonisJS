@@ -16,9 +16,6 @@ export default function UpdateBlogPage(): JSX.Element {
   const [prevState, setPrevState] = useState(updateBlogData);
   const { id, title, image, content } = updateArticle;
 
-  console.log("User info", user.state.getUser);
-  
-
   useEditBlogPageHooks();
 
   function inputHandler(

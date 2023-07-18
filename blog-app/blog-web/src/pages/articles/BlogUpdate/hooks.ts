@@ -18,17 +18,21 @@ export function useEditBlogPageHooks(): void {
   const prev = usePrevious(state);
   const slug: any = params.slug;
   const userRole = auth.state.user?.role;
+  const ownerId = state.getBlog.data?.ownerId;
   const navigate = useNavigate();
 
   useEffect(() => {
     blog.getBlog(slug);
+    if (ownerId) {
+      user.getById(ownerId);
+    }
   }, []);
 
   useEffect(() => {
     // if user other than admins try to access edit blog path then redirect the user to blog/list path even for blogger until ownerId of the blog isn't mathcing the id of loggedIn user
     if (
       !hasPermission("admin" || "super-admin", userRole) &&
-      state.getBlog.data?.ownerId !== auth.state.user?.id &&
+      ownerId !== auth.state.user?.id &&
       // !userRole when user is not loggedIn
       !userRole
     ) {
