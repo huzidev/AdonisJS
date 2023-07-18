@@ -10,7 +10,7 @@ export default function UpdateBlogPage(): JSX.Element {
   const user = useUser();
   const blogs = useBlogs();
   const blog = blogs.state.getBlog?.data;
-  const isAdmin = auth.state.user?.role === ("admin" || "super-admin") ? true : false;
+  const isOwner = auth.state.user?.id === blogs.state.getBlog.data?.ownerId ? true : false;
   const ownerName = user.state.getUser.data?.username;
   const [updateArticle, setUpdateArticle] = useState(updateBlogData);
   const [prevState, setPrevState] = useState(updateBlogData);
@@ -50,7 +50,7 @@ export default function UpdateBlogPage(): JSX.Element {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Edit {isAdmin ? `${ownerName}` : "Yours"} Blog
+            Edit {!isOwner ? `${ownerName}'s` : "Yours"} Blog
           </h2>
         </div>
         <form
