@@ -128,11 +128,12 @@ export default function ViewBlogsPage(): JSX.Element {
                     Read More
                     {/* {blog.createdAt} */}
                   </Link>
+                  {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
                   {(blog.ownerId === userData?.id ||
-                    hasPermission(
+                    (hasPermission(
                       "admin" || "super-admin",
                       userData?.role
-                    )) && (
+                    ) && userData?.role === "admin" && uploadedByUserRole !== "super-admin")) && (
                     <div>
                       <Link
                         to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
