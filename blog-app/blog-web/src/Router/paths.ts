@@ -11,8 +11,6 @@ const ROUTE_PATHS = {
   
   BANNED_USER: '/banned_user',
   
-  NOT_FOUND: '/not_found',
-
   RESET_PASSWORD: '/reset_password',
   SEND_RESET_PASSWORD: '/send_reset_password',
 

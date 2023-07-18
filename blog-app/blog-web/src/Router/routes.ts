@@ -15,7 +15,6 @@ const UsersPage = React.lazy(() => import("pages/user/ManageUsers"));
 const SendResetPasswordPage = React.lazy(() => import("pages/auth/SendResetPassword"));
 const ResetPasswordPage = React.lazy(() => import("pages/auth/ResetPassword"));
 const BannedUserPage = React.lazy(() => import("pages/user/BannedUser"));
-const NotFoundPage = React.lazy(() => import("pages/NotFound"))
 
 // exact is used for those URL where their won't be an additional (CHANGEABLE) params/id 
 // - ARTICLE_CREATE: '/blog/add here we can use exact: true because their is no additional (CHANGEABLE) params/id 
@@ -116,12 +115,6 @@ const routes: AppRoute[] = [
         role: roles[0],
         path: ROUTE_PATHS.BANNED_USER,
         Component: BannedUserPage
-    },
-    {
-        exact: true,
-        // even if user is not loggedIn and tries to change URL for view some user's profile and then tries to change the URL
-        path: ROUTE_PATHS.NOT_FOUND,
-        Component: NotFoundPage
     }
 ]
 
