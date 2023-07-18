@@ -18,7 +18,9 @@ export default function ViewProfilePage(): JSX.Element {
   const userDataById = user.state.getUser?.data;
   const currentPage: any = blogs.state.getBlogsById.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
-  const isUser = auth.state.user?.role === "user";
+  const currentRole = auth.state.user?.role;
+  const isUser = currentRole === "user";
+  const isAdmin = hasPermission("admin" || "super-admin", currentRole);
   const isClickedUser = user.state.getUser.data?.role === "user";
   const isMe = params.id === "me";
   const [payload, setPayload] = useState<any>({
@@ -26,7 +28,7 @@ export default function ViewProfilePage(): JSX.Element {
     page: 1,
   });
   const [showModal, setShowModal] = useState(false);
-  const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
+  const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);  
 
   const [userDetails, setUserDetails] =
     useState<UserDetailState>(userDetailsData);
@@ -78,6 +80,7 @@ export default function ViewProfilePage(): JSX.Element {
     setPayload(updatedPayload);
     blogs.getBlogsById(updatedPayload);
   }
+
   useViewProfilePageHook();
   return (
     <>
@@ -104,9 +107,12 @@ export default function ViewProfilePage(): JSX.Element {
                 ? `Total Blogs Liked : ${favoriteBlogs.meta?.total}`
                 : `Total Blogs : ${totalBlogs}`}
             </h2>
-            {isMe && (
+            {(isMe || isAdmin) && (
               <Link
-                to={ROUTE_PATHS.EDIT_USER + "me"}
+                to={
+                   // if path paths doesn't have me then this means admin is on user view profile page hence send the admin to edit user by details
+                    ROUTE_PATHS.EDIT_USER + `${isMe ? "me" : userDataById?.id}`
+                }
                 type="button"
                 className="text-white bg-gray-800 font-medium text-sm py-2.5"
               >
@@ -158,11 +164,7 @@ export default function ViewProfilePage(): JSX.Element {
                         >
                           Read More
                         </Link>
-                        {(blog.ownerId === userId ||
-                          hasPermission(
-                            "admin" || "super-admin",
-                            auth.state.user?.role
-                          )) && (
+                        {isAdmin && (
                           <div>
                             <Link
                               to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
