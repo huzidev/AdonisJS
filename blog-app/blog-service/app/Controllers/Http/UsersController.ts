@@ -111,7 +111,7 @@ export default class UsersController {
           status: 404,
         };
       }
-      // if admin tries to update super-admin
+      // if admin tries to update super-admin therefore we haven't used isAdmin
       if (!auth.user!.hasAccess(user.role)) {
         throw {
           message: "In sufficient access",
@@ -124,7 +124,7 @@ export default class UsersController {
       return {
         message:
           (params.id ? "User" : "Yours") + " details updated successfully",
-        data: user?.toObject(),
+          data: user?.toObject()
       };
     } catch (e) {
       if (e.sqlMessage) {
