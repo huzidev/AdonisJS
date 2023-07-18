@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
@@ -11,6 +12,7 @@ import { successNotification } from "utils/notifications";
 export function useEditBlogPageHooks(): void {
   const blog = useBlogs();
   const auth = useAuth();
+  const user = useUser();
   const params = useParams();
   const state = blog.state;
   const prev = usePrevious(state);
@@ -27,6 +29,7 @@ export function useEditBlogPageHooks(): void {
     if (
       !hasPermission("admin" || "super-admin", userRole) &&
       state.getBlog.data?.ownerId !== auth.state.user?.id &&
+      // !userRole when user is not loggedIn
       !userRole
     ) {
       toast.error("Insufficient Access, You can't edit someone else blog");

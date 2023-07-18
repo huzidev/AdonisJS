@@ -1,14 +1,23 @@
 import { useEffect, useState } from "react";
 import { useBlogs } from "store/articles";
+import { useAuth } from "store/auth";
+import { useUser } from "store/user";
 import { updateBlogData } from "./data";
 import { useEditBlogPageHooks } from "./hooks";
 
 export default function UpdateBlogPage(): JSX.Element {
+  const auth = useAuth();
+  const user = useUser();
   const blogs = useBlogs();
   const blog = blogs.state.getBlog?.data;
+  const isAdmin = auth.state.user?.role === ("admin" || "super-admin") ? true : false;
+  const ownerName = user.state.getUser.data?.username;
   const [updateArticle, setUpdateArticle] = useState(updateBlogData);
   const [prevState, setPrevState] = useState(updateBlogData);
   const { id, title, image, content } = updateArticle;
+
+  console.log("User info", user.state.getUser);
+  
 
   useEditBlogPageHooks();
 
@@ -44,7 +53,7 @@ export default function UpdateBlogPage(): JSX.Element {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Edit Yours Blog
+            Edit {isAdmin ? `${ownerName}` : "Yours"} Blog
           </h2>
         </div>
         <form
