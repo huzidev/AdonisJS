@@ -55,8 +55,6 @@ export default function ViewProfilePage(): JSX.Element {
     }
   }, [params.id, currentId]);
 
-  console.log("Favorite blogs", favoriteBlogs.data);
-
   useEffect(() => {
     if (isUser || isClickedUser) {
       blogs.getFavoriteBlogs(payload);

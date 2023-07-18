@@ -33,6 +33,7 @@ export default function ViewBlogsPage(): JSX.Element {
       blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1);
     }
   }
+
   useBlogsPageHooks();
   return (
     <>
@@ -42,6 +43,7 @@ export default function ViewBlogsPage(): JSX.Element {
           const uploadedByUser = allUsers?.find(
             (user: User) => user.id === blog.ownerId
           );
+          const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
           const uploadedByUserId = uploadedByUser && uploadedByUser.id;
           const uploadedByUsername = uploadedByUser && uploadedByUser.username;
           return (
