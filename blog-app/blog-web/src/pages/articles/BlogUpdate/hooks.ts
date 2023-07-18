@@ -50,5 +50,10 @@ export function useEditBlogPageHooks(): void {
         }
       }
     }
+    if (prev?.getBlog.loading) {
+      if (!state.getBlog.loading && state.getBlog.error) {
+          navigate(ROUTE_PATHS.NOT_FOUND);
+      }
+    }
   }, [state]);
 }
