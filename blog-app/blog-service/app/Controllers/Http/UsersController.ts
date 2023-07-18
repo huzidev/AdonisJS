@@ -90,20 +90,7 @@ export default class UsersController {
       // if admin tries to update user who doesn't exist
       const user = await User.findBy("id", userId);
 
-      if (
-        // so if user tries to udpate own self then only username will fetch therefore we've created a condition !params.id when user update own self then check username
-        (!params.id && body.username === user?.username) ||
-        (body.username === user?.username &&
-          body.role === user?.role &&
-          body.isActive === user?.isActive &&
-          body.isVerified === user?.isVerified &&
-          body.isBanned === user?.isBanned)
-      ) {
-        throw {
-          message: "Can't update, values are same as of before",
-          status: 401,
-        };
-      }
+      
 
       if (!user) {
         throw {
@@ -114,7 +101,21 @@ export default class UsersController {
       // if admin tries to update super-admin therefore we haven't used isAdmin
       if (!auth.user!.hasAccess(user.role)) {
         throw {
-          message: "In sufficient access",
+          message: "Insufficient access, you do not have permission to perform this action",
+          status: 401,
+        };
+      } // first it'll chech if user has access to perfrom this action then it'll check values that if they are same or not 
+      else if (
+        // so if user tries to udpate own self then only username will fetch therefore we've created a condition !params.id when user update own self then check username
+        (!params.id && body.username === user?.username) ||
+        (body.username === user?.username &&
+          body.role === user?.role &&
+          body.isActive === user?.isActive &&
+          body.isVerified === user?.isVerified &&
+          body.isBanned === user?.isBanned)
+      ) {
+        throw {
+          message: "Can't update, values are same as of before",
           status: 401,
         };
       }
