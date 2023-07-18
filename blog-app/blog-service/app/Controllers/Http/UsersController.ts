@@ -39,7 +39,8 @@ export default class UsersController {
       const user = await User.findBy("id", params.id);
       if (!user) {
         throw { message: `No User found by id ${params.id}`, status: 404 };
-      } else {
+      } 
+      else {
         return {
           message: "User fetched successfully",
           data: user,
