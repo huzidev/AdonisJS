@@ -21,29 +21,30 @@ export function useEditBlogPageHooks(): void {
   const ownerId = state.getBlog.data?.ownerId;
   const navigate = useNavigate();
 
+  console.log("BLOG", blog.state.getBlog);
+
   useEffect(() => {
-    blog.getBlog(slug);
+    // used !prev?.getBlog.loading because it's fetching blog multiple times
+    if (!prev?.getBlog.loading) {
+      blog.getBlog(slug);
+    }
     if (ownerId) {
       user.getById(ownerId);
     }
   }, [ownerId]);
 
   useEffect(() => {
-    if (prev?.getBlog.loading) {
-      if (!state.getBlog.loading && !state.getBlog.error) {
-        // if user other than admins try to access edit blog path then redirect the user to blog/list path even for blogger until ownerId of the blog isn't mathcing the id of loggedIn user
-        if (
-          !hasPermission("admin" || "super-admin", userRole) &&
-          ownerId !== auth.state.user?.id &&
-          // !userRole when user is not loggedIn
-          !userRole
-        ) {
-          toast.error("Insufficient Access, You can't edit someone else blog");
-          navigate(ROUTE_PATHS.ARTICLES);
-        }
-      }
+    // if user other than admins try to access edit blog path then redirect the user to blog/list path even for blogger until ownerId of the blog isn't mathcing the id of loggedIn user
+    if (
+      !hasPermission("admin" || "super-admin", userRole) &&
+      ownerId !== auth.state.user?.id &&
+      // !userRole when user is not loggedIn
+      !userRole
+    ) {
+      toast.error("Insufficient Access, You can't edit someone else blog");
+      navigate(ROUTE_PATHS.ARTICLES);
     }
-  }, [state.getBlog, userRole]);
+     }, [state.getBlog, userRole]);
 
   useEffect(() => {
     if (prev?.updateBlog.loading) {
@@ -53,12 +54,12 @@ export function useEditBlogPageHooks(): void {
           navigate(ROUTE_PATHS.ARTICLES);
         }
       } else if (!state.updateBlog.loading && state.updateBlog.error) {
-          navigate("/");
+        navigate("/");
       }
     }
     if (prev?.getBlog.loading) {
       if (!state.getBlog.loading && state.getBlog.error) {
-          navigate("/");
+        navigate("/");
       }
     }
   }, [state]);
