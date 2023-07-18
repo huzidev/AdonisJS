@@ -63,8 +63,18 @@ export default class ArticlesController {
     try {
       const body = await request.validate(UpdateArticle);
       const article = await Article.findBy("id", params.id);
+      
+      const userRole: any = auth.user?.role;
+
+      console.log("User role", userRole);
       // const articleId: number = params.id;
       // if user didn't change any value and tries to update blog
+      if (!auth.user!.hasAccess(userRole)) {
+        throw {
+          message: "Insufficient access, you do not have permission to perform this action",
+          status: 401,
+        };
+      }
       if (body.title === article?.title && body.content === article?.content) {
         throw {
           message: "Can't update, values are same as of before",

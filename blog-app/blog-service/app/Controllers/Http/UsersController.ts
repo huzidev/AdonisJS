@@ -91,8 +91,6 @@ export default class UsersController {
       // if admin tries to update user who doesn't exist
       const user = await User.findBy("id", userId);
 
-      
-
       if (!user) {
         throw {
           message: "User not found",
