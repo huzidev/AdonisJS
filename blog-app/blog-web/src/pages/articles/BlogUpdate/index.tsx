@@ -52,7 +52,7 @@ export default function UpdateBlogPage(): JSX.Element {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Edit {!isOwner ? `${ownerName}'s` : "Yours"} Blog
+            Edit {isOwner ? "Yours" : `${ownerName}'s`} Blog
           </h2>
         </div>
         <form
