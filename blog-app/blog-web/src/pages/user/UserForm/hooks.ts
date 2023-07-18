@@ -1,12 +1,17 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 
 export function useUserFormHook(): void {
+  const auth = useAuth();
   const user = useUser();
+  const userRole = user.state.getUser.data?.role;
+  const authRole = auth.state.user?.role;
   const state = user.state;
   const prevAuth = usePrevious(state);
   const navigate = useNavigate();
@@ -39,6 +44,10 @@ export function useUserFormHook(): void {
     }
     // if user tries to change the id in the URL and that id doesn't exist then redirect the user to Not Found page
     if (prevAuth?.getUser.loading) {
+      if (authRole === "admin" && userRole === "super-admin") {
+        toast.error("Insufficient Access, You can't edit super-admin's details");
+        navigate(ROUTE_PATHS.ARTICLES);
+      }
       if (!state.getUser.loading && state.getUser.error) {
         navigate("/");
       }

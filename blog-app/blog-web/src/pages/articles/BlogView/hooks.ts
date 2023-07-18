@@ -14,7 +14,7 @@ export function useGetBlogPageHooks(): void {
   const state = blog.state;
   const prev = usePrevious(state);
   const navigate = useNavigate();
-  const ownerId: any = blog.state.getBlog.data?.ownerId;
+  const ownerId: any = state.getBlog.data?.ownerId;
   const byMe = ownerId === auth.state.user?.id;
 
   // seprately making with different useEffect because while creating in same useEffect as of ownerId it's fetching data multiple times

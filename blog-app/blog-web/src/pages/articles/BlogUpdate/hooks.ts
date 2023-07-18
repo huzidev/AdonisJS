@@ -15,26 +15,28 @@ export function useEditBlogPageHooks(): void {
   const user = useUser();
   const params = useParams();
   const state = blog.state;
+  const stateUser = user.state;
   const prev = usePrevious(state);
+  const prevUser = usePrevious(stateUser);
   const slug: any = params.slug;
   const userRole = auth.state.user?.role;
-  const ownerId = state.getBlog.data?.ownerId;
+  const ownerId: any = blog.state.getBlog.data?.ownerId;
   const navigate = useNavigate();
 
   useEffect(() => {
-    // used !prev?.getBlog.loading because it's fetching blog multiple times
-    if (!prev?.getBlog.loading) {
       blog.getBlog(slug);
-    }
+  }, [])
+
+  useEffect(() => {
     // to get the clicked user details so we can show edit (username) details
     if (ownerId) {
-      user.getById(ownerId);
-    }
+        user.getById(ownerId);
+      }
   }, [ownerId]);
 
   useEffect(() => {
     // if user other than admins try to access edit blog path then redirect the user to blog/list path even for blogger until ownerId of the blog isn't mathcing the id of loggedIn user
-    if (prev?.getBlog.loading) {
+    if (prevUser?.getUser.loading) {
       if (
         !hasPermission("admin" || "super-admin", userRole) &&
         ownerId !== auth.state.user?.id
@@ -44,11 +46,15 @@ export function useEditBlogPageHooks(): void {
         navigate(ROUTE_PATHS.ARTICLES);
       }
     } 
+      if (userRole === "admin" && user.state.getUser.data?.role === "super-admin") {
+        toast.error("Insufficient Access, You can't edit super-admin's blog");
+        navigate(ROUTE_PATHS.ARTICLES);
+      }
     // if (!userRole) {
     //   toast.error("You can't access the requested path kindly signin first");
     //   navigate(ROUTE_PATHS.ARTICLES);
     // }
-  }, [state.getBlog, userRole]);
+  }, [state.getBlog, userRole, stateUser.getUser]);
 
   useEffect(() => {
     if (prev?.updateBlog.loading) {
