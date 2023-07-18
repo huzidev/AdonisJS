@@ -21,13 +21,12 @@ export function useEditBlogPageHooks(): void {
   const ownerId = state.getBlog.data?.ownerId;
   const navigate = useNavigate();
 
-  console.log("BLOG", blog.state.getBlog);
-
   useEffect(() => {
     // used !prev?.getBlog.loading because it's fetching blog multiple times
     if (!prev?.getBlog.loading) {
       blog.getBlog(slug);
     }
+    // to get the clicked user details so we can show edit (username) details
     if (ownerId) {
       user.getById(ownerId);
     }
@@ -35,14 +34,16 @@ export function useEditBlogPageHooks(): void {
 
   useEffect(() => {
     // if user other than admins try to access edit blog path then redirect the user to blog/list path even for blogger until ownerId of the blog isn't mathcing the id of loggedIn user
-    if (
-      !hasPermission("admin" || "super-admin", userRole) &&
-      ownerId !== auth.state.user?.id &&
-      // !userRole when user is not loggedIn
-      !userRole
-    ) {
-      toast.error("Insufficient Access, You can't edit someone else blog");
-      navigate(ROUTE_PATHS.ARTICLES);
+    if (prev?.getBlog.loading) {
+      if (
+        !hasPermission("admin" || "super-admin", userRole) &&
+        ownerId !== auth.state.user?.id
+        // !userRole when user is not loggedIn
+        // !userRole
+      ) {
+        toast.error("Insufficient Access, You can't edit someone else blog");
+        navigate(ROUTE_PATHS.ARTICLES);
+      }
     }
      }, [state.getBlog, userRole]);
 
