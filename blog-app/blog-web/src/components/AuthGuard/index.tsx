@@ -43,9 +43,14 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     //   navigate("/")
     // }
 
+    // if user is not loggedIn and tries to access paths like edit user
+    if (isProtected && !user) {
+      navigate("/");
+      toast.error("Can't access kindly signin first");
+    }
     if (isProtected && (user && !hasPermission(allowedRole, user.role))) {
       navigate("/");
-      toast.error("Insufficient access, you do not have permission to perform this action")
+      toast.error("Insufficient access, you do not have permission to perform this action");
     } else if (user) {
       const { isVerified, isBanned } = user;
       if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {

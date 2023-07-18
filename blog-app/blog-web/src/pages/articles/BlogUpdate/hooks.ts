@@ -44,10 +44,10 @@ export function useEditBlogPageHooks(): void {
         navigate(ROUTE_PATHS.ARTICLES);
       }
     }
-    if (!userRole) {
-      toast.error("You can't access the requested path kindly signin first");
-      navigate(ROUTE_PATHS.ARTICLES);
-    }
+    // if (!userRole) {
+    //   toast.error("You can't access the requested path kindly signin first");
+    //   navigate(ROUTE_PATHS.ARTICLES);
+    // }
   }, [state.getBlog, userRole]);
 
   useEffect(() => {
