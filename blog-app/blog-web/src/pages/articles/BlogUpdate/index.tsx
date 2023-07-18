@@ -10,6 +10,8 @@ export default function UpdateBlogPage(): JSX.Element {
   const user = useUser();
   const blogs = useBlogs();
   const blog = blogs.state.getBlog?.data;
+  // when admin Clikced on edit blog then check if ownerId of that blog is mathcing the loggedIn user id if it matches then we'll show Edit Yours Blog other wise
+  // admin is updating blog hence it'll show edit (ownername of blog) blog
   const isOwner = auth.state.user?.id === blogs.state.getBlog.data?.ownerId ? true : false;
   const ownerName = user.state.getUser.data?.username;
   const [updateArticle, setUpdateArticle] = useState(updateBlogData);
