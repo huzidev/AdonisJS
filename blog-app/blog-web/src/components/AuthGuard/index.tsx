@@ -45,7 +45,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
 
     if (isProtected && (user && !hasPermission(allowedRole, user.role))) {
       navigate("/");
-      toast.error("Insufficient Access")
+      toast.error("Insufficient access, you do not have permission to perform this action")
     } else if (user) {
       const { isVerified, isBanned } = user;
       if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {
