@@ -43,7 +43,7 @@ export function useEditBlogPageHooks(): void {
         toast.error("Insufficient Access, You can't edit someone else blog");
         navigate(ROUTE_PATHS.ARTICLES);
       }
-    }
+    } 
     // if (!userRole) {
     //   toast.error("You can't access the requested path kindly signin first");
     //   navigate(ROUTE_PATHS.ARTICLES);
