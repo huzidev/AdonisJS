@@ -1,5 +1,6 @@
 import Hash from '@ioc:Adonis/Core/Hash';
-import { BaseModel, HasMany, beforeSave, column, hasMany } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, HasMany, beforeSave, column, hasMany, scope } from '@ioc:Adonis/Lucid/Orm';
+import Sort from 'App/Utils/Sort';
 import { DateTime } from 'luxon';
 import Article from './Article';
 
@@ -76,4 +77,8 @@ export default class User extends BaseModel {
     const check = myRole >= access
     return check
   }
+
+  public static filtersSort = scope((query, filters) => {
+    Sort.mapObjToQuery(filters.sort, query)
+  })
 }
