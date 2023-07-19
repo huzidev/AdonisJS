@@ -7,7 +7,7 @@ import { UserState } from "./types";
 const initialState: UserState = {
     updateMe: { ...subState, data: null },
     updateById: { ...subState, data: null },
-    allUser: { ...subState, data: null },
+    allUser: { ...subState, data: null, filters: null },
     getUser: { ...subState, data: null },
     getUserPage: { ...subState, data: null, meta: null },
     createUser: { ...subState },

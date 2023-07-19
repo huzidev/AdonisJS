@@ -4,7 +4,7 @@ import { User } from "store/auth/types";
 import { mapErrorToState } from "store/utils";
 import { errorNotification } from "utils/notifications";
 import * as endpoints from "./endpoints";
-import { UpdateByIdPayload, UpdateMePayload } from "./types";
+import { UpdateByIdPayload, UpdateMePayload, UserFiltersReq } from "./types";
 
 export const updateMe = createAsyncThunk(endpoints.UPDATE_ME, async (data: UpdateMePayload): Promise<User | null> => {
     try {
@@ -52,11 +52,11 @@ export const allUser = createAsyncThunk(endpoints.USER_LIST, async () => {
         console.log("Error", err);
         throw e
     }
-})
+})  
 
-export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (page: number) => {
+export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (page: number, data?: UserFiltersReq) => {
     try {
-        const response = await api.get(endpoints.USER_LIST_PAGE + page);
+        const response = await api.get(endpoints.USER_LIST_PAGE + page, {params: data});
         return response.data;
     } catch (e: any) {
         const err = mapErrorToState(e);
