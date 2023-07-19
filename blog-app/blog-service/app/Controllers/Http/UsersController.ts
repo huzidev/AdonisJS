@@ -1,8 +1,10 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
 import User from "App/Models/User";
+import Utils from "App/Utils";
 import {
   UserCreate,
+  UserListFilters,
   UserUpdate,
   UserUpdateMe,
 } from "App/Validators/UserValidator";
@@ -12,12 +14,13 @@ export default class UsersController {
     return { data: auth.user?.toJSON() };
   }
 
-  public async getAllUser({ params }: HttpContextContract) {
+  public async getAllUser({ params, request }: HttpContextContract) {
     try {
       // const response = await User.all();
       const query = User.query();
       const filters = await validator.validate({
-        
+        schema: UserListFilters.schema,
+        data: Utils.parseQS(request.qs(), [ 'sort' ])
       })
 
       let response;
