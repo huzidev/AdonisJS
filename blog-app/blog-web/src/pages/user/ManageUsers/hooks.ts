@@ -13,8 +13,8 @@ export function useManageUsersPageHooks(): void {
 
   // no need for create !allUsers.data or !allUsers.length because new list of users will fetch every time when admin clicked on next buttton
   useEffect(() => {
-    const search = window.location.search;
-    user.allUserPage(Number(params.page) || 1)
+    const search: any = window.location.search;
+    user.allUserPage({page: Number(params.page) || 1, ...search})
   }, [params.page]);
 
   useEffect(() => {

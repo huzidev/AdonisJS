@@ -3,13 +3,13 @@ import { User } from 'store/auth/types';
 import { useAppDispatch } from 'store/hooks/hooks';
 import * as actions from "./actions";
 import { userSlice } from './reducer';
-import { AllUserList, UpdateByIdPayload, UpdateMePayload, UserState } from './types';
+import { UpdateByIdPayload, UpdateMePayload, UserByPage, UserState } from './types';
 
 export const useUser = () => {
   const state = useSelector((state: any) => state.user) as UserState;
   const dispatch = useAppDispatch();
   const allUser = () => dispatch(actions.allUser());
-  const allUserPage = (payload: AllUserList) => dispatch(actions.allUserByPage(payload));
+  const allUserPage = (payload: UserByPage) => dispatch(actions.allUserByPage(payload));
   const updateMe = (payload: UpdateMePayload) => dispatch(actions.updateMe(payload)); 
   const updateById = (payload: UpdateByIdPayload) => dispatch(actions.updateById(payload)); 
   const getById = (payload: number) => dispatch(actions.getById(payload));
