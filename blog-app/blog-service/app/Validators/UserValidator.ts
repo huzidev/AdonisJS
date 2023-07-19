@@ -2,8 +2,6 @@ import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
 import pick from 'lodash/pick'
 
-// when user is updating own self
-
 // when admin is updating a user
 export class UserUpdate {
   public static schemaMap = {
@@ -23,7 +21,8 @@ export class UserUpdate {
   public messages = UserUpdate.messages
 }
 
-// because of public static schemaMap we can access that properties their as well because of the keyword static
+// when user is updating own self 
+// because of public static schemaMap we can access that properties their as well because of the keyword (static)
 export class UserUpdateMe {
   public schema = schema.create(pick(UserUpdate.schemaMap, ['username']))
   public messages = UserUpdate.messages

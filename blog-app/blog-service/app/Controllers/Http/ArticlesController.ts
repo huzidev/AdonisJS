@@ -6,7 +6,9 @@ import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 // Controller used to call the functions created in routes here so routes won't get messed up
 
 const noArticle = { message: "No such article is found ", status: 404 };
-const noPermission = { message: "You didn't have permission", status: 401 };
+const noPermission = { 
+          message: "Insufficient access, you do not have permission to perform this action",
+          status: 401, };
 export default class ArticlesController {
   public async getBlogs({ params }: HttpContextContract) {
     const userId = params.id;
@@ -49,7 +51,7 @@ export default class ArticlesController {
       }
       if (!article) {
         throw noArticle;
-      } 
+      }
       return {
         article,
         message: `Blog by ${user?.username} fetched successfully`,
@@ -69,24 +71,23 @@ export default class ArticlesController {
       console.log("User role", userRole);
       // const articleId: number = params.id;
       // if user didn't change any value and tries to update blog
-      if (!auth.user!.hasAccess(userRole)) {
-        throw {
-          message: "Insufficient access, you do not have permission to perform this action",
-          status: 401,
-        };
+      if (!article) {
+        throw noArticle;
+        // isAdmin created in User Model
+      } 
+      if ((article.ownerId !== auth.user?.id && !auth.user?.isAdmin()) || !auth.user!.hasAccess(userRole)) {
+        throw noPermission
       }
-      if (body.title === article?.title && body.content === article?.content) {
+      // if (article.ownerId !== auth.user?.id && !auth.user?.isAdmin()) {
+      //   throw noPermission;
+      // } 
+      else if (body.title === article?.title && body.content === article?.content) {
         throw {
           message: "Can't update, values are same as of before",
           status: 401
         };
-      }
-      if (!article) {
-        throw noArticle;
-        // isAdmin created in User Model
-      } else if (article.ownerId !== auth.user?.id && !auth.user?.isAdmin()) {
-        throw noPermission;
-      } else {
+      } 
+      else {
         // await Article.query().where("id", articleId).update(body);
         article.fill({ ...article, ...body });
         article.merge(body);
