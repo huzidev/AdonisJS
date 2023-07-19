@@ -58,3 +58,19 @@ export class UserList {
   })
   public static messages = {}
 }
+
+export class UserListFilters {
+  public static schema = schema.create({
+    sort: schema.object.optional().members({
+      // enum is for available choice like here Sort.type have two available choice either asc or desc
+      id: schema.enum.optional(Sort.types),
+      username: schema.enum.optional(Sort.types),
+      role: schema.enum.optional(Sort.types),
+      isVerified: schema.enum.optional(Sort.types),
+      isActive: schema.enum.optional(Sort.types),
+      isBanned: schema.enum.optional(Sort.types),
+      createdAt: schema.enum.optional(Sort.types),
+      updatedAt: schema.enum.optional(Sort.types),
+    }),
+  })
+}
