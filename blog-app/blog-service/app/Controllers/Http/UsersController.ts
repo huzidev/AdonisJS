@@ -1,4 +1,5 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import { validator } from '@ioc:Adonis/Core/Validator';
 import User from "App/Models/User";
 import {
   UserCreate,
@@ -15,7 +16,10 @@ export default class UsersController {
     try {
       // const response = await User.all();
       const query = User.query();
-  
+      const filters = await validator.validate({
+        
+      })
+
       let response;
       // if user wanted to see allBlogs uploaded by him
       if (params.page) {
