@@ -15,7 +15,7 @@ export function useManageUsersPageHooks(): void {
   useEffect(() => {
     const search: any = window.location.search;
     user.allUserPage({page: Number(params.page) || 1, ...search})
-  }, [params.page]);
+  }, [params.page, window.location.search]);
 
   useEffect(() => {
     if (prev?.loading) {
