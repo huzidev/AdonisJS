@@ -57,5 +57,4 @@ export class UserList {
     updated_at: schema.date.optional({ format: 'yyyy-MM-dd' })
   })
   public static messages = {}
-
 }

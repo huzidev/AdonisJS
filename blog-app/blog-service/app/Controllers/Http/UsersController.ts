@@ -12,26 +12,30 @@ export default class UsersController {
   }
 
   public async getAllUser({ params }: HttpContextContract) {
-    // const response = await User.all();
-    const query = User.query();
-
-    let response;
-    // if user wanted to see allBlogs uploaded by him
-    if (params.page) {
-      response = await query.paginate(params.page || 1, 10);
-      if (Number(params.page) > response.lastPage) {
-        throw {
-          message: `Users page limit exceeds, Total pages are ${response.lastPage}`,
-          status: 404
-        };
+    try {
+      // const response = await User.all();
+      const query = User.query();
+  
+      let response;
+      // if user wanted to see allBlogs uploaded by him
+      if (params.page) {
+        response = await query.paginate(params.page || 1, 10);
+        if (Number(params.page) > response.lastPage) {
+          throw {
+            message: `Users page limit exceeds, Total pages are ${response.lastPage}`,
+            status: 404
+          };
+        }
+      } else {
+        response = await query;
       }
-    } else {
-      response = await query;
+      return {
+        message: `Users list ${params.page} fetched successfully`,
+        data: response
+      };
+    } catch (e) {
+      throw e;
     }
-    return {
-      message: `Users list ${params.page} fetched successfully`,
-      data: response
-    };
   }
 
   public async getById({ params }: HttpContextContract) {
