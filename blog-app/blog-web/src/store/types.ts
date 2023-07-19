@@ -20,6 +20,8 @@ export interface SubState extends HTTPFieldErrors {
 
 export interface MapErrorToState extends HTTPFieldErrors, BaseHTTPResponse {}
 
+export type SortType = 'asc' | 'desc';
+
 export interface PaginationMeta {
   total: number;
   perPage: number;
