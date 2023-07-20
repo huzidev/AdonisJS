@@ -14,7 +14,7 @@ export default function UsersPage() {
   const navigate = useNavigate();
   const [sortValue, setSortValue] = useState<any>({value: "", type: ""});
 
-  // when user reloads the page the useState gets to default form hence if user type is asc then it'll became "" because of reloads this useEffect will gets the state to default form
+  // when user reloads the page the useState gets to default form hence if sort type is asc then it'll became "" because of reloads this useEffect will gets the state to current type
 useEffect(() => {
     // Get the sort parameter from the URL when the component mounts
     const searchParams = new URLSearchParams(window.location.search);
@@ -44,7 +44,7 @@ useEffect(() => {
     } else {
       // by default the type will be asc first
       type = "asc";
-    }
+    } 
     // If the type is "asc", add the sort parameter to the URL
      if (type === "asc" || type === "desc") {
       const searchParams = new URLSearchParams(window.location.search);
