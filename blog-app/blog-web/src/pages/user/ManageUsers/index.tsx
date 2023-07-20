@@ -84,6 +84,7 @@ export default function UsersPage() {
               <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
                 {columns.map((data, columnIndex) => (
                   <th
+                    // calling it with lowerCase suppose we need id for sort but because of startCase() function in columns we were getting Id instead of id
                     onClick={() => handleSort(data.title.toLowerCase())}
                     className="px-5 py-3 cursor-pointer"
                     key={columnIndex}
