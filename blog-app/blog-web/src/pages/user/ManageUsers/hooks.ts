@@ -14,7 +14,11 @@ export function useManageUsersPageHooks(): void {
 
   // no need for create !allUsers.data or !allUsers.length because new list of users will fetch every time when admin clicked on next buttton
   useEffect(() => {
+    // qs.parse() is mandatory otherwise it'll send complete URL after ? which is ?sort=%7B"id"%3A"desc"%7D
+    // but after using it through qs.parse(search) it'll send {sort: '{"id":"desc"}'} which is parsed value
     const search: any = qs.parse(window.location.search);
+    console.log("search", search);
+    
     user.allUserPage({page: Number(params.page) || 1, ...search})
   }, [params.page, window.location.search]);
 
