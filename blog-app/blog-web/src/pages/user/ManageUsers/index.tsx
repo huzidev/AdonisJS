@@ -1,5 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
@@ -9,12 +10,44 @@ import { useManageUsersPageHooks } from "./hooks";
 export default function UsersPage() {
   const user = useUser();
   const auth = useAuth();
+    const params = useParams();
   const navigate = useNavigate();
+  const [sortValue, setSortValue] = useState<any>({value: "", type: ""});
+    const handleSort = (column: string) => {
+    let type = "";
+    if (sortValue.value === column) {
+      // if type is asc then change it to desc if desc then change to asc
+      type = sortValue.type === "asc" ? "desc" : "asc";
+    } else {
+      // by default the type will be asc first
+      type = "asc";
+    }
+
+    // If the type is "asc", add the sort parameter to the URL
+    if (type === "asc") {
+      const searchParams = new URLSearchParams(window.location.search);
+      searchParams.set("sort", JSON.stringify({ [column]: "asc" }));
+      
+      const newUrl = `${ROUTE_PATHS.USERS_PAGE}/${params.page}?${searchParams.toString()}`;
+      window.history.replaceState({}, "", newUrl);
+    } else if (type === "desc") {
+      // If the type is "desc", remove the sort parameter from the URL
+      const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set("sort", JSON.stringify({ [column]: "desc" }));
+      const newUrl = `${ROUTE_PATHS.USERS_PAGE}/${params.page}?${searchParams.toString()}`;
+      window.history.replaceState({}, "", newUrl);
+    } else {
+      const newUrl = `${ROUTE_PATHS.USERS_PAGE}/${params.page}`;
+      window.history.replaceState({}, "", newUrl);
+    }
+
+    setSortValue({ value: column, type });
+  };
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;
   let lastPage = user.state.getUserPage.meta?.lastPage;
 
-  useManageUsersPageHooks();
+  useManageUsersPageHooks(sortValue);
   return (
     <div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">
@@ -51,7 +84,11 @@ export default function UsersPage() {
             <thead>
               <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
                 {columns.map((data, columnIndex) => (
-                  <th className="px-5 py-3" key={columnIndex}>
+                  <th
+                    onClick={() => handleSort(data.title)}
+                    className="px-5 py-3 cursor-pointer"
+                    key={columnIndex}
+                  >
                     {data.title}
                   </th>
                 ))}
