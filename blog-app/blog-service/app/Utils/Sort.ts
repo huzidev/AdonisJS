@@ -3,13 +3,14 @@ import { LucidModel, LucidRow, ModelQueryBuilderContract } from '@ioc:Adonis/Luc
 export default class Sort {
   public static types = ['asc', 'desc'] as const // sort with ascending order or descending order
 
+  
   public static mapObjToQuery = (
     obj: any, // means object can be array, string, number etc and we specify any because if we sort price which is number if we sort name which is string therefore obj type can be any
     query: ModelQueryBuilderContract<LucidModel, LucidRow>
-  ): void => {
-    if (!obj) {
-      return
-    }
+    ): void => {
+      if (!obj) {
+        return
+      }
 
     Object.keys(obj).forEach((sortKey) => { // obj is parameter of .keys() and it must have to be Object.keys() and forEach can take number, string, array, array of strings any type
       const sort = obj[sortKey] // since forEach works for array only

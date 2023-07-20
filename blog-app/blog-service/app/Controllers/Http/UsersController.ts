@@ -20,9 +20,10 @@ export default class UsersController {
       const query = User.query();
       const filters = await validator.validate({
         schema: UserListFilters.schema,
-        data: Utils.parseQS(request.qs(), [ 'sort' ])
+        data: Utils.parseQS(request.qs(), ['sort'])
       })
-
+      console.log("Filters", filters);
+        
       let response;
       // if user wanted to see allBlogs uploaded by him
       if (params.page) {
@@ -38,6 +39,8 @@ export default class UsersController {
       } else {
         response = await query;
       }
+      console.log("RESPONSE", response);
+      
       return {
         message: `Users list ${params.page} fetched successfully`,
         data: response

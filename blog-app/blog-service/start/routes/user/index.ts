@@ -11,6 +11,7 @@ export default function UsersRoutes() {
       .middleware("auth:admin")
       .where("id", /^[0-9]+$/);
     Route.get("/list", `${path}.getAllUser`);
+    // in manage users only admin can see users by page
     Route.get("/list/:page", `${path}.getAllUser`)
       .where("page", /^[0-9]+$/)
       .middleware("auth:admin");
