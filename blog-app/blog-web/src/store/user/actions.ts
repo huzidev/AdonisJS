@@ -54,9 +54,10 @@ export const allUser = createAsyncThunk(endpoints.USER_LIST, async () => {
     }
 })  
 
-export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (data?: UserByPage) => {
+export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (data: UserByPage) => {
+    console.log("data", data);
     try {
-        const response = await api.get(endpoints.USER_LIST_PAGE + data!.page, {params: data});
+        const response = await api.get(endpoints.USER_LIST_PAGE + data.page, {params: data});
         return response.data;
     } catch (e: any) {
         const err = mapErrorToState(e);

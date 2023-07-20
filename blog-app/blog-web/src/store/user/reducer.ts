@@ -65,9 +65,12 @@ export const userSlice = createSlice({
             state.getUserPage.loading = false;
             if (action.payload) {
                 const { data, message } = action.payload;
-                state.getUserPage.data = data.data;
+                state.getUserPage.data = [...data.data];
                 state.getUserPage.meta = data.meta;
-                state.getUserPage.filters = data.filters;
+                if (data.filters) {
+                    state.getUserPage.filters = data.filters;
+                    state.getUserPage.data = [ ...data.data ];
+                }
                 state.getUserPage.message = message;
             }
             state.getUserPage.error = false;
