@@ -18,19 +18,20 @@ export default class UsersController {
     try {
       // const response = await User.all();
       const query = User.query();
+      console.log("Req", request.qs()); 
+      
       const filters = await validator.validate({
         schema: UserListFilters.schema,
         data: Utils.parseQS(request.qs(), ['sort'])
       })
-      console.log("Filters", filters);
-        
+
       let response;
       // if user wanted to see allBlogs uploaded by him
       if (params.page) {
         response = await query
-          .withScopes((scope) => scope.filtersSort(filters))
+          // .withScopes((scope) => scope.filtersSort(filters))
           .paginate(params.page || 1, 10);
-        if (Number(params.page) > response.lastPage) {
+        if (params.page > response.lastPage) {
           throw {
             message: `Users page limit exceeds, Total pages are ${response.lastPage}`,
             status: 404
@@ -39,8 +40,6 @@ export default class UsersController {
       } else {
         response = await query;
       }
-      console.log("RESPONSE", response);
-      
       return {
         message: `Users list ${params.page} fetched successfully`,
         data: response
