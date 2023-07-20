@@ -87,12 +87,13 @@ export default function UsersPage() {
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <span className="whitespace-no-wrap">
-                      {new Date(user.createdAt).toLocaleString()}
+                      {/* just show dates not time while toLocaleString shows complete date and time */}
+                      {new Date(user.createdAt).toLocaleDateString()}
                     </span>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <span className="whitespace-no-wrap" title="Last Update">
-                      {new Date(user.updatedAt).toLocaleString()}
+                      {new Date(user.updatedAt).toLocaleDateString()}
                     </span>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
