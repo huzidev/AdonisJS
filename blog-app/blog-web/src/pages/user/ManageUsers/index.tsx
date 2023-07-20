@@ -17,26 +17,25 @@ export default function UsersPage() {
     let type = "";
     if (sortValue.value === column) {
       // if type is asc then change it to desc if desc then change to asc
-      type = sortValue.type === "asc" ? "desc" : "asc";
+      if (sortValue.type === "") {
+        type = "asc"
+      } else if (sortValue.type === "asc") {
+        type = "desc"
+      } else if (sortValue.type === "desc") {
+        type = "";
+      }
     } else {
       // by default the type will be asc first
       type = "asc";
     }
-
     // If the type is "asc", add the sort parameter to the URL
-    if (type === "asc") {
+     if (type === "asc" || type === "desc") {
       const searchParams = new URLSearchParams(window.location.search);
-      searchParams.set("sort", JSON.stringify({ [column]: "asc" }));
-      
-      const newUrl = `${ROUTE_PATHS.USERS_PAGE}/${params.page}?${searchParams.toString()}`;
-      window.history.replaceState({}, "", newUrl);
-    } else if (type === "desc") {
-      // If the type is "desc", remove the sort parameter from the URL
-      const searchParams = new URLSearchParams(window.location.search);
-        searchParams.set("sort", JSON.stringify({ [column]: "desc" }));
+      searchParams.set("sort", JSON.stringify({ [column]: type }));
       const newUrl = `${ROUTE_PATHS.USERS_PAGE}/${params.page}?${searchParams.toString()}`;
       window.history.replaceState({}, "", newUrl);
     } else {
+      // If the type is neither "asc" nor "desc", remove the entire "sort" parameter from the URL
       const newUrl = `${ROUTE_PATHS.USERS_PAGE}/${params.page}`;
       window.history.replaceState({}, "", newUrl);
     }
