@@ -1,5 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
@@ -10,10 +10,27 @@ import { useManageUsersPageHooks } from "./hooks";
 export default function UsersPage() {
   const user = useUser();
   const auth = useAuth();
-    const params = useParams();
+  const params = useParams();
   const navigate = useNavigate();
   const [sortValue, setSortValue] = useState<any>({value: "", type: ""});
-    const handleSort = (column: string) => {
+
+  // when user reloads the page the useState gets to default form hence if user type is asc then it'll became "" because of reloads this useEffect will gets the state to default form
+useEffect(() => {
+    // Get the sort parameter from the URL when the component mounts
+    const searchParams = new URLSearchParams(window.location.search);
+    const sortParam = searchParams.get("sort");
+
+    if (sortParam) {
+      // If the sort parameter is present, update the sortValue state accordingly
+      const sortValueObj = JSON.parse(sortParam);
+      const column = Object.keys(sortValueObj)[0];
+      const type = sortValueObj[column];
+      setSortValue({ value: column, type });
+    }
+  }, []);
+
+
+  const handleSort = (column: string) => {
     let type = "";
     if (sortValue.value === column) {
       // if type is asc then change it to desc if desc then change to asc

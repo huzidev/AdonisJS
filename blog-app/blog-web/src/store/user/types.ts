@@ -49,6 +49,7 @@ export interface UserByPage extends SubState {
     data?: User[] | null;
     meta: PaginationMeta | null;
     filters?: UserSortReq | null;
+    page?: number;
 }
 
 export interface UserState {

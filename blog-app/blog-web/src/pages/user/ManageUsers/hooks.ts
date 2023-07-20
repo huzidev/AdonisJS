@@ -17,7 +17,7 @@ export function useManageUsersPageHooks(value: any): void {
     // qs.parse() is mandatory otherwise it'll send complete URL after ? which is ?sort=%7B"id"%3A"desc"%7D
     // but after using it through qs.parse(search) it'll send {sort: '{"id":"desc"}'} which is parsed value
     const search: any = qs.parse(window.location.search);
-    user.allUserPage({...search})
+    user.allUserPage({page: params.page || 1, ...search})
   }, [params.page, window.location.search]);
 
   useEffect(() => {
