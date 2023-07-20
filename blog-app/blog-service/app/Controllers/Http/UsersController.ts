@@ -18,18 +18,22 @@ export default class UsersController {
     try {
       // const response = await User.all();
       const query = User.query();
-      console.log("Req", request.qs()); 
       
+      console.log("QS", request.qs());
+
       const filters = await validator.validate({
         schema: UserListFilters.schema,
         data: Utils.parseQS(request.qs(), ['sort'])
       })
 
+      console.log("Filters", filters);
+      
+
       let response;
       // if user wanted to see allBlogs uploaded by him
       if (params.page) {
         response = await query
-          // .withScopes((scope) => scope.filtersSort(filters))
+          .withScopes((scope) => scope.filtersSort(filters))
           .paginate(params.page || 1, 10);
         if (params.page > response.lastPage) {
           throw {

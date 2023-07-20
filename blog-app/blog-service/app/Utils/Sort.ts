@@ -2,6 +2,8 @@ import { LucidModel, LucidRow, ModelQueryBuilderContract } from '@ioc:Adonis/Luc
 
 export default class Sort {
   public static types = ['asc', 'desc'] as const // sort with ascending order or descending order
+  public static typesRole = ['user', 'blogger', 'admin', 'super-admin'] as const // sort with ascending order or descending order
+  public static typesBooleam = ['true', 'false'] as const // sort with ascending order or descending order
 
   
   public static mapObjToQuery = (
@@ -17,7 +19,18 @@ export default class Sort {
       // const sort will be either asc or desc
       // sortKey will be id, name, email etc
       
-      query.orderBy(sortKey, sort) // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending
+      if (sortKey === "role") {
+        query.from("users").where(sortKey, sort)
+      } else if (sortKey === "isVerified") {
+        if (sort === "true") {
+          query.from("users").where(sortKey, 1)
+        } else {
+          query.from("users").where(sortKey, 0)
+        }
+      } {
+        query.orderBy(sortKey, sort) // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending
+      }     
+
       // console.log('object sortKey', sortKey) // sortKey can be price, name, rooms, status(status can be available and rented) etc since all these are of diff types
       // console.log("what is sort in func", sortKey);
     })
