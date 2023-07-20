@@ -32,11 +32,11 @@ export default function UsersPage() {
      if (type === "asc" || type === "desc") {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("sort", JSON.stringify({ [column]: type }));
-      const newUrl = `${ROUTE_PATHS.USERS_PAGE}/${params.page}?${searchParams.toString()}`;
+      const newUrl = `${ROUTE_PATHS.USERS_PAGE}${params.page}?${searchParams.toString()}`;
       window.history.replaceState({}, "", newUrl);
     } else {
       // If the type is neither "asc" nor "desc", remove the entire "sort" parameter from the URL
-      const newUrl = `${ROUTE_PATHS.USERS_PAGE}/${params.page}`;
+      const newUrl = `${ROUTE_PATHS.USERS_PAGE}${params.page}`;
       window.history.replaceState({}, "", newUrl);
     }
 
