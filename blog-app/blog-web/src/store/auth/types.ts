@@ -17,6 +17,8 @@ export interface User {
     isActive: boolean;
     isVerified: boolean;
     isBanned: boolean;
+    createdAt: string;
+    updatedAt: string;
     role: UserRole;
 }
 

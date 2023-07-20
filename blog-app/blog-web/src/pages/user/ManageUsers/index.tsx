@@ -13,7 +13,7 @@ export default function UsersPage() {
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;
   let lastPage = user.state.getUserPage.meta?.lastPage;
-  
+
   useManageUsersPageHooks();
   return (
     <div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
@@ -83,6 +83,16 @@ export default function UsersPage() {
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <span className="whitespace-no-wrap">
                       {user.isActive ? "True" : "In False"}
+                    </span>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <span className="whitespace-no-wrap">
+                      {new Date(user.createdAt).toLocaleString()}
+                    </span>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <span className="whitespace-no-wrap" title="Last Update">
+                      {new Date(user.updatedAt).toLocaleString()}
                     </span>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">

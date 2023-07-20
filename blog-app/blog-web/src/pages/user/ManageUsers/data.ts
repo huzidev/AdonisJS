@@ -8,6 +8,8 @@ const columnsKeys = [
   'isActive',
   'isBanned',
   'isVerified',
+  'createdAt',
+  'updatedAt',
   'Actions'
 ];
 
