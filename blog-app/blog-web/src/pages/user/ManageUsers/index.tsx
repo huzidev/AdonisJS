@@ -12,10 +12,9 @@ export default function UsersPage() {
   const auth = useAuth();
   const params = useParams();
   const navigate = useNavigate();
-  const [sortValue, setSortValue] = useState<any>({value: "", type: ""});
-
+  const [sortValue, setSortValue] = useState<any>({ value: "", type: "" });
   // when user reloads the page the useState gets to default form hence if sort type is asc then it'll became "" because of reloads this useEffect will gets the state to current type
-useEffect(() => {
+  useEffect(() => {
     // Get the sort parameter from the URL when the component mounts
     const searchParams = new URLSearchParams(window.location.search);
     const sortParam = searchParams.get("sort");
@@ -29,27 +28,28 @@ useEffect(() => {
     }
   }, []);
 
-
   const handleSort = (column: string) => {
     let type = "";
     if (sortValue.value === column) {
       // if type is asc then change it to desc if desc then change to asc
       if (sortValue.type === "") {
-        type = "asc"
+        type = "asc";
       } else if (sortValue.type === "asc") {
-        type = "desc"
+        type = "desc";
       } else if (sortValue.type === "desc") {
         type = "";
       }
     } else {
       // by default the type will be asc first
       type = "asc";
-    } 
+    }
     // If the type is "asc", add the sort parameter to the URL
-     if (type === "asc" || type === "desc") {
+    if (type === "asc" || type === "desc") {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("sort", JSON.stringify({ [column]: type }));
-      const newUrl = `${ROUTE_PATHS.USERS_PAGE}${params.page}?${searchParams.toString()}`;
+      const newUrl = `${ROUTE_PATHS.USERS_PAGE}${
+        params.page
+      }?${searchParams.toString()}`;
       window.history.replaceState({}, "", newUrl);
     } else {
       // If the type is neither "asc" nor "desc", remove the entire "sort" parameter from the URL
@@ -75,7 +75,7 @@ useEffect(() => {
         </div>
         <div className="flex items-center justify-between">
           <div className="ml-10 space-x-8 lg:ml-40">
-            <button 
+            <button
               className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700"
               title="Create User"
               onClick={() => navigate(ROUTE_PATHS.USER_CREATE)}
@@ -153,18 +153,17 @@ useEffect(() => {
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <div className="pl-4">
                       {/* so admin can't get the access to edit super-admin */}
-                      {auth.state.user && !hasPermission(user.role, auth.state.user.role) ? (
+                      {auth.state.user &&
+                      !hasPermission(user.role, auth.state.user.role) ? (
                         <button
-                        className="text-blue-600"
-                        // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                        onClick={() =>
-                          navigate(
-                            ROUTE_PATHS.VIEW_PROFILE + user.id 
-                          )
-                        }
-                      >
-                        View Profile
-                      </button>
+                          className="text-blue-600"
+                          // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                          onClick={() =>
+                            navigate(ROUTE_PATHS.VIEW_PROFILE + user.id)
+                          }
+                        >
+                          View Profile
+                        </button>
                       ) : (
                         <button
                           className="text-blue-600"
@@ -172,7 +171,9 @@ useEffect(() => {
                           onClick={() =>
                             navigate(
                               ROUTE_PATHS.EDIT_USER +
-                                (user.id === auth.state.user?.id ? "me" : user.id)
+                                (user.id === auth.state.user?.id
+                                  ? "me"
+                                  : user.id)
                             )
                           }
                         >
@@ -192,17 +193,25 @@ useEffect(() => {
           </span>
           <div className="mt-2 inline-flex sm:mt-0">
             {currentPage !== 1 && (
-              <button 
+              <button
                 className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
-                onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + (currentPage! - 1))}
+                onClick={() =>
+                  navigate(
+                    ROUTE_PATHS.USERS_PAGE + (currentPage! - 1 + window.location.search)
+                  )
+                }
               >
                 Prev
               </button>
             )}
             {currentPage !== lastPage && (
-              <button 
+              <button
                 className="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
-                onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + (currentPage! + 1))}
+                onClick={() =>
+                  navigate(
+                    ROUTE_PATHS.USERS_PAGE + (currentPage! + 1) + window.location.search
+                  )
+                }
               >
                 Next
               </button>
