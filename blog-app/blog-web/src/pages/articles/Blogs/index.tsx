@@ -134,6 +134,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     (hasPermission("admin", userData?.role) &&
                       uploadedByUserRole !== "super-admin") ||
                     hasPermission("super-admin", userData?.role)) && (
+                      // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
                       isBannedUser ? (
                         <div>
                           <Link
