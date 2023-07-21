@@ -21,7 +21,7 @@ export default class Sort {
       
       if (sortKey === "role") {
         query.from("users").where(sortKey, sort)
-      } else if (sortKey === "isVerified") {
+      } else if (sortKey === ("isVerified" || "isActive" || "isBanned")) {
         if (sort === "true") {
           query.from("users").where(sortKey, 1)
         } else {
