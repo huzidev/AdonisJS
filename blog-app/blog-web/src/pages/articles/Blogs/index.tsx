@@ -134,9 +134,15 @@ export default function ViewBlogsPage(): JSX.Element {
                     (hasPermission("admin", userData?.role) &&
                       uploadedByUserRole !== "super-admin") ||
                     hasPermission("super-admin", userData?.role)) && (
-                      userData?.isBanned ? (
+                      isBannedUser ? (
                         <div>
-                          View Profile
+                          <Link
+                            to={ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId}
+                            type="button"
+                            className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                          >
+                            View Profile
+                          </Link>
                         </div>
                       ) : (
                       <div>
