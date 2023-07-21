@@ -43,6 +43,7 @@ export default function ViewBlogsPage(): JSX.Element {
           const uploadedByUser = allUsers?.find(
             (user: User) => user.id === blog.ownerId
           );
+          const isBannedUser = uploadedByUser && uploadedByUser.isBanned;
           const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
           const uploadedByUserId = uploadedByUser && uploadedByUser.id;
           const uploadedByUsername = uploadedByUser && uploadedByUser.username;
@@ -191,7 +192,7 @@ export default function ViewBlogsPage(): JSX.Element {
                       type="button"
                       className="text-sm font-medium text-center text-white hover:text-blue-500"
                     >
-                      {uploadedByUsername}
+                      {uploadedByUsername} {isBannedUser && "Banned"}
                     </Link>
                   </div>
                 </div>
