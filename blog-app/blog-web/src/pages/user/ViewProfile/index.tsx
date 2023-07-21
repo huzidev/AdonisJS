@@ -35,6 +35,7 @@ export default function ViewProfilePage(): JSX.Element {
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   const userId: any = auth.state.user?.id;
 
+
   let currentId = isMe ? userId : Number(params.id);
   let allBlogsById = blogs.state.getBlogsById.data;
   let userBlogs = allBlogsById.filter((blogs) => blogs.ownerId === currentId);
@@ -85,26 +86,38 @@ export default function ViewProfilePage(): JSX.Element {
       <div>
         <div className="w-11/12 my-5 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div className="p-5">
-            <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
-              User Profile
-            </h1>
-            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Id : {userDetails.id}
-            </h2>
-            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Name : {userDetails.username + ` (${userDetails.role})`}
-            </h2>
-            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Email : {userDetails.email}
-            </h2>
-            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Joined Date : {formatedDate}
-            </h2>
-            <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {(isUser && isMe) || isClickedUser
-                ? `Total Blogs Liked : ${favoriteBlogs.meta?.total}`
-                : `Total Blogs : ${totalBlogs}`}
-            </h2>
+          {
+            userDataById?.isBanned ? (
+              <div className="flex pt-6">
+                <p className="text-xl">
+                  User <b>{userDataById?.username}</b> Is Banned from this web
+                </p>
+              </div>
+            ) : (
+              <>
+              <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
+                User Profile
+              </h1>
+              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                Id : {userDetails.id}
+              </h2>
+              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                Name : {userDetails.username + ` (${userDetails.role})`}
+              </h2>
+              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                Email : {userDetails.email}
+              </h2>
+              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                Joined Date : {formatedDate}
+              </h2>
+              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                {(isUser && isMe) || isClickedUser
+                  ? `Total Blogs Liked : ${favoriteBlogs.meta?.total}`
+                  : `Total Blogs : ${totalBlogs}`}
+              </h2>
+              </>
+            )
+          }
             {(isMe || isAdmin) && (
               <Link
                 to={
