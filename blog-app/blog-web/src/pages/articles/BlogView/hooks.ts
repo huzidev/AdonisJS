@@ -27,7 +27,7 @@ export function useGetBlogPageHooks(): void {
       user.getById(ownerId);
     }
   }, [ownerId])
-  
+
   useEffect(() => {
     if (prev?.getBlog.loading) {
       if (!state.getBlog.loading && !state.getBlog.error) {
