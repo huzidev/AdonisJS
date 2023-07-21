@@ -147,23 +147,14 @@ export default function UsersPage() {
               <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
                 {columns.map((data, columnIndex) => (
                   // because we don't wanna put onClick filters on sno and actions field
-                  constKeys.includes(data.key) ? (
-                    <th
-                      className="px-5 py-3"
-                      key={columnIndex}
-                    >
-                      {startCase(data.title)}
-                    </th>
-                  ) : (
-                    <th
-                      onClick={() => handleSort(data.key)}
+                  <th
+                      onClick={!constKeys.includes(data.key) ? () => handleSort(data.key) : undefined}
                       className="px-5 py-3 cursor-pointer"
                       key={columnIndex}
                     >
                       {/* startCase will make the first letter Capital of any word */}
                       {startCase(data.title)}
                     </th>
-                  )
                 ))}
               </tr>
             </thead>
