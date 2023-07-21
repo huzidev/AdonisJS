@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { alternateKeys, booleanKeys, columns } from "./data";
+import { alternateKeys, booleanKeys, columns, typeResult } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
 
 
@@ -85,8 +85,12 @@ export default function UsersPage() {
       }
     }
 
+    const result = typeResult.find((value) => value === type);
+
+    console.log("Result", result);
+    
     // If the type is "asc", add the sort parameter to the URL
-    if (type === "asc" || type === "desc" || type === "true" || type === "false") {
+    if (type === result) {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("sort", JSON.stringify({ [column]: type }));
       const newUrl = `${ROUTE_PATHS.USERS_PAGE}${
@@ -147,7 +151,7 @@ export default function UsersPage() {
                     className="px-5 py-3 cursor-pointer"
                     key={columnIndex}
                   >
-  {/* startCase will make first letter Capital of any word */}
+                    {/* startCase will make first letter Capital of any word */}
                     {startCase(data.title)}
                   </th>
                 ))}
@@ -157,6 +161,9 @@ export default function UsersPage() {
               {allUsers?.map((user, userIndex) => (
                 // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                 <tr key={userIndex}>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <p className="whitespace-no-wrap">{userIndex + 1}</p>
+                  </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <p className="whitespace-no-wrap">{user.id}</p>
                   </td>
@@ -181,7 +188,7 @@ export default function UsersPage() {
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <span className="whitespace-no-wrap">
-                      {user.isActive ? "True" : "In False"}
+                      {user.isActive ? "True" : "False"}
                     </span>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
