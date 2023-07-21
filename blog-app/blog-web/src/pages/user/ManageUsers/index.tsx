@@ -31,9 +31,6 @@ export default function UsersPage() {
   const handleSort = (column: string) => {
     let type = "";
     
-    console.log("columns", column);
-    
-
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
     let altKeys = alternateKeys.find((value) => value === column);
     let boolKeys = booleanKeys.find((value) => value === column);
@@ -90,7 +87,7 @@ export default function UsersPage() {
 
   useManageUsersPageHooks(sortValue);
   return (
-    <div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">
         <div>
           <h2 className="font-semibold text-gray-700">Manage Users</h2>
@@ -145,6 +142,9 @@ export default function UsersPage() {
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <p className="whitespace-no-wrap">{user.username}</p>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                    <p className="whitespace-no-wrap">{user.email}</p>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <p className="whitespace-no-wrap">{user.role}</p>

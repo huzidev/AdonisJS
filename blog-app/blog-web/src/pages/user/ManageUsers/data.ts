@@ -4,6 +4,7 @@ import startCase from 'lodash/startCase';
 const columnsKeys = [
   'id',
   'username',
+  'email',
   'role',
   'isActive',
   'isBanned',
