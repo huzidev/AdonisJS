@@ -184,10 +184,7 @@ export default function ViewBlogsPage(): JSX.Element {
                   <div className="flex justify-end items-center">
                     <p className="text-white">Uploaded By :&nbsp;</p>
                     {isBannedUser ? (
-                      <div className="flex">
-                        <del title="Banned User">{uploadedByUsername}</del>
-                        <p>&nbsp;Banned</p>
-                      </div>
+                      <del title="Banned User" className="text-red-600">{uploadedByUsername}</del>
                     ) : (
                       <Link
                         to={
