@@ -28,7 +28,7 @@ export default class UsersController {
 
       console.log("Filter", filters);
       
-
+      // to use these values in message
       let filterResultKey;
       let filterResultValue;
       if (!!filters.sort) {
