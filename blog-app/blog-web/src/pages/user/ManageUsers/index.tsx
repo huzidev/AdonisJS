@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { columns } from "./data";
+import { alternateKeys, columns } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
 
 export default function UsersPage() {
@@ -30,7 +30,10 @@ export default function UsersPage() {
 
   const handleSort = (column: string) => {
     let type = "";
-    if (sortValue.value === column) {
+    
+    // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
+    let altKeys = alternateKeys.find((value) => value === column);
+    if (sortValue.value === altKeys) {
       // if type is asc then change it to desc if desc then change to asc
       if (sortValue.type === "") {
         type = "asc";
