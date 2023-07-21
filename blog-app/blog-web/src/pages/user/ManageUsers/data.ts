@@ -1,4 +1,3 @@
-import startCase from 'lodash/startCase';
 
 // these columnKeys will be shown at top when Admin clicked on manage users
 const columnsKeys = [
@@ -16,11 +15,12 @@ const columnsKeys = [
 
 // boolKeys means they'll either be true(yes) or false(no)
 export const booleanKeys = ['isActive', 'isBanned', 'isVerified'];
-export const alternateKeys = ['id', 'username', 'createdAt', 'updatedAt'];
+export const alternateKeys = ['id', 'email', 'username', 'createdAt', 'updatedAt'];
+export const typeResult = ["asc", "desc", "true", "false", "admin", "super-admin", "user", "blogger"];
+
 
 export const columns = columnsKeys.map((key) => ({
   key,
   dataIndex: key,
-  // startCase will make first letter Capital of any word
-  title: startCase(key)
+  title: key
 }));

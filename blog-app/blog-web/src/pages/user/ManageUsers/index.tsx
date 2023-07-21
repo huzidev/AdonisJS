@@ -1,4 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
+import startCase from 'lodash/startCase';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
@@ -6,6 +7,7 @@ import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { alternateKeys, booleanKeys, columns } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
+
 
 export default function UsersPage() {
   const user = useUser();
@@ -18,7 +20,6 @@ export default function UsersPage() {
     // Get the sort parameter from the URL when the component mounts
     const searchParams = new URLSearchParams(window.location.search);
     const sortParam = searchParams.get("sort");
-
     if (sortParam) {
       // If the sort parameter is present, update the sortValue state accordingly
       const sortValueObj = JSON.parse(sortParam);
@@ -30,11 +31,13 @@ export default function UsersPage() {
 
   const handleSort = (column: string) => {
     let type = "";
+
+    console.log("COLUMN", column);
     
+
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
     let altKeys = alternateKeys.find((value) => value === column);
     let boolKeys = booleanKeys.find((value) => value === column);
-    console.log("boolkets", boolKeys);
     
     if (altKeys) {
       if (sortValue.value === altKeys) {
@@ -51,7 +54,7 @@ export default function UsersPage() {
         type = "asc";
       }
     } else if (boolKeys) {
-      if (sortValue.value === altKeys) {
+      if (sortValue.value === boolKeys) {
         // if type is asc then change it to desc if desc then change to asc
         if (sortValue.type === "") {
           type = "true";
@@ -64,7 +67,24 @@ export default function UsersPage() {
         // by default the type will be asc first
         type = "true";
       }
+    } else {
+      if (sortValue.value === column) {
+        if (sortValue.type === "") {
+          type = "admin";
+        } else if (sortValue.type === "admin") {
+          type = "super-admin";
+        } else if (sortValue.type === "super-admin") {
+          type = "user";
+        } else if (sortValue.type === "user") {
+          type = "blogger";
+        } else if (sortValue.type === "blogger") {
+          type = "";
+        }
+      } else {
+          type = "admin";
+      }
     }
+
     // If the type is "asc", add the sort parameter to the URL
     if (type === "asc" || type === "desc" || type === "true" || type === "false") {
       const searchParams = new URLSearchParams(window.location.search);
@@ -123,12 +143,12 @@ export default function UsersPage() {
               <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
                 {columns.map((data, columnIndex) => (
                   <th
-                    // calling it with lowerCase suppose we need id for sort but because of startCase() function in columns we were getting Id instead of id
-                    onClick={() => handleSort(data.title.toLowerCase())}
+                    onClick={() => handleSort(data.title)}
                     className="px-5 py-3 cursor-pointer"
                     key={columnIndex}
                   >
-                    {data.title}
+  {/* startCase will make first letter Capital of any word */}
+                    {startCase(data.title)}
                   </th>
                 ))}
               </tr>
