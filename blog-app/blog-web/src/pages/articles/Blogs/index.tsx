@@ -43,7 +43,7 @@ export default function ViewBlogsPage(): JSX.Element {
           const uploadedByUser = allUsers?.find(
             (user: User) => user.id === blog.ownerId
           );
-          const isBannedUser = uploadedByUser && uploadedByUser.isBanned;
+          const isBannedUser: any = uploadedByUser && uploadedByUser.isBanned;
           const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
           const uploadedByUserId = uploadedByUser && uploadedByUser.id;
           const uploadedByUsername = uploadedByUser && uploadedByUser.username;
@@ -131,8 +131,8 @@ export default function ViewBlogsPage(): JSX.Element {
                   </Link>
                   {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
                   {(blog.ownerId === userData?.id ||
-                    ((hasPermission("admin", userData?.role) &&
-                      uploadedByUserRole !== "super-admin")) ||
+                    (hasPermission("admin", userData?.role) &&
+                      uploadedByUserRole !== "super-admin") ||
                     hasPermission("super-admin", userData?.role)) && (
                     <div>
                       <Link
@@ -183,17 +183,24 @@ export default function ViewBlogsPage(): JSX.Element {
                   )}
                   <div className="flex justify-end items-center">
                     <p className="text-white">Uploaded By :&nbsp;</p>
-                    <Link
-                      to={
-                        blog.ownerId === auth.state.user?.id
-                          ? ROUTE_PATHS.VIEW_PROFILE + "me"
-                          : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId
-                      }
-                      type="button"
-                      className="text-sm font-medium text-center text-white hover:text-blue-500"
-                    >
-                      {uploadedByUsername} {isBannedUser && "Banned"}
-                    </Link>
+                    {isBannedUser ? (
+                      <div className="flex">
+                        <del title="Banned User">{uploadedByUsername}</del>
+                        <p>&nbsp;Banned</p>
+                      </div>
+                    ) : (
+                      <Link
+                        to={
+                          blog.ownerId === auth.state.user?.id
+                            ? ROUTE_PATHS.VIEW_PROFILE + "me"
+                            : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId
+                        }
+                        type="button"
+                        className="text-sm font-medium text-center text-white hover:text-blue-500"
+                      >
+                        {uploadedByUsername}
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
