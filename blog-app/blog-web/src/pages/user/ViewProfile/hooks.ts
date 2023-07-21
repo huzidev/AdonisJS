@@ -26,7 +26,8 @@ export function useViewProfilePageHook(): void {
   useEffect(() => {
     if (prevUser?.loading) {
       if (!userState.loading && !userState.error) {
-        if (username) {
+        // if user is banned then we won't show details fetched successfully notification
+        if (username && !userState.data?.isBanned) {
           successNotification(`${username}'s details fetched successfully`);
         }
       } else if (!userState.loading && userState.error) {
