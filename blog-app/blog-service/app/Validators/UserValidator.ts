@@ -66,6 +66,7 @@ export class UserListFilters {
       // enum is for available choice like here Sort.type have two available choice either asc or desc
       id: schema.enum.optional(Sort.types),
       username: schema.enum.optional(Sort.types),
+      email: schema.enum.optional(Sort.types),
       role: schema.enum.optional(Sort.typesRole),
       isVerified: schema.enum.optional(Sort.typesBooleam),
       isActive: schema.enum.optional(Sort.typesBooleam),

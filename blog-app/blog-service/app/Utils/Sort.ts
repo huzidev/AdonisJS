@@ -27,10 +27,9 @@ export default class Sort {
         } else {
           query.from("users").where(sortKey, 0)
         }
-      } {
+      } else {
         query.orderBy(sortKey, sort) // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending
-      }     
-
+      }
       // console.log('object sortKey', sortKey) // sortKey can be price, name, rooms, status(status can be available and rented) etc since all these are of diff types
       // console.log("what is sort in func", sortKey);
     })
