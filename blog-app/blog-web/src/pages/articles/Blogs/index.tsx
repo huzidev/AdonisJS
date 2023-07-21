@@ -134,52 +134,58 @@ export default function ViewBlogsPage(): JSX.Element {
                     (hasPermission("admin", userData?.role) &&
                       uploadedByUserRole !== "super-admin") ||
                     hasPermission("super-admin", userData?.role)) && (
-                    <div>
-                      <Link
-                        to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
-                        type="button"
-                        className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                      >
-                        Edit
-                      </Link>
-                      <button
-                        type="button"
-                        className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
-                        // onClick={() => blogs.deleteBlog(blog.id)}
-                        onClick={() => {
-                          setDeleteBlogId(blog.id);
-                          setShowModal(true);
-                        }}
-                      >
-                        Delete
-                      </button>
-                      {showModal && deleteBlogId === blog.id && (
-                        <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
-                          <div className="bg-white p-8 w-96">
-                            <p className="text-lg text-center mb-4">
-                              Are you sure you want to delete this blog?
-                            </p>
-                            <div className="flex justify-center space-x-4">
-                              <button
-                                className="bg-red-500 text-white px-4 py-2 rounded"
-                                onClick={() => {
-                                  blogs.deleteBlog(blog.id);
-                                  setShowModal(false);
-                                }}
-                              >
-                                Yes
-                              </button>
-                              <button
-                                className="bg-gray-500 text-white px-4 py-2 rounded"
-                                onClick={() => setShowModal(false)}
-                              >
-                                No
-                              </button>
+                      userData?.isBanned ? (
+                        <div>
+                          View Profile
+                        </div>
+                      ) : (
+                      <div>
+                        <Link
+                          to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                          type="button"
+                          className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          type="button"
+                          className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
+                          // onClick={() => blogs.deleteBlog(blog.id)}
+                          onClick={() => {
+                            setDeleteBlogId(blog.id);
+                            setShowModal(true);
+                          }}
+                        >
+                          Delete
+                        </button>
+                        {showModal && deleteBlogId === blog.id && (
+                          <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
+                            <div className="bg-white p-8 w-96">
+                              <p className="text-lg text-center mb-4">
+                                Are you sure you want to delete this blog?
+                              </p>
+                              <div className="flex justify-center space-x-4">
+                                <button
+                                  className="bg-red-500 text-white px-4 py-2 rounded"
+                                  onClick={() => {
+                                    blogs.deleteBlog(blog.id);
+                                    setShowModal(false);
+                                  }}
+                                >
+                                  Yes
+                                </button>
+                                <button
+                                  className="bg-gray-500 text-white px-4 py-2 rounded"
+                                  onClick={() => setShowModal(false)}
+                                >
+                                  No
+                                </button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      )}
-                    </div>
+                        )}
+                      </div>
+                      )
                   )}
                   <div className="flex justify-end items-center">
                     <p className="text-white">Uploaded By :&nbsp;</p>
