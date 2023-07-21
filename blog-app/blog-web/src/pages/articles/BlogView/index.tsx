@@ -24,8 +24,10 @@ export default function ViewBlogPage(): JSX.Element {
     <div>
       <div className="w-2/3 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         {owner?.isBanned ? (
-          <div>
-            User {owner?.username} Is Banned from this web
+          <div className="flex justify-center py-32">
+            <p className="text-xl">
+              User <b>{owner?.username}</b> Is Banned from this web
+            </p>
           </div>
         ) : (
           <>
