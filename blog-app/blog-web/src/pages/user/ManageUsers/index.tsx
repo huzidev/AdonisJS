@@ -30,7 +30,7 @@ export default function UsersPage() {
   }, []);
 
   const handleSort = (column: string) => {
-    let type = "";
+    let type: any = "";
 
     console.log("COLUMN", column);
     
@@ -69,17 +69,22 @@ export default function UsersPage() {
       }
     } else {
       if (sortValue.value === column) {
-        if (sortValue.type === "") {
-          type = "admin";
-        } else if (sortValue.type === "admin") {
-          type = "super-admin";
-        } else if (sortValue.type === "super-admin") {
-          type = "user";
-        } else if (sortValue.type === "user") {
-          type = "blogger";
-        } else if (sortValue.type === "blogger") {
-          type = "";
+        let result = typeResult.find((value) => value === sortValue.type);
+        console.log("RESULT", result);
+        if (sortValue.value === result) {
+          type = result;
         }
+        // if (sortValue.type === "") {
+        //   type = "admin";
+        // } else if (sortValue.type === "admin") {
+        //   type = "super-admin";
+        // } else if (sortValue.type === "super-admin") {
+        //   type = "user";
+        // } else if (sortValue.type === "user") {
+        //   type = "blogger";
+        // } else if (sortValue.type === "blogger") {
+        //   type = "";
+        // }
       } else {
           type = "admin";
       }
@@ -87,8 +92,6 @@ export default function UsersPage() {
 
     const result = typeResult.find((value) => value === type);
 
-    console.log("Result", result);
-    
     // If the type is "asc", add the sort parameter to the URL
     if (type === result) {
       const searchParams = new URLSearchParams(window.location.search);
