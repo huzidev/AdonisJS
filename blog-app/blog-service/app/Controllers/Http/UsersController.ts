@@ -26,10 +26,17 @@ export default class UsersController {
         data: Utils.parseQS(request.qs(), ['sort'])
       })
 
-      console.log("Filters", filters);
+      console.log("Filter", filters);
       
 
-      let response;
+      let filterResultKey;
+      let filterResultValue;
+      if (!!filters.sort) {
+        filterResultKey = Object.keys(filters.sort!)[0];
+        filterResultValue = Object.values(filters.sort!)[0];
+      }
+
+      let response; 
       // if user wanted to see allBlogs uploaded by him
       if (params.page) {
         response = await query
@@ -45,7 +52,16 @@ export default class UsersController {
         response = await query;
       }
       return {
-        message: `Users list ${params.page} fetched successfully`,
+        // so when user asked for filter then notifcation will be according to filter type
+        message: !!filters.sort 
+          ? `Users fetched by ${
+            filterResultKey === "role" 
+            ? filters.sort?.role 
+            : filterResultValue === "asc" 
+            ? `ascending ${filterResultKey} order` 
+            : `descending ${filterResultKey} order` 
+          } successfully` 
+          : `Users list ${params.page} fetched successfully`, 
         data: response
       };
     } catch (e) {
