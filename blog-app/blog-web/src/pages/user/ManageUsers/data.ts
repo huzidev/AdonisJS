@@ -18,6 +18,7 @@ const columnsKeys = [
 export const booleanKeys = ['isActive', 'isBanned', 'isVerified'];
 export const alternateKeys = ['id', 'email', 'username', 'createdAt', 'updatedAt'];
 export const typeResult = ["asc", "desc", "true", "false", "admin", "super-admin", "user", "blogger"];
+export const constKeys = ['sno', 'actions'];
 
 export const columns = columnsKeys.map((key) => ({
   key,

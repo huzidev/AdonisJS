@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { alternateKeys, booleanKeys, columns, typeResult } from "./data";
+import { alternateKeys, booleanKeys, columns, constKeys, typeResult } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
 
 
@@ -146,14 +146,24 @@ export default function UsersPage() {
             <thead>
               <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
                 {columns.map((data, columnIndex) => (
-                  <th
-                    onClick={() => handleSort(data.title)}
-                    className="px-5 py-3 cursor-pointer"
-                    key={columnIndex}
-                  >
-                    {/* startCase will make first letter Capital of any word */}
-                    {startCase(data.title)}
-                  </th>
+                  // because we don't wanna put onClick filters on sno and actions field
+                  constKeys.includes(data.key) ? (
+                    <th
+                      className="px-5 py-3"
+                      key={columnIndex}
+                    >
+                      {startCase(data.title)}
+                    </th>
+                  ) : (
+                    <th
+                      onClick={() => handleSort(data.key)}
+                      className="px-5 py-3 cursor-pointer"
+                      key={columnIndex}
+                    >
+                      {/* startCase will make the first letter Capital of any word */}
+                      {startCase(data.title)}
+                    </th>
+                  )
                 ))}
               </tr>
             </thead>
