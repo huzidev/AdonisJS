@@ -202,7 +202,6 @@ useEffect(() => {
             {currentPage !== lastPage && (
               <button 
                 className="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
-                // onClick={next}
                 onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + (currentPage! + 1))}
               >
                 Next
