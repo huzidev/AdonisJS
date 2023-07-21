@@ -30,7 +30,8 @@ export function useViewProfilePageHook(): void {
         if (username && !userState.data?.isBanned) {
           successNotification(`${username}'s details fetched successfully`);
         }
-      } else if (!userState.loading && userState.error) {
+      } // when user tries to change the URL example if user changes view/:id id of the user which doesn't exist then show error 
+      else if (!userState.loading && userState.error) {
         navigate("/");
       }
     }
