@@ -10,7 +10,7 @@ export function useViewProfilePageHook(): void {
   const blogs = useBlogs();
   const username = user.state.getUser.data?.username;
   const params = useParams();
-  const userState = user.state.getUser;
+  const userState = user.state;
   const blogState = blogs.state;
   const prevUser = usePrevious(userState);
   const prevBlog = usePrevious(blogState);
@@ -24,14 +24,14 @@ export function useViewProfilePageHook(): void {
   }, [params.id]);
 
   useEffect(() => {
-    if (prevUser?.loading) {
-      if (!userState.loading && !userState.error) {
+    if (prevUser?.getUser.loading) {
+      if (!userState.getUser.loading && !userState.getUser.error) {
         // if user is banned then we won't show details fetched successfully notification
-        if (username && !userState.data?.isBanned) {
+        if (username && !userState.getUser.data?.isBanned) {
           successNotification(`${username}'s details fetched successfully`);
         }
       } // when user tries to change the URL example if user changes view/:id id of the user which doesn't exist then show error 
-      else if (!userState.loading && userState.error) {
+      else if (!userState.getUser.loading && userState.getUser.error) {
         navigate("/");
       }
     }
