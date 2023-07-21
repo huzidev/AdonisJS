@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { alternateKeys, columns } from "./data";
+import { alternateKeys, booleanKeys, columns } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
 
 export default function UsersPage() {
@@ -31,23 +31,45 @@ export default function UsersPage() {
   const handleSort = (column: string) => {
     let type = "";
     
+    console.log("columns", column);
+    
+
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
     let altKeys = alternateKeys.find((value) => value === column);
-    if (sortValue.value === altKeys) {
-      // if type is asc then change it to desc if desc then change to asc
-      if (sortValue.type === "") {
+    let boolKeys = booleanKeys.find((value) => value === column);
+    console.log("boolkets", boolKeys);
+    
+    if (altKeys) {
+      if (sortValue.value === altKeys) {
+        // if type is asc then change it to desc if desc then change to asc
+        if (sortValue.type === "") {
+          type = "asc";
+        } else if (sortValue.type === "asc") {
+          type = "desc";
+        } else if (sortValue.type === "desc") {
+          type = "";
+        }
+      } else {
+        // by default the type will be asc first
         type = "asc";
-      } else if (sortValue.type === "asc") {
-        type = "desc";
-      } else if (sortValue.type === "desc") {
-        type = "";
       }
-    } else {
-      // by default the type will be asc first
-      type = "asc";
+    } else if (boolKeys) {
+      if (sortValue.value === altKeys) {
+        // if type is asc then change it to desc if desc then change to asc
+        if (sortValue.type === "") {
+          type = "true";
+        } else if (sortValue.type === "true") {
+          type = "false";
+        } else if (sortValue.type === "false") {
+          type = "";
+        }
+      } else {
+        // by default the type will be asc first
+        type = "true";
+      }
     }
     // If the type is "asc", add the sort parameter to the URL
-    if (type === "asc" || type === "desc") {
+    if (type === "asc" || type === "desc" || type === "true" || type === "false") {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("sort", JSON.stringify({ [column]: type }));
       const newUrl = `${ROUTE_PATHS.USERS_PAGE}${

@@ -14,7 +14,7 @@ const columnsKeys = [
 ];
 
 // boolKeys means they'll either be true(yes) or false(no)
-export const boolKeys = ['isActive', 'isBanned', 'isVerified'];
+export const booleanKeys = ['isActive', 'isBanned', 'isVerified'];
 export const alternateKeys = ['id', 'username', 'createdAt', 'updatedAt'];
 
 export const columns = columnsKeys.map((key) => ({
