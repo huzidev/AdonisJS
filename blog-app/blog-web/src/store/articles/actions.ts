@@ -14,10 +14,12 @@ import {
 
 export const getBlogs = createAsyncThunk(
   endpoints.GET_BLOGS,
-  async (page: number): Promise<AllBlogs | null> => {
+  async (data: any): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
+    console.log("data", data);
+    
     try {
-      const response = await api.get(endpoints.GET_BLOGS + page);
+      const response = await api.get(endpoints.GET_BLOGS + data.page, {params: data});
       console.log("Respose for all blogs", response);
       return response.data;
     } catch (e: any) {

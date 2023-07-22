@@ -14,13 +14,13 @@ export default function UsersPage() {
   const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
-  const { sortValue, handleSort } = useUserFiltersState();
+  const { handleSort } = useUserFiltersState();
 
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;
   let lastPage = user.state.getUserPage.meta?.lastPage;
 
-  useManageUsersPageHooks(sortValue);
+  useManageUsersPageHooks();
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">

@@ -1,9 +1,10 @@
-const columnsKeys = [
-  'recent blog',
-  'old blog'
+export const columnsKeys = [
+  'most recent',
+  'oldest'
 ];
 
 // boolKeys means they'll either be true(yes) or false(no)
+export const altKeys = ["createdAt"]
 export const typeResult = ["asc", "desc"];
 
 export const columns = columnsKeys.map((key) => ({

@@ -5,7 +5,7 @@ import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 
-export function useManageUsersPageHooks(value: any): void {
+export function useManageUsersPageHooks(): void {
   const user = useUser();
   const state = user.state.getUserPage;
   const prev = usePrevious(state);

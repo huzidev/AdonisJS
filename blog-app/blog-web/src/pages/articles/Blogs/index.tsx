@@ -1,6 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
-import { useUserFiltersState } from "pages/user/hooks";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
@@ -24,74 +23,60 @@ export default function ViewBlogsPage(): JSX.Element {
   // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
-  const { sortValue, handleSort } = useUserFiltersState();
 
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
-  const currentPageFvrtBlogs: any =
-    blogs.state.getFavoriteBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
-  const lastPageFvrtBlogs: any = blogs.state.getFavoriteBlogs.meta?.lastPage;
 
-  function loadMore() {
-    blogs.getBlogs(currentPageBlogs + 1);
-    if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
-      blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1);
-    }
-  }
-
-  useBlogsPageHooks();
+  const { loadMore, handleSort } = useBlogsPageHooks();
   return (
     <div className="w-10/12 m-auto flex flex-col">
-    <div>
-      <button
-        id="dropdownDefaultButton"
-        data-dropdown-toggle="dropdown"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button"
-        onClick={() => setDropDown(!dropDown)}
-      >
-        Filter List{" "}
-        <svg
-          className="w-2.5 h-2.5 ml-2.5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 10 6"
+      <div>
+        <button
+          id="dropdownDefaultButton"
+          data-dropdown-toggle="dropdown"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          type="button"
+          onClick={() => setDropDown(!dropDown)}
         >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m1 1 4 4 4-4"
-          />
-        </svg>
-      </button>
-      <div
-        id="dropdown"
-        className={`z-10 ${
-          dropDown
-            ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-            : "hidden"
-        }`}
-      >
-        <ul
-          className="py-2 text-sm text-gray-700 dark:text-gray-200"
-          aria-labelledby="dropdownDefaultButton"
+          Filter List{" "}
+          <svg
+            className="w-2.5 h-2.5 ml-2.5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m1 1 4 4 4-4"
+            />
+          </svg>
+        </button>
+        <div
+          id="dropdown"
+          className={`z-10 ${
+            dropDown
+              ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+              : "hidden"
+          }`}
         >
-          {columns.map((data, columnIndex) => (
-                  // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
-                  <li
-                    className="px-5 py-3 cursor-pointer"
-                    key={columnIndex}
-                  >
-                    {/* startCase will make the first letter Capital of any word */}
-                    {startCase(data.title)}
-                  </li>
-                ))}
-        </ul>
+          <ul
+            className="py-2 text-sm text-gray-700 dark:text-gray-200"
+            aria-labelledby="dropdownDefaultButton"
+          >
+            {columns.map((data, columnIndex) => (
+              // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
+              <li onClick={() => handleSort(data.title)} className="px-5 py-3 cursor-pointer" key={columnIndex}>
+                {/* startCase will make the first letter Capital of any word */}
+                {startCase(data.title)}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
       <div className=" flex flex-wrap">
         {allBlogs.map((blog: BlogState) => {
           // allUsers? is mandatory as it can be empty

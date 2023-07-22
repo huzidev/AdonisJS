@@ -5,8 +5,8 @@ import { alternateKeys, booleanKeys, typeResult } from "./ManageUsers/data";
 import { SortPayload } from "./ManageUsers/types";
 
 export function useUserFiltersState() {
-
     const params = useParams();
+    
     const [sortValue, setSortValue] = useState<SortPayload>({
         value: "",
         type: "",
@@ -77,12 +77,7 @@ export function useUserFiltersState() {
     setSortValue({ value: column, type });
   };
 
-//   useEffect(() => {
-//     handleSort(data)
-//   }, [])
-
     return {
-        sortValue,
         handleSort
     }
 }
