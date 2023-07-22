@@ -20,6 +20,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const [showModal, setShowModal] = useState(false);
   // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
+  const [dropDown, setDropDown] = useState<boolean>(false);
 
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const currentPageFvrtBlogs: any =
@@ -37,6 +38,72 @@ export default function ViewBlogsPage(): JSX.Element {
   useBlogsPageHooks();
   return (
     <>
+      <button
+        id="dropdownDefaultButton"
+        data-dropdown-toggle="dropdown"
+        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button"
+        onClick={() => setDropDown(!dropDown)}
+      >
+        Dropdown button{" "}
+        <svg
+          className="w-2.5 h-2.5 ml-2.5"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 10 6"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 4 4 4-4"
+          />
+        </svg>
+      </button>
+      <div
+        id="dropdown"
+        className={`z-10 ${dropDown ? "block" : "hidden"} bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+      >
+        <ul
+          className="py-2 text-sm text-gray-700 dark:text-gray-200"
+          aria-labelledby="dropdownDefaultButton"
+        >
+          <li>
+            <a
+              href="#"
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              Settings
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              Earnings
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              Sign out
+            </a>
+          </li>
+        </ul>
+      </div>
       <div className="w-10/12 m-auto flex flex-wrap">
         {allBlogs.map((blog: BlogState) => {
           // allUsers? is mandatory as it can be empty
@@ -133,19 +200,19 @@ export default function ViewBlogsPage(): JSX.Element {
                   {(blog.ownerId === userData?.id ||
                     (hasPermission("admin", userData?.role) &&
                       uploadedByUserRole !== "super-admin") ||
-                    hasPermission("super-admin", userData?.role)) && (
-                      // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
-                      isBannedUser ? (
-                        <div>
-                          <Link
-                            to={ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId}
-                            type="button"
-                            className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                          >
-                            View Profile
-                          </Link>
-                        </div>
-                      ) : (
+                    hasPermission("super-admin", userData?.role)) &&
+                    // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
+                    (isBannedUser ? (
+                      <div>
+                        <Link
+                          to={ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId}
+                          type="button"
+                          className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                        >
+                          View Profile
+                        </Link>
+                      </div>
+                    ) : (
                       <div>
                         <Link
                           to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
@@ -192,30 +259,32 @@ export default function ViewBlogsPage(): JSX.Element {
                           </div>
                         )}
                       </div>
-                      )
-                  )}
+                    ))}
                   <div className="flex justify-between items-center">
                     <p>
-                      Uploaded At : {new Date(blog.createdAt).toLocaleDateString()}
+                      Uploaded At :{" "}
+                      {new Date(blog.createdAt).toLocaleDateString()}
                     </p>
-                      <p className="text-white">
-                        Uploaded By :&nbsp;
-                        {isBannedUser ? (
-                          <del title="Banned User" className="text-red-600">{uploadedByUsername}</del>
-                        ) : (
-                          <Link
-                            to={
-                              blog.ownerId === auth.state.user?.id
-                                ? ROUTE_PATHS.VIEW_PROFILE + "me"
-                                : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId
-                            }
-                            type="button"
-                            className="text-sm font-medium text-center text-white hover:text-blue-500"
-                          >
-                            {uploadedByUsername}
-                          </Link>
-                        )}
-                      </p>
+                    <p className="text-white">
+                      Uploaded By :&nbsp;
+                      {isBannedUser ? (
+                        <del title="Banned User" className="text-red-600">
+                          {uploadedByUsername}
+                        </del>
+                      ) : (
+                        <Link
+                          to={
+                            blog.ownerId === auth.state.user?.id
+                              ? ROUTE_PATHS.VIEW_PROFILE + "me"
+                              : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId
+                          }
+                          type="button"
+                          className="text-sm font-medium text-center text-white hover:text-blue-500"
+                        >
+                          {uploadedByUsername}
+                        </Link>
+                      )}
+                    </p>
                   </div>
                 </div>
               </div>
