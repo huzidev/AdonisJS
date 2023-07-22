@@ -6,7 +6,7 @@ import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useUserFiltersState } from "../hooks";
 import {
-  columns
+  columns, constKeys
 } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
 
@@ -57,12 +57,12 @@ export default function UsersPage() {
             <thead>
               <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
                 {columns.map((data, columnIndex) => (
-                  // because we don't wanna put onClick filters on sno and actions field
+                  // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                   <th
-                    onClick={ () => handleSort(data.key)
-                      // !constKeys.includes(data.key)
-                      //   ? () => handleSort(data.key)
-                      //   : undefined
+                    onClick={
+                      !constKeys.includes(data.key)
+                        ? () => handleSort(data.key)
+                        : undefined
                     }
                     className="px-5 py-3 cursor-pointer"
                     key={columnIndex}
