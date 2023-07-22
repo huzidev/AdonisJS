@@ -23,34 +23,29 @@ export default function UsersPage() {
     if (sortParam) {
       // If the sort parameter is present, update the sortValue state accordingly
       const sortValueObj = JSON.parse(sortParam);
-      const column = Object.keys(sortValueObj)[0];
-      const type = sortValueObj[column];
-      setSortValue({ value: column, type });
+      const key: any = Object.keys(sortValueObj)[0];
+      const value: any = Object.values(sortValueObj)[0];
+      setSortValue({ value: key, type: value });
     }
   }, []);
 
   const handleSort = (column: string) => {
     let type: any = "";
 
-    console.log("COLUMN", column);
-    
-
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
     let altKeys = alternateKeys.find((value) => value === column);
     let boolKeys = booleanKeys.find((value) => value === column);
     
+    console.log("ALT KEYS", altKeys);
+    console.log("Sort Type", sortValue.type);
+
+    let resultType = typeResult.find((value) => value === sortValue.value)
     if (altKeys) {
       if (sortValue.value === altKeys) {
         // if type is asc then change it to desc if desc then change to asc
-        if (sortValue.type === "") {
-          type = "asc";
-        } else if (sortValue.type === "asc") {
-          type = "desc";
-        } else if (sortValue.type === "desc") {
-          type = "";
-        }
+        !sortValue.type ? type = "asc" : sortValue.type === "asc" ? type = "desc" : type = ""
       } else {
-        // by default the type will be asc first
+        // by default the type will be in ascedning order first
         type = "asc";
       }
     } else if (boolKeys) {
@@ -69,22 +64,21 @@ export default function UsersPage() {
       }
     } else {
       if (sortValue.value === column) {
-        let result = typeResult.find((value) => value === sortValue.type);
-        console.log("RESULT", result);
+        let result = typeResult.find((value) => value);
         if (sortValue.value === result) {
           type = result;
         }
-        // if (sortValue.type === "") {
-        //   type = "admin";
-        // } else if (sortValue.type === "admin") {
-        //   type = "super-admin";
-        // } else if (sortValue.type === "super-admin") {
-        //   type = "user";
-        // } else if (sortValue.type === "user") {
-        //   type = "blogger";
-        // } else if (sortValue.type === "blogger") {
-        //   type = "";
-        // }
+        if (sortValue.type === "") {
+          type = "admin";
+        } else if (sortValue.type === "admin") {
+          type = "super-admin";
+        } else if (sortValue.type === "super-admin") {
+          type = "user";
+        } else if (sortValue.type === "user") {
+          type = "blogger";
+        } else if (sortValue.type === "blogger") {
+          type = "";
+        }
       } else {
           type = "admin";
       }
