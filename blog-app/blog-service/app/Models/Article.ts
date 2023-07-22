@@ -1,4 +1,5 @@
-import { BaseModel, BelongsTo, beforeCreate, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, beforeCreate, belongsTo, column, scope } from '@ioc:Adonis/Lucid/Orm'
+import Sort from 'App/Utils/Sort'
 import { DateTime } from 'luxon'
 import User from './User'
 
@@ -43,4 +44,8 @@ export default class Article extends BaseModel {
     const titleSlug = data.title.toLocaleLowerCase().replace(/ /g, "-");
     data.slug = `${titleSlug}-${Date.now()}`;
   }
+
+  public static filtersSort = scope((query, filters) => {
+    Sort.mapObjToQuery(filters.sort, query)
+  })
 }

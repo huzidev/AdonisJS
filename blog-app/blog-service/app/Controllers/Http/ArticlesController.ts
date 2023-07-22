@@ -1,8 +1,10 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import { validator } from '@ioc:Adonis/Core/Validator';
+
 import Article from "App/Models/Article";
 import User from "App/Models/User";
-import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
-import validator from "validator";
+import Utils from "App/Utils";
+import { BlogListFilters, CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 
 // Controller used to call the functions created in routes here so routes won't get messed up
 
@@ -12,20 +14,24 @@ const noPermission = {
   status: 401
 };
 export default class ArticlesController {
-  public async getBlogs({ params }: HttpContextContract) {
-    const filters = await validator.validate({
-        schema: UserListFilters.schema,
-        data: Utils.parseQS(request.qs(), ['sort'])
-      })
-    const userId = params.id;
-    const query = Article.query();
-
-    // if user wanted to see allBlogs uploaded by him
-    if (userId) {
-      query.where("owner_id", userId);
+  public async getBlogs({ params, request }: HttpContextContract) {
+    try {
+      const filters = await validator.validate({
+          schema: BlogListFilters.schema,
+          data: Utils.parseQS(request.qs(), ['sort'])
+        })
+      const userId = params.id;
+      const query = Article.query();
+  
+      // if user wanted to see allBlogs uploaded by him
+      if (userId) {
+        query.where("owner_id", userId);
+      }
+      const response = await query.paginate(params.page || 1, 5);
+      return response;
+    } catch (e) {
+      throw e;
     }
-    const response = await query.paginate(params.page || 1, 5);
-    return response;
   }
 
   public async addBlog({ request, auth }: HttpContextContract) {
