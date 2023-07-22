@@ -1,4 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
+import startCase from "lodash/startCase";
+import { useUserFiltersState } from "pages/user/hooks";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
@@ -6,6 +8,7 @@ import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
+import { columns } from "./data";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
@@ -21,6 +24,7 @@ export default function ViewBlogsPage(): JSX.Element {
   // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
+  const { sortValue, handleSort } = useUserFiltersState();
 
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const currentPageFvrtBlogs: any =
@@ -37,7 +41,8 @@ export default function ViewBlogsPage(): JSX.Element {
 
   useBlogsPageHooks();
   return (
-    <>
+    <div className="w-10/12 m-auto flex flex-col">
+    <div>
       <button
         id="dropdownDefaultButton"
         data-dropdown-toggle="dropdown"
@@ -45,7 +50,7 @@ export default function ViewBlogsPage(): JSX.Element {
         type="button"
         onClick={() => setDropDown(!dropDown)}
       >
-        Dropdown button{" "}
+        Filter List{" "}
         <svg
           className="w-2.5 h-2.5 ml-2.5"
           aria-hidden="true"
@@ -64,47 +69,30 @@ export default function ViewBlogsPage(): JSX.Element {
       </button>
       <div
         id="dropdown"
-        className={`z-10 ${dropDown ? "block" : "hidden"} bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+        className={`z-10 ${
+          dropDown
+            ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+            : "hidden"
+        }`}
       >
         <ul
           className="py-2 text-sm text-gray-700 dark:text-gray-200"
           aria-labelledby="dropdownDefaultButton"
         >
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Settings
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Earnings
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Sign out
-            </a>
-          </li>
+          {columns.map((data, columnIndex) => (
+                  // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
+                  <li
+                    className="px-5 py-3 cursor-pointer"
+                    key={columnIndex}
+                  >
+                    {/* startCase will make the first letter Capital of any word */}
+                    {startCase(data.title)}
+                  </li>
+                ))}
         </ul>
       </div>
-      <div className="w-10/12 m-auto flex flex-wrap">
+    </div>
+      <div className=" flex flex-wrap">
         {allBlogs.map((blog: BlogState) => {
           // allUsers? is mandatory as it can be empty
           const uploadedByUser = allUsers?.find(
@@ -293,7 +281,7 @@ export default function ViewBlogsPage(): JSX.Element {
         })}
         {/* if both currentPage is = to lastPage means final page hence no more fetching after that */}
       </div>
-      <div className="w-10/12 m-auto mt-5">
+      <div className="mt-5">
         {currentPageBlogs !== lastPageBlogs && (
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
@@ -303,6 +291,6 @@ export default function ViewBlogsPage(): JSX.Element {
           </button>
         )}
       </div>
-    </>
+    </div>
   );
 }
