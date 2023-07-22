@@ -1,11 +1,17 @@
 import ROUTE_PATHS from "Router/paths";
-import startCase from 'lodash/startCase';
+import startCase from "lodash/startCase";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { alternateKeys, booleanKeys, columns, constKeys, typeResult } from "./data";
+import {
+  alternateKeys,
+  booleanKeys,
+  columns,
+  constKeys,
+  typeResult,
+} from "./data";
 import { useManageUsersPageHooks } from "./hooks";
 import { SortPayload } from "./types";
 
@@ -14,7 +20,10 @@ export default function UsersPage() {
   const auth = useAuth();
   const params = useParams();
   const navigate = useNavigate();
-  const [sortValue, setSortValue] = useState<SortPayload>({ value: "", type: "" });
+  const [sortValue, setSortValue] = useState<SortPayload>({
+    value: "",
+    type: "",
+  });
   // when user reloads the page the useState gets to default form hence if sort type is asc then it'll became "" because of reloads this useEffect will gets the state to current type
   useEffect(() => {
     // Get the sort parameter from the URL when the component mounts
@@ -35,53 +44,48 @@ export default function UsersPage() {
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
     let altKeys = alternateKeys.find((value) => value === column);
     let boolKeys = booleanKeys.find((value) => value === column);
-    
-    console.log("ALT KEYS", altKeys);
-    console.log("Sort Type", sortValue.type);
 
-    let resultType = typeResult.find((value) => value === sortValue.value)
     if (altKeys) {
-      if (sortValue.value === altKeys) {
-        // if type is asc then change it to desc if desc then change to asc
-        !sortValue.type ? type = "asc" : sortValue.type === "asc" ? type = "desc" : type = ""
-      } else {
-        // by default the type will be in ascedning order first
-        type = "asc";
-      }
+      // if type is asc then change it to desc if desc then change to "" empty string (which is default form)
+      !sortValue.type
+        ? type = "asc"
+        : sortValue.type === "asc"
+        ? type = "desc"
+        : type = ""
     } else if (boolKeys) {
-      if (sortValue.value === boolKeys) {
-        // if type is asc then change it to desc if desc then change to asc
-        if (sortValue.type === "") {
-          type = "true";
-        } else if (sortValue.type === "true") {
-          type = "false";
-        } else if (sortValue.type === "false") {
-          type = "";
-        }
-      } else {
-        // by default the type will be asc first
-        type = "true";
-      }
+      // if type is asc then change it to desc if desc then change to asc
+      !sortValue.type
+        ? type = "true"
+        : sortValue.type === "true"
+        ? type = "false"
+        : type = ""
     } else {
-      if (sortValue.value === column) {
-        let result = typeResult.find((value) => value);
-        if (sortValue.value === result) {
-          type = result;
-        }
-        if (sortValue.type === "") {
-          type = "admin";
-        } else if (sortValue.type === "admin") {
-          type = "super-admin";
-        } else if (sortValue.type === "super-admin") {
-          type = "user";
-        } else if (sortValue.type === "user") {
-          type = "blogger";
-        } else if (sortValue.type === "blogger") {
-          type = "";
-        }
-      } else {
-          type = "admin";
-      }
+        !sortValue.type
+          ? type = "admin"
+          : sortValue.type === "admin"
+          ? type = "super-admin"
+          : sortValue.type === "super-admin"
+          ? type = "user"
+          : sortValue.type === "user"
+          ? type = "blogger" 
+          : type = "" 
+        // if (sortValue.value === result) {
+        //   type = result;
+        // }
+        //   if (sortValue.type === "") {
+        //     type = "admin";
+        //   } else if (sortValue.type === "admin") {
+        //     type = "super-admin";
+        //   } else if (sortValue.type === "super-admin") {
+        //     type = "user";
+        //   } else if (sortValue.type === "user") {
+        //     type = "blogger";
+        //   } else if (sortValue.type === "blogger") {
+        //     type = "";
+        //   }
+        // } else {
+        //     type = "admin";
+        // }
     }
 
     const result = typeResult.find((value) => value === type);
@@ -145,13 +149,17 @@ export default function UsersPage() {
                 {columns.map((data, columnIndex) => (
                   // because we don't wanna put onClick filters on sno and actions field
                   <th
-                      onClick={!constKeys.includes(data.key) ? () => handleSort(data.key) : undefined}
-                      className="px-5 py-3 cursor-pointer"
-                      key={columnIndex}
-                    >
-                      {/* startCase will make the first letter Capital of any word */}
-                      {startCase(data.title)}
-                    </th>
+                    onClick={
+                      !constKeys.includes(data.key)
+                        ? () => handleSort(data.key)
+                        : undefined
+                    }
+                    className="px-5 py-3 cursor-pointer"
+                    key={columnIndex}
+                  >
+                    {/* startCase will make the first letter Capital of any word */}
+                    {startCase(data.title)}
+                  </th>
                 ))}
               </tr>
             </thead>
@@ -247,7 +255,8 @@ export default function UsersPage() {
                 className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
                 onClick={() =>
                   navigate(
-                    ROUTE_PATHS.USERS_PAGE + (currentPage! - 1 + window.location.search)
+                    ROUTE_PATHS.USERS_PAGE +
+                      (currentPage! - 1 + window.location.search)
                   )
                 }
               >
@@ -259,7 +268,9 @@ export default function UsersPage() {
                 className="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
                 onClick={() =>
                   navigate(
-                    ROUTE_PATHS.USERS_PAGE + (currentPage! + 1) + window.location.search
+                    ROUTE_PATHS.USERS_PAGE +
+                      (currentPage! + 1) +
+                      window.location.search
                   )
                 }
               >
