@@ -1,4 +1,5 @@
 import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
+import Sort from 'App/Utils/Sort'
 
 export class CreateArticle {
   public schema = schema.create({
@@ -26,4 +27,16 @@ export class UpdateArticle {
     'regex': "Kindly use only alphabets or numbers in title",
     required: '{{ field }} is required to update blog'
   }
+}
+
+export class BlogListFilters {
+  public static schema = schema.create({
+    sort: schema.object.optional().members({
+      // enum is for available choice like here Sort.type have two available choice either asc or desc
+      username: schema.enum.optional(Sort.types),
+      role: schema.enum.optional(Sort.typesRole),
+      createdAt: schema.enum.optional(Sort.types),
+    }),
+  })
+  public static messages = {}
 }

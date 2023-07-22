@@ -2,6 +2,7 @@ import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Article from "App/Models/Article";
 import User from "App/Models/User";
 import { CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
+import validator from "validator";
 
 // Controller used to call the functions created in routes here so routes won't get messed up
 
@@ -12,6 +13,10 @@ const noPermission = {
 };
 export default class ArticlesController {
   public async getBlogs({ params }: HttpContextContract) {
+    const filters = await validator.validate({
+        schema: UserListFilters.schema,
+        data: Utils.parseQS(request.qs(), ['sort'])
+      })
     const userId = params.id;
     const query = Article.query();
 
