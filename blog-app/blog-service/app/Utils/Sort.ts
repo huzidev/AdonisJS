@@ -5,7 +5,6 @@ export default class Sort {
   public static typesRole = ['user', 'blogger', 'admin', 'super-admin'] as const // sort with ascending order or descending order
   public static typesBooleam = ['true', 'false'] as const // sort with ascending order or descending order
 
-  
   public static mapObjToQuery = (
     obj: any, // means object can be array, string, number etc and we specify any because if we sort price which is number if we sort name which is string therefore obj type can be any
     query: ModelQueryBuilderContract<LucidModel, LucidRow>
@@ -18,10 +17,12 @@ export default class Sort {
       const sort = obj[sortKey] // since forEach works for array only
       // const sort will be either asc or desc
       // sortKey will be id, name, email etc
-      
+
+    const boolValues = ["isBanned", "isActive", "isVerified"]
+
       if (sortKey === "role") {
         query.from("users").where(sortKey, sort)
-      } else if (sortKey === ("isVerified" || "isActive" || "isBanned")) {
+      } else if (boolValues.includes(sortKey)) {
         if (sort === "true") {
           query.from("users").where(sortKey, 1)
         } else {

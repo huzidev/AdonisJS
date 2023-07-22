@@ -26,8 +26,6 @@ export default class UsersController {
         data: Utils.parseQS(request.qs(), ['sort'])
       })
 
-      console.log("Filter", filters);
-      
       // to use these values in message
       let filterResultKey;
       let filterResultValue;
