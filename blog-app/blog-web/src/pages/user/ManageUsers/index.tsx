@@ -7,14 +7,14 @@ import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { alternateKeys, booleanKeys, columns, constKeys, typeResult } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
-
+import { SortPayload } from "./types";
 
 export default function UsersPage() {
   const user = useUser();
   const auth = useAuth();
   const params = useParams();
   const navigate = useNavigate();
-  const [sortValue, setSortValue] = useState<any>({ value: "", type: "" });
+  const [sortValue, setSortValue] = useState<SortPayload>({ value: "", type: "" });
   // when user reloads the page the useState gets to default form hence if sort type is asc then it'll became "" because of reloads this useEffect will gets the state to current type
   useEffect(() => {
     // Get the sort parameter from the URL when the component mounts
