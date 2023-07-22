@@ -194,23 +194,28 @@ export default function ViewBlogsPage(): JSX.Element {
                       </div>
                       )
                   )}
-                  <div className="flex justify-end items-center">
-                    <p className="text-white">Uploaded By :&nbsp;</p>
-                    {isBannedUser ? (
-                      <del title="Banned User" className="text-red-600">{uploadedByUsername}</del>
-                    ) : (
-                      <Link
-                        to={
-                          blog.ownerId === auth.state.user?.id
-                            ? ROUTE_PATHS.VIEW_PROFILE + "me"
-                            : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId
-                        }
-                        type="button"
-                        className="text-sm font-medium text-center text-white hover:text-blue-500"
-                      >
-                        {uploadedByUsername}
-                      </Link>
-                    )}
+                  <div className="flex justify-between items-center">
+                    <p>
+                      Uploaded At : {new Date(blog.createdAt).toLocaleDateString()}
+                    </p>
+                      <p className="text-white">
+                        Uploaded By :&nbsp;
+                        {isBannedUser ? (
+                          <del title="Banned User" className="text-red-600">{uploadedByUsername}</del>
+                        ) : (
+                          <Link
+                            to={
+                              blog.ownerId === auth.state.user?.id
+                                ? ROUTE_PATHS.VIEW_PROFILE + "me"
+                                : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId
+                            }
+                            type="button"
+                            className="text-sm font-medium text-center text-white hover:text-blue-500"
+                          >
+                            {uploadedByUsername}
+                          </Link>
+                        )}
+                      </p>
                   </div>
                 </div>
               </div>
