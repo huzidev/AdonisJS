@@ -43,8 +43,8 @@ export default function UsersPage() {
 
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
     let altKeys = alternateKeys.find((value) => value === column);
+    // if sortValue is between isVerified, isBanned, isActive then boolKeys
     let boolKeys = booleanKeys.find((value) => value === column);
-
     if (altKeys) {
       // if type is asc then change it to desc if desc then change to "" empty string (which is default form)
       !sortValue.type
@@ -60,32 +60,15 @@ export default function UsersPage() {
         ? type = "false"
         : type = ""
     } else {
-        !sortValue.type
-          ? type = "admin"
-          : sortValue.type === "admin"
-          ? type = "super-admin"
-          : sortValue.type === "super-admin"
-          ? type = "user"
-          : sortValue.type === "user"
-          ? type = "blogger" 
-          : type = "" 
-        // if (sortValue.value === result) {
-        //   type = result;
-        // }
-        //   if (sortValue.type === "") {
-        //     type = "admin";
-        //   } else if (sortValue.type === "admin") {
-        //     type = "super-admin";
-        //   } else if (sortValue.type === "super-admin") {
-        //     type = "user";
-        //   } else if (sortValue.type === "user") {
-        //     type = "blogger";
-        //   } else if (sortValue.type === "blogger") {
-        //     type = "";
-        //   }
-        // } else {
-        //     type = "admin";
-        // }
+      !sortValue.type
+        ? type = "admin"
+        : sortValue.type === "admin"
+        ? type = "super-admin"
+        : sortValue.type === "super-admin"
+        ? type = "user"
+        : sortValue.type === "user"
+        ? type = "blogger" 
+        : type = "" 
     }
 
     const result = typeResult.find((value) => value === type);
