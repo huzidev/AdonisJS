@@ -1,94 +1,21 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
+import { useUserFiltersState } from "../hooks";
 import {
-  alternateKeys,
-  booleanKeys,
-  columns,
-  constKeys,
-  typeResult,
+  columns
 } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
-import { SortPayload } from "./types";
 
 export default function UsersPage() {
   const user = useUser();
   const auth = useAuth();
-  const params = useParams();
   const navigate = useNavigate();
-  const [sortValue, setSortValue] = useState<SortPayload>({
-    value: "",
-    type: "",
-  });
-  // when user reloads the page the useState gets to default form hence if sort type is asc then it'll became "" because of reloads this useEffect will gets the state to current type
-  useEffect(() => {
-    // Get the sort parameter from the URL when the component mounts
-    const searchParams = new URLSearchParams(window.location.search);
-    const sortParam = searchParams.get("sort");
-    if (sortParam) {
-      // If the sort parameter is present, update the sortValue state accordingly
-      const sortValueObj = JSON.parse(sortParam);
-      const key: any = Object.keys(sortValueObj)[0];
-      const value: any = Object.values(sortValueObj)[0];
-      setSortValue({ value: key, type: value });
-    }
-  }, []);
+  const { sortValue, handleSort } = useUserFiltersState();
 
-  const handleSort = (column: string) => {
-    let type: any = "";
-
-    // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
-    let altKeys = alternateKeys.find((value) => value === column);
-    // if sortValue is between isVerified, isBanned, isActive then boolKeys
-    let boolKeys = booleanKeys.find((value) => value === column);
-    if (altKeys) {
-      // if type is asc then change it to desc if desc then change to "" empty string (which is default form)
-      !sortValue.type
-        ? type = "asc"
-        : sortValue.type === "asc"
-        ? type = "desc"
-        : type = ""
-    } else if (boolKeys) {
-      // if type is asc then change it to desc if desc then change to asc
-      !sortValue.type
-        ? type = "true"
-        : sortValue.type === "true"
-        ? type = "false"
-        : type = ""
-    } else {
-      !sortValue.type
-        ? type = "admin"
-        : sortValue.type === "admin"
-        ? type = "super-admin"
-        : sortValue.type === "super-admin"
-        ? type = "user"
-        : sortValue.type === "user"
-        ? type = "blogger" 
-        : type = "" 
-    }
-
-    const result = typeResult.find((value) => value === type);
-
-    // If the type is "asc", add the sort parameter to the URL
-    if (type === result) {
-      const searchParams = new URLSearchParams(window.location.search);
-      searchParams.set("sort", JSON.stringify({ [column]: type }));
-      const newUrl = `${ROUTE_PATHS.USERS_PAGE}${
-        params.page
-      }?${searchParams.toString()}`;
-      window.history.replaceState({}, "", newUrl);
-    } else {
-      // If the type is neither "asc" nor "desc", remove the entire "sort" parameter from the URL
-      const newUrl = `${ROUTE_PATHS.USERS_PAGE}${params.page}`;
-      window.history.replaceState({}, "", newUrl);
-    }
-
-    setSortValue({ value: column, type });
-  };
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;
   let lastPage = user.state.getUserPage.meta?.lastPage;
@@ -132,10 +59,10 @@ export default function UsersPage() {
                 {columns.map((data, columnIndex) => (
                   // because we don't wanna put onClick filters on sno and actions field
                   <th
-                    onClick={
-                      !constKeys.includes(data.key)
-                        ? () => handleSort(data.key)
-                        : undefined
+                    onClick={ () => handleSort(data.key)
+                      // !constKeys.includes(data.key)
+                      //   ? () => handleSort(data.key)
+                      //   : undefined
                     }
                     className="px-5 py-3 cursor-pointer"
                     key={columnIndex}
