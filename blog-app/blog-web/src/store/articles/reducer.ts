@@ -43,12 +43,19 @@ export const blogSlice = createSlice({
         // if user first gets on the blogs page then meta.currentPage will be 1 hence just add the data
         console.log("Filters", filters);
         console.log("meta", meta?.currentPage);
-        if (filters || meta?.currentPage === 1) {
-          state.getBlogs.data = data
-        } // when user clicked on Load More 
-        else {
-            state.getBlogs.data = [ ...state.getBlogs.data, ...data ]
+        if (filters) {
+          if (state.getBlogs.data && meta.currentPage === 1) {
+            state.getBlogs.data = data
+          } 
+          if (meta.currentPage !== 1) {
+            console.log("state data", state.getBlogs.data);
+            state.getBlogs.data = [...state.getBlogs.data, ...data]
           }
+        //   state.getBlogs.data = data
+        // } // when user clicked on Load More 
+        // else {
+        }
+        state.getBlogs.data = data
         // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
         state.getBlogs.meta = meta;
         state.getBlogs.message = "Blogs fetched successfully" 
