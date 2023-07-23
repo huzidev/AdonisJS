@@ -1,5 +1,5 @@
 import { User } from "store/auth/types";
-import { PaginationMeta, SubState } from "store/types";
+import { PaginationMeta, SortType, SubState } from "store/types";
 
 // for getBlog just title and content is required
 export interface AddBlogPayload {
@@ -36,9 +36,15 @@ export interface GetBlogsById {
   page: number;
 }
 
+export interface BlogSortReq {
+  createdAt?: SortType;
+}
+
 export interface AllBlogs extends SubState {
   data: Blog[];
-  meta: PaginationMeta | null;
+  meta: PaginationMeta | null | any;
+  filters?: boolean;
+  page?: number;
 }
 
 export interface getBlogById extends SubState {

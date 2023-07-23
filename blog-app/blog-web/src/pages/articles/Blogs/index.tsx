@@ -24,6 +24,8 @@ export default function ViewBlogsPage(): JSX.Element {
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
 
+  console.log("ALL BLOGS", allBlogs);
+
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
 

@@ -16,12 +16,15 @@ export const getBlogs = createAsyncThunk(
   endpoints.GET_BLOGS,
   async (data: any): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
-    console.log("data", data);
-    
     try {
       const response = await api.get(endpoints.GET_BLOGS + data.page, {params: data});
-      console.log("Respose for all blogs", response);
-      return response.data;
+      const filtersApplied = data.sort !== undefined;
+
+      return {
+        data: response.data.data,
+        meta: response.data.meta,
+        filters: filtersApplied
+      };
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);

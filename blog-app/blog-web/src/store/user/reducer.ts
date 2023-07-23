@@ -12,8 +12,7 @@ const initialState: UserState = {
     getUserPage: { 
         ...subState, 
         data: null, 
-        meta: null, 
-        filters: null 
+        meta: null
     },
     createUser: { ...subState },
     user: null
@@ -67,10 +66,6 @@ export const userSlice = createSlice({
                 const { data, message } = action.payload;
                 state.getUserPage.data = [...data.data];
                 state.getUserPage.meta = data.meta;
-                if (data.filters) {
-                    state.getUserPage.filters = data.filters;
-                    state.getUserPage.data = [ ...data.data ];
-                }
                 state.getUserPage.message = message;
             }
             state.getUserPage.error = false;

@@ -17,7 +17,7 @@ export function useBlogsPageHooks() {
   const prev = usePrevious(state);
   const allUsers: any = user.state.allUser?.data;
   const allBlogs = blogs.state.getBlogs?.data;
-  const favoriteBlogs = blogs.state.getFavoriteBlogs;
+  const favoriteBlogs: any = blogs.state.getFavoriteBlogs;
   const payload: any = {
     userId: auth.state.user?.id,
     page: 1
@@ -50,7 +50,6 @@ export function useBlogsPageHooks() {
   }, []);
 
   const handleSort = (column: string) => {
-    console.log("column", column);
     let type: any = "";
     column === "most recent" ? type = "asc" : type = "desc" 
     let update = column === "most recent" ? "createdAt" : "createdAt"
@@ -82,11 +81,8 @@ export function useBlogsPageHooks() {
     if (!allUsers) {
       user.allUser();
     }
-    console.log("SEARCH", search);
     
-    // if (!allBlogs.length || search) {
       blogs.getBlogs({page: 1, ...search})
-    // }
 
     // so only if loggedIn user's role is user then fetch favorite blogs
     if (auth.state.user?.role === "user" && !favoriteBlogs.data.length) {

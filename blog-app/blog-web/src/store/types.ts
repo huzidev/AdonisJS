@@ -13,8 +13,8 @@ export interface HTTPFieldError {
 }
 
 export interface SubState extends HTTPFieldErrors {
-  loading: boolean;
-  error: boolean;
+  loading?: boolean;
+  error?: boolean;
   message?: string;
 }
 

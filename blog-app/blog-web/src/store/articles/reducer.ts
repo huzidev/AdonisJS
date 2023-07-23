@@ -6,7 +6,11 @@ import { BlogState, getBlogById } from "./types";
 const initialState: BlogState = {
   getBlogsById: { ...subState, data: [], meta: null },
   getFavoriteBlogs: { ...subState, data: [], meta: null },
-  getBlogs: { ...subState, data: [], meta: null },
+  getBlogs: { 
+    ...subState, 
+    data: [], 
+    meta: null
+  },
   getBlog: { ...subState, data: null },
   updateBlog: { ...subState, data: null },
   deleteBlog: { ...subState },
@@ -35,16 +39,20 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
       state.getBlogs.loading = false;
       if (action.payload) {
-        const { data, meta } = action.payload;
+        const { data, meta, filters } = action.payload;
+        // if user first gets on the blogs page then meta.currentPage will be 1 hence just add the data
+        console.log("Filters", filters);
+        console.log("meta", meta?.currentPage);
+        if (filters || meta?.currentPage === 1) {
+          state.getBlogs.data = data
+        } // when user clicked on Load More 
+        else {
+            state.getBlogs.data = [ ...state.getBlogs.data, ...data ]
+          }
         // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-        const cleaned =
-          state.getBlogs.data?.filter(
-            (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
-          ) ?? [];
-        state.getBlogs.data = [...cleaned, ...data];
-        state.getBlogs.message = "Blogs fetched successfully"
-        // meta takes pagination data like total, currentPage, LastPage
         state.getBlogs.meta = meta;
+        state.getBlogs.message = "Blogs fetched successfully" 
+        // meta takes pagination data like total, currentPage, LastPage
       }
       state.getBlogs.error = false;
     });

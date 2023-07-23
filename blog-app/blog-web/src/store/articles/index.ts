@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'store/hooks/hooks';
 import * as actions from "./actions";
-import { AddBlogPayload, AddFavoriteBlogPayload, BlogState, GetBlogPayload, GetBlogsById, UpdateBlogPayload } from './types';
+import { AddBlogPayload, AddFavoriteBlogPayload, AllBlogs, BlogState, GetBlogPayload, GetBlogsById, UpdateBlogPayload } from './types';
 
 export const useBlogs = () => {
   const state = useSelector((state: any) => state.blogs) as BlogState;
   const dispatch = useAppDispatch();
-  const getBlogs = (payload: number) => dispatch(actions.getBlogs(payload));
+  const getBlogs = (payload: AllBlogs) => dispatch(actions.getBlogs(payload));
   const getBlogsById = (payload: GetBlogsById) => dispatch(actions.getBlogsById(payload));
   const getFavoriteBlogs = (payload: GetBlogsById) => dispatch(actions.getFavoriteBlogs(payload));
   const addFavoriteBlog = (payload: AddFavoriteBlogPayload) => dispatch(actions.addFavoriteBlog(payload));
