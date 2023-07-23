@@ -48,11 +48,21 @@ export const blogSlice = createSlice({
           else if (state.getBlogs.data && meta.currentPage !== 1) {
         state.getBlogs.data = [...state.getBlogs.data, ...data];
       }
-      state.getBlogs.meta = meta;
-        //   state.getBlogs.data = data
-        // } // when user clicked on Load More 
-        // else {
+      //   state.getBlogs.data = data
+      // } // when user clicked on Load More 
+      // else {
+      } else {
+        if (meta.currentPage === 1) {
+          state.getBlogs.data = data
+        } else {
+          const cleaned =
+          state.getBlogs.data?.filter(
+            (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
+          ) ?? [];
+        state.getBlogs.data = [...cleaned, ...data];
         }
+      }
+      state.getBlogs.meta = meta;
         // state.getBlogs.data = data
         // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
         state.getBlogs.message = "Blogs fetched successfully" 
