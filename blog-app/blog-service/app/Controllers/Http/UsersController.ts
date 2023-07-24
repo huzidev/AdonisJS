@@ -40,7 +40,7 @@ export default class UsersController {
         }
       }
       
-      let filterResultKey: any;
+      let filterResultKey;
       let filterResultValue;
       if (!!filters.sort) {
         filterResultKey = Object.keys(filters.sort!)[0];

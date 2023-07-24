@@ -22,9 +22,27 @@ export default class ArticlesController {
         query.where("owner_id", userId);
       }
       
+      const isSort = Object.keys(request.qs())[1];
+
+      // to check if user tries to change method in URL which should be sort if user tries to change it then throw error
+      // it is compulsory to put isSort !== "sort" inside isSort so it won't run every time rather it'll only runs when user called the FILTERS
+      // we can't called !userFilters.includes(filterResultKey) here because for that we needs filters so if user changes the METHOD in URL from sort to something else
+      // then filter will became undefined and the isSort won't work therefore created these two seprately
+      if (isSort) {
+        if (isSort !== "sort") {
+          throw invalidURL;
+        }
+      }
+      
+      let filterResultKey;
       let filterResultValue;
       if (!!filters.sort) {
+        filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
+        // filter for most recent and oldest will be according to createdAt therefore checking for createdAt only
+        if (filterResultKey !== "createdAt") {
+          throw invalidURL;
+        }
       }
 
       const response = await query
