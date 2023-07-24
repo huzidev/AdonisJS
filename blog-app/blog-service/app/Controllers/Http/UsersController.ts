@@ -32,6 +32,8 @@ export default class UsersController {
 
       // to check if user tries to change method in URL which should be sort if user tries to change it then throw error
       // it is compulsory to put isSort !== "sort" inside isSort so it won't run every time rather it'll only runs when user called the FILTERS
+      // we can't called !userFilters.includes(filterResultKey) here because for that we needs filters so if user changes the METHOD in URL from sort to something else
+      // then filter will became undefined and the isSort won't work therefore created these two seprately
       if (isSort) {
         if (isSort !== "sort") {
           throw invalidURL;
@@ -43,8 +45,6 @@ export default class UsersController {
       if (!!filters.sort) {
         filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
-        // console.log("is sort", isSort);
-        
         // so when user tries to change the value from URL then throw error
         // if filters is according to username and user tries to change the value of username to something else then the error will be shown
           if (!userFilters.includes(filterResultKey)) {
