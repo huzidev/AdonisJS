@@ -1,13 +1,14 @@
-import ROUTE_PATHS from 'Router/paths';
-import { SortPayload } from 'pages/user/ManageUsers/types';
-import qs from 'query-string';
+import ROUTE_PATHS from "Router/paths";
+import { SortPayload } from "pages/user/ManageUsers/types";
+import qs from "query-string";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
-import { typeResult } from './data';
+import { typeResult } from "./data";
 
 export function useBlogsPageHooks() {
   const blogs = useBlogs();
@@ -15,12 +16,16 @@ export function useBlogsPageHooks() {
   const auth = useAuth();
   const state = blogs.state;
   const prev = usePrevious(state);
+  const navigate = useNavigate();
   const allUsers: any = user.state.allUser?.data;
-  const allBlogs = blogs.state.getBlogs?.data;
   const favoriteBlogs: any = blogs.state.getFavoriteBlogs;
+  const [sortValue, setSortValue] = useState<SortPayload>({
+    value: "",
+    type: "",
+  });
   const payload: any = {
     userId: auth.state.user?.id,
-    page: 1
+    page: 1,
   };
 
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
@@ -28,14 +33,9 @@ export function useBlogsPageHooks() {
     blogs.state.getFavoriteBlogs.meta?.currentPage;
   const lastPageFvrtBlogs: any = blogs.state.getFavoriteBlogs.meta?.lastPage;
 
-    const search: any = qs.parse(window.location.search);
+  const search: any = qs.parse(window.location.search);
 
-  const [sortValue, setSortValue] = useState<SortPayload>({
-        value: "",
-        type: "",
-    });
-
-    useEffect(() => {
+  useEffect(() => {
     // Get the sort parameter from the URL when the component mounts
     const searchParams = new URLSearchParams(window.location.search);
     const sortParam = searchParams.get("sort");
@@ -48,13 +48,22 @@ export function useBlogsPageHooks() {
     }
   }, []);
 
-   function handleSort (column: string) {
+  function handleSort(column: string) {
     let type: any = "";
     // most recent will called desc because desc neans from last to first therefore the last belog will be the latest blog and type === "" when user called reset filters
-    column === "most recent" ? type = "desc" : column === "oldest" ? type = "asc" : type = "";
+    column === "most recent"
+      ? (type = "desc")
+      : column === "oldest"
+      ? (type = "asc")
+      : (type = "");
     // becasuse most recent and old blog will be shown according to createdAt date and "" (empty string condition) is for when user clicked on reset filters
     // because then sortValue.value will be "" and we've statement in UI that only show resetFilters when sortValue.vlaue is not ""
-    let update = column === "most recent" ? "createdAt" : column === "oldest" ? "createdAt" : "";
+    let update =
+      column === "most recent"
+        ? "createdAt"
+        : column === "oldest"
+        ? "createdAt"
+        : "";
     const result = typeResult.find((value) => value === type);
 
     // If the type is "asc", add the sort parameter to the URL
@@ -68,11 +77,11 @@ export function useBlogsPageHooks() {
       const newUrl = `${ROUTE_PATHS.ARTICLES}`;
       window.history.replaceState({}, "", newUrl);
     }
-
     setSortValue({ value: update, type });
   }
+  
   function loadMore() {
-    blogs.getBlogs({page: currentPageBlogs + 1, ...search});
+    blogs.getBlogs({ page: currentPageBlogs + 1, ...search });
     if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
       blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1);
     }
@@ -84,7 +93,7 @@ export function useBlogsPageHooks() {
       user.allUser();
     }
     
-      blogs.getBlogs({page: 1, ...search})
+    blogs.getBlogs({ page: 1, ...search });
 
     // so only if loggedIn user's role is user then fetch favorite blogs
     if (auth.state.user?.role === "user" && !favoriteBlogs.data.length) {
@@ -96,6 +105,8 @@ export function useBlogsPageHooks() {
     if (prev?.getBlogs.loading) {
       if (!state.getBlogs.loading && !state.getBlogs.error) {
         successNotification(state.getBlogs.message);
+      } else if (!state.getBlogs.loading && state.getBlogs.error) {
+        navigate(ROUTE_PATHS.ARTICLES);
       }
     }
     if (prev?.deleteBlog.loading) {
@@ -108,6 +119,6 @@ export function useBlogsPageHooks() {
   return {
     sortValue,
     loadMore,
-    handleSort
+    handleSort,
   };
 }

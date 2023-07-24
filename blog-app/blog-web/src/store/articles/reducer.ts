@@ -39,8 +39,9 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlogs.fulfilled, (state, action) => {
       state.getBlogs.loading = false;
       if (action.payload) {
-        const { data, meta, filters } = action.payload;
-        // if user first gets on the blogs page then meta.currentPage will be 1 hence just add the data
+        const { data, meta, filters, message } = action.payload;
+        console.log("MESSAGE", message);
+        
         if (filters) {
           // state.getBlogs.data mean whne user is no blogs page then default list will be shown to user and currentPage will be 1 hence when user called filters
           // then replace the recent data with new data therefore we haven't used [...state.geBlogs.data, ...data] because spread operator will append new data with old data
@@ -53,7 +54,7 @@ export const blogSlice = createSlice({
             state.getBlogs.data = [...state.getBlogs.data, ...data];
           }
         } else {
-          if (meta.currentPage === 1) {
+          if (meta.currentPage === 1) { 
             state.getBlogs.data = data;
           } else {
             // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
@@ -65,7 +66,7 @@ export const blogSlice = createSlice({
           }
         }
         state.getBlogs.meta = meta;
-        state.getBlogs.message = "Blogs fetched successfully";
+        state.getBlogs.message = message;
         // meta takes pagination data like total, currentPage, LastPage
       }
       state.getBlogs.error = false;

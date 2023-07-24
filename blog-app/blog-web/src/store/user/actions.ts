@@ -59,6 +59,7 @@ export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (d
         const response = await api.get(endpoints.USER_LIST_PAGE + data.page, {params: data});
         return response.data;
     } catch (e: any) {
+        console.log("Error from redux", e);
         const err = mapErrorToState(e);
         errorNotification(err);
         console.log("Error", err);

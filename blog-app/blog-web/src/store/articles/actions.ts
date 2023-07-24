@@ -20,9 +20,12 @@ export const getBlogs = createAsyncThunk(
       const response = await api.get(endpoints.GET_BLOGS + data.page, {params: data});
       const filtersApplied = data.sort !== undefined;
 
+      console.log("ALL BLOGS RESPONSE", response);
+
       return {
-        data: response.data.data,
-        meta: response.data.meta,
+        data: response.data.data.data,
+        meta: response.data.data.meta,
+        message: response.data.message,
         filters: filtersApplied
       };
     } catch (e: any) {
