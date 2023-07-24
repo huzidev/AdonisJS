@@ -6,17 +6,17 @@ import { BlogState, getBlogById } from "./types";
 const initialState: BlogState = {
   getBlogsById: { ...subState, data: [], meta: null },
   getFavoriteBlogs: { ...subState, data: [], meta: null },
-  getBlogs: { 
-    ...subState, 
-    data: [], 
-    meta: null
+  getBlogs: {
+    ...subState,
+    data: [],
+    meta: null,
   },
   getBlog: { ...subState, data: null },
   updateBlog: { ...subState, data: null },
   deleteBlog: { ...subState },
   addBlog: { ...subState },
   addFavoriteBlog: { ...subState },
-  removeFavoriteBlog: { ...subState }
+  removeFavoriteBlog: { ...subState },
 };
 
 export const blogSlice = createSlice({
@@ -28,7 +28,7 @@ export const blogSlice = createSlice({
         ...(state?.getBlogs.data ?? []),
         ...action.payload.data,
       };
-    },  
+    },
   },
   extraReducers: (builder) => {
     // getAllBlogs
@@ -45,31 +45,27 @@ export const blogSlice = createSlice({
           // state.getBlogs.data mean whne user is no blogs page then default list will be shown to user and currentPage will be 1 hence when user called filters
           // then replace the recent data with new data therefore we haven't used [...state.geBlogs.data, ...data] because spread operator will append new data with old data
           if (state.getBlogs.data && meta.currentPage === 1) {
-            state.getBlogs.data = data
-          } 
+            state.getBlogs.data = data;
+          }
           // if filters condition is TRUE and we've already some data then because the FILTER state is TRUE this means previous data is accordin to filter
           // hence append new data with the old data currentPage not 1 means user called the LOAD MORE button
           else if (state.getBlogs.data && meta.currentPage !== 1) {
-        state.getBlogs.data = [...state.getBlogs.data, ...data];
-      }
-      //   state.getBlogs.data = data
-      // } // when user clicked on Load More 
-      // else {
-      } else {
-        if (meta.currentPage === 1) {
-          state.getBlogs.data = data
+            state.getBlogs.data = [...state.getBlogs.data, ...data];
+          }
         } else {
-          const cleaned =
-          state.getBlogs.data?.filter(
-            (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
-          ) ?? [];
-        state.getBlogs.data = [...cleaned, ...data];
+          if (meta.currentPage === 1) {
+            state.getBlogs.data = data;
+          } else {
+            // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
+            const cleaned =
+              state.getBlogs.data?.filter(
+                (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
+              ) ?? [];
+            state.getBlogs.data = [...cleaned, ...data];
+          }
         }
-      }
-      state.getBlogs.meta = meta;
-        // state.getBlogs.data = data
-        // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-        state.getBlogs.message = "Blogs fetched successfully" 
+        state.getBlogs.meta = meta;
+        state.getBlogs.message = "Blogs fetched successfully";
         // meta takes pagination data like total, currentPage, LastPage
       }
       state.getBlogs.error = false;
@@ -111,7 +107,7 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlog.fulfilled, (state, action) => {
       state.getBlog.loading = false;
       if (action.payload) {
-        const { article, message } = action.payload
+        const { article, message } = action.payload;
         state.getBlog.data = { ...article };
         state.getBlog.message = message;
       }
@@ -130,9 +126,9 @@ export const blogSlice = createSlice({
       if (action.payload) {
         const { data, message } = action.payload;
         // Update new blog in allBlogs page
-        state.getBlogs.data = [...state.getBlogs.data, data]
+        state.getBlogs.data = [...state.getBlogs.data, data];
         // Update new blog in ViewProfile page
-        state.getBlogsById.data = [...state.getBlogsById.data, data]
+        state.getBlogsById.data = [...state.getBlogsById.data, data];
         state.addBlog.message = message;
       }
     });
@@ -170,7 +166,7 @@ export const blogSlice = createSlice({
     });
     builder.addCase(actions.updateBlog.fulfilled, (state, action) => {
       state.updateBlog.loading = false;
-      const { data, message } = action.payload; 
+      const { data, message } = action.payload;
       const updatedAllBlogs = state.getBlogs.data.map((blog) => {
         if (blog.id === data.id) {
           return data;
