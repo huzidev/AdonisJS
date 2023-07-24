@@ -16,6 +16,8 @@ const noPermission = {
 export default class ArticlesController {
   public async getBlogs({ params, request }: HttpContextContract) {
     try {
+      console.log("REQUEST", request.qs());
+    
       const filters = await validator.validate({
           schema: BlogListFilters.schema,
           data: Utils.parseQS(request.qs(), ['sort'])
@@ -27,7 +29,31 @@ export default class ArticlesController {
       if (userId) {
         query.where("owner_id", userId);
       }
-      const response = await query.paginate(params.page || 1, 5);
+      
+      let filterResultKey;
+      let filterResultValue;
+      if (!!filters.sort) {
+        filterResultKey = Object.keys(filters.sort!)[0];
+        filterResultValue = Object.values(filters.sort!)[0];
+      }
+
+      const response = await query
+        .withScopes((scope) => scope.filtersSort(filters))
+        .paginate(params.page || 1, 15);
+      
+        // return {
+      //   // so when user asked for filter then notifcation will be according to filter type
+      //   message: !!filters.sort 
+      //     ? `Users fetched by ${
+      //       filterResultValue === "asc" 
+      //       ? `ascending ${filterResultKey} order` 
+      //       : `descending ${filterResultKey} order` 
+      //     } successfully` 
+      //     : `Users list ${params.page} fetched successfully`, 
+      //   response
+      // }; 
+      console.log("RESPONSE", response);
+      
       return response;
     } catch (e) {
       throw e;

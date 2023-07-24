@@ -19,7 +19,6 @@ export default class Sort {
       // sortKey will be id, name, email etc
 
     const boolValues = ["isBanned", "isActive", "isVerified"]
-
       if (sortKey === "role") {
         query.from("users").where(sortKey, sort)
       } else if (boolValues.includes(sortKey)) {

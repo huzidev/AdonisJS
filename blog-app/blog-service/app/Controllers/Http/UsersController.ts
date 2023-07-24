@@ -49,6 +49,7 @@ export default class UsersController {
       } else {
         response = await query;
       }
+
       return {
         // so when user asked for filter then notifcation will be according to filter type
         message: !!filters.sort 
