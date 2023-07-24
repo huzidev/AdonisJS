@@ -17,7 +17,11 @@ export default function ManageBlogsPage() {
 
     useManageBlogsPageHooks();
 
-  return (
+    const test= "Hello World testing pagination method"
+    console.log("LENGTH",  test.length);
+    
+
+    return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">
         <div>
@@ -81,7 +85,9 @@ export default function ManageBlogsPage() {
                     <p className="whitespace-no-wrap">{blog.title}</p>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                    <p className="whitespace-no-wrap">{blog.content}</p>
+                    <p className="whitespace-no-wrap">{blog.content.length > 50
+                      ? `${blog.content.slice(0, 50)}...`
+                      : blog.content}</p>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
                     <span className="whitespace-no-wrap">
