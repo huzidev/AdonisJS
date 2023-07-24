@@ -1,7 +1,7 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -19,17 +19,26 @@ export default function ViewBlogsPage(): JSX.Element {
   const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
-  const { loadMore, handleSort } = useBlogsPageHooks();
+  const { loadMore, handleSort, sortValue } = useBlogsPageHooks();
 
   return (
     <div className="w-10/12 m-auto flex flex-col">
       <div>
+        {sortValue.value && (
+          <button 
+            className="text-white mr-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={() => handleSort("")}
+          >
+            Reset Filters
+          </button>
+        )}
         <button
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
@@ -79,6 +88,7 @@ export default function ViewBlogsPage(): JSX.Element {
             ))}
           </ul>
         </div>
+        
       </div>
       <div className=" flex flex-wrap">
         {allBlogs.map((blog: BlogState) => {

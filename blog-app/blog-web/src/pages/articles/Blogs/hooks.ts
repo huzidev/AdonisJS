@@ -48,11 +48,12 @@ export function useBlogsPageHooks() {
     }
   }, []);
 
-  const handleSort = (column: string) => {
+   function handleSort (column: string) {
     let type: any = "";
     // most recent will called desc because desc neans from last to first therefore the last belog will be the latest blog
-    column === "most recent" ? type = "desc" : type = "asc" 
-    let update = column === "most recent" ? "createdAt" : "createdAt"
+    column === "most recent" ? type = "desc" : column === "oldest" ? type = "asc" : type = "";
+    // becasuse most recent and old blog will be shown according to createdAt date
+    let update = column === "most recent" ? "createdAt" : column === "oldest" ? "createdAt" : "";
     const result = typeResult.find((value) => value === type);
 
     // If the type is "asc", add the sort parameter to the URL
@@ -104,6 +105,7 @@ export function useBlogsPageHooks() {
   }, [state]);
 
   return {
+    sortValue,
     loadMore,
     handleSort
   };
