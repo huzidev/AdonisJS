@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { columns } from "./data";
+import { useManageBlogsPageHooks } from "./hooks";
 
 export default function ManageBlogsPage() {
     const blogs = useBlogs();
