@@ -16,6 +16,7 @@ export function useViewProfilePageHook(): void {
   const prevBlog = usePrevious(blogState);
   const navigate = useNavigate();
 
+
   // created a spearte useEffect because while calling it in the one defined below causes problem when user delete the blog then (Your details fetched successfully) notification fetching two times therefore created a seprate useEffect
   useEffect(() => {
     if (params.id === "me") {
@@ -42,10 +43,12 @@ export function useViewProfilePageHook(): void {
     }
     if (prevBlog?.getBlogsById.loading) {
       if (!blogState.getBlogsById.loading && !blogState.getBlogsById.error) {
+        const currentPage = blogState.getBlogsById.meta.currentPage;
+        const lastPage = blogState.getBlogsById.meta.lastPage;
         if (username) {
-          successNotification(`${username}'s blogs page ${blogState.getBlogsById.meta.currentPage} of ${blogState.getBlogsById.meta.lastPage} fetched successfully`);
+          successNotification(`${username}'s blogs page ${currentPage} of ${lastPage} fetched successfully`);
         } else {
-          successNotification("Yours blogs fetched successfully");
+          successNotification(`Yours blogs page ${currentPage} of ${lastPage} fetched successfully`);
         }
       }
     }
