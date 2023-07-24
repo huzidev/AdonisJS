@@ -100,9 +100,9 @@ const routes: AppRoute[] = [
         Component: ManageUsersPage
     },
     {
-        role: roles[1], // only admins see users page
+        role: roles[1],
         path: `${ROUTE_PATHS.ARTICLES_PAGE}:page`,
-        Component: ManageUsersPage
+        Component: ManageBlogsPage
     },
     {
         exact: true,
