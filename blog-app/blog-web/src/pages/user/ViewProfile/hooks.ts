@@ -43,7 +43,7 @@ export function useViewProfilePageHook(): void {
     if (prevBlog?.getBlogsById.loading) {
       if (!blogState.getBlogsById.loading && !blogState.getBlogsById.error) {
         if (username) {
-          successNotification(`${username}'s blogs fetched successfully`);
+          successNotification(`${username}'s blogs page ${blogState.getBlogsById.meta.currentPage} of ${blogState.getBlogsById.meta.lastPage} fetched successfully`);
         } else {
           successNotification("Yours blogs fetched successfully");
         }
