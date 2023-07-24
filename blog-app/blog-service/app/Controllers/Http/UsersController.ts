@@ -1,5 +1,6 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
+import { emailExist, usernameExist } from "App/Default/Messages";
 import User from "App/Models/User";
 import Utils from "App/Utils";
 import {
@@ -98,15 +99,9 @@ export default class UsersController {
     } catch (e) {
       if (e.sqlMessage) {
         if (e.sqlMessage.includes("users.users_username_unique")) {
-          throw {
-            message: "Username already exist",
-            status: 409,
-          };
+          throw usernameExist
         } else if (e.sqlMessage.includes("users.users_email_unique")) {
-          throw {
-            message: "Email already exist",
-            status: 409,
-          };
+          throw emailExist
         }
       }
       throw e;
@@ -163,10 +158,7 @@ export default class UsersController {
     } catch (e) {
       if (e.sqlMessage) {
         if (e.sqlMessage.includes("users.users_username_unique")) {
-          throw {
-            message: "Username already exist",
-            status: 409,
-          };
+          throw usernameExist
         }
       }
       throw e;

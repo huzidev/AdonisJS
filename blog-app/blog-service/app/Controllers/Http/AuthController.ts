@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
+import { emailExist, invalidCredentials, noEmailFound, usernameExist } from 'App/Default/Messages';
 import EmailVerificationCode from 'App/Models/EmailVerificationCode';
 import ResetPasswordCode from 'App/Models/ResetPasswordCode';
 import User from "App/Models/User";
@@ -45,15 +46,9 @@ export default class AuthController {
             trx.rollback()
             if (e.sqlMessage) {
                 if (e.sqlMessage.includes("users.users_username_unique")) {
-                    throw {
-                        message: "Username already exist",
-                        status: 409
-                    }
+                    throw usernameExist
                 } else if (e.sqlMessage.includes("users.users_email_unique")) {
-                    throw {
-                        message: "Email already exist",
-                        status: 409
-                    }
+                    throw emailExist
                 } 
             }
             throw e
@@ -80,7 +75,7 @@ export default class AuthController {
             }
         } catch (e) {
             if (e.code === "E_INVALID_AUTH_PASSWORD" || e.code ===  "E_INVALID_AUTH_UID") {
-                throw { message: "Email or Password is incorrect", status: 400 }
+                throw invalidCredentials
             }
             throw e
         }
@@ -116,7 +111,7 @@ export default class AuthController {
         // using .first() because we knew data can't be null as for calling this request email is mandatory if no email then this won't even run if data can be null then firstOrFail
         const user = await User.query().where("email", body.email).where("isActive", true).first();
         if (!user) {
-            throw { message: 'No user is registered with this email', status: 404 }
+            throw noEmailFound
         }
         let verificationCode = await ResetPasswordCode.findBy("userId", user.id);
 
@@ -141,7 +136,7 @@ export default class AuthController {
         const user = await User.query().where("email", body.email).where("isActive", true).first();
         // so if user tries to change email through URL
         if (!user) {
-            throw { message: 'No user is registered with this email', status: 404 }
+            throw noEmailFound
         }
         let verificationCode = await ResetPasswordCode.findBy("userId", user.id);
         if (
