@@ -1,12 +1,9 @@
 const columnsKeys = [
   "sno",
   "id",
-  "username",
-  "email",
-  "role",
-  "isActive",
-  "isBanned",
-  "isVerified",
+  "owner id",
+  "title",
+  "content",
   "createdAt",
   "updatedAt",
   "actions",
@@ -15,5 +12,5 @@ const columnsKeys = [
 export const columns = columnsKeys.map((key) => ({
   key,
   dataIndex: key,
-  title: key,
+  title: key
 }));
