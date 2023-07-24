@@ -1,7 +1,7 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { alternateKeys, booleanKeys, notBooleanResult, typeResult } from "./ManageUsers/data";
+import { alternateKeys, booleanKeys, notAltResult, notBooleanResult, notRoleResult, typeResult } from "./ManageUsers/data";
 import { SortPayload } from "./ManageUsers/types";
 
 export function useUserFiltersState() {
@@ -33,7 +33,7 @@ export function useUserFiltersState() {
     let boolKeys = booleanKeys.find((value) => value === column);
     if (altKeys) {
       // if type is asc then change it to desc if desc then change to "" empty string (which is default form)
-      !sortValue.type
+      notAltResult.includes(sortValue.type) || !sortValue.type
         ? (type = "asc")
         : sortValue.type === "asc"
         ? (type = "desc")
@@ -49,7 +49,7 @@ export function useUserFiltersState() {
         ? (type = "false")
         : (type = "");
     } else {
-      !sortValue.type
+      notRoleResult.includes(sortValue.type) || !sortValue.type
         ? (type = "admin")
         : sortValue.type === "admin"
         ? (type = "super-admin")

@@ -16,7 +16,9 @@ const columnsKeys = [
 
 // boolKeys means they'll either be true(yes) or false(no)
 export const booleanKeys = ['isActive', 'isBanned', 'isVerified'];
-export const notBooleanResult = ['asc', 'desc', 'admin', "super-admin", "user", "blogger"]
+export const notBooleanResult = ['asc', 'desc', 'admin', 'super-admin', 'user', 'blogger'];
+export const notAltResult = ['true', 'false', 'admin', "super-admin", "user", "blogger"];
+export const notRoleResult = ['asc', 'desc', 'true', 'false'];
 export const alternateKeys = ['id', 'createdAt', 'email', 'username', 'createdAt', 'updatedAt'];
 export const typeResult = ["asc", "desc", "true", "false", "admin", "super-admin", "user", "blogger"];
 export const constKeys = ['sno', 'actions'];
