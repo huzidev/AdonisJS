@@ -26,7 +26,6 @@ export function useBlogsPageHooks() {
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const currentPageFvrtBlogs: any =
     blogs.state.getFavoriteBlogs.meta?.currentPage;
-  const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
   const lastPageFvrtBlogs: any = blogs.state.getFavoriteBlogs.meta?.lastPage;
 
     const search: any = qs.parse(window.location.search);
