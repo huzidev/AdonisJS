@@ -1,24 +1,15 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
-
+import { blogsFetched, noArticle, noPermission } from "App/Default/Message";
 import Article from "App/Models/Article";
 import User from "App/Models/User";
 import Utils from "App/Utils";
 import { BlogListFilters, CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
 
 // Controller used to call the functions created in routes here so routes won't get messed up
-
-const noArticle = { message: "No such article is found ", status: 404 };
-const noPermission = {
-  message: "Insufficient access, you do not have permission to perform this action",
-  status: 401
-};
-const blogsFetched = "blogs fetched successfully";
 export default class ArticlesController {
   public async getBlogs({ params, request }: HttpContextContract) {
     try {
-      console.log("REQUEST", request.qs());
-    
       const filters = await validator.validate({
           schema: BlogListFilters.schema,
           data: Utils.parseQS(request.qs(), ['sort'])
