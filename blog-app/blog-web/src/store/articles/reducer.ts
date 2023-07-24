@@ -28,7 +28,7 @@ export const blogSlice = createSlice({
         ...(state?.getBlogs.data ?? []),
         ...action.payload.data,
       };
-    },
+    },  
   },
   extraReducers: (builder) => {
     // getAllBlogs

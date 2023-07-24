@@ -51,7 +51,8 @@ export function useBlogsPageHooks() {
 
   const handleSort = (column: string) => {
     let type: any = "";
-    column === "most recent" ? type = "asc" : type = "desc" 
+    // most recent will called desc because desc neans from last to first therefore the last belog will be the latest blog
+    column === "most recent" ? type = "desc" : type = "asc" 
     let update = column === "most recent" ? "createdAt" : "createdAt"
     const result = typeResult.find((value) => value === type);
 
