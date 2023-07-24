@@ -29,6 +29,10 @@ export function useUserFiltersState() {
 
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
     let altKeys = alternateKeys.find((value) => value === column);
+    console.log("ALT KEY", altKeys);
+    console.log("SORT RESULT", sortValue.value);
+    
+    
     // if sortValue is between isVerified, isBanned, isActive then boolKeys
     let boolKeys = booleanKeys.find((value) => value === column);
     if (altKeys) {
@@ -71,7 +75,7 @@ export function useUserFiltersState() {
       }?${searchParams.toString()}`;
       window.history.replaceState({}, "", newUrl);
     } else {
-      // If the type is neither "asc" nor "desc", remove the entire "sort" parameter from the URL
+      // If the type is neither "asc" nor "desc" or "true", "false", "admin" etc, remove the entire "sort" parameter from the URL
       const newUrl = `${ROUTE_PATHS.USERS_PAGE}${params.page}`;
       window.history.replaceState({}, "", newUrl);
     }
