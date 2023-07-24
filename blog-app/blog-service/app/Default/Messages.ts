@@ -23,5 +23,8 @@ export const noEmailFound = {
   message: "No user is registered with this email",
   status: 404
 };
+export const invalidURL = {
+  message: "Invalid URL type", status: 400 
+};
 
 export const blogsFetched = "blogs fetched successfully";

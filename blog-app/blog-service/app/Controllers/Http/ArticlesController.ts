@@ -1,6 +1,6 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
-import { blogsFetched, noArticle, noPermission } from "App/Default/Messages";
+import { blogsFetched, invalidURL, noArticle, noPermission } from "App/Default/Messages";
 import Article from "App/Models/Article";
 import User from "App/Models/User";
 import Utils from "App/Utils";
@@ -43,8 +43,7 @@ export default class ArticlesController {
       }; 
     } catch (e) {
       console.log("ERROR", e);
-      
-      throw e;
+      throw invalidURL;
     }
   }
 

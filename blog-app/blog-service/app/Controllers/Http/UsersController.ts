@@ -1,6 +1,6 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
-import { emailExist, usernameExist } from "App/Default/Messages";
+import { emailExist, invalidURL, usernameExist } from "App/Default/Messages";
 import User from "App/Models/User";
 import Utils from "App/Utils";
 import {
@@ -67,7 +67,7 @@ export default class UsersController {
       };
     } catch (e) {
       console.log("ERROR", e);
-      throw { message: "Invalid URL type", status: 400 }
+      throw invalidURL;
     }
   }
 
