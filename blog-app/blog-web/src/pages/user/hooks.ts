@@ -1,18 +1,17 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { alternateKeys, booleanKeys, typeResult } from "./ManageUsers/data";
+import { alternateKeys, booleanKeys, notBooleanResult, typeResult } from "./ManageUsers/data";
 import { SortPayload } from "./ManageUsers/types";
 
 export function useUserFiltersState() {
-    const params = useParams();
-    
-    const [sortValue, setSortValue] = useState<SortPayload>({
-        value: "",
-        type: "",
-    });
+  const params = useParams();
+  const [sortValue, setSortValue] = useState<SortPayload>({
+    value: "",
+    type: ""
+  });
 
-    useEffect(() => {
+  useEffect(() => {
     // Get the sort parameter from the URL when the component mounts
     const searchParams = new URLSearchParams(window.location.search);
     const sortParam = searchParams.get("sort");
@@ -35,27 +34,30 @@ export function useUserFiltersState() {
     if (altKeys) {
       // if type is asc then change it to desc if desc then change to "" empty string (which is default form)
       !sortValue.type
-        ? type = "asc"
+        ? (type = "asc")
         : sortValue.type === "asc"
-        ? type = "desc"
-        : type = ""
+        ? (type = "desc")
+        : (type = "");
     } else if (boolKeys) {
       // if type is asc then change it to desc if desc then change to asc
-      !sortValue.type
-        ? type = "true"
+      // it is ncessary to do because suppose if user clicked on username to be filtered now sortValue.type have property related to asc OR desc now when user clicked on
+      // booleanKeys so due to already present value of asc OR desc the filter first became empty then it'll run so therefore we've created this property so even if
+      // their is some value present or no value present then called the true order first
+      notBooleanResult.includes(sortValue.type) || !sortValue.type
+        ? (type = "true")
         : sortValue.type === "true"
-        ? type = "false"
-        : type = ""
+        ? (type = "false")
+        : (type = "");
     } else {
       !sortValue.type
-        ? type = "admin"
+        ? (type = "admin")
         : sortValue.type === "admin"
-        ? type = "super-admin"
+        ? (type = "super-admin")
         : sortValue.type === "super-admin"
-        ? type = "user"
+        ? (type = "user")
         : sortValue.type === "user"
-        ? type = "blogger" 
-        : type = "" 
+        ? (type = "blogger")
+        : (type = "");
     }
 
     const result = typeResult.find((value) => value === type);
@@ -77,7 +79,7 @@ export function useUserFiltersState() {
     setSortValue({ value: column, type });
   };
 
-    return {
-        handleSort
-    }
+  return {
+    handleSort,
+  };
 }
