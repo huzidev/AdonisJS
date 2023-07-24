@@ -23,7 +23,6 @@ export default class ArticlesController {
       }
       
       const isSort = Object.keys(request.qs())[1];
-
       // to check if user tries to change method in URL which should be sort if user tries to change it then throw error
       // it is compulsory to put isSort !== "sort" inside isSort so it won't run every time rather it'll only runs when user called the FILTERS
       // we can't called !userFilters.includes(filterResultKey) here because for that we needs filters so if user changes the METHOD in URL from sort to something else
