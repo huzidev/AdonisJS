@@ -24,6 +24,7 @@ export default class UsersController {
 
       const filters = await validator.validate({
         schema: UserListFilters.schema,
+        messages: UserListFilters.messages,
         data: Utils.parseQS(request.qs(), ['sort'])
       })
 
@@ -65,7 +66,8 @@ export default class UsersController {
         data: response
       };
     } catch (e) {
-      throw e;
+      console.log("ERROR", e);
+      throw { message: "Invalid URL type", status: 400 }
     }
   }
 

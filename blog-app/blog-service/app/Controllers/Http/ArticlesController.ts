@@ -42,6 +42,8 @@ export default class ArticlesController {
         data: response
       }; 
     } catch (e) {
+      console.log("ERROR", e);
+      
       throw e;
     }
   }
