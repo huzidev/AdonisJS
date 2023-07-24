@@ -44,8 +44,11 @@ export const getBlogsById = createAsyncThunk(
     try {
       const { userId, page } = data;
       const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`);
-      console.log("response for all blogs BY ID", response.data);
-      return response.data;
+      console.log("response for all blogs BY ID", response.data.data);
+      return {
+        data : response.data.data.data,
+        meta: response.data.data.meta
+      };
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);
