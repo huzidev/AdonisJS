@@ -43,6 +43,7 @@ export function useViewProfilePageHook(): void {
     }
     if (prevBlog?.getBlogsById.loading) {
       if (!blogState.getBlogsById.loading && !blogState.getBlogsById.error) {
+        // created these two const variable here because in this statement these variable will be updated
         const currentPage = blogState.getBlogsById.meta.currentPage;
         const lastPage = blogState.getBlogsById.meta.lastPage;
         if (username) {

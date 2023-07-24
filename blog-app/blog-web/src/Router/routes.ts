@@ -11,7 +11,8 @@ const ViewBlogsPage = React.lazy(() => import('pages/articles/Blogs'));
 const ViewProfilePage = React.lazy(() => import('pages/user/ViewProfile'));
 const UserFormPage = React.lazy(() => import('pages/auth/Form'));
 const VerifyUserPage = React.lazy(() => import('pages/user/VerifyUser'));
-const UsersPage = React.lazy(() => import("pages/user/ManageUsers"));
+const ManageUsersPage = React.lazy(() => import("pages/user/ManageUsers"));
+const ManageBlogsPage = React.lazy(() => import("pages/articles/ManageBlogs"));
 const SendResetPasswordPage = React.lazy(() => import("pages/auth/SendResetPassword"));
 const ResetPasswordPage = React.lazy(() => import("pages/auth/ResetPassword"));
 const BannedUserPage = React.lazy(() => import("pages/user/BannedUser"));
@@ -96,7 +97,12 @@ const routes: AppRoute[] = [
     {
         role: roles[2], // only admins see users page
         path: `${ROUTE_PATHS.USERS_PAGE}:page`,
-        Component: UsersPage
+        Component: ManageUsersPage
+    },
+    {
+        role: roles[1], // only admins see users page
+        path: `${ROUTE_PATHS.ARTICLES_PAGE}:page`,
+        Component: ManageUsersPage
     },
     {
         exact: true,
