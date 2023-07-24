@@ -29,15 +29,17 @@ export function useUserFiltersState() {
 
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
     let altKeys = alternateKeys.find((value) => value === column);
-    console.log("ALT KEY", altKeys);
-    console.log("SORT RESULT", sortValue.value);
-    
     
     // if sortValue is between isVerified, isBanned, isActive then boolKeys
     let boolKeys = booleanKeys.find((value) => value === column);
     if (altKeys) {
       // if type is asc then change it to desc if desc then change to "" empty string (which is default form)
-      notAltResult.includes(sortValue.type) || !sortValue.type
+      // !sortValue.type means when their is no type means no filters been used hence add the asc order first
+      // sortValue.value !== altKeys now suppose user clicked on uesrname hence asc order will be adds first since asc order is added in the type firstly hence if user 
+      // tries to called email then because the asc order is already in sortValue.type hence for email it'll called desc order which is not OK because first
+      // it should called the asc order first therefore we've created the condition sortValue.value !== altKeys means if value changes as of value in sortValue.value
+      // then called the asc order first
+      notAltResult.includes(sortValue.type) || !sortValue.type || sortValue.value !== altKeys
         ? (type = "asc")
         : sortValue.type === "asc"
         ? (type = "desc")
@@ -47,12 +49,13 @@ export function useUserFiltersState() {
       // it is ncessary to do because suppose if user clicked on username to be filtered now sortValue.type have property related to asc OR desc now when user clicked on
       // booleanKeys so due to already present value of asc OR desc the filter first became empty then it'll run so therefore we've created this property so even if
       // their is some value present or no value present then called the true order first
-      notBooleanResult.includes(sortValue.type) || !sortValue.type
+      notBooleanResult.includes(sortValue.type) || !sortValue.type || sortValue.value !== boolKeys
         ? (type = "true")
         : sortValue.type === "true"
         ? (type = "false")
         : (type = "");
     } else {
+      // no need to called sortValue.value because role property have no related other field which have same type as of roles
       notRoleResult.includes(sortValue.type) || !sortValue.type
         ? (type = "admin")
         : sortValue.type === "admin"
