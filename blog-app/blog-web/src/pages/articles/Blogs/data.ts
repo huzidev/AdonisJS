@@ -1,3 +1,5 @@
+import { SortPayload } from "pages/user/ManageUsers/types";
+
 export const columnsKeys = [
   'most recent',
   'oldest'
@@ -12,3 +14,8 @@ export const columns = columnsKeys.map((key) => ({
   dataIndex: key,
   title: key
 }));
+
+export const initialSortState: SortPayload = {
+  value: "",
+  type: ""
+}

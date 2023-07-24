@@ -1,5 +1,4 @@
 import ROUTE_PATHS from "Router/paths";
-import { SortPayload } from "pages/user/ManageUsers/types";
 import qs from "query-string";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +7,7 @@ import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
-import { typeResult } from "./data";
+import { initialSortState, typeResult } from "./data";
 
 export function useBlogsPageHooks() {
   const blogs = useBlogs();
@@ -19,10 +18,7 @@ export function useBlogsPageHooks() {
   const navigate = useNavigate();
   const allUsers: any = user.state.allUser?.data;
   const favoriteBlogs: any = blogs.state.getFavoriteBlogs;
-  const [sortValue, setSortValue] = useState<SortPayload>({
-    value: "",
-    type: "",
-  });
+  const [sortValue, setSortValue] = useState(initialSortState);
   const payload: any = {
     userId: auth.state.user?.id,
     page: 1,
@@ -107,6 +103,8 @@ export function useBlogsPageHooks() {
         successNotification(state.getBlogs.message);
       } else if (!state.getBlogs.loading && state.getBlogs.error) {
         navigate(ROUTE_PATHS.ARTICLES);
+        // so if any error occured then simply setSortValue to initial state which hides the reset filters button as well
+        setSortValue(initialSortState);
       }
     }
     if (prev?.deleteBlog.loading) {
