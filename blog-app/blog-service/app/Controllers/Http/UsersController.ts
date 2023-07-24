@@ -28,12 +28,23 @@ export default class UsersController {
         data: Utils.parseQS(request.qs(), ['sort'])
       })
 
-      // to use these values in message
-      let filterResultKey;
+      const isSort = Object.keys(request.qs())[1];
+
+      // to check if user tries to change method in URL which should be sort if user tries to change it then throw error
+      // it is compulsory to put isSort !== "sort" inside isSort so it won't run every time rather it'll only runs when user called the FILTERS
+      if (isSort) {
+        if (isSort !== "sort") {
+          throw invalidURL;
+        }
+      }
+      
+      let filterResultKey: any;
       let filterResultValue;
       if (!!filters.sort) {
         filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
+        // console.log("is sort", isSort);
+        
         // so when user tries to change the value from URL then throw error
         // if filters is according to username and user tries to change the value of username to something else then the error will be shown
           if (!userFilters.includes(filterResultKey)) {
