@@ -1,5 +1,6 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
+import { userFilters } from "App/Default/Filters";
 import { emailExist, invalidURL, usernameExist } from "App/Default/Messages";
 import User from "App/Models/User";
 import Utils from "App/Utils";
@@ -24,7 +25,6 @@ export default class UsersController {
 
       const filters = await validator.validate({
         schema: UserListFilters.schema,
-        messages: UserListFilters.messages,
         data: Utils.parseQS(request.qs(), ['sort'])
       })
 
@@ -34,7 +34,13 @@ export default class UsersController {
       if (!!filters.sort) {
         filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
+        // so when user tries to change the value from URL then throw error
+        // if filters is according to username and user tries to change the value of username to something else then the error will be shown
+          if (!userFilters.includes(filterResultKey)) {
+            throw invalidURL;
+          }
       }
+
 
       let response; 
       // if user wanted to see allBlogs uploaded by him
