@@ -85,8 +85,8 @@ export default function ManageBlogsPage() {
                     <p className="whitespace-no-wrap">{blog.title}</p>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                    <p className="whitespace-no-wrap">{blog.content.length > 50
-                      ? `${blog.content.slice(0, 50)}...`
+                    <p className="whitespace-no-wrap">{blog.content.length > 45
+                      ? `${blog.content.slice(0, 45)}...`
                       : blog.content}</p>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
