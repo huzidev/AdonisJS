@@ -17,6 +17,10 @@ export const links = [
     link: ROUTE_PATHS.ARTICLE_CREATE
   },
   {
+    title: 'Manage Blogs',
+    link: ROUTE_PATHS.ARTICLES_PAGE + 1
+  },
+  {
     title: 'Manage Users',
     link: ROUTE_PATHS.USERS_PAGE + 1
   },
@@ -29,6 +33,7 @@ export const links = [
 export const loggedInPathsBlogger = [
   ROUTE_PATHS.ARTICLES,
   ROUTE_PATHS.ARTICLE_CREATE,
+  ROUTE_PATHS.ARTICLES_PAGE + 1,
   ROUTE_PATHS.VIEW_PROFILE + "me"
 ];
 
@@ -46,6 +51,7 @@ export const loggedOutPaths = [
 export const adminPaths = [
   ROUTE_PATHS.ARTICLES,
   ROUTE_PATHS.ARTICLE_CREATE,
+  ROUTE_PATHS.ARTICLES_PAGE + 1,
   ROUTE_PATHS.USERS_PAGE + 1,
   ROUTE_PATHS.VIEW_PROFILE + "me"
 ]
