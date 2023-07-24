@@ -13,6 +13,7 @@ const noPermission = {
   message: "Insufficient access, you do not have permission to perform this action",
   status: 401
 };
+const blogsFetched = "blogs fetched successfully";
 export default class ArticlesController {
   public async getBlogs({ params, request }: HttpContextContract) {
     try {
@@ -30,10 +31,8 @@ export default class ArticlesController {
         query.where("owner_id", userId);
       }
       
-      let filterResultKey;
       let filterResultValue;
       if (!!filters.sort) {
-        filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
       }
 
@@ -41,20 +40,16 @@ export default class ArticlesController {
         .withScopes((scope) => scope.filtersSort(filters))
         .paginate(params.page || 1, 15);
       
-        // return {
-      //   // so when user asked for filter then notifcation will be according to filter type
-      //   message: !!filters.sort 
-      //     ? `Users fetched by ${
-      //       filterResultValue === "asc" 
-      //       ? `ascending ${filterResultKey} order` 
-      //       : `descending ${filterResultKey} order` 
-      //     } successfully` 
-      //     : `Users list ${params.page} fetched successfully`, 
-      //   response
-      // }; 
-      console.log("RESPONSE", response);
-      
-      return response;
+        return {
+        // so when user asked for filter then notifcation will be according to filter type
+        message: !!filters.sort && filterResultValue === "desc" 
+        ? `Most recent ${blogsFetched}` 
+        : filterResultValue === "asc" 
+        ? `Oldest ${blogsFetched}` 
+        // by default first letter is small of blogs as we are using the same message mutiple places therefore
+        : blogsFetched.charAt(0).toUpperCase() + blogsFetched.slice(1).toLocaleLowerCase(),
+        data: response
+      }; 
     } catch (e) {
       throw e;
     }
