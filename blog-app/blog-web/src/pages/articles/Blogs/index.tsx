@@ -23,13 +23,12 @@ export default function ViewBlogsPage(): JSX.Element {
   // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
-
-  console.log("ALL BLOGS", allBlogs);
-
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
 
   const { loadMore, handleSort } = useBlogsPageHooks();
+
+
   return (
     <div className="w-10/12 m-auto flex flex-col">
       <div>
@@ -71,7 +70,11 @@ export default function ViewBlogsPage(): JSX.Element {
           >
             {columns.map((data, columnIndex) => (
               // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
-              <li onClick={() => handleSort(data.title)} className="px-5 py-3 cursor-pointer" key={columnIndex}>
+              <li
+                onClick={() => handleSort(data.title)}
+                className="px-5 py-3 cursor-pointer"
+                key={columnIndex}
+              >
                 {/* startCase will make the first letter Capital of any word */}
                 {startCase(data.title)}
               </li>
