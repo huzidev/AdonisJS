@@ -9,6 +9,8 @@ const columnsKeys = [
   "actions",
 ];
 
+export const constKeys = ["sno", "actions"];
+
 export const columns = columnsKeys.map((key) => ({
   key,
   dataIndex: key,

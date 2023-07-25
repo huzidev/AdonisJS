@@ -7,7 +7,7 @@ import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
-import { columns } from "./data";
+import { columns, constKeys } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
 
 export default function ManageBlogsPage() {
@@ -60,7 +60,9 @@ export default function ManageBlogsPage() {
                         className="px-5 py-3 cursor-pointer"
                         key={columnIndex}
                         onClick={
-                          () => handleSort(data.title === "uploadedBy" ? "username" : data.title)
+                          !constKeys.includes(data.key)
+                            ? () => handleSort(data.key)
+                            : undefined
                         }
                       >
                         {/* startCase will make the first letter Capital of any word */}
@@ -125,19 +127,22 @@ export default function ManageBlogsPage() {
                       </td>
                       <td className="border-b border-gray-200 bg-white p-5 text-sm">
                         <div className="pl-4">
-                          <Link
-                            to={
-                              (auth.state.user?.role === "admin" &&
-                              uploadedByUserRole === "super-admin"
-                                ? ROUTE_PATHS.ARTICLE_VIEW
-                                : ROUTE_PATHS.ARTICLE_UPDATE) + blog.slug
+                          <button
+                            className="text-blue-600"
+                            onClick={() =>
+                              navigate(
+                                (auth.state.user?.role === "admin" &&
+                                uploadedByUserRole === "super-admin"
+                                  ? ROUTE_PATHS.ARTICLE_VIEW
+                                  : ROUTE_PATHS.ARTICLE_UPDATE) + blog.slug
+                              )
                             }
                           >
                             {auth.state.user?.role === "admin" &&
                             uploadedByUserRole === "super-admin"
                               ? "View Blog"
-                              : "Edit"}
-                          </Link>
+                              : "Edit"} 
+                          </button>
                         </div>
                       </td>
                     </tr>
