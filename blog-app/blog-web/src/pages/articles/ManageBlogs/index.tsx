@@ -88,37 +88,11 @@ export default function ManageBlogsPage() {
                       </span>
                     </td>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      {/* <div className="pl-4"> */}
-                      {/* so admin can't get the access to edit super-admin */}
-                      {/* {auth.state.user &&
-                          !hasPermission(, auth.state.user.role) ? (
-                            <button
-                              className="text-blue-600"
-                              // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                              onClick={() =>
-                                navigate(ROUTE_PATHS.VIEW_PROFILE + user.id)
-                              }
-                            >
-                              View Profile
-                            </button>
-                          ) : (
-                            <button
-                              className="text-blue-600"
-                              // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                              onClick={() =>
-                                navigate(
-                                  ROUTE_PATHS.EDIT_USER +
-                                    (user.id === auth.state.user?.id
-                                      ? "me"
-                                      : user.id)
-                                )
-                              }
-                            >
-                              Edit
-                            </button>
-                          )}
-                        </div> */}
-                      <button>Edit</button>
+                      <div className="pl-4">
+                          <button>
+                            Edit
+                          </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
