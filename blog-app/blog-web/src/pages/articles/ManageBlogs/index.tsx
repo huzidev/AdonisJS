@@ -19,9 +19,7 @@ export default function ManageBlogsPage() {
   const allBlogs = isAdmin ? dataByUser.data : dataByMe.data;
   const currentPage = isAdmin ? dataByUser.meta?.currentPage:  dataByMe.meta?.currentPage;
   const lastPage = isAdmin ? dataByUser.meta?.lastPage : dataByMe.meta?.lastPage;
-
   useManageBlogsPageHooks();
-  console.log("all blogs", allBlogs);
   
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">

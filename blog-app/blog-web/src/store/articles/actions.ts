@@ -12,16 +12,26 @@ import {
   UpdateBlogPayload,
 } from "./types";
 
+export const getMyList = createAsyncThunk(endpoints.GET_BLOGS + "me", async (data: any): Promise<AllBlogs | null> => {
+  try {
+    
+  } catch (e: any) {
+   const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e 
+  }
+})
+
 export const getBlogs = createAsyncThunk(
   endpoints.GET_BLOGS,
   async (data: any): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
+    console.log("data", data);
+    
     try {
       const response = await api.get(endpoints.GET_BLOGS + data.page, {params: data});
       const filtersApplied = data.sort !== undefined;
-
-      console.log("ALL BLOGS RESPONSE", response);
-
       return {
         data: response.data.data.data,
         meta: response.data.data.meta,
