@@ -30,7 +30,7 @@ export default function ManageBlogsPage() {
             {isAdmin ? "Manage Blogs" : "Manage Your Blogs"}
           </h2>
           <span className="text-xs text-gray-500">
-            {"View blogs uploaded by" + (isAdmin ? " bloggers" : " you")}
+            {`View ${isAdmin ? "all uploaded blogs": "blogs uploaded by you"}`}
           </span>
         </div>
       </div>
