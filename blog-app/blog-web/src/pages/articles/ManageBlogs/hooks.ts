@@ -29,7 +29,7 @@ export function useManageBlogsPageHooks(): void {
 
   const search: any = qs.parse(window.location.search);
     if (isAdmin) {
-      blogs.getBlogs({page: params.page || 1, ...search})
+      blogs.getBlogsList({page: params.page || 1, ...search})
     } else {
       blogs.getMyList(payload)
     }
