@@ -9,3 +9,11 @@ export const userFilters = [
   "createdAt",
   "updatedAt"
 ];
+
+export const articleFilters = [
+  "id",
+  "title",
+  "content",
+  "createdAt",
+  "updatedAt"
+];

@@ -1,5 +1,6 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
+import { articleFilters } from "App/Default/Filters";
 import { blogsFetched, invalidURL, noArticle, noPermission } from "App/Default/Messages";
 import Article from "App/Models/Article";
 import User from "App/Models/User";
@@ -39,7 +40,7 @@ export default class ArticlesController {
         filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
         // filter for most recent and oldest will be according to createdAt therefore checking for createdAt only
-        if (filterResultKey !== "createdAt") {
+        if (!articleFilters.includes(filterResultKey)) {
           throw invalidURL;
         }
       }
