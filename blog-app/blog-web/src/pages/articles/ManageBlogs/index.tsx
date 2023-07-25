@@ -3,6 +3,7 @@ import startCase from "lodash/startCase";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { columns } from "./data";
@@ -59,6 +60,9 @@ export default function ManageBlogsPage() {
                   const uploadedByUser = allUsers?.find(
                   (user: User) => user.id === blog.ownerId
                 );
+                const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
+                const uploadedByUserId = uploadedByUser && uploadedByUser.id;
+                const uploadedByUsername = uploadedByUser && uploadedByUser.username;
                   return (
                   // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                   <tr key={userIndex}>
@@ -71,7 +75,9 @@ export default function ManageBlogsPage() {
                     {isAdmin && (
                       <td className="border-b border-gray-200 bg-white p-5 text-sm">
                         <p className="whitespace-no-wrap">
-                          {blog.ownerId}
+                          {blog.ownerId === uploadedByUserId && (
+                            uploadedByUserRole === "super-admin" ? `${uploadedByUsername + " *"}` : uploadedByUsername
+                          )}
                         </p>
                       </td>
                     )}
