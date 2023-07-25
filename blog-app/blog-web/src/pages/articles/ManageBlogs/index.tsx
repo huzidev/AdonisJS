@@ -104,11 +104,13 @@ export default function ManageBlogsPage() {
                     </td>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <div className="pl-4">
-                          <button
-                            onClick={() => navigate(ROUTE_PATHS.ARTICLE_UPDATE + blog.slug)}
-                          >
+                          <Link
+                            to={
+                              (auth.state.user?.role === "admin" && uploadedByUserRole === "super-admin" ? ROUTE_PATHS.ARTICLE_VIEW : ROUTE_PATHS.ARTICLE_UPDATE) + blog.slug  
+                            }                          
+                            >
                             {auth.state.user?.role === "admin" && uploadedByUserRole === "super-admin" ? "View Profile" : "Edit"}
-                          </button>
+                          </Link>
                       </div>
                     </td>
                   </tr>
