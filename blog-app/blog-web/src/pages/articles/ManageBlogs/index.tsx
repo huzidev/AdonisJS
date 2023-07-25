@@ -107,7 +107,7 @@ export default function ManageBlogsPage() {
                           <button
                             onClick={() => navigate(ROUTE_PATHS.ARTICLE_UPDATE + blog.slug)}
                           >
-                            Edit
+                            {auth.state.user?.role === "admin" && uploadedByUserRole === "super-admin" ? "View Profile" : "Edit"}
                           </button>
                       </div>
                     </td>
