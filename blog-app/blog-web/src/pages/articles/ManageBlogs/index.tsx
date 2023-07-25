@@ -89,7 +89,9 @@ export default function ManageBlogsPage() {
                     </td>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <div className="pl-4">
-                          <button>
+                          <button
+                            onClick={() => navigate(ROUTE_PATHS.ARTICLE_UPDATE + blog.slug)}
+                          >
                             Edit
                           </button>
                       </div>
