@@ -43,10 +43,13 @@ export default function ManageBlogsPage() {
                 <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
                   {columns.map((data, columnIndex) => (
                     // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
-                    <th className="px-5 py-3 cursor-pointer" key={columnIndex}>
-                      {/* startCase will make the first letter Capital of any word */}
-                      {startCase(data.title)}
-                    </th>
+                    // So owner id won't be shown when blogger clikced on manage blogs owner id will only be visible when admin state is true
+                    data.title === "owner id" && !isAdmin ? null : (
+                      <th className="px-5 py-3 cursor-pointer" key={columnIndex}>
+                        {/* startCase will make the first letter Capital of any word */}
+                        {startCase(data.title)}
+                      </th>
+                    )
                   ))}
                 </tr>
               </thead>
@@ -60,9 +63,11 @@ export default function ManageBlogsPage() {
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <p className="whitespace-no-wrap">{blog.id}</p>
                     </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <p className="whitespace-no-wrap">{blog.ownerId}</p>
-                    </td>
+                    {isAdmin && (
+                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <p className="whitespace-no-wrap">{blog.ownerId}</p>
+                      </td>
+                    )}
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
                       <p className="whitespace-no-wrap">{blog.title}</p>
                     </td>
