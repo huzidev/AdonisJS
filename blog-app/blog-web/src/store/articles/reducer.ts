@@ -110,7 +110,9 @@ export const blogSlice = createSlice({
       state.getMyList.loading = false;
       if (action.payload) {
         const { data, meta } = action.payload;
-        // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
+        // created a seprate condition for getMyList so when user clicked on manage blogs then a table is shown with all the blogs uploaded by that user now we've
+        // created a condition in getBlogsById which is that when user clicked on LoadMore then previous data remains save and new data appends in array BUT for table
+        // we wanted previous data to be vanished and just show new data so when user CLICKED on next page then just new data must shown not the previous data
         state.getMyList.data = [...state.getBlogs.data, ...data];
         // meta takes pagination data like total, currentPage, LastPage
         state.getMyList.meta = meta;
