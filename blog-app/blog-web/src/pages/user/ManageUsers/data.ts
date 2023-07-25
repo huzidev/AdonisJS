@@ -17,6 +17,8 @@ const columnsKeys = [
 export const booleanKeys = ["isActive", "isBanned", "isVerified"];
 export const notRoleResult = ["asc", "desc", "true", "false"];
 export const notBooleanResult = [
+  "recent",
+  "oldest",
   "asc",
   "desc",
   "admin",
@@ -25,6 +27,18 @@ export const notBooleanResult = [
   "blogger",
 ];
 export const notAltResult = [
+  "recent",
+  "oldest",
+  "true",
+  "false",
+  "admin",
+  "super-admin",
+  "user",
+  "blogger",
+];
+export const notDateResult = [
+  "asc",
+  "desc",
   "true",
   "false",
   "admin",
@@ -36,7 +50,6 @@ export const alternateKeys = [
   "id",
   "title",
   "content",
-  "createdAt",
   "email",
   "username"
 ];

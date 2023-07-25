@@ -1,5 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
-import { alternateKeys, booleanKeys, notAltResult, notBooleanResult, notRoleResult, typeResult } from "pages/user/ManageUsers/data";
+import { alternateKeys, booleanKeys, dateKeys, notAltResult, notBooleanResult, notDateResult, notRoleResult, typeResult } from "pages/user/ManageUsers/data";
 import { SortPayload } from "pages/user/ManageUsers/types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -57,12 +57,16 @@ export function useFiltersHook() {
       // it should called the asc order first therefore we've created the condition sortValue.value !== altKeys means if value changes as of value in sortValue.value
       // then called the asc order first
       notAltResult.includes(sortValue.type) || !sortValue.type || sortValue.value !== altKeys
+        ? (type = "asc")
+        : sortValue.type === "asc"
+        ? (type = "desc")
+        : (type = "");
+    } else if (dateKey) {
+      notDateResult.includes(sortValue.type) || !sortValue.type || sortValue.value !== altKeys
         ? (type = "recent")
         : sortValue.type === "recent"
         ? (type = "oldest")
         : (type = "");
-    } else if () {
-
     } else if (boolKeys) {
       // if type is asc then change it to desc if desc then change to asc
       // it is ncessary to do because suppose if user clicked on username to be filtered now sortValue.type have property related to asc OR desc now when user clicked on
