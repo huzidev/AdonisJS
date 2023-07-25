@@ -19,7 +19,6 @@ export default class ArticlesController {
       const query = Article.query();
   
       // because for calling username filters we don't have username in articles table therefore created join statement
-      query.join('users', 'articles.owner_id', 'users.id');
       // if user wanted to see allBlogs uploaded by him
       if (userId) {
         query.where("owner_id", userId);
@@ -41,6 +40,10 @@ export default class ArticlesController {
       if (!!filters.sort) {
         filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
+        // so when user called the filter on main blogs page then don't run this query only run this join statement when filtersResultKey is username
+        if (filterResultKey === "username") {
+          query.join('users', 'articles.owner_id', 'users.id');
+        }
         // filter for most recent and oldest will be according to createdAt therefore checking for createdAt only
         if (!articleFilters.includes(filterResultKey)) {
           throw invalidURL;
