@@ -15,16 +15,23 @@ export default function ManageBlogsPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const isMe = auth.state.user;
-  const isAdmin = hasPermission(("admin" || "super-admin"), auth.state.user?.role);
+  const isAdmin = hasPermission(
+    "admin" || "super-admin",
+    auth.state.user?.role
+  );
 
   const dataByMe = blogs.state.getMyList;
   const dataByUser = blogs.state.getBlogsList;
   const allBlogs = isAdmin ? dataByUser.data : dataByMe.data;
-    const allUsers = user.state.allUser?.data;
-  const currentPage = isAdmin ? dataByUser.meta?.currentPage:  dataByMe.meta?.currentPage;
-  const lastPage = isAdmin ? dataByUser.meta?.lastPage : dataByMe.meta?.lastPage;
+  const allUsers = user.state.allUser?.data;
+  const currentPage = isAdmin
+    ? dataByUser.meta?.currentPage
+    : dataByMe.meta?.currentPage;
+  const lastPage = isAdmin
+    ? dataByUser.meta?.lastPage
+    : dataByMe.meta?.lastPage;
   useManageBlogsPageHooks();
-  
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">
@@ -43,79 +50,94 @@ export default function ManageBlogsPage() {
             <table className="w-full">
               <thead>
                 <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
-                  {columns.map((data, columnIndex) => (
+                  {columns.map((data, columnIndex) =>
                     // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                     // So owner id won't be shown when blogger clikced on manage blogs owner id will only be visible when admin state is true
                     data.title === "uploaded by" && !isAdmin ? null : (
-                      <th className="px-5 py-3 cursor-pointer" key={columnIndex}>
+                      <th
+                        className="px-5 py-3 cursor-pointer"
+                        key={columnIndex}
+                      >
                         {/* startCase will make the first letter Capital of any word */}
                         {startCase(data.title)}
                       </th>
                     )
-                  ))}
+                  )}
                 </tr>
               </thead>
               <tbody className="text-gray-500">
                 {allBlogs?.map((blog, userIndex) => {
                   const uploadedByUser = allUsers?.find(
-                  (user: User) => user.id === blog.ownerId
-                );
-                const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
-                const uploadedByUserId = uploadedByUser && uploadedByUser.id;
-                const uploadedByUsername = uploadedByUser && uploadedByUser.username;
+                    (user: User) => user.id === blog.ownerId
+                  );
+                  const uploadedByUserRole =
+                    uploadedByUser && uploadedByUser.role;
+                  const uploadedByUserId = uploadedByUser && uploadedByUser.id;
+                  const uploadedByUsername =
+                    uploadedByUser && uploadedByUser.username;
                   return (
-                  // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
-                  <tr key={userIndex}>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <p className="whitespace-no-wrap">{userIndex + 1}</p>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <p className="whitespace-no-wrap">{blog.id}</p>
-                    </td>
-                    {isAdmin && (
+                    // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
+                    <tr key={userIndex}>
+                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <p className="whitespace-no-wrap">{userIndex + 1}</p>
+                      </td>
+                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <p className="whitespace-no-wrap">{blog.id}</p>
+                      </td>
+                      {isAdmin && (
+                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                          <p className="whitespace-no-wrap">
+                            {blog.ownerId === uploadedByUserId &&
+                              (uploadedByUserRole === "super-admin"
+                                ? `${uploadedByUsername + " *"}`
+                                : uploadedByUsername)}
+                          </p>
+                        </td>
+                      )}
+                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <p className="whitespace-no-wrap">{blog.title}</p>
+                      </td>
                       <td className="border-b border-gray-200 bg-white p-5 text-sm">
                         <p className="whitespace-no-wrap">
-                          {blog.ownerId === uploadedByUserId && (
-                            uploadedByUserRole === "super-admin" ? `${uploadedByUsername + " *"}` : uploadedByUsername
-                          )}
+                          {blog.content.length > 45
+                            ? `${blog.content.slice(0, 45)}...`
+                            : blog.content}
                         </p>
                       </td>
-                    )}
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <p className="whitespace-no-wrap">{blog.title}</p>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <p className="whitespace-no-wrap">
-                        {blog.content.length > 45
-                          ? `${blog.content.slice(0, 45)}...`
-                          : blog.content}
-                      </p>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <span className="whitespace-no-wrap">
-                        {/* just show dates not time while toLocaleString shows complete date and time */}
-                        {new Date(blog.createdAt).toLocaleDateString()}
-                      </span>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <span className="whitespace-no-wrap" title="Last Update">
-                        {new Date(blog.updatedAt).toLocaleDateString()}
-                      </span>
-                    </td>
-                    <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                      <div className="pl-4">
+                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <span className="whitespace-no-wrap">
+                          {/* just show dates not time while toLocaleString shows complete date and time */}
+                          {new Date(blog.createdAt).toLocaleDateString()}
+                        </span>
+                      </td>
+                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <span
+                          className="whitespace-no-wrap"
+                          title="Last Update"
+                        >
+                          {new Date(blog.updatedAt).toLocaleDateString()}
+                        </span>
+                      </td>
+                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <div className="pl-4">
                           <Link
                             to={
-                              (auth.state.user?.role === "admin" && uploadedByUserRole === "super-admin" ? ROUTE_PATHS.ARTICLE_VIEW : ROUTE_PATHS.ARTICLE_UPDATE) + blog.slug  
-                            }                          
-                            >
-                            {auth.state.user?.role === "admin" && uploadedByUserRole === "super-admin" ? "View Profile" : "Edit"}
+                              (auth.state.user?.role === "admin" &&
+                              uploadedByUserRole === "super-admin"
+                                ? ROUTE_PATHS.ARTICLE_VIEW
+                                : ROUTE_PATHS.ARTICLE_UPDATE) + blog.slug
+                            }
+                          >
+                            {auth.state.user?.role === "admin" &&
+                            uploadedByUserRole === "super-admin"
+                              ? "View Profile"
+                              : "Edit"}
                           </Link>
-                      </div>
-                    </td>
-                  </tr>
-                  )
-})}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -157,7 +179,8 @@ export default function ManageBlogsPage() {
       ) : (
         <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <h1 className="text-lg mb-6 font-bold tracking-tight text-white"></h1>
-          Oops... {isAdmin ? "No one have" : "You haven't"} uploaded any blog yet.
+          Oops... {isAdmin ? "No one have" : "You haven't"} uploaded any blog
+          yet.
           <Link
             to={ROUTE_PATHS.ARTICLE_CREATE}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
