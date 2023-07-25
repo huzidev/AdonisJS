@@ -3,15 +3,17 @@ import startCase from "lodash/startCase";
 import { useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { hasPermission } from "utils";
 import { columns } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
 
 export default function ManageBlogsPage() {
-    const blogs = useBlogs();
+  const blogs = useBlogs();
   const auth = useAuth();
   const navigate = useNavigate();
+  const isMe = auth.state.user;
 
-  const allBlogs = blogs.state.getBlogs.data;
+  const allBlogs = isMe ? blogs.state.getBlogsById.data : blogs.state.getBlogs.data;
   const currentPage = blogs.state.getBlogs.meta?.currentPage;
   const lastPage = blogs.state.getBlogs.meta?.currentPage;
 
@@ -25,9 +27,9 @@ export default function ManageBlogsPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">
         <div>
-          <h2 className="font-semibold text-gray-700">Manage Users</h2>
+          <h2 className="font-semibold text-gray-700">{hasPermission("admin" || "super-admin", auth.state.user?.role) ? "Manage Blogs" : "Manage Your Blogs"}</h2>
           <span className="text-xs text-gray-500">
-            View accounts of registered users
+            {"View blogs uploaded by" + (hasPermission("admin" || "super-admin", auth.state.user?.role) ? " bloggers" : " you")}
           </span>
         </div>
         <div className="flex items-center justify-between">

@@ -10,7 +10,7 @@ import {
 } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
 
-export default function UsersPage() {
+export default function ManageUsersPage() {
   const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
