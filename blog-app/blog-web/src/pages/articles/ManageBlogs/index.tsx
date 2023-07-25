@@ -3,6 +3,7 @@ import startCase from "lodash/startCase";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { hasPermission } from "utils";
 import { columns } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
 
@@ -11,17 +12,17 @@ export default function ManageBlogsPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const isMe = auth.state.user;
-  const isAdmin = auth.state.user?.role === ("admin" || "super-admin");
+  const isAdmin = hasPermission(("admin" || "super-admin"), auth.state.user?.role);
 
   const dataByMe = blogs.state.getBlogsById;
   const dataByUser = blogs.state.getBlogs;
-  const allBlogs = isMe ? dataByMe.data : dataByUser.data;
-  const currentPage = isMe ? dataByMe.meta?.currentPage : dataByUser.meta?.currentPage;
-  const lastPage = isMe ? dataByMe.meta?.lastPage : dataByUser.meta?.lastPage;
+  const allBlogs = isAdmin ? dataByUser.data : dataByMe.data;
+  const currentPage = isAdmin ? dataByUser.meta?.currentPage:  dataByMe.meta?.currentPage;
+  const lastPage = isAdmin ? dataByUser.meta?.lastPage : dataByMe.meta?.lastPage;
 
   useManageBlogsPageHooks();
-  console.log("ALL BLOGS", allBlogs);
-
+  console.log("all blogs", allBlogs);
+  
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">
@@ -159,8 +160,7 @@ export default function ManageBlogsPage() {
       ) : (
         <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <h1 className="text-lg mb-6 font-bold tracking-tight text-white"></h1>
-          Oops... {isAdmin ? "No one have" : "You haven't"} uploaded any blog
-          yet.
+          Oops... {isAdmin ? "No one have" : "You haven't"} uploaded any blog yet.
           <Link
             to={ROUTE_PATHS.ARTICLE_CREATE}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from 'store/articles';
 import { useAuth } from 'store/auth';
+import { hasPermission } from 'utils';
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 import { PayloadReq } from './types';
@@ -10,11 +11,11 @@ import { PayloadReq } from './types';
 export function useManageBlogsPageHooks(): void {
   const blogs = useBlogs();
   const auth = useAuth();
+  const params = useParams();
   const state = blogs.state;
   const prev = usePrevious(state);
-  const params = useParams();
   const isMe: any = auth.state.user;
-  const isAdmin = auth.state.user?.role === ("admin" || "super-admin");
+    const isAdmin = hasPermission(("admin" || "super-admin"), auth.state.user?.role);
   const navigate = useNavigate();
   const payload: PayloadReq = {
     userId: isMe.id,
@@ -25,10 +26,14 @@ export function useManageBlogsPageHooks(): void {
   useEffect(() => {
     // qs.parse() is mandatory otherwise it'll send complete URL after ? which is ?sort=%7B"id"%3A"desc"%7D
     // but after using it through qs.parse(search) it'll send {sort: '{"id":"desc"}'} which is parsed value
-    const search: any = qs.parse(window.location.search);
+
+  console.log("IS ADMIN", isAdmin);
+    
+  const search: any = qs.parse(window.location.search);
     if (isAdmin) {
       blogs.getBlogs({page: params.page || 1, ...search})
     } else {
+      console.log("RUN");
       blogs.getBlogsById(payload)
     }
   }, [params.page, window.location.search]);
