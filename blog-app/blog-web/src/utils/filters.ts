@@ -9,8 +9,8 @@ export function useFiltersHook() {
   const [isUserPage, setIsUserPage] = useState<boolean>();
   const [path, setPath] = useState<string>('');
   const [sortValue, setSortValue] = useState<SortPayload>({
-    value: "",
-    type: ""
+    value: '',
+    type: ''
   });
 
   const locationURL = window.location.pathname;
