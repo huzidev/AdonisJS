@@ -38,11 +38,15 @@ export const alternateKeys = [
   "content",
   "createdAt",
   "email",
-  "username",
-  "createdAt",
-  "updatedAt",
+  "username"
 ];
+export const dateKeys = [
+  "createdAt",
+  "updatedAt"
+]
 export const typeResult = [
+  "recent",
+  "oldest",
   "asc",
   "desc",
   "true",

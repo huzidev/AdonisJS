@@ -39,8 +39,6 @@ export function useFiltersHook() {
   }, []);
 
   const handleSort = (column: string) => {
-    console.log("COLUMN", column);
-    
     let type: any = "";
 
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
@@ -48,6 +46,9 @@ export function useFiltersHook() {
     
     // if sortValue is between isVerified, isBanned, isActive then boolKeys
     let boolKeys = booleanKeys.find((value) => value === column);
+
+    // for createdAt and updatedAt we'll not show asc, desc for createdAt and updatedAt rather we'll show recent or oldest
+    let dateKey = dateKeys.find((value) => value === column)
     if (altKeys) {
       // if type is asc then change it to desc if desc then change to "" empty string (which is default form)
       // !sortValue.type means when their is no type means no filters been used hence add the asc order first
@@ -56,10 +57,12 @@ export function useFiltersHook() {
       // it should called the asc order first therefore we've created the condition sortValue.value !== altKeys means if value changes as of value in sortValue.value
       // then called the asc order first
       notAltResult.includes(sortValue.type) || !sortValue.type || sortValue.value !== altKeys
-        ? (type = "asc")
-        : sortValue.type === "asc"
-        ? (type = "desc")
+        ? (type = "recent")
+        : sortValue.type === "recent"
+        ? (type = "oldest")
         : (type = "");
+    } else if () {
+
     } else if (boolKeys) {
       // if type is asc then change it to desc if desc then change to asc
       // it is ncessary to do because suppose if user clicked on username to be filtered now sortValue.type have property related to asc OR desc now when user clicked on
@@ -99,6 +102,8 @@ export function useFiltersHook() {
       window.history.replaceState({}, "", newUrl);
     }
 
+    console.log("TYPE", type);
+    
     setSortValue({ value: column, type });
   };
 
