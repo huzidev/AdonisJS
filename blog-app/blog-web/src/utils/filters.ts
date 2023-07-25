@@ -1,15 +1,29 @@
 import ROUTE_PATHS from "Router/paths";
+import { alternateKeys, booleanKeys, notAltResult, notBooleanResult, notRoleResult, typeResult } from "pages/user/ManageUsers/data";
+import { SortPayload } from "pages/user/ManageUsers/types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { alternateKeys, booleanKeys, notAltResult, notBooleanResult, notRoleResult, typeResult } from "./ManageUsers/data";
-import { SortPayload } from "./ManageUsers/types";
 
-export function useUserFiltersState() {
+export function useFiltersHook() {
   const params = useParams();
+  const [isUserPage, setIsUserPage] = useState<boolean>();
+  const [path, setPath] = useState<string>('');
   const [sortValue, setSortValue] = useState<SortPayload>({
     value: "",
     type: ""
   });
+
+  const locationURL = window.location.pathname;
+  useEffect(() => {
+    if (locationURL.includes("/user")) {
+      setIsUserPage(true)
+      setPath(ROUTE_PATHS.USERS_PAGE);
+    } else {
+      setIsUserPage(false)
+      setPath(ROUTE_PATHS.ARTICLES_PAGE);
+    }
+    console.log("WHAT IS STATE", isUserPage);
+  }, [isUserPage, path])
 
   useEffect(() => {
     // Get the sort parameter from the URL when the component mounts
@@ -73,13 +87,13 @@ export function useUserFiltersState() {
     if (type === result) {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("sort", JSON.stringify({ [column]: type }));
-      const newUrl = `${ROUTE_PATHS.USERS_PAGE}${
+      const newUrl = `${path}${
         params.page
       }?${searchParams.toString()}`;
       window.history.replaceState({}, "", newUrl);
     } else {
       // If the type is neither "asc" nor "desc" or "true", "false", "admin" etc, remove the entire "sort" parameter from the URL
-      const newUrl = `${ROUTE_PATHS.USERS_PAGE}${params.page}`;
+      const newUrl = `${path}${params.page}`;
       window.history.replaceState({}, "", newUrl);
     }
 

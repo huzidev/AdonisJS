@@ -34,6 +34,8 @@ export const notAltResult = [
 ];
 export const alternateKeys = [
   "id",
+  "title",
+  "content",
   "createdAt",
   "email",
   "username",

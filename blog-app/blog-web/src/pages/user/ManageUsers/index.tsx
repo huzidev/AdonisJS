@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { useUserFiltersState } from "../hooks";
+import { useFiltersHook } from "utils/filters";
 import {
   columns, constKeys
 } from "./data";
@@ -14,7 +14,7 @@ export default function ManageUsersPage() {
   const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
-  const { handleSort } = useUserFiltersState();
+  const { handleSort } = useFiltersHook();
 
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;

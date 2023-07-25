@@ -6,6 +6,7 @@ import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
+import { useFiltersHook } from "utils/filters";
 import { columns } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
 
@@ -14,11 +15,12 @@ export default function ManageBlogsPage() {
   const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
-  const isMe = auth.state.user;
   const isAdmin = hasPermission(
     "admin" || "super-admin",
     auth.state.user?.role
   );
+
+  const { handleSort } = useFiltersHook();
 
   const dataByMe = blogs.state.getMyList;
   const dataByUser = blogs.state.getBlogsList;
@@ -57,6 +59,7 @@ export default function ManageBlogsPage() {
                       <th
                         className="px-5 py-3 cursor-pointer"
                         key={columnIndex}
+                        onClick={() => handleSort(data.title)}
                       >
                         {/* startCase will make the first letter Capital of any word */}
                         {startCase(data.title)}
