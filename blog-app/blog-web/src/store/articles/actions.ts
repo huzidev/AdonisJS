@@ -12,16 +12,16 @@ import {
   UpdateBlogPayload,
 } from "./types";
 
-export const getMyList = createAsyncThunk(endpoints.GET_BLOGS + "me", async (data: any): Promise<AllBlogs | null> => {
-  try {
-    
-  } catch (e: any) {
-   const err = mapErrorToState(e);
-        errorNotification(err);
-        console.log("Error", err);
-        throw e 
-  }
-})
+// export const getMyList = createAsyncThunk(endpoints.GET_BLOGS + "me", async (data: any): Promise<AllBlogs | null> => {
+//   try {
+//     const response = await api.get()
+//   } catch (e: any) {
+//    const err = mapErrorToState(e);
+//         errorNotification(err);
+//         console.log("Error", err);
+//         throw e 
+//   }
+// })
 
 export const getBlogs = createAsyncThunk(
   endpoints.GET_BLOGS,

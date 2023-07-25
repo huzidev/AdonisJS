@@ -5,6 +5,7 @@ import { BlogState, getBlogById } from "./types";
 
 const initialState: BlogState = {
   getBlogsById: { ...subState, data: [], meta: null },
+  getMyList: { ...subState, data: [], meta: null },
   getFavoriteBlogs: { ...subState, data: [], meta: null },
   getBlogs: {
     ...subState,
@@ -91,6 +92,26 @@ export const blogSlice = createSlice({
             (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
           ) ?? [];
         state.getBlogsById.data = [...cleaned, ...data];
+        // meta takes pagination data like total, currentPage, LastPage
+        state.getBlogsById.meta = meta;
+      }
+      state.getBlogsById.error = false;
+    });
+    builder.addCase(actions.getBlogsById.rejected, (state) => {
+      state.getBlogsById.loading = false;
+      state.getBlogsById.error = true;
+    });
+    // when user clicked on manage blogs
+    builder.addCase(actions.getBlogsById.pending, (state) => {
+      state.getBlogsById.loading = true;
+      state.getBlogsById.error = false;
+    });
+    builder.addCase(actions.getBlogsById.fulfilled, (state, action) => {
+      state.getBlogsById.loading = false;
+      if (action.payload) {
+        const { data, meta } = action.payload;
+        // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
+        state.getBlogsById.data = [...state.getBlogs.data, ...data];
         // meta takes pagination data like total, currentPage, LastPage
         state.getBlogsById.meta = meta;
       }
