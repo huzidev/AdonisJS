@@ -1,7 +1,7 @@
 const columnsKeys = [
   "sno",
   "id",
-  "uploaded by",
+  "uploadedBy",
   "title",
   "content",
   "createdAt",

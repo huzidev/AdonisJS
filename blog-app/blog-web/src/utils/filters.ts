@@ -39,6 +39,8 @@ export function useFiltersHook() {
   }, []);
 
   const handleSort = (column: string) => {
+    console.log("COLUMN", column);
+    
     let type: any = "";
 
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order

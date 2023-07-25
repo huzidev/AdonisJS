@@ -59,7 +59,9 @@ export default function ManageBlogsPage() {
                       <th
                         className="px-5 py-3 cursor-pointer"
                         key={columnIndex}
-                        onClick={() => handleSort(data.title)}
+                        onClick={
+                          () => handleSort(data.title === "uploadedBy" ? "username" : data.title)
+                        }
                       >
                         {/* startCase will make the first letter Capital of any word */}
                         {startCase(data.title)}
@@ -133,7 +135,7 @@ export default function ManageBlogsPage() {
                           >
                             {auth.state.user?.role === "admin" &&
                             uploadedByUserRole === "super-admin"
-                              ? "View Profile"
+                              ? "View Blog"
                               : "Edit"}
                           </Link>
                         </div>

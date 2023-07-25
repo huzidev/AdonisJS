@@ -89,21 +89,8 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlogsList.fulfilled, (state, action) => {
       state.getBlogsList.loading = false;
       if (action.payload) {
-        const { data, meta, filters, message } = action.payload;
-        if (filters) {
-          // state.getBlogs.data mean whne user is no blogs page then default list will be shown to user and currentPage will be 1 hence when user called filters
-          // then replace the recent data with new data therefore we haven't used [...state.geBlogs.data, ...data] because spread operator will append new data with old data
-          if (state.getBlogsList.data && meta.currentPage === 1) {
-            state.getBlogsList.data = data;
-          }
-          // if filters condition is TRUE and we've already some data then because the FILTER state is TRUE this means previous data is accordin to filter
-          // hence append new data with the old data currentPage not 1 means user called the LOAD MORE button
-          else if (state.getBlogsList.data && meta.currentPage !== 1) {
-            state.getBlogsList.data = [...state.getBlogsList.data, ...data];
-          }
-        } else {
-            state.getBlogsList.data = data;
-        }
+        const { data, meta, message } = action.payload;
+        state.getBlogsList.data = [...data];
         state.getBlogsList.meta = meta;
         state.getBlogsList.message = message;
         // meta takes pagination data like total, currentPage, LastPage
