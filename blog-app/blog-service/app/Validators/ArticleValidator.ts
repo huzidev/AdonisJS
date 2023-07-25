@@ -36,8 +36,8 @@ export class BlogListFilters {
       id: schema.enum.optional(Sort.types),
       title: schema.enum.optional(Sort.types),
       content: schema.enum.optional(Sort.types),
-      createdAt: schema.enum.optional(Sort.types),
-      updatedAt: schema.enum.optional(Sort.types),
+      createdAt: schema.enum.optional(Sort.dateValue),
+      updatedAt: schema.enum.optional(Sort.dateValue),
       // username row is not in Articles table therefore we'll use join query for link
       username: schema.enum.optional(Sort.types),
     }),
