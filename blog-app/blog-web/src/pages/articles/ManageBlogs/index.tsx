@@ -14,7 +14,7 @@ export default function ManageBlogsPage() {
   const isMe = auth.state.user;
   const isAdmin = hasPermission(("admin" || "super-admin"), auth.state.user?.role);
 
-  const dataByMe = blogs.state.getBlogsById;
+  const dataByMe = blogs.state.getMyList;
   const dataByUser = blogs.state.getBlogs;
   const allBlogs = isAdmin ? dataByUser.data : dataByMe.data;
   const currentPage = isAdmin ? dataByUser.meta?.currentPage:  dataByMe.meta?.currentPage;
