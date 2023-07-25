@@ -72,8 +72,8 @@ export class UserListFilters {
       isVerified: schema.enum.optional(Sort.typesBooleam),
       isActive: schema.enum.optional(Sort.typesBooleam),
       isBanned: schema.enum.optional(Sort.typesBooleam),
-      createdAt: schema.enum.optional(Sort.types),
-      updatedAt: schema.enum.optional(Sort.types),
+      createdAt: schema.enum.optional(Sort.dateValue),
+      updatedAt: schema.enum.optional(Sort.dateValue),
     }),
   })
   public static messages = {}

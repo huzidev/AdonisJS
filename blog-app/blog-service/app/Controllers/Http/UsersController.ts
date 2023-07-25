@@ -21,8 +21,6 @@ export default class UsersController {
       // const response = await User.all();
       const query = User.query();
       
-      console.log("QS", request.qs());
-
       const filters = await validator.validate({
         schema: UserListFilters.schema,
         data: Utils.parseQS(request.qs(), ['sort'])
