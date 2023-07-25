@@ -3,7 +3,6 @@ import startCase from "lodash/startCase";
 import { useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
-import { hasPermission } from "utils";
 import { columns } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
 
@@ -12,45 +11,23 @@ export default function ManageBlogsPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const isMe = auth.state.user;
+  const isAdmin = auth.state.user?.role === ("admin" || "super-admin");
 
   const allBlogs = isMe ? blogs.state.getBlogsById.data : blogs.state.getBlogs.data;
   const currentPage = blogs.state.getBlogs.meta?.currentPage;
   const lastPage = blogs.state.getBlogs.meta?.currentPage;
 
     useManageBlogsPageHooks();
-
-    const test= "Hello World testing pagination method"
-    console.log("LENGTH",  test.length);
+    console.log("ALL BLOGS", allBlogs);
     
-
     return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">
         <div>
-          <h2 className="font-semibold text-gray-700">{hasPermission("admin" || "super-admin", auth.state.user?.role) ? "Manage Blogs" : "Manage Your Blogs"}</h2>
+          <h2 className="font-semibold text-gray-700">{isAdmin ? "Manage Blogs" : "Manage Your Blogs"}</h2>
           <span className="text-xs text-gray-500">
-            {"View blogs uploaded by" + (hasPermission("admin" || "super-admin", auth.state.user?.role) ? " bloggers" : " you")}
+            {"View blogs uploaded by" + (isAdmin ? " bloggers" : " you")}
           </span>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="ml-10 space-x-8 lg:ml-40">
-            <button
-              className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700"
-              title="Create User"
-              onClick={() => navigate(ROUTE_PATHS.USER_CREATE)}
-            >
-              <svg
-                className="w-6 h-6 text-gray-800 dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 18 20"
-              >
-                <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z" />
-              </svg>
-              Create User
-            </button>
-          </div>
         </div>
       </div>
       <div className="overflow-y-hidden rounded-lg border">
@@ -71,7 +48,8 @@ export default function ManageBlogsPage() {
               </tr>
             </thead>
             <tbody className="text-gray-500">
-              {allBlogs?.map((blog, userIndex) => (
+              {
+              allBlogs?.map((blog, userIndex) => (
                 // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                 <tr key={userIndex}>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
