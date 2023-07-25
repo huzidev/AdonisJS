@@ -13,6 +13,7 @@ export function useManageBlogsPageHooks(): void {
   const prev = usePrevious(state);
   const params = useParams();
   const isMe: any = auth.state.user;
+  const isAdmin = auth.state.user?.role === ("admin" || "super-admin");
   const navigate = useNavigate();
   const [payload, setPayload] = useState<any>({
     userId: isMe.id,
@@ -24,8 +25,11 @@ export function useManageBlogsPageHooks(): void {
     // qs.parse() is mandatory otherwise it'll send complete URL after ? which is ?sort=%7B"id"%3A"desc"%7D
     // but after using it through qs.parse(search) it'll send {sort: '{"id":"desc"}'} which is parsed value
     const search: any = qs.parse(window.location.search);
-    blogs.getBlogs({page: params.page || 1, ...search})
-    blogs.getBlogsById(payload)
+    if (isAdmin) {
+      blogs.getBlogs({page: params.page || 1, ...search})
+    } else {
+      blogs.getBlogsById(payload)
+    }
   }, [params.page, window.location.search]);
 
   useEffect(() => {
