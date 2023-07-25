@@ -283,7 +283,7 @@ export default function ViewProfilePage(): JSX.Element {
                       : // if user role is not user and path includes "me" then show You haven't Uploaded any blog yet
                         `${
                           isMe ? "You" : userDetails.username
-                        } haven't Uploaded`}{" "}
+                        } haven't uploaded`}{" "}
                     any blog yet
                   </h1>
                   <Link
