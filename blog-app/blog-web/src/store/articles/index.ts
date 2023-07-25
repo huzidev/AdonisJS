@@ -7,6 +7,7 @@ export const useBlogs = () => {
   const state = useSelector((state: any) => state.blogs) as BlogState;
   const dispatch = useAppDispatch();
   const getBlogs = (payload: AllBlogs) => dispatch(actions.getBlogs(payload));
+  const getBlogsList = (payload: AllBlogs) => dispatch(actions.getBlogsList(payload));
   const getBlogsById = (payload: GetBlogsById) => dispatch(actions.getBlogsById(payload));
   const getMyList = (payload: GetBlogsById) => dispatch(actions.getMyList(payload));
   const getFavoriteBlogs = (payload: GetBlogsById) => dispatch(actions.getFavoriteBlogs(payload));
@@ -20,6 +21,7 @@ export const useBlogs = () => {
   return {
     state,
     getBlogs,
+    getBlogsList,
     getBlog,
     addBlog,
     updateBlog,

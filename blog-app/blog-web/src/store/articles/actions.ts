@@ -33,6 +33,30 @@ export const getMyList = createAsyncThunk(
   }
 );
 
+export const getBlogsList = createAsyncThunk(
+  endpoints.GET_BLOGS + "all",
+  async (data: any): Promise<AllBlogs | null> => {
+    // AllBlogs contains Array of blogs and meta
+    console.log("data", data);
+    
+    try {
+      const response = await api.get(endpoints.GET_BLOGS + data.page, {params: data});
+      const filtersApplied = data.sort !== undefined;
+      return {
+        data: response.data.data.data,
+        meta: response.data.data.meta,
+        message: response.data.message,
+        filters: filtersApplied
+      };
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
+    }
+  }
+);
+
 export const getBlogs = createAsyncThunk(
   endpoints.GET_BLOGS,
   async (data: any): Promise<AllBlogs | null> => {

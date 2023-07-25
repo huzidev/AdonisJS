@@ -54,6 +54,7 @@ export interface getBlogById extends SubState {
 
 export interface BlogState {
   getBlogs: AllBlogs;
+  getBlogsList: AllBlogs;
   getBlogsById: AllBlogs;
   getMyList: AllBlogs;
   getFavoriteBlogs: AllBlogs;

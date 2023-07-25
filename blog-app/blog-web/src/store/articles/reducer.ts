@@ -12,6 +12,11 @@ const initialState: BlogState = {
     data: [],
     meta: null,
   },
+  getBlogsList: {
+    ...subState,
+    data: [],
+    meta: null,
+  },
   getBlog: { ...subState, data: null },
   updateBlog: { ...subState, data: null },
   deleteBlog: { ...subState },
@@ -75,7 +80,39 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlogs.rejected, (state) => {
       state.getBlogs.loading = false;
       state.getBlogs.error = true;
-      // state.getBlogs.message = "Something went wrong"
+    });
+    // when admin clicked on manage Blogs
+    builder.addCase(actions.getBlogsList.pending, (state) => {
+      state.getBlogsList.loading = true;
+      state.getBlogsList.error = false;
+    });
+    builder.addCase(actions.getBlogsList.fulfilled, (state, action) => {
+      state.getBlogsList.loading = false;
+      if (action.payload) {
+        const { data, meta, filters, message } = action.payload;
+        if (filters) {
+          // state.getBlogs.data mean whne user is no blogs page then default list will be shown to user and currentPage will be 1 hence when user called filters
+          // then replace the recent data with new data therefore we haven't used [...state.geBlogs.data, ...data] because spread operator will append new data with old data
+          if (state.getBlogsList.data && meta.currentPage === 1) {
+            state.getBlogsList.data = data;
+          }
+          // if filters condition is TRUE and we've already some data then because the FILTER state is TRUE this means previous data is accordin to filter
+          // hence append new data with the old data currentPage not 1 means user called the LOAD MORE button
+          else if (state.getBlogsList.data && meta.currentPage !== 1) {
+            state.getBlogsList.data = [...state.getBlogsList.data, ...data];
+          }
+        } else {
+            state.getBlogsList.data = data;
+        }
+        state.getBlogsList.meta = meta;
+        state.getBlogsList.message = message;
+        // meta takes pagination data like total, currentPage, LastPage
+      }
+      state.getBlogsList.error = false;
+    });
+    builder.addCase(actions.getBlogsList.rejected, (state) => {
+      state.getBlogsList.loading = false;
+      state.getBlogsList.error = true;
     });
     // getAllBlogsById
     builder.addCase(actions.getBlogsById.pending, (state) => {
@@ -113,7 +150,7 @@ export const blogSlice = createSlice({
         // created a seprate condition for getMyList so when user clicked on manage blogs then a table is shown with all the blogs uploaded by that user now we've
         // created a condition in getBlogsById which is that when user clicked on LoadMore then previous data remains save and new data appends in array BUT for table
         // we wanted previous data to be vanished and just show new data so when user CLICKED on next page then just new data must shown not the previous data
-        state.getMyList.data = [...state.getBlogs.data, ...data];
+        state.getMyList.data = data;
         // meta takes pagination data like total, currentPage, LastPage
         state.getMyList.meta = meta;
       }
