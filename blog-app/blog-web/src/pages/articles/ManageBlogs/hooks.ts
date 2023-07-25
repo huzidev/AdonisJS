@@ -31,7 +31,7 @@ export function useManageBlogsPageHooks(): void {
     if (isAdmin) {
       blogs.getBlogs({page: params.page || 1, ...search})
     } else {
-      blogs.getBlogsById(payload)
+      blogs.getMyList(payload)
     }
   }, [params.page, window.location.search]);
 

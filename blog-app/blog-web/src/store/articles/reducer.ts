@@ -102,24 +102,24 @@ export const blogSlice = createSlice({
       state.getBlogsById.error = true;
     });
     // when user clicked on manage blogs
-    builder.addCase(actions.getBlogsById.pending, (state) => {
-      state.getBlogsById.loading = true;
-      state.getBlogsById.error = false;
+    builder.addCase(actions.getMyList.pending, (state) => {
+      state.getMyList.loading = true;
+      state.getMyList.error = false;
     });
-    builder.addCase(actions.getBlogsById.fulfilled, (state, action) => {
-      state.getBlogsById.loading = false;
+    builder.addCase(actions.getMyList.fulfilled, (state, action) => {
+      state.getMyList.loading = false;
       if (action.payload) {
         const { data, meta } = action.payload;
         // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-        state.getBlogsById.data = [...state.getBlogs.data, ...data];
+        state.getMyList.data = [...state.getBlogs.data, ...data];
         // meta takes pagination data like total, currentPage, LastPage
-        state.getBlogsById.meta = meta;
+        state.getMyList.meta = meta;
       }
-      state.getBlogsById.error = false;
+      state.getMyList.error = false;
     });
-    builder.addCase(actions.getBlogsById.rejected, (state) => {
-      state.getBlogsById.loading = false;
-      state.getBlogsById.error = true;
+    builder.addCase(actions.getMyList.rejected, (state) => {
+      state.getMyList.loading = false;
+      state.getMyList.error = true;
     });
     // getBlogBySlug
     builder.addCase(actions.getBlog.pending, (state) => {
