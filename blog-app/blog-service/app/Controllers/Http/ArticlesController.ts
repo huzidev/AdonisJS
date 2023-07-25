@@ -18,6 +18,8 @@ export default class ArticlesController {
       const userId = params.id;
       const query = Article.query();
   
+      // because for calling username filters we don't have username in articles table therefore created join statement
+      query.join('users', 'articles.owner_id', 'users.id');
       // if user wanted to see allBlogs uploaded by him
       if (userId) {
         query.where("owner_id", userId);

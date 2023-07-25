@@ -68,6 +68,7 @@ export class UserListFilters {
       username: schema.enum.optional(Sort.types),
       email: schema.enum.optional(Sort.types),
       role: schema.enum.optional(Sort.typesRole),
+      uploadedBy: schema.enum.optional(Sort.types),
       isVerified: schema.enum.optional(Sort.typesBooleam),
       isActive: schema.enum.optional(Sort.typesBooleam),
       isBanned: schema.enum.optional(Sort.typesBooleam),

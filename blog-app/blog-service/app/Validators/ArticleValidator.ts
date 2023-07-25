@@ -37,7 +37,8 @@ export class BlogListFilters {
       title: schema.enum.optional(Sort.types),
       content: schema.enum.optional(Sort.types),
       createdAt: schema.enum.optional(Sort.types),
-      updatedAt: schema.enum.optional(Sort.types)
+      updatedAt: schema.enum.optional(Sort.types),
+      username: schema.enum.optional(Sort.types),
     }),
   })
   public static messages = {}
