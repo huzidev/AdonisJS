@@ -33,7 +33,11 @@ export class BlogListFilters {
   public static schema = schema.create({
     sort: schema.object.optional().members({
       // enum is for available choice like here Sort.type have two available choice either asc or desc
-      createdAt: schema.enum.optional(Sort.types)
+      id: schema.enum.optional(Sort.types),
+      title: schema.enum.optional(Sort.types),
+      content: schema.enum.optional(Sort.types),
+      createdAt: schema.enum.optional(Sort.types),
+      updatedAt: schema.enum.optional(Sort.types)
     }),
   })
   public static messages = {}
