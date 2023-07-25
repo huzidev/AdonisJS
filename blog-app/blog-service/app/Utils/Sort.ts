@@ -30,6 +30,7 @@ export default class Sort {
           query.from("users").where(sortKey, 0)
         }
       } else if (dateValues.includes(sortKey)) {
+        // the URL will show createdAt recent means recent blogs
         if (sort === "recent") {
           query.orderBy(sortKey, "desc")
         } else {
