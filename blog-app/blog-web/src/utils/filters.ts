@@ -62,7 +62,7 @@ export function useFiltersHook() {
         ? (type = "desc")
         : (type = "");
     } else if (dateKey) {
-      notDateResult.includes(sortValue.type) || !sortValue.type || sortValue.value !== altKeys
+      notDateResult.includes(sortValue.type) || !sortValue.type || sortValue.value !== dateKey
         ? (type = "recent")
         : sortValue.type === "recent"
         ? (type = "oldest")
@@ -106,8 +106,6 @@ export function useFiltersHook() {
       window.history.replaceState({}, "", newUrl);
     }
 
-    console.log("TYPE", type);
-    
     setSortValue({ value: column, type });
   };
 
