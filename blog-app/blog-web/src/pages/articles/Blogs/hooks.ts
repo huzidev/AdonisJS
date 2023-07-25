@@ -45,12 +45,14 @@ export function useBlogsPageHooks() {
   }, []);
 
   function handleSort(column: string) {
+    console.log("COKYNB", column);
+    
     let type: any = "";
     // most recent will called desc because desc neans from last to first therefore the last belog will be the latest blog and type === "" when user called reset filters
     column === "most recent"
-      ? (type = "desc")
+      ? (type = "recent")
       : column === "oldest"
-      ? (type = "asc")
+      ? (type = "oldest")
       : (type = "");
     // becasuse most recent and old blog will be shown according to createdAt date and "" (empty string condition) is for when user clicked on reset filters
     // because then sortValue.value will be "" and we've statement in UI that only show resetFilters when sortValue.vlaue is not ""

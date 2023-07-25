@@ -7,7 +7,7 @@ export const columnsKeys = [
 
 // boolKeys means they'll either be true(yes) or false(no)
 export const altKeys = ["createdAt"]
-export const typeResult = ["asc", "desc"];
+export const typeResult = ["recent", "oldest"];
 
 export const columns = columnsKeys.map((key) => ({
   key,
