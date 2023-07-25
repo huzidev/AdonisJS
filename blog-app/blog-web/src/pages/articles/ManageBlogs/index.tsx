@@ -3,12 +3,14 @@ import startCase from "lodash/startCase";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { columns } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
 
 export default function ManageBlogsPage() {
   const blogs = useBlogs();
+  const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
   const isMe = auth.state.user;
@@ -17,6 +19,7 @@ export default function ManageBlogsPage() {
   const dataByMe = blogs.state.getMyList;
   const dataByUser = blogs.state.getBlogsList;
   const allBlogs = isAdmin ? dataByUser.data : dataByMe.data;
+    const allUsers = user.state.allUser?.data;
   const currentPage = isAdmin ? dataByUser.meta?.currentPage:  dataByMe.meta?.currentPage;
   const lastPage = isAdmin ? dataByUser.meta?.lastPage : dataByMe.meta?.lastPage;
   useManageBlogsPageHooks();
@@ -42,7 +45,7 @@ export default function ManageBlogsPage() {
                   {columns.map((data, columnIndex) => (
                     // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                     // So owner id won't be shown when blogger clikced on manage blogs owner id will only be visible when admin state is true
-                    data.title === "owner id" && !isAdmin ? null : (
+                    data.title === "uploaded by" && !isAdmin ? null : (
                       <th className="px-5 py-3 cursor-pointer" key={columnIndex}>
                         {/* startCase will make the first letter Capital of any word */}
                         {startCase(data.title)}
@@ -52,7 +55,11 @@ export default function ManageBlogsPage() {
                 </tr>
               </thead>
               <tbody className="text-gray-500">
-                {allBlogs?.map((blog, userIndex) => (
+                {allBlogs?.map((blog, userIndex) => {
+                  const uploadedByUser = allUsers?.find(
+                  (user: User) => user.id === blog.ownerId
+                );
+                  return (
                   // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                   <tr key={userIndex}>
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
@@ -63,7 +70,9 @@ export default function ManageBlogsPage() {
                     </td>
                     {isAdmin && (
                       <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                        <p className="whitespace-no-wrap">{blog.ownerId}</p>
+                        <p className="whitespace-no-wrap">
+                          {blog.ownerId}
+                        </p>
                       </td>
                     )}
                     <td className="border-b border-gray-200 bg-white p-5 text-sm">
@@ -97,7 +106,8 @@ export default function ManageBlogsPage() {
                       </div>
                     </td>
                   </tr>
-                ))}
+                  )
+})}
               </tbody>
             </table>
           </div>
