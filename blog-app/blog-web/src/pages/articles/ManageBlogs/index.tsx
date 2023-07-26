@@ -61,7 +61,8 @@ export default function ManageBlogsPage() {
                         key={columnIndex}
                         onClick={
                           !constKeys.includes(data.key)
-                            ? () => handleSort(data.key)
+                          // ternary operator when user clicked on uploadedBy then their is no field named uploadedBy hence send username instead of uploadedBy
+                            ? () => handleSort(data.key === "uploadedBy" ? "username" : data.key)
                             : undefined
                         }
                       >
