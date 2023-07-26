@@ -51,8 +51,7 @@ export const alternateKeys = [
   "title",
   "content",
   "email",
-  "username",
-  "uploadedBy"
+  "username"
 ];
 export const dateKeys = [
   "createdAt",

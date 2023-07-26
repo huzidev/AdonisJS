@@ -39,7 +39,7 @@ export function useEditBlogPageHooks(): void {
     
     if (prevUser?.getUser.loading) {
       if (
-        !hasPermission("admin" || "super-admin", userRole) &&
+        !hasPermission("admin", userRole) &&
         ownerId !== auth.state.user?.id
         // !userRole when user is not loggedIn
       ) {

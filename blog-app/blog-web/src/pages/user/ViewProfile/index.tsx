@@ -20,7 +20,7 @@ export default function ViewProfilePage(): JSX.Element {
   const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
   const currentRole = auth.state.user?.role;
   const isUser = currentRole === "user";
-  const isAdmin = hasPermission("admin" || "super-admin", currentRole);
+  const isAdmin = hasPermission("admin", currentRole);
   const isClickedUser = user.state.getUser.data?.role === "user";
   const isMe = params.id === "me";
   const [payload, setPayload] = useState<any>({

@@ -16,7 +16,7 @@ export default function ManageBlogsPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const isAdmin = hasPermission(
-    "admin" || "super-admin",
+    "admin",
     auth.state.user?.role
   );
 
