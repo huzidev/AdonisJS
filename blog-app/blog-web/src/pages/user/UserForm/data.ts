@@ -1,25 +1,25 @@
 import { BooleanState, User, UserDetailsEdit } from "./types";
 
 export const detailsMe: UserDetailsEdit = {
-    username: ""
+    username: ''
 }
 
 export const detailsId: User = {
-    username: "",
-    role: "",
+    username: '',
+    role: '',
     isVerified: false,
     isBanned: false,
     isActive: false,
 }
 
 export const detailsCreateUser: User = {
-    username: "",
-    email: "",
-    role: "",
+    username: '',
+    email: '',
+    role: '',
     isVerified: false,
     isActive: false,
-    password: "",
-    passwordConfirmation: ""
+    password: '',
+    passwordConfirmation: ''
 }
 
 export const detailsBoolean: BooleanState = {
