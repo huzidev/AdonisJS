@@ -55,7 +55,7 @@ export default function ManageBlogsPage() {
                   {columns.map((data, columnIndex) =>
                     // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                     // So uploaded by won't be shown when blogger clikced on manage blogs uploaded by will only be visible when admin state is true
-                    data.title === "uploaded by" && !isAdmin ? null : (
+                    data.title === "uploadedBy" && !isAdmin ? null : (
                       <th
                         className="px-5 py-3 cursor-pointer"
                         key={columnIndex}
