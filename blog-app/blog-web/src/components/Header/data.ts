@@ -30,6 +30,9 @@ export const links = [
   }
 ];
 
+export const managePaths = ["/user/list", "/blog/list"];
+
+
 export const loggedInPathsBlogger = [
   ROUTE_PATHS.ARTICLES,
   ROUTE_PATHS.ARTICLE_CREATE,
