@@ -17,7 +17,7 @@ const ROUTE_PATHS = {
   ARTICLE_CREATE: '/blog/add',
   ARTICLE_UPDATE: '/blog/edit/',
   ARTICLES_PAGE: '/blog/list/',
-  ARTICLES: '/blog/list',
+  ARTICLES: '/blogs',
   ARTICLE_VIEW: '/blog/',
 };
 
