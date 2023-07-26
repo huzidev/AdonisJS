@@ -12,14 +12,15 @@ import {
   UpdateBlogPayload,
 } from "./types";
 
-
 export const getMyList = createAsyncThunk(
   endpoints.GET_BLOGS + "me",
-  async (data: GetBlogsById): Promise<AllBlogs | null> => {
+  async (data: any): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
     try {
-      const { userId, page } = data;
-      const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`);
+      console.log("DATA", data);
+      
+      const { userId, page } = data.payload;
+      const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`, {params: data});
       return {
         data : response.data.data.data,
         meta: response.data.data.meta
