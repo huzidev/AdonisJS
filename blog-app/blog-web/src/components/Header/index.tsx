@@ -10,6 +10,10 @@ export default function Header() {
 
   const value: any = managePaths.find((path) => location.pathname.includes(path));
 
+  if (location.pathname.includes(value)) {
+    console.log("LOCATION", !!value);
+  }
+
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -46,7 +50,8 @@ export default function Header() {
                 user && (user.role === "blogger" ? loggedInPathsBlogger.includes(data.link) : loggedInPathsUser.includes(data.link)) && user.isVerified ? (
                     <li key={dataIndex}>
                       <Link
-                        to={data.link}
+                      to={managePaths.includes(data.link) ? data.link + "1" : data.link }
+                        // to={data.link}
                         className={`
                             block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${
                               location.pathname === data.link
@@ -78,7 +83,8 @@ export default function Header() {
                   <li key={dataIndex}>
                     <Link
                     // so whem user clicked on manageUsers or manageBlogs then add 1 at end of URL which is page 1 for pagination
-                      to={managePaths.includes(value) ? data.link + "1" : data.link }
+                      // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
+                      to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                       className={`
                           block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${
                             // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
