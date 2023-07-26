@@ -19,7 +19,8 @@ export function useEditBlogPageHooks(): void {
   const prev = usePrevious(state);
   const prevUser = usePrevious(stateUser);
   const slug: any = params.slug;
-  const userRole = auth.state.user?.role;
+  const userRole = user.state.getUser.data?.role;
+  const authRole = auth.state.user?.role;
   const ownerId: any = blog.state.getBlog.data?.ownerId;
   const navigate = useNavigate();
 
@@ -47,14 +48,10 @@ export function useEditBlogPageHooks(): void {
         navigate(ROUTE_PATHS.ARTICLES);
       }
     } 
-      if (userRole === "admin" && user.state.getUser.data?.role === "super-admin") {
+      if (authRole === "admin" && userRole === "super-admin") {
         toast.error("Insufficient Access, You can't edit super-admin's blog");
         navigate(ROUTE_PATHS.ARTICLES);
       }
-    // if (!userRole) {
-    //   toast.error("You can't access the requested path kindly signin first");
-    //   navigate(ROUTE_PATHS.ARTICLES);
-    // }
   }, [state.getBlog, userRole, stateUser.getUser]);
 
   useEffect(() => {
