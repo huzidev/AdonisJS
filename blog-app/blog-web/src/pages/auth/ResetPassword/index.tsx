@@ -98,8 +98,8 @@ export default function ResetPasswordPage(): JSX.Element {
                 </div>
                 <p
                   className={`transition-opacity duration-200 ${
-                    resetState.password !== resetState.passwordConfirmation &&
-                    resetState.password.length > 5
+                    resetState.password !== resetState.passwordConfirmation ||
+                    resetState.password.length <= 5
                       ? "opacity-100"
                       : "opacity-0"
                   } text-red-500`}

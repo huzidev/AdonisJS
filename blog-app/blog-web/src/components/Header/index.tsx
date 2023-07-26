@@ -8,11 +8,7 @@ export default function Header() {
   const auth = useAuth();
   const user = auth.state.user;
 
-  const value: any = managePaths.find((path) => location.pathname.includes(path));
-
-  if (location.pathname.includes(value)) {
-    console.log("LOCATION", !!value);
-  }
+  // const value: any = managePaths.find((path) => location.pathname.includes(path));
 
   return (
     <div>
