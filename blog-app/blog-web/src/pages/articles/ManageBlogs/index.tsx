@@ -54,7 +54,7 @@ export default function ManageBlogsPage() {
                 <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
                   {columns.map((data, columnIndex) =>
                     // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
-                    // So owner id won't be shown when blogger clikced on manage blogs owner id will only be visible when admin state is true
+                    // So uploaded by won't be shown when blogger clikced on manage blogs uploaded by will only be visible when admin state is true
                     data.title === "uploaded by" && !isAdmin ? null : (
                       <th
                         className="px-5 py-3 cursor-pointer"

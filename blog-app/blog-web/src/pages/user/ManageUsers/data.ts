@@ -51,12 +51,13 @@ export const alternateKeys = [
   "title",
   "content",
   "email",
-  "username"
+  "username",
+  "uploadedBy"
 ];
 export const dateKeys = [
   "createdAt",
   "updatedAt"
-]
+];
 export const typeResult = [
   "recent",
   "oldest",

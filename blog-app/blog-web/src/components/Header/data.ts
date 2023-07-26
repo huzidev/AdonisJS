@@ -54,4 +54,4 @@ export const adminPaths = [
   ROUTE_PATHS.ARTICLES_PAGE + 1,
   ROUTE_PATHS.USERS_PAGE + 1,
   ROUTE_PATHS.VIEW_PROFILE + "me"
-]
+];
