@@ -22,7 +22,6 @@ export function useFiltersHook() {
       setIsUserPage(false)
       setPath(ROUTE_PATHS.ARTICLES_PAGE);
     }
-    console.log("WHAT IS STATE", isUserPage);
   }, [isUserPage, path])
 
   useEffect(() => {
