@@ -17,8 +17,6 @@ export const getMyList = createAsyncThunk(
   async (data: any): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
     try {
-      console.log("DATA", data);
-      
       const { userId, page } = data.payload;
       const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`, {params: data});
       return {
