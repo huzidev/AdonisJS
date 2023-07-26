@@ -118,7 +118,8 @@ export default function ViewProfilePage(): JSX.Element {
               </>
             )
           }
-            {(isMe || isAdmin) && (
+          {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile */}
+            {(isMe || isAdmin) && userDataById?.role !== "super-admin" && (
               <Link
                 to={
                    // if path paths doesn't have me then this means admin is on user view profile page hence send the admin to edit user by details
