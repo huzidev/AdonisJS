@@ -1,29 +1,39 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import { validator } from '@ioc:Adonis/Core/Validator';
+import { validator } from "@ioc:Adonis/Core/Validator";
 import { articleFilters } from "App/Default/Filters";
-import { blogsFetched, invalidURL, noArticle, noPermission } from "App/Default/Messages";
+import {
+  blogsFetched,
+  invalidURL,
+  noArticle,
+  noPermission,
+} from "App/Default/Messages";
 import Article from "App/Models/Article";
 import User from "App/Models/User";
 import Utils from "App/Utils";
-import { BlogListFilters, CreateArticle, UpdateArticle } from "App/Validators/ArticleValidator";
+import {
+  BlogListFilters,
+  CreateArticle,
+  UpdateArticle,
+} from "App/Validators/ArticleValidator";
 
 // Controller used to call the functions created in routes here so routes won't get messed up
 export default class ArticlesController {
   public async getBlogs({ params, request }: HttpContextContract) {
     try {
       const filters = await validator.validate({
-          schema: BlogListFilters.schema,
-          data: Utils.parseQS(request.qs(), ['sort'])
-        })
+        schema: BlogListFilters.schema,
+        data: Utils.parseQS(request.qs(), ["sort"]),
+      });
+
       const userId = params.id;
       const query = Article.query();
-  
+
       // because for calling username filters we don't have username in articles table therefore created join statement
       // if user wanted to see allBlogs uploaded by him
       if (userId) {
         query.where("owner_id", userId);
       }
-      
+
       const isSort = Object.keys(request.qs())[1];
       // to check if user tries to change method in URL which should be sort if user tries to change it then throw error
       // it is compulsory to put isSort !== "sort" inside isSort so it won't run every time rather it'll only runs when user called the FILTERS
@@ -34,7 +44,7 @@ export default class ArticlesController {
           throw invalidURL;
         }
       }
-      
+
       let filterResultKey;
       let filterResultValue;
       if (!!filters.sort) {
@@ -42,8 +52,10 @@ export default class ArticlesController {
         filterResultValue = Object.values(filters.sort!)[0];
         // so when user called the filter on main blogs page then don't run this query only run this join statement when filtersResultKey is username
         if (filterResultKey === "username") {
-          query.join('users', 'articles.owner_id', 'users.id');
+          query.join("users", "articles.owner_id", "users.id");
         }
+        console.log("FILTER RESULT", filterResultKey);
+
         // filter for most recent and oldest will be according to createdAt therefore checking for createdAt only
         if (!articleFilters.includes(filterResultKey)) {
           throw invalidURL;
@@ -53,17 +65,19 @@ export default class ArticlesController {
       const response = await query
         .withScopes((scope) => scope.filtersSort(filters))
         .paginate(params.page || 1, 15);
-      
-        return {
+
+      return {
         // so when user asked for filter then notifcation will be according to filter type
-        message: !!filters.sort && filterResultValue === "desc" 
-        ? `Most recent ${blogsFetched}` 
-        : filterResultValue === "asc" 
-        ? `Oldest ${blogsFetched}` 
-        // by default first letter is small of blogs as we are using the same message mutiple places therefore
-        : blogsFetched.charAt(0).toUpperCase() + blogsFetched.slice(1).toLocaleLowerCase(),
-        data: response
-      }; 
+        message:
+          !!filters.sort && filterResultValue === "desc"
+            ? `Most recent ${blogsFetched}`
+            : filterResultValue === "asc"
+            ? `Oldest ${blogsFetched}`
+            : // by default first letter is small of blogs as we are using the same message mutiple places therefore
+              blogsFetched.charAt(0).toUpperCase() +
+              blogsFetched.slice(1).toLocaleLowerCase(),
+        data: response,
+      };
     } catch (e) {
       console.log("ERROR", e);
       throw invalidURL;
