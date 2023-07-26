@@ -23,7 +23,7 @@ export function useManageBlogsPageHooks(): void {
   );
   const navigate = useNavigate();
   const payload: PayloadReq = {
-    userId: isMe.id,
+    userId: isMe?.id,
     page: Number(params.page) || 1,
   };
 
