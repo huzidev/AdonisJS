@@ -178,17 +178,7 @@ export default function ViewProfilePage(): JSX.Element {
                             userDataById?.role !== "super-admin") ||
                           hasPermission("super-admin", userDataById?.role)) &&
                           // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
-                          (userDataById?.isBanned ? (
-                            <div>
-                              <Link
-                                to={ROUTE_PATHS.VIEW_PROFILE + userDataById.id}
-                                type="button"
-                                className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                              >
-                                View Profile
-                              </Link>
-                            </div>
-                          ) : (
+                          (!userDataById?.isBanned && (
                             <div>
                               <Link
                                 to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
