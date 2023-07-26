@@ -28,13 +28,12 @@ export default function ViewProfilePage(): JSX.Element {
     page: 1,
   });
   const [showModal, setShowModal] = useState(false);
-  const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);  
+  const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
 
   const [userDetails, setUserDetails] =
     useState<UserDetailState>(userDetailsData);
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   const userId: any = auth.state.user?.id;
-
 
   let currentId = isMe ? userId : Number(params.id);
   let allBlogsById = blogs.state.getBlogsById.data;
@@ -86,8 +85,7 @@ export default function ViewProfilePage(): JSX.Element {
       <div>
         <div className="w-11/12 my-5 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div className="p-5">
-          {
-            userDataById?.isBanned ? (
+            {userDataById?.isBanned ? (
               <div className="flex pt-6">
                 <p className="text-xl">
                   User <b>{userDataById?.username}</b> Is Banned from this web
@@ -95,35 +93,34 @@ export default function ViewProfilePage(): JSX.Element {
               </div>
             ) : (
               <>
-              <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
-                User Profile
-              </h1>
-              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Id : {userDetails.id}
-              </h2>
-              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Name : {userDetails.username + ` (${userDetails.role})`}
-              </h2>
-              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Email : {userDetails.email}
-              </h2>
-              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Joined Date : {formatedDate}
-              </h2>
-              <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {(isUser && isMe) || isClickedUser
-                  ? `Total Blogs Liked : ${favoriteBlogs.meta?.total}`
-                  : `Total Blogs : ${totalBlogs}`}
-              </h2>
+                <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
+                  User Profile
+                </h1>
+                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  Id : {userDetails.id}
+                </h2>
+                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  Name : {userDetails.username + ` (${userDetails.role})`}
+                </h2>
+                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  Email : {userDetails.email}
+                </h2>
+                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  Joined Date : {formatedDate}
+                </h2>
+                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {(isUser && isMe) || isClickedUser
+                    ? `Total Blogs Liked : ${favoriteBlogs.meta?.total}`
+                    : `Total Blogs : ${totalBlogs}`}
+                </h2>
               </>
-            )
-          }
-          {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile */}
+            )}
+            {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile */}
             {(isMe || isAdmin) && userDataById?.role !== "super-admin" && (
               <Link
                 to={
-                   // if path paths doesn't have me then this means admin is on user view profile page hence send the admin to edit user by details
-                    ROUTE_PATHS.EDIT_USER + `${isMe ? "me" : userDataById?.id}`
+                  // if path paths doesn't have me then this means admin is on user view profile page hence send the admin to edit user by details
+                  ROUTE_PATHS.EDIT_USER + `${isMe ? "me" : userDataById?.id}`
                 }
                 type="button"
                 className="text-white bg-gray-800 font-medium text-sm py-2.5"
@@ -176,53 +173,69 @@ export default function ViewProfilePage(): JSX.Element {
                         >
                           Read More
                         </Link>
-                        {isAdmin && (
-                          <div>
-                            <Link
-                              to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
-                              type="button"
-                              className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                            >
-                              Edit
-                            </Link>
-                            <button
-                              type="button"
-                              className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
-                              onClick={() => {
-                                setDeleteBlogId(blog.id);
-                                setShowModal(true);
-                              }}
-                            >
-                              Delete
-                            </button>
-                            {showModal && deleteBlogId === blog.id && (
-                              <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
-                                <div className="bg-white p-8 w-96">
-                                  <p className="text-lg text-center mb-4">
-                                    Are you sure you want to delete this blog?
-                                  </p>
-                                  <div className="flex justify-center space-x-4">
-                                    <button
-                                      className="bg-red-500 text-white px-4 py-2 rounded"
-                                      onClick={() => {
-                                        blogs.deleteBlog(blog.id);
-                                        setShowModal(false);
-                                      }}
-                                    >
-                                      Yes
-                                    </button>
-                                    <button
-                                      className="bg-gray-500 text-white px-4 py-2 rounded"
-                                      onClick={() => setShowModal(false)}
-                                    >
-                                      No
-                                    </button>
+                        {(blog.ownerId === userDataById?.id ||
+                          (hasPermission("admin", userDataById?.role) &&
+                            userDataById?.role !== "super-admin") ||
+                          hasPermission("super-admin", userDataById?.role)) &&
+                          // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
+                          (userDataById?.isBanned ? (
+                            <div>
+                              <Link
+                                to={ROUTE_PATHS.VIEW_PROFILE + userDataById.id}
+                                type="button"
+                                className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                              >
+                                View Profile
+                              </Link>
+                            </div>
+                          ) : (
+                            <div>
+                              <Link
+                                to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                                type="button"
+                                className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                              >
+                                Edit
+                              </Link>
+                              <button
+                                type="button"
+                                className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
+                                // onClick={() => blogs.deleteBlog(blog.id)}
+                                onClick={() => {
+                                  setDeleteBlogId(blog.id);
+                                  setShowModal(true);
+                                }}
+                              >
+                                Delete
+                              </button>
+                              {showModal && deleteBlogId === blog.id && (
+                                <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
+                                  <div className="bg-white p-8 w-96">
+                                    <p className="text-lg text-center mb-4">
+                                      Are you sure you want to delete this blog?
+                                    </p>
+                                    <div className="flex justify-center space-x-4">
+                                      <button
+                                        className="bg-red-500 text-white px-4 py-2 rounded"
+                                        onClick={() => {
+                                          blogs.deleteBlog(blog.id);
+                                          setShowModal(false);
+                                        }}
+                                      >
+                                        Yes
+                                      </button>
+                                      <button
+                                        className="bg-gray-500 text-white px-4 py-2 rounded"
+                                        onClick={() => setShowModal(false)}
+                                      >
+                                        No
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            )}
-                          </div>
-                        )}
+                              )}
+                            </div>
+                          ))}
                       </div>
                     </div>
                   </div>
