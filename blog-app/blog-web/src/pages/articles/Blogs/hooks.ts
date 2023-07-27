@@ -21,7 +21,7 @@ export function useBlogsPageHooks() {
   const [sortValue, setSortValue] = useState(initialSortState);
   const payload: any = {
     userId: auth.state.user?.id,
-    page: 1,
+    page: 1
   };
 
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;

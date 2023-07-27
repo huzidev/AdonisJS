@@ -123,6 +123,9 @@ export default function ViewBlogsPage(): JSX.Element {
                       // only if loggedIn user's role is user then show heart icon for adding blogs in favorite
                       auth.state.user && auth.state.user.role === "user" && (
                         <div
+                        title={(favoriteBlogs.find(
+                              (favoriteBlog) => favoriteBlog.id === blog.id
+                            ) ? "Remove From" : "Add to") + " favorite"}
                           className={`p-2 rounded-full transition-colors duration-300 ${
                             favoriteBlogs.find(
                               (favoriteBlog) => favoriteBlog.id === blog.id
