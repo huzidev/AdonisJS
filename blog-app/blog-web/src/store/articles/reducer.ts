@@ -213,16 +213,10 @@ export const blogSlice = createSlice({
     builder.addCase(actions.updateBlog.fulfilled, (state, action) => {
       state.updateBlog.loading = false;
       const { data, message } = action.payload;
-      const updatedAllBlogs = state.getBlogs.data.map((blog) => {
-        if (blog.id === data.id) {
-          return data;
-        }
-        return blog;
-      });
+      const updateBlog = JSON.parse(JSON.stringify(state.getBlogs.data.find((blog) => blog.id === data.id)));
+      // to put updated value in the getBlogs data
+      state.getBlogs.data = [updateBlog]
       state.updateBlog.message = message;
-      // Update the allBlogs data in the state
-      // getBlogs because updating the updated blog value in getBlogs list
-      state.getBlogs.data = updatedAllBlogs;
       state.updateBlog.error = false;
     });
     builder.addCase(actions.updateBlog.rejected, (state) => {
@@ -256,7 +250,8 @@ export const blogSlice = createSlice({
         const { message, data } = action.payload
         // because by default data state.getBlogs.data is in form of this Proxy(Array) {0: {…}} therefore used JSON.parse
           const cleaned = JSON.parse(JSON.stringify(state.getBlogs.data.find((blog) => blog.id === data.articleId)));
-          state.getFavoriteBlogs.data = [...state.getFavoriteBlogs.data, cleaned];
+          const prevBlog = JSON.parse(JSON.stringify(state.getFavoriteBlogs.data));
+          state.getFavoriteBlogs.data = [...prevBlog, cleaned];
         state.addFavoriteBlog.message = message;
       }
       state.addFavoriteBlog.error = false
