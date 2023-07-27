@@ -89,7 +89,6 @@ export const blogSlice = createSlice({
         state.getBlogsList.data = [...data];
         state.getBlogsList.meta = meta;
         state.getBlogsList.message = message;
-        // meta takes pagination data like total, currentPage, LastPage
       }
       state.getBlogsList.error = false;
     });
@@ -106,15 +105,9 @@ export const blogSlice = createSlice({
       state.getBlogsById.loading = false;
       if (action.payload) {
         const { data, meta } = action.payload;
-        // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-        // const cleaned =
-        //   state.getBlogsById.data?.filter(
-        //     (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
-        //   ) ?? [];
-          
-        // state.getBlogsById.data = [...cleaned, ...data];
-          state.getBlogsById.data = [...state.getBlogsById.data, ...data];
-          // meta takes pagination data like total, currentPage, LastPage
+          const cleaned = JSON.parse(JSON.stringify(state.getBlogsById.data));
+          // so when user clicked on load more then previous data remains save and fetches new data
+          state.getBlogsById.data = [...cleaned, ...data];
           state.getBlogsById.meta = meta;
         }
       state.getBlogsById.error = false;
