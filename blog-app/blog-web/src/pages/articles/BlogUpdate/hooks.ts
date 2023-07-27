@@ -25,15 +25,13 @@ export function useEditBlogPageHooks(): void {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (slug) {
       blog.getBlog(slug);
-  }, [slug])
-
-  useEffect(() => {
-    // to get the clicked user details so we can show edit (username) details
-    if (ownerId) {
-      user.getById(ownerId)
+      if (prev?.getBlog.loading) {
+        user.getById(ownerId)
+      }
     }
-  }, [ownerId, window.location.pathname]);
+  }, [ownerId, window.location.pathname])
 
   useEffect(() => {
     if (prev?.updateBlog.loading) {
