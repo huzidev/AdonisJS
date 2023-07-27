@@ -1,16 +1,21 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Article from 'App/Models/Article';
 import FavoriteArticle from 'App/Models/FavoriteArticle';
+import User from 'App/Models/User';
 import { AddFavoriteArticle } from 'App/Validators/FavoriteArticleValidator';
 
 export default class FavoriteArticlesController {
     public async add({ request }: HttpContextContract) {
         try {
             const body = await request.validate(AddFavoriteArticle);
-            await FavoriteArticle.create({...body});
+            const { userId, articleId } = body;
+            
+            const user = await User.findBy("id", body.ownerId);
+            
+            await FavoriteArticle.create({articleId, userId});
             return { 
                 data: body, 
-                message: "Article added to favorite successfully!" 
+                message: `Blog by ${user?.username} added to favorite list successfully!` 
             };
         } catch (e) {
             throw e
