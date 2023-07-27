@@ -30,7 +30,7 @@ export const userSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        // updateUser
+        // updateMe
         builder.addCase(actions.updateMe.pending, (state) => {
             state.updateMe = {loading: true, error: false};
         })
