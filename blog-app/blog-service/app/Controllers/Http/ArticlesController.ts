@@ -152,7 +152,7 @@ export default class ArticlesController {
       ) {
         throw {
           message: "Can't update, values are same as of before",
-          status: 401,
+          status: 400
         };
       } else {
         // await Article.query().where("id", articleId).update(body);
