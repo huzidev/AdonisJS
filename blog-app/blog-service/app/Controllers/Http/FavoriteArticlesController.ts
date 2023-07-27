@@ -38,7 +38,7 @@ export default class FavoriteArticlesController {
             const user = await User.findBy("id", body.ownerId);
             console.log("BODY", body);
             const article = await FavoriteArticle.findBy("article_id", body.articleId);
-            await article!.delete();
+            await article?.delete();
             return { message: `Blog by ${user?.username} removed from favorite list successfully!`, id: body.articleId };
         } catch (e) {
             throw e
