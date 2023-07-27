@@ -27,11 +27,12 @@ export function useEditBlogPageHooks(): void {
   useEffect(() => {
     if (slug) {
       blog.getBlog(slug);
+      // so only get userData by id when blog get fetched successfully otherwise the id of previous user remains saved and will give error
       if (prev?.getBlog.loading) {
         user.getById(ownerId)
       }
     }
-  }, [ownerId, window.location.pathname])
+  }, [ownerId])
 
   useEffect(() => {
     if (prev?.updateBlog.loading) {
