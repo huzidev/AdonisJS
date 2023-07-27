@@ -55,7 +55,8 @@ export const blogSlice = createSlice({
           // if filters condition is TRUE and we've already some data then because the FILTER state is TRUE this means previous data is accordin to filter
           // hence append new data with the old data currentPage not 1 means user called the LOAD MORE button
           else if (state.getBlogs.data && meta.currentPage !== 1) {
-            state.getBlogs.data = [...state.getBlogs.data, ...data];
+            const cleaned = JSON.parse(JSON.stringify(state.getBlogs.data));
+            state.getBlogs.data = [...cleaned, ...data];
           }
         } else {
           if (meta.currentPage === 1) { 
@@ -244,13 +245,6 @@ export const blogSlice = createSlice({
       state.getFavoriteBlogs.loading = false;
       if (action.payload) {
         const { data, meta } = action.payload;
-        // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-        // const cleaned =
-        //   state.getFavoriteBlogs.data?.filter(
-        //     (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
-        //   ) ?? [];
-        // state.getFavoriteBlogs.data = [...cleaned, ...data];
-        // meta takes pagination data like total, currentPage, LastPage
         state.getFavoriteBlogs.data = data;
         state.getFavoriteBlogs.meta = meta;
       }
