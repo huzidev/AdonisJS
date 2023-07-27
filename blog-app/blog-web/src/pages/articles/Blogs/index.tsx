@@ -137,10 +137,11 @@ export default function ViewBlogsPage(): JSX.Element {
                             favoriteBlogs.find(
                               (favoriteBlog) => favoriteBlog.id === blog.id
                             )
-                              ? blogs.removeFavoriteBlog(blog.id)
+                              ? blogs.removeFavoriteBlog({articleId: blog.id, ownerId: blog.ownerId})
                               : blogs.addFavoriteBlog({
                                   userId: auth.state.user?.id,
                                   articleId: blog.id,
+                                  ownerId: blog.ownerId
                                 })
                           }
                         >

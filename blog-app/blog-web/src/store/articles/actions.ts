@@ -9,6 +9,7 @@ import {
   AllBlogs,
   GetBlogPayload,
   GetBlogsById,
+  RemoveFavoriteBlogPayload,
   UpdateBlogPayload,
 } from "./types";
 
@@ -154,10 +155,7 @@ export const addFavoriteBlog = createAsyncThunk(
   async (data: AddFavoriteBlogPayload) => {
     try {
       const response = await api.post(endpoints.ADD_FAVORITE_BLOG, data);
-      if (response.status === 200) {
-        alert("Blog added To Favorite");
-      }
-      console.log("Add Blog", response);
+      console.log("RESPONSE FOR ADD FAVORITE", response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
@@ -170,13 +168,13 @@ export const addFavoriteBlog = createAsyncThunk(
 
 export const removeFavoriteBlog = createAsyncThunk(
   endpoints.REMOVE_FAVORITE_BLOG,
-  async (id: number) => {
+  async (data: RemoveFavoriteBlogPayload) => {
+    console.log("DATA", data);
+    
     try {
-      const response = await api.delete(endpoints.REMOVE_FAVORITE_BLOG + id);
-      if (response.status === 200) {
-        alert("Blog Removed From Favorite");
-      }
-      return response.data.id;
+      const response = await api.delete(endpoints.REMOVE_FAVORITE_BLOG + data.articleId, {data});
+      console.log("RESPONSE FOR REMOVE FAVORITE", response);
+      return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);

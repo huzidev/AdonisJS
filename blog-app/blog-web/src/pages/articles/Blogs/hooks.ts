@@ -112,6 +112,16 @@ export function useBlogsPageHooks() {
         successNotification(state.deleteBlog.message);
       }
     }
+    if (prev?.addFavoriteBlog.loading) {
+      if (!state.addFavoriteBlog.loading && !state.addFavoriteBlog.error) {
+        successNotification(state.addFavoriteBlog.message);
+      }
+    }
+    if (prev?.removeFavoriteBlog.loading) {
+      if (!state.removeFavoriteBlog.loading && !state.removeFavoriteBlog.error) {
+        successNotification(state.removeFavoriteBlog.message);
+      }
+    }
   }, [state]);
 
   return {
