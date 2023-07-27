@@ -55,7 +55,7 @@ export const userSlice = createSlice({
         builder.addCase(actions.allUser.rejected, (state) => {
             state.allUser = {loading: false, error: true};
         })
-        // getUserByPage
+        // getUsersByPage
         builder.addCase(actions.allUserByPage.pending, (state) => {
             state.getUserPage.loading = true;
             state.getUserPage.error = false;

@@ -28,6 +28,9 @@ export default function UserFormPage() {
   const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
 
+  console.log("USER DATA", user.state.getUser?.data);
+  
+
   useEffect(() => {
     if (isMe) {
       setUpdateDetailsMe({ ...updateDetailsMe, ...userData });

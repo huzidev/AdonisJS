@@ -13,11 +13,11 @@ export function useUserFormHook(): void {
   const userRole = user.state.getUser.data?.role;
   const authRole = auth.state.user?.role;
   const state = user.state;
-  const prevAuth = usePrevious(state);
+  const prev = usePrevious(state);
   const navigate = useNavigate();
   
   useEffect(() => {
-    if (prevAuth?.createUser.loading) {
+    if (prev?.createUser.loading) {
       if (!state?.createUser?.loading && !state.createUser.error) {
         successNotification(state.createUser.message);
         if (state.createUser.message?.includes("successfully")) {
@@ -26,7 +26,7 @@ export function useUserFormHook(): void {
         }
       }
     }
-    if (prevAuth?.updateMe.loading) {
+    if (prev?.updateMe.loading) {
       if (!state.updateMe.loading && !state.updateMe.error) {
        successNotification(state.updateMe.message);
        if (state.updateMe.message?.includes("successfully")) {
@@ -34,7 +34,7 @@ export function useUserFormHook(): void {
         }
      }
     }
-    if (prevAuth?.updateById.loading) {
+    if (prev?.updateById.loading) {
       if (!state.updateById.loading && !state.updateById.error) {
        successNotification(state.updateById.message);
        if (state.updateById.message?.includes("successfully")) {
@@ -43,7 +43,7 @@ export function useUserFormHook(): void {
      }
     }
     // if user tries to change the id in the URL and that id doesn't exist then redirect the user to Not Found page
-    if (prevAuth?.getUser.loading) {
+    if (prev?.getUser.loading) {
       if (authRole === "admin" && userRole === "super-admin") {
         toast.error("Insufficient Access, You can't edit super-admin's details");
         navigate(ROUTE_PATHS.ARTICLES);

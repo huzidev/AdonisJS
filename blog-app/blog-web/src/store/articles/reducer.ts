@@ -164,6 +164,9 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlog.rejected, (state) => {
       state.getBlog.loading = false;
       state.getBlog.error = true;
+      // // so if user tries to chnage URL and gets no such article is found then navigate user to blogs page by checking error message if it contains status code 404
+      // // when no such article is found error is formed then status code will be 404
+      // state.getBlog.message = action.error.message;
     });
     // addBlog
     builder.addCase(actions.addBlog.pending, (state) => {
