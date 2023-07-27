@@ -168,9 +168,11 @@ export const blogSlice = createSlice({
       if (action.payload) {
         const { data, message } = action.payload;
         // Update new blog in allBlogs page
-        state.getBlogs.data = [...state.getBlogs.data, data];
+        const cleanedBlogs = JSON.parse(JSON.stringify(state.getBlogs.data));
+        state.getBlogs.data = [...cleanedBlogs, data];
         // Update new blog in ViewProfile page
-        state.getBlogsById.data = [...state.getBlogsById.data, data];
+        const cleanedUserBlog = JSON.parse(JSON.stringify(state.getBlogs.data));
+        state.getBlogsById.data = [...cleanedUserBlog, data];
         state.addBlog.message = message;
       }
     });
