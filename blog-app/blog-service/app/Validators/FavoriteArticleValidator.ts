@@ -14,10 +14,11 @@ export class AddFavoriteArticle {
 
 export class RemoveFavoriteArticle {
   public schema = schema.create({
-    articleId: schema.number()
+    articleId: schema.number(),
+    ownerId: schema.number(),
   })
 
   public messages: CustomMessages = {
-    required: '{{ field }} is required to create blog',
+    required: '{{ field }} is required to remove blog',
   }
 }

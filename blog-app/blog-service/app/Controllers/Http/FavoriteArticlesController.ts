@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Article from 'App/Models/Article';
 import FavoriteArticle from 'App/Models/FavoriteArticle';
 import User from 'App/Models/User';
-import { AddFavoriteArticle } from 'App/Validators/FavoriteArticleValidator';
+import { AddFavoriteArticle, RemoveFavoriteArticle } from 'App/Validators/FavoriteArticleValidator';
 
 export default class FavoriteArticlesController {
     public async add({ request }: HttpContextContract) {
@@ -32,12 +32,14 @@ export default class FavoriteArticlesController {
         return response;
     }
 
-    public async remove({ params }: HttpContextContract) {
+    public async remove({ request }: HttpContextContract) {
         try {
-            const article = await FavoriteArticle.findBy("article_id", params.id);
+            const body = await request.validate(RemoveFavoriteArticle);
+            const user = await User.findBy("id", body.ownerId);
+            console.log("BODY", body);
+            const article = await FavoriteArticle.findBy("article_id", body.articleId);
             await article!.delete();
-            console.log("params id", params.id);
-            return { message: `Article with id ${params.id} Deleted`, id: Number(params.id) };
+            return { message: `Blog by ${user?.username} removed from favorite list successfully!`, id: body.articleId };
         } catch (e) {
             throw e
         }
