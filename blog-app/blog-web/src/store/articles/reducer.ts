@@ -116,7 +116,7 @@ export const blogSlice = createSlice({
       state.getBlogsById.loading = false;
       state.getBlogsById.error = true;
     });
-    // when user clicked on manage blogs
+    // when blogger clicked on manage blogs
     builder.addCase(actions.getMyList.pending, (state) => {
       state.getMyList.loading = true;
       state.getMyList.error = false;
@@ -146,8 +146,8 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlog.fulfilled, (state, action) => {
       state.getBlog.loading = false;
       if (action.payload) {
-        const { article, message } = action.payload;
-        state.getBlog.data = article;
+        const { data, message } = action.payload;
+        state.getBlog.data = data;
         state.getBlog.message = message;
       }
       state.getBlog.error = false;
