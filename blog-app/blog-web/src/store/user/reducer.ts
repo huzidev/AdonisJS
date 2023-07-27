@@ -38,7 +38,7 @@ export const userSlice = createSlice({
             state.updateMe = {loading: false, error: false};
             if (action.payload) {
                 const { data, message }: any = action.payload;
-                state.updateMe.data = {...data};
+                state.updateMe.data = data;
                 state.updateMe.message = message;
             }
         })
@@ -93,7 +93,7 @@ export const userSlice = createSlice({
             state.updateById = {loading: false, error: false};
             if (action.payload) {
                 const { data, message }: any = action.payload;
-                state.updateById.data = {...data};
+                state.updateById.data = data;
                 state.updateById.message = message;
             }
         })

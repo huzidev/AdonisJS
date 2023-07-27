@@ -22,7 +22,7 @@ const initialState: BlogState = {
   deleteBlog: { ...subState },
   addBlog: { ...subState },
   addFavoriteBlog: { ...subState },
-  removeFavoriteBlog: { ...subState },
+  removeFavoriteBlog: { ...subState }
 };
 
 export const blogSlice = createSlice({
@@ -46,8 +46,6 @@ export const blogSlice = createSlice({
       state.getBlogs.loading = false;
       if (action.payload) {
         const { data, meta, filters, message } = action.payload;
-        console.log("MESSAGE", message);
-        
         if (filters) {
           // state.getBlogs.data mean whne user is no blogs page then default list will be shown to user and currentPage will be 1 hence when user called filters
           // then replace the recent data with new data therefore we haven't used [...state.geBlogs.data, ...data] because spread operator will append new data with old data
@@ -64,11 +62,13 @@ export const blogSlice = createSlice({
             state.getBlogs.data = data;
           } else {
             // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-            const cleaned =
-              state.getBlogs.data?.filter(
-                (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
-              ) ?? [];
-            state.getBlogs.data = [...cleaned, ...data];
+            // const cleaned =
+            //   state.getBlogs.data?.filter(
+            //     (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
+            //   ) ?? [];
+            //   console.log("CLEANED FOR ALL BLOGS", cleaned);
+            state.getBlogs.data = [...state.getBlogs.data, ...data];
+            
           }
         }
         state.getBlogs.meta = meta;
@@ -111,14 +111,16 @@ export const blogSlice = createSlice({
       if (action.payload) {
         const { data, meta } = action.payload;
         // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-        const cleaned =
-          state.getBlogsById.data?.filter(
-            (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
-          ) ?? [];
-        state.getBlogsById.data = [...cleaned, ...data];
-        // meta takes pagination data like total, currentPage, LastPage
-        state.getBlogsById.meta = meta;
-      }
+        // const cleaned =
+        //   state.getBlogsById.data?.filter(
+        //     (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
+        //   ) ?? [];
+          
+        // state.getBlogsById.data = [...cleaned, ...data];
+          state.getBlogsById.data = [...state.getBlogsById.data, ...data];
+          // meta takes pagination data like total, currentPage, LastPage
+          state.getBlogsById.meta = meta;
+        }
       state.getBlogsById.error = false;
     });
     builder.addCase(actions.getBlogsById.rejected, (state) => {
@@ -156,7 +158,7 @@ export const blogSlice = createSlice({
       state.getBlog.loading = false;
       if (action.payload) {
         const { article, message } = action.payload;
-        state.getBlog.data = { ...article };
+        state.getBlog.data = article;
         state.getBlog.message = message;
       }
       state.getBlog.error = false;
@@ -243,12 +245,13 @@ export const blogSlice = createSlice({
       if (action.payload) {
         const { data, meta } = action.payload;
         // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-        const cleaned =
-          state.getFavoriteBlogs.data?.filter(
-            (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
-          ) ?? [];
-        state.getFavoriteBlogs.data = [...cleaned, ...data];
+        // const cleaned =
+        //   state.getFavoriteBlogs.data?.filter(
+        //     (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
+        //   ) ?? [];
+        // state.getFavoriteBlogs.data = [...cleaned, ...data];
         // meta takes pagination data like total, currentPage, LastPage
+        state.getFavoriteBlogs.data = data;
         state.getFavoriteBlogs.meta = meta;
       }
       state.getFavoriteBlogs.error = false;
@@ -264,7 +267,10 @@ export const blogSlice = createSlice({
     builder.addCase(actions.addFavoriteBlog.fulfilled, (state, action) => {
       state.addFavoriteBlog.loading = false;
       if (action.payload) {
-        const { message } = action.payload
+        const { message, data } = action.payload
+        // because by default data state.getBlogs.data is in form of this Proxy(Array) {0: {…}} therefore used JSON.parse
+          const cleaned = JSON.parse(JSON.stringify(state.getBlogs.data.find((blog) => blog.id === data.articleId)));
+          state.getFavoriteBlogs.data = [...state.getFavoriteBlogs.data, cleaned];
         state.addFavoriteBlog.message = message;
       }
       state.addFavoriteBlog.error = false
