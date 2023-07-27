@@ -115,8 +115,8 @@ export default class ArticlesController {
         throw noArticle;
       }
       return {
-        article,
-        message: `Blog by ${user?.username} fetched successfully`,
+        data: article,
+        message: `Blog by ${user?.username} fetched successfully`
       };
     } catch (e) {
       throw e;
