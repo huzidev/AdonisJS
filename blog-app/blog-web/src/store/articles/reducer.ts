@@ -268,9 +268,11 @@ export const blogSlice = createSlice({
       // to update the getFavoriteBlogs field when removed the blog
       if (action.payload) {
         const { message, id } = action.payload;
-        state.getFavoriteBlogs.data = state.getFavoriteBlogs.data.filter(
-          (blog) => blog.id !== id
-        );
+        state.getFavoriteBlogs.data = JSON.parse(JSON.stringify(
+          state.getFavoriteBlogs.data.filter(
+           (blog) => blog.id !== id
+         )
+        ))
         state.removeFavoriteBlog.message = message;
       }
     });
