@@ -51,6 +51,7 @@ export const blogSlice = createSlice({
           // then replace the recent data with new data therefore we haven't used [...state.geBlogs.data, ...data] because spread operator will append new data with old data
           if (state.getBlogs.data && meta.currentPage === 1) {
             state.getBlogs.data = data;
+            
           }
           // if filters condition is TRUE and we've already some data then because the FILTER state is TRUE this means previous data is accordin to filter
           // hence append new data with the old data currentPage not 1 means user called the LOAD MORE button
@@ -62,14 +63,8 @@ export const blogSlice = createSlice({
           if (meta.currentPage === 1) { 
             state.getBlogs.data = data;
           } else {
-            // so data won't be fetched again when user gets onto blogs page else data will fetched again and again
-            // const cleaned =
-            //   state.getBlogs.data?.filter(
-            //     (dataBlog) => !data.find((blog) => blog.id === dataBlog.id)
-            //   ) ?? [];
-            //   console.log("CLEANED FOR ALL BLOGS", cleaned);
-            state.getBlogs.data = [...state.getBlogs.data, ...data];
-            
+            const cleaned = JSON.parse(JSON.stringify(state.getBlogs.data));
+            state.getBlogs.data = [...cleaned, ...data];
           }
         }
         state.getBlogs.meta = meta;
