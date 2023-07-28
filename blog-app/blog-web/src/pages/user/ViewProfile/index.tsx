@@ -345,7 +345,10 @@ export default function ViewProfilePage(): JSX.Element {
         </div>
       </div>
       <div className="w-11/12 m-auto mt-5">
-        {(currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) && (
+        {/* so load more button will only be visible when their is currentPage OR currentPageFvrt and if currentPage and lastPage values 
+         became equal then don't show load more button anymore
+        */}
+        {(currentPage || currentPageFvrt) && (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) && (
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
             onClick={loadMore}
