@@ -24,6 +24,8 @@ export default function ViewProfilePage(): JSX.Element {
   const isAdmin = hasPermission("admin", currentRole);
   const isMe = params.id === "me";
   const userState = user.state;
+  const blogState = blogs.state;
+  const prevBlog = usePrevious(blogState);
   const prev = usePrevious(userState);
   // const [payload, setPayload] = useState<any>({
   //   userId: isMe ? auth.state.user?.id : Number(params.id),
@@ -40,9 +42,10 @@ export default function ViewProfilePage(): JSX.Element {
 
   let currentId = isMe ? userId : Number(params.id);
   let allBlogsById = blogs.state.getBlogsById.data;
-  let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
+  // let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
   let favoriteBlogs = blogs.state.getFavoriteBlogs;
+  const [userBlogs, setUserBlogs] = useState<any>();
 
   const loggedInId: any = auth.state.user?.id;
 
@@ -72,7 +75,7 @@ export default function ViewProfilePage(): JSX.Element {
         }
       } 
       if (isMe) {
-      setUserDetails({...userDetails, ...userDataById});
+      setUserDetails({...userDetails, ...data});
         // because when user's role is user then we only wanted to fetch favoriteBlogs
         const payloadData = {
             userId: loggedInId,
@@ -86,6 +89,18 @@ export default function ViewProfilePage(): JSX.Element {
       }
     }
   }, [userState])
+
+
+  useEffect(() => {
+    if (prevBlog?.getBlogsById.loading) {
+      console.log("blogs by id", blogState.getBlogsById.data);
+      setUserBlogs(blogState.getBlogsById.data)
+    } 
+    if (prevBlog?.getFavoriteBlogs.loading) {
+      console.log("favortite blogs by id", blogState.getFavoriteBlogs.data);
+      setUserBlogs(blogState.getFavoriteBlogs.data)
+    }
+  }, [blogState])
 
   function loadMore() {
     const updatedPayload = {
