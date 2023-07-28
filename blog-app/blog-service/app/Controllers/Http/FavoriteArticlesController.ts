@@ -9,6 +9,8 @@ export default class FavoriteArticlesController {
         try {
             const body = await request.validate(AddFavoriteArticle);
             const { userId, articleId } = body;
+
+            console.log("BODY", body);
             
             // for owner of blog info so we can get owner name and then show the owner name in notification
             const user = await User.findBy("id", body.ownerId);
@@ -28,7 +30,7 @@ export default class FavoriteArticlesController {
         const query = FavoriteArticle.query()
             .where("user_id", userId)
             .select("article_id");
-        const response = await Article.query().whereIn("id", query).paginate(params.page || 1, 10);
+        const response = await Article.query().whereIn("id", query).paginate(params.page || 1, 15);
         return response;
     }
 

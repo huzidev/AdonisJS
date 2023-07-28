@@ -26,7 +26,7 @@ export default class ArticlesController {
       });
 
       const userId = params.id;
-      const query = Article.query();
+      const query = Article.query();  
 
       // because for calling username filters we don't have username in articles table therefore created join statement
       // if user wanted to see allBlogs uploaded by him
@@ -122,7 +122,7 @@ export default class ArticlesController {
       throw e;
     }
   }
-
+  
   public async updateBlog({ request, auth, params }: HttpContextContract) {
     try {
       const body = await request.validate(UpdateArticle);
