@@ -16,6 +16,7 @@ export function useBlogsPageHooks() {
   const state = blogs.state;
   const prev = usePrevious(state);
   const navigate = useNavigate();
+  const isUser = auth.state.user?.role === "user";
   const allUsers: any = user.state.allUser?.data;
   const favoriteBlogs: any = blogs.state.getFavoriteBlogs;
   const [sortValue, setSortValue] = useState(initialSortState);
@@ -78,15 +79,14 @@ export function useBlogsPageHooks() {
   
   function loadMore() {
     blogs.getBlogs({ page: currentPageBlogs + 1, ...search });
-    console.log("FVRRT BLOGS", currentPageBlogs);
-    console.log("last page fvrt", lastPageFvrtBlogs);
-    
-    if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
-      let loggedInId: any = auth.state.user?.id
-      blogs.getFavoriteBlogs({
-        page: currentPageFvrtBlogs + 1,
-        userId: loggedInId
-      });
+    if (isUser) {
+      if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
+        let loggedInId: any = auth.state.user?.id
+        blogs.getFavoriteBlogs({
+          page: currentPageFvrtBlogs + 1,
+          userId: loggedInId
+        });
+      }
     }
   }
 

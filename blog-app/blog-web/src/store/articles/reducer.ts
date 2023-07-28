@@ -237,7 +237,6 @@ export const blogSlice = createSlice({
         // it is COMPUSLORY to called cleaned variable here above state.getFavoriteBlogs.data = data otherwise the new data will overwrite the previous data with new data
         const cleaned = JSON.parse(JSON.stringify(state.getFavoriteBlogs.data));
         state.getFavoriteBlogs.data = data;
-        console.log("cleaned", cleaned);
         if (meta.currentPage !== 1) {
           // so when user clicked on load more then save the previous data and append the new data in the list WITHOUT losing the previous data
           state.getFavoriteBlogs.data = [...cleaned, ...data];
