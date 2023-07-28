@@ -19,6 +19,7 @@ export default function ViewProfilePage(): JSX.Element {
   const userDataById = user.state.getUser?.data;
   const currentPage: any = blogs.state.getBlogsById.meta?.currentPage;
   const currentPageFvrt: any = blogs.state.getFavoriteBlogs.meta?.currentPage;
+  const lastPageFvrt: any = blogs.state.getFavoriteBlogs.meta?.lastPage;
   const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
   const currentRole = auth.state.user?.role;
   const isUser = currentRole === "user";
@@ -109,11 +110,14 @@ export default function ViewProfilePage(): JSX.Element {
     if (isRole === "user") {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
-      console.log("updatedPayload", updatedPayload);
       blogs.getBlogsById(updatedPayload);
     }
   }
 
+  console.log("currentPageFvrt", currentPageFvrt);
+  console.log("lastPageFvrt", lastPageFvrt);
+  console.log("currentPage", currentPage);
+  console.log("lastPage", lastPage);
   useViewProfilePageHook();
   return (
     <>
@@ -341,7 +345,7 @@ export default function ViewProfilePage(): JSX.Element {
         </div>
       </div>
       <div className="w-11/12 m-auto mt-5">
-        {currentPage !== lastPage && (
+        {(currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) && (
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
             onClick={loadMore}
