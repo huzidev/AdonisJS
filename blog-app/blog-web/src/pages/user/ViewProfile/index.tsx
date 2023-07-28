@@ -46,8 +46,6 @@ export default function ViewProfilePage(): JSX.Element {
 
   const loggedInId: any = auth.state.user?.id;
 
-  const [clickedState, setClickedState] = useState();
-
   useEffect(() => {
     if (isMe) {
       user.getById(loggedInId);
@@ -60,6 +58,7 @@ export default function ViewProfilePage(): JSX.Element {
   useEffect(() => {
     if (prev?.getUser.loading) {
       if (!isMe) {
+      setUserDetails({...userDetails, ...userDataById});
         if (isRole === "user") { 
           blogs.getFavoriteBlogs({
             userId: params.id,
@@ -73,6 +72,7 @@ export default function ViewProfilePage(): JSX.Element {
         }
       } 
       if (isMe) {
+      setUserDetails({...userDetails, ...userDataById});
         // because when user's role is user then we only wanted to fetch favoriteBlogs
         const payloadData = {
             userId: loggedInId,
@@ -86,15 +86,6 @@ export default function ViewProfilePage(): JSX.Element {
       }
     }
   }, [userState])
-
-  // to store the data
-  useEffect(() => {
-    if (!isMe && userDataById) {
-      setUserDetails({ ...userDetails, ...userDataById });
-    } else if (isMe && data) {
-      setUserDetails({ ...userDetails, ...data });
-    }
-  }, [userDataById, params.id]);
 
   function loadMore() {
     const updatedPayload = {
