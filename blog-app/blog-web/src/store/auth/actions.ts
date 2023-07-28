@@ -62,7 +62,6 @@ export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async (): Promi
         if (token) {
             setToken(token)
             const response = await api.get(endpoints.USER_DETAILS);
-            console.log("response for user details", response);
             return response.data.data;
         }
         return null;

@@ -57,8 +57,6 @@ export const getBlogs = createAsyncThunk(
   endpoints.GET_BLOGS,
   async (data: any): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
-    console.log("data", data);
-    
     try {
       const response = await api.get(endpoints.GET_BLOGS + data.page, {params: data});
       const filtersApplied = data.sort !== undefined;

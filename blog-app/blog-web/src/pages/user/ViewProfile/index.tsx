@@ -5,6 +5,7 @@ import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
+import { usePrevious } from "utils/hooks";
 import { userDetailsData } from "./data";
 import { useViewProfilePageHook } from "./hooks";
 import { UserDetailState } from "./types";
@@ -21,8 +22,9 @@ export default function ViewProfilePage(): JSX.Element {
   const currentRole = auth.state.user?.role;
   const isUser = currentRole === "user";
   const isAdmin = hasPermission("admin", currentRole);
-  const isClickedUser = user.state.getUser.data?.role === "user";
   const isMe = params.id === "me";
+  const userState = user.state;
+  const prev = usePrevious(userState);
   // const [payload, setPayload] = useState<any>({
   //   userId: isMe ? auth.state.user?.id : Number(params.id),
   //   page: 1,
@@ -30,7 +32,7 @@ export default function ViewProfilePage(): JSX.Element {
   const [payload, setPayload] = useState<any>();
   const [showModal, setShowModal] = useState(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
-
+  let isClickedUser: any;
   const [userDetails, setUserDetails] =
     useState<UserDetailState>(userDetailsData);
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
@@ -43,39 +45,47 @@ export default function ViewProfilePage(): JSX.Element {
   let favoriteBlogs = blogs.state.getFavoriteBlogs;
 
   const loggedInId: any = auth.state.user?.id;
+
+  const [clickedState, setClickedState] = useState();
+
   useEffect(() => {
-    if (!isMe) {
-      user.getById(params.id);
-      if (isClickedUser) { 
-        console.log("CLICKED ON USER");
-        blogs.getFavoriteBlogs({
-          userId: params.id,
-          page: 1
-        });
-      } else {
-        console.log("NOT CLICKED ON USER");
-        blogs.getBlogsById({
-          userId: params.id,
-          page: 1
-        });
-      }
-    } 
     if (isMe) {
-      // because when user's role is user then we only wanted to fetch favoriteBlogs
-      const payloadData = {
-          userId: loggedInId,
-          page: 1
+      user.getById(loggedInId);
+    } else {
+      user.getById(params.id);
+    }
+  }, [params.id, loggedInId])
+  
+  const isRole: any = userState.getUser.data?.role;
+  useEffect(() => {
+    if (prev?.getUser.loading) {
+      if (!isMe) {
+        if (isRole === "user") { 
+          blogs.getFavoriteBlogs({
+            userId: params.id,
+            page: 1
+          });
+        } else {
+          blogs.getBlogsById({
+            userId: params.id,
+            page: 1
+          });
         }
-      if (isUser) {
-        console.log("CLICKED ON LOGGED IN USER");
-        
-        blogs.getFavoriteBlogs(payloadData);
-      } else {
-        console.log("CLICKED ON LOGGED IN NOT USERRRRR");
-        blogs.getBlogsById(payloadData);
+      } 
+      if (isMe) {
+        // because when user's role is user then we only wanted to fetch favoriteBlogs
+        const payloadData = {
+            userId: loggedInId,
+            page: 1
+          }
+        if (isRole === "user") {
+          blogs.getFavoriteBlogs(payloadData);
+        } else {
+          blogs.getBlogsById(payloadData);
+        }
       }
     }
-  }, [params.id, currentId]);
+  }, [userState])
 
   // to store the data
   useEffect(() => {
@@ -125,7 +135,7 @@ export default function ViewProfilePage(): JSX.Element {
                   Joined Date : {formatedDate}
                 </h2>
                 <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  {(isUser && isMe) || isClickedUser
+                  {(isUser && isMe) || user.state.getUser.data?.role === "user"
                     ? `Total Blogs Liked : ${favoriteBlogs.meta?.total}`
                     : `Total Blogs : ${totalBlogs}`}
                 </h2>
@@ -149,7 +159,7 @@ export default function ViewProfilePage(): JSX.Element {
         <div className="w-11/12 mx-auto">
           <h1 className="text-2xl font-bold tracking-tight">
             {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
-            {(isUser && isMe) || isClickedUser
+            {(isUser && isMe) || user.state.getUser.data?.role === "user"
               ? `Blogs Liked By ${isMe ? "You" : userDetails.username}`
               : `Blogs Uploaded By ${!isMe ? userDetails.username : "You"}`}
           </h1>
@@ -295,7 +305,7 @@ export default function ViewProfilePage(): JSX.Element {
                   <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                     Oops...
                     {/* if clickedUser role is user */}
-                    {isClickedUser && !isMe
+                    {user.state.getUser.data?.role === "user" && !isMe
                       ? `${userDetails.username} haven't Liked`
                       : // if LoggedIn user's role is user and path includes "me"
                       isUser && isMe
