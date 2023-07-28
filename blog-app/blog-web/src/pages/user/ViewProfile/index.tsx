@@ -152,7 +152,7 @@ export default function ViewProfilePage(): JSX.Element {
               </>
             )}
             {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile */}
-            {((!isAdmin && currentRole === "super-admin") || (isAdminRole && userDataById?.role !== "super-admin")) && (
+            {(isMe || (!isAdmin && currentRole === "super-admin") || (isAdminRole && userDataById?.role !== "super-admin")) && (
               <Link
                 to={
                   // if path paths doesn't have me then this means admin is on user view profile page hence send the admin to edit user by details
@@ -208,10 +208,9 @@ export default function ViewProfilePage(): JSX.Element {
                         >
                           Read More
                         </Link>
-                        {(blog.ownerId === userDataById?.id ||
-                          (hasPermission("admin", userDataById?.role) &&
-                            userDataById?.role !== "super-admin") ||
-                          hasPermission("super-admin", userDataById?.role)) &&
+                        {
+                        (blog.ownerId === auth.state.user?.id || (!isAdmin && currentRole === "super-admin") || (isAdminRole && userDataById?.role !== "super-admin"))
+                          &&
                           // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
                           !userDataById?.isBanned && (
                             <div>
@@ -309,7 +308,7 @@ export default function ViewProfilePage(): JSX.Element {
                 // that condiiton for shwowing is defined above
               })
             : !blogs.state.getBlogs?.loading &&
-              (!userBlogs || !favoriteBlogs.data) && (
+              !userBlogs && (
                 <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                     Oops...
