@@ -234,7 +234,7 @@ export const blogSlice = createSlice({
       state.getFavoriteBlogs.loading = false;
       if (action.payload) {
         const { data, meta } = action.payload;
-        // it is COMPUSLORY to called cleaned variable here above state.getFavoriteBlogs.data = data otherwise the new data will overwrite the previous data state
+        // it is COMPUSLORY to called cleaned variable here above state.getFavoriteBlogs.data = data otherwise the new data will overwrite the previous data with new data
         const cleaned = JSON.parse(JSON.stringify(state.getFavoriteBlogs.data));
         state.getFavoriteBlogs.data = data;
         console.log("cleaned", cleaned);
