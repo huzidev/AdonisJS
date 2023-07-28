@@ -115,10 +115,6 @@ export default function ViewProfilePage(): JSX.Element {
     }
   }
 
-  console.log("currentPageFvrt", currentPageFvrt);
-  console.log("lastPageFvrt", lastPageFvrt);
-  console.log("currentPage", currentPage);
-  console.log("lastPage", lastPage);
   useViewProfilePageHook();
   return (
     <>
