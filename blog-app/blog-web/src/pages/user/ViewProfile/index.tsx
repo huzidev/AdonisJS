@@ -18,6 +18,7 @@ export default function ViewProfilePage(): JSX.Element {
   const data = auth.state.user;
   const userDataById = user.state.getUser?.data;
   const currentPage: any = blogs.state.getBlogsById.meta?.currentPage;
+  const currentPageFvrt: any = blogs.state.getFavoriteBlogs.meta?.currentPage;
   const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
   const currentRole = auth.state.user?.role;
   const isUser = currentRole === "user";
@@ -93,22 +94,24 @@ export default function ViewProfilePage(): JSX.Element {
 
   useEffect(() => {
     if (prevBlog?.getBlogsById.loading) {
-      console.log("blogs by id", blogState.getBlogsById.data);
       setUserBlogs(blogState.getBlogsById.data)
     } 
     if (prevBlog?.getFavoriteBlogs.loading) {
-      console.log("favortite blogs by id", blogState.getFavoriteBlogs.data);
       setUserBlogs(blogState.getFavoriteBlogs.data)
     }
   }, [blogState])
 
   function loadMore() {
     const updatedPayload = {
-      ...payload,
-      page: currentPage + 1,
+      userId: isMe ? loggedInId : params.id,
+      page: isUser ? currentPageFvrt + 1 : currentPage + 1,
     };
     setPayload(updatedPayload);
-    blogs.getBlogsById(updatedPayload);
+    if (isUser) {
+      blogs.getFavoriteBlogs(updatedPayload);
+    } else {
+      blogs.getBlogsById(updatedPayload);
+    }
   }
 
   useViewProfilePageHook();

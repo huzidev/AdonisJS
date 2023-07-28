@@ -106,12 +106,11 @@ export const blogSlice = createSlice({
       if (action.payload) {
         const { data, meta } = action.payload;
           const cleaned = JSON.parse(JSON.stringify(state.getBlogsById.data));
-          // so when user clicked on load more then previous data remains save and fetches new data
           state.getBlogsById.data = [...data];
           if (meta.currentPage !== 1) {
+            // so when user clicked on load more then previous data remains save and fetches new data
             state.getBlogsById.data = [...cleaned, ...data];
           }
-
           state.getBlogsById.meta = meta;
         }
       state.getBlogsById.error = false;
