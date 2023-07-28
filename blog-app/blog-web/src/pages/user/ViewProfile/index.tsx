@@ -58,32 +58,32 @@ export default function ViewProfilePage(): JSX.Element {
     } else {
       user.getById(params.id);
     }
-  }, [params.id, loggedInId])
-  
+  }, [params.id, loggedInId]);
+
   const isRole: any = userState.getUser.data?.role;
   useEffect(() => {
     if (prev?.getUser.loading) {
       if (!isMe) {
-      setUserDetails({...userDetails, ...userDataById});
-        if (isRole === "user") { 
+        setUserDetails({ ...userDetails, ...userDataById });
+        if (isRole === "user") {
           blogs.getFavoriteBlogs({
             userId: params.id,
-            page: 1
+            page: 1,
           });
         } else {
           blogs.getBlogsById({
             userId: params.id,
-            page: 1
+            page: 1,
           });
         }
-      } 
+      }
       if (isMe) {
-      setUserDetails({...userDetails, ...data});
+        setUserDetails({ ...userDetails, ...data });
         // because when user's role is user then we only wanted to fetch favoriteBlogs
         const payloadData = {
-            userId: loggedInId,
-            page: 1
-          }
+          userId: loggedInId,
+          page: 1,
+        };
         if (isRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
         } else {
@@ -91,16 +91,16 @@ export default function ViewProfilePage(): JSX.Element {
         }
       }
     }
-  }, [userState])
+  }, [userState]);
 
   useEffect(() => {
     if (prevBlog?.getBlogsById.loading) {
-      setUserBlogs(blogState.getBlogsById.data)
-    } 
-    if (prevBlog?.getFavoriteBlogs.loading) {
-      setUserBlogs(blogState.getFavoriteBlogs.data)
+      setUserBlogs(blogState.getBlogsById.data);
     }
-  }, [blogState])
+    if (prevBlog?.getFavoriteBlogs.loading) {
+      setUserBlogs(blogState.getFavoriteBlogs.data);
+    }
+  }, [blogState]);
 
   function loadMore() {
     const updatedPayload = {
@@ -114,6 +114,8 @@ export default function ViewProfilePage(): JSX.Element {
       blogs.getBlogsById(updatedPayload);
     }
   }
+
+  console.log("favoriteBlogs.meta?.total", favoriteBlogs.meta?.total);
 
   useViewProfilePageHook();
   return (
@@ -152,7 +154,9 @@ export default function ViewProfilePage(): JSX.Element {
               </>
             )}
             {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile */}
-            {(isMe || (!isAdmin && currentRole === "super-admin") || (isAdminRole && userDataById?.role !== "super-admin")) && (
+            {(isMe ||
+              (!isAdmin && currentRole === "super-admin") ||
+              (isAdminRole && userDataById?.role !== "super-admin")) && (
               <Link
                 to={
                   // if path paths doesn't have me then this means admin is on user view profile page hence send the admin to edit user by details
@@ -175,7 +179,10 @@ export default function ViewProfilePage(): JSX.Element {
           </h1>
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
-          {blogState.getFavoriteBlogs.loading || blogState.getBlogsById.loading ? "Loading" : userBlogs ? userBlogs.map((blog: any) => {
+          {blogState.getFavoriteBlogs.loading || blogState.getBlogsById.loading
+            ? "Loading"
+            : userBlogs
+            ? userBlogs.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                     {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -208,9 +215,10 @@ export default function ViewProfilePage(): JSX.Element {
                         >
                           Read More
                         </Link>
-                        {
-                        (blog.ownerId === auth.state.user?.id || (!isAdmin && currentRole === "super-admin") || (isAdminRole && userDataById?.role !== "super-admin"))
-                          &&
+                        {(blog.ownerId === auth.state.user?.id ||
+                          (!isAdmin && currentRole === "super-admin") ||
+                          (isAdminRole &&
+                            userDataById?.role !== "super-admin")) &&
                           // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
                           !userDataById?.isBanned && (
                             <div>
@@ -308,7 +316,8 @@ export default function ViewProfilePage(): JSX.Element {
                 // that condiiton for shwowing is defined above
               })
             : !blogs.state.getBlogs?.loading &&
-              !userBlogs && (
+              favoriteBlogs.meta?.total &&
+              favoriteBlogs.meta?.total === 0 && (
                 <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                     Oops...
@@ -344,14 +353,15 @@ export default function ViewProfilePage(): JSX.Element {
         {/* so load more button will only be visible when their is currentPage OR currentPageFvrt and if currentPage and lastPage values 
          became equal then don't show load more button anymore
         */}
-        {(currentPage || currentPageFvrt) && (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) && (
-          <button
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            onClick={loadMore}
-          >
-            Load More
-          </button>
-        )}
+        {(currentPage || currentPageFvrt) &&
+          (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) && (
+            <button
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+              onClick={loadMore}
+            >
+              Load More
+            </button>
+          )}
       </div>
     </>
   );
