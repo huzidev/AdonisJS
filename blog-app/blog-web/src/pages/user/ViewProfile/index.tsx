@@ -23,10 +23,11 @@ export default function ViewProfilePage(): JSX.Element {
   const isAdmin = hasPermission("admin", currentRole);
   const isClickedUser = user.state.getUser.data?.role === "user";
   const isMe = params.id === "me";
-  const [payload, setPayload] = useState<any>({
-    userId: isMe ? auth.state.user?.id : Number(params.id),
-    page: 1,
-  });
+  // const [payload, setPayload] = useState<any>({
+  //   userId: isMe ? auth.state.user?.id : Number(params.id),
+  //   page: 1,
+  // });
+  const [payload, setPayload] = useState<any>();
   const [showModal, setShowModal] = useState(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
 
@@ -41,22 +42,37 @@ export default function ViewProfilePage(): JSX.Element {
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
   let favoriteBlogs = blogs.state.getFavoriteBlogs;
 
-  console.log("PARAMS ID", params.id);
-  console.log("userDataById", userDataById?.id);
-
+  const loggedInId: any = auth.state.user?.id;
   useEffect(() => {
-    if (!isMe && Number(params.id) !== userDataById?.id) {
+    if (!isMe) {
       user.getById(params.id);
-      if (!isClickedUser) { 
-        blogs.getBlogsById(payload);
+      if (isClickedUser) { 
+        console.log("CLICKED ON USER");
+        blogs.getFavoriteBlogs({
+          userId: params.id,
+          page: 1
+        });
+      } else {
+        console.log("NOT CLICKED ON USER");
+        blogs.getBlogsById({
+          userId: params.id,
+          page: 1
+        });
       }
     } 
     if (isMe) {
       // because when user's role is user then we only wanted to fetch favoriteBlogs
-      if (!isUser) {
-        blogs.getBlogsById(payload);
-      } else if (isUser || isClickedUser) {
-        blogs.getFavoriteBlogs(payload);
+      const payloadData = {
+          userId: loggedInId,
+          page: 1
+        }
+      if (isUser) {
+        console.log("CLICKED ON LOGGED IN USER");
+        
+        blogs.getFavoriteBlogs(payloadData);
+      } else {
+        console.log("CLICKED ON LOGGED IN NOT USERRRRR");
+        blogs.getBlogsById(payloadData);
       }
     }
   }, [params.id, currentId]);
