@@ -119,7 +119,7 @@ export default function ManageUsersPage() {
                     </span>
                   </td>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                    <div className="pl-4">
+                    <div>
                       {/* so admin can't get the access to edit super-admin */}
                       {auth.state.user &&
                       !hasPermission(user.role, auth.state.user.role) ? (
@@ -133,6 +133,7 @@ export default function ManageUsersPage() {
                           View Profile
                         </button>
                       ) : (
+                        <div>
                         <button
                           className="text-blue-600"
                           // if admin clicked on own self then redirect to EditProfile instead on EditUser
@@ -147,6 +148,22 @@ export default function ManageUsersPage() {
                         >
                           Edit
                         </button>
+                        <button
+                          className="text-blue-600"
+                          // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                          onClick={() =>
+                            navigate(
+                              ROUTE_PATHS.VIEW_PROFILE +
+                                (user.id === auth.state.user?.id
+                                  ? "me"
+                                  : user.id)
+                            )
+                          }
+                        >
+                          &nbsp;
+                          View
+                        </button>
+                        </div>
                       )}
                     </div>
                   </td>
