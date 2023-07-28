@@ -99,7 +99,7 @@ export function useBlogsPageHooks() {
     blogs.getBlogs({ page: 1, ...search });
 
     // so only if loggedIn user's role is user then fetch favorite blogs
-    if (auth.state.user?.role === "user") {
+    if (isUser) {
       blogs.getFavoriteBlogs(payload);
     }
   }, [window.location.search]);
