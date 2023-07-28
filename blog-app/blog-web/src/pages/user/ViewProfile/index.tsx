@@ -22,8 +22,9 @@ export default function ViewProfilePage(): JSX.Element {
   const lastPageFvrt: any = blogs.state.getFavoriteBlogs.meta?.lastPage;
   const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
   const currentRole = auth.state.user?.role;
+  const isAdminRole = hasPermission("admin", currentRole);
   const isUser = currentRole === "user";
-  const isAdmin = hasPermission("admin", currentRole);
+  const isAdmin = userDataById?.role === "admin";
   const isMe = params.id === "me";
   const userState = user.state;
   const blogState = blogs.state;
@@ -155,7 +156,7 @@ export default function ViewProfilePage(): JSX.Element {
               </>
             )}
             {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile */}
-            {(isMe || isAdmin) && userDataById?.role !== "super-admin" && (
+            {((!isAdmin && currentRole === "super-admin") || (isAdminRole && userDataById?.role !== "super-admin")) && (
               <Link
                 to={
                   // if path paths doesn't have me then this means admin is on user view profile page hence send the admin to edit user by details
