@@ -78,8 +78,15 @@ export function useBlogsPageHooks() {
   
   function loadMore() {
     blogs.getBlogs({ page: currentPageBlogs + 1, ...search });
+    console.log("FVRRT BLOGS", currentPageBlogs);
+    console.log("last page fvrt", lastPageFvrtBlogs);
+    
     if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
-      blogs.getFavoriteBlogs(currentPageFvrtBlogs + 1);
+      let loggedInId: any = auth.state.user?.id
+      blogs.getFavoriteBlogs({
+        page: currentPageFvrtBlogs + 1,
+        userId: loggedInId
+      });
     }
   }
 
@@ -92,10 +99,10 @@ export function useBlogsPageHooks() {
     blogs.getBlogs({ page: 1, ...search });
 
     // so only if loggedIn user's role is user then fetch favorite blogs
-    if (auth.state.user?.role === "user" && !favoriteBlogs.data.length) {
+    if (auth.state.user?.role === "user") {
       blogs.getFavoriteBlogs(payload);
     }
-  }, [favoriteBlogs.data.length, window.location.search]);
+  }, [window.location.search]);
 
   useEffect(() => {
     if (prev?.getBlogs.loading) {

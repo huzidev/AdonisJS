@@ -91,7 +91,6 @@ export default function ViewProfilePage(): JSX.Element {
     }
   }, [userState])
 
-
   useEffect(() => {
     if (prevBlog?.getBlogsById.loading) {
       setUserBlogs(blogState.getBlogsById.data)
@@ -104,12 +103,13 @@ export default function ViewProfilePage(): JSX.Element {
   function loadMore() {
     const updatedPayload = {
       userId: isMe ? loggedInId : params.id,
-      page: isUser ? currentPageFvrt + 1 : currentPage + 1,
+      page: isRole === "user" ? currentPageFvrt + 1 : currentPage + 1,
     };
     setPayload(updatedPayload);
-    if (isUser) {
+    if (isRole === "user") {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
+      console.log("updatedPayload", updatedPayload);
       blogs.getBlogsById(updatedPayload);
     }
   }
@@ -174,8 +174,7 @@ export default function ViewProfilePage(): JSX.Element {
           </h1>
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
-          {userBlogs && userBlogs.length
-            ? userBlogs.map((blog: any) => {
+          {blogState.getFavoriteBlogs.loading || blogState.getBlogsById.loading ? "Loading" : userBlogs ? userBlogs.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                     {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -266,7 +265,7 @@ export default function ViewProfilePage(): JSX.Element {
                   </div>
                 );
               })
-            : favoriteBlogs.data.length
+            : favoriteBlogs.data
             ? favoriteBlogs.data.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
@@ -309,7 +308,7 @@ export default function ViewProfilePage(): JSX.Element {
                 // that condiiton for shwowing is defined above
               })
             : !blogs.state.getBlogs?.loading &&
-              (!userBlogs.length || !favoriteBlogs.data) && (
+              (!userBlogs || !favoriteBlogs.data) && (
                 <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                     Oops...

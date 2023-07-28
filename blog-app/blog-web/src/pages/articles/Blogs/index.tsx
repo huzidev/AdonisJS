@@ -183,7 +183,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
                     className="text-sm font-medium text-center text-white hover:text-blue-500"
                   >
-                    Read More
+                    Read More {blog.id}
                     {/* {blog.createdAt} */}
                   </Link>
                   {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
