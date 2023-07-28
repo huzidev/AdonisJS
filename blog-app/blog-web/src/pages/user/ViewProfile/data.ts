@@ -2,8 +2,8 @@ import { UserDetailState } from "./types";
 
 export const userDetailsData: UserDetailState = {
     id: null,
-    username: "",
-    email: "",
-    createdAt: "",
-    role: "",
+    username: '',
+    email: '',
+    createdAt: '',
+    role: ''
 }

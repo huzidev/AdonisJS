@@ -37,27 +37,27 @@ export default function ViewProfilePage(): JSX.Element {
 
   let currentId = isMe ? userId : Number(params.id);
   let allBlogsById = blogs.state.getBlogsById.data;
-  let userBlogs = allBlogsById.filter((blogs) => blogs.ownerId === currentId);
+  let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
   let favoriteBlogs = blogs.state.getFavoriteBlogs;
+
+  console.log("PARAMS ID", params.id);
+  console.log("userDataById", userDataById?.id);
 
   useEffect(() => {
     if (!isMe && Number(params.id) !== userDataById?.id) {
       user.getById(params.id);
-      if (!isClickedUser) {
+      if (!isClickedUser) { 
         blogs.getBlogsById(payload);
       }
-    } else if (isMe && !userBlogs.length) {
+    } 
+    if (isMe) {
       // because when user's role is user then we only wanted to fetch favoriteBlogs
       if (!isUser) {
         blogs.getBlogsById(payload);
+      } else if (isUser || isClickedUser) {
+        blogs.getFavoriteBlogs(payload);
       }
-    }
-  }, [params.id, currentId]);
-
-  useEffect(() => {
-    if (isUser || isClickedUser) {
-      blogs.getFavoriteBlogs(payload);
     }
   }, [params.id, currentId]);
 
@@ -139,7 +139,7 @@ export default function ViewProfilePage(): JSX.Element {
           </h1>
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
-          {userBlogs.length
+          {userBlogs && userBlogs.length
             ? userBlogs.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
