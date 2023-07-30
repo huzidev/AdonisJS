@@ -28,16 +28,10 @@ export default function ViewProfilePage(): JSX.Element {
   const blogState = blogs.state;
   const prevBlog = usePrevious(blogState);
   const prev = usePrevious(userState);
-  // const [payload, setPayload] = useState<any>({
-  //   userId: isMe ? auth.state.user?.id : Number(params.id),
-  //   page: 1,
-  // });
   const [payload, setPayload] = useState<any>();
   const [showModal, setShowModal] = useState(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   let isClickedUser: any;
-  // const [userDetails, setUserDetails] =
-  //   useState<UserDetailState>(userDetailsData);
   const userId: any = auth.state.user?.id;
 
   let currentId = isMe ? userId : Number(params.id);
@@ -49,46 +43,6 @@ export default function ViewProfilePage(): JSX.Element {
   const loggedInId: any = auth.state.user?.id;
 
   const isRole: any = userState.getUser.data?.role;
-  // useEffect(() => {
-  //   if (prev?.getUser.loading) {
-  //     if (!isMe) {
-  //       setUserDetails({ ...userDetails, ...userDataById });
-  //       if (isRole === "user") {
-  //         blogs.getFavoriteBlogs({
-  //           userId: params.id,
-  //           page: 1,
-  //         });
-  //       } else {
-  //         blogs.getBlogsById({
-  //           userId: params.id,
-  //           page: 1,
-  //         });
-  //       }
-  //     }
-  //     if (isMe) {
-  //       setUserDetails({ ...userDetails, ...data });
-  //       // because when user's role is user then we only wanted to fetch favoriteBlogs
-  //       const payloadData = {
-  //         userId: loggedInId,
-  //         page: 1,
-  //       };
-  //       if (isRole === "user") {
-  //         blogs.getFavoriteBlogs(payloadData);
-  //       } else {
-  //         blogs.getBlogsById(payloadData);
-  //       }
-  //     }
-  //   }
-  // }, [userState]);
-
-  // useEffect(() => {
-  //   if (prevBlog?.getBlogsById.loading) {
-  //     setUserBlogs(blogState.getBlogsById.data);
-  //   }
-  //   if (prevBlog?.getFavoriteBlogs.loading) {
-  //     setUserBlogs(blogState.getFavoriteBlogs.data);
-  //   }
-  // }, [blogState]);
 
   function loadMore() {
     const updatedPayload = {
@@ -102,7 +56,6 @@ export default function ViewProfilePage(): JSX.Element {
       blogs.getBlogsById(updatedPayload);
     }
   }
-
   const { userDetails, userBlogs } = useViewProfilePageHook();
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (

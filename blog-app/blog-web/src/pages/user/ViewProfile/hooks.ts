@@ -66,18 +66,14 @@ export function useViewProfilePageHook() {
         }
       }
     }
-  }, [userState]);
 
-   useEffect(() => {
     if (prevBlog?.getBlogsById.loading) {
       setUserBlogs(blogState.getBlogsById.data);
     }
     if (prevBlog?.getFavoriteBlogs.loading) {
       setUserBlogs(blogState.getFavoriteBlogs.data);
     }
-  }, [blogState]);
 
-  useEffect(() => {
     if (prevUser?.getUser.loading) {
       if (!userState.getUser.loading && !userState.getUser.error) {
         // if user is banned then we won't show details fetched successfully notification
