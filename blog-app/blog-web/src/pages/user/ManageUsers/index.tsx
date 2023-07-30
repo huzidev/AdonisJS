@@ -1,6 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
-import { List } from "react-content-loader";
+import { BulletList } from "react-content-loader";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
@@ -11,11 +11,20 @@ import {
 } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
 
+function SkeletonLoader() {
+  return (
+    <div>
+      {/* You can customize the skeleton loader according to your design */}
+    </div>
+  );
+}
+
 export default function ManageUsersPage() {
   const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
   const { handleSort } = useFiltersHook();
+  // const [isLoading, setIsLoading] = useState(false);
 
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;
@@ -23,9 +32,18 @@ export default function ManageUsersPage() {
 
   useManageUsersPageHooks();
 
-  function loadingCall() {
-    return <div><List /></div>
-  }
+  // function loadingCall() {
+  //   return <div><List /></div>
+  // }
+
+  // Check if the user data is loading
+
+  const isLoading = user.state.getUserPage.loading;
+
+  // useEffect(() => {
+  //   const state: any = user.state.getUserPage.loading;
+  //   setIsLoading(state);
+  // }, [user.state.getUserPage.loading]);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
@@ -80,8 +98,13 @@ export default function ManageUsersPage() {
               </tr>
             </thead>
             <tbody className="text-gray-500">
-              {user.state.getUserPage.loading && loadingCall()}
-              {allUsers?.map((user, userIndex) => (
+              {isLoading ? (
+                <tr>
+                  <td colSpan={10}>
+                    <BulletList />
+                  </td>
+                </tr>
+              ) : (allUsers?.map((user, userIndex) => (
                 // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                 <tr key={userIndex}>
                   <td className="border-b border-gray-200 bg-white p-5 text-sm">
@@ -175,7 +198,7 @@ export default function ManageUsersPage() {
                     </div>
                   </td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </table>
         </div>

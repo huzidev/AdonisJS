@@ -1,5 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
+import { BulletList } from "react-content-loader";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -34,6 +35,8 @@ export default function ManageBlogsPage() {
     : dataByMe.meta?.lastPage;
   useManageBlogsPageHooks();
 
+  const isLoading = blogs.state.getBlogsList.loading;
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">
@@ -46,7 +49,6 @@ export default function ManageBlogsPage() {
           </span>
         </div>
       </div>
-      {allBlogs.length ? (
         <div className="overflow-y-hidden rounded-lg border">
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -74,81 +76,88 @@ export default function ManageBlogsPage() {
                 </tr>
               </thead>
               <tbody className="text-gray-500">
-                {allBlogs?.map((blog, userIndex) => {
-                  const uploadedByUser = allUsers?.find(
-                    (user: User) => user.id === blog.ownerId
-                  );
-                  const uploadedByUserRole =
-                    uploadedByUser && uploadedByUser.role;
-                  const uploadedByUserId = uploadedByUser && uploadedByUser.id;
-                  const uploadedByUsername =
-                    uploadedByUser && uploadedByUser.username;
-                  return (
-                    // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
-                    <tr key={userIndex}>
-                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                        <p className="whitespace-no-wrap">{userIndex + 1}</p>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                        <p className="whitespace-no-wrap">{blog.id}</p>
-                      </td>
-                      {isAdmin && (
+                {isLoading ? (
+                  <tr>
+                  <td colSpan={10}>
+                    <BulletList />
+                  </td>
+                </tr>
+                ) : (
+                  allBlogs?.map((blog, userIndex) => {
+                    const uploadedByUser = allUsers?.find(
+                      (user: User) => user.id === blog.ownerId
+                    );
+                    const uploadedByUserRole =
+                      uploadedByUser && uploadedByUser.role;
+                    const uploadedByUserId = uploadedByUser && uploadedByUser.id;
+                    const uploadedByUsername =
+                      uploadedByUser && uploadedByUser.username;
+                    return (
+                      // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
+                      <tr key={userIndex}>
+                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                          <p className="whitespace-no-wrap">{userIndex + 1}</p>
+                        </td>
+                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                          <p className="whitespace-no-wrap">{blog.id}</p>
+                        </td>
+                        {isAdmin && (
+                          <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                            <p className="whitespace-no-wrap">
+                              {blog.ownerId === uploadedByUserId &&
+                                (uploadedByUserRole === "super-admin"
+                                  ? `${uploadedByUsername + " *"}`
+                                  : uploadedByUsername)}
+                            </p>
+                          </td>
+                        )}
+                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                          <p className="whitespace-no-wrap">{blog.title}</p>
+                        </td>
                         <td className="border-b border-gray-200 bg-white p-5 text-sm">
                           <p className="whitespace-no-wrap">
-                            {blog.ownerId === uploadedByUserId &&
-                              (uploadedByUserRole === "super-admin"
-                                ? `${uploadedByUsername + " *"}`
-                                : uploadedByUsername)}
+                            {blog.content.length > 45
+                              ? `${blog.content.slice(0, 45)}...`
+                              : blog.content}
                           </p>
                         </td>
-                      )}
-                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                        <p className="whitespace-no-wrap">{blog.title}</p>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                        <p className="whitespace-no-wrap">
-                          {blog.content.length > 45
-                            ? `${blog.content.slice(0, 45)}...`
-                            : blog.content}
-                        </p>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                        <span className="whitespace-no-wrap">
-                          {/* just show dates not time while toLocaleString shows complete date and time */}
-                          {new Date(blog.createdAt).toLocaleDateString()}
-                        </span>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                        <span
-                          className="whitespace-no-wrap"
-                          title="Last Update"
-                        >
-                          {new Date(blog.updatedAt).toLocaleDateString()}
-                        </span>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white p-5 text-sm">
-                        <div className="pl-4">
-                          <button
-                            className="text-blue-600"
-                            onClick={() =>
-                              navigate(
-                                (auth.state.user?.role === "admin" &&
-                                uploadedByUserRole === "super-admin"
-                                  ? ROUTE_PATHS.ARTICLE_VIEW
-                                  : ROUTE_PATHS.ARTICLE_UPDATE) + blog.slug
-                              )
-                            }
+                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                          <span className="whitespace-no-wrap">
+                            {/* just show dates not time while toLocaleString shows complete date and time */}
+                            {new Date(blog.createdAt).toLocaleDateString()}
+                          </span>
+                        </td>
+                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                          <span
+                            className="whitespace-no-wrap"
+                            title="Last Update"
                           >
-                            {auth.state.user?.role === "admin" &&
-                            uploadedByUserRole === "super-admin"
-                              ? "View Blog"
-                              : "Edit"} 
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
+                            {new Date(blog.updatedAt).toLocaleDateString()}
+                          </span>
+                        </td>
+                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                          <div className="pl-4">
+                            <button
+                              className="text-blue-600"
+                              onClick={() =>
+                                navigate(
+                                  (auth.state.user?.role === "admin" &&
+                                  uploadedByUserRole === "super-admin"
+                                    ? ROUTE_PATHS.ARTICLE_VIEW
+                                    : ROUTE_PATHS.ARTICLE_UPDATE) + blog.slug
+                                )
+                              }
+                            >
+                              {auth.state.user?.role === "admin" &&
+                              uploadedByUserRole === "super-admin"
+                                ? "View Blog"
+                                : "Edit"} 
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  }))}
               </tbody>
             </table>
           </div>
@@ -187,7 +196,6 @@ export default function ManageBlogsPage() {
             </div>
           </div>
         </div>
-      ) : (
         <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <h1 className="text-lg mb-6 font-bold tracking-tight text-white"></h1>
           Oops... {isAdmin ? "No one have" : "You haven't"} uploaded any blog
@@ -201,7 +209,6 @@ export default function ManageBlogsPage() {
             Add Blog
           </Link>
         </div>
-      )}
     </div>
   );
 }
