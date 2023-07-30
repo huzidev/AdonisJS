@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
+import { Blog } from "store/articles/types";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
@@ -29,11 +30,11 @@ export function useViewProfilePageHook() {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] =
     useState<UserDetailState>(userDetailsData);
-  const [userBlogs, setUserBlogs] = useState<any>([]);
-  const currentPage: number = blogs.state.getBlogsById.meta?.currentPage;
-  const currentPageFvrt: number = blogs.state.getFavoriteBlogs.meta?.currentPage;
-  const lastPageFvrt: number = blogs.state.getFavoriteBlogs.meta?.lastPage;
-  const lastPage: number = blogs.state.getBlogsById.meta?.lastPage;
+  const [userBlogs, setUserBlogs] = useState<Blog[]>([]);
+  const currentPage: number = blogState.getBlogsById.meta?.currentPage;
+  const currentPageFvrt: number = blogState.getFavoriteBlogs.meta?.currentPage;
+  const lastPageFvrt: number = blogState.getFavoriteBlogs.meta?.lastPage;
+  const lastPage: number = blogState.getBlogsById.meta?.lastPage;
 
   useEffect(() => {
     if (isMe) {
@@ -127,6 +128,8 @@ export function useViewProfilePageHook() {
       blogs.getBlogsById(updatedPayload);
     }
   }
+  console.log("userBlogs", userBlogs);
+  
 
   return {
     userDetails,

@@ -11,3 +11,8 @@ export type ParamsId = {
     // params.id will be in string format and then we can Number(params.id) to make it
     id: string
 }
+
+export interface ViewProfileStateHandler {
+    userDetails: UserDetailState;
+    currentPage: number
+}
