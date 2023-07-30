@@ -13,6 +13,8 @@ export function useViewProfilePageHook() {
   const auth = useAuth();
   const blogs = useBlogs();
   const params = useParams<ParamsId>();
+  const userState = user.state;
+  const blogState = blogs.state;
   const data = auth.state.user;
   const username = user.state.getUser.data?.username;
   const loggedInUser = auth.state.user?.username;
@@ -20,10 +22,8 @@ export function useViewProfilePageHook() {
   const isMe = params.id === "me";
   const userId = Number(params.id);
   const loggedInId: any = auth.state.user?.id;
-  const userState = user.state;
   const isRole: any = userState.getUser.data?.role;
   const isLoggedInRole: any = auth.state.user?.role;
-  const blogState = blogs.state;
   const prevUser = usePrevious(userState);
   const prevBlog = usePrevious(blogState);
   const navigate = useNavigate();
