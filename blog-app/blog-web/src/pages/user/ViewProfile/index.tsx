@@ -1,5 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
+import { BulletList } from "react-content-loader";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -22,6 +23,8 @@ export default function ViewProfilePage(): JSX.Element {
   // let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogs.state.getFavoriteBlogs.meta?.total;
+
+  const isLoading = user.state.getUser.loading;
 
   const {
     userDetails,
@@ -50,23 +53,29 @@ export default function ViewProfilePage(): JSX.Element {
                 <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
                   User Profile
                 </h1>
-                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Id : {userDetails.id}
-                </h2>
-                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Name : {userDetails.username + ` (${userDetails.role})`}
-                </h2>
-                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Email : {userDetails.email}
-                </h2>
-                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Joined Date : {formatedDate}
-                </h2>
-                <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  {(isUser && isMe) || user.state.getUser.data?.role === "user"
-                    ? `Total Blogs Liked : ${totalFvrtBlogs}`
-                    : `Total Blogs : ${totalBlogs}`}
-                </h2>
+                {isLoading ? (
+                  <BulletList />
+                ) : (
+                  <>
+                  <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Id : {userDetails.id}
+                  </h2>
+                  <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Name : {userDetails.username + ` (${userDetails.role})`}
+                  </h2>
+                  <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Email : {userDetails.email}
+                  </h2>
+                  <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Joined Date : {formatedDate}
+                  </h2>
+                  <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {(isUser && isMe) || user.state.getUser.data?.role === "user"
+                      ? `Total Blogs Liked : ${totalFvrtBlogs}`
+                      : `Total Blogs : ${totalBlogs}`}
+                  </h2>
+                  </>
+                )}
               </>
             )}
             {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile and  can't edit super-admin details */}
