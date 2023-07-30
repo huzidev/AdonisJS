@@ -6,9 +6,7 @@ import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { usePrevious } from "utils/hooks";
-import { userDetailsData } from "./data";
 import { useViewProfilePageHook } from "./hooks";
-import { UserDetailState } from "./types";
 
 export default function ViewProfilePage(): JSX.Element {
   const auth = useAuth();
@@ -38,9 +36,8 @@ export default function ViewProfilePage(): JSX.Element {
   const [showModal, setShowModal] = useState(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   let isClickedUser: any;
-  const [userDetails, setUserDetails] =
-    useState<UserDetailState>(userDetailsData);
-  const formatedDate = new Date(userDetails.createdAt).toLocaleString();
+  // const [userDetails, setUserDetails] =
+  //   useState<UserDetailState>(userDetailsData);
   const userId: any = auth.state.user?.id;
 
   let currentId = isMe ? userId : Number(params.id);
@@ -52,46 +49,38 @@ export default function ViewProfilePage(): JSX.Element {
 
   const loggedInId: any = auth.state.user?.id;
 
-  // useEffect(() => {
-  //   if (isMe) {
-  //     user.getById(loggedInId);
-  //   } else {
-  //     user.getById(params.id);
-  //   }
-  // }, [params.id, loggedInId]);
-
   const isRole: any = userState.getUser.data?.role;
-  useEffect(() => {
-    if (prev?.getUser.loading) {
-      if (!isMe) {
-        setUserDetails({ ...userDetails, ...userDataById });
-        if (isRole === "user") {
-          blogs.getFavoriteBlogs({
-            userId: params.id,
-            page: 1,
-          });
-        } else {
-          blogs.getBlogsById({
-            userId: params.id,
-            page: 1,
-          });
-        }
-      }
-      if (isMe) {
-        setUserDetails({ ...userDetails, ...data });
-        // because when user's role is user then we only wanted to fetch favoriteBlogs
-        const payloadData = {
-          userId: loggedInId,
-          page: 1,
-        };
-        if (isRole === "user") {
-          blogs.getFavoriteBlogs(payloadData);
-        } else {
-          blogs.getBlogsById(payloadData);
-        }
-      }
-    }
-  }, [userState]);
+  // useEffect(() => {
+  //   if (prev?.getUser.loading) {
+  //     if (!isMe) {
+  //       setUserDetails({ ...userDetails, ...userDataById });
+  //       if (isRole === "user") {
+  //         blogs.getFavoriteBlogs({
+  //           userId: params.id,
+  //           page: 1,
+  //         });
+  //       } else {
+  //         blogs.getBlogsById({
+  //           userId: params.id,
+  //           page: 1,
+  //         });
+  //       }
+  //     }
+  //     if (isMe) {
+  //       setUserDetails({ ...userDetails, ...data });
+  //       // because when user's role is user then we only wanted to fetch favoriteBlogs
+  //       const payloadData = {
+  //         userId: loggedInId,
+  //         page: 1,
+  //       };
+  //       if (isRole === "user") {
+  //         blogs.getFavoriteBlogs(payloadData);
+  //       } else {
+  //         blogs.getBlogsById(payloadData);
+  //       }
+  //     }
+  //   }
+  // }, [userState]);
 
   useEffect(() => {
     if (prevBlog?.getBlogsById.loading) {
@@ -115,7 +104,8 @@ export default function ViewProfilePage(): JSX.Element {
     }
   }
 
-  useViewProfilePageHook();
+  const { userDetails } = useViewProfilePageHook();
+  const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (
     <>
       <div>

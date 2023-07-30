@@ -1,25 +1,33 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
+import { userDetailsData } from "./data";
+import { UserDetailState } from "./types";
 
-export function useViewProfilePageHook(): void {
+export function useViewProfilePageHook() {
   const user = useUser();
   const auth = useAuth();
   const blogs = useBlogs();
   const params: any = useParams();
+  const data = auth.state.user;
   const username = user.state.getUser.data?.username;
   const loggedInUser = auth.state.user?.username;
+  const userDataById = user.state.getUser?.data;
   const isMe = params.id === "me";
   const loggedInId: any = auth.state.user?.id;
   const userState = user.state;
+  const isRole: any = userState.getUser.data?.role;
+  const isLoggedInRole: any = auth.state.user?.role;
   const blogState = blogs.state;
   const prevUser = usePrevious(userState);
   const prevBlog = usePrevious(blogState);
   const navigate = useNavigate();
+  const [userDetails, setUserDetails] =
+    useState<UserDetailState>(userDetailsData);
 
   useEffect(() => {
     if (isMe) {
@@ -28,6 +36,36 @@ export function useViewProfilePageHook(): void {
       user.getById(params.id);
     }
   }, [params.id, loggedInId]);
+
+  useEffect(() => {
+    if (prevUser?.getUser.loading) {
+      if (!isMe) {
+        setUserDetails({ ...userDetails, ...userDataById });
+        const payloadData = {
+            userId: params.id,
+            page: 1,
+          }
+        if (isRole === "user") {
+          blogs.getFavoriteBlogs(payloadData);
+        } else {
+          blogs.getBlogsById(payloadData);
+        }
+      }
+      if (isMe) {
+        setUserDetails({ ...userDetails, ...data });
+        // because when user's role is user then we only wanted to fetch favoriteBlogs
+        const payloadData = {
+          userId: loggedInId,
+          page: 1,
+        };
+        if (isLoggedInRole === "user") {
+          blogs.getFavoriteBlogs(payloadData);
+        } else {
+          blogs.getBlogsById(payloadData);
+        }
+      }
+    }
+  }, [userState]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
@@ -58,4 +96,8 @@ export function useViewProfilePageHook(): void {
       }
     }
   }, [userState, blogState]);
+
+  return {
+    userDetails,
+  }
 }
