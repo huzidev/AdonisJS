@@ -26,7 +26,7 @@ export default class ArticlesController {
       });
 
       const userId = params.id;
-      const query = Article.query();  
+      const query = Article.query();
 
       // because for calling username filters we don't have username in articles table therefore created join statement
       // if user wanted to see allBlogs uploaded by him
@@ -54,8 +54,6 @@ export default class ArticlesController {
         if (filterResultKey === "username") {
           query.join("users", "articles.owner_id", "users.id");
         }
-        console.log("FILTER RESULT", filterResultKey);
-
         // filter for most recent and oldest will be according to createdAt therefore checking for createdAt only
         if (!articleFilters.includes(filterResultKey)) {
           throw invalidURL;
@@ -65,6 +63,12 @@ export default class ArticlesController {
       const response = await query
         .withScopes((scope) => scope.filtersSort(filters))
         .paginate(params.page || 1, 15);
+      if (params.page > response.lastPage) {
+        throw {
+          message: `Blogs page limit exceeds, Total pages are ${response.lastPage}`,
+          status: 404,
+        };
+      }
 
       return {
         // so when user asked for filter then notifcation will be according to filter type
@@ -79,8 +83,11 @@ export default class ArticlesController {
         data: response,
       };
     } catch (e) {
-      console.log("ERROR", e);
-      throw invalidURL;
+      throw {
+        message: e.message.includes("E_VALIDATION_FAILURE")
+          ? invalidURL.message
+          : e.message,
+      };
     }
   }
 
@@ -116,13 +123,13 @@ export default class ArticlesController {
       }
       return {
         data: article,
-        message: `Blog by ${user?.username} fetched successfully`
+        message: `Blog by ${user?.username} fetched successfully`,
       };
     } catch (e) {
       throw e;
     }
   }
-  
+
   public async updateBlog({ request, auth, params }: HttpContextContract) {
     try {
       const body = await request.validate(UpdateArticle);
@@ -152,7 +159,7 @@ export default class ArticlesController {
       ) {
         throw {
           message: "Can't update, values are same as of before",
-          status: 400
+          status: 400,
         };
       } else {
         // await Article.query().where("id", articleId).update(body);
