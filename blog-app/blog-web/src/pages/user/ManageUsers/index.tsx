@@ -1,5 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
+import { List } from "react-content-loader";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
@@ -21,6 +22,11 @@ export default function ManageUsersPage() {
   let lastPage = user.state.getUserPage.meta?.lastPage;
 
   useManageUsersPageHooks();
+
+  function loadingCall() {
+    return <div><List /></div>
+  }
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div className="flex items-center justify-between pb-6">
@@ -74,6 +80,7 @@ export default function ManageUsersPage() {
               </tr>
             </thead>
             <tbody className="text-gray-500">
+              {user.state.getUserPage.loading && loadingCall()}
               {allUsers?.map((user, userIndex) => (
                 // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                 <tr key={userIndex}>
