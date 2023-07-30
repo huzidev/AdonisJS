@@ -6,7 +6,8 @@ export interface UserDetailState {
     role: string;
 }
 
+// while using interface it's giving error
 export type ParamsId = {
-    // params.id will be in string format and then we can Number(params.id) to make it number
+    // params.id will be in string format and then we can Number(params.id) to make it
     id: string
 }
