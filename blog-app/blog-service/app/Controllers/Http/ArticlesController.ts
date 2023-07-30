@@ -89,7 +89,9 @@ export default class ArticlesController {
         : `Oldest ${filterResultKey === "createdAt" ? "created" : ""}`
       } blogs list fetched successfully`
       } else {
-        message = blogsFetched
+        // blogs fetched message is used at multiple places therefore called toUpperCase function here so first letter will be Capital like
+        // Blogs fetched successfully
+        message = blogsFetched.charAt(0).toUpperCase() + blogsFetched.slice(1).toLowerCase();
       }
 
       return {
