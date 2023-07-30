@@ -81,9 +81,7 @@ export default class ArticlesController {
             ? `Most recent ${blogsFetched}`
             : filterResultValue === "asc"
             ? `Oldest ${blogsFetched}`
-            : // by default first letter is small of blogs as we are using the same message mutiple places therefore
-              blogsFetched.charAt(0).toUpperCase() +
-              blogsFetched.slice(1).toLocaleLowerCase(),
+            : blogsFetched,
         data: response,
       };
     } catch (e) {
