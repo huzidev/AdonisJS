@@ -1,5 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -45,7 +45,6 @@ export default function ViewProfilePage(): JSX.Element {
   // let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogs.state.getFavoriteBlogs.meta?.total;
-  const [userBlogs, setUserBlogs] = useState<any>([]);
 
   const loggedInId: any = auth.state.user?.id;
 
@@ -82,14 +81,14 @@ export default function ViewProfilePage(): JSX.Element {
   //   }
   // }, [userState]);
 
-  useEffect(() => {
-    if (prevBlog?.getBlogsById.loading) {
-      setUserBlogs(blogState.getBlogsById.data);
-    }
-    if (prevBlog?.getFavoriteBlogs.loading) {
-      setUserBlogs(blogState.getFavoriteBlogs.data);
-    }
-  }, [blogState]);
+  // useEffect(() => {
+  //   if (prevBlog?.getBlogsById.loading) {
+  //     setUserBlogs(blogState.getBlogsById.data);
+  //   }
+  //   if (prevBlog?.getFavoriteBlogs.loading) {
+  //     setUserBlogs(blogState.getFavoriteBlogs.data);
+  //   }
+  // }, [blogState]);
 
   function loadMore() {
     const updatedPayload = {
@@ -104,7 +103,7 @@ export default function ViewProfilePage(): JSX.Element {
     }
   }
 
-  const { userDetails } = useViewProfilePageHook();
+  const { userDetails, userBlogs } = useViewProfilePageHook();
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (
     <>
