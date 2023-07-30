@@ -32,10 +32,11 @@ export function useManageBlogsPageHooks(): void {
     // qs.parse() is mandatory otherwise it'll send complete URL after ? which is ?sort=%7B"id"%3A"desc"%7D
     // but after using it through qs.parse(search) it'll send {sort: '{"id":"desc"}'} which is parsed value
 
-    user.allUser();
     const search: any = qs.parse(window.location.search);
     if (isAdmin) {
       // params.page || 1 means if no params.page hence fetch first page if user clikced on next button then params.page will became 2 and now blogs according to 2nd page will fetch
+      // so user's list will only fetched when admin is loggedIn so admin can see uploadedBy username
+      user.allUser();
       blogs.getBlogsList({ page: params.page || 1, ...search });
     } else {
       blogs.getMyList({ payload, ...search });
