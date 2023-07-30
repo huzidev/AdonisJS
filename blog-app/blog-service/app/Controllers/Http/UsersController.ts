@@ -71,6 +71,7 @@ export default class UsersController {
       
 
       let message;
+      // so when user asked for filter then notifcation will be according to filter type
       if (!!filters.sort && response.totalNumber !== 0 && !dateKeys.includes(filterResultKey) ) {
         message = `Users list fetched by ${
           filterResultKey === "role" 
@@ -84,16 +85,21 @@ export default class UsersController {
           : `${filterResultKey} false state`
         } successfully`
       } else if (!!filters.sort && response.totalNumber !== 0 && dateKeys.includes(filterResultKey)) {
-        message = `Users list with ${filterResultValue === "oldest" ? "oldest users order " : "recently joined users "} fetched successfully`
+        message = `Users list with ${
+          filterResultValue === "oldest" 
+          ? `oldest ${filterResultKey === "updatedAt" ? "updated" : ""} users order`
+          : `recently ${filterResultKey === "createdAt" ? "joined" : "updated"} users`
+        } fetched successfully`
+      } else if (response.totalNumber === 0) {
+         // so if no user is found with specifc role and conditon then show that message in notification
+        // if no one us banned then show no user found with isBanned true
+        message = `No user found with ${filterResultKey} ${filterResultValue}`
+      } else {
+        message = `Users list ${params.page} fetched successfully`
       }
 
       return {
-        // so when user asked for filter then notifcation will be according to filter type
         message,
-          // so if no user is found with specifc role and conditon then show that message in notification
-          // if no one us banned then show no user found with isBanned true
-          // : response.totalNumber === 0 ? `No user found with ${filterResultKey} ${filterResultValue}` 
-          // : `Users list ${params.page} fetched successfully`, 
         data: response
       };
     } catch (e) {
