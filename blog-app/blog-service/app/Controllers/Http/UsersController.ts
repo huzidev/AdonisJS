@@ -87,7 +87,7 @@ export default class UsersController {
       } else if (!!filters.sort && response.totalNumber !== 0 && dateKeys.includes(filterResultKey)) {
         message = `Users list with ${
           filterResultValue === "oldest" 
-          ? `oldest ${filterResultKey === "updatedAt" ? "updated" : ""} users order`
+          ? `oldest ${filterResultKey === "updatedAt" ? "updated" : ""} users`
           : `recently ${filterResultKey === "createdAt" ? "joined" : "updated"} users`
         } fetched successfully`
       } else if (response.totalNumber === 0) {
