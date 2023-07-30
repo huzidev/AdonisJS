@@ -84,6 +84,7 @@ export default class ArticlesController {
       };
     } catch (e) {
       throw {
+      // so if validation error occurs when user change type for asc, desc to something else then validation error will trigger hence show Inavalid URL message instead of E_VALIDATION_FAILURE message
         message: e.message.includes("E_VALIDATION_FAILURE")
           ? invalidURL.message
           : e.message,
