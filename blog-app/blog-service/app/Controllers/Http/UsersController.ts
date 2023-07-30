@@ -69,14 +69,21 @@ export default class UsersController {
 
       return {
         // so when user asked for filter then notifcation will be according to filter type
-        message: !!filters.sort 
+        message: !!filters.sort && response.totalNumber !== 0 
           ? `Users fetched by ${
             filterResultKey === "role" 
             ? filters.sort?.role 
             : filterResultValue === "asc" 
             ? `ascending ${filterResultKey} order` 
-            : `descending ${filterResultKey} order` 
+            : filterResultValue === "desc"
+            ? `descending ${filterResultKey} order`
+            : filterResultValue === "true"
+            ? `${filterResultKey} true state`
+            : `${filterResultKey} false state`
           } successfully` 
+          // so if no user is found with specifc role and conditon then show that message in notification
+          // if no one us banned then show no user found with isBanned true
+          : response.totalNumber === 0 ? `No user found with ${filterResultKey} ${filterResultValue}` 
           : `Users list ${params.page} fetched successfully`, 
         data: response
       };
