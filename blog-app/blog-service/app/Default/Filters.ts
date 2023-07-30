@@ -1,4 +1,4 @@
-export const userFilters = [
+export const userFiltersKeys = [
   "id",
   "username",
   "email",
@@ -10,6 +10,17 @@ export const userFilters = [
   "createdAt",
   "updatedAt"
 ];
+
+export const userFiltersValues = [
+  "asc",
+  "desc",
+  "admin",
+  "super-admin",
+  "user",
+  "blogger",
+  "true",
+  "false"
+]
 
 export const articleFilters = [
   "id",

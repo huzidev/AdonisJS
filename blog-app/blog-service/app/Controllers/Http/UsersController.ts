@@ -1,6 +1,6 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
-import { userFilters } from "App/Default/Filters";
+import { userFiltersKeys } from "App/Default/Filters";
 import { emailExist, invalidURL, usernameExist } from "App/Default/Messages";
 import User from "App/Models/User";
 import Utils from "App/Utils";
@@ -43,13 +43,13 @@ export default class UsersController {
       if (!!filters.sort) {
         filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
+        console.log("FILTER VALUE", filterResultValue);
         // so when user tries to change the value from URL then throw error
         // if filters is according to username and user tries to change the value of username to something else then the error will be shown
-          if (!userFilters.includes(filterResultKey)) {
+          if (!userFiltersKeys.includes(filterResultKey)) {
             throw invalidURL;
           }
       }
-
 
       let response; 
       // if user wanted to see allBlogs uploaded by him
@@ -81,8 +81,8 @@ export default class UsersController {
         data: response
       };
     } catch (e) {
-      console.log("ERROR", e);
-      throw invalidURL;
+      // so if validation error occurs when user change type for asc, desc, true etc to something else then validation error will trigger hence show Inavalid URL message instead of E_VALIDATION_FAILURE message
+      throw { message: e.message.includes("E_VALIDATION_FAILURE") ? "Invalid URL" : e.message };
     }
   }
 
