@@ -52,13 +52,13 @@ export default function ViewProfilePage(): JSX.Element {
 
   const loggedInId: any = auth.state.user?.id;
 
-  useEffect(() => {
-    if (isMe) {
-      user.getById(loggedInId);
-    } else {
-      user.getById(params.id);
-    }
-  }, [params.id, loggedInId]);
+  // useEffect(() => {
+  //   if (isMe) {
+  //     user.getById(loggedInId);
+  //   } else {
+  //     user.getById(params.id);
+  //   }
+  // }, [params.id, loggedInId]);
 
   const isRole: any = userState.getUser.data?.role;
   useEffect(() => {

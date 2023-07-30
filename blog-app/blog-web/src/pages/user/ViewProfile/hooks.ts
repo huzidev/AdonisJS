@@ -10,14 +10,24 @@ export function useViewProfilePageHook(): void {
   const user = useUser();
   const auth = useAuth();
   const blogs = useBlogs();
+  const params: any = useParams();
   const username = user.state.getUser.data?.username;
   const loggedInUser = auth.state.user?.username;
-  const params = useParams();
+  const isMe = params.id === "me";
+  const loggedInId: any = auth.state.user?.id;
   const userState = user.state;
   const blogState = blogs.state;
   const prevUser = usePrevious(userState);
   const prevBlog = usePrevious(blogState);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isMe) {
+      user.getById(loggedInId);
+    } else {
+      user.getById(params.id);
+    }
+  }, [params.id, loggedInId]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
