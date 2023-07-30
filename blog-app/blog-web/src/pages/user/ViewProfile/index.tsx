@@ -48,7 +48,7 @@ export default function ViewProfilePage(): JSX.Element {
   // let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
   let favoriteBlogs = blogs.state.getFavoriteBlogs;
-  const [userBlogs, setUserBlogs] = useState<any>();
+  const [userBlogs, setUserBlogs] = useState<any>([]);
 
   const loggedInId: any = auth.state.user?.id;
 
@@ -115,7 +115,8 @@ export default function ViewProfilePage(): JSX.Element {
     }
   }
 
-  console.log("favoriteBlogs.meta?.total", favoriteBlogs.meta?.total);
+  console.log("user blogs", userBlogs.length === 0);
+  
 
   useViewProfilePageHook();
   return (
@@ -153,7 +154,7 @@ export default function ViewProfilePage(): JSX.Element {
                 </h2>
               </>
             )}
-            {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile */}
+            {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile and  can't edit super-admin details */}
             {(isMe ||
               (!isAdmin && currentRole === "super-admin") ||
               (isAdminRole && userDataById?.role !== "super-admin")) && (
@@ -273,8 +274,9 @@ export default function ViewProfilePage(): JSX.Element {
                   </div>
                 );
               })
-            : favoriteBlogs.data
-            ? favoriteBlogs.data.map((blog: any) => {
+            : (favoriteBlogs.data && userBlogs)
+            // ? favoriteBlogs.data.map((blog: any) => {
+            ? userBlogs.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                     {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -315,9 +317,7 @@ export default function ViewProfilePage(): JSX.Element {
                 // when user clicked on viewProfile then if userBlogs OR favoriteBlogs is empty then show field otherwise show the blogs Uploaded or Liked by that user
                 // that condiiton for shwowing is defined above
               })
-            : !blogs.state.getBlogs?.loading &&
-              favoriteBlogs.meta?.total &&
-              favoriteBlogs.meta?.total === 0 && (
+            : userBlogs.length === 0 && (
                 <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                     Oops...
