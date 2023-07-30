@@ -24,14 +24,18 @@ export default class ArticlesController {
         schema: BlogListFilters.schema,
         data: Utils.parseQS(request.qs(), ["sort"]),
       });
-
+      
       const userId = params.id;
+      
+      console.log("USER ID", userId);
       const query = Article.query();
 
+      let user;
       // because for calling username filters we don't have username in articles table therefore created join statement
       // if user wanted to see allBlogs uploaded by him
       if (userId) {
         query.where("owner_id", userId);
+        user = await User.findBy("id", userId);
       }
 
       const isSort = Object.keys(request.qs())[1];
@@ -117,7 +121,8 @@ export default class ArticlesController {
       let user;
       if (article) {
         // using .first() because we are receving array[]
-        user = await User.query().where("id", article.ownerId).first();
+        // user = await User.query().where("id", article.ownerId).first();
+        user = await User.findBy("id", article.ownerId);
       }
       if (!article) {
         throw noArticle;
