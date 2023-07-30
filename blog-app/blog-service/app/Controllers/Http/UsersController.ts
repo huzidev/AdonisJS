@@ -67,6 +67,9 @@ export default class UsersController {
         response = await query;
       }
 
+      console.log(filterResultKey);
+      
+
       let message;
       if (!!filters.sort && response.totalNumber !== 0 && !dateKeys.includes(filterResultKey) ) {
         message = `Users list fetched by ${
@@ -81,7 +84,7 @@ export default class UsersController {
           : `${filterResultKey} false state`
         } successfully`
       } else if (!!filters.sort && response.totalNumber !== 0 && dateKeys.includes(filterResultKey)) {
-        message = `Users list with ${filterResultKey === "oldest" ? "oldest users " : "recently joined users "} fetched successfully`
+        message = `Users list with ${filterResultValue === "oldest" ? "oldest users order " : "recently joined users "} fetched successfully`
       }
 
       return {
