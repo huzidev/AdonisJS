@@ -18,7 +18,7 @@ export function useManageBlogsPageHooks(): void {
   const prev = usePrevious(state);
   const isMe: any = auth.state.user;
   const isAdmin = hasPermission(
-    "admin" || "super-admin",
+    "admin",
     auth.state.user?.role
   );
   const navigate = useNavigate();
@@ -43,12 +43,12 @@ export function useManageBlogsPageHooks(): void {
   }, [params.page, window.location.search]);
 
   useEffect(() => {
-    if (prev?.getBlogs.loading) {
-      if (!state.getBlogs.loading && !state.getBlogs.error) {
-        successNotification(state.getBlogs.message);
+    if (prev?.getBlogsList.loading) {
+      if (!state.getBlogsList.loading && !state.getBlogsList.error) {
+        successNotification(state.getBlogsList.message);
       }
       // if user enter the page exceeding the page limit
-      else if (!state.getBlogs.loading && state.getBlogs.error) {
+      else if (!state.getBlogsList.loading && state.getBlogsList.error) {
         navigate("/");
       }
     }
