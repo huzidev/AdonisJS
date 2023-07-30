@@ -7,9 +7,9 @@ import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 import { userDetailsData } from "./data";
-import { ParamsId, UserDetailState } from "./types";
+import { ParamsId, UserDetailState, ViewProfileStateHandler } from "./types";
 
-export function useViewProfilePageHook() {
+export function useViewProfilePageHook(): ViewProfileStateHandler {
   const user = useUser();
   const auth = useAuth();
   const blogs = useBlogs();
@@ -128,8 +128,6 @@ export function useViewProfilePageHook() {
       blogs.getBlogsById(updatedPayload);
     }
   }
-  console.log("userBlogs", userBlogs);
-  
 
   return {
     userDetails,

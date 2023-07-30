@@ -1,3 +1,5 @@
+import { Blog } from "store/articles/types";
+
 export interface UserDetailState {
     id: number | null;
     username: string;
@@ -14,5 +16,10 @@ export type ParamsId = {
 
 export interface ViewProfileStateHandler {
     userDetails: UserDetailState;
-    currentPage: number
+    userBlogs: Blog[];
+    loadMore: () => void;
+    currentPage: number;
+    currentPageFvrt: number;
+    lastPageFvrt: number;
+    lastPage: number;
 }
