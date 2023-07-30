@@ -53,5 +53,14 @@ export function useManageBlogsPageHooks(): void {
         navigate("/");
       }
     }
+    if (prev?.getMyList.loading) {
+      if (!state.getMyList.loading && !state.getMyList.error) {
+        successNotification(state.getMyList.message);
+      }
+      // if user enter the page exceeding the page limit
+      else if (!state.getMyList.loading && state.getMyList.error) {
+        navigate("/");
+      }
+    }
   }, [state]);
 }
