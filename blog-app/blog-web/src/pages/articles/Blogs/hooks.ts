@@ -19,6 +19,7 @@ export function useBlogsPageHooks() {
   const isUser = auth.state.user?.role === "user";
   const allUsers: any = user.state.allUser?.data;
   const favoriteBlogs: any = blogs.state.getFavoriteBlogs;
+  const isLoading = state.getBlogs.loading;
   const [sortValue, setSortValue] = useState(initialSortState);
   const payload: any = {
     userId: auth.state.user?.id,
@@ -135,5 +136,6 @@ export function useBlogsPageHooks() {
     sortValue,
     loadMore,
     handleSort,
+    isLoading
   };
 }
