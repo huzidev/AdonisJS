@@ -1,11 +1,11 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from "@ioc:Adonis/Core/Validator";
-import { articleFilters } from "App/Default/Filters";
+import { articleFilters, dateKeys } from "App/Default/Filters";
 import {
   blogsFetched,
   invalidURL,
   noArticle,
-  noPermission,
+  noPermission
 } from "App/Default/Messages";
 import Article from "App/Models/Article";
 import User from "App/Models/User";
@@ -74,15 +74,30 @@ export default class ArticlesController {
         };
       }
 
+      console.log("RESPONSE", response);
+      
+
+      let message;
+      // so when user asked for filter then notifcation will be according to filter type
+      if (!!filters.sort && !dateKeys.includes(filterResultKey)) {
+        message = `Blogs list fetched by ${
+          filterResultValue === "asc" 
+          ? `ascending ${filterResultKey}` 
+          : `descending ${filterResultKey}`
+        } order successfully`
+      } else if (!!filters.sort && dateKeys.includes(filterResultKey)) {
+        message = `${filterResultValue === "recent" 
+        ? `Most recently ${filterResultKey === "updatedAt" ? "updated" : "created"}` 
+        // so if user clicked on updatedAt oldest then show Oldest blog list fethced successfully therefore passed "" for else condition
+        : `Oldest ${filterResultKey === "createdAt" ? "created" : ""}`
+      } blogs list fetched successfully`
+      } else {
+        message = blogsFetched
+      }
+
       return {
-        // so when user asked for filter then notifcation will be according to filter type
-        message:
-          !!filters.sort && filterResultValue === "desc"
-            ? `Most recent ${blogsFetched}`
-            : filterResultValue === "asc"
-            ? `Oldest ${blogsFetched}`
-            : blogsFetched,
-        data: response,
+        message,
+        data: response
       };
     } catch (e) {
       throw {
