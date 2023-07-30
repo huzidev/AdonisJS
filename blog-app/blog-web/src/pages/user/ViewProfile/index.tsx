@@ -115,9 +115,6 @@ export default function ViewProfilePage(): JSX.Element {
     }
   }
 
-  console.log("user blogs", userBlogs.length === 0);
-  
-
   useViewProfilePageHook();
   return (
     <>
@@ -319,7 +316,7 @@ export default function ViewProfilePage(): JSX.Element {
             //   })
             // : 
           }
-         {(!blogState.getFavoriteBlogs.loading || !blogState.getBlogsById.loading) && userBlogs.length === 0 && (
+         {userBlogs.length === 0 && (
                 <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                     Oops...
