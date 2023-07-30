@@ -16,8 +16,10 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const params = useParams<ParamsId>();
   const userState = user.state;
   const blogState = blogs.state;
-  const data = auth.state.user;
-  const username = user.state.getUser.data?.username;
+  const prevUser = usePrevious(userState);
+  const prevBlog = usePrevious(blogState);
+  const navigate = useNavigate();
+  const username = userState.getUser.data?.username;
   const loggedInUser = auth.state.user?.username;
   const userDataById = user.state.getUser?.data;
   const isMe = params.id === "me";
@@ -25,9 +27,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const loggedInId: any = auth.state.user?.id;
   const isRole: any = userState.getUser.data?.role;
   const isLoggedInRole: any = auth.state.user?.role;
-  const prevUser = usePrevious(userState);
-  const prevBlog = usePrevious(blogState);
-  const navigate = useNavigate();
   const [userDetails, setUserDetails] =
     useState<UserDetailState>(userDetailsData);
   const [userBlogs, setUserBlogs] = useState<Blog[]>([]);
@@ -59,7 +58,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         }
       }
       if (isMe) {
-        setUserDetails({ ...userDetails, ...data });
+        setUserDetails({ ...userDetails, ...auth.state.user });
         // because when user's role is user then we only wanted to fetch favoriteBlogs
         const payloadData = {
           userId: loggedInId,
@@ -137,5 +136,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     currentPageFvrt,
     lastPageFvrt,
     lastPage,
+    isMe
   };
 }

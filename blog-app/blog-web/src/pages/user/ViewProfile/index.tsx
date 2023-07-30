@@ -1,6 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
@@ -11,17 +11,14 @@ export default function ViewProfilePage(): JSX.Element {
   const auth = useAuth();
   const blogs = useBlogs();
   const user = useUser();
-  const params: any = useParams();
   const userDataById = user.state.getUser?.data;
   const currentRole = auth.state.user?.role;
   const isAdminRole = hasPermission("admin", currentRole);
   const isUser = currentRole === "user";
   const isAdmin = userDataById?.role === "admin";
-  const isMe = params.id === "me";
   const blogState = blogs.state;
   const [showModal, setShowModal] = useState(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
-
   // let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogs.state.getFavoriteBlogs.meta?.total;
@@ -34,6 +31,7 @@ export default function ViewProfilePage(): JSX.Element {
     currentPageFvrt,
     lastPageFvrt,
     lastPage,
+    isMe
   } = useViewProfilePageHook();
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (
