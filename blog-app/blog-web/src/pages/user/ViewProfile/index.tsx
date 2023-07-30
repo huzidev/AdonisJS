@@ -47,7 +47,7 @@ export default function ViewProfilePage(): JSX.Element {
   let allBlogsById = blogs.state.getBlogsById.data;
   // let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
-  let favoriteBlogs = blogs.state.getFavoriteBlogs;
+  let totalFvrtBlogs = blogs.state.getFavoriteBlogs.meta?.total;
   const [userBlogs, setUserBlogs] = useState<any>([]);
 
   const loggedInId: any = auth.state.user?.id;
@@ -149,7 +149,7 @@ export default function ViewProfilePage(): JSX.Element {
                 </h2>
                 <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                   {(isUser && isMe) || user.state.getUser.data?.role === "user"
-                    ? `Total Blogs Liked : ${favoriteBlogs.meta?.total}`
+                    ? `Total Blogs Liked : ${totalFvrtBlogs}`
                     : `Total Blogs : ${totalBlogs}`}
                 </h2> 
               </>
@@ -355,8 +355,9 @@ export default function ViewProfilePage(): JSX.Element {
         {/* so load more button will only be visible when their is currentPage OR currentPageFvrt and if currentPage and lastPage values 
          became equal then don't show load more button anymore
         */}
-        {(currentPage || currentPageFvrt) &&
-          (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) && (
+        {
+          // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
+          (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) && (totalBlogs > 15 || totalFvrtBlogs > 15) && (
             <button
               className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
               onClick={loadMore}
