@@ -74,9 +74,6 @@ export default class ArticlesController {
         };
       }
 
-      console.log("RESPONSE", response);
-      
-
       let message;
       // so when user asked for filter then notifcation will be according to filter type
       if (!!filters.sort && !dateKeys.includes(filterResultKey)) {
