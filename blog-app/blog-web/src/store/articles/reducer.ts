@@ -88,9 +88,7 @@ export const blogSlice = createSlice({
         const { data, meta, message } = action.payload;
         state.getBlogsList.data = [...data];
         state.getBlogsList.meta = meta;
-        // from backend blogs fetched message is used at multiple places therefore called toUpperCase function here so first letter will be Capital like
-        // Blogs fetched successfully
-        state.getBlogsList.message = message!.charAt(0).toUpperCase() + message?.slice(1).toLowerCase();
+        state.getBlogsList.message = message;
       }
       state.getBlogsList.error = false;
     });
