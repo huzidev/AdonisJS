@@ -35,6 +35,7 @@ export function useManageBlogsPageHooks(): void {
     user.allUser();
     const search: any = qs.parse(window.location.search);
     if (isAdmin) {
+      // params.page || 1 means if no params.page hence fetch first page if user clikced on next button then params.page will became 2 and now blogs according to 2nd page will fetch
       blogs.getBlogsList({ page: params.page || 1, ...search });
     } else {
       blogs.getMyList({ payload, ...search });
