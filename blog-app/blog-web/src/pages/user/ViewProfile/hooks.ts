@@ -6,18 +6,19 @@ import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 import { userDetailsData } from "./data";
-import { UserDetailState } from "./types";
+import { ParamsId, UserDetailState } from "./types";
 
 export function useViewProfilePageHook() {
   const user = useUser();
   const auth = useAuth();
   const blogs = useBlogs();
-  const params: any = useParams();
+  const params = useParams<ParamsId>();
   const data = auth.state.user;
   const username = user.state.getUser.data?.username;
   const loggedInUser = auth.state.user?.username;
   const userDataById = user.state.getUser?.data;
   const isMe = params.id === "me";
+  const userId = Number(params.id);
   const loggedInId: any = auth.state.user?.id;
   const userState = user.state;
   const isRole: any = userState.getUser.data?.role;
@@ -29,23 +30,27 @@ export function useViewProfilePageHook() {
   const [userDetails, setUserDetails] =
     useState<UserDetailState>(userDetailsData);
   const [userBlogs, setUserBlogs] = useState<any>([]);
+  const currentPage: number = blogs.state.getBlogsById.meta?.currentPage;
+  const currentPageFvrt: number = blogs.state.getFavoriteBlogs.meta?.currentPage;
+  const lastPageFvrt: number = blogs.state.getFavoriteBlogs.meta?.lastPage;
+  const lastPage: number = blogs.state.getBlogsById.meta?.lastPage;
 
   useEffect(() => {
     if (isMe) {
       user.getById(loggedInId);
     } else {
-      user.getById(params.id);
+      user.getById(userId);
     }
-  }, [params.id, loggedInId]);
+  }, [userId, loggedInId]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
       if (!isMe) {
         setUserDetails({ ...userDetails, ...userDataById });
         const payloadData = {
-            userId: params.id,
-            page: 1,
-          }
+          userId: userId,
+          page: 1,
+        };
         if (isRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
         } else {
@@ -79,9 +84,13 @@ export function useViewProfilePageHook() {
         // if user is banned then we won't show details fetched successfully notification
         if (username && !userState.getUser.data?.isBanned) {
           // check if clicked user's name (username) matches the loggedInUser name then call yours details fetched successfully
-          successNotification(`${username === loggedInUser ? "Yours" : username}'s details fetched successfully`);
+          successNotification(
+            `${
+              username === loggedInUser ? "Yours" : username
+            }'s details fetched successfully`
+          );
         }
-      } // when user tries to change the URL example if user changes view/:id id of the user which doesn't exist then show error 
+      } // when user tries to change the URL example if user changes view/:id id of the user which doesn't exist then show error
       else if (!userState.getUser.loading && userState.getUser.error) {
         navigate("/");
       }
@@ -97,14 +106,35 @@ export function useViewProfilePageHook() {
         const currentPage = blogState.getBlogsById.meta.currentPage;
         const lastPage = blogState.getBlogsById.meta.lastPage;
         if (username) {
-          successNotification(`${username === loggedInUser ? "Yours" : username}'s blogs page ${currentPage} of ${lastPage} fetched successfully`);
+          successNotification(
+            `${
+              username === loggedInUser ? "Yours" : username
+            }'s blogs page ${currentPage} of ${lastPage} fetched successfully`
+          );
         }
       }
     }
   }, [userState, blogState]);
 
+  function loadMore() {
+    const updatedPayload = {
+      userId: isMe ? loggedInId : params.id,
+      page: isRole === "user" ? currentPageFvrt + 1 : currentPage + 1,
+    };
+    if (isRole === "user") {
+      blogs.getFavoriteBlogs(updatedPayload);
+    } else {
+      blogs.getBlogsById(updatedPayload);
+    }
+  }
+
   return {
     userDetails,
-    userBlogs
-  }
+    userBlogs,
+    loadMore,
+    currentPage,
+    currentPageFvrt,
+    lastPageFvrt,
+    lastPage,
+  };
 }

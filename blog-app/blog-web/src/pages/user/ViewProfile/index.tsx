@@ -5,7 +5,6 @@ import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { usePrevious } from "utils/hooks";
 import { useViewProfilePageHook } from "./hooks";
 
 export default function ViewProfilePage(): JSX.Element {
@@ -13,50 +12,29 @@ export default function ViewProfilePage(): JSX.Element {
   const blogs = useBlogs();
   const user = useUser();
   const params: any = useParams();
-  const data = auth.state.user;
   const userDataById = user.state.getUser?.data;
-  const currentPage: any = blogs.state.getBlogsById.meta?.currentPage;
-  const currentPageFvrt: any = blogs.state.getFavoriteBlogs.meta?.currentPage;
-  const lastPageFvrt: any = blogs.state.getFavoriteBlogs.meta?.lastPage;
-  const lastPage: any = blogs.state.getBlogsById.meta?.lastPage;
   const currentRole = auth.state.user?.role;
   const isAdminRole = hasPermission("admin", currentRole);
   const isUser = currentRole === "user";
   const isAdmin = userDataById?.role === "admin";
   const isMe = params.id === "me";
-  const userState = user.state;
   const blogState = blogs.state;
-  const prevBlog = usePrevious(blogState);
-  const prev = usePrevious(userState);
-  const [payload, setPayload] = useState<any>();
   const [showModal, setShowModal] = useState(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
-  let isClickedUser: any;
-  const userId: any = auth.state.user?.id;
 
-  let currentId = isMe ? userId : Number(params.id);
-  let allBlogsById = blogs.state.getBlogsById.data;
   // let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogs.state.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogs.state.getFavoriteBlogs.meta?.total;
 
-  const loggedInId: any = auth.state.user?.id;
-
-  const isRole: any = userState.getUser.data?.role;
-
-  function loadMore() {
-    const updatedPayload = {
-      userId: isMe ? loggedInId : params.id,
-      page: isRole === "user" ? currentPageFvrt + 1 : currentPage + 1,
-    };
-    setPayload(updatedPayload);
-    if (isRole === "user") {
-      blogs.getFavoriteBlogs(updatedPayload);
-    } else {
-      blogs.getBlogsById(updatedPayload);
-    }
-  }
-  const { userDetails, userBlogs } = useViewProfilePageHook();
+  const {
+    userDetails,
+    userBlogs,
+    loadMore,
+    currentPage,
+    currentPageFvrt,
+    lastPageFvrt,
+    lastPage,
+  } = useViewProfilePageHook();
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (
     <>
@@ -90,7 +68,7 @@ export default function ViewProfilePage(): JSX.Element {
                   {(isUser && isMe) || user.state.getUser.data?.role === "user"
                     ? `Total Blogs Liked : ${totalFvrtBlogs}`
                     : `Total Blogs : ${totalBlogs}`}
-                </h2> 
+                </h2>
               </>
             )}
             {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile and  can't edit super-admin details */}
@@ -119,10 +97,12 @@ export default function ViewProfilePage(): JSX.Element {
           </h1>
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
-          {(blogState.getFavoriteBlogs.loading || blogState.getBlogsById.loading
-            ? "Loading"
-            : userBlogs)
-            && userBlogs.map((blog: any) => {
+          {
+            (blogState.getFavoriteBlogs.loading ||
+            blogState.getBlogsById.loading
+              ? "Loading"
+              : userBlogs) &&
+              userBlogs.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                     {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -256,38 +236,38 @@ export default function ViewProfilePage(): JSX.Element {
             //     // when user clicked on viewProfile then if userBlogs OR favoriteBlogs is empty then show field otherwise show the blogs Uploaded or Liked by that user
             //     // that condiiton for shwowing is defined above
             //   })
-            // : 
+            // :
           }
-         {userBlogs.length === 0 && (
-                <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                  <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
-                    Oops...
-                    {/* if clickedUser role is user */}
-                    {user.state.getUser.data?.role === "user" && !isMe
-                      ? `${userDetails.username} haven't Liked`
-                      : // if LoggedIn user's role is user and path includes "me"
-                      isUser && isMe
-                      ? "You haven't Liked"
-                      : // if user role is not user and path includes "me" then show You haven't Uploaded any blog yet
-                        `${
-                          isMe ? "You" : userDetails.username
-                        } haven't uploaded`}{" "}
-                    any blog yet
-                  </h1>
-                  <Link
-                    to={
-                      isMe && !isUser
-                        ? ROUTE_PATHS.ARTICLE_CREATE
-                        : ROUTE_PATHS.ARTICLES
-                    }
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                    title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
-                  >
-                    {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
-                    {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
-                  </Link>
-                </div>
-              )}
+          {userBlogs.length === 0 && (
+            <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
+                Oops...
+                {/* if clickedUser role is user */}
+                {user.state.getUser.data?.role === "user" && !isMe
+                  ? `${userDetails.username} haven't Liked`
+                  : // if LoggedIn user's role is user and path includes "me"
+                  isUser && isMe
+                  ? "You haven't Liked"
+                  : // if user role is not user and path includes "me" then show You haven't Uploaded any blog yet
+                    `${
+                      isMe ? "You" : userDetails.username
+                    } haven't uploaded`}{" "}
+                any blog yet
+              </h1>
+              <Link
+                to={
+                  isMe && !isUser
+                    ? ROUTE_PATHS.ARTICLE_CREATE
+                    : ROUTE_PATHS.ARTICLES
+                }
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+              >
+                {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
+                {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <div className="w-11/12 m-auto mt-5">
@@ -296,14 +276,16 @@ export default function ViewProfilePage(): JSX.Element {
         */}
         {
           // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
-          (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) && (totalBlogs > 15 || totalFvrtBlogs > 15) && (
-            <button
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-              onClick={loadMore}
-            >
-              Load More
-            </button>
-          )}
+          (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) &&
+            (totalBlogs > 15 || totalFvrtBlogs > 15) && (
+              <button
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                onClick={loadMore}
+              >
+                Load More
+              </button>
+            )
+        }
       </div>
     </>
   );
