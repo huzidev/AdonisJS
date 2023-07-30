@@ -22,7 +22,8 @@ export const getMyList = createAsyncThunk(
       const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`, {params: data});
       return {
         data : response.data.data.data,
-        meta: response.data.data.meta
+        meta: response.data.data.meta,
+        message: response.data.message
       };
     } catch (e: any) {
       const err = mapErrorToState(e);

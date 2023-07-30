@@ -88,7 +88,9 @@ export const blogSlice = createSlice({
         const { data, meta, message } = action.payload;
         state.getBlogsList.data = [...data];
         state.getBlogsList.meta = meta;
-        state.getBlogsList.message = message;
+        // from backend blogs fetched message is used at multiple places therefore called toUpperCase function here so first letter will be Capital like
+        // Blogs fetched successfully
+        state.getBlogsList.message = message!.charAt(0).toUpperCase() + message?.slice(1).toLowerCase();
       }
       state.getBlogsList.error = false;
     });
@@ -127,12 +129,12 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getMyList.fulfilled, (state, action) => {
       state.getMyList.loading = false;
       if (action.payload) {
-        const { data, meta } = action.payload;
+        const { data, meta, message } = action.payload;
         // created a seprate condition for getMyList so when user clicked on manage blogs then a table is shown with all the blogs uploaded by that user now we've
         // created a condition in getBlogsById which is that when user clicked on LoadMore then previous data remains save and new data appends in array BUT for table
         // we wanted previous data to be vanished and just show new data so when user CLICKED on next page then just new data must shown not the previous data
         state.getMyList.data = data;
-        state.getMyList.message = "Yours blogs list fetched successfully";
+        state.getMyList.message = `Yours ${message}`;
         // meta takes pagination data like total, currentPage, LastPage
         state.getMyList.meta = meta;
       }
