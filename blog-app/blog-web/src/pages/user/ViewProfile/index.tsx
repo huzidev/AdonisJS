@@ -274,50 +274,52 @@ export default function ViewProfilePage(): JSX.Element {
                   </div>
                 );
               })
-            : (favoriteBlogs.data && userBlogs)
-            // ? favoriteBlogs.data.map((blog: any) => {
-            ? userBlogs.map((blog: any) => {
-                return (
-                  <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
-                    {/* <img src={ele.image} alt="Thumbnail" /> */}
-                    <div className="h-52 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                      <img
-                        className="rounded-t-lg"
-                        src="/docs/images/blog/image-1.jpg"
-                        alt="Thumbnail"
-                      />
-                      <div className="p-5">
-                        <h5
-                          title={blog.title}
-                          className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-                        >
-                          {blog.title.length > 21
-                            ? `${blog.title.slice(0, 21)}...`
-                            : blog.title}
-                        </h5>
-                        <p
-                          title={blog.content}
-                          className="mb-3 font-normal text-gray-700 dark:text-gray-400"
-                        >
-                          {blog.content.length > 50
-                            ? `${blog.content.slice(0, 50)}...`
-                            : blog.content}
-                        </p>
-                        <Link
-                          to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
-                          className="text-sm font-medium text-center text-white hover:text-blue-500"
-                        >
-                          Read More
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                );
-                // so when user reload the page this won't be shown for the time page is reloading
-                // when user clicked on viewProfile then if userBlogs OR favoriteBlogs is empty then show field otherwise show the blogs Uploaded or Liked by that user
-                // that condiiton for shwowing is defined above
-              })
-            : userBlogs.length === 0 && (
+            : 
+            // (favoriteBlogs.data && userBlogs)
+            // // ? favoriteBlogs.data.map((blog: any) => {
+            // ? userBlogs.map((blog: any) => {
+            //     return (
+            //       <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
+            //         {/* <img src={ele.image} alt="Thumbnail" /> */}
+            //         <div className="h-52 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            //           <img
+            //             className="rounded-t-lg"
+            //             src="/docs/images/blog/image-1.jpg"
+            //             alt="Thumbnail"
+            //           />
+            //           <div className="p-5">
+            //             <h5
+            //               title={blog.title}
+            //               className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+            //             >
+            //               {blog.title.length > 21
+            //                 ? `${blog.title.slice(0, 21)}...`
+            //                 : blog.title}
+            //             </h5>
+            //             <p
+            //               title={blog.content}
+            //               className="mb-3 font-normal text-gray-700 dark:text-gray-400"
+            //             >
+            //               {blog.content.length > 50
+            //                 ? `${blog.content.slice(0, 50)}...`
+            //                 : blog.content}
+            //             </p>
+            //             <Link
+            //               to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
+            //               className="text-sm font-medium text-center text-white hover:text-blue-500"
+            //             >
+            //               Read More
+            //             </Link>
+            //           </div>
+            //         </div>
+            //       </div>
+            //     );
+            //     // so when user reload the page this won't be shown for the time page is reloading
+            //     // when user clicked on viewProfile then if userBlogs OR favoriteBlogs is empty then show field otherwise show the blogs Uploaded or Liked by that user
+            //     // that condiiton for shwowing is defined above
+            //   })
+            // : 
+            userBlogs.length === 0 && (
                 <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                     Oops...
