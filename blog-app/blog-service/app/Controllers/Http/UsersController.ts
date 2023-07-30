@@ -1,6 +1,6 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
-import { userFiltersKeys } from "App/Default/Filters";
+import { dateKeys, userFiltersKeys } from "App/Default/Filters";
 import { emailExist, invalidURL, usernameExist } from "App/Default/Messages";
 import User from "App/Models/User";
 import Utils from "App/Utils";
@@ -67,24 +67,30 @@ export default class UsersController {
         response = await query;
       }
 
+      let message;
+      if (!!filters.sort && response.totalNumber !== 0 && !dateKeys.includes(filterResultKey) ) {
+        message = `Users list fetched by ${
+          filterResultKey === "role" 
+          ? filters.sort?.role 
+          : filterResultValue === "asc" 
+          ? `ascending ${filterResultKey} order` 
+          : filterResultValue === "desc"
+          ? `descending ${filterResultKey} order`
+          : filterResultValue === "true"
+          ? `${filterResultKey} true state`
+          : `${filterResultKey} false state`
+        } successfully`
+      } else if (!!filters.sort && response.totalNumber !== 0 && dateKeys.includes(filterResultKey)) {
+        message = `Users list with ${filterResultKey === "oldest" ? "oldest users " : "recently joined users "} fetched successfully`
+      }
+
       return {
         // so when user asked for filter then notifcation will be according to filter type
-        message: !!filters.sort && response.totalNumber !== 0 
-          ? `Users fetched by ${
-            filterResultKey === "role" 
-            ? filters.sort?.role 
-            : filterResultValue === "asc" 
-            ? `ascending ${filterResultKey} order` 
-            : filterResultValue === "desc"
-            ? `descending ${filterResultKey} order`
-            : filterResultValue === "true"
-            ? `${filterResultKey} true state`
-            : `${filterResultKey} false state`
-          } successfully` 
+        message,
           // so if no user is found with specifc role and conditon then show that message in notification
           // if no one us banned then show no user found with isBanned true
-          : response.totalNumber === 0 ? `No user found with ${filterResultKey} ${filterResultValue}` 
-          : `Users list ${params.page} fetched successfully`, 
+          // : response.totalNumber === 0 ? `No user found with ${filterResultKey} ${filterResultValue}` 
+          // : `Users list ${params.page} fetched successfully`, 
         data: response
       };
     } catch (e) {

@@ -8,8 +8,13 @@ export const userFiltersKeys = [
   "uploadedBy",
   "isVerified",
   "createdAt",
-  "updatedAt"
+  "updatedAt",
 ];
+
+export const dateKeys = [
+  "createdAt",
+  "updatedAt"
+]
 
 export const articleFilters = [
   "id",
