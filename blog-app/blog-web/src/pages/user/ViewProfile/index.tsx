@@ -151,7 +151,7 @@ export default function ViewProfilePage(): JSX.Element {
                   {(isUser && isMe) || user.state.getUser.data?.role === "user"
                     ? `Total Blogs Liked : ${favoriteBlogs.meta?.total}`
                     : `Total Blogs : ${totalBlogs}`}
-                </h2>
+                </h2> 
               </>
             )}
             {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile and  can't edit super-admin details */}
@@ -180,10 +180,10 @@ export default function ViewProfilePage(): JSX.Element {
           </h1>
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
-          {blogState.getFavoriteBlogs.loading || blogState.getBlogsById.loading
+          {(blogState.getFavoriteBlogs.loading || blogState.getBlogsById.loading
             ? "Loading"
-            : userBlogs
-            ? userBlogs.map((blog: any) => {
+            : userBlogs)
+            && userBlogs.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                     {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -274,7 +274,6 @@ export default function ViewProfilePage(): JSX.Element {
                   </div>
                 );
               })
-            : 
             // (favoriteBlogs.data && userBlogs)
             // // ? favoriteBlogs.data.map((blog: any) => {
             // ? userBlogs.map((blog: any) => {
@@ -319,7 +318,8 @@ export default function ViewProfilePage(): JSX.Element {
             //     // that condiiton for shwowing is defined above
             //   })
             // : 
-            userBlogs.length === 0 && (
+          }
+         {userBlogs.length === 0 && (
                 <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                     Oops...
