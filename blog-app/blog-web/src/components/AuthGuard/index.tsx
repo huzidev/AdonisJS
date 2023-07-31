@@ -57,10 +57,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       } else if (isProtected && !hasPermission(allowedRole, user.role)) {
         navigate("/");
         toast.error("Insufficient access, you do not have permission to perform this action");
-      } else if (currentPath === ROUTE_PATHS.ARTICLE_CREATE) {
-        navigate("/");
-      } 
-      else {
+      } else {
         setState(true);
       }
     } else {
