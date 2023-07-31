@@ -8,7 +8,7 @@ import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { LoadingList } from "utils/loading";
+import { LoadingListBlogs } from "utils/loading";
 import { columns } from "./data";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
@@ -100,7 +100,7 @@ export default function ViewBlogsPage(): JSX.Element {
       <div className=" flex flex-wrap">
         {/* if their is some data in allBlogs then don't show skeleton loading because then load more spinner will run while fetching data */}
         {isLoading && !allBlogs.length ? (
-          <LoadingList />
+          <LoadingListBlogs />
         ) : (
           allBlogs.map((blog: BlogState) => {
             // allUsers? is mandatory as it can be empty
