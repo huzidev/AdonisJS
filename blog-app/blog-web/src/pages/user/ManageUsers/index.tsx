@@ -98,7 +98,7 @@ export default function ManageUsersPage() {
               </tr>
             </thead>
             <tbody className="text-gray-500">
-              {isLoading ? (
+              {isLoading && !allUsers ? (
                 <tr>
                   <td colSpan={10}>
                     <BulletList />

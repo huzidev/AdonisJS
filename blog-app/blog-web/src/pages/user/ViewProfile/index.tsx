@@ -54,7 +54,7 @@ export default function ViewProfilePage(): JSX.Element {
                   User Profile
                 </h1>
                 {isLoading ? (
-                  <BulletList />
+                  <BulletList />  
                 ) : (
                   <>
                   <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
