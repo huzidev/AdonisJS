@@ -1,7 +1,7 @@
 import ROUTE_PATHS from "Router/paths";
 import qs from "query-string";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useResetPassword } from "store/resetPassword";
 import { resetPasswordState } from "./data";
 import useResetPasswordPageHooks from "./hooks";
@@ -9,10 +9,21 @@ import { ResetPasswordCode } from "./types";
 
 export default function ResetPasswordPage(): JSX.Element {
   const state = useResetPassword();
+  const navigate = useNavigate();
   const [resetState, setResetState] = useState<ResetPasswordCode>(resetPasswordState);
-  const params: any = {
+  
+  let params: any = {
     ...qs.parse(window.location.search),
   };
+
+  useEffect(() => {
+    if (params.email) {
+      setResetState({ ...resetState, email: params.email });
+    }
+    else {
+      navigate("/")
+    }
+  }, [])
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;

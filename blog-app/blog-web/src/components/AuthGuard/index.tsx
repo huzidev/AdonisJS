@@ -24,9 +24,8 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
 
   // so user can't access the protected path
   // Ex user can't access the path for blogger and user and blogger and can't access the path for admins
-  const isProtected = !!route?.role;
-  const allowedRole = route?.role;
-  
+  let isProtected = !!route?.role;
+  let allowedRole = route?.role;
   useEffect(() => {
     const { initState, user } = auth.state;
     if (!initState.init && !initState.loading) {
@@ -36,6 +35,10 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     if (!initState.init) {
       return;
     }
+
+     console.log("IS PROTTECTED", isProtected);
+    console.log("ALLOWED ROLE", allowedRole);
+    console.log("CURRENT ROLE", auth.state.user?.role);
 
     // if user is not loggedIn and tries to access paths like edit user, create user etc
     if (isProtected && !user) {
