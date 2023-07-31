@@ -8,6 +8,7 @@ import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
+import { LoadingBlogs } from "utils/loading";
 import { columns } from "./data";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
@@ -297,6 +298,7 @@ export default function ViewBlogsPage(): JSX.Element {
           </button>
         )}
       </div>
+      <LoadingBlogs />
     </div>
   );
 }
