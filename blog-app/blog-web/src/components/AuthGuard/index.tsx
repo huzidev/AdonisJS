@@ -35,7 +35,6 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     if (initState.init) {
       // so loader won't be shown when data is fetched
       setState(true)
-      return;
     }
 
     // if user is not loggedIn and tries to access paths like edit user, create user etc
