@@ -38,7 +38,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     }
 
     // if user is not loggedIn and tries to access paths like edit user, create user etc
-    if (isProtected && !user) {
+    if (isProtected && !user && initState.init) {
       navigate("/");
       toast.error("You can't access the requested path kindly signin first");
     } else if (user) {
