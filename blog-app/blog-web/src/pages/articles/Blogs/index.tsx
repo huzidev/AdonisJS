@@ -97,7 +97,7 @@ export default function ViewBlogsPage(): JSX.Element {
         }
       </div>
       <div className=" flex flex-wrap">
-        {isLoading ? (
+        {isLoading && !allBlogs.length ? (
           <LoadingList />
         ) : (
           allBlogs.map((blog: BlogState) => {
@@ -307,7 +307,7 @@ export default function ViewBlogsPage(): JSX.Element {
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
             onClick={loadMore}
           >
-            Load More
+            Load More {(isLoading && allBlogs.length) && "LOADINGGGG"}
           </button>
         )}
       </div>
