@@ -308,6 +308,7 @@ export default function ViewBlogsPage(): JSX.Element {
             className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
             onClick={loadMore}
           >
+            {/* so spinner with load more will only be shown when loading state is true and their is some data because if their is no data then load more will not be shown */}
             Load More {(isLoading && allBlogs.length) && (
               <TailSpin
                 height="28"
