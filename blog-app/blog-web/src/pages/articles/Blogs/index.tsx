@@ -98,6 +98,7 @@ export default function ViewBlogsPage(): JSX.Element {
         }
       </div>
       <div className=" flex flex-wrap">
+        {/* if their is some data in allBlogs then don't show skeleton loading because then load more spinner will run while fetching data */}
         {isLoading && !allBlogs.length ? (
           <LoadingList />
         ) : (
