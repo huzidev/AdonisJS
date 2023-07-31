@@ -1,6 +1,7 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { useState } from "react";
+import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -304,10 +305,21 @@ export default function ViewBlogsPage(): JSX.Element {
       <div className="mt-5">
         {currentPageBlogs !== lastPageBlogs && (
           <button
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
             onClick={loadMore}
           >
-            Load More {(isLoading && allBlogs.length) && "LOADINGGGG"}
+            Load More {(isLoading && allBlogs.length) && (
+              <TailSpin
+                height="28"
+                width="23"
+                color="#4fa94d"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{}}
+                wrapperClass="pl-4"
+                visible={true}
+              />
+            )}
           </button>
         )}
       </div>
