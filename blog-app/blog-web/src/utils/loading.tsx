@@ -5,9 +5,9 @@ export function LoadingList() {
     <div>
       <ContentLoader
         speed={1.8}
-        width={1400}
+        width={1200}
         height={220}
-        viewBox="0 0 1400 220"
+        viewBox="0 0 1200 220"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
       >
