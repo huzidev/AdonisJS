@@ -22,7 +22,7 @@ export default function AppRouter(): JSX.Element {
   return (
     <Router>
       <Suspense fallback={<PageLoader />}>
-        {isAuthChecked && <Nav />} 
+        {isAuthChecked && <Nav />}
         <Routes>
           {routes.map(({ Component, ...route }) => {
             return (
