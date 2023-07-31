@@ -11,20 +11,11 @@ import {
 } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
 
-function SkeletonLoader() {
-  return (
-    <div>
-      {/* You can customize the skeleton loader according to your design */}
-    </div>
-  );
-}
-
 export default function ManageUsersPage() {
   const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
   const { handleSort } = useFiltersHook();
-  // const [isLoading, setIsLoading] = useState(false);
 
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;
@@ -32,18 +23,7 @@ export default function ManageUsersPage() {
 
   useManageUsersPageHooks();
 
-  // function loadingCall() {
-  //   return <div><List /></div>
-  // }
-
-  // Check if the user data is loading
-
   const isLoading = user.state.getUserPage.loading;
-
-  // useEffect(() => {
-  //   const state: any = user.state.getUserPage.loading;
-  //   setIsLoading(state);
-  // }, [user.state.getUserPage.loading]);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
