@@ -3,7 +3,7 @@ import { useAuth } from "store/auth";
 import { hasPermission } from "utils";
 import { adminPaths, links, loggedInPathsBlogger, loggedInPathsUser, loggedOutPaths, managePaths } from "./data";
 
-export default function Header() {
+export default function Header(): JSX.Element {
   const location = useLocation();
   const auth = useAuth();
   const user = auth.state.user;
