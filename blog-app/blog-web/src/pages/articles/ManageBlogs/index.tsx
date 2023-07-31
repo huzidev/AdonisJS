@@ -1,6 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
-import { BulletList } from "react-content-loader";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -8,6 +7,7 @@ import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
+import { LoadingList } from "utils/loading";
 import { columns, constKeys } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
 
@@ -76,12 +76,12 @@ export default function ManageBlogsPage() {
                 </tr>
               </thead>
               <tbody className="text-gray-500">
-                {isLoading ? (
+                {isLoading ?  (
                   <tr>
-                  <td colSpan={10}>
-                    <BulletList />
+                  <td colSpan={12}>
+                    <LoadingList />
                   </td>
-                </tr>
+                </tr> 
                 ) : (
                   allBlogs?.map((blog, userIndex) => {
                     const uploadedByUser = allUsers?.find(

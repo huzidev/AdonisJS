@@ -1,11 +1,11 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
-import { BulletList } from "react-content-loader";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
+import { LoadingList } from "utils/loading";
 import {
   columns, constKeys
 } from "./data";
@@ -80,10 +80,10 @@ export default function ManageUsersPage() {
             <tbody className="text-gray-500">
               {isLoading && !allUsers ? (
                 <tr>
-                  <td colSpan={10}>
-                    <BulletList />
+                  <td colSpan={12}>
+                    <LoadingList />
                   </td>
-                </tr>
+                </tr>                
               ) : (allUsers?.map((user, userIndex) => (
                 // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                 <tr key={userIndex}>
