@@ -48,6 +48,7 @@ export function useBlogsPageHooks() {
 
   function handleSort(column: string) {
     let type: any = "";
+    
     // most recent will called desc because desc neans from last to first therefore the last belog will be the latest blog and type === "" when user called reset filters
     column === "most recent"
       ? (type = "recent")

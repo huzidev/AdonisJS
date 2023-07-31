@@ -1,7 +1,7 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -20,7 +20,6 @@ export default function ViewBlogsPage(): JSX.Element {
   const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
-  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
@@ -33,7 +32,7 @@ export default function ViewBlogsPage(): JSX.Element {
     <div className="w-10/12 m-auto flex flex-col">
       <div>
         {sortValue.value && (
-          <button 
+          <button
             className="text-white mr-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={() => handleSort("")}
           >
@@ -44,57 +43,56 @@ export default function ViewBlogsPage(): JSX.Element {
           // so if allBlogs length is just 1 then no need to show filters
           allBlogs.length > 1 && (
             <div>
-            <button
-              id="dropdownDefaultButton"
-              data-dropdown-toggle="dropdown"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              type="button"
-              onClick={() => setDropDown(!dropDown)}
-            >
-              Filter List{" "}
-              <svg
-                className="w-2.5 h-2.5 ml-2.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 10 6"
+              <button
+                id="dropdownDefaultButton"
+                data-dropdown-toggle="dropdown"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button"
+                onClick={() => setDropDown(!dropDown)}
               >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 1 4 4 4-4"
-                />
-              </svg>
-            </button>
-          <div
-            id="dropdown"
-            className={`z-10 ${
-              dropDown
-                ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-                : "hidden"
-            }`}
-          >
-            <ul
-              className="py-2 text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownDefaultButton"
-            >
-              {columns.map((data, columnIndex) => (
-                // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
-                <li
-                  onClick={() => handleSort(data.title)}
-                  className="px-5 py-3 cursor-pointer"
-                  key={columnIndex}
+                Filter List{" "}
+                <svg
+                  className="w-2.5 h-2.5 ml-2.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
                 >
-                  {/* startCase will make the first letter Capital of any word */}
-                  {startCase(data.title)}
-                </li>
-              ))}
-            </ul>
-          </div>
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+              <div
+                id="dropdown"
+                className={`z-10 ${
+                  dropDown
+                    ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                    : "hidden"
+                }`}
+              >
+                <ul
+                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownDefaultButton"
+                >
+                  {columns.map((data, columnIndex) => (
+                    // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
+                    <li
+                      onClick={() => handleSort(data.title)}
+                      className="px-5 py-3 cursor-pointer"
+                      key={columnIndex}
+                    >
+                      {/* startCase will make the first letter Capital of any word */}
+                      {startCase(data.title)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-
           )
         }
       </div>
@@ -110,7 +108,8 @@ export default function ViewBlogsPage(): JSX.Element {
             const isBannedUser: any = uploadedByUser && uploadedByUser.isBanned;
             const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
             const uploadedByUserId = uploadedByUser && uploadedByUser.id;
-            const uploadedByUsername = uploadedByUser && uploadedByUser.username;
+            const uploadedByUsername =
+              uploadedByUser && uploadedByUser.username;
             return (
               <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -134,9 +133,13 @@ export default function ViewBlogsPage(): JSX.Element {
                         // only if loggedIn user's role is user then show heart icon for adding blogs in favorite
                         auth.state.user && auth.state.user.role === "user" && (
                           <div
-                          title={(favoriteBlogs.find(
+                            title={
+                              (favoriteBlogs.find(
                                 (favoriteBlog) => favoriteBlog.id === blog.id
-                              ) ? "Remove From" : "Add to") + " favorite"}
+                              )
+                                ? "Remove From"
+                                : "Add to") + " favorite"
+                            }
                             className={`p-2 rounded-full transition-colors duration-300 ${
                               favoriteBlogs.find(
                                 (favoriteBlog) => favoriteBlog.id === blog.id
@@ -148,11 +151,14 @@ export default function ViewBlogsPage(): JSX.Element {
                               favoriteBlogs.find(
                                 (favoriteBlog) => favoriteBlog.id === blog.id
                               )
-                                ? blogs.removeFavoriteBlog({articleId: blog.id, ownerId: blog.ownerId})
+                                ? blogs.removeFavoriteBlog({
+                                    articleId: blog.id,
+                                    ownerId: blog.ownerId,
+                                  })
                                 : blogs.addFavoriteBlog({
                                     userId: auth.state.user?.id,
                                     articleId: blog.id,
-                                    ownerId: blog.ownerId
+                                    ownerId: blog.ownerId,
                                   })
                             }
                           >
@@ -291,7 +297,8 @@ export default function ViewBlogsPage(): JSX.Element {
                 </div>
               </div>
             );
-          }))}
+          })
+        )}
         {/* if both currentPage is = to lastPage means final page hence no more fetching after that */}
       </div>
       <div className="mt-5">
