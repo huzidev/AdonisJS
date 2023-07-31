@@ -28,6 +28,9 @@ interface AppRoute {
   Component: React.LazyExoticComponent<() => JSX.Element>;
 }   
 
+// MANDATORY to put paths with :params at the end so their won't be any conflicts while accessing paths otherwise if some paths have URL in common like 
+// /blog/add OR /blog/:slug so their can be conflicts if they are not in order
+
 const routes: AppRoute[] = [
     {
         exact: true,
