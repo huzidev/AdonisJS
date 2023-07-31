@@ -110,20 +110,6 @@ export default function AddBlogPage(): JSX.Element {
           </div>
         </form>
       </div>
-      {/* <div className={`inset-0 ${flexClass} fixed`}>
-      <div className={`${flexClass} transition ease-in-out delay-750 opacity-1`}>
-        <h1 className="text-3xl font-bold mr-1">
-          Blog App 
-        </h1>
-        <RotatingLines 
-          strokeColor="black"
-          strokeWidth="5"
-          animationDuration="0.80"
-          width="47"
-          visible={true}
-        />
-      </div>
-    </div> */}
     </div>
   );
 }
