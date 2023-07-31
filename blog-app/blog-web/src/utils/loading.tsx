@@ -21,6 +21,28 @@ export function LoadingList() {
   );
 }
 
+export function LoadingUser() {
+  return (
+    <div>
+      <ContentLoader
+        speed={1.8}
+        width={1000}
+        height={270}
+        viewBox="0 0 1000 270"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#ecebeb"
+      >
+        <rect x="15" y="15" rx="5" ry="5" width="120" height="25" />
+        <rect x="15" y="55" rx="5" ry="5" width="520" height="25" />
+        <rect x="15" y="95" rx="5" ry="5" width="450" height="25" />
+        <rect x="15" y="135" rx="5" ry="5" width="430" height="25" />
+        <rect x="15" y="175" rx="5" ry="5" width="320" height="25" />
+        <rect x="15" y="220" rx="5" ry="5" width="50" height="25" />
+      </ContentLoader>
+    </div>
+  );
+}
+
 export function LoadingListBlogs() {
   return (
     <div>
