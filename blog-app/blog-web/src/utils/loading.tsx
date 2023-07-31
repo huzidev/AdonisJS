@@ -5,9 +5,9 @@ export function LoadingList() {
     <div>
       <ContentLoader
         speed={1.8}
-        width={1200}
+        width={1400}
         height={220}
-        viewBox="0 0 1200 220"
+        viewBox="0 0 1400 220"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
       >
@@ -21,32 +21,35 @@ export function LoadingList() {
   );
 }
 
-export function LoadingBlogs() {
-  return (
-    <div>
-      <ContentLoader viewBox="0 0 900 507" height={507} width={900} >
-        <rect x="30" y="60" rx="0" ry="0" width="200" height="120" />
-        <rect x="30" y="189" rx="0" ry="0" width="200" height="15" />
-        <rect x="30" y="211" rx="0" ry="0" width="140" height="15" />
-        <rect x="243" y="60" rx="0" ry="0" width="200" height="120" />
-        <rect x="243" y="189" rx="0" ry="0" width="200" height="15" />
-        <rect x="243" y="211" rx="0" ry="0" width="140" height="15" />
-        <rect x="455" y="60" rx="0" ry="0" width="200" height="120" />
-        <rect x="455" y="189" rx="0" ry="0" width="200" height="15" />
-        <rect x="455" y="211" rx="0" ry="0" width="140" height="15" />
-        <rect x="667" y="60" rx="0" ry="0" width="200" height="120" />
-        <rect x="667" y="188" rx="0" ry="0" width="200" height="15" />
-        <rect x="667" y="209" rx="0" ry="0" width="140" height="15" />
-        <rect x="30" y="320" rx="0" ry="0" width="200" height="120" />
-        <rect x="30" y="450" rx="0" ry="0" width="200" height="15" />
-        <rect x="30" y="474" rx="0" ry="0" width="140" height="15" />
-        <rect x="243" y="320" rx="0" ry="0" width="200" height="120" />
-        <rect x="455" y="320" rx="0" ry="0" width="200" height="120" />
-        <rect x="243" y="450" rx="0" ry="0" width="200" height="15" />
-        <rect x="455" y="450" rx="0" ry="0" width="200" height="15" />
-        <rect x="243" y="474" rx="0" ry="0" width="140" height="15" />
-        <rect x="455" y="474" rx="0" ry="0" width="140" height="15" />
-      </ContentLoader>
-    </div>
-  );
-}
+// export function LoadingBlogs() {
+//   return (
+//     <div>
+//       <ContentLoader viewBox="0 0 1400 750" height={750} width={1200} >
+//         <rect x="30" y="60" rx="0" ry="0" width="200" height="120" />
+//         <rect x="30" y="189" rx="0" ry="0" width="200" height="15" />
+//         <rect x="30" y="211" rx="0" ry="0" width="140" height="15" />
+//         <rect x="243" y="60" rx="0" ry="0" width="200" height="120" />
+//         <rect x="243" y="189" rx="0" ry="0" width="200" height="15" />
+//         <rect x="243" y="211" rx="0" ry="0" width="140" height="15" />
+//         {/*  */}
+//         <rect x="755" y="60" rx="0" ry="0" width="650" height="200" />
+//         {/*  */}
+//         <rect x="755" y="270" rx="0" ry="0" width="200" height="15" />
+//         {/*  */}
+//         <rect x="755" y="295" rx="0" ry="0" width="140" height="15" />
+//         <rect x="30" y="320" rx="0" ry="0" width="200" height="120" />
+//         <rect x="30" y="450" rx="0" ry="0" width="200" height="15" />
+//         <rect x="30" y="474" rx="0" ry="0" width="140" height="15" />
+//         <rect x="243" y="320" rx="0" ry="0" width="200" height="120" />
+//         {/*  */}
+//         <rect x="755" y="420" rx="0" ry="0" width="650" height="200" />
+//         <rect x="243" y="450" rx="0" ry="0" width="200" height="15" />
+//         {/*  */}
+//         <rect x="755" y="630" rx="0" ry="0" width="200" height="15" />
+//         <rect x="243" y="474" rx="0" ry="0" width="140" height="15" />
+//         {/*  */}
+//         <rect x="755" y="655" rx="0" ry="0" width="140" height="15" /> 
+//       </ContentLoader>
+//     </div>
+//   );
+// }

@@ -1,14 +1,13 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { useState } from "react";
-import { BulletList } from "react-content-loader";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { LoadingBlogs } from "utils/loading";
+import { LoadingList } from "utils/loading";
 import { columns } from "./data";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
@@ -94,7 +93,7 @@ export default function ViewBlogsPage(): JSX.Element {
       </div>
       <div className=" flex flex-wrap">
         {isLoading ? (
-          <BulletList />
+          <LoadingList />
         ) : (
           allBlogs.map((blog: BlogState) => {
             // allUsers? is mandatory as it can be empty
@@ -298,7 +297,6 @@ export default function ViewBlogsPage(): JSX.Element {
           </button>
         )}
       </div>
-      <LoadingBlogs />
     </div>
   );
 }
