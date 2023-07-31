@@ -20,6 +20,7 @@ export default function ResetPasswordPage(): JSX.Element {
     if (params.email) {
       setResetState({ ...resetState, email: params.email });
     }
+    // so if user tries to access resetPassword state without email then navigate user to / homepage
     else {
       navigate("/")
     }
