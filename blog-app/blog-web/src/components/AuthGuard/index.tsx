@@ -36,10 +36,6 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       return;
     }
 
-     console.log("IS PROTTECTED", isProtected);
-    console.log("ALLOWED ROLE", allowedRole);
-    console.log("CURRENT ROLE", auth.state.user?.role);
-
     // if user is not loggedIn and tries to access paths like edit user, create user etc
     if (isProtected && !user) {
       navigate("/");
@@ -61,7 +57,10 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       } else if (isProtected && !hasPermission(allowedRole, user.role)) {
         navigate("/");
         toast.error("Insufficient access, you do not have permission to perform this action");
-      } else {
+      } else if (currentPath === ROUTE_PATHS.ARTICLE_CREATE) {
+        navigate("/");
+      } 
+      else {
         setState(true);
       }
     } else {

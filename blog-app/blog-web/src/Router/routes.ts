@@ -35,20 +35,11 @@ const routes: AppRoute[] = [
         Component: HomePage
     },
     {
-        Component: ViewBlogPage,
-        path: `${ROUTE_PATHS.ARTICLE_VIEW}:slug`
-    },
-    {
         // exact true because no additional (CHANGEABLE) params/id and role[1] so blogger and admin can add blogs
         exact: true,
         role: roles[1],
         path: ROUTE_PATHS.ARTICLE_CREATE,
         Component: AddBlogPage
-    },
-    {
-        role: roles[1],
-        path: `${ROUTE_PATHS.ARTICLE_UPDATE}:slug`,
-        Component: UpdateBlogPage
     },
     {
         exact: true, // didn't used role because everyone even if user is not loggedIn then user can access signIn page
@@ -66,22 +57,6 @@ const routes: AppRoute[] = [
         Component: ViewBlogsPage
     },
     {
-        // loggedIn is not necessary for view profile
-        path: `${ROUTE_PATHS.VIEW_PROFILE}:id`,
-        Component: ViewProfilePage
-    },
-    {
-        exact: true,
-        role: roles[0],
-        path: `${ROUTE_PATHS.EDIT_USER}me`,
-        Component: UserForm
-    },
-    {
-        role: roles[2], // only admins can edit users by id
-        path: `${ROUTE_PATHS.EDIT_USER}:id`,
-        Component: UserForm
-    },
-    {
         exact: true,
         role: roles[2], // only admins can create users
         path: ROUTE_PATHS.USER_CREATE,
@@ -93,16 +68,6 @@ const routes: AppRoute[] = [
         role: roles[0],
         path: ROUTE_PATHS.VERIFY_USER,
         Component: VerifyUserPage
-    },
-    {
-        role: roles[2], // only admins see users page
-        path: `${ROUTE_PATHS.USERS_PAGE}:page`,
-        Component: ManageUsersPage
-    },
-    {
-        role: roles[1],
-        path: `${ROUTE_PATHS.ARTICLES_PAGE}:page`,
-        Component: ManageBlogsPage
     },
     {
         exact: true,
@@ -121,6 +86,41 @@ const routes: AppRoute[] = [
         role: roles[0],
         path: ROUTE_PATHS.BANNED_USER,
         Component: BannedUserPage
+    },
+    {
+        role: roles[1],
+        path: `${ROUTE_PATHS.ARTICLE_UPDATE}:slug`,
+        Component: UpdateBlogPage
+    },
+    {
+        path: `${ROUTE_PATHS.ARTICLE_VIEW}:slug`,
+        Component: ViewBlogPage
+    },
+    {
+        // loggedIn is not necessary for view profile
+        path: `${ROUTE_PATHS.VIEW_PROFILE}:id`,
+        Component: ViewProfilePage
+    },
+    {
+        exact: true,
+        role: roles[0],
+        path: `${ROUTE_PATHS.EDIT_USER}me`,
+        Component: UserForm
+    },
+    {
+        role: roles[2], // only admins can edit users by id
+        path: `${ROUTE_PATHS.EDIT_USER}:id`,
+        Component: UserForm
+    },
+    {
+        role: roles[2], // only admins see users page
+        path: `${ROUTE_PATHS.USERS_PAGE}:page`,
+        Component: ManageUsersPage
+    },
+    {
+        role: roles[1],
+        path: `${ROUTE_PATHS.ARTICLES_PAGE}:page`,
+        Component: ManageBlogsPage
     }
 ]
 
