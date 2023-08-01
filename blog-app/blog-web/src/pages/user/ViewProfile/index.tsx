@@ -126,6 +126,7 @@ export default function ViewProfilePage(): JSX.Element {
         <div className="w-11/12 mx-auto">
           <h1 className="text-2xl font-bold tracking-tight">
             {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
+            {/* isLoadingUser ? "" so when userState is in loading then don't show anything otherwise it'll show Blogs Uploaded while loading is true */}
             {isLoadingUser ? "" : (
               (isUser && isMe) || isRole === "user"
               ? `Blogs Liked By ${isMe ? "You" : userDetails.username}`
