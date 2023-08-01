@@ -29,8 +29,21 @@ export default function ViewProfilePage(): JSX.Element {
   const isLoadingBlogs = blogState.getBlogsById.loading;
   const isLoadingFvrtBlogs = blogState.getFavoriteBlogs.loading;
 
+  
+  const {
+    userDetails,
+    userBlogs,
+    loadMore,
+    currentPage,
+    currentPageFvrt,
+    lastPageFvrt,
+    lastPage,
+    isMe,
+  } = useViewProfilePageHook();
+  
   const totalBlogsContent =
-    isLoadingBlogs || isLoadingFvrtBlogs ? (
+  // !userBlogs.length so when user clicked on Load More then 3 Dot loader won't work because their is already data and same case is created for Load More button
+    (isLoadingBlogs || isLoadingFvrtBlogs) && !userBlogs.length ? (
       <ThreeDots
         height="35"
         width="50"
@@ -46,20 +59,6 @@ export default function ViewProfilePage(): JSX.Element {
     ) : (
       totalBlogs
     );
-
-  const {
-    userDetails,
-    userBlogs,
-    loadMore,
-    currentPage,
-    currentPageFvrt,
-    lastPageFvrt,
-    lastPage,
-    isMe,
-  } = useViewProfilePageHook();
-
-  console.log("user blogs", userBlogs);
-  
 
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (
