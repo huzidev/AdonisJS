@@ -29,20 +29,23 @@ export default function ViewProfilePage(): JSX.Element {
   const isLoadingBlogs = blogs.state.getBlogsById.loading;
   const isLoadingFvrtBlogs = blogs.state.getFavoriteBlogs.loading;
 
-  const totalBlogsContent = isLoadingBlogs || isLoadingFvrtBlogs ? (
-  <ThreeDots
-    height="35"
-    width="50"
-    radius="9"
-    color="#4fa94d"
-    ariaLabel="three-dots-loading"
-    wrapperStyle={{}}
-    wrapperClass=""
-    visible={true}
-  />
-) : (
-  userDataById?.role === "user" ? totalFvrtBlogs : totalBlogs
-);
+  const totalBlogsContent =
+    isLoadingBlogs || isLoadingFvrtBlogs ? (
+      <ThreeDots
+        height="35"
+        width="50"
+        radius="9"
+        color="#4fa94d"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    ) : userDataById?.role === "user" ? (
+      totalFvrtBlogs
+    ) : (
+      totalBlogs
+    );
 
   const {
     userDetails,
@@ -91,7 +94,8 @@ export default function ViewProfilePage(): JSX.Element {
                       {(isUser && isMe) ||
                       user.state.getUser.data?.role === "user"
                         ? `Total Blogs Liked : `
-                        : `Total Blogs : `} {totalBlogsContent}
+                        : `Total Blogs : `}{" "}
+                      {totalBlogsContent}
                     </h2>
                   </>
                 )}
@@ -218,8 +222,7 @@ export default function ViewProfilePage(): JSX.Element {
                     </div>
                   </div>
                 );
-              }
-            )
+              })
             )
             // (favoriteBlogs.data && userBlogs)
             // // ? favoriteBlogs.data.map((blog: any) => {
@@ -266,36 +269,38 @@ export default function ViewProfilePage(): JSX.Element {
             //   })
             // :
           }
-          {(!isLoadingUser && (isLoadingBlogs || isLoadingFvrtBlogs) && userBlogs.length === 0) && (
-            <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
-                Oops...
-                {/* if clickedUser role is user */}
-                {user.state.getUser.data?.role === "user" && !isMe
-                  ? `${userDetails.username} haven't Liked`
-                  : // if LoggedIn user's role is user and path includes "me"
-                  isUser && isMe
-                  ? "You haven't Liked"
-                  : // if user role is not user and path includes "me" then show You haven't Uploaded any blog yet
-                    `${
-                      isMe ? "You" : userDetails.username
-                    } haven't uploaded`}{" "}
-                any blog yet
-              </h1>
-              <Link
-                to={
-                  isMe && !isUser
-                    ? ROUTE_PATHS.ARTICLE_CREATE
-                    : ROUTE_PATHS.ARTICLES
-                }
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
-              >
-                {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
-                {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
-              </Link>
-            </div>
-          )}
+          {!isLoadingUser &&
+            (isLoadingBlogs || isLoadingFvrtBlogs) &&
+            userBlogs.length === 0 && (
+              <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
+                  Oops...
+                  {/* if clickedUser role is user */}
+                  {user.state.getUser.data?.role === "user" && !isMe
+                    ? `${userDetails.username} haven't Liked`
+                    : // if LoggedIn user's role is user and path includes "me"
+                    isUser && isMe
+                    ? "You haven't Liked"
+                    : // if user role is not user and path includes "me" then show You haven't Uploaded any blog yet
+                      `${
+                        isMe ? "You" : userDetails.username
+                      } haven't uploaded`}{" "}
+                  any blog yet
+                </h1>
+                <Link
+                  to={
+                    isMe && !isUser
+                      ? ROUTE_PATHS.ARTICLE_CREATE
+                      : ROUTE_PATHS.ARTICLES
+                  }
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                  title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+                >
+                  {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
+                  {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+                </Link>
+              </div>
+            )}
         </div>
       </div>
       <div className="w-11/12 m-auto mt-5">
