@@ -18,16 +18,16 @@ export default function ViewProfilePage(): JSX.Element {
   const userDataById = user.state.getUser?.data;
   const currentRole = auth.state.user?.role;
   const isAdminRole = hasPermission("admin", currentRole);
+  const blogState = blogs.state;
   const isUser = currentRole === "user";
   const isAdmin = userDataById?.role === "admin";
-  const blogState = blogs.state;
   // let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
-  let totalBlogs = blogs.state.getBlogsById.meta?.total;
-  let totalFvrtBlogs = blogs.state.getFavoriteBlogs.meta?.total;
+  let totalBlogs = blogState.getBlogsById.meta?.total;
+  let totalFvrtBlogs = blogState.getFavoriteBlogs.meta?.total;
 
   const isLoadingUser = user.state.getUser.loading;
-  const isLoadingBlogs = blogs.state.getBlogsById.loading;
-  const isLoadingFvrtBlogs = blogs.state.getFavoriteBlogs.loading;
+  const isLoadingBlogs = blogState.getBlogsById.loading;
+  const isLoadingFvrtBlogs = blogState.getFavoriteBlogs.loading;
 
   const totalBlogsContent =
     isLoadingBlogs || isLoadingFvrtBlogs ? (
