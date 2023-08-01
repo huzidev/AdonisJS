@@ -270,7 +270,7 @@ export default function ViewProfilePage(): JSX.Element {
         */}
         {
           // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
-          (isRole === "user" ? currentPageFvrt !== lastPageFvrt : currentPage !== lastPage) &&
+          (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) &&
             (totalBlogs > 15 || totalFvrtBlogs > 15) && (
               <button
                 className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
