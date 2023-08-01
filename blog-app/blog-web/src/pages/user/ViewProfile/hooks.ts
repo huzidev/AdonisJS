@@ -119,7 +119,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   function loadMore() {
     const updatedPayload = {
       userId: isMe ? loggedInId : params.id,
-      page: isRole === "user" ? currentPageFvrt + 1 : currentPage + 1,
+      page: isRole === "user"? currentPageFvrt + 1 : currentPage + 1,
     };
     if (isRole === "user") {
       blogs.getFavoriteBlogs(updatedPayload);
@@ -136,6 +136,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     currentPageFvrt,
     lastPageFvrt,
     lastPage,
-    isMe
+    isMe,
+    isRole
   };
 }

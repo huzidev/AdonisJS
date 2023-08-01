@@ -39,6 +39,7 @@ export default function ViewProfilePage(): JSX.Element {
     lastPageFvrt,
     lastPage,
     isMe,
+    isRole
   } = useViewProfilePageHook();
   
   const totalBlogsContent =
@@ -59,6 +60,10 @@ export default function ViewProfilePage(): JSX.Element {
     ) : (
       totalBlogs
     );
+
+      console.log("currentPage", currentPage);
+      console.log("lastPage", lastPage);
+      
 
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (
@@ -226,9 +231,8 @@ export default function ViewProfilePage(): JSX.Element {
               );
             })
           )}
-          {!isLoadingUser &&
-            (isLoadingBlogs || isLoadingFvrtBlogs) &&
-            userBlogs.length === 0 && (
+          {(!isLoadingUser && !isLoadingBlogs &&
+            userBlogs.length === 0) && (
               <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                   Oops...
@@ -266,7 +270,7 @@ export default function ViewProfilePage(): JSX.Element {
         */}
         {
           // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
-          (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) &&
+          ((currentPageFvrt !== lastPageFvrt || currentPage !== lastPage)) &&
             (totalBlogs > 15 || totalFvrtBlogs > 15) && (
               <button
                 className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"

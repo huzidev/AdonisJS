@@ -22,5 +22,6 @@ export interface ViewProfileStateHandler {
     currentPageFvrt: number;
     lastPageFvrt: number;
     lastPage: number;
-    isMe: boolean
+    isMe: boolean;
+    isRole: string;
 }
