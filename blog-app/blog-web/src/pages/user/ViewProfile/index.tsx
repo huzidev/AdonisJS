@@ -61,10 +61,6 @@ export default function ViewProfilePage(): JSX.Element {
       totalBlogs
     );
 
-      console.log("currentPage", currentPage);
-      console.log("lastPage", lastPage);
-      
-
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (
     <>
@@ -130,9 +126,12 @@ export default function ViewProfilePage(): JSX.Element {
         <div className="w-11/12 mx-auto">
           <h1 className="text-2xl font-bold tracking-tight">
             {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
-            {(isUser && isMe) || user.state.getUser.data?.role === "user"
+            {isLoadingUser ? "" : (
+              (isUser && isMe) || isRole === "user"
               ? `Blogs Liked By ${isMe ? "You" : userDetails.username}`
-              : `Blogs Uploaded By ${!isMe ? userDetails.username : "You"}`}
+              : `Blogs Uploaded By ${!isMe ? userDetails.username : "You"}`
+            )
+              }
           </h1>
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
@@ -270,7 +269,7 @@ export default function ViewProfilePage(): JSX.Element {
         */}
         {
           // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
-          ((currentPageFvrt !== lastPageFvrt || currentPage !== lastPage)) &&
+          (isRole === "user" ? currentPageFvrt !== lastPageFvrt : currentPage !== lastPage) &&
             (totalBlogs > 15 || totalFvrtBlogs > 15) && (
               <button
                 className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
