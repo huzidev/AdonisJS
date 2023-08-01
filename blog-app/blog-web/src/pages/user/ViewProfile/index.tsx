@@ -27,9 +27,9 @@ export default function ViewProfilePage(): JSX.Element {
 
   const isLoadingUser = user.state.getUser.loading;
   const isLoadingBlogs = blogs.state.getBlogsById.loading;
-  const isLoadingFvrtBlogs = blogs.state.getFavoriteBlogs.data;
+  const isLoadingFvrtBlogs = blogs.state.getFavoriteBlogs.loading;
 
-  const totalBlogsContent = isLoadingBlogs ? (
+  const totalBlogsContent = isLoadingBlogs || isLoadingFvrtBlogs ? (
   <ThreeDots
     height="35"
     width="50"
@@ -41,7 +41,7 @@ export default function ViewProfilePage(): JSX.Element {
     visible={true}
   />
 ) : (
-  totalBlogs
+  userDataById?.role === "user" ? totalFvrtBlogs : totalBlogs
 );
 
   const {
@@ -87,11 +87,11 @@ export default function ViewProfilePage(): JSX.Element {
                     <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                       Joined Date : {formatedDate}
                     </h2>
-                    <h2 className="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h2 className="mb-4 text-xl flex font-bold tracking-tight text-gray-900 dark:text-white">
                       {(isUser && isMe) ||
                       user.state.getUser.data?.role === "user"
-                        ? `Total Blogs Liked : ${totalFvrtBlogs}`
-                        : `Total Blogs : ${totalBlogsContent}`}
+                        ? `Total Blogs Liked : `
+                        : `Total Blogs : `} {totalBlogsContent}
                     </h2>
                   </>
                 )}
