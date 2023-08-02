@@ -21,6 +21,7 @@ export default function UserFormPage() {
   const [booleanState, setBooleanState] = useState<BooleanState>(detailsBoolean);
   const fetchedData: any = user.state.getUser?.data;
   const isMe = window.location.pathname.includes("/me");
+  const loggedInId: any = auth.state.user?.id;
   const isCreate = window.location.pathname.includes("create");
 
   // const prevUpdateState = usePrevious(user.state.updateMe);
@@ -73,8 +74,8 @@ export default function UserFormPage() {
   // }, [updateState, prevUpdateState]);
 
   useEffect(() => {
-    if (!isMe && !isCreate) {
-      user.getById(Number(params.id));
+    if (!isCreate) {
+      user.getById(isMe ? loggedInId : Number(params.id));
     }
   }, [params.id]);
 
