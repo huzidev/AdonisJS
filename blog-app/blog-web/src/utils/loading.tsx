@@ -1,4 +1,5 @@
 import ContentLoader from "react-content-loader";
+import { ThreeDots } from "react-loader-spinner";
 
 export function LoadingList() {
   return (
@@ -64,6 +65,23 @@ export function LoadingListBlogs() {
   );
 }
 
+export function LoadingThreeDots() {
+  return (
+    <div>
+      <ThreeDots
+        height="35"
+        width="50"
+        radius="9"
+        color="#4fa94d"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    </div>
+  );
+}
+
 // export function LoadingBlogs() {
 //   return (
 //     <div>
@@ -91,7 +109,7 @@ export function LoadingListBlogs() {
 //         <rect x="755" y="630" rx="0" ry="0" width="200" height="15" />
 //         <rect x="243" y="474" rx="0" ry="0" width="140" height="15" />
 //         {/*  */}
-//         <rect x="755" y="655" rx="0" ry="0" width="140" height="15" /> 
+//         <rect x="755" y="655" rx="0" ry="0" width="140" height="15" />
 //       </ContentLoader>
 //     </div>
 //   );

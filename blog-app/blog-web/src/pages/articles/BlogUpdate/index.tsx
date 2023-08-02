@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
-import { LoadingList } from "utils/loading";
+import { LoadingList, LoadingThreeDots } from "utils/loading";
 import { updateBlogData } from "./data";
 import { useEditBlogPageHooks } from "./hooks";
 
@@ -64,16 +63,7 @@ export default function UpdateBlogPage(): JSX.Element {
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               {/* show three dots loading when users data is in loading state */}
               {isLoading
-                ? <ThreeDots
-                  height="35"
-                  width="50"
-                  radius="9"
-                  color="#4fa94d"
-                  ariaLabel="three-dots-loading"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                  visible={true}
-                /> 
+                ? <LoadingThreeDots />
                 : `Edit ${isOwner ? "Yours" : `${ownerName}'s`} Blog`
               }
             </h2>

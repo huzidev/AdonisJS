@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
+import { LoadingList, LoadingThreeDots } from "utils/loading";
 import { detailsBoolean, detailsCreateUser, detailsId, detailsMe } from "./data";
 import { useUserFormHook } from "./hooks";
 import { BooleanState, User, UserDetailsEdit } from "./types";
@@ -23,6 +24,7 @@ export default function UserFormPage() {
   const isMe = window.location.pathname.includes("/me");
   const loggedInId: any = auth.state.user?.id;
   const isCreate = window.location.pathname.includes("create");
+  const isLoading = user.state.getUser.loading;
 
   // const prevUpdateState = usePrevious(user.state.updateMe);
   // const updateState = user.state.updateMe;
@@ -106,10 +108,13 @@ export default function UserFormPage() {
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             {isCreate
               ? "Create User"
-              : isMe
-              ? "Edit Yours Details"
               // using ref Hook value.current so the username field won't re-render when admin edit the username
-              :  `Edit ${value.current}'s Details`} 
+              // !isCreate so when user is at editing own info or when admin is edit some user info then loadign will show three dots loader
+              : (!isCreate && isLoading)
+              ? <LoadingThreeDots />
+              : isMe && !isLoading
+              ? "Edit Yours Details" 
+              : `Edit ${value.current}'s Details`} 
           </h2>
         </div>
         <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -297,7 +302,10 @@ export default function UserFormPage() {
                   />
                 </div>
               </>
-            ) : isMe ? (
+            ) : isLoading ? (
+              <LoadingList />
+            )
+            : (!isLoading && isMe) ? (
               <>
                 <label
                   htmlFor="username"

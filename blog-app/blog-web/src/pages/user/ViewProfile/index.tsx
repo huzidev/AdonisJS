@@ -1,12 +1,12 @@
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
-import { TailSpin, ThreeDots } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { LoadingListBlogs, LoadingUser } from "utils/loading";
+import { LoadingListBlogs, LoadingThreeDots, LoadingUser } from "utils/loading";
 import { useViewProfilePageHook } from "./hooks";
 
 export default function ViewProfilePage(): JSX.Element {
@@ -43,16 +43,7 @@ export default function ViewProfilePage(): JSX.Element {
   const totalBlogsContent =
     // !userBlogs.length so when user clicked on Load More then 3 Dot loader won't work because their is already data and same case is created for Load More button
     (isLoadingBlogs || isLoadingFvrtBlogs) && !userBlogs.length ? (
-      <ThreeDots
-        height="35"
-        width="50"
-        radius="9"
-        color="#4fa94d"
-        ariaLabel="three-dots-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
-      />
+      <LoadingThreeDots />
     ) : userDataById?.role === "user" ? (
       totalFvrtBlogs
     ) : (
