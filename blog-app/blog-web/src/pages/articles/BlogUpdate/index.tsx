@@ -50,6 +50,7 @@ export default function UpdateBlogPage(): JSX.Element {
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        {/* show skeleton loading when blogs is in loading state */}
         {isLoadingBlog ? (
           <LoadingList />
         ) : (
@@ -61,6 +62,7 @@ export default function UpdateBlogPage(): JSX.Element {
               alt="Your Company"
             />
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              {/* show three dots loading when users data is in loading state */}
               {isLoading
                 ? <ThreeDots
                   height="35"
