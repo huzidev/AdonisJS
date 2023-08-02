@@ -32,6 +32,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       auth.initUser();
       return;
     }
+
     if (initState.init) {
       // so loader won't be shown when data is fetched
       setState(true)
@@ -65,7 +66,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     } else {
       setState(true);
     }
-  }, [auth.initUser, auth.state.initState]);
+  }, [auth.state.user, auth.state.initState]);
   if (!state) {
     return <PageLoader />;
   }

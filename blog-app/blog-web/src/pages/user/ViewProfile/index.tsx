@@ -21,7 +21,6 @@ export default function ViewProfilePage(): JSX.Element {
   const blogState = blogs.state;
   const isUser = currentRole === "user";
   const isAdmin = userDataById?.role === "admin";
-  // let userBlogs = isUser ? blogs.state.getFavoriteBlogs?.data : allBlogsById.filter((blogs) => blogs.ownerId === currentId);
   let totalBlogs = blogState.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogState.getFavoriteBlogs.meta?.total;
 
@@ -230,7 +229,7 @@ export default function ViewProfilePage(): JSX.Element {
                 );
               })}
               {!isLoadingUser &&
-                (!isLoadingBlogs || !isLoadingFvrtBlogs) &&
+                // (!isLoadingBlogs || !isLoadingFvrtBlogs) &&
                 userBlogs.length === 0 && (
                   <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
@@ -263,13 +262,12 @@ export default function ViewProfilePage(): JSX.Element {
                 )}
               <div className="w-11/12 m-auto mt-5">
                 {/* so load more button will only be visible when their is currentPage OR currentPageFvrt and if currentPage and lastPage values 
-         became equal then don't show load more button anymore
-        */}
+                became equal then don't show load more button anymore
+                */}
                 {
                   // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
-                  (currentPageFvrt !== lastPageFvrt ||
-                    currentPage !== lastPage) &&
-                    (totalBlogs > 15 || totalFvrtBlogs > 15) && (
+                  (!isLoadingUser && (isRole === "user" ? currentPageFvrt !== lastPageFvrt : currentPage !== lastPage) &&
+                    (isRole === "user" ? totalFvrtBlogs > 15 : totalBlogs > 15)) && (
                       <button
                         className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
                         onClick={loadMore}
