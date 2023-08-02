@@ -10,8 +10,6 @@ export default class FavoriteArticlesController {
             const body = await request.validate(AddFavoriteArticle);
             const { userId, articleId } = body;
 
-            console.log("BODY", body);
-            
             // for owner of blog info so we can get owner name and then show the owner name in notification
             const user = await User.findBy("id", body.ownerId);
             

@@ -4,7 +4,7 @@ export class AddComment {
   public schema = schema.create({
     userId: schema.number(),
     articleId: schema.number(),
-    content: schema.string({ trim: true }, [rules.minLength(2)]),
+    comment: schema.string({ trim: true }, [rules.minLength(2)]),
   })
 
   public messages: CustomMessages = {
