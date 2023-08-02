@@ -2,6 +2,7 @@ import Route from '@ioc:Adonis/Core/Route';
 
 import ArticlesRoutes from './routes/article';
 import AuthRoutes from './routes/auth';
+import CommentRoutes from './routes/comment';
 import FavoriteArticlesRoutes from './routes/favoriteArticle';
 import UsersRoutes from './routes/user';
 
@@ -10,4 +11,5 @@ Route.group(() => {
   AuthRoutes()
   UsersRoutes()
   FavoriteArticlesRoutes()
+  CommentRoutes()
 })
