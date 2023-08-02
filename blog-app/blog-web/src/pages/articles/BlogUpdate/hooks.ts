@@ -25,8 +25,11 @@ export function useEditBlogPageHooks(): void {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (slug) {
       blog.getBlog(slug);
+  }, [])
+
+  useEffect(() => {
+    if (slug) {
       // so only get userData by id when blog get fetched successfully otherwise the id of previous user remains saved and will give error
       if (prev?.getBlog.loading) {
         user.getById(ownerId)

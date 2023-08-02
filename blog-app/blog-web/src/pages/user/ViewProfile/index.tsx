@@ -133,7 +133,7 @@ export default function ViewProfilePage(): JSX.Element {
           </h1>
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
-          {isLoadingBlogs && !userBlogs.length ? (
+          {(isLoadingBlogs || isLoadingFvrtBlogs) && !userBlogs.length ? (
             <LoadingListBlogs />
           ) : (
             <>
@@ -228,9 +228,8 @@ export default function ViewProfilePage(): JSX.Element {
                   </div>
                 );
               })}
-              {!isLoadingUser &&
-                // (!isLoadingBlogs || !isLoadingFvrtBlogs) &&
-                userBlogs.length === 0 && (
+              {(!isLoadingUser &&
+                (!isLoadingBlogs && userBlogs.length === 0)) && (
                   <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                       Oops...
