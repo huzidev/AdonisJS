@@ -29,7 +29,6 @@ export default function ViewProfilePage(): JSX.Element {
   const isLoadingBlogs = blogState.getBlogsById.loading;
   const isLoadingFvrtBlogs = blogState.getFavoriteBlogs.loading;
 
-  
   const {
     userDetails,
     userBlogs,
@@ -39,11 +38,11 @@ export default function ViewProfilePage(): JSX.Element {
     lastPageFvrt,
     lastPage,
     isMe,
-    isRole
+    isRole,
   } = useViewProfilePageHook();
-  
+
   const totalBlogsContent =
-  // !userBlogs.length so when user clicked on Load More then 3 Dot loader won't work because their is already data and same case is created for Load More button
+    // !userBlogs.length so when user clicked on Load More then 3 Dot loader won't work because their is already data and same case is created for Load More button
     (isLoadingBlogs || isLoadingFvrtBlogs) && !userBlogs.length ? (
       <ThreeDots
         height="35"
@@ -127,172 +126,176 @@ export default function ViewProfilePage(): JSX.Element {
           <h1 className="text-2xl font-bold tracking-tight">
             {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
             {/* isLoadingUser ? "" so when userState is in loading then don't show anything otherwise it'll show Blogs Uploaded while user state is in loading */}
-            {isLoadingUser ? "" : (
-              (isUser && isMe) || isRole === "user"
+            {isLoadingUser
+              ? ""
+              : (isUser && isMe) || isRole === "user"
               ? `Blogs Liked By ${isMe ? "You" : userDetails.username}`
-              : `Blogs Uploaded By ${!isMe ? userDetails.username : "You"}`
-            )
-              }
+              : `Blogs Uploaded By ${!isMe ? userDetails.username : "You"}`}
           </h1>
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
           {isLoadingBlogs && !userBlogs.length ? (
             <LoadingListBlogs />
           ) : (
-            userBlogs.map((blog: any) => {
-              return (
-                <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
-                  {/* <img src={ele.image} alt="Thumbnail" /> */}
-                  <div className="h-52 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <img
-                      className="rounded-t-lg"
-                      src="/docs/images/blog/image-1.jpg"
-                      alt="Thumbnail"
-                    />
-                    <div>
-                      <h5
-                        title={blog.title}
-                        className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-                      >
-                        {blog.title.length > 21
-                          ? `${blog.title.slice(0, 21)}...`
-                          : blog.title}
-                      </h5>
-                      <p
-                        title={blog.content}
-                        className="mb-3 font-normal text-gray-700 dark:text-gray-400"
-                      >
-                        {blog.content.length > 50
-                          ? `${blog.content.slice(0, 50)}...`
-                          : blog.content}
-                      </p>
-                      <Link
-                        to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
-                        className="text-sm font-medium text-center text-white hover:text-blue-500"
-                      >
-                        Read More
-                      </Link>
-                      {(blog.ownerId === auth.state.user?.id ||
-                        (!isAdmin && currentRole === "super-admin") ||
-                        (isAdminRole &&
-                          userDataById?.role !== "super-admin")) &&
-                        // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
-                        !userDataById?.isBanned && (
-                          <div>
-                            <Link
-                              to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
-                              type="button"
-                              className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                            >
-                              Edit
-                            </Link>
-                            <button
-                              type="button"
-                              className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
-                              // onClick={() => blogs.deleteBlog(blog.id)}
-                              onClick={() => {
-                                setDeleteBlogId(blog.id);
-                                setShowModal(true);
-                              }}
-                            >
-                              Delete
-                            </button>
-                            {showModal && deleteBlogId === blog.id && (
-                              <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
-                                <div className="bg-white p-8 w-96">
-                                  <p className="text-lg text-center mb-4">
-                                    Are you sure you want to delete this blog?
-                                  </p>
-                                  <div className="flex justify-center space-x-4">
-                                    <button
-                                      className="bg-red-500 text-white px-4 py-2 rounded"
-                                      onClick={() => {
-                                        blogs.deleteBlog(blog.id);
-                                        setShowModal(false);
-                                      }}
-                                    >
-                                      Yes
-                                    </button>
-                                    <button
-                                      className="bg-gray-500 text-white px-4 py-2 rounded"
-                                      onClick={() => setShowModal(false)}
-                                    >
-                                      No
-                                    </button>
+            <>
+              {userBlogs.map((blog: any) => {
+                return (
+                  <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
+                    {/* <img src={ele.image} alt="Thumbnail" /> */}
+                    <div className="h-52 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                      <img
+                        className="rounded-t-lg"
+                        src="/docs/images/blog/image-1.jpg"
+                        alt="Thumbnail"
+                      />
+                      <div>
+                        <h5
+                          title={blog.title}
+                          className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                        >
+                          {blog.title.length > 21
+                            ? `${blog.title.slice(0, 21)}...`
+                            : blog.title}
+                        </h5>
+                        <p
+                          title={blog.content}
+                          className="mb-3 font-normal text-gray-700 dark:text-gray-400"
+                        >
+                          {blog.content.length > 50
+                            ? `${blog.content.slice(0, 50)}...`
+                            : blog.content}
+                        </p>
+                        <Link
+                          to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
+                          className="text-sm font-medium text-center text-white hover:text-blue-500"
+                        >
+                          Read More
+                        </Link>
+                        {(blog.ownerId === auth.state.user?.id ||
+                          (!isAdmin && currentRole === "super-admin") ||
+                          (isAdminRole &&
+                            userDataById?.role !== "super-admin")) &&
+                          // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
+                          !userDataById?.isBanned && (
+                            <div>
+                              <Link
+                                to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                                type="button"
+                                className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                              >
+                                Edit
+                              </Link>
+                              <button
+                                type="button"
+                                className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
+                                // onClick={() => blogs.deleteBlog(blog.id)}
+                                onClick={() => {
+                                  setDeleteBlogId(blog.id);
+                                  setShowModal(true);
+                                }}
+                              >
+                                Delete
+                              </button>
+                              {showModal && deleteBlogId === blog.id && (
+                                <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
+                                  <div className="bg-white p-8 w-96">
+                                    <p className="text-lg text-center mb-4">
+                                      Are you sure you want to delete this blog?
+                                    </p>
+                                    <div className="flex justify-center space-x-4">
+                                      <button
+                                        className="bg-red-500 text-white px-4 py-2 rounded"
+                                        onClick={() => {
+                                          blogs.deleteBlog(blog.id);
+                                          setShowModal(false);
+                                        }}
+                                      >
+                                        Yes
+                                      </button>
+                                      <button
+                                        className="bg-gray-500 text-white px-4 py-2 rounded"
+                                        onClick={() => setShowModal(false)}
+                                      >
+                                        No
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            )}
-                          </div>
-                        )}
+                              )}
+                            </div>
+                          )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })
-          )}
-          {(!isLoadingUser && !isLoadingBlogs &&
-            userBlogs.length === 0) && (
-              <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
-                  Oops...
-                  {/* if clickedUser role is user */}
-                  {user.state.getUser.data?.role === "user" && !isMe
-                    ? `${userDetails.username} haven't Liked`
-                    : // if LoggedIn user's role is user and path includes "me"
-                    isUser && isMe
-                    ? "You haven't Liked"
-                    : // if user role is not user and path includes "me" then show You haven't Uploaded any blog yet
-                      `${
-                        isMe ? "You" : userDetails.username
-                      } haven't uploaded`}{" "}
-                  any blog yet
-                </h1>
-                <Link
-                  to={
-                    isMe && !isUser
-                      ? ROUTE_PATHS.ARTICLE_CREATE
-                      : ROUTE_PATHS.ARTICLES
-                  }
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                  title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
-                >
-                  {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
-                  {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
-                </Link>
-              </div>
-            )}
-        </div>
-      </div>
-      <div className="w-11/12 m-auto mt-5">
-        {/* so load more button will only be visible when their is currentPage OR currentPageFvrt and if currentPage and lastPage values 
+                );
+              })}
+              {!isLoadingUser &&
+                (!isLoadingBlogs || !isLoadingFvrtBlogs) &&
+                userBlogs.length === 0 && (
+                  <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
+                      Oops...
+                      {/* if clickedUser role is user */}
+                      {user.state.getUser.data?.role === "user" && !isMe
+                        ? `${userDetails.username} haven't Liked`
+                        : // if LoggedIn user's role is user and path includes "me"
+                        isUser && isMe
+                        ? "You haven't Liked"
+                        : // if user role is not user and path includes "me" then show You haven't Uploaded any blog yet
+                          `${
+                            isMe ? "You" : userDetails.username
+                          } haven't uploaded`}{" "}
+                      any blog yet
+                    </h1>
+                    <Link
+                      to={
+                        isMe && !isUser
+                          ? ROUTE_PATHS.ARTICLE_CREATE
+                          : ROUTE_PATHS.ARTICLES
+                      }
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                      title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+                    >
+                      {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
+                      {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+                    </Link>
+                  </div>
+                )}
+              <div className="w-11/12 m-auto mt-5">
+                {/* so load more button will only be visible when their is currentPage OR currentPageFvrt and if currentPage and lastPage values 
          became equal then don't show load more button anymore
         */}
-        {
-          // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
-          (currentPageFvrt !== lastPageFvrt || currentPage !== lastPage) &&
-            (totalBlogs > 15 || totalFvrtBlogs > 15) && (
-              <button
-                className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
-                onClick={loadMore}
-              >
-                {/* so spinner with load more will only be shown when loading state is true and their is some data because if their is no data then load more will not be shown */}
-                Load More{" "}
-                {((isLoadingBlogs || isLoadingFvrtBlogs) && userBlogs.length) && (
-                  <TailSpin
-                    height="28"
-                    width="23"
-                    color="#4fa94d"
-                    ariaLabel="tail-spin-loading"
-                    radius="1"
-                    wrapperStyle={{}}
-                    wrapperClass="pl-4"
-                    visible={true}
-                  />
-                )}
-              </button>
-            )
-        }
+                {
+                  // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
+                  (currentPageFvrt !== lastPageFvrt ||
+                    currentPage !== lastPage) &&
+                    (totalBlogs > 15 || totalFvrtBlogs > 15) && (
+                      <button
+                        className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
+                        onClick={loadMore}
+                      >
+                        {/* so spinner with load more will only be shown when loading state is true and their is some data because if their is no data then load more will not be shown */}
+                        Load More{" "}
+                        {(isLoadingBlogs || isLoadingFvrtBlogs) &&
+                          userBlogs.length && (
+                            <TailSpin
+                              height="28"
+                              width="23"
+                              color="#4fa94d"
+                              ariaLabel="tail-spin-loading"
+                              radius="1"
+                              wrapperStyle={{}}
+                              wrapperClass="pl-4"
+                              visible={true}
+                            />
+                          )}
+                      </button>
+                    )
+                }
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </>
   );
