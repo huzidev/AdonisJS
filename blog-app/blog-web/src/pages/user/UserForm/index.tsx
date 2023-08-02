@@ -1,69 +1,22 @@
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
 import { LoadingList, LoadingThreeDots } from "utils/loading";
-import { detailsBoolean, detailsCreateUser, detailsId, detailsMe } from "./data";
+import { detailsBoolean } from "./data";
 import { useUserFormHook } from "./hooks";
-import { BooleanState, User, UserDetailsEdit } from "./types";
+import { BooleanState } from "./types";
 
 export default function UserFormPage() {
   const auth = useAuth();
   const user = useUser();
-  const params = useParams();
-  const userData = auth.state.user;
-  const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>(detailsMe);
-  const value = useRef('');
-  const [updateDetailsId, setUpdateDetailsId] = useState<User>(detailsId);
-  const [createUser, setCreateUser] = useState<any>(detailsCreateUser);
   const [booleanState, setBooleanState] = useState<BooleanState>(detailsBoolean);
-  const fetchedData: any = user.state.getUser?.data;
-  const isMe = window.location.pathname.includes("/me");
-  const loggedInId: any = auth.state.user?.id;
-  const isCreate = window.location.pathname.includes("create");
   const isLoading = user.state.getUser.loading;
-
   // const prevUpdateState = usePrevious(user.state.updateMe);
   // const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
-
-  useEffect(() => {
-    if (isMe) {
-      setUpdateDetailsMe({ ...updateDetailsMe, ...fetchedData });
-    } else {
-      setUpdateDetailsId({ ...updateDetailsId, ...fetchedData });
-      // so value will only be fetched if fetchedData is not undefined
-      // using useRef other wise the value is updating on own on the heading as well where Edit ${value.current} Details is written
-      if (fetchedData) {
-        value.current = fetchedData.username;
-      }
-    }
-  }, [params.id, fetchedData]);
-
-  function inputHandler(e: React.ChangeEvent) {
-    const { name, value, type, checked } = e.target as HTMLInputElement;
-    isCreate ? (
-      setCreateUser({
-        ...createUser,
-        [name]: type === "checkbox" ? checked : value,
-      })
-    ) : (
-      isMe ? (
-        setUpdateDetailsMe({
-          ...updateDetailsMe,
-          [name]: value,
-        })
-       ) : (
-        setUpdateDetailsId({
-          ...updateDetailsId,
-          [name]: type === "checkbox" ? checked : value,
-        })
-       )
-    )
-  }
 
   // useEffect(() => {
   //   if (
@@ -75,27 +28,19 @@ export default function UserFormPage() {
   //   }
   // }, [updateState, prevUpdateState]);
 
-  useEffect(() => {
-    if (!isCreate) {
-      user.getById(isMe ? loggedInId : Number(params.id));
-    }
-  }, [params.id]);
-
-  function submit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (isMe) {
-      user.updateMe({ ...updateDetailsMe })
-    } else if (Number(params.id) === user.state.getUser.data?.id) {
-      user.updateById({
-        ...updateDetailsId,
-        id: Number(params.id)
-      })
-    } 
-    else {
-      user.createUser({...createUser})
-    }
-  }
-  useUserFormHook();
+  
+  const { 
+    isMe,
+    value,
+    isCreate,
+    inputHandler,
+    updateDetailsId,
+    updateDetailsMe,
+    createUser,
+    submit,
+    setCreateUser,
+    setUpdateDetailsId 
+  } = useUserFormHook();
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">

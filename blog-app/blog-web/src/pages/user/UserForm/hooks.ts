@@ -1,21 +1,88 @@
 import ROUTE_PATHS from "Router/paths";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
+import { detailsCreateUser, detailsId, detailsMe } from "./data";
+import { User, UserDetailsEdit } from "./types";
 
 export function useUserFormHook() {
   const auth = useAuth();
   const user = useUser();
+  const params = useParams();
+  const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>(detailsMe);
+  const [createUser, setCreateUser] = useState<any>(detailsCreateUser);
+  const isMe = window.location.pathname.includes("/me");
+  const value = useRef('');
+  const loggedInId: any = auth.state.user?.id;
+  const fetchedData: any = user.state.getUser?.data;
+  const [updateDetailsId, setUpdateDetailsId] = useState<User>(detailsId);
+  const isCreate = window.location.pathname.includes("create");
   const userRole = user.state.getUser.data?.role;
   const authRole = auth.state.user?.role;
   const state = user.state;
   const prev = usePrevious(state);
   const navigate = useNavigate();
   
+  useEffect(() => {
+    if (isMe) {
+      setUpdateDetailsMe({ ...updateDetailsMe, ...fetchedData });
+    } else {
+      setUpdateDetailsId({ ...updateDetailsId, ...fetchedData });
+      // so value will only be fetched if fetchedData is not undefined
+      // using useRef other wise the value is updating on own on the heading as well where Edit ${value.current} Details is written
+      if (fetchedData) {
+        value.current = fetchedData.username;
+      }
+    }
+  }, [params.id, fetchedData]);
+
+  function inputHandler(e: React.ChangeEvent) {
+    const { name, value, type, checked } = e.target as HTMLInputElement;
+    isCreate ? (
+      setCreateUser({
+        ...createUser,
+        [name]: type === "checkbox" ? checked : value,
+      })
+    ) : (
+      isMe ? (
+        setUpdateDetailsMe({
+          ...updateDetailsMe,
+          [name]: value,
+        })
+       ) : (
+        setUpdateDetailsId({
+          ...updateDetailsId,
+          [name]: type === "checkbox" ? checked : value,
+        })
+       )
+    )
+  }
+
+  useEffect(() => {
+      if (!isCreate) {
+        user.getById(isMe ? loggedInId : Number(params.id));
+      }
+    }, [params.id]);
+
+    function submit(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      if (isMe) {
+        user.updateMe({ ...updateDetailsMe })
+      } else if (Number(params.id) === user.state.getUser.data?.id) {
+        user.updateById({
+          ...updateDetailsId,
+          id: Number(params.id)
+        })
+      } 
+      else {
+        user.createUser({...createUser})
+      }
+    }
+
   useEffect(() => {
     if (prev?.createUser.loading) {
       if (!state?.createUser?.loading && !state.createUser.error) {
@@ -54,5 +121,17 @@ export function useUserFormHook() {
     }
   }, [state]);
 
+  return {
+    isMe,
+    value,
+    isCreate,
+    inputHandler,
+    updateDetailsId,
+    updateDetailsMe,
+    createUser,
+    submit,
+    setCreateUser,
+    setUpdateDetailsId
+  }
 
 }
