@@ -1,33 +1,37 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import Article from 'App/Models/Article';
-import Comment from 'App/Models/Comment';
-import User from 'App/Models/User';
-import { AddComment } from 'App/Validators/CommentValidator';
+import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import Article from "App/Models/Article";
+import Comment from "App/Models/Comment";
+import User from "App/Models/User";
+import { AddComment } from "App/Validators/CommentValidator";
 
 export default class CommentsController {
-    public async addComment({ request, auth }: HttpContextContract) {
-        try {
-            const body = await request.validate(AddComment);
+  public async addComment({ request, auth }: HttpContextContract) {
+    try {
+      const body = await request.validate(AddComment);
 
-            const { userId, articleId } = body;
+      console.log("body", body);
 
-            const userComment: any = User.findBy("id", userId);
+      const { userId, articleId } = body;
 
-            const article: any = Article.findBy("id", articleId);
+        let user: any, article: any, ownerName: any;
 
-            const blogOwner: any = User.findBy("id", article.ownerId);
-
-            console.log("ARTICLES", article);
+            console.log("USER ID", userId);
             
-            await Comment.create(body);
+                user = await User.findBy("id", userId);
+                article = await Article.findBy("id", articleId);
+                ownerName = await User.findBy("id", article.ownerId);
 
-            return {
-                message: `Comment added successfully by ${userComment.username} on blog by ${blogOwner.username}`,
-                status: 200,
-                response: body
-            }
-        } catch (e) {
-            throw e;
-        }
+            
+
+      await Comment.create(body);
+
+      return {
+        message: `Comment added successfully by ${user.username} on blog ${ownerName.username}`,
+        status: 200,
+        response: body
+      };
+    } catch (e) {
+      throw e;
     }
+  }
 }
