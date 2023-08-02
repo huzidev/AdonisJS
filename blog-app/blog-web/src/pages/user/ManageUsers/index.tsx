@@ -78,7 +78,7 @@ export default function ManageUsersPage() {
               </tr>
             </thead>
             <tbody className="text-gray-500">
-              {isLoading && !allUsers ? (
+              {isLoading ? (
                 <tr>
                   <td colSpan={12}>
                     <LoadingList />
