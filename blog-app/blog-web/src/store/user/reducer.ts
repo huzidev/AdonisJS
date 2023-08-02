@@ -39,6 +39,7 @@ export const userSlice = createSlice({
             if (action.payload) {
                 const { data, message }: any = action.payload;
                 state.updateMe.data = data;
+                // state.getUser.data = data;
                 state.updateMe.message = message;
             }
         })

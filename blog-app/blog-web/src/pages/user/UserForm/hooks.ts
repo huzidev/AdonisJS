@@ -7,7 +7,7 @@ import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 
-export function useUserFormHook(): void {
+export function useUserFormHook() {
   const auth = useAuth();
   const user = useUser();
   const userRole = user.state.getUser.data?.role;
@@ -53,4 +53,6 @@ export function useUserFormHook(): void {
       }
     }
   }, [state]);
+
+
 }

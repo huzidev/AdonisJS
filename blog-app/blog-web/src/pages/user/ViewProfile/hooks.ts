@@ -58,7 +58,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         }
       }
       if (isMe) {
-        setUserDetails({ ...userDetails, ...auth.state.user });
+        // setUserDetails({ ...userDetails, ...auth.state.user });
+        setUserDetails({ ...userDetails, ...userDataById });
         // because when user's role is user then we only wanted to fetch favoriteBlogs
         const payloadData = {
           userId: loggedInId,

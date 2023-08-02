@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
-import { usePrevious } from "utils/hooks";
 import { detailsBoolean, detailsCreateUser, detailsId, detailsMe } from "./data";
 import { useUserFormHook } from "./hooks";
 import { BooleanState, User, UserDetailsEdit } from "./types";
@@ -24,16 +23,13 @@ export default function UserFormPage() {
   const isMe = window.location.pathname.includes("/me");
   const isCreate = window.location.pathname.includes("create");
 
-  const prevUpdateState = usePrevious(user.state.updateMe);
-  const updateState = user.state.updateMe;
+  // const prevUpdateState = usePrevious(user.state.updateMe);
+  // const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
-
-  console.log("USER DATA", user.state.getUser?.data);
-  
 
   useEffect(() => {
     if (isMe) {
-      setUpdateDetailsMe({ ...updateDetailsMe, ...userData });
+      setUpdateDetailsMe({ ...updateDetailsMe, ...fetchedData });
     } else {
       setUpdateDetailsId({ ...updateDetailsId, ...fetchedData });
       // so value will only be fetched if fetchedData is not undefined
@@ -66,15 +62,15 @@ export default function UserFormPage() {
     )
   }
 
-  useEffect(() => {
-    if (
-      prevUpdateState?.loading &&
-      !updateState?.loading &&
-      updateState?.data
-    ) {
-      user.updateUserState(updateState.data!);
-    }
-  }, [updateState, prevUpdateState]);
+  // useEffect(() => {
+  //   if (
+  //     prevUpdateState?.loading &&
+  //     !updateState?.loading &&
+  //     updateState?.data
+  //   ) {
+  //     user.updateUserState(updateState.data!);
+  //   }
+  // }, [updateState, prevUpdateState]);
 
   useEffect(() => {
     if (!isMe && !isCreate) {
@@ -112,7 +108,7 @@ export default function UserFormPage() {
               : isMe
               ? "Edit Yours Details"
               // using ref Hook value.current so the username field won't re-render when admin edit the username
-              : `Edit ${value.current}'s Details`} 
+              :  `Edit ${value.current}'s Details`} 
           </h2>
         </div>
         <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">

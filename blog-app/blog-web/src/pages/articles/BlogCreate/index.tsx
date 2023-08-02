@@ -9,8 +9,6 @@ export default function AddBlogPage(): JSX.Element {
   const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
 
-  const [state, setState] = useState<boolean>(false);
-
   function inputHandler(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
