@@ -72,7 +72,7 @@ export default class UsersController {
 
       let message;
       // so when user asked for filter then notifcation will be according to filter type
-      if (!!filters.sort && response.totalNumber !== 0 && !dateKeys.includes(filterResultKey) ) {
+      if (!!filters.sort && response.totalNumber !== 0 && !dateKeys.includes(filterResultKey)) {
         message = `Users list fetched by ${
           filterResultKey === "role" 
           ? filters.sort?.role 
