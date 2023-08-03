@@ -28,7 +28,7 @@ export function useCommentPageHooks() {
 
   useEffect(() => {
     if (blogId) {
-      comment.getComments({ articleId: blogId });
+      comment.getComments(blogId);
     }
     setContent({ ...content, userId: loggedInId, articleId: blogId });
   }, [loggedInId, blogId]);

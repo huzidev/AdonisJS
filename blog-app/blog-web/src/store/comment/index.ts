@@ -13,6 +13,7 @@ export const useComments = () => {
   return {
     state,
     addComment,
-    getComments
+    getComments,
+    deleteComment
   };
 };

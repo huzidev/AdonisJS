@@ -53,9 +53,9 @@ export default function CommentsPage(props: any): JSX.Element {
         <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
           <footer className="flex justify-between items-center mb-2">
             <div>
-              {allComments && allComments.map((comment: AllCommentsState, index: number) => {
+              {allComments && allComments.map((value: AllCommentsState, index: number) => {
                 const uploadedByUser = allUsers?.find(
-                  (user: User) => user.id === comment.userId
+                  (user: User) => user.id === value.userId
                 ); 
                 const commentBy = uploadedByUser && uploadedByUser.username;
                 const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
@@ -66,14 +66,14 @@ export default function CommentsPage(props: any): JSX.Element {
                         {commentBy}
                       </p>
                       <p>
-                        {comment.comment}
+                        {value.comment}
                       </p>
                     </div>
                     <p>
-                      {new Date(comment.createdAt).toLocaleDateString()}
+                      {new Date(value.createdAt).toLocaleDateString()}
                     </p>
                     {
-                      (comment.userId === userData?.id || 
+                      (value.userId === userData?.id || 
                       (hasPermission("admin", userData?.role) &&
                         uploadedByUserRole !== "super-admin")) &&
                     <div>
@@ -81,7 +81,7 @@ export default function CommentsPage(props: any): JSX.Element {
                         Edit
                       </button>
                       {" "}
-                          <button>
+                          <button onClick={() => comment.deleteComment(value.id)}>
                             Delete
                           </button>
                     </div>
