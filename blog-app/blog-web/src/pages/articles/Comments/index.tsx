@@ -1,10 +1,14 @@
+import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComments } from "store/comment";
+import { hasPermission } from "utils";
 import { useCommentPageHooks } from "./hooks";
 import { AllCommentsState } from "./types";
 
 export default function CommentsPage(): JSX.Element {
   const comment = useComments();
+  const auth = useAuth();
+  const userData = auth.state.user;
   const { content, setContent, allComments, allUsers } = useCommentPageHooks();
  
   function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -52,6 +56,7 @@ export default function CommentsPage(): JSX.Element {
                   (user: User) => user.id === comment.userId
                 ); 
                 const commentBy = uploadedByUser && uploadedByUser.username;
+                const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
                 return (
                   <div key={index}>
                     <div className="flex">
@@ -65,6 +70,10 @@ export default function CommentsPage(): JSX.Element {
                     <p>
                       {new Date(comment.createdAt).toLocaleDateString()}
                     </p>
+                    {
+                      (comment.userId === userData?.id ||
+                      (hasPermission("admin", userData?.role) &&
+                        uploadedByUserRole !== "super-admin")) &&
                     <div>
                       <button>
                         Edit
@@ -74,6 +83,7 @@ export default function CommentsPage(): JSX.Element {
                         Delete
                       </button>
                     </div>
+                    }
                   </div>
                 )
               })}
