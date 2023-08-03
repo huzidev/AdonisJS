@@ -9,6 +9,8 @@ export const add = createAsyncThunk(
   async (data: any) => {
     try {
       const response = await api.post(endpoints.ADD_COMMENT, data);
+      console.log("ADD COMMENT RESPONSE", response);
+      return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);
