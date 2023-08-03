@@ -16,7 +16,7 @@ export default function AddCommentPage(): JSX.Element {
     const [content, setContent] = useState<AddCommentState>({
         userId: loggedInId!,
         articleId: blogId!,
-        comment: ""
+        comment: ''
     })
 
     function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -38,8 +38,12 @@ export default function AddCommentPage(): JSX.Element {
               Your comment
             </label>
             <textarea
-              id="comment"
+              name="comment"
               rows={6}
+              value={content.comment}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setContent({ ...content, comment: e.target.value })
+              }
               className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
               placeholder="Write a comment..."
               required
@@ -47,7 +51,6 @@ export default function AddCommentPage(): JSX.Element {
           </div>
           <button
             type="submit"
-            onClick={submit}
             className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
           >
             Post comment
