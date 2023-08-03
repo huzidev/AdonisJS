@@ -1,4 +1,29 @@
+import { useState } from "react";
+import { useBlogs } from "store/articles";
+import { useAuth } from "store/auth";
+import { useComments } from "store/comment";
+import { AddCommentState } from "./types";
+
 export default function AddCommentPage(): JSX.Element {
+    const comment = useComments();
+
+    const auth = useAuth();
+    const blog = useBlogs();
+
+    const loggedInId = auth.state.user?.id;
+    const blogId = blog.state.getBlog.data?.id;
+
+    const [content, setContent] = useState<AddCommentState>({
+        userId: loggedInId!,
+        articleId: blogId!,
+        comment: ""
+    })
+
+    function submit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        comment.addComment(content)
+    }   
+
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
@@ -22,6 +47,7 @@ export default function AddCommentPage(): JSX.Element {
           </div>
           <button
             type="submit"
+            onClick={submit}
             className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
           >
             Post comment
