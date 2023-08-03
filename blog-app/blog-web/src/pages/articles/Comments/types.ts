@@ -1,11 +1,10 @@
-import { Comment } from "store/comment/types";
-
 export interface AddCommentState {
-    userId: number;
-    articleId: number;
-    comment: string;
+  userId: number;
+  articleId: number;
+  comment: string;
 }
 
-export interface AllComments {
-    data: Comment[]
+export interface AllComments extends AddCommentState {
+  createdAt: string;
+  updatedAt: string;
 }

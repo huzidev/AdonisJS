@@ -1,16 +1,15 @@
+import { User } from "store/auth/types";
 import { useComments } from "store/comment";
 import { useCommentPageHooks } from "./hooks";
 
 export default function CommentsPage(): JSX.Element {
   const comment = useComments();
-  const { content, setContent, allComments } = useCommentPageHooks();
+  const { content, setContent, allComments, allUsers } = useCommentPageHooks();
  
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     comment.addComment(content);
   }
-
-  console.log("Comments", allComments);
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
@@ -48,7 +47,9 @@ export default function CommentsPage(): JSX.Element {
           <footer className="flex justify-between items-center mb-2">
             <div className="flex items-center">
               {allComments && allComments.map((comment: any, index: number) => {
-                const commentBy = comment.userId 
+                const uploadedByUser = allUsers?.find(
+                  (user: User) => user.id === comment.userId
+                ); 
                 return (
                   <p key={index} className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                     <img
