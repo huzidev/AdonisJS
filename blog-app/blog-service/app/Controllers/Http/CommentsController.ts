@@ -36,7 +36,6 @@ export default class CommentsController {
             .where("article_id", articleId)
             .select("*");
       // const response = await Article.query().whereIn("id", query);
-      console.log("response", response);
       return {
         message: "Comments fetched successfully",
         data: response
