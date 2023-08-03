@@ -3,12 +3,15 @@ import { useCommentPageHooks } from "./hooks";
 
 export default function AddCommentPage(): JSX.Element {
   const comment = useComments();
-  const { content, setContent } = useCommentPageHooks();
+  const { content, setContent, comments } = useCommentPageHooks();
  
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     comment.addComment(content);
   }
+
+  console.log("RESPONSE FOR ALL COMMENTS", comments);
+  
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">

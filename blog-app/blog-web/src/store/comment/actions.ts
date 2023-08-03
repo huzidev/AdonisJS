@@ -10,7 +10,6 @@ export const addComment = createAsyncThunk(
   async (data: AddCommentPayload) => {
     try {
       const response = await api.post(endpoints.ADD_COMMENT, data);
-      console.log("ADD COMMENT RESPONSE", response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
@@ -25,7 +24,7 @@ export const getComments = createAsyncThunk(
   endpoints.GET_COMMENTS,
   async (data: GetCommentsState) => {
     try {
-      const response = await api.post(endpoints.GET_COMMENTS + data.articleId);
+      const response = await api.get(endpoints.GET_COMMENTS + data.articleId);
       console.log("RESPONSE FOR ALL COMMENTS", response.data);
       return response.data;
     } catch (e: any) {

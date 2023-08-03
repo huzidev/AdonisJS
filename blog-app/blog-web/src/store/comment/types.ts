@@ -1,9 +1,9 @@
 import { SubState } from "store/types";
 
 export interface AddCommentPayload {
-    userId: number;
-    articleId: number;
-    comment: string;
+  userId: number;
+  articleId: number;
+  comment: string;
 }
 
 export interface Comment extends AddCommentPayload {
@@ -14,7 +14,7 @@ export interface Comment extends AddCommentPayload {
 
 export interface GetCommentsState extends SubState {
   articleId?: number;
-  data: Comment | null;
+  data?: Comment | null;
 }
 
 export interface CommentState {

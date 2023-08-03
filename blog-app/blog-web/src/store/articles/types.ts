@@ -47,7 +47,7 @@ export interface BlogSortReq {
 }
 
 export interface AllBlogs extends SubState {
-  data: Blog;
+  data: Blog[];
   meta: PaginationMeta | null | any;
   filters?: boolean;
   page?: number;
