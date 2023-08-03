@@ -16,6 +16,8 @@ export default function CommentsPage(props: any): JSX.Element {
     comment.addComment(content);
   }
 
+  console.log("all comments", allComments);
+
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
@@ -71,7 +73,7 @@ export default function CommentsPage(props: any): JSX.Element {
                       {new Date(comment.createdAt).toLocaleDateString()}
                     </p>
                     {
-                      (comment.userId === userData?.id ||
+                      (comment.userId === userData?.id || 
                       (hasPermission("admin", userData?.role) &&
                         uploadedByUserRole !== "super-admin")) &&
                     <div>
@@ -79,13 +81,9 @@ export default function CommentsPage(props: any): JSX.Element {
                         Edit
                       </button>
                       {" "}
-                      {
-                        (userData?.id === props.ownerid && uploadedByUserRole !== "super-admin") && (
                           <button>
                             Delete
                           </button>
-                        )
-                      }
                     </div>
                     }
                   </div>

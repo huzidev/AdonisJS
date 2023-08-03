@@ -20,7 +20,11 @@ export const commentSlice = createSlice({
         builder.addCase(actions.addComment.fulfilled, (state, action) => {
             state.addComment = { loading: false, error: false };
             if (action.payload) {
-                const { message } = action.payload;
+                const { message, data } = action.payload;
+                if (state.getComments.data) {
+                  const prevComments = JSON.parse(JSON.stringify(state.getComments.data));
+                  state.getComments.data = [...prevComments, data]
+                }
                 state.addComment.message = message;
             }
         })
