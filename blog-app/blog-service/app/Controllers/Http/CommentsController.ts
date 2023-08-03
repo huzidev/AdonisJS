@@ -21,8 +21,7 @@ export default class CommentsController {
 
       return {
         message: `Comment added successfully by ${user.username} `,
-        status: 200,
-        response: body,
+        data: body
       };
     } catch (e) {
       throw e;
@@ -35,7 +34,7 @@ export default class CommentsController {
       const response = await Comment.query()
             .where("article_id", articleId)
             .select("*");
-      // const response = await Article.query().whereIn("id", query);
+      // const response = await Article.query().whereIn("id", query); 
       return {
         message: "Comments fetched successfully",
         data: response
@@ -65,12 +64,12 @@ export default class CommentsController {
   }
 
   public async delete({ params }: HttpContextContract) {
-    const comment = await Comment.findBy("id", params.id);
-    await comment?.delete();
+    const response = await Comment.findBy("id", params.id);
+    await response?.delete();
 
     return {
-      message: `Comment with id ${comment?.id} deleted successfully`,
-      status: 200
+      message: `Comment with id ${response?.id} deleted successfully`,
+      data: response
     }
   }
 }
