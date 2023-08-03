@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useComments } from "store/comment";
+import { AddCommentState } from "./types";
 
 export default function AddCommentPage(): JSX.Element {
   const comment = useComments();
@@ -11,10 +12,10 @@ export default function AddCommentPage(): JSX.Element {
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = blog.state.getBlog.data?.id;
 
-  const [content, setContent] = useState<any>({
-    userId: null,
-    articleId: null,
-    comment: "",
+  const [content, setContent] = useState<AddCommentState>({
+    userId: loggedInId,
+    articleId: blogId,
+    comment: '',
   });
 
   useEffect(() => {
