@@ -1,4 +1,5 @@
 import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
+import pick from 'lodash/pick'
 
 export class AddComment {
   public static schemaMap = {
@@ -14,7 +15,7 @@ export class AddComment {
 }
 
 export class EditComment {
-  public schema = schema.create(AddComment.schemaMap)
+  public schema = schema.create(pick(AddComment.schemaMap, ['comment']))
   public messages: CustomMessages = {
     required: '{{ field }} is required for edit comment',
   }

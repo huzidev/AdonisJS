@@ -38,7 +38,16 @@ export default class CommentsController {
     return response;
   }
 
-  public async edit({ auth, request }) {
-    const body = await request.validate(EditComment);
+  public async edit({ params, request }) {
+    try {
+      const body = await request.validate(EditComment);
+      const comment: any = await Comment.findBy("id", params.id);
+  
+      comment.fill({ ...comment, ...body });
+      comment.merge(body);
+      await comment.save();
+    } catch (e) {
+      throw e;
+    }
   }
 }
