@@ -69,7 +69,7 @@ export default class CommentsController {
 
     return {
       message: `Comment with id ${response?.id} deleted successfully`,
-      data: response
+      response
     }
   }
 }
