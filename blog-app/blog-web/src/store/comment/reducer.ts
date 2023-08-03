@@ -29,18 +29,18 @@ export const commentSlice = createSlice({
         });
         // Get All Comments
         builder.addCase(actions.getComments.pending, (state) => {
-          state.addComment = { loading: true, error: false };
+          state.getComments = { loading: true, error: false };
         });
         builder.addCase(actions.getComments.fulfilled, (state, action) => {
-          state.addComment = { loading: true, error: false };
+          state.getComments = { loading: true, error: false };
             if (action.payload) {
               const { message, data } = action.payload;
               state.getComments.data = data;
-              state.addComment.message = message;
+              state.getComments.message = message;
             }
         })
         builder.addCase(actions.getComments.rejected, (state) => {
-          state.addComment = { loading: true, error: false };
+          state.getComments = { loading: true, error: false };
         });
     }
 })

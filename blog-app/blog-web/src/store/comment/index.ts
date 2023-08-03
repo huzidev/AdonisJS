@@ -5,7 +5,7 @@ import { AddCommentPayload, CommentState, GetCommentsState } from "./types";
 
 export const useComments = () => {
   const dispatch = useAppDispatch();
-  const state = useSelector((state: any) => state.blogs) as CommentState;
+  const state = useSelector((state: any) => state.comments) as CommentState;
   const addComment = (payload: AddCommentPayload) => dispatch(actions.addComment(payload));
   const getComments = (payload: GetCommentsState) => dispatch(actions.getComments(payload));
 

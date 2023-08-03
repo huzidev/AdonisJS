@@ -25,7 +25,6 @@ export const getComments = createAsyncThunk(
   async (data: GetCommentsState) => {
     try {
       const response = await api.get(endpoints.GET_COMMENTS + data.articleId);
-      console.log("RESPONSE FOR ALL COMMENTS", response.data);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);

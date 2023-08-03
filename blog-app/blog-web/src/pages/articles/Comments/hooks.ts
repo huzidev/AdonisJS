@@ -10,7 +10,8 @@ export function useCommentPageHooks() {
   const blog = useBlogs();
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = blog.state.getBlog.data?.id;
-  const [comments, setComments] = useState<any>();
+  const allComments: any = comment.state.getComments.data;
+  const [comments, setComments] = useState<any>(allComments);
 
   const [content, setContent] = useState<AddCommentState>({
     userId: loggedInId,
@@ -25,9 +26,13 @@ export function useCommentPageHooks() {
     setContent({ ...content, userId: loggedInId, articleId: blogId });
   }, [loggedInId, blogId]);
 
+  useEffect(() => {
+    setComments(allComments)
+  }, [comments])
+
   return {
     setContent,
     content,
-    comments
+    allComments
   }
 }

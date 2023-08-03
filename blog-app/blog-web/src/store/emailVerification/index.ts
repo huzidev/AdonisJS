@@ -3,7 +3,6 @@ import { useAppDispatch } from 'store/hooks/hooks';
 import * as actions from './actions';
 import { EmailVerificationPayload, EmailVerificationState } from './types';
 
-
 export function useEmailVerification() {
   const state = useSelector((state: any) => state.emailVerification) as EmailVerificationState;
   const dispatch = useAppDispatch();
