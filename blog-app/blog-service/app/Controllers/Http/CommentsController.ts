@@ -56,4 +56,14 @@ export default class CommentsController {
       throw e;
     }
   }
+
+  public async delete({ params }: HttpContextContract) {
+    const comment = await Comment.findBy("id", params.id);
+    await comment?.delete();
+
+    return {
+      message: `Comment with id ${comment?.id} deleted successfully`,
+      status: 200
+    }
+  }
 }
