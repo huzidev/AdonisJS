@@ -4,7 +4,7 @@ import User from "App/Models/User";
 import { AddComment, EditComment } from "App/Validators/CommentValidator";
 
 export default class CommentsController {
-  public async addC({ request, auth }: HttpContextContract) {
+  public async add({ request, auth }: HttpContextContract) {
     try {
       const body = await request.validate(AddComment);
 
@@ -46,6 +46,12 @@ export default class CommentsController {
       comment.fill({ ...comment, ...body });
       comment.merge(body);
       await comment.save();
+
+      return {
+        message: "Comment updated successfully",
+        status: 200
+      }
+
     } catch (e) {
       throw e;
     }
