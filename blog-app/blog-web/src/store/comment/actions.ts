@@ -3,10 +3,11 @@ import api from "services/api";
 import { mapErrorToState } from "store/utils";
 import { errorNotification } from "utils/notifications";
 import * as endpoints from "./endpoints";
+import { AddCommentPayload } from "./types";
 
 export const add = createAsyncThunk(
   endpoints.ADD_COMMENT,
-  async (data: any) => {
+  async (data: AddCommentPayload) => {
     try {
       const response = await api.post(endpoints.ADD_COMMENT, data);
       console.log("ADD COMMENT RESPONSE", response);
