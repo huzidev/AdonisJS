@@ -60,6 +60,10 @@ export default function CommentsPage(): JSX.Element {
                     <p>
                       {comment.comment}
                     </p>
+                    {" "}
+                    <p>
+                      {new Date(comment.createdAt).toLocaleDateString()}
+                    </p>
                   </div>
                 )
               })}
