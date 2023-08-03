@@ -30,12 +30,20 @@ export default class CommentsController {
   }
 
   public async getAll({ params }: HttpContextContract) {
-    const articleId = params.id;
-    const response = Comment.query()
-          .where("article_id", articleId)
-          .select("*");
-    // const response = await Article.query().whereIn("id", query);
-    return response;
+    try {
+      const articleId = params.id;
+      const response = await Comment.query()
+            .where("article_id", articleId)
+            .select("*");
+      // const response = await Article.query().whereIn("id", query);
+      console.log("response", response);
+      return {
+        message: "Comments fetched successfully",
+        data: response
+      };
+    } catch (e) {
+      throw e
+    }
   }
 
   public async edit({ params, request }) {
