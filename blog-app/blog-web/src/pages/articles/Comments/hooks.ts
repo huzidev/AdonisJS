@@ -6,7 +6,6 @@ import { AddCommentState } from "./types";
 export function useCommentPageHooks() {
   const auth = useAuth();
   const blog = useBlogs();
-
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = blog.state.getBlog.data?.id;
 

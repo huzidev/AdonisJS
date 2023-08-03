@@ -3,7 +3,6 @@ import { useCommentPageHooks } from "./hooks";
 
 export default function AddCommentPage(): JSX.Element {
   const comment = useComments();
-
   const { content, setContent } = useCommentPageHooks();
  
   function submit(e: React.FormEvent<HTMLFormElement>) {
