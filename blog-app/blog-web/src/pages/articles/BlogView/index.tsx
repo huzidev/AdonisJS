@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useUser } from "store/user";
+import AddCommentPage from "../Comments";
 import { useGetBlogPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
@@ -51,6 +52,9 @@ export default function ViewBlogPage(): JSX.Element {
             </div>
           </>
         )}
+      </div>
+      <div className="w-2/3 my-8 mx-auto">
+        <AddCommentPage />
       </div>
     </div>
   );
