@@ -46,24 +46,34 @@ export default function CommentsPage(): JSX.Element {
         </form>
         <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
           <footer className="flex justify-between items-center mb-2">
-            <div >
+            <div>
               {allComments && allComments.map((comment: AllCommentsState, index: number) => {
                 const uploadedByUser = allUsers?.find(
                   (user: User) => user.id === comment.userId
                 ); 
                 const commentBy = uploadedByUser && uploadedByUser.username;
                 return (
-                  <div key={index} className="flex">
-                    <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                      {commentBy}
-                    </p>
-                    <p>
-                      {comment.comment}
-                    </p>
-                    {" "}
+                  <div key={index}>
+                    <div className="flex">
+                      <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                        {commentBy}
+                      </p>
+                      <p>
+                        {comment.comment}
+                      </p>
+                    </div>
                     <p>
                       {new Date(comment.createdAt).toLocaleDateString()}
                     </p>
+                    <div>
+                      <button>
+                        Edit
+                      </button>
+                      {" "}
+                      <button>
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 )
               })}
