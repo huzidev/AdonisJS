@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import blogs from "./articles/reducer";
 import auth from "./auth/reducer";
+import comments from "./comment/reducer";
 import emailVerification from "./emailVerification/reducer";
 import reset from "./resetPassword/reducer";
 import user from "./user/reducer";
@@ -11,6 +12,7 @@ const store = configureStore({
         auth,
         user,
         reset,
+        comments,
         emailVerification
     }
 })
