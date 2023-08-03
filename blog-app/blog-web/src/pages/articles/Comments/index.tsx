@@ -1,6 +1,7 @@
 import { User } from "store/auth/types";
 import { useComments } from "store/comment";
 import { useCommentPageHooks } from "./hooks";
+import { AllCommentsState } from "./types";
 
 export default function CommentsPage(): JSX.Element {
   const comment = useComments();
@@ -16,7 +17,7 @@ export default function CommentsPage(): JSX.Element {
       <div className="max-w-2xl mx-auto px-4">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
-            Comments
+            Comments ({allComments && allComments.length})
           </h2>
         </div>
         <form className="mb-6" onSubmit={submit}>
@@ -45,20 +46,21 @@ export default function CommentsPage(): JSX.Element {
         </form>
         <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
           <footer className="flex justify-between items-center mb-2">
-            <div className="flex items-center">
-              {allComments && allComments.map((comment: any, index: number) => {
+            <div >
+              {allComments && allComments.map((comment: AllCommentsState, index: number) => {
                 const uploadedByUser = allUsers?.find(
                   (user: User) => user.id === comment.userId
                 ); 
+                const commentBy = uploadedByUser && uploadedByUser.username;
                 return (
-                  <p key={index} className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                    <img
-                      className="mr-2 w-6 h-6 rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                      alt="Michael Gough"
-                    />
-                    {comment.comment}
-                  </p>
+                  <div key={index} className="flex">
+                    <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                      {commentBy}
+                    </p>
+                    <p>
+                      {comment.comment}
+                    </p>
+                  </div>
                 )
               })}
             </div>

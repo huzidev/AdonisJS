@@ -4,7 +4,7 @@ export interface AddCommentState {
   comment: string;
 }
 
-export interface AllComments extends AddCommentState {
+export interface AllCommentsState extends AddCommentState {
   createdAt: string;
   updatedAt: string;
 }
