@@ -50,6 +50,9 @@ export default function ViewProfilePage(): JSX.Element {
       totalBlogs
     );
 
+      console.log("USER BLOGS", userBlogs);
+      
+
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (
     <>
