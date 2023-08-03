@@ -15,6 +15,13 @@ export const commentSlice = createSlice({
         builder.addCase(actions.addComment.pending, (state) => {
           state.addComment = { loading: true, error: false };
         });
+        builder.addCase(actions.addComment.fulfilled, (state, action) => {
+            state.addComment = { loading: false, error: false };
+            if (action.payload) {
+                const { message } = action.payload;
+                state.addComment.message = message;
+            }
+        })
         builder.addCase(actions.addComment.rejected, (state) => {
           state.addComment = { loading: false, error: true };
         });
