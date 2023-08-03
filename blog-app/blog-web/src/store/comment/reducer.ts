@@ -5,6 +5,7 @@ import { CommentState } from "./types";
 
 const initialState: CommentState = {
   addComment: { ...subState },
+  deleteComment: { ...subState },
   getComments : { ...subState, data: null  }
 };
 
@@ -45,6 +46,24 @@ export const commentSlice = createSlice({
         })
         builder.addCase(actions.getComments.rejected, (state) => {
           state.getComments = { loading: true, error: false };
+        });
+        // Delete Comment
+        builder.addCase(actions.deleteComment.pending, (state) => {
+          state.deleteComment = { loading: true, error: false };
+        });
+        builder.addCase(actions.deleteComment.fulfilled, (state, action) => {
+          state.deleteComment = { loading: true, error: false };
+          if (action.payload) {
+          const { response, message } = action.payload;
+          state.getComments.data = JSON.parse(JSON.stringify(
+            state.getComments.data?.filter(
+              (comment) => comment.id !== response.id
+            ))) 
+            state.deleteComment.message = message;
+          }
+        })
+        builder.addCase(actions.deleteComment.rejected, (state) => {
+          state.deleteComment = { loading: true, error: false };
         });
     }
 })

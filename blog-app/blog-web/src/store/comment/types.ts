@@ -20,4 +20,5 @@ export interface GetCommentsState extends SubState {
 export interface CommentState {
   addComment: SubState;
   getComments: GetCommentsState;
+  deleteComment: SubState;
 }

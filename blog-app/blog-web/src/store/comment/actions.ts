@@ -43,7 +43,9 @@ export const deleteComment = createAsyncThunk(
   async (articleId: number) => {
     try {
       const response = await api.delete(endpoints.DELETE_COMMENT + articleId);
-      return response.data;
+      console.log("RESPONSE fro delete comment", response);
+      
+      return response.data
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);
