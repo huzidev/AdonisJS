@@ -39,7 +39,7 @@ export default function ViewBlogPage(): JSX.Element {
             />
             <div className="p-5 flex flex-col items-center">
               <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {blogView.title}
+                {blogView.title} {blog.state.getBlog.data?.id}
               </h5>
               <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                 {blogView.content}
