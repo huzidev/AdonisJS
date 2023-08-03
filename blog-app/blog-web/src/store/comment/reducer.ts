@@ -29,21 +29,19 @@ export const commentSlice = createSlice({
         });
         // Get All Comments
         builder.addCase(actions.getComments.pending, (state) => {
-          state.getComments.loading = true;
-          state.getComments.error= false;
+          state.addComment = { loading: true, error: false };
         });
         builder.addCase(actions.getComments.fulfilled, (state, action) => {
-            state.getComments.loading = false;
+          state.addComment = { loading: true, error: false };
             if (action.payload) {
               const { message, data } = action.payload;
               state.getComments.data = data;
               state.addComment.message = message;
             }
-            state.getComments.error= false;
         })
         builder.addCase(actions.getComments.rejected, (state) => {
-          state.getComments.loading = false;
-          state.getComments.error= true;
+          state.addComment = { loading: true, error: false };
+
         });
     }
 })
