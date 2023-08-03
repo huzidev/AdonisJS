@@ -5,7 +5,7 @@ import { CommentState } from "./types";
 
 const initialState: CommentState = {
   addComment: { ...subState },
-  getComments : { ...subState, data: []  }
+  getComments : { ...subState, data: null  }
 };
 
 export const commentSlice = createSlice({
@@ -13,6 +13,7 @@ export const commentSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        // Add Comment
         builder.addCase(actions.addComment.pending, (state) => {
           state.addComment = { loading: true, error: false };
         });
@@ -25,6 +26,24 @@ export const commentSlice = createSlice({
         })
         builder.addCase(actions.addComment.rejected, (state) => {
           state.addComment = { loading: false, error: true };
+        });
+        // Get All Comments
+        builder.addCase(actions.getComments.pending, (state) => {
+          state.getComments.loading = true;
+          state.getComments.error= false;
+        });
+        builder.addCase(actions.getComments.fulfilled, (state, action) => {
+            state.getComments.loading = false;
+            if (action.payload) {
+              const { message, data } = action.payload;
+              state.getComments.data = data;
+              state.addComment.message = message;
+            }
+            state.getComments.error= false;
+        })
+        builder.addCase(actions.getComments.rejected, (state) => {
+          state.getComments.loading = false;
+          state.getComments.error= true;
         });
     }
 })

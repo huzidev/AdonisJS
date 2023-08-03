@@ -13,8 +13,8 @@ export interface Comment extends AddCommentPayload {
 }
 
 export interface GetCommentsState extends SubState {
-  articleId: number;
-  data: Comment;
+  articleId?: number;
+  data: Comment | null;
 }
 
 export interface CommentState {
