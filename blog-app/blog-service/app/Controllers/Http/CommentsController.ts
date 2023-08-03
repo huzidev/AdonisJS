@@ -1,10 +1,10 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Comment from "App/Models/Comment";
 import User from "App/Models/User";
-import { AddComment } from "App/Validators/CommentValidator";
+import { AddComment, EditComment } from "App/Validators/CommentValidator";
 
 export default class CommentsController {
-  public async addComment({ request, auth }: HttpContextContract) {
+  public async addC({ request, auth }: HttpContextContract) {
     try {
       const body = await request.validate(AddComment);
 
@@ -29,12 +29,16 @@ export default class CommentsController {
     }
   }
 
-  public async getComments({ params }: HttpContextContract) {
+  public async getAll({ params }: HttpContextContract) {
     const articleId = params.id;
     const response = Comment.query()
           .where("article_id", articleId)
           .select("*");
     // const response = await Article.query().whereIn("id", query);
     return response;
+  }
+
+  public async edit({ auth, request }) {
+    const body = await request.validate(EditComment);
   }
 }

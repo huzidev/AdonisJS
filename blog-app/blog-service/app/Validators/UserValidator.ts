@@ -26,6 +26,7 @@ export class UserUpdate {
 // because of public static schemaMap we can access that properties their as well because of the keyword (static)
 export class UserUpdateMe {
   // when user is updating own details then user can only update username
+  // pick is used to pick specific value
   public schema = schema.create(pick(UserUpdate.schemaMap, ['username']))
   public messages = UserUpdate.messages
 }
