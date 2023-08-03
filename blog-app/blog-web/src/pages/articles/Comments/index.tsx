@@ -5,7 +5,7 @@ import { hasPermission } from "utils";
 import { useCommentPageHooks } from "./hooks";
 import { AllCommentsState } from "./types";
 
-export default function CommentsPage(): JSX.Element {
+export default function CommentsPage(props: any): JSX.Element {
   const comment = useComments();
   const auth = useAuth();
   const userData = auth.state.user;
@@ -79,9 +79,13 @@ export default function CommentsPage(): JSX.Element {
                         Edit
                       </button>
                       {" "}
-                      <button>
-                        Delete
-                      </button>
+                      {
+                        (userData?.id === props.ownerid && uploadedByUserRole !== "super-admin") && (
+                          <button>
+                            Delete
+                          </button>
+                        )
+                      }
                     </div>
                     }
                   </div>

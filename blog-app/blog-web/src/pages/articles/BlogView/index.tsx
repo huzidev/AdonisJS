@@ -14,6 +14,7 @@ export default function ViewBlogPage(): JSX.Element {
   const owner = user.state.getUser.data;
   const initialState: BlogState = { title: "", image: "", content: "" };
   const [blogView, setBlogView] = useState(initialState);
+  const ownerId: any = blog.state.getBlog.data?.ownerId
 
   useEffect(() => {
     setBlogView({ ...blogView, ...getBlog });
@@ -54,7 +55,9 @@ export default function ViewBlogPage(): JSX.Element {
         )}
       </div>
       <div className="w-2/3 my-8 mx-auto">
-        <CommentsPage />
+        <CommentsPage 
+          ownerId={ownerId}
+        />
       </div>
     </div>
   );
