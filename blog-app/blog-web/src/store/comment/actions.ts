@@ -5,7 +5,7 @@ import { errorNotification } from "utils/notifications";
 import * as endpoints from "./endpoints";
 import { AddCommentPayload } from "./types";
 
-export const add = createAsyncThunk(
+export const addComment = createAsyncThunk(
   endpoints.ADD_COMMENT,
   async (data: AddCommentPayload) => {
     try {
