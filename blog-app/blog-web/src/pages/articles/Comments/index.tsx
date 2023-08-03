@@ -1,27 +1,11 @@
-import { useEffect, useState } from "react";
-import { useBlogs } from "store/articles";
-import { useAuth } from "store/auth";
 import { useComments } from "store/comment";
-import { AddCommentState } from "./types";
+import { useCommentPageHooks } from "./hooks";
 
 export default function AddCommentPage(): JSX.Element {
   const comment = useComments();
-  const auth = useAuth();
-  const blog = useBlogs();
 
-  const loggedInId: any = auth.state.user?.id;
-  const blogId: any = blog.state.getBlog.data?.id;
-
-  const [content, setContent] = useState<AddCommentState>({
-    userId: loggedInId,
-    articleId: blogId,
-    comment: '',
-  });
-
-  useEffect(() => {
-    setContent({ ...content, userId: loggedInId, articleId: blogId });
-  }, [loggedInId, blogId]);
-
+  const { content, setContent } = useCommentPageHooks();
+ 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     comment.addComment(content);
