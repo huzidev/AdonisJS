@@ -4,7 +4,8 @@ import * as actions from "./actions";
 import { CommentState } from "./types";
 
 const initialState: CommentState = {
-  addComment: { ...subState }
+  addComment: { ...subState },
+  getComments : { ...subState, data: []  }
 };
 
 export const commentSlice = createSlice({

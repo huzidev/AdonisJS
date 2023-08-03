@@ -12,12 +12,12 @@ export interface Comment extends AddCommentPayload {
   updatedAt: string;
 }
 
-export interface GetCommentsState {
+export interface GetCommentsState extends SubState {
   articleId: number;
   data: Comment;
 }
 
 export interface CommentState {
   addComment: SubState;
-  getComments: SubState;
+  getComments: GetCommentsState;
 }
