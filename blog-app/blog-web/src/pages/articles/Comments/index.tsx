@@ -1,7 +1,7 @@
 import { useComments } from "store/comment";
 import { useCommentPageHooks } from "./hooks";
 
-export default function AddCommentPage(): JSX.Element {
+export default function CommentsPage(): JSX.Element {
   const comment = useComments();
   const { content, setContent, comments } = useCommentPageHooks();
  
@@ -10,15 +10,14 @@ export default function AddCommentPage(): JSX.Element {
     comment.addComment(content);
   }
 
-  console.log("RESPONSE FOR ALL COMMENTS", comments);
-  
+  console.log("Comments", comments);
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
-            Comments (20)
+            Comments
           </h2>
         </div>
         <form className="mb-6" onSubmit={submit}>
