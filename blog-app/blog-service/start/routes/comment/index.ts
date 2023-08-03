@@ -4,5 +4,6 @@ export default function CommentRoutes() {
     const path = "CommentsController";
     Route.group(() => {
         Route.post("/add", `${path}.addComment`).middleware("auth");
+        Route.get("/get/:id", `${path}.getComments`).where("id", /^[0-9]+$/);
     }).prefix('/comment')
 }       
