@@ -39,7 +39,7 @@ export const commentSlice = createSlice({
         builder.addCase(actions.getComments.fulfilled, (state, action) => {
           state.getComments = { loading: true, error: false };
             if (action.payload) {
-              const { message, data } = action.payload;
+              const { message, data } = action.payload; 
               state.getComments.data = data;
               state.getComments.message = message;
             }
