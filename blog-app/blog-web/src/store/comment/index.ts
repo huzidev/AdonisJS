@@ -10,12 +10,14 @@ export const useComments = () => {
   const getComments = (payload: number) => dispatch(actions.getComments(payload));
   const getById = (payload: number) => dispatch(actions.getCommentById(payload));
   const deleteComment = (payload: number) => dispatch(actions.deleteComment(payload));
+  const editComment = (payload: number) => dispatch(actions.editComment(payload));
 
   return {
     state,
     addComment,
     getComments,
     deleteComment,
+    editComment,
     getById
   };
 };
