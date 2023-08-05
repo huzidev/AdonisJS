@@ -2,6 +2,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
+import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import CommentsPage from "../comments/ShowComments";
 import { useGetBlogPageHooks } from "./hooks";
@@ -10,6 +11,7 @@ import { BlogState } from "./types";
 export default function ViewBlogPage(): JSX.Element {
   const user = useUser();
   const blog = useBlogs();
+  const auth = useAuth();
   const getBlog = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
   const initialState: BlogState = { title: "", image: "", content: "" };
@@ -54,11 +56,13 @@ export default function ViewBlogPage(): JSX.Element {
           </>
         )}
       </div>
-      <div className="w-2/3 my-8 mx-auto">
-        <CommentsPage 
-          ownerId={ownerId}
-        />
-      </div>
+      {auth.state.user && (
+        <div className="w-2/3 my-8 mx-auto">
+          <CommentsPage 
+            ownerId={ownerId}
+          />
+        </div>
+      )}
     </div>
   );
 }
