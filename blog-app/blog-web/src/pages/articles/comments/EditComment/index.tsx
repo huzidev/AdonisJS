@@ -7,12 +7,17 @@ export default function EditCommentPage(): JSX.Element {
   const params: any = useParams();
   const commentResp = comment.state.getCommentById.data;
   console.log("Comment resp", commentResp);
-  const [content, setContent] = useState<any>({comment: ""});
+  const [content, setContent] = useState<any>({comment: ''});
 
   useEffect(() => {
     comment.getById(params.id);
-    setContent({ ...content, comment: commentResp });
   }, []);
+
+  useEffect(() => {
+    if (commentResp) {
+        setContent({ ...content, ...commentResp })
+    }
+  }, [params.id, commentResp])
 
   return (
     <>
