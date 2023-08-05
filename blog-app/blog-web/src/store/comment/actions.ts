@@ -3,7 +3,7 @@ import api from "services/api";
 import { mapErrorToState } from "store/utils";
 import { errorNotification } from "utils/notifications";
 import * as endpoints from "./endpoints";
-import { AddCommentPayload } from "./types";
+import { AddCommentPayload, GetCommentByIdState } from "./types";
 
 export const addComment = createAsyncThunk(
   endpoints.ADD_COMMENT,
@@ -56,9 +56,9 @@ export const getCommentById = createAsyncThunk(
 
 export const editComment = createAsyncThunk(
   endpoints.EDIT_COMMENT,
-  async (id: number) => {
+  async (data: GetCommentByIdState) => {
     try {
-      const response = await api.get(endpoints.EDIT_COMMENT + id);
+      const response = await api.get(endpoints.EDIT_COMMENT + data.id, data);
       console.log("Edit COMMENT RESP", response.data);
       return response.data;
     } catch (e: any) {
