@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useUser } from "store/user";
-import CommentsPage from "../Comments";
+import CommentsPage from "../comments/ShowComments";
 import { useGetBlogPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
