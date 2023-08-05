@@ -44,6 +44,24 @@ export default class CommentsController {
     }
   }
 
+  public async getById({ params }: HttpContextContract) {
+    try {
+      const comment = await Comment.findBy("id", params.id);
+      if (!comment) {
+        throw {
+          message: `No comment found by id ${params.id}`
+        }
+      } else {
+        return {
+          message: `Comment fetched successfully by id ${params.id}`,
+          data: comment
+        }
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
   public async edit({ params, request }) {
     try {
       const body = await request.validate(EditComment);
