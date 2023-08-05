@@ -1,3 +1,5 @@
+import ROUTE_PATHS from "Router/paths";
+import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComments } from "store/comment";
@@ -78,9 +80,9 @@ export default function CommentsPage(props: any): JSX.Element {
                       <p>{new Date(value.createdAt).toLocaleDateString()}</p>
                       {(isCommentAuthor ||
                         (isAdmin && !isAuthorSuperAdmin)) && (
-                          <button>
+                          <Link to={ROUTE_PATHS.EDIT_COMMENT + value.id}>
                             Edit
-                          </button>
+                          </Link>  
                       )}
                       {" "}
                       {/* // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins and admins comment */}
