@@ -1,5 +1,5 @@
 import React from 'react';
-import { roles } from 'store/auth/types';
+import { UserRole, roles } from 'store/auth/types';
 import ROUTE_PATHS from './paths';
 
 const HomePage = React.lazy(() => import('pages/Home'));
@@ -125,6 +125,11 @@ const routes: AppRoute[] = [
         role: roles[1],
         path: `${ROUTE_PATHS.ARTICLES_PAGE}:page`,
         Component: ManageBlogsPage
+    },
+    {
+        role: roles[0],
+        path: `${ROUTE_PATHS.EDIT_COMMENT}:id`,
+        Component: EditCommentPage
     }
 ]
 
