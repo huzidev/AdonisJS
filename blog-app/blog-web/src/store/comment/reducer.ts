@@ -7,7 +7,8 @@ const initialState: CommentState = {
   addComment: { ...subState },
   deleteComment: { ...subState },
   getComments : { ...subState, data: null },
-  getCommentById : { ...subState, data: null }
+  getCommentById : { ...subState, data: null },
+  editComment : { ...subState, data: null }
 };
 
 export const commentSlice = createSlice({
