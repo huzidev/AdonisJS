@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserRole, roles } from 'store/auth/types';
+import { roles } from 'store/auth/types';
 import ROUTE_PATHS from './paths';
 
 const HomePage = React.lazy(() => import('pages/Home'));
@@ -16,6 +16,7 @@ const ManageBlogsPage = React.lazy(() => import("pages/articles/ManageBlogs"));
 const SendResetPasswordPage = React.lazy(() => import("pages/auth/SendResetPassword"));
 const ResetPasswordPage = React.lazy(() => import("pages/auth/ResetPassword"));
 const BannedUserPage = React.lazy(() => import("pages/user/BannedUser"));
+const EditCommentPage = 
 
 // exact is used for those URL where their won't be an additional (CHANGEABLE) params/id 
 // - ARTICLE_CREATE: '/blog/add here we can use exact: true because their is no additional (CHANGEABLE) params/id 
