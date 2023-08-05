@@ -66,7 +66,7 @@ export default class CommentsController {
     try {
       const body = await request.validate(EditComment);
       const comment: any = await Comment.findBy("id", params.id);
-  
+
       comment.fill({ ...comment, ...body });
       comment.merge(body);
       await comment.save();
