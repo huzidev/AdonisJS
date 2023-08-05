@@ -17,7 +17,7 @@ export interface GetCommentsState extends SubState {
   data?: Comment[] | null;
 }
 
-export interface GetCommentState extends SubState {
+export interface GetCommentByIdState extends SubState {
   articleId?: number;
   data?: Comment | null;
 }
@@ -25,6 +25,6 @@ export interface GetCommentState extends SubState {
 export interface CommentState {
   addComment: SubState;
   getComments: GetCommentsState;
-  getComment: GetCommentState;
+  getCommentById: GetCommentByIdState;
   deleteComment: SubState;
 }

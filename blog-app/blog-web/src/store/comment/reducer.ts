@@ -7,7 +7,7 @@ const initialState: CommentState = {
   addComment: { ...subState },
   deleteComment: { ...subState },
   getComments : { ...subState, data: null },
-  getComment : { ...subState, data: null }
+  getCommentById : { ...subState, data: null }
 };
 
 export const commentSlice = createSlice({
@@ -46,6 +46,21 @@ export const commentSlice = createSlice({
             }
         })
         builder.addCase(actions.getComments.rejected, (state) => {
+          state.getComments = { loading: true, error: false };
+        });
+        // Get Comment By Id
+        builder.addCase(actions.getCommentById.pending, (state) => {
+          state.getComments = { loading: true, error: false };
+        });
+        builder.addCase(actions.getCommentById.fulfilled, (state, action) => {
+          state.getComments = { loading: true, error: false };
+            if (action.payload) {
+              const { message, data } = action.payload; 
+              state.getComments.data = data;
+              state.getComments.message = message;
+            }
+        })
+        builder.addCase(actions.getCommentById.rejected, (state) => {
           state.getComments = { loading: true, error: false };
         });
         // Delete Comment
