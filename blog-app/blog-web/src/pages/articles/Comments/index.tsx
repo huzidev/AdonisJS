@@ -65,6 +65,7 @@ export default function CommentsPage(props: any): JSX.Element {
                   const isBlogOwner = props.ownerId === userData?.id;
                   const isCommentAuthor = value.userId === userData?.id;
                   const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
+                  const isAuthorAdmin = uploadedByUserRole === "admin";
                   const isAdmin = hasPermission("admin", userData?.role);
                   return (
                     <div key={index}>
@@ -82,10 +83,11 @@ export default function CommentsPage(props: any): JSX.Element {
                           </button>
                       )}
                       {" "}
+                      {/* // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins comment */}
                       {(isCommentAuthor ||
-                        // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins comment
-                        ((isAdmin || isBlogOwner) &&
-                          !isAuthorSuperAdmin)) && (
+                        ((isAdmin && !isAuthorSuperAdmin) 
+                        || (isBlogOwner && (!isAuthorAdmin && !isAuthorSuperAdmin)))) 
+                        && (
                           <button
                             onClick={() => comment.deleteComment(value.id)}
                           >
