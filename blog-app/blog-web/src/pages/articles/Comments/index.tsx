@@ -63,6 +63,9 @@ export default function CommentsPage(props: any): JSX.Element {
                   const commentBy = uploadedByUser && uploadedByUser.username;
                   const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
                   const isBlogOwner = props.ownerId === userData?.id;
+                  const isCommentAuthor = value.userId === userData?.id;
+                  const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
+                  const isAdmin = hasPermission("admin", userData?.role);
                   return (
                     <div key={index}>
                       <div className="flex">
@@ -72,18 +75,17 @@ export default function CommentsPage(props: any): JSX.Element {
                         <p>{value.comment}</p>
                       </div>
                       <p>{new Date(value.createdAt).toLocaleDateString()}</p>
-                      {(value.userId === userData?.id ||
-                        (hasPermission("admin", userData?.role) &&
-                          uploadedByUserRole !== "super-admin")) && (
+                      {(isCommentAuthor ||
+                        (isAdmin && !isAuthorSuperAdmin)) && (
                           <button>
                             Edit
                           </button>
                       )}
                       {" "}
-                      {(value.userId === userData?.id ||
+                      {(isCommentAuthor ||
                         // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins comment
-                        (hasPermission("admin", userData?.role) || isBlogOwner &&
-                          uploadedByUserRole !== "super-admin")) && (
+                        (isAdmin || isBlogOwner &&
+                          !isAuthorSuperAdmin)) && (
                           <button
                             onClick={() => comment.deleteComment(value.id)}
                           >
