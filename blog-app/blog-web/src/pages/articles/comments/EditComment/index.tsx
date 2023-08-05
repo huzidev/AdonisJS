@@ -21,7 +21,7 @@ export default function EditCommentPage(): JSX.Element {
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    comment.editComment({ id: params.id, data: content })
+    comment.editComment({ id: params.id, comment: content })
   }
 
   return (
@@ -39,7 +39,7 @@ export default function EditCommentPage(): JSX.Element {
           name="comment"
           type="text"
           value={content.comment}
-          onChange={(e) => e.target.value}
+          onChange={(e) => setContent(e.target.value)}
           required
           className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         />

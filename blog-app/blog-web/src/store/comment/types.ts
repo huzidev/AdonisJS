@@ -22,6 +22,11 @@ export interface GetCommentByIdState extends SubState {
   data?: Comment | null;
 }
 
+export interface EditCommentPayload extends SubState {
+  id?: number;
+  comment: "string";
+}
+
 export interface CommentState {
   addComment: SubState;
   getComments: GetCommentsState;
