@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/hooks/hooks";
 import * as actions from "./actions";
-import { AddCommentPayload, CommentState } from "./types";
+import { AddCommentPayload, CommentState, GetCommentByIdState } from "./types";
 
 export const useComments = () => {
   const dispatch = useAppDispatch();
@@ -10,7 +10,7 @@ export const useComments = () => {
   const getComments = (payload: number) => dispatch(actions.getComments(payload));
   const getById = (payload: number) => dispatch(actions.getCommentById(payload));
   const deleteComment = (payload: number) => dispatch(actions.deleteComment(payload));
-  const editComment = (payload: number) => dispatch(actions.editComment(payload));
+  const editComment = (payload: GetCommentByIdState) => dispatch(actions.editComment(payload));
 
   return {
     state,
