@@ -50,18 +50,18 @@ export const commentSlice = createSlice({
         });
         // Get Comment By Id
         builder.addCase(actions.getCommentById.pending, (state) => {
-          state.getComments = { loading: true, error: false };
+          state.getCommentById = { loading: true, error: false };
         });
         builder.addCase(actions.getCommentById.fulfilled, (state, action) => {
-          state.getComments = { loading: true, error: false };
+          state.getCommentById = { loading: true, error: false };
             if (action.payload) {
               const { message, data } = action.payload; 
-              state.getComments.data = data;
-              state.getComments.message = message;
+              state.getCommentById.data = data;
+              state.getCommentById.message = message;
             }
         })
         builder.addCase(actions.getCommentById.rejected, (state) => {
-          state.getComments = { loading: true, error: false };
+          state.getCommentById = { loading: true, error: false };
         });
         // Delete Comment
         builder.addCase(actions.deleteComment.pending, (state) => {
