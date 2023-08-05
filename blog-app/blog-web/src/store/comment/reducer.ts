@@ -6,8 +6,8 @@ import { CommentState } from "./types";
 const initialState: CommentState = {
   addComment: { ...subState },
   deleteComment: { ...subState },
-  getComments : { ...subState, data: null }
-  getComments : { ...subState, data: null }
+  getComments : { ...subState, data: null },
+  getComment : { ...subState, data: null }
 };
 
 export const commentSlice = createSlice({
