@@ -19,8 +19,13 @@ export default function EditCommentPage(): JSX.Element {
     }
   }, [params.id, commentResp])
 
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+  }
+
   return (
     <>
+    <form onSubmit={submit}>
       <label
         htmlFor="comment"
         className="block text-sm font-medium leading-6 text-gray-900"
@@ -43,6 +48,7 @@ export default function EditCommentPage(): JSX.Element {
           value="Update Comment"
         />
       </div>
+    </form>
     </>
   );
 }

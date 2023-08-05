@@ -44,7 +44,22 @@ export const getCommentById = createAsyncThunk(
   async (id: number) => {
     try {
       const response = await api.get(endpoints.GET_COMMENT + id);
-      console.log("GET COMMENT RESP", response.data);
+      return response.data;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
+      }
+    }
+);
+
+export const editComment = createAsyncThunk(
+  endpoints.EDIT_COMMENT,
+  async (id: number) => {
+    try {
+      const response = await api.get(endpoints.EDIT_COMMENT + id);
+      console.log("Edit COMMENT RESP", response.data);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
