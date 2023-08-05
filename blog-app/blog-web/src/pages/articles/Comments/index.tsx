@@ -10,13 +10,15 @@ export default function CommentsPage(props: any): JSX.Element {
   const auth = useAuth();
   const userData = auth.state.user;
   const { content, setContent, allComments, allUsers } = useCommentPageHooks();
- 
+
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     comment.addComment(content);
   }
 
-  console.log("all comments", allComments);
+  console.log("userData", userData?.id);
+  console.log("props", props.ownerId);
+  
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
@@ -53,45 +55,43 @@ export default function CommentsPage(props: any): JSX.Element {
         <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
           <footer className="flex justify-between items-center mb-2">
             <div>
-              {allComments && allComments.map((value: AllCommentsState, index: number) => {
-                const uploadedByUser = allUsers?.find(
-                  (user: User) => user.id === value.userId
-                ); 
-                const commentBy = uploadedByUser && uploadedByUser.username;
-                const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
-                return (
-                  <div key={index}>
-                    <div className="flex">
-                      <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                        {commentBy}
-                      </p>
-                      <p>
-                        {value.comment}
-                      </p>
+              {allComments &&
+                allComments.map((value: AllCommentsState, index: number) => {
+                  const uploadedByUser = allUsers?.find(
+                    (user: User) => user.id === value.userId
+                  );
+                  const commentBy = uploadedByUser && uploadedByUser.username;
+                  const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
+                  const isBlogOwner = props.ownerId === userData?.id;
+                  return (
+                    <div key={index}>
+                      <div className="flex">
+                        <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                          {commentBy}
+                        </p>
+                        <p>{value.comment}</p>
+                      </div>
+                      <p>{new Date(value.createdAt).toLocaleDateString()}</p>
+                      {(value.userId === userData?.id ||
+                        (hasPermission("admin", userData?.role) &&
+                          uploadedByUserRole !== "super-admin")) && (
+                        <div>
+                          <button>
+                            Edit
+                          </button>{" "}
+                              <button
+                                onClick={() => comment.deleteComment(value.id)}
+                              >
+                                Delete
+                              </button>
+                        </div>
+                      )}
                     </div>
-                    <p>
-                      {new Date(value.createdAt).toLocaleDateString()}
-                    </p>
-                    {
-                      (value.userId === userData?.id || 
-                      (hasPermission("admin", userData?.role) &&
-                        uploadedByUserRole !== "super-admin")) &&
-                    <div>
-                      <button>
-                        Edit
-                      </button>
-                      {" "}
-                          <button onClick={() => comment.deleteComment(value.id)}>
-                            Delete
-                          </button>
-                    </div>
-                    }
-                  </div>
-                )
-              })}
+                  );
+                })}
             </div>
-            </footer>
-           </article>
+          </footer>
+        </article>
       </div>
     </section>
   );
