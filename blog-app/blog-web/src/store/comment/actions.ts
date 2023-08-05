@@ -38,6 +38,22 @@ export const getComments = createAsyncThunk(
       }
     }
 );
+
+export const getCommentById = createAsyncThunk(
+  endpoints.GET_COMMENTS,
+  async (articleId: number) => {
+    try {
+      const response = await api.get(endpoints.GET_COMMENTS + articleId);
+      return response.data;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
+      }
+    }
+);
+
 export const deleteComment = createAsyncThunk(
   endpoints.DELETE_COMMENT,
   async (articleId: number) => {
