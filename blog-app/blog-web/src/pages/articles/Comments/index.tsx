@@ -84,7 +84,7 @@ export default function CommentsPage(props: any): JSX.Element {
                       {" "}
                       {(isCommentAuthor ||
                         // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins comment
-                        (isAdmin || isBlogOwner &&
+                        ((isAdmin || isBlogOwner) &&
                           !isAuthorSuperAdmin)) && (
                           <button
                             onClick={() => comment.deleteComment(value.id)}
