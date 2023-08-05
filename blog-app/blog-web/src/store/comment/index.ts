@@ -8,12 +8,14 @@ export const useComments = () => {
   const state = useSelector((state: any) => state.comments) as CommentState;
   const addComment = (payload: AddCommentPayload) => dispatch(actions.addComment(payload));
   const getComments = (payload: number) => dispatch(actions.getComments(payload));
+  const getById = (payload: number) => dispatch(actions.getCommentById(payload));
   const deleteComment = (payload: number) => dispatch(actions.deleteComment(payload));
 
   return {
     state,
     addComment,
     getComments,
-    deleteComment
+    deleteComment,
+    getById
   };
 };
