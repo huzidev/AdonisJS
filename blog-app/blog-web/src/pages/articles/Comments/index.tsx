@@ -83,7 +83,7 @@ export default function CommentsPage(props: any): JSX.Element {
                           </button>
                       )}
                       {" "}
-                      {/* // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins comment */}
+                      {/* // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins and admins comment */}
                       {(isCommentAuthor ||
                         ((isAdmin && !isAuthorSuperAdmin) 
                         || (isBlogOwner && (!isAuthorAdmin && !isAuthorSuperAdmin)))) 
