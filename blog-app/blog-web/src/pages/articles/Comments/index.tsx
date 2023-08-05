@@ -75,16 +75,19 @@ export default function CommentsPage(props: any): JSX.Element {
                       {(value.userId === userData?.id ||
                         (hasPermission("admin", userData?.role) &&
                           uploadedByUserRole !== "super-admin")) && (
-                        <div>
                           <button>
                             Edit
-                          </button>{" "}
-                              <button
-                                onClick={() => comment.deleteComment(value.id)}
-                              >
-                                Delete
-                              </button>
-                        </div>
+                          </button>
+                      )}
+                      {" "}
+                      {(value.userId === userData?.id || isBlogOwner ||
+                        (hasPermission("admin", userData?.role) &&
+                          uploadedByUserRole !== "super-admin")) && (
+                          <button
+                            onClick={() => comment.deleteComment(value.id)}
+                          >
+                            Delete
+                          </button>
                       )}
                     </div>
                   );
