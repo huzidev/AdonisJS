@@ -6,13 +6,8 @@ export default function EditCommentPage(): JSX.Element {
   const comment = useComments();
   const params: any = useParams();
   const commentResp = comment.state.getCommentById.data;
-  console.log("Comment resp", commentResp);
   const [content, setContent] = useState<any>({comment: ''});
-
-  useEffect(() => {
-    comment.getById(params.id);
-  }, []);
-
+  
   useEffect(() => {
     if (commentResp) {
         setContent({ ...content, ...commentResp })
@@ -39,7 +34,7 @@ export default function EditCommentPage(): JSX.Element {
           name="comment"
           type="text"
           value={content.comment}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setContent(e.target.value)}
           required
           className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         />
