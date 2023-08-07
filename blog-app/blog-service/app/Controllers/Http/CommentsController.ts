@@ -74,7 +74,6 @@ export default class CommentsController {
       return {
         message: "Comment updated successfully",
         data: comment?.toObject()
-
       }
 
     } catch (e) {
