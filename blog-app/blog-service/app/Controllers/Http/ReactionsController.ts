@@ -4,7 +4,7 @@ import User from 'App/Models/User';
 import { AddReaction } from 'App/Validators/ReactionValidator';
 
 export default class ReactionsController {
-    public async add({ params, request }: HttpContextContract) {
+    public async add({ request }: HttpContextContract) {
     try {
         const body = await request.validate(AddReaction);
         const { userId, articleId } = body;
