@@ -5,6 +5,7 @@ export class AddComment {
   public static schemaMap = {
     userId: schema.number(),
     articleId: schema.number(),
+    // replyId optional because reply id will only be used when user clicked on reply button
     replyId: schema.number.optional(),
     comment: schema.string({ trim: true }, [rules.minLength(2)]),
   }

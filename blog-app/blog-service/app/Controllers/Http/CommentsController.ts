@@ -4,18 +4,16 @@ import User from "App/Models/User";
 import { AddComment, EditComment } from "App/Validators/CommentValidator";
 
 export default class CommentsController {
-  public async add({ request, auth }: HttpContextContract) {
+  public async add({ request }: HttpContextContract) {
     try {
       const body = await request.validate(AddComment);
 
       console.log("body", body);
 
-      const { userId, articleId } = body;
-
-      console.log("USER ID", userId);
+      const { userId } = body;
 
       const user: any = await User.findBy("id", userId);
-
+      
       await Comment.create(body);
 
       return {
