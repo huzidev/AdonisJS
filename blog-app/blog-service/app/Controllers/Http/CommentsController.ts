@@ -41,7 +41,7 @@ export default class CommentsController {
     }
   }
 
-  public async getById({ params }: HttpContextContract) {
+  public async getById({ params }: HttpContextContract) { 
     try {
       const comment = await Comment.findBy("id", params.id);
       if (!comment) {
