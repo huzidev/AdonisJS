@@ -29,12 +29,10 @@ export function useEditCommentPageHooks() {
             }
         }
         if (prev?.editComment.loading) {
+            console.log("RUN");
+            
             if (!state.editComment.loading && !state.editComment.error) {
-                if (byMe) {
-                    successNotification("Yours comment updated successfully")
-                } else {
-                    successNotification(state.editComment.message)
-                }
+                successNotification(state.editComment.message)
             }
         }
     }, [state])

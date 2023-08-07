@@ -18,9 +18,6 @@ export default function CommentsPage(props: any): JSX.Element {
     comment.addComment(content);
   }
 
-  console.log("userData", userData?.id);
-  console.log("props", props.ownerId);
-
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">

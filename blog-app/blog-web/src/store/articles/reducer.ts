@@ -217,9 +217,9 @@ export const blogSlice = createSlice({
     builder.addCase(actions.updateBlog.fulfilled, (state, action) => {
       state.updateBlog.loading = false;
       const { data, message } = action.payload;
-      const updateBlog = JSON.parse(JSON.stringify(state.getBlogs.data.find((blog) => blog.id === data.id)));
-      // to put updated value in the getBlogs data
-      state.getBlogs.data = [updateBlog]
+      // const updateBlog = JSON.parse(JSON.stringify(state.getBlogs.data.find((blog) => blog.id === data.id)));
+      // // to put updated value in the getBlogs data
+      // state.getBlogs.data = [updateBlog];
       state.updateBlog.message = message;
       state.updateBlog.error = false;
     });
