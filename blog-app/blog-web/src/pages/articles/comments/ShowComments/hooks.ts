@@ -25,7 +25,7 @@ export function useCommentPageHooks() {
   const [content, setContent] = useState<AddCommentState>({
     userId: loggedInId,
     articleId: blogId,
-    comment: "",
+    comment: '',
   });
 
   useEffect(() => {
