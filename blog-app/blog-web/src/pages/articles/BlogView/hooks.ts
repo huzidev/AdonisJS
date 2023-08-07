@@ -41,5 +41,6 @@ export function useGetBlogPageHooks(): void {
         navigate("/");
       }
     }
+    console.log("state.getBlog.message", state.getBlog.message);
   }, [state]);
 }

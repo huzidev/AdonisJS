@@ -7,17 +7,17 @@ import { successNotification } from "utils/notifications";
 export function useEditCommentPageHooks() {
     const comment = useComments();
     const params: any = useParams();
-    const commentState = comment.state;
-    const prev = usePrevious(commentState);
+    const state = comment.state;
+    const prev = usePrevious(state);
     useEffect(() => {
         comment.getById(params.id);
     }, []);
 
     useEffect(() => {
         if (prev?.getCommentById.loading) {
-            if (!commentState.getCommentById.loading && !commentState.getCommentById.error) {
-                successNotification(commentState.getCommentById.message)
+            if (!state.getCommentById.loading && !state.getCommentById.error) {
+                successNotification(state.getCommentById.message)
             }
         }
-    }, [commentState])
+    }, [state])
 }

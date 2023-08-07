@@ -54,7 +54,7 @@ export const commentSlice = createSlice({
           state.getCommentById = { loading: true, error: false };
         });
         builder.addCase(actions.getCommentById.fulfilled, (state, action) => {
-          state.getCommentById = { loading: true, error: false };
+          state.getCommentById = { loading: false, error: false };
             if (action.payload) {
               const { message, data } = action.payload; 
               state.getCommentById.data = data;
