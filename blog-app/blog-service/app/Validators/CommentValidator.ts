@@ -5,6 +5,7 @@ export class AddComment {
   public static schemaMap = {
     userId: schema.number(),
     articleId: schema.number(),
+    replyId: schema.number.optional(),
     comment: schema.string({ trim: true }, [rules.minLength(2)]),
   }
 
