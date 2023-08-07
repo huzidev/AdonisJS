@@ -7,7 +7,7 @@ export default class ReactionsController {
     public async add({ request }: HttpContextContract) {
     try {
         const body = await request.validate(AddReaction);
-        const { userId, articleId, isLike, isDislike } = body;
+        const { userId, isLike, isDislike } = body;
 
         // const reaction = new Reaction();
         let reaction = await Reaction.findBy("userId", userId);
@@ -15,25 +15,21 @@ export default class ReactionsController {
         // for owner of blog info so we can get owner name and then show the owner name in notification
         const user = await User.findBy("id", userId);
 
+        // so when user clicked on like or dislike for first time add values in columns and WHEN values are added then we'll call reaction.save() to get latest data
+        // otherwise every time it'll create new column with new values instead of updating the same column
         if (!reaction) {
             await Reaction.create({ ...body })
         } else {
+            if (isLike) {
+                reaction.isLike = true;
+                reaction.isDislike = false;
+            } else if (isDislike) {
+                reaction.isLike = false;
+                reaction.isDislike = true;
+            }
             await reaction.save();
         }
-
         
-        // reaction.articleId = articleId;
-        // reaction.userId = userId;
-
-        // if (isLike) {
-        //     reaction.isLike = true;
-        //     reaction.isDislike = false;
-        // } else if (isDislike) {
-        //     reaction.isLike = false;
-        //     reaction.isDislike = true;
-        // }
-        // // await reaction.save();
-
         return { 
             data: body, 
             message: `You've liked blog by ${user?.username}` 
