@@ -13,6 +13,8 @@ export default class extends BaseSchema {
       table.boolean('is_like').defaultTo(false).notNullable()
       table.boolean('is_dislike').defaultTo(false).notNullable()
 
+      table.unique(['user_id', 'article_id'])
+      
       table.timestamp('updated_at', { useTz: true }).notNullable()
       table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
     })

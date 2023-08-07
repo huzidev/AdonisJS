@@ -1,9 +1,8 @@
-import Route from '@ioc:Adonis/Core/Route';
+import Route from "@ioc:Adonis/Core/Route";
 
-export default function ArticlesRoutes() {
-    const path = "ReactionsController";
-    Route.group(() => {
-        Route.get("/blog", `${path}.add`)
-            .middleware("auth");
-    }).prefix("/reaction")
+export default function ReactionsRoutes() {
+  const path = "ReactionsController";
+  Route.group(() => {
+    Route.post("/blog", `${path}.add`).middleware("auth");
+  }).prefix("/reaction");
 }

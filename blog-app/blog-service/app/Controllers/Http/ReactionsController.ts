@@ -7,22 +7,27 @@ export default class ReactionsController {
     public async add({ request }: HttpContextContract) {
     try {
         const body = await request.validate(AddReaction);
-        const { userId, articleId } = body;
+        const { userId, articleId, isLike, isDislike } = body;
+
+        const reaction = new Reaction();
 
         // for owner of blog info so we can get owner name and then show the owner name in notification
         const user = await User.findBy("id", userId);
         
-        let isLike;
-        let isDislike;
-        if (body.isLike) {
-            isLike = true;
-            isDislike = false;
-        } else if (body.isDislike) {
-            isLike = false;
-            isDislike = true;
-        }
+        reaction.articleId = articleId;
+        reaction.userId = userId;
 
-        await Reaction.create({articleId, userId, isLike, isDislike});
+        if (isLike) {
+            reaction.isLike = true;
+            reaction.isDislike = false;
+        } else if (isDislike) {
+            reaction.isLike = false;
+            reaction.isDislike = true;
+        }
+        // await reaction.save();
+
+        await reaction.save();
+
         return { 
             data: body, 
             message: `You've liked blog by ${user?.username}` 
