@@ -1,7 +1,7 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Reaction from "App/Models/Reaction";
 import User from "App/Models/User";
-import { AddReaction } from "App/Validators/ReactionValidator";
+import { AddReaction, GetReactions } from "App/Validators/ReactionValidator";
 
 export default class ReactionsController {
   public async add({ request }: HttpContextContract) {
@@ -43,12 +43,16 @@ export default class ReactionsController {
     }
   }
 
-  public async getReactions({ params }: HttpContextContract) {
+  public async getReactions({ params, request }: HttpContextContract) {
     try {
-        const response = await Reaction.query().count("id as total").where("articleId", params.id);
-       
+        const { isLike, isDislike } = await request.validate(GetReactions);
+        let response;
+        if (isLike) {
+            response = await Reaction.query().count("id as total").where("articleId", params.id).where("isLike", true);
+        } else if (isDislike) {
+            response = await Reaction.query().count("id as total").where("articleId", params.id).where("isDislike", true);
+        }
         console.log("Response", response);
-        
       return {
         message: "Reactions fetched successfully",
         data: response,
