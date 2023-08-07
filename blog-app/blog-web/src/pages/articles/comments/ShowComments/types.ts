@@ -1,7 +1,8 @@
 export interface PropsState {
-  userId: number;
+  ownerId: number;
 }
-export interface AddCommentState extends PropsState {
+export interface AddCommentState {
+  userId: number;
   articleId: number;
   comment: string;
 }
