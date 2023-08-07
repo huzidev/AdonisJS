@@ -56,13 +56,13 @@ export default function ViewBlogPage(): JSX.Element {
           </>
         )}
       </div>
-      {auth.state.user && (
+      {/* {auth.state.user && ( */}
         <div className="w-2/3 my-8 mx-auto">
           <CommentsPage 
             ownerId={ownerId}
           />
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }
