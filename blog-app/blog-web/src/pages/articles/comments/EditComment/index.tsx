@@ -21,7 +21,6 @@ export default function EditCommentPage(): JSX.Element {
     comment.editComment({ id: params.id, comment: content });
     navigate(-1);
   }
-
   useEditCommentPageHooks();
 
   return (
