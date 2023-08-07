@@ -78,6 +78,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                         </p>
                         <p>{value.comment}</p>
                       </div>
+                      {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
                       {replyState.id === value.id && (
                         <div className="mt-2">
                           <input
