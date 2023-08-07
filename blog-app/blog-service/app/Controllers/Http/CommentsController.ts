@@ -19,7 +19,7 @@ export default class CommentsController {
       await Comment.create(body);
 
       return {
-        message: `Comment added successfully by ${user.username} `,
+        message: body.replyId ? `Replied to ${user.username} added successfully` : `Comment added successfully by ${user.username}`,
         data: body
       };
     } catch (e) {
