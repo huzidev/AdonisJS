@@ -39,4 +39,13 @@ export default class ReactionsController {
       throw e;
     }
   }
+
+  public async getReactions({ request, params }: HttpContextContract) {
+    try {
+        const response = await Reaction.findBy("articleId", params.id);
+    } catch (e) {
+        throw e;        
+    }
+
+  }
 }
