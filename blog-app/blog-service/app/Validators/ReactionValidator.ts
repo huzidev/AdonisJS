@@ -1,10 +1,9 @@
 import { CustomMessages, schema } from '@ioc:Adonis/Core/Validator'
 
-export class AddFavoriteArticle {
+export class AddReaction {
   public schema = schema.create({
     userId: schema.number(),
-    articleId: schema.number(),
-    ownerId: schema.number()
+    articleId: schema.number()
   })
 
   public messages: CustomMessages = {
