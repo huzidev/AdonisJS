@@ -1,7 +1,8 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import Database from "@ioc:Adonis/Lucid/Database";
 import Reaction from "App/Models/Reaction";
 import User from "App/Models/User";
-import { AddReaction, GetReactions } from "App/Validators/ReactionValidator";
+import { AddReaction } from "App/Validators/ReactionValidator";
 
 export default class ReactionsController {
   public async add({ request }: HttpContextContract) {
@@ -21,7 +22,7 @@ export default class ReactionsController {
       // otherwise every time it'll create new column with new values instead of updating the same column
       if (!reaction) {
         reaction = await Reaction.create({
-          ...body
+          ...body,
         });
       } else {
         if (isLike) {
@@ -36,26 +37,32 @@ export default class ReactionsController {
 
       return {
         data: body,
-        message: `You've ${isLike ? "Liked" : "Disliked"} blog by ${user?.username}`
+        message: `You've ${isLike ? "Liked" : "Disliked"} blog by ${
+          user?.username
+        }`,
       };
     } catch (e) {
       throw e;
     }
   }
 
-  public async getReactions({ params, request }: HttpContextContract) {
+  public async getReactions({ params }: HttpContextContract) {
     try {
-        const { isLike, isDislike } = await request.validate(GetReactions);
-        let response;
-        if (isLike) {
-            response = await Reaction.query().count("id as total").where("articleId", params.id).where("isLike", true);
-        } else if (isDislike) {
-            response = await Reaction.query().count("id as total").where("articleId", params.id).where("isDislike", true);
-        }
-        console.log("Response", response);
+        const likes = await Database.from('reactions')
+        .where('article_id', params.id)
+        .where('is_like', true)
+        .count('* as totalLikes')
+        .first();
+
+        const dislikes = await Database.from('reactions')
+        .where('article_id', params.id)
+        .where('is_dislike', true)
+        .count('* as totalDislikes')
+        .first();
+      
       return {
         message: "Reactions fetched successfully",
-        data: response,
+        data: { likes, dislikes },
       };
     } catch (e) {
       throw e;
