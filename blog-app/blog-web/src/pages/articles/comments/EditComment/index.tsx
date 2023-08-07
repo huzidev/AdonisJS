@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useComments } from "store/comment";
 import { useEditCommentPageHooks } from "./hooks";
 
@@ -8,6 +8,7 @@ export default function EditCommentPage(): JSX.Element {
   const params: any = useParams();
   const commentResp = comment.state.getCommentById.data;
   const [content, setContent] = useState<any>({comment: ''});
+  const navigate = useNavigate();
   
   useEffect(() => {
     if (commentResp) {
@@ -17,7 +18,8 @@ export default function EditCommentPage(): JSX.Element {
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    comment.editComment({ id: params.id, comment: content })
+    comment.editComment({ id: params.id, comment: content });
+    navigate(-1);
   }
 
   useEditCommentPageHooks();
