@@ -40,9 +40,16 @@ export default class ReactionsController {
     }
   }
 
-  public async getReactions({ request, params }: HttpContextContract) {
+  public async getReactions({ params }: HttpContextContract) {
     try {
-        const response = await Reaction.findBy("articleId", params.id);
+        // const response = await Reaction.findBy("articleId", params.id);
+        const response = await Reaction.query().count("id").where("articleId", params.id);
+        console.log("Response", response);
+        
+        return {
+            message: "Reactions fetched successfully",
+            data: response
+        }
     } catch (e) {
         throw e;        
     }
