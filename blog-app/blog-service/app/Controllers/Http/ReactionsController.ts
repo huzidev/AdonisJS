@@ -9,24 +9,30 @@ export default class ReactionsController {
         const body = await request.validate(AddReaction);
         const { userId, articleId, isLike, isDislike } = body;
 
-        const reaction = new Reaction();
+        // const reaction = new Reaction();
+        let reaction = await Reaction.findBy("userId", userId);
 
         // for owner of blog info so we can get owner name and then show the owner name in notification
         const user = await User.findBy("id", userId);
-        
-        reaction.articleId = articleId;
-        reaction.userId = userId;
 
-        if (isLike) {
-            reaction.isLike = true;
-            reaction.isDislike = false;
-        } else if (isDislike) {
-            reaction.isLike = false;
-            reaction.isDislike = true;
+        if (!reaction) {
+            await Reaction.create({ ...body })
+        } else {
+            await reaction.save();
         }
-        // await reaction.save();
 
-        await reaction.save();
+        
+        // reaction.articleId = articleId;
+        // reaction.userId = userId;
+
+        // if (isLike) {
+        //     reaction.isLike = true;
+        //     reaction.isDislike = false;
+        // } else if (isDislike) {
+        //     reaction.isLike = false;
+        //     reaction.isDislike = true;
+        // }
+        // // await reaction.save();
 
         return { 
             data: body, 
