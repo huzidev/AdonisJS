@@ -12,10 +12,20 @@ export default class ReactionsController {
         // for owner of blog info so we can get owner name and then show the owner name in notification
         const user = await User.findBy("id", userId);
         
-        await Reaction.create({articleId, userId});
+        let isLike;
+        let isDislike;
+        if (body.isLike) {
+            isLike = true;
+            isDislike = false;
+        } else if (body.isDislike) {
+            isLike = false;
+            isDislike = true;
+        }
+
+        await Reaction.create({articleId, userId, isLike, isDislike});
         return { 
             data: body, 
-            message: `Blog by ${user?.username} added to favorite list successfully!` 
+            message: `You've liked blog by ${user?.username}` 
         };
     
     } catch (e) {
