@@ -12,7 +12,7 @@ export default class Reaction extends BaseModel {
   public articleId: number
 
   @column({ consume: (v) => !!v })
-  public isLike: boolean = true
+  public isLike: boolean = false
 
   @column({ consume: (v) => !!v })
   public isDislike: boolean = false

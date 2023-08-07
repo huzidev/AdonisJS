@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
+import Database from '@ioc:Adonis/Lucid/Database';
 import Reaction from 'App/Models/Reaction';
 import User from 'App/Models/User';
 import { AddReaction } from 'App/Validators/ReactionValidator';
@@ -43,9 +44,14 @@ export default class ReactionsController {
   public async getReactions({ params }: HttpContextContract) {
     try {
         // const response = await Reaction.findBy("articleId", params.id);
-        const response = await Reaction.query().count("id").where("articleId", params.id);
-        console.log("Response", response);
-        
+        // const response = await Reaction.query().count("id").where("articleId", params.id);
+        const response = await Database
+            .from('reactions')
+            .count({
+                'active': 'is_like',
+                'total': '*',
+            })
+            
         return {
             message: "Reactions fetched successfully",
             data: response
@@ -53,6 +59,5 @@ export default class ReactionsController {
     } catch (e) {
         throw e;        
     }
-
   }
 }
