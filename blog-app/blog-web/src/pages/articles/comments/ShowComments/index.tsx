@@ -13,7 +13,8 @@ export default function CommentsPage(props: PropsState): JSX.Element {
   const auth = useAuth();
   const userData = auth.state.user;
   const { content, setContent, allComments, allUsers } = useCommentPageHooks();
-  const [reply, setReply] = useState<boolean>(false);
+  const [replyState, setReplyState] = useState<boolean>(false);
+  const [reply, setReply] = useState<any>()
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -75,6 +76,24 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                         </p>
                         <p>{value.comment}</p>
                       </div>
+                      {replyState && (
+                        <div className="mt-2">
+                          <input
+                            id="reply"
+                            name="reply"
+                            type="text"
+                            value={content.comment}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReply(e.target.value)}
+                            required
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          />
+                          <input
+                            className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            type="submit"
+                            value="post"
+                          />
+                        </div>
+                      )}
                       <p>{new Date(value.createdAt).toLocaleDateString()}</p>
                       {(isCommentAuthor ||
                         (isAdmin && !isAuthorSuperAdmin)) && (
@@ -96,7 +115,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                       )}
                       {" "}
                       <button
-                        onClick={() => setReply(!reply)}
+                        onClick={() => setReplyState(!replyState)}
                       >
                         Reply
                       </button>
