@@ -5,9 +5,9 @@ import { User } from "store/auth/types";
 import { useComments } from "store/comment";
 import { hasPermission } from "utils";
 import { useCommentPageHooks } from "./hooks";
-import { AllCommentsState } from "./types";
+import { AllCommentsState, PropsState } from "./types";
 
-export default function CommentsPage(props: any): JSX.Element {
+export default function CommentsPage(props: PropsState): JSX.Element {
   const comment = useComments();
   const auth = useAuth();
   const userData = auth.state.user;
@@ -60,7 +60,7 @@ export default function CommentsPage(props: any): JSX.Element {
                   );
                   const commentBy = uploadedByUser && uploadedByUser.username;
                   const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
-                  const isBlogOwner = props.ownerId === userData?.id;
+                  const isBlogOwner = props.userId === userData?.id;
                   const isCommentAuthor = value.userId === userData?.id;
                   const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
                   const isAuthorAdmin = uploadedByUserRole === "admin";
