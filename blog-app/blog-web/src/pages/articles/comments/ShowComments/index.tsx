@@ -1,4 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -12,6 +13,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
   const auth = useAuth();
   const userData = auth.state.user;
   const { content, setContent, allComments, allUsers } = useCommentPageHooks();
+  const [reply, setReply] = useState<boolean>(false);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -92,6 +94,12 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                             Delete
                           </button>
                       )}
+                      {" "}
+                      <button
+                        onClick={() => setReply(!reply)}
+                      >
+                        Reply
+                      </button>
                     </div>
                   );
                 })}
