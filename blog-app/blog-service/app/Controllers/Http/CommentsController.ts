@@ -12,7 +12,6 @@ export default class CommentsController {
 
       const { userId, articleId } = body;
 
-
       console.log("USER ID", userId);
 
       const user: any = await User.findBy("id", userId);
@@ -33,7 +32,7 @@ export default class CommentsController {
       const articleId = params.id;
       const response = await Comment.query()
             .where("article_id", articleId)
-            .select("*");
+            .select('*');
       // const response = await Article.query().whereIn("id", query); 
       return {
         message: "Comments fetched successfully",
