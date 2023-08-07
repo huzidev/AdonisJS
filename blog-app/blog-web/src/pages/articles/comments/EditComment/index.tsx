@@ -26,7 +26,7 @@ export default function EditCommentPage(): JSX.Element {
 
   return (
     <>
-    <form onSubmit={submit}>
+    <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
       <label
         htmlFor="comment"
         className="block text-sm font-medium leading-6 text-gray-900"
