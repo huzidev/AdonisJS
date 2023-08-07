@@ -71,7 +71,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const isAuthorAdmin = uploadedByUserRole === "admin";
                   const isAdmin = hasPermission("admin", userData?.role);
                   return (
-                    // !value.replyId && (
+                    // !value.replyId ? (
                       <div key={index}>
                         <div className="flex">
                         <p>
@@ -109,7 +109,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                           </div>
                         )}
                         <p>{new Date(value.createdAt).toLocaleDateString()}</p>
-                        {value.replyId && ("HELLO")}
                         {(isCommentAuthor ||
                           (isAdmin && !isAuthorSuperAdmin)) && (
                             <Link to={ROUTE_PATHS.EDIT_COMMENT + value.id}>
@@ -135,7 +134,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                           Reply
                         </button>
                       </div>
-                    // )
+                    // ) : "heLLO"
                   );
                 })}
             </div>
