@@ -70,8 +70,6 @@ export const allUserByPage = createAsyncThunk(endpoints.USER_LIST_PAGE, async (d
 export const getById = createAsyncThunk(endpoints.GET_BY_ID, async (id: number) => {
     try {
         const response = await api.get(endpoints.GET_BY_ID + id);
-        console.log("RESPONE FOR GET USER BY ID", response);
-        
         return response.data.data;
     } catch (e: any) {
         const err = mapErrorToState(e);

@@ -122,7 +122,6 @@ export const getBlog = createAsyncThunk(
   async (slug: GetBlogPayload) => {
     try {
       const response = await api.get(endpoints.GET_BLOG + slug);
-      console.log("response for getblogs by slug", response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);

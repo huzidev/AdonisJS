@@ -10,7 +10,7 @@ export const addComment = createAsyncThunk(
   async (data: AddCommentPayload) => {
     try {
       const response = await api.post(endpoints.ADD_COMMENT, data);
-      console.log('Add Blog response', response.data);
+      console.log('Add Comment response', response.data);
       return {
         message: response.data.message,
         data: response.data.data

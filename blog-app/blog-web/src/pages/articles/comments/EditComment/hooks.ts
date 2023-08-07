@@ -30,7 +30,6 @@ export function useEditCommentPageHooks() {
         }
         if (prev?.editComment.loading) {
             console.log("RUN");
-            
             if (!state.editComment.loading && !state.editComment.error) {
                 successNotification(state.editComment.message)
             }
