@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useComments } from "store/comment";
+import { useEditCommentPageHooks } from "./hooks";
 
 export default function EditCommentPage(): JSX.Element {
   const comment = useComments();
@@ -18,6 +19,8 @@ export default function EditCommentPage(): JSX.Element {
     e.preventDefault();
     comment.editComment({ id: params.id, comment: content })
   }
+
+  useEditCommentPageHooks();
 
   return (
     <>
