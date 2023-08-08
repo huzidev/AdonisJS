@@ -29,9 +29,14 @@ export function useGetBlogPageHooks() {
   useEffect(() => {
     if (ownerId) {
       user.getById(ownerId);
-      reaction.getReactions({ articleId: blogId, userId: loggedInId });
     }
   }, [ownerId])
+
+  useEffect(() => {
+    if (blogId) {
+      reaction.getReactions({ articleId: blogId, userId: loggedInId });
+    }
+  }, [blogId])
 
   useEffect(() => {
     if (prev?.getBlog.loading) {

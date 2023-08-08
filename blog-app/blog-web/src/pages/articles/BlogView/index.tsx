@@ -31,6 +31,9 @@ export default function ViewBlogPage(): JSX.Element {
   }, [getBlog]);
 
   useGetBlogPageHooks();
+  if (allReactions) {
+    console.log("all reactions", allReactions);
+  }
   return (
     <div>
       <div className="w-2/3 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
