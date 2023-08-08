@@ -25,14 +25,7 @@ export default class ReactionsController {
           ...body,
         });
       } else {
-        // if (isLike) {
-        //   reaction.isLike = true;
-        //   reaction.isDislike = false;
-        // } else if (isDislike) {
-        //   reaction.isLike = false;
-        //   reaction.isDislike = true;
-        // }
-        // reaction.merget so when user update isLike or isDislike then instead of creating new column simply update the existing column with updated Data therefore we've called MERGE
+        // reaction.merge so when user update isLike or isDislike then instead of creating new column simply update the existing column with updated Data therefore we've called MERGE
         reaction.merge(body);
         await reaction.save();
       }
