@@ -17,37 +17,21 @@ export default function ViewBlogPage(): JSX.Element {
   const blog = useBlogs();
   const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
-  const initialState: BlogState = { title: "", image: "", content: "" };
+  const initialState: BlogState = { title: '', image: '', content: '' };
   const [blogView, setBlogView] = useState(initialState);
   const allReactions: any = reaction.state.getReactions.data;
-  const [reactionState, setReactionState] = useState<any>({
-    totalLikes: null,
-    totalDislikes: null,
-    user: null,
-  });
   const ownerId: any = blog.state.getBlog.data?.ownerId;
   const reactState: AddReactionState = {
     userId: loggedInId,
     articleId: getBlog?.id,
   };
+  const allReactionsState = allReactions && allReactions.user;
 
   useEffect(() => {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);
 
-  useEffect(() => {
-    setReactionState({ ...blogView, ...allReactions });
-  }, [allReactions]);
-
   useGetBlogPageHooks();
-
-  if (allReactions) {
-    if (allReactions.user) {
-      console.log("all reactions", allReactions);
-    }
-  }
-
-  const allReactionsState = allReactions && allReactions.user;
 
   return (
     <div>
