@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
@@ -9,6 +10,7 @@ import { successNotification } from "utils/notifications";
 export function useGetBlogPageHooks(): void {
   const params: any = useParams();
   const blog = useBlogs();
+  const reaction = useReactions();
   const user = useUser();
   const auth = useAuth();
   const state = blog.state;
