@@ -111,7 +111,9 @@ export default function ViewBlogsPage(): JSX.Element {
             const uploadedByUserId = uploadedByUser && uploadedByUser.id;
             const uploadedByUsername =
               uploadedByUser && uploadedByUser.username;
-            const likes = allReactions?.find((data: any) => data.articleId === blog.id)
+            const likes = allReactions?.find((data: any) => data.articleId === blog.id && data.isLike)
+            console.log("likes", likes)
+            
             return (
               <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
