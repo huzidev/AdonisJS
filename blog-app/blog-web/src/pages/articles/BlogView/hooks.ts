@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -6,7 +6,6 @@ import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
-import { initialReactionState } from "./data";
 
 export function useGetBlogPageHooks() {
   const params: any = useParams();
@@ -21,8 +20,6 @@ export function useGetBlogPageHooks() {
   const byMe = ownerId === auth.state.user?.id;
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = state.getBlog.data?.id;
-  const [reactionState, setReactionState] = useState<any>(initialReactionState)
-  const allReact: any = reaction.state.getReactions.data;
 
   // seprately making with different useEffect because while creating in same useEffect as of ownerId it's fetching data multiple times
   useEffect(() => {
