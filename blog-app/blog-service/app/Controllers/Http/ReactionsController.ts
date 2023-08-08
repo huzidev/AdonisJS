@@ -56,16 +56,15 @@ export default class ReactionsController {
         .first();
 
         // so if user with id 1 has liked the blog then return that id of user so we can compare it on front-end that whether user has liked the blog or not to show Clicked feature on like button
-        const userId = await Reaction.query()
+        const user = await Reaction.query()
         .where("userId", params.id)
         .where("articleId", params.articleId)
         .first();
-        console.log("user id", userId?.userId);
 
       return {
         message: "Reactions fetched successfully",
         // so only totalLikes: and totalDislikes value will be returned
-        data: {...likes, ...dislikes, userId}
+        data: {...likes, ...dislikes, user}
       };
     } catch (e) {
       throw e;
