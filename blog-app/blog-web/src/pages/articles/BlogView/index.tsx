@@ -69,7 +69,7 @@ export default function ViewBlogPage(): JSX.Element {
               onClick={() =>
                 reaction.addReaction({
                   ...reactState,
-                  // so if user liked a blog then Liked button will be shown and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
+                  // so if user liked a blog then Liked will be shown instead of like because user has already liked the blog and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
                   isLike: allReactions.user.isLike ? false : true,
                   isDislike: false,
                 })
@@ -101,9 +101,9 @@ export default function ViewBlogPage(): JSX.Element {
             </div>
             <div className="flex justify-between mr-3">
               <div className="flex">
-                <p>Likes : {allReactions?.isLike}</p>
+                <p>Likes : {allReactions && allReactions.totalLikes}</p>
                 <p className="ml-2">
-                  Dislikes : {allReactions?.isDislike}
+                  Dislikes : {allReactions && allReactions.totalDislikes}
                 </p>
               </div>
               <Link to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>
