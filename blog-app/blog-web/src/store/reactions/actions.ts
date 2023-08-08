@@ -25,7 +25,22 @@ export const getReactions = createAsyncThunk(
   async (data: GetReactionPayload) => {
     try {
       const response = await api.get(endpoints.GET_REACTIONS + data.articleId + "/" + data.userId);
-      console.log('GET REACTIONS RESPONSE', response);
+      return response.data;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
+    }
+  }
+);
+
+export const getAllReactions = createAsyncThunk(
+  endpoints.ALL_REACTIONS,
+  async () => {
+    try {
+      const response = await api.get(endpoints.ALL_REACTIONS);
+      console.log('GET ALL REACTIONS RESPONSE', response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
