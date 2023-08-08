@@ -26,10 +26,10 @@ export default function ViewBlogPage(): JSX.Element {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);
 
-  const { reactionState, setReactionState } = useGetBlogPageHooks();
+  const { reactionState } = useGetBlogPageHooks();
 
   if (reactionState) {
-    console.log("React state", reactionState);
+      console.log("React state", reactionState);
   }
   
   return (
