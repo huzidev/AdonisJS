@@ -40,6 +40,7 @@ export function useGetBlogPageHooks() {
   }, [blogId])
 
   useEffect(() => {
+    // when user clikced on like or dislike button then fetch the updated data
     if (prevReact?.loading) {
       reaction.getReactions({ articleId: blogId, userId: loggedInId });
     }
