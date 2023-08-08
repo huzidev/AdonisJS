@@ -2,6 +2,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
+import { useAuth } from "store/auth";
 import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import CommentsPage from "../comments/ShowComments";
@@ -10,9 +11,11 @@ import { BlogState } from "./types";
 
 export default function ViewBlogPage(): JSX.Element {
   const user = useUser();
+  const auth = useAuth();
+  const loggedInId: any = auth.state.user?.id;
   const reaction = useReactions();
   const blog = useBlogs();
-  const getBlog = blog.state.getBlog?.data;
+  const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
   const initialState: BlogState = { title: "", image: "", content: "" };
   const [blogView, setBlogView] = useState(initialState);
@@ -40,10 +43,20 @@ export default function ViewBlogPage(): JSX.Element {
               src="/docs/images/blog/image-1.jpg"
               alt="Thumbnail"
             />
-              <button>
+              <button onClick={() => reaction.addReaction({
+                userId: loggedInId,
+                articleId: getBlog?.id,
+                isLike: true,
+                isDislike: false
+              })}>
                   Like
               </button>
-              <button className="ml-5">
+              <button className="ml-5" onClick={() => reaction.addReaction({
+                userId: loggedInId,
+                articleId: getBlog?.id,
+                isLike: false,
+                isDislike: true
+              })}>
                 Dislike
               </button>
             <div className="p-5 flex flex-col items-center">
