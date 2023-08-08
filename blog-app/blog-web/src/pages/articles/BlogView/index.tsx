@@ -17,18 +17,13 @@ export default function ViewBlogPage(): JSX.Element {
   const initialState: BlogState = { title: "", image: "", content: "" };
   const [blogView, setBlogView] = useState(initialState);
   const ownerId: any = blog.state.getBlog.data?.ownerId
-  const allReactions = reaction.state.getReactions.data;
+  const allReactions: any = reaction.state.getReactions.data;
 
   useEffect(() => {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);
 
-
-  console.log("ALL REACTIONS", allReactions);
-  
-
   useGetBlogPageHooks();
-
   return (
     <div>
       <div className="w-2/3 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -54,6 +49,12 @@ export default function ViewBlogPage(): JSX.Element {
               </p>
             </div>
             <div className="flex justify-end mr-3">
+              <p>
+                Likes : {allReactions && Object.values(allReactions.likes)[0]}
+              </p>
+              <p>
+                Dislikes : {allReactions && Object.values(allReactions.dislikes)[0]}
+              </p>
               <Link to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>
                 Uploaded By : {owner?.username}
               </Link>
