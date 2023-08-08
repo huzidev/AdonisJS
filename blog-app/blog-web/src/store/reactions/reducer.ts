@@ -25,6 +25,21 @@ export const reactionSlice = createSlice({
         builder.addCase(actions.addReaction.rejected, (state) => {
           state.addReaction = { loading: false, error: true };
         });
+        // Get Reactions (Likes, Dislikes)
+        builder.addCase(actions.getReactions.pending, (state) => {
+          state.getReactions = { loading: true, error: false };
+        });
+        builder.addCase(actions.getReactions.fulfilled, (state, action) => {
+            state.getReactions = { loading: false, error: false };
+            if (action.payload) {
+                const { message, data } = action.payload;
+                state.getReactions.data = data;
+                state.getReactions.message = message;
+            }
+        })
+        builder.addCase(actions.getReactions.rejected, (state) => {
+          state.getReactions = { loading: false, error: true };
+        });
     }
 })
 
