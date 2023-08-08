@@ -62,7 +62,8 @@ export default class ReactionsController {
 
       return {
         message: "Reactions fetched successfully",
-        data: { likes, dislikes }
+        // so only totalLikes: and totalDislikes value will be returned
+        data: {...likes, ...dislikes}
       };
     } catch (e) {
       throw e;
