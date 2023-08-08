@@ -18,7 +18,6 @@ export function useBlogsPageHooks() {
   const navigate = useNavigate();
   const isUser = auth.state.user?.role === "user";
   const allUsers: any = user.state.allUser?.data;
-  const favoriteBlogs: any = blogs.state.getFavoriteBlogs;
   const isLoading = state.getBlogs.loading;
   const [sortValue, setSortValue] = useState(initialSortState);
   const payload: any = {

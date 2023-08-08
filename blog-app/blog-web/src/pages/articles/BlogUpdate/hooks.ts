@@ -48,7 +48,7 @@ export function useEditBlogPageHooks(): void {
     }
     if (prev?.getBlog.loading) {
       if (!state.getBlog.loading && state.getBlog.error) {
-        navigate("/");
+        navigate('/');
       }
     }
     // if user other than admins try to access edit blog path then redirect the user to blog/list path even for blogger until ownerId of the blog isn't mathcing the id of loggedIn user
