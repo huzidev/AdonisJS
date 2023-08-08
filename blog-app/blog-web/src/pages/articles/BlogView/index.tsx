@@ -17,14 +17,14 @@ export default function ViewBlogPage(): JSX.Element {
   const blog = useBlogs();
   const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
-  const initialState: BlogState = { title: '', image: '', content: '' };
+  const initialState: BlogState = { title: "", image: "", content: "" };
   const [blogView, setBlogView] = useState(initialState);
-  const ownerId: any = blog.state.getBlog.data?.ownerId
+  const ownerId: any = blog.state.getBlog.data?.ownerId;
   const allReactions: any = reaction.state.getReactions.data;
   const reactState: AddReactionState = {
     userId: loggedInId,
-    articleId: getBlog?.id
-  }
+    articleId: getBlog?.id,
+  };
 
   useEffect(() => {
     setBlogView({ ...blogView, ...getBlog });
@@ -47,21 +47,32 @@ export default function ViewBlogPage(): JSX.Element {
               src="/docs/images/blog/image-1.jpg"
               alt="Thumbnail"
             />
-              <button onClick={() => reaction.addReaction({
-                ...reactState,
-                // so if user liked a blog then Liked button will be shown and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
-                isLike: allReactions.userId.isLike ? false : true,
-                isDislike: false
-              })}>
-                  {allReactions && allReactions.userId.isLike ? "Liked" : "Like"}
-              </button>
-              <button className="ml-5" onClick={() => reaction.addReaction({
-                ...reactState,
-                isLike: false,
-                isDislike: allReactions.userId.isDislike ? false : true,
-              })}>
-                {allReactions && allReactions.userId.isDislike ? "Disliked" : "Dislike"}
-              </button>
+            <button
+              onClick={() =>
+                reaction.addReaction({
+                  ...reactState,
+                  // so if user liked a blog then Liked button will be shown and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
+                  isLike: allReactions.userId.isLike ? false : true,
+                  isDislike: false,
+                })
+              }
+            >
+              {allReactions && allReactions.userId.isLike ? "Liked" : "Like"}
+            </button>
+            <button
+              className="ml-5"
+              onClick={() =>
+                reaction.addReaction({
+                  ...reactState,
+                  isLike: false,
+                  isDislike: allReactions.userId.isDislike ? false : true,
+                })
+              }
+            >
+              {allReactions && allReactions.userId.isDislike
+                ? "Disliked"
+                : "Dislike"}
+            </button>
             <div className="p-5 flex flex-col items-center">
               <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {blogView.title} {blog.state.getBlog.data?.id}
@@ -72,9 +83,7 @@ export default function ViewBlogPage(): JSX.Element {
             </div>
             <div className="flex justify-between mr-3">
               <div className="flex">
-                <p>
-                  Likes : {allReactions && allReactions.totalLikes}
-                </p>
+                <p>Likes : {allReactions && allReactions.totalLikes}</p>
                 <p className="ml-2">
                   Dislikes : {allReactions && allReactions.totalDislikes}
                 </p>
@@ -86,11 +95,9 @@ export default function ViewBlogPage(): JSX.Element {
           </>
         )}
       </div>
-        <div className="w-2/3 my-8 mx-auto">
-          <CommentsPage 
-            ownerId={ownerId}
-          />
-        </div>
+      <div className="w-2/3 my-8 mx-auto">
+        <CommentsPage ownerId={ownerId} />
+      </div>
     </div>
   );
 }
