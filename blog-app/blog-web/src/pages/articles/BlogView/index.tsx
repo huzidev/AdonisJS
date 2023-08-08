@@ -17,14 +17,14 @@ export default function ViewBlogPage(): JSX.Element {
   const blog = useBlogs();
   const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
-  const initialState: BlogState = { title: '', image: '', content: '' };
+  const initialState: BlogState = { title: "", image: "", content: "" };
   const [blogView, setBlogView] = useState(initialState);
   const allReactions: any = reaction.state.getReactions.data;
-  const [reactionState, setReactionState] = useState<any>({ 
+  const [reactionState, setReactionState] = useState<any>({
     totalLikes: null,
     totalDislikes: null,
-    user: null
-  })
+    user: null,
+  });
   const ownerId: any = blog.state.getBlog.data?.ownerId;
   const reactState: AddReactionState = {
     userId: loggedInId,
@@ -36,11 +36,11 @@ export default function ViewBlogPage(): JSX.Element {
   }, [getBlog]);
 
   useEffect(() => {
-    setReactionState({ ...blogView, ...allReactions })
-  }, [allReactions])
+    setReactionState({ ...blogView, ...allReactions });
+  }, [allReactions]);
 
   useGetBlogPageHooks();
- 
+
   if (allReactions) {
     if (allReactions.user) {
       console.log("all reactions", allReactions);
@@ -87,7 +87,7 @@ export default function ViewBlogPage(): JSX.Element {
                 })
               }
             >
-                {allReactionsState && allReactions.user.isDislike
+              {allReactionsState && allReactions.user.isDislike
                 ? "Disliked"
                 : "Dislike"}
             </button>
