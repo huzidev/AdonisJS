@@ -22,6 +22,11 @@ export default function ViewBlogPage(): JSX.Element {
   const ownerId: any = blog.state.getBlog.data?.ownerId
   const allReactions: any = reaction.state.getReactions.data;
 
+  const reactState = {
+    userId: loggedInId,
+    articleId: getBlog?.id
+  }
+
   useEffect(() => {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);
@@ -49,17 +54,14 @@ export default function ViewBlogPage(): JSX.Element {
               alt="Thumbnail"
             />
               <button onClick={() => reaction.addReaction({
-                userId: loggedInId,
-                articleId: getBlog?.id,
+                ...reactState,
                 isLike: allReactions.userId.isLike ? false : true,
                 isDislike: false
               })}>
                   {allReactions && allReactions.userId.isLike ? "Liked" : "Like"}
-                  {/* like */}
               </button>
               <button className="ml-5" onClick={() => reaction.addReaction({
-                userId: loggedInId,
-                articleId: getBlog?.id,
+                ...reactState,
                 isLike: false,
                 isDislike: allReactions.userId.isDislike ? false : true,
               })}>
