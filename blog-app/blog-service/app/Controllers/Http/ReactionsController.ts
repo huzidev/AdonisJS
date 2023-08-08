@@ -59,10 +59,10 @@ export default class ReactionsController {
         .where('is_dislike', true)
         .count('* as totalDislikes')
         .first();
-      
+
       return {
         message: "Reactions fetched successfully",
-        data: { likes, dislikes },
+        data: { likes, dislikes }
       };
     } catch (e) {
       throw e;
