@@ -66,13 +66,12 @@ export default function ViewBlogPage(): JSX.Element {
                 reaction.addReaction({
                   ...reactState,
                   // so if user liked a blog then Liked button will be shown and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
-                  isLike: allReactions.userId.isLike ? false : true,
+                  isLike: allReactions.user.isLike ? false : true,
                   isDislike: false,
                 })
               }
             >
-              {/* {!allReactions.userId ? "Like" : allReactions.userId.isLike ? "Liked" : "Like"} */}
-              like
+              {allReactions && allReactions.user.isLike ? "Liked" : "Like"}
             </button>
             <button
               className="ml-5"
