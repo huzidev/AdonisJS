@@ -25,6 +25,7 @@ export default function ViewBlogPage(): JSX.Element {
     userId: loggedInId,
     articleId: getBlog?.id,
   };
+  // to check that allReactions must not be null and allReactions.user must also not be null otherwise it'll show error if we just check allReactions
   const allReactionsState = allReactions && allReactions.user;
 
   useEffect(() => {
@@ -32,9 +33,6 @@ export default function ViewBlogPage(): JSX.Element {
   }, [getBlog]);
 
   useGetBlogPageHooks();
-
-  console.log("all", allReactions);
-  
 
   return (
     <div>
