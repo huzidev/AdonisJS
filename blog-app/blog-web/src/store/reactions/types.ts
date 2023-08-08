@@ -7,11 +7,11 @@ export interface AddReactionPayload {
     isDislike: boolean;
 }
 
-export interface GetReactionState extends SubState {
+export interface GetReactionsState extends SubState {
     data?: AddReactionPayload[] | null;
 }
 
 export interface ReactionState {
   addReaction: SubState;
-  getReactions: GetReactionState;
+  getReactions: GetReactionsState;
 }
