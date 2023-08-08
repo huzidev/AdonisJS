@@ -12,22 +12,18 @@ export const reactionSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-         builder.addCase(actions.addComment.pending, (state) => {
-          state.addComment = { loading: true, error: false };
+         builder.addCase(actions.addReaction.pending, (state) => {
+          state.addReaction = { loading: true, error: false };
         });
-        builder.addCase(actions.addComment.fulfilled, (state, action) => {
-            state.addComment = { loading: false, error: false };
+        builder.addCase(actions.addReaction.fulfilled, (state, action) => {
+            state.addReaction = { loading: false, error: false };
             if (action.payload) {
                 const { message, data } = action.payload;
-                if (state.getComments.data) {
-                  const prevComments = JSON.parse(JSON.stringify(state.getComments.data));
-                  state.getComments.data = [...prevComments, data]
-                }
-                state.addComment.message = message;
+                state.addReaction.message = message;
             }
         })
-        builder.addCase(actions.addComment.rejected, (state) => {
-          state.addComment = { loading: false, error: true };
+        builder.addCase(actions.addReaction.rejected, (state) => {
+          state.addReaction = { loading: false, error: true };
         });
     }
 })
