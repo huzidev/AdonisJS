@@ -22,18 +22,16 @@ export default function ViewBlogPage(): JSX.Element {
   const ownerId: any = blog.state.getBlog.data?.ownerId
   const allReactions: any = reaction.state.getReactions.data;
 
-  const [reactionState, setReactionState] = useState({
-    userId: loggedInId,
-    articleId: getBlog?.id,
-    isLike: false,
-    isDislike: false
-  })
-
   useEffect(() => {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);
 
-  useGetBlogPageHooks();
+  const { reactionState, setReactionState } = useGetBlogPageHooks();
+
+  if (reactionState) {
+    console.log("React state", reactionState);
+  }
+  
   return (
     <div>
       <div className="w-2/3 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -78,10 +76,10 @@ export default function ViewBlogPage(): JSX.Element {
             <div className="flex justify-between mr-3">
               <div className="flex">
                 <p>
-                  Likes : {allReactions && allReactions.totalLikes}
+                  Likes : {reactionState && reactionState.totalLikes}
                 </p>
                 <p className="ml-2">
-                  Dislikes : {allReactions && allReactions.totalDislikes}
+                  Dislikes : {reactionState && reactionState.totalDislikes}
                 </p>
               </div>
               <Link to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>

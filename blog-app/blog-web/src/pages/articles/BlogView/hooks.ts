@@ -8,7 +8,7 @@ import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 import { initialReactionState } from "./data";
 
-export function useGetBlogPageHooks(): void {
+export function useGetBlogPageHooks() {
   const params: any = useParams();
   const blog = useBlogs();
   const reaction = useReactions();
@@ -21,7 +21,7 @@ export function useGetBlogPageHooks(): void {
   const byMe = ownerId === auth.state.user?.id;
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = state.getBlog.data?.id;
-  const [reactionState, setReactionState] = useState(initialReactionState)
+  const [reactionState, setReactionState] = useState<any>(initialReactionState)
   const allReact: any = reaction.state.getReactions.data;
 
   // seprately making with different useEffect because while creating in same useEffect as of ownerId it's fetching data multiple times
@@ -32,18 +32,15 @@ export function useGetBlogPageHooks(): void {
   useEffect(() => {
     if (ownerId) {
       user.getById(ownerId);
+      reaction.getReactions({ articleId: blogId, userId: loggedInId });
     }
   }, [ownerId])
 
   useEffect(() => {
-    if (blogId) {
-      reaction.getReactions({ articleId: blogId, userId: loggedInId });
+    if (allReact) {
       setReactionState({ ...reactionState, ...allReact })
-    } 
-  }, [blogId])
-
-    console.log("reactionState", reactionState);
-
+    }
+  }, [allReact])
 
   useEffect(() => {
     if (prev?.getBlog.loading) {
@@ -60,4 +57,9 @@ export function useGetBlogPageHooks(): void {
     }
     console.log("state.getBlog.message", state.getBlog.message);
   }, [state]);
+
+  return {
+    reactionState,
+    setReactionState
+  }
 }
