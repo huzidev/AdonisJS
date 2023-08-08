@@ -70,4 +70,17 @@ export default class ReactionsController {
       throw e;
     }
   }
+
+  public async getAllReactions({}) {
+    try {
+      const response = await Reaction.query();
+      console.log("Response", response);
+      return {
+        message: "All reactions fethced successfully",
+        data: response
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 }
