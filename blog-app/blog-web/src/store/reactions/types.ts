@@ -13,4 +13,5 @@ export interface GetReactionState extends SubState {
 
 export interface ReactionState {
   addReaction: SubState;
+  getReactions: GetReactionState;
 }

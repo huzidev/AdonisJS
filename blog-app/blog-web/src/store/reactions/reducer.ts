@@ -4,7 +4,8 @@ import * as actions from "./actions";
 import { ReactionState } from "./types";
 
 const initialState: ReactionState = {
-    addReaction:  { ...subState }
+    addReaction:  { ...subState },
+    getReactions:  { ...subState, data: null }
 }
 
 export const reactionSlice = createSlice({
