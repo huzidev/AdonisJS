@@ -51,7 +51,7 @@ export default function ViewBlogPage(): JSX.Element {
               <button onClick={() => reaction.addReaction({
                 userId: loggedInId,
                 articleId: getBlog?.id,
-                isLike: true,
+                isLike: allReactions.userId.isLike ? false : true,
                 isDislike: false
               })}>
                   {allReactions && allReactions.userId.isLike ? "Liked" : "Like"}
@@ -61,7 +61,7 @@ export default function ViewBlogPage(): JSX.Element {
                 userId: loggedInId,
                 articleId: getBlog?.id,
                 isLike: false,
-                isDislike: true
+                isDislike: allReactions.userId.isDislike ? false : true,
               })}>
                 {allReactions && allReactions.userId.isDislike ? "Disliked" : "Dislike"}
               </button>
