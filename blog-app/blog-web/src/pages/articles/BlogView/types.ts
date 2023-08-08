@@ -5,12 +5,6 @@ export interface BlogState {
 }
 
 export interface ReactionsState {
-    // likes: {
-    //     totalLikes: number
-    // }
-    // dislikes: {
-    //     totalDislikes: number
-    // }
     likes: number
     dislikes: number
 }

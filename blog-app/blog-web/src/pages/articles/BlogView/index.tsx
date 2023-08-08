@@ -22,6 +22,13 @@ export default function ViewBlogPage(): JSX.Element {
   const ownerId: any = blog.state.getBlog.data?.ownerId
   const allReactions: any = reaction.state.getReactions.data;
 
+  const [reactionState, setReactionState] = useState({
+    userId: loggedInId,
+    articleId: getBlog?.id,
+    isLike: false,
+    isDislike: false
+  })
+
   useEffect(() => {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);
