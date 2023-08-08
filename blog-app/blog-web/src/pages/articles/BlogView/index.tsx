@@ -40,6 +40,12 @@ export default function ViewBlogPage(): JSX.Element {
               src="/docs/images/blog/image-1.jpg"
               alt="Thumbnail"
             />
+              <button>
+                  Like
+              </button>
+              <button className="ml-5">
+                Dislike
+              </button>
             <div className="p-5 flex flex-col items-center">
               <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {blogView.title} {blog.state.getBlog.data?.id}
@@ -64,13 +70,11 @@ export default function ViewBlogPage(): JSX.Element {
           </>
         )}
       </div>
-      {/* {auth.state.user && ( */}
         <div className="w-2/3 my-8 mx-auto">
           <CommentsPage 
             ownerId={ownerId}
           />
         </div>
-      {/* )} */}
     </div>
   );
 }
