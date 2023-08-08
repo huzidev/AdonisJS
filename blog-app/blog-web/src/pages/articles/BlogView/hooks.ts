@@ -33,8 +33,10 @@ export function useGetBlogPageHooks(): void {
   }, [ownerId])
 
   useEffect(() => {
+    if (loggedInId || blogId) {
       reaction.getReactions({ articleId: blogId, userId: loggedInId });
-  }, [blogId])
+    }
+  }, [])
 
   useEffect(() => {
     if (prev?.getBlog.loading) {
