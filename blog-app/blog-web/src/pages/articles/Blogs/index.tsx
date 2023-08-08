@@ -198,13 +198,17 @@ export default function ViewBlogsPage(): JSX.Element {
                         ? `${blog.content.slice(0, 50)}...`
                         : blog.content}
                     </p>
-                    <Link
-                      to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
-                      className="text-sm font-medium text-center text-white hover:text-blue-500"
-                    >
-                      Read More
-                      {/* {blog.createdAt} */}
-                    </Link>
+                    <div className="flex justify-between">
+                      <Link
+                        to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
+                        className="text-sm font-medium text-center text-white hover:text-blue-500"
+                      >
+                        Read More
+                      </Link>
+                      <p>
+                        Likes : 
+                      </p>
+                    </div>
                     {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
                     {(blog.ownerId === userData?.id ||
                       (hasPermission("admin", userData?.role) &&
