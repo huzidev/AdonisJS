@@ -7,7 +7,7 @@ import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import CommentsPage from "../comments/ShowComments";
 import { useGetBlogPageHooks } from "./hooks";
-import { BlogState } from "./types";
+import { AddReactionState, BlogState } from "./types";
 
 export default function ViewBlogPage(): JSX.Element {
   const user = useUser();
@@ -22,7 +22,7 @@ export default function ViewBlogPage(): JSX.Element {
   const ownerId: any = blog.state.getBlog.data?.ownerId
   const allReactions: any = reaction.state.getReactions.data;
 
-  const reactState = {
+  const reactState: AddReactionState = {
     userId: loggedInId,
     articleId: getBlog?.id
   }

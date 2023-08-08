@@ -8,3 +8,8 @@ export interface ReactionsState {
     likes: number
     dislikes: number
 }
+
+export interface AddReactionState {
+    userId: number;
+    articleId: number;
+}
