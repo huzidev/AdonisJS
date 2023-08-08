@@ -6,6 +6,7 @@ import { ReactionState } from "./types";
 const initialState: ReactionState = {
   addReaction: { ...subState },
   getReactions: { ...subState },
+  getAllReactions: { ...subState },
 };
 
 export const reactionSlice = createSlice({
@@ -40,6 +41,21 @@ export const reactionSlice = createSlice({
     });
     builder.addCase(actions.getReactions.rejected, (state) => {
       state.getReactions = { loading: false, error: true };
+    });
+    // Get All Reactions For Every Single Blogs
+    builder.addCase(actions.getAllReactions.pending, (state) => {
+      state.getAllReactions = { loading: true, error: false };
+    });
+    builder.addCase(actions.getAllReactions.fulfilled, (state, action) => {
+      state.getAllReactions = { loading: false, error: false };
+      if (action.payload) {
+        const { message, data } = action.payload;
+        state.getAllReactions.data = data;
+        state.getAllReactions.message = message;
+      }
+    });
+    builder.addCase(actions.getAllReactions.rejected, (state) => {
+      state.getAllReactions = { loading: false, error: true };
     });
   },
 });

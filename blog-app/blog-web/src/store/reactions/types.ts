@@ -18,4 +18,5 @@ export interface GetReactionsState extends SubState {
 export interface ReactionState {
   addReaction: SubState;
   getReactions: GetReactionsState;
+  getAllReactions: GetReactionsState;
 }
