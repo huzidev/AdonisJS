@@ -17,7 +17,7 @@ export default function ViewBlogPage(): JSX.Element {
   const blog = useBlogs();
   const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
-  const initialState: BlogState = { title: "", image: "", content: "" };
+  const initialState: BlogState = { title: '', image: '', content: '' };
   const [blogView, setBlogView] = useState(initialState);
   const ownerId: any = blog.state.getBlog.data?.ownerId;
   const allReactions: any = reaction.state.getReactions.data;
@@ -31,6 +31,7 @@ export default function ViewBlogPage(): JSX.Element {
   }, [getBlog]);
 
   useGetBlogPageHooks();
+  
   if (allReactions) {
     console.log("all reactions", allReactions);
   }
