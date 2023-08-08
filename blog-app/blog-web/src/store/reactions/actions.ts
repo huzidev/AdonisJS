@@ -1,7 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import * as endpoints from "./endpoints";
+
 
 export const addReaction = createAsyncThunk(
-  endpoints.ADD_COMMENT,
+  endpoints.ADD_REACTION,
   async (data: AddCommentPayload) => {
     try {
       const response = await api.post(endpoints.ADD_COMMENT, data);

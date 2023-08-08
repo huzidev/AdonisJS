@@ -1,1 +1,1 @@
-export const ADD_REACTION = "/comment/add";
+export const ADD_REACTION = "/reaction/blog";
