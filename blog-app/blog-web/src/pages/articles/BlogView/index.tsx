@@ -50,10 +50,10 @@ export default function ViewBlogPage(): JSX.Element {
             </div>
             <div className="flex justify-end mr-3">
               <p>
-                Likes : {allReactions && Object.values(allReactions.likes)[0]}
+                Likes : {allReactions && allReactions.totalLikes}
               </p>
               <p>
-                Dislikes : {allReactions && Object.values(allReactions.dislikes)[0]}
+                Dislikes : {allReactions && allReactions.totalDislikes}
               </p>
               <Link to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>
                 Uploaded By : {owner?.username}
