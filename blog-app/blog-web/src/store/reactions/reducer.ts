@@ -4,7 +4,7 @@ import * as actions from "./actions";
 import { ReactionState } from "./types";
 
 const initialState: ReactionState = {
-    addReaction:  { ...subState, data: null },
+    addReaction:  { ...subState }
 }
 
 export const reactionSlice = createSlice({
@@ -18,8 +18,7 @@ export const reactionSlice = createSlice({
         builder.addCase(actions.addReaction.fulfilled, (state, action) => {
             state.addReaction = { loading: false, error: false };
             if (action.payload) {
-                const { message, data } = action.payload;
-                state.addReaction.message = message;
+                state.addReaction.message = action.payload.message;
             }
         })
         builder.addCase(actions.addReaction.rejected, (state) => {
