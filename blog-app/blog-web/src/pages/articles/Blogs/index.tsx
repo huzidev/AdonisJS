@@ -27,7 +27,9 @@ export default function ViewBlogsPage(): JSX.Element {
   const [dropDown, setDropDown] = useState<boolean>(false);
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
-  const { loadMore, handleSort, sortValue, isLoading } = useBlogsPageHooks();
+  const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
+
+  console.log("allReactions", allReactions);
 
   return (
     <div className="w-10/12 m-auto flex flex-col">
