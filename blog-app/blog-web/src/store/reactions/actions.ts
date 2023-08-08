@@ -20,3 +20,19 @@ export const addReaction = createAsyncThunk(
     }
   }
 );
+
+export const getReactions = createAsyncThunk(
+  endpoints.GET_REACTIONS,
+  async (id: number) => {
+    try {
+      const response = await api.post(endpoints.GET_REACTIONS, id);
+      console.log('ADD REACTION RESPONSE');
+      return response.data;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
+    }
+  }
+);
