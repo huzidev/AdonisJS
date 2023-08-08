@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
+import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
@@ -12,6 +13,7 @@ import { initialSortState, typeResult } from "./data";
 export function useBlogsPageHooks() {
   const blogs = useBlogs();
   const user = useUser();
+  const reactions = useReactions();
   const auth = useAuth();
   const state = blogs.state;
   const prev = usePrevious(state);
@@ -98,6 +100,7 @@ export function useBlogsPageHooks() {
     }
     
     blogs.getBlogs({ page: 1, ...search });
+    reactions.getAllReactions();
 
     // so only if loggedIn user's role is user then fetch favorite blogs
     if (isUser) {
@@ -132,10 +135,13 @@ export function useBlogsPageHooks() {
     }
   }, [state]);
 
+  const allReactions = reactions.state.getAllReactions.data;
+
   return {
     sortValue,
     loadMore,
     handleSort,
-    isLoading
+    isLoading,
+    allReactions
   };
 }
