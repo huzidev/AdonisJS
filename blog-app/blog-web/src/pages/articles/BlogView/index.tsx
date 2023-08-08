@@ -29,7 +29,9 @@ export default function ViewBlogPage(): JSX.Element {
     isDislike: false
   })
 
-  console.log("all reactions", allReactions);
+  if (allReactions) {
+    console.log("all reactions", allReactions.userId);
+  }
   
 
   useEffect(() => {
@@ -59,7 +61,8 @@ export default function ViewBlogPage(): JSX.Element {
                 isLike: true,
                 isDislike: false
               })}>
-                  Like
+                  {allReactions && allReactions.userId.isLike ? "Liked" : "Like"}
+                  {/* like */}
               </button>
               <button className="ml-5" onClick={() => reaction.addReaction({
                 userId: loggedInId,
@@ -67,7 +70,7 @@ export default function ViewBlogPage(): JSX.Element {
                 isLike: false,
                 isDislike: true
               })}>
-                Dislike
+                {allReactions && allReactions.userId.isDislike ? "Disliked" : "Dislike"}
               </button>
             <div className="p-5 flex flex-col items-center">
               <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
