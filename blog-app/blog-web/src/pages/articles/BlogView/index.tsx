@@ -33,6 +33,9 @@ export default function ViewBlogPage(): JSX.Element {
 
   useGetBlogPageHooks();
 
+  console.log("all", allReactions);
+  
+
   return (
     <div>
       <div className="w-2/3 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -54,7 +57,7 @@ export default function ViewBlogPage(): JSX.Element {
                 reaction.addReaction({
                   ...reactState,
                   // so if user liked a blog then Liked will be shown instead of like because user has already liked the blog and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
-                  isLike: allReactions.user.isLike ? false : true,
+                  isLike: allReactionsState && allReactions.user.isLike ? false : true,
                   isDislike: false,
                 })
               }
@@ -67,7 +70,7 @@ export default function ViewBlogPage(): JSX.Element {
                 reaction.addReaction({
                   ...reactState,
                   isLike: false,
-                  isDislike: allReactions.user.isDislike ? false : true,
+                  isDislike: allReactionsState && allReactions.user.isDislike ? false : true,
                 })
               }
             >
