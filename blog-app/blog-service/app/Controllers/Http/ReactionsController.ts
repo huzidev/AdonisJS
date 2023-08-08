@@ -71,7 +71,7 @@ export default class ReactionsController {
     }
   }
 
-  public async getAllReactions({}) {
+  public async getAllReactions() {
     try {
       const response = await Reaction.query();
       console.log("Response", response);
