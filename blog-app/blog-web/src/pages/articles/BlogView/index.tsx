@@ -19,8 +19,13 @@ export default function ViewBlogPage(): JSX.Element {
   const owner = user.state.getUser.data;
   const initialState: BlogState = { title: '', image: '', content: '' };
   const [blogView, setBlogView] = useState(initialState);
-  const ownerId: any = blog.state.getBlog.data?.ownerId;
   const allReactions: any = reaction.state.getReactions.data;
+  const [reactionState, setReactionState] = useState<any>({ 
+    totalLikes: null,
+    totalDislikes: null,
+    user: null
+  })
+  const ownerId: any = blog.state.getBlog.data?.ownerId;
   const reactState: AddReactionState = {
     userId: loggedInId,
     articleId: getBlog?.id,
@@ -30,10 +35,14 @@ export default function ViewBlogPage(): JSX.Element {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);
 
-  const reactionState = useGetBlogPageHooks();
+  useEffect(() => {
+    setReactionState({ ...blogView, ...allReactions })
+  }, [allReactions])
+
+  useGetBlogPageHooks();
  
-  if (reactionState) {
-    console.log("all reactions", Object.values(reactionState)[0].userId);
+  if (allReactions) {
+    console.log("all reactions", allReactions);
   }
 
   return (
@@ -71,14 +80,15 @@ export default function ViewBlogPage(): JSX.Element {
                 reaction.addReaction({
                   ...reactState,
                   isLike: false,
-                  isDislike: allReactions.userId.isDislike ? false : true,
+                  // isDislike: allReactions?.userId.isDislike ? false : true,
+                  isDislike: true,
                 })
               }
             >
               {/* {allReactions.userId && allReactions.userId.isDislike
                 ? "Disliked"
                 : "Dislike"} */}
-                {reactionState && Object.values(reactionState)[0].userId
+                {reactionState.userId
                 ? "Disliked"
                 : "Dislike"}
                 {/* Dislike */}
@@ -93,9 +103,9 @@ export default function ViewBlogPage(): JSX.Element {
             </div>
             <div className="flex justify-between mr-3">
               <div className="flex">
-                <p>Likes : {allReactions && allReactions.totalLikes}</p>
+                <p>Likes : {allReactions?.isLike}</p>
                 <p className="ml-2">
-                  Dislikes : {allReactions && allReactions.totalDislikes}
+                  Dislikes : {allReactions?.isDislike}
                 </p>
               </div>
               <Link to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>

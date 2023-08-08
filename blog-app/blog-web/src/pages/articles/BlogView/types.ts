@@ -4,12 +4,18 @@ export interface BlogState {
     content: string;
 }
 
-export interface ReactionsState {
-    likes: number
-    dislikes: number
-}
-
 export interface AddReactionState {
     userId: number;
     articleId: number;
+}
+
+interface ReactionState {
+    isLike: boolean;
+    isDislike: boolean;
+}
+
+export interface AllReactionsState {
+    totalLikes: number | null;
+    totalDislikes: number | null;
+    user: ReactionState
 }
