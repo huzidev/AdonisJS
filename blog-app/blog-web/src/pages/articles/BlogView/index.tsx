@@ -42,8 +42,12 @@ export default function ViewBlogPage(): JSX.Element {
   useGetBlogPageHooks();
  
   if (allReactions) {
-    console.log("all reactions", allReactions);
+    if (allReactions.user) {
+      console.log("all reactions", allReactions);
+    }
   }
+
+  const allReactionsState = allReactions && allReactions.user;
 
   return (
     <div>
@@ -71,7 +75,7 @@ export default function ViewBlogPage(): JSX.Element {
                 })
               }
             >
-              {allReactions && allReactions.user.isLike ? "Liked" : "Like"}
+              {allReactionsState && allReactions.user.isLike ? "Liked" : "Like"}
             </button>
             <button
               className="ml-5"
@@ -79,18 +83,13 @@ export default function ViewBlogPage(): JSX.Element {
                 reaction.addReaction({
                   ...reactState,
                   isLike: false,
-                  // isDislike: allReactions?.userId.isDislike ? false : true,
-                  isDislike: true,
+                  isDislike: allReactions.user.isDislike ? false : true,
                 })
               }
             >
-              {/* {allReactions.userId && allReactions.userId.isDislike
-                ? "Disliked"
-                : "Dislike"} */}
-                {reactionState.userId
+                {allReactionsState && allReactions.user.isDislike
                 ? "Disliked"
                 : "Dislike"}
-                {/* Dislike */}
             </button>
             <div className="p-5 flex flex-col items-center">
               <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
