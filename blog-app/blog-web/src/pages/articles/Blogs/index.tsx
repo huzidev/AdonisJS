@@ -22,14 +22,11 @@ export default function ViewBlogsPage(): JSX.Element {
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
   const [showModal, setShowModal] = useState(false);
-  // to hold delete blog id as we can't directly called the modal in map
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
   const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
-
-  console.log("allReactions", allReactions);
 
   return (
     <div className="w-10/12 m-auto flex flex-col">
@@ -114,6 +111,7 @@ export default function ViewBlogsPage(): JSX.Element {
             const uploadedByUserId = uploadedByUser && uploadedByUser.id;
             const uploadedByUsername =
               uploadedByUser && uploadedByUser.username;
+            const likes = allReactions?.find((data: any) => data.articleId === blog.id)
             return (
               <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                 {/* <img src={ele.image} alt="Thumbnail" /> */}

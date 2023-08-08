@@ -135,7 +135,7 @@ export function useBlogsPageHooks() {
     }
   }, [state]);
 
-  const allReactions = reactions.state.getAllReactions.data;
+  const allReactions: any = reactions.state.getAllReactions.data;
 
   return {
     sortValue,
