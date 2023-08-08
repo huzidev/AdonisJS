@@ -11,6 +11,7 @@ export const useReactions = () => {
 
   return {
     state,
-    addReaction
+    addReaction,
+    getReactions
   };
 };

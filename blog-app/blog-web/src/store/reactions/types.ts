@@ -8,7 +8,7 @@ export interface AddReactionPayload {
 }
 
 export interface GetReactionsState extends SubState {
-    data?: AddReactionPayload[] | null;
+    data?: AddReactionPayload;
 }
 
 export interface ReactionState {

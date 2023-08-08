@@ -5,7 +5,7 @@ import { ReactionState } from "./types";
 
 const initialState: ReactionState = {
     addReaction:  { ...subState },
-    getReactions:  { ...subState, data: null }
+    getReactions:  { ...subState }
 }
 
 export const reactionSlice = createSlice({
@@ -13,6 +13,7 @@ export const reactionSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        // Add Reactions (Likes, Dislikes)
          builder.addCase(actions.addReaction.pending, (state) => {
           state.addReaction = { loading: true, error: false };
         });

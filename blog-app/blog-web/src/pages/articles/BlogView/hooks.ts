@@ -22,6 +22,7 @@ export function useGetBlogPageHooks(): void {
   // seprately making with different useEffect because while creating in same useEffect as of ownerId it's fetching data multiple times
   useEffect(() => {
     blog.getBlog(params.slug);
+    reaction.getReactions(100);
   }, []);
   
   useEffect(() => {

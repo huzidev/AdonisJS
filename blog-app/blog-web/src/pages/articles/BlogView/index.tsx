@@ -2,6 +2,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
+import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import CommentsPage from "../comments/ShowComments";
 import { useGetBlogPageHooks } from "./hooks";
@@ -9,6 +10,7 @@ import { BlogState } from "./types";
 
 export default function ViewBlogPage(): JSX.Element {
   const user = useUser();
+  const reaction = useReactions();
   const blog = useBlogs();
   const getBlog = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
@@ -19,6 +21,7 @@ export default function ViewBlogPage(): JSX.Element {
   useEffect(() => {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);
+
 
   useGetBlogPageHooks();
 
