@@ -16,6 +16,7 @@ export function useGetBlogPageHooks() {
   const state = blog.state;
   const prev = usePrevious(state);
   const navigate = useNavigate();
+  const prevReact = usePrevious(reaction.state.addReaction);
   const ownerId: any = state.getBlog.data?.ownerId;
   const byMe = ownerId === auth.state.user?.id;
   const loggedInId: any = auth.state.user?.id;
@@ -37,6 +38,12 @@ export function useGetBlogPageHooks() {
       reaction.getReactions({ articleId: blogId, userId: loggedInId });
     }
   }, [blogId])
+
+  useEffect(() => {
+    if (prevReact?.loading) {
+      reaction.getReactions({ articleId: blogId, userId: loggedInId });
+    }
+  }, [reaction.state.addReaction])
 
   useEffect(() => {
     if (prev?.getBlog.loading) {
