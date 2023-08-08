@@ -1,8 +1,12 @@
 import { SubState } from "store/types";
 
-export interface AddReactionPayload {
-    userId: number;
-    articleId: number;
+
+export interface GetReactionPayload {
+  userId: number;
+  articleId: number;
+}
+
+export interface AddReactionPayload extends GetReactionPayload {
     isLike: boolean;
     isDislike: boolean;
 }
