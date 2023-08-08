@@ -17,11 +17,10 @@ export default function ViewBlogPage(): JSX.Element {
   const blog = useBlogs();
   const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
-  const initialState: BlogState = { title: "", image: "", content: "" };
+  const initialState: BlogState = { title: '', image: '', content: '' };
   const [blogView, setBlogView] = useState(initialState);
   const ownerId: any = blog.state.getBlog.data?.ownerId
   const allReactions: any = reaction.state.getReactions.data;
-
   const reactState: AddReactionState = {
     userId: loggedInId,
     articleId: getBlog?.id
@@ -32,11 +31,6 @@ export default function ViewBlogPage(): JSX.Element {
   }, [getBlog]);
 
   useGetBlogPageHooks();
-
-  if (allReactions) {
-      console.log("React state", allReactions.userId);
-  }
-  
   return (
     <div>
       <div className="w-2/3 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -55,6 +49,7 @@ export default function ViewBlogPage(): JSX.Element {
             />
               <button onClick={() => reaction.addReaction({
                 ...reactState,
+                // so if user liked a blog then Liked button will be shown and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
                 isLike: allReactions.userId.isLike ? false : true,
                 isDislike: false
               })}>
