@@ -29,11 +29,6 @@ export default function ViewBlogPage(): JSX.Element {
     isDislike: false
   })
 
-  if (allReactions) {
-    console.log("all reactions", allReactions.userId);
-  }
-  
-
   useEffect(() => {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);

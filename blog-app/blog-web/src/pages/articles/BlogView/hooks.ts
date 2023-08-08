@@ -29,13 +29,12 @@ export function useGetBlogPageHooks(): void {
   useEffect(() => {
     if (ownerId) {
       user.getById(ownerId);
-      reaction.getReactions({ articleId: blogId, userId: loggedInId });
     }
   }, [ownerId])
 
-  // useEffect(() => {
-  //     reaction.getReactions(blogId)
-  // }, [blogId])
+  useEffect(() => {
+      reaction.getReactions({ articleId: blogId, userId: loggedInId });
+  }, [blogId])
 
   useEffect(() => {
     if (prev?.getBlog.loading) {

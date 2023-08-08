@@ -10,7 +10,6 @@ export const addReaction = createAsyncThunk(
   async (data: AddReactionPayload) => {
     try {
       const response = await api.post(endpoints.ADD_REACTION, data);
-      console.log('ADD REACTION RESPONSE', response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
