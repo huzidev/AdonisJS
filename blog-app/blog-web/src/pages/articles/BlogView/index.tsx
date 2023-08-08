@@ -48,13 +48,15 @@ export default function ViewBlogPage(): JSX.Element {
                 {blogView.content}
               </p>
             </div>
-            <div className="flex justify-end mr-3">
-              <p>
-                Likes : {allReactions && allReactions.totalLikes}
-              </p>
-              <p>
-                Dislikes : {allReactions && allReactions.totalDislikes}
-              </p>
+            <div className="flex justify-between mr-3">
+              <div className="flex">
+                <p>
+                  Likes : {allReactions && allReactions.totalLikes}
+                </p>
+                <p className="ml-2">
+                  Dislikes : {allReactions && allReactions.totalDislikes}
+                </p>
+              </div>
               <Link to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>
                 Uploaded By : {owner?.username}
               </Link>
