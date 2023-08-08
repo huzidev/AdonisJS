@@ -37,12 +37,6 @@ export function useGetBlogPageHooks() {
   }, [ownerId])
 
   useEffect(() => {
-    if (allReact) {
-      setReactionState({ ...reactionState, ...allReact })
-    }
-  }, [allReact])
-
-  useEffect(() => {
     if (prev?.getBlog.loading) {
       if (!state.getBlog.loading && !state.getBlog.error) {
         if (byMe) {
@@ -58,8 +52,4 @@ export function useGetBlogPageHooks() {
     console.log("state.getBlog.message", state.getBlog.message);
   }, [state]);
 
-  return {
-    reactionState,
-    setReactionState
-  }
 }

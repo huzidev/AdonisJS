@@ -26,10 +26,10 @@ export default function ViewBlogPage(): JSX.Element {
     setBlogView({ ...blogView, ...getBlog });
   }, [getBlog]);
 
-  const { reactionState } = useGetBlogPageHooks();
+  useGetBlogPageHooks();
 
-  if (reactionState) {
-      console.log("React state", reactionState);
+  if (allReactions) {
+      console.log("React state", allReactions.userId);
   }
   
   return (
@@ -76,10 +76,10 @@ export default function ViewBlogPage(): JSX.Element {
             <div className="flex justify-between mr-3">
               <div className="flex">
                 <p>
-                  Likes : {reactionState && reactionState.totalLikes}
+                  Likes : {allReactions && allReactions.totalLikes}
                 </p>
                 <p className="ml-2">
-                  Dislikes : {reactionState && reactionState.totalDislikes}
+                  Dislikes : {allReactions && allReactions.totalDislikes}
                 </p>
               </div>
               <Link to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>
