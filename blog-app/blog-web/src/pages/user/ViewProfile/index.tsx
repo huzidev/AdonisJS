@@ -52,6 +52,10 @@ export default function ViewProfilePage(): JSX.Element {
     );
 
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
+
+
+  console.log("all reactions", allReactions);
+  
   return (
     <>
       <div>

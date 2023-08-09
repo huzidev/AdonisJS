@@ -1,4 +1,5 @@
 import { Blog } from "store/articles/types";
+import { Reactions } from "store/reactions/types";
 
 export interface UserDetailState {
     id: number | null;
@@ -24,5 +25,5 @@ export interface ViewProfileStateHandler {
     lastPage: number;
     isMe: boolean;
     isRole: string;
-    allReactions: any
+    allReactions: Reactions[];
 }
