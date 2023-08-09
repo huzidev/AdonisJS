@@ -73,8 +73,8 @@ export default class ReactionsController {
 
   public async getAllReactions() {
     try {
-      const response = await Reaction.query();
-      console.log("Response", response);
+      const response = await Reaction.query().where("isLike", true);
+      console.log("Response", response.length); 
       return {
         message: "All reactions fethced successfully",
         data: response
