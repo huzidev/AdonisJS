@@ -1,3 +1,4 @@
+import Database from '@ioc:Adonis/Lucid/Database';
 import { LucidModel, LucidRow, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm';
 
 export default class Sort {
@@ -40,7 +41,11 @@ export default class Sort {
         }
       }
       else if (sort === "popular") {
-        query.from("reactions").where("is_like", 1)
+        Database.from("reactions")
+        .select('article_id')
+        .count('id as like_count')
+        .where("is_like", true)
+        .groupBy('article_id');
       }
       else {
         query.orderBy(sortKey, sort) // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending

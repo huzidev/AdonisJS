@@ -83,8 +83,6 @@ export default class ReactionsController {
         .where("is_like", true)
         .groupBy('article_id');
       
-      console.log("response", response);
-
       return {
         message: "All reactions fethced successfully",
         data: response,
