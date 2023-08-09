@@ -43,6 +43,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     } else {
       user.getById(userId);
     }
+    reactions.getAllReactions();
   }, [userId, loggedInId]);
 
   useEffect(() => {
