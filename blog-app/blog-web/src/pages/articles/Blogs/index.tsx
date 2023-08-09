@@ -27,11 +27,6 @@ export default function ViewBlogsPage(): JSX.Element {
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
   const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
-
-
-  console.log("All reactions", allReactions);
-  
-
   return (
     <div className="w-10/12 m-auto flex flex-col">
       <div>
@@ -115,11 +110,8 @@ export default function ViewBlogsPage(): JSX.Element {
             const uploadedByUserId = uploadedByUser && uploadedByUser.id;
             const uploadedByUsername =
               uploadedByUser && uploadedByUser.username;
-            const likes = allReactions?.filter((data: any) => data.articleId !== blog.id && data.isLike)
-            console.log("likes");
-            
             return (
-              <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
+            <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
                 <div className="h-52 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <img
@@ -212,7 +204,8 @@ export default function ViewBlogsPage(): JSX.Element {
                         Read More
                       </Link>
                       <p>
-                        Likes : 
+                        {/* to show Total likes of every blogs */}
+                        Likes : {allReactions?.filter((value: any) => value.articleId === blog.id).length}
                       </p>
                     </div>
                     {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
