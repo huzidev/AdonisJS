@@ -43,31 +43,31 @@ export default class ReactionsController {
 
   public async getReactions({ params }: HttpContextContract) {
     try {
-        const likes = await Database.from('reactions')
-        .where('article_id', params.articleId)
-        .where('is_like', true)
-        .count('* as totalLikes')
+      const likes = await Database.from("reactions")
+        .where("article_id", params.articleId)
+        .where("is_like", true)
+        .count("* as totalLikes")
         .first();
 
-        const dislikes = await Database.from('reactions')
-        .where('article_id', params.articleId)
-        .where('is_dislike', true)
-        .count('* as totalDislikes')
+      const dislikes = await Database.from("reactions")
+        .where("article_id", params.articleId)
+        .where("is_dislike", true)
+        .count("* as totalDislikes")
         .first();
 
-        // so if user with id 1 has liked the blog then return that id of user so we can compare it on front-end that whether user has liked the blog or not to show Clicked feature on like button
-        let user;
-        // only get user response when user is loggedIn then it'll get params.id
-        if (params.id) {
-          user = await Reaction.query()
+      // so if user with id 1 has liked the blog then return that id of user so we can compare it on front-end that whether user has liked the blog or not to show Clicked feature on like button
+      let user;
+      // only get user response when user is loggedIn then it'll get params.id
+      if (params.id) {
+        user = await Reaction.query()
           .where("userId", params.id)
           .where("articleId", params.articleId)
           .first();
-        }
+      }
       return {
         message: "Reactions fetched successfully",
         // so only totalLikes: and totalDislikes value will be returned
-        data: {...likes, ...dislikes, user}
+        data: { ...likes, ...dislikes, user },
       };
     } catch (e) {
       throw e;
@@ -77,11 +77,11 @@ export default class ReactionsController {
   public async getAllReactions() {
     try {
       const response = await Reaction.query().where("isLike", true);
-      console.log("Response", response.length); 
+      console.log("Response", response.length);
       return {
         message: "All reactions fethced successfully",
-        data: response
-      }
+        data: response,
+      };
     } catch (e) {
       throw e;
     }
