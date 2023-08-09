@@ -7,9 +7,7 @@ export default function Header(): JSX.Element {
   const location = useLocation();
   const auth = useAuth();
   const user = auth.state.user;
-
-  const value: any = managePaths.find((path) => location.pathname.includes(path));
-
+  // const value: any = managePaths.find((path) => location.pathname.includes(path));
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
