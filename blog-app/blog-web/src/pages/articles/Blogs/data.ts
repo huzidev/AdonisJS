@@ -6,9 +6,10 @@ export const columnsKeys = [
   'most popular'
 ];
 
+
 // boolKeys means they'll either be true(yes) or false(no)
-export const altKeys = ["createdAt"]
-export const typeResult = ["recent", "oldest"];
+export const altKeys = ['most recent', 'oldest'];
+export const typeResult = ["recent", "oldest", "popular"];
 
 export const columns = columnsKeys.map((key) => ({
   key,
@@ -17,6 +18,6 @@ export const columns = columnsKeys.map((key) => ({
 }));
 
 export const initialSortState: SortPayload = {
-  value: "",
-  type: ""
+  value: '',
+  type: ''
 }

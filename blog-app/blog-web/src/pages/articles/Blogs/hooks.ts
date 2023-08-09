@@ -8,7 +8,7 @@ import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
-import { initialSortState, typeResult } from "./data";
+import { altKeys, initialSortState, typeResult } from "./data";
 
 export function useBlogsPageHooks() {
   const blogs = useBlogs();
@@ -48,22 +48,27 @@ export function useBlogsPageHooks() {
   }, []);
 
   function handleSort(column: string) {
-    let type: any = "";
+    let type: any = '';
     
     // most recent will called desc because desc neans from last to first therefore the last belog will be the latest blog and type === "" when user called reset filters
     column === "most recent"
       ? (type = "recent")
       : column === "oldest"
       ? (type = "oldest")
-      : (type = "");
+      : column === "most popular"
+      ? type = 'popular'
+      : type = ''
     // becasuse most recent and old blog will be shown according to createdAt date and "" (empty string condition) is for when user clicked on reset filters
     // because then sortValue.value will be "" and we've statement in UI that only show resetFilters when sortValue.vlaue is not ""
     let update =
-      column === "most recent"
-        ? "createdAt"
-        : column === "oldest"
-        ? "createdAt"
-        : "";
+      altKeys.includes(column)
+      ? "createdAt" 
+      : column === "most popular"
+      ? "blogs" : ''
+      // column === ("most recent" || "oldest")
+        // : column === "oldest"
+        // ? "createdAt"
+        // : "";
     const result = typeResult.find((value) => value === type);
 
     // If the type is "asc", add the sort parameter to the URL
