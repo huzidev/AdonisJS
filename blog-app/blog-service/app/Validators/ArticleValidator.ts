@@ -40,6 +40,7 @@ export class BlogListFilters {
       updatedAt: schema.enum.optional(Sort.dateValue),
       // username row is not in Articles table therefore we'll use join query for link
       username: schema.enum.optional(Sort.types),
+      blogs: schema.enum.optional(["popular"])
     }),
   })
   public static messages = {}
