@@ -27,7 +27,6 @@ export default class ArticlesController {
       
       console.log("filters", filters);
       
-
       const userId = params.id;
       
       const query = Article.query();
