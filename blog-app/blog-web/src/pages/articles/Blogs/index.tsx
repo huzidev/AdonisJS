@@ -117,8 +117,6 @@ export default function ViewBlogsPage(): JSX.Element {
             const uploadedByUserId = uploadedByUser && uploadedByUser.id;
             const uploadedByUsername =
               uploadedByUser && uploadedByUser.username;
-              const likes = allReactions && allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount;
-                console.log("likes", likes);
               
             return (
             <div key={blog.id} className="w-[30.33%] mt-8 mx-4">

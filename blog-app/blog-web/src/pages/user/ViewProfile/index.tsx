@@ -165,8 +165,8 @@ export default function ViewProfilePage(): JSX.Element {
                               Read More
                             </Link>
                             <p>
-                              {/* to show Total likes of every blogs */}
-                              Likes : {allReactions?.filter((value: any) => value.articleId === blog.id).length}
+                              {/* to show Total likes of every blogs and ?? is used if totalCount is undefined means no like then show 0 */}
+                              Likes : {allReactions && (allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
                             </p>
                           </div>
                         {(blog.ownerId === auth.state.user?.id ||
