@@ -116,7 +116,8 @@ export default function ViewBlogsPage(): JSX.Element {
             const uploadedByUsername =
               uploadedByUser && uploadedByUser.username;
             const likes = allReactions?.filter((data: any) => data.articleId !== blog.id && data.isLike)
-            let totalReact = likes.filter((value: any) => value.articleId === 100);
+            console.log("likes");
+            
             return (
               <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
