@@ -28,6 +28,10 @@ export default function ViewBlogsPage(): JSX.Element {
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
   const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
 
+
+  console.log("All reactions", allReactions);
+  
+
   return (
     <div className="w-10/12 m-auto flex flex-col">
       <div>
@@ -111,9 +115,8 @@ export default function ViewBlogsPage(): JSX.Element {
             const uploadedByUserId = uploadedByUser && uploadedByUser.id;
             const uploadedByUsername =
               uploadedByUser && uploadedByUser.username;
-            const likes = allReactions?.find((data: any) => data.articleId === blog.id && data.isLike)
-            console.log("likes", likes)
-            
+            const likes = allReactions?.filter((data: any) => data.articleId !== blog.id && data.isLike)
+            let totalReact = likes.filter((value: any) => value.articleId === 100);
             return (
               <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
