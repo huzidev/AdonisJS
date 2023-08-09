@@ -1,7 +1,7 @@
 import { SubState } from "store/types";
 
 export interface GetReactionPayload {
-  userId: number;
+  userId?: number;
   articleId: number;
 }
 

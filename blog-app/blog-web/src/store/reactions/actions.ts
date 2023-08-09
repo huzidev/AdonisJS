@@ -24,7 +24,8 @@ export const getReactions = createAsyncThunk(
   endpoints.GET_REACTIONS,
   async (data: GetReactionPayload) => {
     try {
-      const response = await api.get(endpoints.GET_REACTIONS + data.articleId + "/" + data.userId);
+      // (data.userId ? "/" + data.userId : '') if user is not loggedIn then simply send articleId just
+      const response = await api.get(endpoints.GET_REACTIONS + data.articleId + (data.userId ? "/" + data.userId : ''));
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);

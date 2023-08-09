@@ -50,32 +50,36 @@ export default function ViewBlogPage(): JSX.Element {
               src="/docs/images/blog/image-1.jpg"
               alt="Thumbnail"
             />
-            <button
-              onClick={() =>
-                reaction.addReaction({
-                  ...reactState,
-                  // so if user liked a blog then Liked will be shown instead of like because user has already liked the blog and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
-                  isLike: allReactionsState && allReactions.user.isLike ? false : true,
-                  isDislike: false,
-                })
-              }
-            >
-              {allReactionsState && allReactions.user.isLike ? "Liked" : "Like"}
-            </button>
-            <button
-              className="ml-5"
-              onClick={() =>
-                reaction.addReaction({
-                  ...reactState,
-                  isLike: false,
-                  isDislike: allReactionsState && allReactions.user.isDislike ? false : true,
-                })
-              }
-            >
-              {allReactionsState && allReactions.user.isDislike
-                ? "Disliked"
-                : "Dislike"}
-            </button>
+            {auth.state.user && (
+              <>
+              <button
+                onClick={() =>
+                  reaction.addReaction({
+                    ...reactState,
+                    // so if user liked a blog then Liked will be shown instead of like because user has already liked the blog and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
+                    isLike: allReactionsState && allReactions.user.isLike ? false : true,
+                    isDislike: false,
+                  })
+                }
+              >
+                {allReactionsState && allReactions.user.isLike ? "Liked" : "Like"}
+              </button>
+              <button
+                className="ml-5"
+                onClick={() =>
+                  reaction.addReaction({
+                    ...reactState,
+                    isLike: false,
+                    isDislike: allReactionsState && allReactions.user.isDislike ? false : true,
+                  })
+                }
+              >
+                {allReactionsState && allReactions.user.isDislike
+                  ? "Disliked"
+                  : "Dislike"}
+              </button>
+              </>
+            )}
             <div className="p-5 flex flex-col items-center">
               <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {blogView.title} {blog.state.getBlog.data?.id}
