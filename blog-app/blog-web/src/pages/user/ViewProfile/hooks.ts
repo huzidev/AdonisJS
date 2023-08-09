@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { Blog } from "store/articles/types";
 import { useAuth } from "store/auth";
+import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
@@ -13,6 +14,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const user = useUser();
   const auth = useAuth();
   const blogs = useBlogs();
+  const reactions = useReactions();
   const params = useParams<ParamsId>();
   const userState = user.state;
   const blogState = blogs.state;
@@ -129,6 +131,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     }
   }
 
+  const allReactions: any = reactions.state.getAllReactions.data;
+
   return {
     userDetails,
     userBlogs,
@@ -138,6 +142,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     lastPageFvrt,
     lastPage,
     isMe,
-    isRole
+    isRole,
+    allReactions
   };
 }

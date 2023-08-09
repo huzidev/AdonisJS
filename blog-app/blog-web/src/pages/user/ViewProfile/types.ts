@@ -24,4 +24,5 @@ export interface ViewProfileStateHandler {
     lastPage: number;
     isMe: boolean;
     isRole: string;
+    allReactions: any
 }

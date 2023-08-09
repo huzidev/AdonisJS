@@ -21,12 +21,14 @@ export default function ViewBlogsPage(): JSX.Element {
   const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
+
   const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
+  
   return (
     <div className="w-10/12 m-auto flex flex-col">
       <div>

@@ -38,6 +38,7 @@ export default function ViewProfilePage(): JSX.Element {
     lastPage,
     isMe,
     isRole,
+    allReactions
   } = useViewProfilePageHook();
 
   const totalBlogsContent =
@@ -49,9 +50,6 @@ export default function ViewProfilePage(): JSX.Element {
     ) : (
       totalBlogs
     );
-
-      console.log("USER BLOGS", userBlogs);
-      
 
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
   return (
@@ -158,12 +156,18 @@ export default function ViewProfilePage(): JSX.Element {
                             ? `${blog.content.slice(0, 50)}...`
                             : blog.content}
                         </p>
-                        <Link
-                          to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
-                          className="text-sm font-medium text-center text-white hover:text-blue-500"
-                        >
-                          Read More
-                        </Link>
+                        <div className="flex justify-between">
+                            <Link
+                              to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
+                              className="text-sm font-medium text-center text-white hover:text-blue-500"
+                            >
+                              Read More
+                            </Link>
+                            <p>
+                              {/* to show Total likes of every blogs */}
+                              Likes : {allReactions?.filter((value: any) => value.articleId === blog.id).length}
+                            </p>
+                          </div>
                         {(blog.ownerId === auth.state.user?.id ||
                           (!isAdmin && currentRole === "super-admin") ||
                           (isAdminRole &&
