@@ -27,7 +27,6 @@ export default class ArticlesController {
       
       const userId = params.id;
       
-      console.log("USER ID", userId);
       const query = Article.query();
 
       let user;
@@ -54,10 +53,11 @@ export default class ArticlesController {
       if (!!filters.sort) {
         filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
+        console.log("filterResultKey", filterResultKey);
         // so when user called the filter on main blogs page then don't run this query only run this join statement when filtersResultKey is username
         if (filterResultKey === "username") {
           query.join("users", "articles.owner_id", "users.id");
-        }
+        } 
         // filter for most recent and oldest will be according to createdAt therefore checking for createdAt only
         if (!articleFilters.includes(filterResultKey)) {
           throw invalidURL;
@@ -86,7 +86,7 @@ export default class ArticlesController {
         message = `${filterResultValue === "recent" 
         ? `Most recently ${filterResultKey === "updatedAt" ? "updated" : "created"}` 
         // so if user clicked on updatedAt oldest then show Oldest blog list fethced successfully therefore passed "" for else condition
-        : `Oldest ${filterResultKey === "createdAt" ? "created" : ""}`
+        : `Oldest ${filterResultKey === "createdAt" ? "created" : ''}`
       } blogs list fetched successfully`
       } else {
         // blogs fetched message is used at multiple places therefore called toUpperCase function here so first letter will be Capital like
