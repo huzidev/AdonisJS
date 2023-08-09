@@ -60,6 +60,9 @@ export default class ArticlesController {
         if (filterResultKey === "username") {
           query.join("users", "articles.owner_id", "users.id");
         } 
+        if (filterResultKey === "blogs") {
+          query.join("articles", "reactions.article_id", "articles.id");
+        }
         // filter for most recent and oldest will be according to createdAt therefore checking for createdAt only
         if (!articleFilters.includes(filterResultKey)) {
           throw invalidURL;

@@ -14,8 +14,10 @@ export default class Sort {
         return
       }
 
-    Object.keys(obj).forEach((sortKey) => { // obj is parameter of .keys() and it must have to be Object.keys() and forEach can take number, string, array, array of strings any type
-      const sort = obj[sortKey] // since forEach works for array only
+      
+      
+      Object.keys(obj).forEach((sortKey) => { // obj is parameter of .keys() and it must have to be Object.keys() and forEach can take number, string, array, array of strings any type
+        const sort = obj[sortKey] // since forEach works for array only
       // const sort will be either asc or desc
       // sortKey will be id, name, email etc
 
@@ -36,7 +38,10 @@ export default class Sort {
         } else {
           query.orderBy(sortKey, "asc")
         }
-      } 
+      }
+      else if (sort === "popular") {
+        query.from("reactions").where("is_like", 1)
+      }
       else {
         query.orderBy(sortKey, sort) // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending
       }
