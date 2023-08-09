@@ -2,7 +2,8 @@ import { SortPayload } from "pages/user/ManageUsers/types";
 
 export const columnsKeys = [
   'most recent',
-  'oldest'
+  'oldest',
+  'most popular'
 ];
 
 // boolKeys means they'll either be true(yes) or false(no)
