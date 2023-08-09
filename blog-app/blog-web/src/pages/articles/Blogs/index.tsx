@@ -29,6 +29,11 @@ export default function ViewBlogsPage(): JSX.Element {
 
   const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
   
+  if (allReactions) {
+    console.log("all reactions", allReactions.filter((value: any) => value.likeCount));
+  }
+  
+
   return (
     <div className="w-10/12 m-auto flex flex-col">
       <div>
@@ -112,6 +117,9 @@ export default function ViewBlogsPage(): JSX.Element {
             const uploadedByUserId = uploadedByUser && uploadedByUser.id;
             const uploadedByUsername =
               uploadedByUser && uploadedByUser.username;
+              const likes = allReactions && allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount;
+                console.log("likes", likes);
+              
             return (
             <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -206,8 +214,8 @@ export default function ViewBlogsPage(): JSX.Element {
                         Read More
                       </Link>
                       <p>
-                        {/* to show Total likes of every blogs */}
-                        Likes : {allReactions?.filter((value: any) => value.articleId === blog.id).length}
+                        {/* to show Total likes of every blogs and ?? is used if totalCount is undefined means no like then show 0 */}
+                        Likes : {allReactions && (allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
                       </p>
                     </div>
                     {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
