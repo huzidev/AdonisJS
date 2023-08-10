@@ -39,7 +39,7 @@ export default class Sort {
       }
       else if (sort === "popular") {
         query.from("articles")
-          .select('articles.id as article_id')
+          .select('articles.*')
           .count('reactions.id as total_likes')
           .where('reactions.is_like', 1)
           .groupBy('articles.id')

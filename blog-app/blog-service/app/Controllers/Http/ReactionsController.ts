@@ -65,7 +65,7 @@ export default class ReactionsController {
       // so if user with id 1 has liked the blog then return that id of user so we can compare it on front-end that whether user has liked the blog or not to show Clicked feature on like button
       let user;
       // only get user response when user is loggedIn then it'll get params.id
-      if (params.id) {
+      if (params.id) {  
         user = await Reaction.query()
           .where("userId", params.id)
           .where("articleId", params.articleId)

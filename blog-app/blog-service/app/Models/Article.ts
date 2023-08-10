@@ -46,7 +46,6 @@ export default class Article extends BaseModel {
   }
 
   public static filtersSort = scope((query, filters) => {
-    console.log("querey", query);
     Sort.mapObjToQuery(filters.sort, query)
   })
 }
