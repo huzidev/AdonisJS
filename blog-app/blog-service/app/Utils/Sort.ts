@@ -45,6 +45,7 @@ export default class Sort {
         .select('article_id')
         .count('id as like_count')
         .where("is_like", true)
+        .orderBy("desc")
         .groupBy('article_id');
       }
       else {

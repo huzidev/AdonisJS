@@ -8,7 +8,7 @@ export default class ReactionsController {
   public async add({ request }: HttpContextContract) {
     try {
       const body = await request.validate(AddReaction);
-      const { articleId, userId, isLike, isDislike } = body;
+      const { articleId, userId, isLike } = body;
 
       // for owner of blog info so we can get owner name and then show the owner name in notification
       const user = await User.findBy("id", userId);
