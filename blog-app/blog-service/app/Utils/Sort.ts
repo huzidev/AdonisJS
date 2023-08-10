@@ -1,4 +1,3 @@
-import Database from '@ioc:Adonis/Lucid/Database';
 import { LucidModel, LucidRow, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm';
 
 export default class Sort {
@@ -14,8 +13,6 @@ export default class Sort {
       if (!obj) {
         return
       }
-
-      
       
       Object.keys(obj).forEach((sortKey) => { // obj is parameter of .keys() and it must have to be Object.keys() and forEach can take number, string, array, array of strings any type
         const sort = obj[sortKey] // since forEach works for array only
@@ -41,12 +38,12 @@ export default class Sort {
         }
       }
       else if (sort === "popular") {
-        Database.from("reactions")
-        .select('article_id')
-        .count('id as like_count')
-        .where("is_like", true)
-        .orderBy("desc")
-        .groupBy('article_id');
+        query.from("articles")
+        .select('articles.id as article_id')
+        .count('reactions.id as total_likes')
+        .where('reactions.is_like', 1)
+        .groupBy('articles.id')
+        .orderBy('total_likes', 'desc');
       }
       else {
         query.orderBy(sortKey, sort) // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending

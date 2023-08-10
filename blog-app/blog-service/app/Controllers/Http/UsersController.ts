@@ -111,7 +111,6 @@ export default class UsersController {
   public async getById({ params }: HttpContextContract) {
     try {
       const user = await User.findBy("id", params.id);
-      console.log("user status", user?.isBanned);
       if (!user) {
         throw { message: `No User found by id ${params.id}`, status: 404 };
       } else {
