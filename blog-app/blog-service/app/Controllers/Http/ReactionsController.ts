@@ -43,9 +43,15 @@ export default class ReactionsController {
 
   public async getReactions({ params }: HttpContextContract) {
     try {
-      const likes = await Database.from("reactions")
-        .where("article_id", params.articleId)
-        .where("is_like", true)
+      // const likes = await Database.from("reactions")
+      //   .where("article_id", params.articleId)
+      //   .where("is_like", true)
+      //   .count("* as totalLikes")
+      //   .first();
+
+      const likes = await Reaction.query()
+        .where("articleId", params.articleId)
+        .where("isLike", true)
         .count("* as totalLikes")
         .first();
 

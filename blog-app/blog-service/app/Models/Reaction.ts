@@ -1,5 +1,7 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import Article from './Article'
+import User from './User'
 
 export default class Reaction extends BaseModel {
   @column({ isPrimary: true })
@@ -16,6 +18,16 @@ export default class Reaction extends BaseModel {
 
   @column({ consume: (v) => !!v })
   public isDislike: boolean = false
+
+  @belongsTo(() => User, {
+    foreignKey: "userId" 
+  })
+  public owner: BelongsTo<typeof User>
+
+  @belongsTo(() => Article, {
+    foreignKey: "articleId" 
+  })
+  public article: BelongsTo<typeof Article>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

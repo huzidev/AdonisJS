@@ -39,11 +39,11 @@ export default class Sort {
       }
       else if (sort === "popular") {
         query.from("articles")
-        .select('articles.id as article_id')
-        .count('reactions.id as total_likes')
-        .where('reactions.is_like', 1)
-        .groupBy('articles.id')
-        .orderBy('total_likes', 'desc');
+          .select('articles.id as article_id')
+          .count('reactions.id as total_likes')
+          .where('reactions.is_like', 1)
+          .groupBy('articles.id')
+          .orderBy('total_likes', 'desc');
       }
       else {
         query.orderBy(sortKey, sort) // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending
