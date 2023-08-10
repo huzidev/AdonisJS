@@ -72,6 +72,7 @@ export default class ArticlesController {
       const response = await query
         .withScopes((scope) => scope.filtersSort(filters))
         .paginate(params.page || 1, 15);
+
       if (params.page > response.lastPage) {
         throw {
           message: `Blogs page limit exceeds, Total pages are ${response.lastPage}`,

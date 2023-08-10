@@ -43,17 +43,18 @@ export default class ReactionsController {
 
   public async getReactions({ params }: HttpContextContract) {
     try {
-      // const likes = await Database.from("reactions")
-      //   .where("article_id", params.articleId)
-      //   .where("is_like", true)
-      //   .count("* as totalLikes")
-      //   .first();
-
-      const likes = await Reaction.query()
-        .where("articleId", params.articleId)
-        .where("isLike", true)
+      const likes = await Database.from("reactions")
+        .where("article_id", params.articleId)
+        .where("is_like", true)
         .count("* as totalLikes")
         .first();
+
+      // const likes: any = await Reaction.query()
+      // .where("article_id", params.articleId)
+      // .where("isLike", true)
+      // .count("* as totalLikes")
+      // .first();
+
 
       const dislikes = await Database.from("reactions")
         .where("article_id", params.articleId)
@@ -87,7 +88,8 @@ export default class ReactionsController {
         .select('article_id')
         .count('id as like_count')
         .where("is_like", true)
-        .groupBy('article_id');
+        .groupBy('article_id')
+        // .orderBy('like_count', 'desc');
       
       return {
         message: "All reactions fethced successfully",
