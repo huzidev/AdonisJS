@@ -41,9 +41,9 @@ export default class Sort {
         query.from("articles")
           .select('articles.*')
           .count('reactions.id as total_likes')
-          // .where('reactions.is_like', 1)
+          // .where('reactions.is_like', '=', 1)
           .groupBy('articles.id')
-          .orderBy('total_likes', 'desc');
+          .orderBy('total_likes', 'desc');  
       }
       else {
         query.orderBy(sortKey, sort) // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending
@@ -64,6 +64,7 @@ export default class Sort {
 
 //   SELECT a.*, COUNT(r.id) AS total_likes
 // FROM Articles a
-// LEFT JOIN Reactions r ON a.id = r.article_id AND r.is_like = 1
+// LEFT JOIN Reactions r ON a.id = r.article_id 
+// AND r.is_like = 1
 // GROUP BY a.id
 // ORDER BY total_likes DESC;
