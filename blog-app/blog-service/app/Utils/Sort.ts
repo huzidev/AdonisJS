@@ -41,7 +41,7 @@ export default class Sort {
         query.from("articles")
           .select('articles.*')
           .count('reactions.id as total_likes')
-          .where('reactions.is_like', 1)
+          // .where('reactions.is_like', 1)
           .groupBy('articles.id')
           .orderBy('total_likes', 'desc');
       }
@@ -53,3 +53,17 @@ export default class Sort {
     })
   }
 }
+
+// SELECT articles.*, COUNT(reactions.id) AS total_likes
+//     FROM articles
+//     LEFT JOIN reactions ON articles.id = reactions.article_id
+//     WHERE reactions.is_like = 1
+//     GROUP BY articles.id
+//     ORDER BY total_likes DESC;  
+
+
+//   SELECT a.*, COUNT(r.id) AS total_likes
+// FROM Articles a
+// LEFT JOIN Reactions r ON a.id = r.article_id AND r.is_like = 1
+// GROUP BY a.id
+// ORDER BY total_likes DESC;
