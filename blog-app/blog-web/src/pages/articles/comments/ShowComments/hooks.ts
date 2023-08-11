@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
-import { useComments } from "store/comment";
+import { useComment } from "store/comment";
+import { useReply } from "store/reply";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 import { AddCommentState } from "./types";
 
 export function useCommentPageHooks() {
-  const comment = useComments();
+  const comment = useComment();
+  const reply = useReply();
   const auth = useAuth();
   const blog = useBlogs();
   const user = useUser();
@@ -20,7 +22,9 @@ export function useCommentPageHooks() {
   const allUsers = user.state.allUser.data;
   const [comments, setComments] = useState<any>(allComments);
   const byMe =
-    comment.state.getCommentById.data?.userId === auth.state.user?.id;
+    state.getCommentById.data?.userId === auth.state.user?.id;
+
+  const allReplies: any = reply.state.getReplies.data;
 
   const [content, setContent] = useState<AddCommentState>({
     userId: loggedInId,
@@ -30,6 +34,7 @@ export function useCommentPageHooks() {
 
   useEffect(() => {
     user.allUser();
+    reply.getReplies(15)
   }, []);
 
   useEffect(() => {
@@ -60,5 +65,6 @@ export function useCommentPageHooks() {
     content,
     allComments,
     allUsers,
+    allReplies
   };
 }

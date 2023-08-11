@@ -3,7 +3,7 @@ import { useAppDispatch } from "store/hooks/hooks";
 import * as actions from "./actions";
 import { AddCommentPayload, CommentState, EditCommentPayload } from "./types";
 
-export const useComments = () => {
+export const useComment = () => {
   const dispatch = useAppDispatch();
   const state = useSelector((state: any) => state.comments) as CommentState;
   const addComment = (payload: AddCommentPayload) => dispatch(actions.addComment(payload));

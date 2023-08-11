@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "store/auth";
-import { useComments } from "store/comment";
+import { useComment } from "store/comment";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 
 export function useEditCommentPageHooks() {
-  const comment = useComments();
+  const comment = useComment();
   const auth = useAuth();
   const params: any = useParams();
   const state = comment.state;

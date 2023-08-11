@@ -3,7 +3,7 @@ import { useAppDispatch } from "store/hooks/hooks";
 import * as actions from "./actions";
 import { AddReplyPayload, EditReplyPayload, ReplyState } from "./types";
 
-export const useComments = () => {
+export const useReply = () => {
   const dispatch = useAppDispatch();
   const state = useSelector((state: any) => state.replies) as ReplyState;
   const addReply = (payload: AddReplyPayload) => dispatch(actions.addReply(payload));

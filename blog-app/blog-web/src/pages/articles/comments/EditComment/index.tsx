@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useComments } from "store/comment";
+import { useComment } from "store/comment";
 import { useEditCommentPageHooks } from "./hooks";
 
 export default function EditCommentPage(): JSX.Element {
-  const comment = useComments();
+  const comment = useComment();
   const params: any = useParams();
   const commentResp = comment.state.getCommentById.data;
   const [content, setContent] = useState<any>({comment: ''});

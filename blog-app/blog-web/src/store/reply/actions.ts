@@ -26,9 +26,9 @@ export const addReply = createAsyncThunk(
 
 export const getReplies = createAsyncThunk(
   endpoints.GET_REPLIES,
-  async (articleId: number) => {
+  async (commentId: number) => {
     try {
-      const response = await api.get(endpoints.GET_REPLIES + articleId);
+      const response = await api.get(endpoints.GET_REPLIES + commentId);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);

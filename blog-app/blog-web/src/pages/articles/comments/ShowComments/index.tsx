@@ -3,16 +3,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
-import { useComments } from "store/comment";
+import { useComment } from "store/comment";
 import { hasPermission } from "utils";
 import { useCommentPageHooks } from "./hooks";
 import { AllCommentsState, PropsState } from "./types";
 
 export default function CommentsPage(props: PropsState): JSX.Element {
-  const comment = useComments();
+  const comment = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
-  const { content, setContent, allComments, allUsers } = useCommentPageHooks();
+  const { content, setContent, allComments, allUsers, allReplies } = useCommentPageHooks();
   const [replyState, setReplyState] = useState<any>({
     id: null,
   });
@@ -22,6 +22,9 @@ export default function CommentsPage(props: PropsState): JSX.Element {
     e.preventDefault();
     comment.addComment(content);
   }
+
+  console.log("All Replies", allReplies);
+  
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
