@@ -42,6 +42,8 @@ export default class Sort {
         query.from("articles as a")
           .select('a.*')
           .count('r.id as total_likes')
+          // joinRaw because we've to called AND query to get matching result and also those result which does not matched
+          // by using .where We are only receving matching result not those which doesn't match
           .joinRaw(Database.rawQuery(`AND r.is_like = 1`))
           // .where('r.is_like', 1)
           .groupBy('a.id')
