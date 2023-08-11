@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.integer('article_id').unsigned().references('id').inTable('articles').onDelete('CASCADE').notNullable()
       // delete all replies if comment with that id is deleted
       table.integer('comment_id').unsigned().references('id').inTable('comments').onDelete('CASCADE').notNullable()
+      table.string("reply", 100).notNullable();
 
       table.timestamp("created_at", { useTz: true }).notNullable().defaultTo(this.now());
       table.timestamp("updated_at", { useTz: true }).notNullable();
