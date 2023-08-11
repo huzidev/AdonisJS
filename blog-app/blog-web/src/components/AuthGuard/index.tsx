@@ -46,9 +46,11 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       const { isVerified, isBanned } = user;
       if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {
         navigate(ROUTE_PATHS.BANNED_USER);
-      } else if (
-        currentPath === ROUTE_PATHS.AUTH_SIGNIN ||
-        currentPath === ROUTE_PATHS.AUTH_SIGNUP
+      } 
+      // when user is loggedIn and tries to acces signIn OR signUp path AND check if user isVerified and Not Banned
+      else if (
+        (currentPath === ROUTE_PATHS.AUTH_SIGNIN ||
+        currentPath === ROUTE_PATHS.AUTH_SIGNUP) && isVerified && !isBanned
       ) {
         navigate("/");
       } else if (!isVerified && currentPath !== ROUTE_PATHS.VERIFY_USER) {
@@ -66,7 +68,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     } else {
       setState(true);
     }
-  }, [auth.state.user, auth.state.initState]);
+  }, [auth.state.user, auth.state.initState, window.location.pathname]);
   if (!state) {
     return <PageLoader />;
   }
