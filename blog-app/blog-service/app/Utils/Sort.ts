@@ -1,3 +1,4 @@
+import Database from '@ioc:Adonis/Lucid/Database';
 import { LucidModel, LucidRow, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm';
 
 export default class Sort {
@@ -41,7 +42,8 @@ export default class Sort {
         query.from("articles as a")
           .select('a.*')
           .count('r.id as total_likes')
-          .where('r.is_like', 1)
+          .joinRaw(Database.rawQuery(`AND r.is_like = 1`))
+          // .where('r.is_like', 1)
           .groupBy('a.id')
           .orderBy('total_likes', 'desc');
       }
@@ -53,14 +55,6 @@ export default class Sort {
     })
   }
 }
-
-// SELECT articles.*, COUNT(reactions.id) AS total_likes
-//     FROM articles
-//     LEFT JOIN reactions ON articles.id = reactions.article_id
-//     WHERE reactions.is_like = 1
-//     GROUP BY articles.id
-//     ORDER BY total_likes DESC;  
-
 
 //   SELECT a.*, COUNT(r.id) AS total_likes
 // FROM Articles a
