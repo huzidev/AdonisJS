@@ -8,8 +8,6 @@ export default class CommentsController {
     try {
       const body = await request.validate(AddComment);
 
-      console.log("body", body);
-
       const { userId } = body;
 
       const user: any = await User.findBy("id", userId);
@@ -17,7 +15,7 @@ export default class CommentsController {
       await Comment.create(body);
 
       return {
-        message: body.replyId ? `Replied to ${user.username} added successfully` : `Comment added successfully by ${user.username}`,
+        message: `Comment added successfully by ${user.username}`,
         data: body
       };
     } catch (e) {
