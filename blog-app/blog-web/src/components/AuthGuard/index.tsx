@@ -40,7 +40,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
 
     // if user is not loggedIn and tries to access paths like edit user, create user etc
     if (isProtected && !user && !initState.loading) {
-      navigate("/");
+      navigate('/');
       toast.error("You can't access the requested path kindly signin first");
     } else if (user) {
       const { isVerified, isBanned } = user;
@@ -49,15 +49,15 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
         (currentPath === ROUTE_PATHS.AUTH_SIGNIN ||
         currentPath === ROUTE_PATHS.AUTH_SIGNUP) && isVerified && !isBanned
       ) {
-        navigate("/");
+        navigate('/');
       } else if (!isVerified && currentPath !== ROUTE_PATHS.VERIFY_USER) {
         navigate(ROUTE_PATHS.VERIFY_USER);
       } else if (isVerified && currentPath === ROUTE_PATHS.VERIFY_USER) {
-        navigate("/");
+        navigate('/');
       } else if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {
         navigate(ROUTE_PATHS.BANNED_USER);
       } else if (isProtected && !hasPermission(allowedRole, user.role)) {
-        navigate("/");
+        navigate('/');
         toast.error(
           "Insufficient access, you do not have permission to perform this action"
         );
