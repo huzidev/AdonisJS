@@ -1,12 +1,12 @@
-import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
-import pick from 'lodash/pick'
+import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator';
+import pick from 'lodash/pick';
 
 export class AddReply {
   public static schemaMap = {
     userId: schema.number(),
     articleId: schema.number(),
     commentId: schema.number(),
-    reply: schema.string({ trim: true }, [rules.minLength(2)]),
+    reply: schema.string({ trim: true }, [rules.minLength(2)])
   }
 
   public messages: CustomMessages = {
