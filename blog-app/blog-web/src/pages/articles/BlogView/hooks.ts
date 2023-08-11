@@ -34,6 +34,7 @@ export function useGetBlogPageHooks() {
   }, [ownerId])
 
   useEffect(() => {
+    // when user is loggedIn then getReactions with loggedIn user id to show like/liked button to check whether user has already liked the blog or not
     if (blogId && auth.state.user) {
       reaction.getReactions({ articleId: blogId, userId: loggedInId });
     } else if (blogId && !auth.state.user) {
