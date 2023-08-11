@@ -59,7 +59,7 @@ export function useGetBlogPageHooks() {
         }
       } // if user tries to change to URL id which doesn't exist in database 
       else if (!state.getBlog.loading && state.getBlog.error) {
-        navigate("/");
+        navigate('/');
       }
     }
     console.log("state.getBlog.message", state.getBlog.message);
