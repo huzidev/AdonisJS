@@ -61,7 +61,7 @@ export default class ArticlesController {
           query.join("users", "articles.owner_id", "users.id");
         } 
         // using leftJOIN to get those values as well which doesn't matches 
-        // Ex: all blogs with most likes fetches first then those which do not have any likes must also fetch
+        // Ex: all blogs with most likes fetches first then those which do not have any likes must also fetch after those blogs which have most likes
         if (filterResultKey === "blogs") {
           query.leftJoin('reactions as r', 'a.id', '=', 'r.article_id')
         }
