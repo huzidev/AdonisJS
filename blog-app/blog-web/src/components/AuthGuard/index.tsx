@@ -44,21 +44,18 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       toast.error("You can't access the requested path kindly signin first");
     } else if (user) {
       const { isVerified, isBanned } = user;
-      if (!isVerified && currentPath !== ROUTE_PATHS.VERIFY_USER) {
-        navigate(ROUTE_PATHS.VERIFY_USER);
-      } 
-      else if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {
-        navigate(ROUTE_PATHS.BANNED_USER);
-      } 
       // when user is loggedIn and tries to acces signIn OR signUp path AND check if user isVerified and Not Banned
-      else if (
+      if (
         (currentPath === ROUTE_PATHS.AUTH_SIGNIN ||
         currentPath === ROUTE_PATHS.AUTH_SIGNUP) && isVerified && !isBanned
       ) {
         navigate("/");
-      } 
-      else if (isVerified && currentPath === ROUTE_PATHS.VERIFY_USER) {
+      } else if (!isVerified && currentPath !== ROUTE_PATHS.VERIFY_USER) {
+        navigate(ROUTE_PATHS.VERIFY_USER);
+      } else if (isVerified && currentPath === ROUTE_PATHS.VERIFY_USER) {
         navigate("/");
+      } else if (isBanned && currentPath !== ROUTE_PATHS.BANNED_USER) {
+        navigate(ROUTE_PATHS.BANNED_USER);
       } else if (isProtected && !hasPermission(allowedRole, user.role)) {
         navigate("/");
         toast.error(
