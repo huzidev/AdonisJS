@@ -38,12 +38,12 @@ export default class Sort {
         }
       }
       else if (sort === "popular") {
-        query.from("articles")
-          .select('articles.*')
-          .count('reactions.id as total_likes')
-          // .where('reactions.is_like', '=', 1)
-          .groupBy('articles.id')
-          .orderBy('total_likes', 'desc');  
+        query.from("articles as a")
+          .select('a.*')
+          .count('r.id as total_likes')
+          .where('r.is_like', 1)
+          .groupBy('a.id')
+          .orderBy('total_likes', 'desc');
       }
       else {
         query.orderBy(sortKey, sort) // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending
