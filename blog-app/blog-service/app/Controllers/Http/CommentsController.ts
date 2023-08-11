@@ -31,19 +31,16 @@ export default class CommentsController {
             .where("article_id", articleId)
             .select('*');
 
-      const replies = await Database.from("comments")
+      const replies: any = await Database.from("comments")
         .join('replies as r', 'comments.id', '=', 'r.comment_id')
         .where("r.article_id", "=", articleId)
         .count('r.comment_id as Total')
         
-      console.log("replies", replies);
-      
-
       // const response = await Article.query().whereIn("id", query); 
       return {
         message: "Comments fetched successfully",
         data: response,
-        replies
+        replies: Object.values(replies[0])
       };
     } catch (e) {
       throw e
