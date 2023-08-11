@@ -5,6 +5,7 @@ import AuthRoutes from './routes/auth';
 import CommentRoutes from './routes/comment';
 import FavoriteArticlesRoutes from './routes/favoriteArticle';
 import ReactionsRoutes from './routes/reaction';
+import ReplyRoutes from './routes/reply';
 import UsersRoutes from './routes/user';
 
 Route.group(() => {
@@ -14,4 +15,5 @@ Route.group(() => {
   FavoriteArticlesRoutes()
   CommentRoutes()
   ReactionsRoutes()
+  ReplyRoutes()
 })
