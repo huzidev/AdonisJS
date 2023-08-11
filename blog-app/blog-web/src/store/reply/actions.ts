@@ -10,16 +10,16 @@ export const addReply = createAsyncThunk(
   async (data: AddReplyPayload) => {
     try {
       const response = await api.post(endpoints.ADD_REPLY, data);
-      console.log('Add Reply response', response.data);
+      console.log("Add Reply response", response.data);
       return {
         message: response.data.message,
-        data: response.data.data
+        data: response.data.data,
       };
     } catch (e: any) {
       const err = mapErrorToState(e);
-        errorNotification(err);
-        console.log("Error", err);
-        throw e
+      errorNotification(err);
+      console.log("Error", err);
+      throw e;
     }
   }
 );
@@ -32,11 +32,11 @@ export const getReplies = createAsyncThunk(
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
-        errorNotification(err);
-        console.log("Error", err);
-        throw e
-      }
+      errorNotification(err);
+      console.log("Error", err);
+      throw e;
     }
+  }
 );
 
 export const getReplyById = createAsyncThunk(
@@ -47,11 +47,11 @@ export const getReplyById = createAsyncThunk(
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
-        errorNotification(err);
-        console.log("Error", err);
-        throw e
-      }
+      errorNotification(err);
+      console.log("Error", err);
+      throw e;
     }
+  }
 );
 
 export const editReply = createAsyncThunk(
@@ -59,16 +59,18 @@ export const editReply = createAsyncThunk(
   async (data: EditReplyPayload) => {
     console.log("data", data);
     try {
-      const response = await api.put(endpoints.EDIT_REPLY + data.id, {comment: data.reply});
+      const response = await api.put(endpoints.EDIT_REPLY + data.id, {
+        reply: data.reply,
+      });
       console.log("Edit Reply RESP", response.data);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
-        errorNotification(err);
-        console.log("Error", err);
-        throw e
-      }
+      errorNotification(err);
+      console.log("Error", err);
+      throw e;
     }
+  }
 );
 
 export const deleteReply = createAsyncThunk(
@@ -77,12 +79,12 @@ export const deleteReply = createAsyncThunk(
     try {
       const response = await api.delete(endpoints.DELETE_REPLY + articleId);
       console.log("RESPONSE from delete REPLY", response);
-      return response.data
+      return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
-        errorNotification(err);
-        console.log("Error", err);
-        throw e
-      }
+      errorNotification(err);
+      console.log("Error", err);
+      throw e;
     }
+  }
 );
