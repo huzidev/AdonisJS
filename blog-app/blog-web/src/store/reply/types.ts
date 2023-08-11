@@ -28,7 +28,7 @@ export interface EditReplyPayload extends SubState {
   reply: string;
 }
 
-export interface CommentState {
+export interface ReplyState {
   addReply: SubState;
   getReplies: GetRepliesState;
   getReplyById: GetReplyByIdState;

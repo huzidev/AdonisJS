@@ -5,7 +5,7 @@ import { errorNotification } from "utils/notifications";
 import * as endpoints from "./endpoints";
 import { AddReplyPayload, EditReplyPayload } from "./types";
 
-export const addComment = createAsyncThunk(
+export const addReply = createAsyncThunk(
   endpoints.ADD_REPLY,
   async (data: AddReplyPayload) => {
     try {
@@ -24,7 +24,7 @@ export const addComment = createAsyncThunk(
   }
 );
 
-export const getComments = createAsyncThunk(
+export const getReplies = createAsyncThunk(
   endpoints.GET_REPLIES,
   async (articleId: number) => {
     try {
@@ -39,7 +39,7 @@ export const getComments = createAsyncThunk(
     }
 );
 
-export const getCommentById = createAsyncThunk(
+export const getReplyById = createAsyncThunk(
   endpoints.GET_REPLY,
   async (id: number) => {
     try {
@@ -54,7 +54,7 @@ export const getCommentById = createAsyncThunk(
     }
 );
 
-export const editComment = createAsyncThunk(
+export const editReply = createAsyncThunk(
   endpoints.EDIT_REPLY,
   async (data: EditReplyPayload) => {
     console.log("data", data);
@@ -71,7 +71,7 @@ export const editComment = createAsyncThunk(
     }
 );
 
-export const deleteComment = createAsyncThunk(
+export const deleteReply = createAsyncThunk(
   endpoints.DELETE_REPLY,
   async (articleId: number) => {
     try {
