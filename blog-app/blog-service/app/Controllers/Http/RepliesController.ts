@@ -28,6 +28,7 @@ export default class RepliesController {
       const commentId = params.id;
       const response = await Reply.query()
             .where("comment_id", commentId)
+            // .preload('comment', (query) => query.where("id", commentId))
             .select('*');
       // const response = await Article.query().whereIn("id", query); 
       return {
