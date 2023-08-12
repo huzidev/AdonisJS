@@ -34,12 +34,12 @@ export function useCommentPageHooks() {
 
   useEffect(() => {
     user.allUser();
-    reply.getReplies(15)
   }, []);
 
   useEffect(() => {
     if (blogId) {
       comment.getComments(blogId);
+      reply.getReplies(blogId)
     }
     setContent({ ...content, userId: loggedInId, articleId: blogId });
   }, [loggedInId, blogId]);

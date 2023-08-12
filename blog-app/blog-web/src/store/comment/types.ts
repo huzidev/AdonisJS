@@ -15,6 +15,7 @@ export interface Comment extends AddCommentPayload {
 export interface GetCommentsState extends SubState {
   articleId?: number;
   data?: Comment[] | null;
+  total?: number;
 }
 
 export interface GetCommentByIdState extends SubState {

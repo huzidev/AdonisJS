@@ -23,8 +23,9 @@ export default function CommentsPage(props: PropsState): JSX.Element {
     comment.addComment(content);
   }
 
-  console.log("All Replies", allReplies);
-  
+  if (allReplies) {
+    console.log("All replies", allReplies);
+  }
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
