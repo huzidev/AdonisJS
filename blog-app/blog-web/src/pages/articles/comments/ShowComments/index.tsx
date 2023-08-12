@@ -64,16 +64,22 @@ export default function CommentsPage(props: PropsState): JSX.Element {
             <div>
               {allComments &&
                 allComments.map((value: AllCommentsState, index: number) => {
-                  const uploadedByUser = allUsers?.find(
+                  const uploadedByUser = allUsers && allUsers?.find(
                     (user: User) => user.id === value.userId
                   );
-                  const commentBy = uploadedByUser && uploadedByUser.username;
-                  const uploadedByUserRole = uploadedByUser && uploadedByUser.role;
+                  const replies = allReplies && allReplies.filter((reply: any) =>  allComments.find((blog: any) => reply.commentId === blog.id))
+                  const commentBy = uploadedByUser?.username;
+                  const uploadedByUserRole = uploadedByUser?.role;
                   const isBlogOwner = props.ownerId === userData?.id;
                   const isCommentAuthor = value.userId === userData?.id;
                   const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
                   const isAuthorAdmin = uploadedByUserRole === "admin";
                   const isAdmin = hasPermission("admin", userData?.role);
+                  if (replies) {
+                    console.log("replies", replies);
+                  }
+                  
+
                   return (
                     // !value.replyId ? (
                       <div key={index}>
