@@ -138,7 +138,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                           const ReplyByUser = allUsers && allUsers?.find(
                               (user: User) => user.id === reply.userId
                             );
-                            const commentBy = ReplyByUser?.username;
+                            const commentBy = ReplyByUser?.username; 
                           return (
                             <div key={index} className="ml-4">
                                 <div className="flex">
