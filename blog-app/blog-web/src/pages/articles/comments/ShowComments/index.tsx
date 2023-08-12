@@ -23,9 +23,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
     comment.addComment(content);
   }
 
-  if (allReplies) {
-    console.log("All replies", allReplies);
-  }
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
@@ -67,7 +64,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const uploadedByUser = allUsers && allUsers?.find(
                     (user: User) => user.id === value.userId
                   );
-                  const replies = allReplies && allReplies.filter((reply: any) =>  allComments.find((blog: any) => reply.commentId === blog.id))
                   const commentBy = uploadedByUser?.username;
                   const uploadedByUserRole = uploadedByUser?.role;
                   const isBlogOwner = props.ownerId === userData?.id;
@@ -75,13 +71,10 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
                   const isAuthorAdmin = uploadedByUserRole === "admin";
                   const isAdmin = hasPermission("admin", userData?.role);
-                  if (replies) {
-                    console.log("replies", replies);
-                  }
-                  
+                  // const replies = allReplies && allReplies.map((reply: any) => reply.id)
+
 
                   return (
-                    // !value.replyId ? (
                       <div key={index}>
                         <div className="flex">
                         <p>
@@ -144,7 +137,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                           Reply
                         </button>
                       </div>
-                    // ) : "heLLO"
                   );
                 })}
             </div>
