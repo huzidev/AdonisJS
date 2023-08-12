@@ -134,11 +134,20 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                         >
                           Reply
                         </button>
-                        {commentReplies && commentReplies.map((reply: any, replyIndex: number) => (
-                            <div key={replyIndex} className="ml-4">
-                              <p>{reply.reply}</p>
-                            </div>
-                          ))}
+                        {commentReplies && commentReplies.map((reply: any, index: number) => {
+                          const ReplyByUser = allUsers && allUsers?.find(
+                              (user: User) => user.id === reply.userId
+                            );
+                            const commentBy = ReplyByUser?.username;
+                          return (
+                            <div key={index} className="ml-4">
+                                <div className="flex">
+                                  <p>{commentBy}</p>
+                                  <p>{reply.reply}</p>
+                                </div>
+                              </div>
+                          )
+                            })}
                       </div>
                   );
                 })}
