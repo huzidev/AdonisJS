@@ -1,5 +1,4 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import Database from "@ioc:Adonis/Lucid/Database";
 import Comment from "App/Models/Comment";
 import User from "App/Models/User";
 import { AddComment, EditComment } from "App/Validators/CommentValidator";
@@ -31,19 +30,18 @@ export default class CommentsController {
             .where("article_id", articleId)
             .select('*');
 
-      const replies: any = await Database.from("comments")
-        .join('replies as r', 'comments.id', '=', 'r.comment_id')
-        .where("r.article_id", "=", articleId)
-        .count('r.comment_id as Total')
+      // const replies: any = await Database.from("comments")
+      //   .join('replies as r', 'comments.id', '=', 'r.comment_id')
+      //   .where("r.article_id", "=", articleId)
+      //   .count('r.comment_id as Total')
         
-      console.log("Replies", replies);
+      // console.log("Replies", replies);
       
-
       // const response = await Article.query().whereIn("id", query); 
       return {
         message: "Comments fetched successfully",
         data: response,
-        replies: Object.values(replies[0])
+        // replies: Object.values(replies[0])
       };
     } catch (e) {
       throw e
