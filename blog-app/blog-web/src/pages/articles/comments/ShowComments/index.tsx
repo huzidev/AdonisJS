@@ -23,7 +23,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
     comment.addComment(content);
   }
 
-
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
@@ -71,8 +70,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
                   const isAuthorAdmin = uploadedByUserRole === "admin";
                   const isAdmin = hasPermission("admin", userData?.role);
-                  // const replies = allReplies && allReplies.map((reply: any) => reply.id)
-
+                   const commentReplies = allReplies && allReplies.filter((reply: any) => reply.commentId === value.id);
 
                   return (
                       <div key={index}>
@@ -81,7 +79,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                           {index + 1}
                         </p>
                           <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                            &nbsp; {commentBy}
+                            &nbsp; {commentBy} {value.id}
                           </p>
                           <p>{value.comment}</p>
                         </div>
@@ -136,6 +134,11 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                         >
                           Reply
                         </button>
+                        {commentReplies && commentReplies.map((reply: any, replyIndex: number) => (
+                            <div key={replyIndex} className="ml-4">
+                              <p>{reply.reply}</p>
+                            </div>
+                          ))}
                       </div>
                   );
                 })}
