@@ -25,9 +25,9 @@ export default class RepliesController {
 
   public async getAll({ params }: HttpContextContract) {
     try {
-      const commentId = params.id;
+      const articleId = params.id;
       const response = await Reply.query()
-            .where("comment_id", commentId)
+            .where("article_id", articleId)
             // .preload('comment', (query) => query.where("id", commentId))
             .select('*');
       // const response = await Article.query().whereIn("id", query); 

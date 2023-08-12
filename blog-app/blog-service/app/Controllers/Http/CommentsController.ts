@@ -36,6 +36,9 @@ export default class CommentsController {
         .where("r.article_id", "=", articleId)
         .count('r.comment_id as Total')
         
+      console.log("Replies", replies);
+      
+
       // const response = await Article.query().whereIn("id", query); 
       return {
         message: "Comments fetched successfully",
