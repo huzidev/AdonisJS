@@ -66,9 +66,9 @@ export const blogSlice = createSlice({
             state.getBlogs.data = [...cleaned, ...data];
           }
         }
+        // meta takes pagination data like total, currentPage, LastPageX
         state.getBlogs.meta = meta;
         state.getBlogs.message = message;
-        // meta takes pagination data like total, currentPage, LastPage
       }
       state.getBlogs.error = false;
     });
