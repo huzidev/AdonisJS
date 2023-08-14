@@ -5,17 +5,18 @@ export class AddComment {
   public static schemaMap = {
     userId: schema.number(),
     articleId: schema.number(),
-    comment: schema.string({ trim: true }, [rules.minLength(2)]),
+    parentId: schema.number.optional(),
+    content: schema.string({ trim: true }, [rules.minLength(2)]),
   }
 
   public messages: CustomMessages = {
-    required: '{{ field }} is required for comment',
+    required: '{{ field }} is required for adding comment',
   }
   public schema = schema.create(AddComment.schemaMap)
 }
 
 export class EditComment {
-  public schema = schema.create(pick(AddComment.schemaMap, ['comment']))
+  public schema = schema.create(pick(AddComment.schemaMap, ['content']))
   public messages: CustomMessages = {
     required: '{{ field }} is required for edit comment',
   }
