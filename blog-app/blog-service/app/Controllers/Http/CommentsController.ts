@@ -9,7 +9,6 @@ export default class CommentsController {
       const body = await request.validate(AddComment);
 
       console.log("Body", body);
-      
         
       const { userId, parentId } = body;
 
@@ -29,9 +28,12 @@ export default class CommentsController {
   public async getAll({ params }: HttpContextContract) {
     try {
       const articleId = params.id;
-      const response = await Comment.query()
-            .where("article_id", articleId)
-            .select('*');
+      // const response = await Comment.query()
+      //       .where("articleId", articleId)
+      //       .select('*');
+      // const comments = await Comment.query()
+      //   .where("article_id", articleId)
+      //   .wher
 
       return {
         message: "Comments fetched successfully",
