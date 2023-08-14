@@ -4,12 +4,12 @@ export interface PropsState {
 export interface AddCommentState {
   userId: number;
   articleId: number;
-  comment: string;
+  content: string;
 }
 
 export interface AllCommentsState extends AddCommentState {
   id: number;
-  replyId?: number;
+  parentId?: number;
   createdAt: string;
   updatedAt: string;
 }

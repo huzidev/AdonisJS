@@ -3,7 +3,7 @@ import { SubState } from "store/types";
 export interface AddCommentPayload {
   userId: number;
   articleId: number;
-  comment: string;
+  content: string;
 }
 
 export interface Comment extends AddCommentPayload {

@@ -39,9 +39,9 @@ export default function CommentsPage(props: PropsState): JSX.Element {
             <textarea
               name="comment"
               rows={6}
-              value={content.comment}
+              value={content.content}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                setContent({ ...content, comment: e.target.value })
+                setContent({ ...content, content: e.target.value })
               }
               className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
               placeholder="Write a comment..."
@@ -82,7 +82,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                             </p>
                             <p>{new Date(value.createdAt).toLocaleDateString()}</p>
                           </div>
-                          <p className="text-gray-500 dark:text-gray-400 ml-6">{value.comment}</p>
+                          <p className="text-gray-500 dark:text-gray-400 ml-6">{value.content}</p>
                         </div>
                         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
                         {replyState.id === value.id && (
@@ -91,7 +91,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                               id="reply"
                               name="reply"
                               type="text"
-                              value={content.comment}
+                              value={content.content}
                               // so if user is replying to owns comment then show reply yours comment
                               placeholder={`Reply to ${isCommentAuthor ? "Yours" : commentBy} comment`}
                               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReply(e.target.value)}
