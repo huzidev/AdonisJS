@@ -8,6 +8,9 @@ export default class CommentsController {
     try {
       const body = await request.validate(AddComment);
 
+      console.log("Body", body);
+      
+        
       const { userId, parentId } = body;
 
       const user: any = await User.findBy("id", userId);
