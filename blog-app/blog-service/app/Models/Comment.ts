@@ -14,7 +14,10 @@ export default class Comment extends BaseModel {
   public articleId: number
   
   @column()
-  public comment: string
+  public parentId: number
+
+  @column()
+  public content: string
 
   @belongsTo(() => User, {
     foreignKey: "userId" 
@@ -25,6 +28,11 @@ export default class Comment extends BaseModel {
     foreignKey: "articleId" 
   })
   public article: BelongsTo<typeof Article>
+
+  @belongsTo(() => Comment, {
+    foreignKey: 'parentId',
+  })
+  public parentComment: BelongsTo<typeof Comment>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
