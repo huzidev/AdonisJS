@@ -5,42 +5,10 @@ import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComment } from "store/comment";
 import { hasPermission } from "utils";
+import CommentWithReplies from "../ShowReplies";
 import { useCommentPageHooks } from "./hooks";
 import { AllCommentsState, PropsState } from "./types";
 
-function CommentWithReplies({ comment, allUsers, allReplies }: any) {
-  const uploadedByUser = allUsers.find(
-    (user: User) => user.id === comment.userId
-  );
-  const commentBy = uploadedByUser?.username;
-  const uploadedByUserRole = uploadedByUser?.role;
-  const replies = allReplies.filter(
-    (reply: AllCommentsState) => reply.parentId === comment.id
-  );
-
-  return (
-    <div>
-      <div className="flex">
-        <p className="inline-flex text-lg items-center mr-3 text-gray-900 dark:text-white">
-          - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
-        </p>
-        <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
-      </div>
-      <p className="text-gray-500 dark:text-gray-400 ml-6">{comment.content}</p>
-      {replies.map((reply: any) => (
-        <div key={reply.id} className="ml-10">
-          <div>
-            <CommentWithReplies
-              comment={reply}
-              allUsers={allUsers}
-              allReplies={allReplies}
-            />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export default function CommentsPage(props: PropsState): JSX.Element {
   const comment = useComment();
@@ -51,6 +19,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
   const [replyState, setReplyState] = useState<any>({
     id: null,
   });
+  const [replies, setReplies] = useState([]);
   const [reply, setReply] = useState<any>("");
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -106,7 +75,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const isAuthorAdmin = uploadedByUserRole === "admin";
                   const isAdmin = hasPermission("admin", userData?.role);
                   return (
-                    <>
+                    <div key={index}>
                       <CommentWithReplies
                         key={value.id}
                         comment={value}
@@ -115,7 +84,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                         uploadedByUserRole={uploadedByUserRole}
                         allReplies={allReplies}
                       />
-                      <div key={index}>
+                      <div >
                         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
                         {replyState.id === value.id && (
                           <div className="mt-2">
@@ -126,7 +95,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                               value={content.content}
                               // so if user is replying to owns comment then show reply yours comment
                               placeholder={`Reply to ${
-                                isCommentAuthor ? "Yours" : commentBy
+                                isCommentAuthor ? "Yours" : (commentBy + `'s`)
                               } comment`}
                               onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>
@@ -177,7 +146,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                           Reply
                         </button>
                       </div>
-                    </>
+                    </div>
                   );
                 })}
             </div>
