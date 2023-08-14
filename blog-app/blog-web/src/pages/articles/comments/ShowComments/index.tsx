@@ -13,7 +13,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
   const auth = useAuth();
   const userData = auth.state.user;
   const { content, setContent, allComments, allUsers, allReplies, toReply } = useCommentPageHooks();
-  console.log("toReply", toReply);
   const [replyState, setReplyState] = useState<any>({
     id: null,
   });
@@ -145,22 +144,25 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                             );
                             const replyBy = ReplyByUser?.username;
                             const replyByRole = ReplyByUser?.role;
-                            // const toReply = reply.find((toReply: any) => toReply.parentId === reply.id);
+                            const toReplies = toReply && toReply.filter((value: any) => value.parentId === reply.id)
                           return (
                             <div key={index} className="ml-10">
                                 <div className="flex">
-                                  <p >{replyBy} {replyByRole && "*"}</p>
+                                  <p>
+                                    {reply.id} &nbsp;
+                                  </p>
+                                  <p>{replyBy} {replyByRole && "*"}</p>
                                   <p className="text-gray-500 dark:text-gray-400 ml-2">{reply.content}</p>
                                 </div>
                                 <div>
-                                  {/* {toReply && toReply.map((toReply: any, index: number) => {
-                                    <div key={index}>
-                                      <p>
-                                        {replyBy}
-                                      </p>
-                                      <p className="text-gray-500 dark:text-gray-400 ml-2">{toReply.content}</p>
-                                    </div>
-                                  })} */}
+                                  {toReplies.map((toReply: any, index: number) => {
+                                    return (
+                                      <div className="flex" key={index}>
+                                        <p >{replyBy} {replyByRole && "*"}</p>
+                                        <p className="text-gray-500 dark:text-gray-400 ml-2">{toReply.content}</p>
+                                      </div>
+                                    )
+                                  })}
                                 </div>
                               </div>  
                           )})}

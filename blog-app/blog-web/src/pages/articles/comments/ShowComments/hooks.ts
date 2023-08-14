@@ -16,11 +16,7 @@ export function useCommentPageHooks() {
   const prev = usePrevious(state);
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = blog.state.getBlog.data?.id;
-  // get Comments (NOT REPLY)
-  // const allComments: any = comment.state.getComments.data?.filter((comment) => comment.parentId === null);
   const allComments: any = comment.state.getComments.comments;
-  // get Replies (NOT COMMENTS)
-  // const allReplies: any = comment.state.getComments.data?.filter((comment) => comment.parentId !== null);
   const allReplies: any = comment.state.getComments.replies;
   const toReply: any = comment.state.getComments.toReply;
   const allUsers = user.state.allUser.data;
