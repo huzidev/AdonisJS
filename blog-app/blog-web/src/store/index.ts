@@ -4,7 +4,6 @@ import auth from "./auth/reducer";
 import comments from "./comment/reducer";
 import emailVerification from "./emailVerification/reducer";
 import reactions from "./reactions/reducer";
-import replies from "./reply/reducer";
 import reset from "./resetPassword/reducer";
 import user from "./user/reducer";
 
@@ -16,7 +15,6 @@ const store = configureStore({
         reset,
         comments,
         reactions,
-        replies,
         emailVerification
     }
 })

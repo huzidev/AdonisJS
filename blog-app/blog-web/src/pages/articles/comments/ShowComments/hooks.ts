@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useComment } from "store/comment";
-import { useReply } from "store/reply";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
@@ -10,7 +9,6 @@ import { AddCommentState } from "./types";
 
 export function useCommentPageHooks() {
   const comment = useComment();
-  const reply = useReply();
   const auth = useAuth();
   const blog = useBlogs();
   const user = useUser();
