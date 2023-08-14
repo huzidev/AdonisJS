@@ -8,15 +8,53 @@ import { hasPermission } from "utils";
 import { useCommentPageHooks } from "./hooks";
 import { AllCommentsState, PropsState } from "./types";
 
+function CommentWithReplies({ comment, allUsers, allReplies, toReply }: any) {
+  const uploadedByUser = allUsers.find(
+    (user: User) => user.id === comment.userId
+  );
+  const commentBy = uploadedByUser?.username;
+  const uploadedByUserRole = uploadedByUser?.role;
+  const replies = allReplies.filter(
+    (reply: any) => reply.parentId === comment.id
+  );
+  const nestedReplies = replies.map((reply: any) => (
+    <div key={reply.id} className="ml-10">
+      <div>
+        <CommentWithReplies
+          comment={reply}
+          allUsers={allUsers}
+          allReplies={allReplies}
+        />
+      </div>
+    </div>
+  ));
+
+  return (
+    <div>
+      <div className="flex">
+        <p className="inline-flex text-lg items-center mr-3 text-gray-900 dark:text-white">
+          - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
+          {comment.id}
+        </p>
+        <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
+      </div>
+      <p className="text-gray-500 dark:text-gray-400 ml-6">{comment.content}</p>
+      {/* ... (reply input and buttons) */}
+      {nestedReplies}
+    </div>
+  );
+}
+
 export default function CommentsPage(props: PropsState): JSX.Element {
   const comment = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
-  const { content, setContent, allComments, allUsers, allReplies, toReply } = useCommentPageHooks();
+  const { content, setContent, allComments, allUsers, allReplies, toReply } =
+    useCommentPageHooks();
   const [replyState, setReplyState] = useState<any>({
     id: null,
   });
-  const [reply, setReply] = useState<any>('')
+  const [reply, setReply] = useState<any>("");
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -60,29 +98,44 @@ export default function CommentsPage(props: PropsState): JSX.Element {
             <div>
               {allComments &&
                 allComments.map((value: AllCommentsState, index: number) => {
-                  const uploadedByUser = allUsers && allUsers?.find(
-                    (user: User) => user.id === value.userId
-                  );
+                  const uploadedByUser =
+                    allUsers &&
+                    allUsers?.find((user: User) => user.id === value.userId);
                   const commentBy = uploadedByUser?.username;
                   const uploadedByUserRole = uploadedByUser?.role;
                   const isBlogOwner = props.ownerId === userData?.id;
                   const isCommentAuthor = value.userId === userData?.id;
-                  const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
+                  const isAuthorSuperAdmin =
+                    uploadedByUserRole === "super-admin";
                   const isAuthorAdmin = uploadedByUserRole === "admin";
                   const isAdmin = hasPermission("admin", userData?.role);
                   // to get specific replies according to specific comments
-                  const replies = allReplies.filter((reply: any) => reply.parentId === value.id)
+                  const replies = allReplies.filter(
+                    (reply: any) => reply.parentId === value.id
+                  );
                   return (
+                    <>
+                      <CommentWithReplies
+                        key={value.id}
+                        comment={value}
+                        allUsers={allUsers}
+                        allReplies={allReplies}
+                      />
                       <div key={index}>
                         <div>
                           <div className="flex">
                             <p className="inline-flex text-lg items-center mr-3 text-gray-900 dark:text-white">
                               {/* (asterik *) will be shown with the name of super-admin */}
-                              - {commentBy} {isAuthorSuperAdmin && "*"} {value.id}
+                              - {commentBy} {isAuthorSuperAdmin && "*"}{" "}
+                              {value.id}
                             </p>
-                            <p>{new Date(value.createdAt).toLocaleDateString()}</p>
+                            <p>
+                              {new Date(value.createdAt).toLocaleDateString()}
+                            </p>
                           </div>
-                          <p className="text-gray-500 dark:text-gray-400 ml-6">{value.content}</p>
+                          <p className="text-gray-500 dark:text-gray-400 ml-6">
+                            {value.content}
+                          </p>
                         </div>
                         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
                         {replyState.id === value.id && (
@@ -93,8 +146,12 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                               type="text"
                               value={content.content}
                               // so if user is replying to owns comment then show reply yours comment
-                              placeholder={`Reply to ${isCommentAuthor ? "Yours" : commentBy} comment`}
-                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReply(e.target.value)}
+                              placeholder={`Reply to ${
+                                isCommentAuthor ? "Yours" : commentBy
+                              } comment`}
+                              onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                              ) => setReply(e.target.value)}
                               required
                               className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
@@ -104,69 +161,44 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                                 type="submit"
                                 value="post"
                               />
-                              <button onClick={() => setReplyState({ id: null })}>
+                              <button
+                                onClick={() => setReplyState({ id: null })}
+                              >
                                 Cancel
                               </button>
                             </div>
                           </div>
                         )}
-                       
                         {(isCommentAuthor ||
                           (isAdmin && !isAuthorSuperAdmin)) && (
-                            <Link to={ROUTE_PATHS.EDIT_COMMENT + value.id}
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                              Edit
-                            </Link>  
-                        )}
-                        {" "}
+                          <Link
+                            to={ROUTE_PATHS.EDIT_COMMENT + value.id}
+                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                          >
+                            Edit
+                          </Link>
+                        )}{" "}
                         {/* // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins and admins comment */}
                         {(isCommentAuthor ||
-                          ((isAdmin && !isAuthorSuperAdmin) 
-                          || (isBlogOwner && (!isAuthorAdmin && !isAuthorSuperAdmin)))) 
-                          && (
-                            <button
+                          (isAdmin && !isAuthorSuperAdmin) ||
+                          (isBlogOwner &&
+                            !isAuthorAdmin &&
+                            !isAuthorSuperAdmin)) && (
+                          <button
                             className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                              onClick={() => comment.deleteComment(value.id)}
-                            >
-                              Delete
-                            </button>
-                        )}
-                        {" "}
+                            onClick={() => comment.deleteComment(value.id)}
+                          >
+                            Delete
+                          </button>
+                        )}{" "}
                         <button
-                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                          className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                           onClick={() => setReplyState({ id: value.id })}
                         >
                           Reply
                         </button>
-                        {replies && replies.map((reply: any, index: number) => {
-                          const ReplyByUser = allUsers && allUsers?.find(
-                              (user: User) => user.id === reply.userId
-                            );
-                            const replyBy = ReplyByUser?.username;
-                            const replyByRole = ReplyByUser?.role;
-                            const toReplies = toReply && toReply.filter((value: any) => value.parentId === reply.id)
-                          return (
-                            <div key={index} className="ml-10">
-                                <div className="flex">
-                                  <p>
-                                    {reply.id} &nbsp;
-                                  </p>
-                                  <p>{replyBy} {replyByRole && "*"}</p>
-                                  <p className="text-gray-500 dark:text-gray-400 ml-2">{reply.content}</p>
-                                </div>
-                                <div>
-                                  {toReplies.map((toReply: any, index: number) => {
-                                    return (
-                                      <div className="flex" key={index}>
-                                        <p >{replyBy} {replyByRole && "*"}</p>
-                                        <p className="text-gray-500 dark:text-gray-400 ml-2">{toReply.content}</p>
-                                      </div>
-                                    )
-                                  })}
-                                </div>
-                              </div>  
-                          )})}
                       </div>
+                    </>
                   );
                 })}
             </div>
