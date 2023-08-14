@@ -23,8 +23,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
     comment.addComment(content);
   }
 
-  console.log("all Replies", allReplies);
-
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
@@ -74,6 +72,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const isAdmin = hasPermission("admin", userData?.role);
                   // to get specific replies according to specific comments
                   const replies = allReplies.filter((reply: any) => reply.parentId === value.id)
+                  console.log("Replies", replies);
                   return (
                       <div key={index}>
                         <div>
@@ -146,11 +145,22 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                             );
                             const replyBy = ReplyByUser?.username;
                             const replyByRole = ReplyByUser?.role;
+                            // const toReply = reply.find((toReply: any) => toReply.parentId === reply.id);
                           return (
                             <div key={index} className="ml-10">
                                 <div className="flex">
                                   <p >{replyBy} {replyByRole && "*"}</p>
                                   <p className="text-gray-500 dark:text-gray-400 ml-2">{reply.content}</p>
+                                </div>
+                                <div>
+                                  {/* {toReply && toReply.map((toReply: any, index: number) => {
+                                    <div key={index}>
+                                      <p>
+                                        {replyBy}
+                                      </p>
+                                      <p className="text-gray-500 dark:text-gray-400 ml-2">{toReply.content}</p>
+                                    </div>
+                                  })} */}
                                 </div>
                               </div>  
                           )})}
