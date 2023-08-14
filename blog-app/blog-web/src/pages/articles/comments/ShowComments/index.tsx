@@ -72,6 +72,8 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
                   const isAuthorAdmin = uploadedByUserRole === "admin";
                   const isAdmin = hasPermission("admin", userData?.role);
+                  // to get specific replies according to specific comments
+                  const replies = allReplies.filter((reply: any) => reply.parentId === value.id)
                   return (
                       <div key={index}>
                         <div>
@@ -138,7 +140,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                         >
                           Reply
                         </button>
-                        {allReplies && allReplies.map((reply: any, index: number) => {
+                        {replies && replies.map((reply: any, index: number) => {
                           const ReplyByUser = allUsers && allUsers?.find(
                               (user: User) => user.id === reply.userId
                             );
@@ -150,7 +152,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                                   <p >{replyBy} {replyByRole && "*"}</p>
                                   <p className="text-gray-500 dark:text-gray-400 ml-2">{reply.content}</p>
                                 </div>
-                              </div>
+                              </div>  
                           )
                             })}
                       </div>
