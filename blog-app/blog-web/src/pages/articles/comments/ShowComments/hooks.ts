@@ -18,7 +18,9 @@ export function useCommentPageHooks() {
   const prev = usePrevious(state);
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = blog.state.getBlog.data?.id;
+  // get Comments (NOT REPLY)
   const allComments: any = comment.state.getComments.data?.filter((comment) => comment.parentId === null);
+  // get Replies (NOT COMMENTS)
   const allReplies: any = comment.state.getComments.data?.filter((comment) => comment.parentId !== null);
   const allUsers = user.state.allUser.data;
   const [comments, setComments] = useState<any>(allComments);
