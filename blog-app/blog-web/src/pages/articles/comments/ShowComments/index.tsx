@@ -74,15 +74,15 @@ export default function CommentsPage(props: PropsState): JSX.Element {
 
                   return (
                       <div key={index}>
-                        <div className="flex">
-                        <p>
-                          {index + 1}
-                        </p>
-                          <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                            {/* (asterik *) will be shown with the name of super-admin */}
-                            &nbsp; {commentBy} {isAuthorSuperAdmin && "*"} {value.id}
-                          </p>
-                          <p>{value.comment}</p>
+                        <div>
+                          <div className="flex">
+                            <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                              {/* (asterik *) will be shown with the name of super-admin */}
+                              - {commentBy} {isAuthorSuperAdmin && "*"} {value.id}
+                            </p>
+                            <p>{new Date(value.createdAt).toLocaleDateString()}</p>
+                          </div>
+                          <p className="text-gray-500 dark:text-gray-400">{value.comment}</p>
                         </div>
                         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
                         {replyState.id === value.id && (
@@ -110,7 +110,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                             </div>
                           </div>
                         )}
-                        <p>{new Date(value.createdAt).toLocaleDateString()}</p>
+                       
                         {(isCommentAuthor ||
                           (isAdmin && !isAuthorSuperAdmin)) && (
                             <Link to={ROUTE_PATHS.EDIT_COMMENT + value.id}>
