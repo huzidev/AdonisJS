@@ -44,8 +44,6 @@ export const commentSlice = createSlice({
               const { message, data } = action.payload; 
               state.getComments.comments = data.filter((comment: any) => comment.parentId === null);
               state.getComments.replies = data.filter((reply: any) => reply.parentId !== null);
-              // to get replies to reply
-              state.getComments.toReply = data.filter((toReply: any) => state.getComments.replies?.find((value: any) => toReply.parentId === value.id));
               state.getComments.message = message;
             }
         })

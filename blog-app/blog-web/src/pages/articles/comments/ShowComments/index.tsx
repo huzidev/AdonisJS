@@ -8,7 +8,7 @@ import { hasPermission } from "utils";
 import { useCommentPageHooks } from "./hooks";
 import { AllCommentsState, PropsState } from "./types";
 
-function CommentWithReplies({ comment, allUsers, allReplies, toReply }: any) {
+function CommentWithReplies({ comment, allUsers, allReplies }: any) {
   const uploadedByUser = allUsers.find(
     (user: User) => user.id === comment.userId
   );
