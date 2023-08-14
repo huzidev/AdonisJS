@@ -1,21 +1,21 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Comment from "App/Models/Comment";
 import User from "App/Models/User";
-import { AddComment, EditComment } from "App/Validators/CommentValidator";
+import { AddComment } from "App/Validators/CommentValidator";
 
 export default class CommentsController {
   public async add({ request }: HttpContextContract) {
     try {
       const body = await request.validate(AddComment);
 
-      const { userId } = body;
+      const { userId, parentId } = body;
 
       const user: any = await User.findBy("id", userId);
       
       await Comment.create(body);
 
       return {
-        message: `Comment added successfully by ${user.username}`,
+        message: `${parentId ? "Reply" : "Comment"} + "added successfully by" + ${user.username}`,
         data: body
       };
     } catch (e) {
