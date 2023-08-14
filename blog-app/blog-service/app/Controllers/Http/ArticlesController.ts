@@ -73,7 +73,9 @@ export default class ArticlesController {
 
       const response = await query
         .withScopes((scope) => scope.filtersSort(filters))
-        .paginate(params.page || 1, 15);
+        // to show newly uploaded blogs first
+        // .orderBy("id", "desc")
+        .paginate(params.page || 1, 15)
 
       if (params.page > response.lastPage) {
         throw {
