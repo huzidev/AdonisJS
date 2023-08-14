@@ -79,6 +79,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                           {index + 1}
                         </p>
                           <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                            {/* (asterik *) will be shown with the name of super-admin */}
                             &nbsp; {commentBy} {isAuthorSuperAdmin && "*"} {value.id}
                           </p>
                           <p>{value.comment}</p>
