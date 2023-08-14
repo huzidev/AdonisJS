@@ -153,8 +153,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                                   <p className="text-gray-500 dark:text-gray-400 ml-2">{reply.content}</p>
                                 </div>
                               </div>  
-                          )
-                            })}
+                          )})}
                       </div>
                   );
                 })}
