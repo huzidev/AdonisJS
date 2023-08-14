@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComment } from "store/comment";
-import { hasPermission } from "utils";
 import CommentWithReplies from "../ShowReplies";
 import { useCommentPageHooks } from "./hooks";
 import { AllCommentsState, PropsState } from "./types";
@@ -67,11 +66,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const commentBy = uploadedByUser?.username;
                   const uploadedByUserRole = uploadedByUser?.role;
                   const isBlogOwner = props.ownerId === userData?.id;
-                  const isCommentAuthor = value.userId === userData?.id;
-                  const isAuthorSuperAdmin =
-                    uploadedByUserRole === "super-admin";
-                  const isAuthorAdmin = uploadedByUserRole === "admin";
-                  const isAdmin = hasPermission("admin", userData?.role);
                   return (
                     <div key={index}>
                       <CommentWithReplies

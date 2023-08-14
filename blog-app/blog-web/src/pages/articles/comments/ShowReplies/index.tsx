@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
+import { useComment } from "store/comment";
 import { hasPermission } from "utils";
 import { AllCommentsState } from "../ShowComments/types";
 
@@ -12,6 +13,7 @@ export default function CommentWithReplies({
   allReplies,
   isBlogOwner,
 }: any) {
+  const commentFunc = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
   const [replyState, setReplyState] = useState<any>({
@@ -20,12 +22,12 @@ export default function CommentWithReplies({
   const uploadedByUser = allUsers.find(
     (user: User) => user.id === comment.userId
   );
-  const [reply, setReply] = useState<any>("");
+  const [reply, setReply] = useState<any>('');
   const isCommentAuthor = comment.userId === userData?.id;
   const isAuthorSuperAdmin = uploadedByUser === "super-admin";
   const commentBy = uploadedByUser?.username;
   const uploadedByUserRole = uploadedByUser?.role;
-  const replies = allReplies.filter(
+  const replies = allReplies && allReplies.filter(
     (reply: AllCommentsState) => reply.parentId === comment.id
   );
 
@@ -85,7 +87,7 @@ export default function CommentWithReplies({
           (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin)) && (
           <button
             className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-            onClick={() => comment.deleteComment(comment.id)}
+            onClick={() => commentFunc.deleteComment(comment.id)}
           >
             Delete
           </button>
