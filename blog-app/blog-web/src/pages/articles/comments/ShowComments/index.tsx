@@ -139,11 +139,12 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                           const ReplyByUser = allUsers && allUsers?.find(
                               (user: User) => user.id === reply.userId
                             );
-                            const commentBy = ReplyByUser?.username;
+                            const replyBy = ReplyByUser?.username;
+                            const replyByRole = ReplyByUser?.role;
                           return (
                             <div key={index} className="ml-4">
                                 <div className="flex">
-                                  <p>{commentBy}</p>
+                                  <p>{replyBy} {replyByRole && "*"}</p>
                                   <p>{reply.reply}</p>
                                 </div>
                               </div>
