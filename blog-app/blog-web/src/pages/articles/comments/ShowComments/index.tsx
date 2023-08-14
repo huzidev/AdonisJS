@@ -17,17 +17,6 @@ function CommentWithReplies({ comment, allUsers, allReplies }: any) {
   const replies = allReplies.filter(
     (reply: any) => reply.parentId === comment.id
   );
-  const nestedReplies = replies.map((reply: any) => (
-    <div key={reply.id} className="ml-10">
-      <div>
-        <CommentWithReplies
-          comment={reply}
-          allUsers={allUsers}
-          allReplies={allReplies}
-        />
-      </div>
-    </div>
-  ));
 
   return (
     <div>
@@ -40,7 +29,17 @@ function CommentWithReplies({ comment, allUsers, allReplies }: any) {
       </div>
       <p className="text-gray-500 dark:text-gray-400 ml-6">{comment.content}</p>
       {/* ... (reply input and buttons) */}
-      {nestedReplies}
+      {replies.map((reply: any) => (
+        <div key={reply.id} className="ml-10">
+          <div>
+            <CommentWithReplies
+              comment={reply}
+              allUsers={allUsers}
+              allReplies={allReplies}
+            />
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -98,8 +97,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
             <div>
               {allComments &&
                 allComments.map((value: AllCommentsState, index: number) => {
-                  const uploadedByUser =
-                    allUsers &&
+                  const uploadedByUser = allUsers &&
                     allUsers?.find((user: User) => user.id === value.userId);
                   const commentBy = uploadedByUser?.username;
                   const uploadedByUserRole = uploadedByUser?.role;
@@ -122,21 +120,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                         allReplies={allReplies}
                       />
                       <div key={index}>
-                        <div>
-                          <div className="flex">
-                            <p className="inline-flex text-lg items-center mr-3 text-gray-900 dark:text-white">
-                              {/* (asterik *) will be shown with the name of super-admin */}
-                              - {commentBy} {isAuthorSuperAdmin && "*"}{" "}
-                              {value.id}
-                            </p>
-                            <p>
-                              {new Date(value.createdAt).toLocaleDateString()}
-                            </p>
-                          </div>
-                          <p className="text-gray-500 dark:text-gray-400 ml-6">
-                            {value.content}
-                          </p>
-                        </div>
                         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
                         {replyState.id === value.id && (
                           <div className="mt-2">
