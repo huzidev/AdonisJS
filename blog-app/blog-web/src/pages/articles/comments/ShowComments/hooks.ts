@@ -22,6 +22,7 @@ export function useCommentPageHooks() {
   // get Replies (NOT COMMENTS)
   // const allReplies: any = comment.state.getComments.data?.filter((comment) => comment.parentId !== null);
   const allReplies: any = comment.state.getComments.replies;
+  const toReply: any = comment.state.getComments.toReply;
   const allUsers = user.state.allUser.data;
   const [comments, setComments] = useState<any>(allComments);
   const byMe =
@@ -65,6 +66,7 @@ export function useCommentPageHooks() {
     content,
     allComments,
     allUsers,
-    allReplies
+    allReplies,
+    toReply
   };
 }

@@ -12,7 +12,8 @@ export default function CommentsPage(props: PropsState): JSX.Element {
   const comment = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
-  const { content, setContent, allComments, allUsers, allReplies } = useCommentPageHooks();
+  const { content, setContent, allComments, allUsers, allReplies, toReply } = useCommentPageHooks();
+  console.log("toReply", toReply);
   const [replyState, setReplyState] = useState<any>({
     id: null,
   });
@@ -72,7 +73,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const isAdmin = hasPermission("admin", userData?.role);
                   // to get specific replies according to specific comments
                   const replies = allReplies.filter((reply: any) => reply.parentId === value.id)
-                  console.log("Replies", replies);
                   return (
                       <div key={index}>
                         <div>
