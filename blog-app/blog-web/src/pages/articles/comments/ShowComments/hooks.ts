@@ -5,7 +5,7 @@ import { useComment } from "store/comment";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
-import { AddCommentState } from "./types";
+import { AddCommentState, AllCommentsState } from "./types";
 
 export function useCommentPageHooks() {
   const comment = useComment();
@@ -16,8 +16,8 @@ export function useCommentPageHooks() {
   const prev = usePrevious(state);
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = blog.state.getBlog.data?.id;
-  const allComments: any = comment.state.getComments.comments;
-  const allReplies: any = comment.state.getComments.replies;
+  const allComments: any = comment.state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId === null);
+  const allReplies: any = comment.state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId !== null);
   const allUsers = user.state.allUser.data;
   const [comments, setComments] = useState<any>(allComments);
   const byMe =

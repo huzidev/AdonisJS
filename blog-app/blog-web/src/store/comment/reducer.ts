@@ -42,8 +42,9 @@ export const commentSlice = createSlice({
           state.getComments = { loading: false, error: false };
             if (action.payload) {
               const { message, data } = action.payload; 
-              state.getComments.comments = data.filter((comment: any) => comment.parentId === null);
-              state.getComments.replies = data.filter((reply: any) => reply.parentId !== null);
+              state.getComments.data = data;
+              // state.getComments.comments = data.filter((comment: any) => comment.parentId === null);
+              // state.getComments.replies = data.filter((reply: any) => reply.parentId !== null);
               state.getComments.message = message;
             }
         })
@@ -88,8 +89,10 @@ export const commentSlice = createSlice({
           state.deleteComment = { loading: false, error: false };
           if (action.payload) {
           const { response, message } = action.payload;
-          state.getComments.comments = JSON.parse(JSON.stringify(state.getComments.comments?.filter((comment: any) => comment.id !== response.id)))
-          state.getComments.replies = JSON.parse(JSON.stringify(state.getComments.replies?.filter((comment: any) => comment.id !== response.id)))
+          state.getComments.data = JSON.parse(JSON.stringify(
+            state.getComments.data?.filter(
+              (comment) => comment.id !== response.id
+            ))) 
             state.deleteComment.message = message;
           }
         })
