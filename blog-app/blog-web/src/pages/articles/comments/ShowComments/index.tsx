@@ -82,7 +82,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                             </p>
                             <p>{new Date(value.createdAt).toLocaleDateString()}</p>
                           </div>
-                          <p className="text-gray-500 dark:text-gray-400">{value.comment}</p>
+                          <p className="text-gray-500 dark:text-gray-400 ml-6">{value.comment}</p>
                         </div>
                         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
                         {replyState.id === value.id && (
