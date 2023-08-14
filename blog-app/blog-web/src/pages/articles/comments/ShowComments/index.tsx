@@ -15,7 +15,7 @@ function CommentWithReplies({ comment, allUsers, allReplies }: any) {
   const commentBy = uploadedByUser?.username;
   const uploadedByUserRole = uploadedByUser?.role;
   const replies = allReplies.filter(
-    (reply: any) => reply.parentId === comment.id
+    (reply: AllCommentsState) => reply.parentId === comment.id
   );
 
   return (
@@ -23,12 +23,10 @@ function CommentWithReplies({ comment, allUsers, allReplies }: any) {
       <div className="flex">
         <p className="inline-flex text-lg items-center mr-3 text-gray-900 dark:text-white">
           - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
-          {comment.id}
         </p>
         <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
       </div>
       <p className="text-gray-500 dark:text-gray-400 ml-6">{comment.content}</p>
-      {/* ... (reply input and buttons) */}
       {replies.map((reply: any) => (
         <div key={reply.id} className="ml-10">
           <div>
@@ -48,7 +46,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
   const comment = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
-  const { content, setContent, allComments, allUsers, allReplies, toReply } =
+  const { content, setContent, allComments, allUsers, allReplies } =
     useCommentPageHooks();
   const [replyState, setReplyState] = useState<any>({
     id: null,
@@ -107,16 +105,14 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                     uploadedByUserRole === "super-admin";
                   const isAuthorAdmin = uploadedByUserRole === "admin";
                   const isAdmin = hasPermission("admin", userData?.role);
-                  // to get specific replies according to specific comments
-                  const replies = allReplies.filter(
-                    (reply: any) => reply.parentId === value.id
-                  );
                   return (
                     <>
                       <CommentWithReplies
                         key={value.id}
                         comment={value}
                         allUsers={allUsers}
+                        commentBy={commentBy}
+                        uploadedByUserRole={uploadedByUserRole}
                         allReplies={allReplies}
                       />
                       <div key={index}>
