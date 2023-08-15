@@ -157,14 +157,6 @@ export default function CommentWithReplies({
             Reply
           </button>
         )}
-        {(isCommentAuthor || (isAdmin && !isAuthorSuperAdmin)) && (
-                <Link
-                  to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
-                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Edit
-                </Link>
-              )}
       </div>
       {replies.map((reply: any) => (
         <div key={reply.id} className="ml-10">
