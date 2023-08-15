@@ -57,12 +57,26 @@ export default function CommentWithReplies({
                 <ul className="py-1 text-sm text-gray-700 dark:text-gray-200"
                     aria-labelledby="dropdownMenuIconHorizontalButton">
                     <li>
-                        <a href="#"
-                            className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                      {(isCommentAuthor || (isAdmin && !isAuthorSuperAdmin)) && (
+                        <Link
+                          to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
+                          className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Edit
+                        </Link>
+                      )}
                     </li>
                     <li>
-                        <a href="#"
-                            className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
+                      {(isCommentAuthor ||
+                        (isAdmin && !isAuthorSuperAdmin) ||
+                        (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin)) && (
+                        <button
+                          className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          onClick={() => commentFunc.deleteComment(comment.id)}
+                        >
+                          Delete
+                        </button>
+                      )}
                     </li>
                 </ul>
             </div>
@@ -99,14 +113,6 @@ export default function CommentWithReplies({
             </div>
           </div>
         )}
-        {(isCommentAuthor || (isAdmin && !isAuthorSuperAdmin)) && (
-          <Link
-            to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          >
-            Edit
-          </Link>
-        )}{" "}
         {/* // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins and admins comment */}
         {(isCommentAuthor ||
           (isAdmin && !isAuthorSuperAdmin) ||
