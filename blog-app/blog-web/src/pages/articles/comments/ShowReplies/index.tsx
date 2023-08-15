@@ -12,6 +12,7 @@ export default function CommentWithReplies({
   allUsers,
   allReplies,
   isBlogOwner,
+  blogId
 }: any) {
   const commentFunc = useComment();
   const auth = useAuth();
@@ -126,7 +127,7 @@ export default function CommentWithReplies({
               <input
                 className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 type="submit"
-                value="post"
+                value="reply"
               />
               <button onClick={() => setReplyState({ id: null })}>
                 Cancel
@@ -134,12 +135,17 @@ export default function CommentWithReplies({
             </div>
           </div>
         )}
-        <button
-          className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-          onClick={() => setReplyState({ id: comment.id })}
-        >
-          Reply
-        </button>
+        {replyState.id !== comment.id && (
+          <button
+            className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            onClick={() => (
+              setReplyState({ id: comment.id })
+            )
+            }
+          >
+            Reply
+          </button>
+        )}
       </div>
       {replies.map((reply: any) => (
         <div key={reply.id} className="ml-10">

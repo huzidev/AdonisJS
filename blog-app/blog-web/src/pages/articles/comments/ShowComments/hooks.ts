@@ -61,6 +61,7 @@ export function useCommentPageHooks() {
     content,
     allComments,
     allUsers,
-    allReplies
+    allReplies,
+    blogId
   };
 }

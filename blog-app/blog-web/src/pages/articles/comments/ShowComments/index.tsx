@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComment } from "store/comment";
@@ -11,13 +10,8 @@ export default function CommentsPage(props: PropsState): JSX.Element {
   const comment = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
-  const { content, setContent, allComments, allUsers, allReplies } =
+  const { content, setContent, allComments, allUsers, allReplies, blogId } =
     useCommentPageHooks();
-  const [replyState, setReplyState] = useState<any>({
-    id: null,
-  });
-  const [replies, setReplies] = useState([]);
-  const [reply, setReply] = useState<any>("");
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -75,6 +69,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                         commentBy={commentBy}
                         uploadedByUserRole={uploadedByUserRole}
                         allReplies={allReplies}
+                        blogId={blogId}
                         isBlogOwner={isBlogOwner}
                       />
                     </div>
