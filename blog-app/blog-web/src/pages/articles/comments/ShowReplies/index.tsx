@@ -46,7 +46,7 @@ export default function CommentWithReplies({
     <div>
       <div className="flex">
         <p className="inline-flex text-lg items-center mr-3 text-gray-900 dark:text-white">
-          - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
+          - {commentBy} {uploadedByUserRole === "super-admin" && '*'}{" "}
         </p>
         <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
         <button
@@ -129,7 +129,7 @@ export default function CommentWithReplies({
                 type="submit"
                 value="reply"
               />
-              <button onClick={() => setReplyState({ id: null })}>
+              <button className="bg-white mt-2 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={() => setReplyState({ id: null })}>
                 Cancel
               </button>
             </div>
