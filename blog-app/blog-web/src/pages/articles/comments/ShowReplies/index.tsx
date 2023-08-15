@@ -1,5 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -30,20 +30,21 @@ export default function CommentWithReplies({
     parentId: null,
     content: "",
   });
-  const allComments = commentFunc.state.getComments?.data;
   const isCommentAuthor = comment.userId === userData?.id;
   const uploadedByUserRole = uploadedByUser?.role;
   const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
   const commentBy = uploadedByUser?.username;
-  const commentsID = allComments?.map((value: any) => value.id);
-  
-  console.log("commentsID", commentsID);
 
   const replies =
     allReplies &&
     allReplies.filter(
       (reply: AllCommentsState) => reply.parentId === comment.id
     );
+
+      useEffect(() => {
+        console.log("Reply state", replyState);
+        console.log("Comment id", comment.id);
+      }, [replyState])
 
   const isAuthorAdmin = uploadedByUserRole === "admin";
   const isAdmin = hasPermission("admin", userData?.role);
@@ -116,7 +117,7 @@ export default function CommentWithReplies({
       <p className="text-gray-500 dark:text-gray-400 ml-6">{comment.content}</p>
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
-        {replyState.id === comment.id && (
+        {replyState.id === comment.id ? (
           <div className="mt-2">
             <input
               id="reply"
@@ -128,7 +129,7 @@ export default function CommentWithReplies({
                 isCommentAuthor ? "Yours" : commentBy + `'s`
               } comment`}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setReply(e.target.value)
+                setReply({ ...reply, content: e.target.value })
               }
               required
               className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -147,9 +148,9 @@ export default function CommentWithReplies({
               </button>
             </div>
           </div>
-        )}
-        {/* reply button wouldn't be shown when user has clicked on reply button */}
-        {replyState.id !== comment.id && (
+        ) 
+        // reply button wouldn't be shown when user has clicked on reply button
+        : (
           <button
             className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             onClick={() => setReplyState({ id: comment.id })}
