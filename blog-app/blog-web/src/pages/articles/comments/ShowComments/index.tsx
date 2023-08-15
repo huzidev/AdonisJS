@@ -18,8 +18,6 @@ export default function CommentsPage(props: PropsState): JSX.Element {
     comment.addComment(addComment);
   }
 
-  console.log("add comment", addComment);
-  
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
