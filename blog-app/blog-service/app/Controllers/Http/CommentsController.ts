@@ -28,16 +28,13 @@ export default class CommentsController {
   public async getAll({ params }: HttpContextContract) {
     try {
       const articleId = params.id;
-      // const response = await Comment.query()
-      //       .where("articleId", articleId)
-      //       .select('*');
-      // const comments = await Comment.query()
-      //   .where("article_id", articleId)
-      //   .wher
+      const response = await Comment.query()
+          .where("articleId", articleId)
+          .select('*');
 
       return {
         message: "Comments fetched successfully",
-        data: response,
+        data: response
       };
     } catch (e) {
       throw e
