@@ -28,7 +28,7 @@ export default function CommentWithReplies({
     userId: null,
     articleId: null,
     parentId: null,
-    content: "",
+    content: '',
   });
   const isCommentAuthor = comment.userId === userData?.id;
   const uploadedByUserRole = uploadedByUser?.role;
