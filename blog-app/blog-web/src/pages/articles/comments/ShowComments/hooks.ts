@@ -41,7 +41,7 @@ export function useCommentPageHooks() {
   }, [loggedInId, blogId]);
 
   useEffect(() => {
-    setAddComment(allComments);
+    setComments(allComments);
   }, [comments]);
 
   useEffect(() => {
