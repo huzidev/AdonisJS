@@ -12,7 +12,7 @@ export default function CommentWithReplies({
   allUsers,
   allReplies,
   isBlogOwner,
-  blogId
+  blogId,
 }: any) {
   const commentFunc = useComment();
   const auth = useAuth();
@@ -28,7 +28,7 @@ export default function CommentWithReplies({
     userId: null,
     articleId: null,
     parentId: null,
-    content: ''
+    content: "",
   });
   const isCommentAuthor = comment.userId === userData?.id;
   const isAuthorSuperAdmin = uploadedByUser === "super-admin";
@@ -46,27 +46,30 @@ export default function CommentWithReplies({
     <div>
       <div className="flex">
         <p className="inline-flex text-lg items-center mr-3 text-gray-900 dark:text-white">
-          - {commentBy} {uploadedByUserRole === "super-admin" && '*'}{" "}
+          - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
         </p>
         <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
-        <button
-          id="dropdownComment1Button"
-          data-dropdown-toggle="dropdownComment1"
-          className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          type="button"
-          onClick={() => setDropDown(!dropDown)}
-        >
-          <svg
-            className="w-5 h-5"
-            aria-hidden="true"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+        {/* three dots button will only be visible when user is loggedIn */}
+        {userData && (
+          <button
+            id="dropdownComment1Button"
+            data-dropdown-toggle="dropdownComment1"
+            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            type="button"
+            onClick={() => setDropDown(!dropDown)}
           >
-            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-          </svg>
-          <span className="sr-only">Comment settings</span>
-        </button>
+            <svg
+              className="w-5 h-5"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+            </svg>
+            <span className="sr-only">Comment settings</span>
+          </button>
+        )}
         <div
           id="dropdownComment1"
           className={`${
@@ -129,7 +132,10 @@ export default function CommentWithReplies({
                 type="submit"
                 value="reply"
               />
-              <button className="bg-white mt-2 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={() => setReplyState({ id: null })}>
+              <button
+                className="bg-white mt-2 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                onClick={() => setReplyState({ id: null })}
+              >
                 Cancel
               </button>
             </div>
@@ -139,10 +145,7 @@ export default function CommentWithReplies({
         {replyState.id !== comment.id && (
           <button
             className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            onClick={() => (
-              setReplyState({ id: comment.id })
-            )
-            }
+            onClick={() => setReplyState({ id: comment.id })}
           >
             Reply
           </button>
