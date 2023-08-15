@@ -23,7 +23,12 @@ export default function CommentWithReplies({
     (user: User) => user.id === comment.userId
   );
   const [dropDown, setDropDown] = useState<boolean>(false);
-  const [reply, setReply] = useState<any>("");
+  const [reply, setReply] = useState<any>({
+    userId: null,
+    articleId: null,
+    parentId: null,
+    content: ''
+  });
   const isCommentAuthor = comment.userId === userData?.id;
   const isAuthorSuperAdmin = uploadedByUser === "super-admin";
   const commentBy = uploadedByUser?.username;
@@ -106,7 +111,7 @@ export default function CommentWithReplies({
               id="reply"
               name="reply"
               type="text"
-              value={comment.content}
+              value={reply.content}
               // so if user is replying to owns comment then show reply yours comment
               placeholder={`Reply to ${
                 isCommentAuthor ? "Yours" : commentBy + `'s`
