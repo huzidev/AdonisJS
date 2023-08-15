@@ -31,9 +31,9 @@ export default function CommentWithReplies({
     content: "",
   });
   const isCommentAuthor = comment.userId === userData?.id;
-  const isAuthorSuperAdmin = uploadedByUser === "super-admin";
-  const commentBy = uploadedByUser?.username;
   const uploadedByUserRole = uploadedByUser?.role;
+  const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
+  const commentBy = uploadedByUser?.username;
   const replies =
     allReplies &&
     allReplies.filter(
@@ -49,8 +49,10 @@ export default function CommentWithReplies({
           - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
         </p>
         <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
-        {/* three dots button will only be visible when user is loggedIn */}
-        {userData && (
+        {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots  */}
+        {userData && (isCommentAuthor ||
+                (isAdmin && !isAuthorSuperAdmin) ||
+                (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin)) && (
           <button
             id="dropdownComment1Button"
             data-dropdown-toggle="dropdownComment1"
@@ -150,6 +152,14 @@ export default function CommentWithReplies({
             Reply
           </button>
         )}
+        {(isCommentAuthor || (isAdmin && !isAuthorSuperAdmin)) && (
+                <Link
+                  to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Edit
+                </Link>
+              )}
       </div>
       {replies.map((reply: any) => (
         <div key={reply.id} className="ml-10">
