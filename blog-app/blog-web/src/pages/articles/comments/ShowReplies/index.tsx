@@ -18,17 +18,19 @@ export default function CommentWithReplies({
   const auth = useAuth();
   const userData = auth.state.user;
   const [replyState, setReplyState] = useState<any>({
-    id: null,
+    id: null
   });
   const uploadedByUser = allUsers.find(
     (user: User) => user.id === comment.userId
   );
-  const [dropDown, setDropDown] = useState<boolean>(false);
+  const [dropDown, setDropDown] = useState<any>({
+    holdId: null
+  });
   const [reply, setReply] = useState<any>({
     userId: null,
     articleId: null,
     parentId: null,
-    content: '',
+    content: ''
   });
   const isCommentAuthor = comment.userId === userData?.id;
   const uploadedByUserRole = uploadedByUser?.role;
@@ -65,7 +67,7 @@ export default function CommentWithReplies({
             data-dropdown-toggle="dropdownComment1"
             className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             type="button"
-            onClick={() => setDropDown(!dropDown)}
+            onClick={() => setDropDown({ ...dropDown, holdId: comment.id })}
           >
             <svg
               className="w-5 h-5"
@@ -82,7 +84,7 @@ export default function CommentWithReplies({
         <div
           id="dropdownComment1"
           className={`${
-            dropDown ? "block" : "hidden"
+            dropDown.holdId === comment.id ? "block" : "hidden"
           } z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}
         >
           <ul
