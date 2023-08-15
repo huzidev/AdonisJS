@@ -67,7 +67,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
                   const uploadedByUserRole = uploadedByUser?.role;
                   const isBlogOwner = props.ownerId === userData?.id;
                   return (
-                    <div key={index}>
+                    <div key={index}> 
                       <CommentWithReplies
                         key={value.id}
                         comment={value}
