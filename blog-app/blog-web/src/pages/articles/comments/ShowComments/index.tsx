@@ -10,12 +10,12 @@ export default function CommentsPage(props: PropsState): JSX.Element {
   const comment = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
-  const { content, setContent, allComments, allUsers, allReplies, blogId } =
+  const { addComment, setAddComment, allComments, allUsers, allReplies, blogId } =
     useCommentPageHooks();
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    comment.addComment(content);
+    comment.addComment(addComment);
   }
 
   return (
@@ -34,9 +34,9 @@ export default function CommentsPage(props: PropsState): JSX.Element {
             <textarea
               name="comment"
               rows={6}
-              value={content.content}
+              value={addComment.content}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                setContent({ ...content, content: e.target.value })
+                setAddComment({ ...addComment, content: e.target.value })
               }
               className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
               placeholder="Write a comment..."

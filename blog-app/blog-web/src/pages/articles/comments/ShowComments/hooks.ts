@@ -5,7 +5,7 @@ import { useComment } from "store/comment";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
-import { AddCommentState, AllCommentsState } from "./types";
+import { AddCommentPayload, AllCommentsState } from "./types";
 
 export function useCommentPageHooks() {
   const comment = useComment();
@@ -23,7 +23,7 @@ export function useCommentPageHooks() {
   const byMe =
     state.getCommentById.data?.userId === auth.state.user?.id;
 
-  const [content, setContent] = useState<AddCommentState>({
+  const [addComment, setAddComment] = useState<AddCommentPayload>({
     userId: loggedInId,
     articleId: blogId,
     content: '',
@@ -37,11 +37,11 @@ export function useCommentPageHooks() {
     if (blogId) {
       comment.getComments(blogId);
     }
-    setContent({ ...content, userId: loggedInId, articleId: blogId });
+    setAddComment({ ...addComment, userId: loggedInId, articleId: blogId });
   }, [loggedInId, blogId]);
 
   useEffect(() => {
-    setComments(allComments);
+    setAddComment(allComments);
   }, [comments]);
 
   useEffect(() => {
@@ -57,8 +57,8 @@ export function useCommentPageHooks() {
   }, [state]);
 
   return {
-    setContent,
-    content,
+    setAddComment,
+    addComment,
     allComments,
     allUsers,
     allReplies,

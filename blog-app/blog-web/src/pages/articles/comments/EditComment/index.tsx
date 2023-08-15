@@ -14,7 +14,7 @@ export default function EditCommentPage(): JSX.Element {
   
   useEffect(() => {
     if (commentResp) {
-      setEditComment({ content: commentResp.content })
+      setEditComment({ ...editComment, content: commentResp.content })
     }
   }, [params.id, commentResp])
 
@@ -40,7 +40,7 @@ export default function EditCommentPage(): JSX.Element {
           name="content"
           type="text"
           value={content}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditComment(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditComment({...editComment, content: e.target.value})}
           required
           className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         />

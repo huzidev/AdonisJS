@@ -1,13 +1,13 @@
 export interface PropsState {
   ownerId: number;
 }
-export interface AddCommentState {
+export interface AddCommentPayload {
   userId: number;
   articleId: number;
   content: string;
 }
 
-export interface AllCommentsState extends AddCommentState {
+export interface AllCommentsState extends AddCommentPayload {
   id: number;
   parentId?: number;
   createdAt: string;
