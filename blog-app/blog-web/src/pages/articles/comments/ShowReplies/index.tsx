@@ -30,10 +30,15 @@ export default function CommentWithReplies({
     parentId: null,
     content: "",
   });
+  const allComments = commentFunc.state.getComments?.data;
   const isCommentAuthor = comment.userId === userData?.id;
   const uploadedByUserRole = uploadedByUser?.role;
   const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
   const commentBy = uploadedByUser?.username;
+  const commentsID = allComments?.map((value: any) => value.id);
+  
+  console.log("commentsID", commentsID);
+
   const replies =
     allReplies &&
     allReplies.filter(
@@ -49,7 +54,7 @@ export default function CommentWithReplies({
           - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
         </p>
         <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
-        {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots  */}
+        {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots */}
         {userData && (isCommentAuthor ||
                 (isAdmin && !isAuthorSuperAdmin) ||
                 (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin)) && (
