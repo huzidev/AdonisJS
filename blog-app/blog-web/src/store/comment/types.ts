@@ -29,7 +29,7 @@ export interface GetCommentByIdState extends SubState {
 
 export interface EditCommentPayload extends SubState {
   id?: number;
-  comment: string;
+  content: string;
 }
 
 export interface CommentState {

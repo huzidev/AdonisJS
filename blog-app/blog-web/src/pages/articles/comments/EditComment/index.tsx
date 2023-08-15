@@ -2,23 +2,25 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useComment } from "store/comment";
 import { useEditCommentPageHooks } from "./hooks";
+import { EditCommentPayload } from "./types";
 
 export default function EditCommentPage(): JSX.Element {
   const comment = useComment();
   const params: any = useParams();
   const commentResp = comment.state.getCommentById.data;
-  const [content, setContent] = useState<any>({comment: ''});
+  const [editComment, setEditComment] = useState<EditCommentPayload>({ content: '' });
+  const { content } = editComment;
   const navigate = useNavigate();
   
   useEffect(() => {
     if (commentResp) {
-        setContent({ ...content, ...commentResp })
+      setEditComment({ content: commentResp.content })
     }
   }, [params.id, commentResp])
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    comment.editComment({ id: params.id, comment: content });
+    comment.editComment({ id: params.id, content });
     navigate(-1);
   }
   useEditCommentPageHooks();
@@ -27,18 +29,18 @@ export default function EditCommentPage(): JSX.Element {
     <>
     <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
       <label
-        htmlFor="comment"
+        htmlFor="content"
         className="block text-sm font-medium leading-6 text-gray-900"
       >
         Edit Comment
       </label>
       <div className="mt-2">
         <input
-          id="comment"
-          name="comment"
+          id="content"
+          name="content"
           type="text"
-          value={content.comment}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setContent(e.target.value)}
+          value={content}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditComment(e.target.value)}
           required
           className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         />

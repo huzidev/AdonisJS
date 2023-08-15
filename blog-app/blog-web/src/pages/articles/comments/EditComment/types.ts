@@ -1,3 +1,3 @@
-export interface EditCommentState {
-    comment: string;
+export interface EditCommentPayload {
+    content: string;
 }
