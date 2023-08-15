@@ -48,6 +48,7 @@ export default function CommentWithReplies({
 
   const isAuthorAdmin = uploadedByUserRole === "admin";
   const isAdmin = hasPermission("admin", userData?.role);
+
   return (
     <div>
       <div className="flex">
