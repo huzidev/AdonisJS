@@ -38,7 +38,6 @@ export default class ArticlesController {
       }
 
       const isSort = Object.keys(request.qs())[1];
-      console.log("isSort", isSort);
       
       // to check if user tries to change method in URL which should be sort if user tries to change it then throw error
       // it is compulsory to put isSort !== "sort" inside isSort so it won't run every time rather it'll only runs when user called the FILTERS
