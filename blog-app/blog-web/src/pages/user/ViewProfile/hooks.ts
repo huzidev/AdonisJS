@@ -112,7 +112,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         }
       } // when user tries to change the URL example if user changes view/:id id of the user which doesn't exist then show error
       else if (!userState.getUser.loading && userState.getUser.error) {
-        navigate("/");
+        navigate('/');
       }
     }
     if (prevBlog?.deleteBlog.loading) {
@@ -145,7 +145,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
       // blogs.getBlogsById({ page: 1, ...search });
-      blogs.getBlogsById({...updatedPayload, filters: search});
+      // blogs.getBlogsById({...updatedPayload, filters: search});
+      blogs.getBlogsById(updatedPayload);
     }
   }
 
