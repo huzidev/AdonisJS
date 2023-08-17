@@ -144,9 +144,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (isRole === "user") {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
-      // blogs.getBlogsById({ page: 1, ...search });
+      // filters: search so when user clicked on load more then result will be according to filters
       blogs.getBlogsById({...updatedPayload, filters: search});
-      // blogs.getBlogsById(updatedPayload);
     }
   }
 
