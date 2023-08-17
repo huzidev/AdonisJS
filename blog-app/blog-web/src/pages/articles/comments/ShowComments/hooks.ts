@@ -23,9 +23,6 @@ export function useCommentPageHooks() {
   const byMe =
     state.getCommentById.data?.userId === auth.state.user?.id;
 
-  console.log("all comments", state.getComments.data);
-  
-
   const [addComment, setAddComment] = useState<AddCommentPayload>({
     userId: loggedInId,
     articleId: blogId,
