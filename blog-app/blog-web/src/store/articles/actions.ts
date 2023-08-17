@@ -9,8 +9,9 @@ import {
   AllBlogs,
   GetBlogPayload,
   GetBlogsById,
+  GetBlogsByIdTest,
   RemoveFavoriteBlogPayload,
-  UpdateBlogPayload,
+  UpdateBlogPayload
 } from "./types";
 
 export const getMyList = createAsyncThunk(
@@ -79,11 +80,11 @@ export const getBlogs = createAsyncThunk(
 
 export const getBlogsById = createAsyncThunk(
   endpoints.GET_BLOGS + "id",
-  async (userId: number, data: any): Promise<AllBlogs | null> => {
+  async (data: GetBlogsByIdTest): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
     try {
       console.log("data", data);
-      const response = await api.get(`${endpoints.GET_BLOGS + userId}/${data.page}`, {params: data});
+      const response = await api.get(`${endpoints.GET_BLOGS + data.userId}/${data.page}`, {params: data.filters});
       return {
         data : response.data.data.data,
         meta: response.data.data.meta

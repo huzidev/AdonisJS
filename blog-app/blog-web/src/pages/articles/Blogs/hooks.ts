@@ -113,14 +113,13 @@ export function useBlogsPageHooks() {
     if (currentPath === "onBlogs") {
       blogs.getBlogs({ page: 1, ...search });
     } 
-    // if (currentPath === "onProfile") {
-    //   if (isMe) {
-    //     blogs.getBlogsById({ ...payloadData, ...search });
-    //   } 
-    //   else {
-    //     blogs.getBlogsById({ ...payloadData, ...search });
-    //   }
-    // }    
+    if (currentPath === "onProfile") {
+      if (isMe) {
+        blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+      } else {
+        blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+      }
+    }    
     reactions.getAllReactions();
 
     // so only if loggedIn user's role is user then fetch favorite blogs

@@ -40,9 +40,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
 
   const search: any = qs.parse(window.location.search);
 
-  console.log("View profile search", search);
-  
-
   useEffect(() => {
     if (isMe) {
       user.getById(loggedInId);
@@ -51,6 +48,10 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     }
     reactions.getAllReactions();
   }, [userId, loggedInId]);
+
+  // useEffect(() => {
+  //     blogs.getBlogsById({ userId: loggedInId, page: 1, filters: {...search} });
+  // }, [search])
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {

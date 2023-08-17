@@ -48,8 +48,18 @@ export interface AllBlogs extends SubState {
   page?: number;
 }
 
+export interface FiltersType {
+  sort: string;
+}
+
+export interface GetBlogsByIdTest {
+  page: number
+  userId: number;
+  filters?: FiltersType;
+}
+
 export interface GetBlogsById {
- page: number;
+  page: number
   userId: number;
 }
 
