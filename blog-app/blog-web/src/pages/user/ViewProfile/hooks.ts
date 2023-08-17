@@ -40,6 +40,9 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
 
   const search: any = qs.parse(window.location.search);
 
+  console.log("View profile search", search);
+  
+
   useEffect(() => {
     if (isMe) {
       user.getById(loggedInId);

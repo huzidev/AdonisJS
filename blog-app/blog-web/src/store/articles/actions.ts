@@ -84,7 +84,7 @@ export const getBlogsById = createAsyncThunk(
     try {
       console.log("data", data);
       const { userId, page } = data;
-      const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`, (data.filters && {params: data.filters}));
+      const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`, (data.sort && {params: data.sort}));
       return {
         data : response.data.data.data,
         meta: response.data.data.meta
