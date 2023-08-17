@@ -45,7 +45,7 @@ export default function ViewProfilePage(): JSX.Element {
     allReactions
   } = useViewProfilePageHook();
 
-  const { handleSort } = useBlogsPageHooks();
+  const { handleSort, sortValue } = useBlogsPageHooks();
 
   const totalBlogsContent =
     // !userBlogs.length so when user clicked on Load More then 3 Dot loader won't work because their is already data and same case is created for Load More button
@@ -130,6 +130,14 @@ export default function ViewProfilePage(): JSX.Element {
               ? `Blogs Liked By ${isMe ? "You" : userDetails.username}`
               : `Blogs Uploaded By ${!isMe ? userDetails.username : "You"}`}
           </h1>
+          {sortValue.value && (
+            <button
+              className="text-white mr-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={() => handleSort('')}
+            >
+              Reset Filters
+            </button>
+          )}
           {
           // so if allBlogs length is just 1 then no need to show filters
           // and filter won't be shown when someone clicked on user's profile because user can't add blogs
