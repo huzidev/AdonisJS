@@ -107,14 +107,9 @@ export function useBlogsPageHooks() {
       user.allUser();
     }
 
-    const payloadData = {
-      userId: isMe ? loggedInId : userId,
-      page: 1,
-    };
     if (currentPath === "onBlogs") {
       blogs.getBlogs({ page: 1, ...search });
-    } 
-    if (currentPath === "onProfile") {
+    } else {
       if (isMe) {
         blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
       } else {
