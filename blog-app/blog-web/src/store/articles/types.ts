@@ -37,11 +37,6 @@ export interface RemoveFavoriteBlogPayload {
   ownerId: number;
 }
 
-export interface GetBlogsById {
-  userId: number;
-  page: number;
-}
-
 export interface BlogSortReq {
   createdAt?: SortType;
 }
@@ -52,12 +47,16 @@ export interface BlogSortReq {
 //   filters?: 
 // }
 
-
 export interface AllBlogs extends SubState {
   data: Blog[];
   meta: PaginationMeta | null | any;
   filters?: boolean;
   page?: number;
+}
+
+export interface GetBlogsById extends AllBlogs {
+  userId: number;
+  page: number;
 }
 
 export interface getBlogById extends SubState {
