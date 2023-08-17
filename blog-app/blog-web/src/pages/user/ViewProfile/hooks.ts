@@ -145,8 +145,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
       // blogs.getBlogsById({ page: 1, ...search });
-      // blogs.getBlogsById({...updatedPayload, filters: search});
-      blogs.getBlogsById(updatedPayload);
+      blogs.getBlogsById({...updatedPayload, filters: search});
+      // blogs.getBlogsById(updatedPayload);
     }
   }
 
