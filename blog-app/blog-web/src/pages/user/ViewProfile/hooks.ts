@@ -46,6 +46,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     } else {
       user.getById(userId);
     }
+    // since we've used useBlogsPageHooks() therefore getAllReactions() functions is created in that hook therefore no need to call that hook here
     // reactions.getAllReactions();
   }, [userId, loggedInId]);
 
