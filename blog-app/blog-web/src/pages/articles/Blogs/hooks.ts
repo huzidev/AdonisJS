@@ -32,6 +32,8 @@ export function useBlogsPageHooks() {
     blogs.state.getFavoriteBlogs.meta?.currentPage;
   const lastPageFvrtBlogs: any = blogs.state.getFavoriteBlogs.meta?.lastPage;
 
+  const currentPath: string = window.location.pathname.includes("/user/view") ? "onProfile" : "onBlogs";
+  
   const search: any = qs.parse(window.location.search);
 
   useEffect(() => {
@@ -71,7 +73,7 @@ export function useBlogsPageHooks() {
     if (type === result) {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("sort", JSON.stringify({ [update]: type }));
-      const newUrl = `${ROUTE_PATHS.ARTICLES}?${searchParams.toString()}`;
+      const newUrl = `${currentPath === "onBlogs" ? ROUTE_PATHS.ARTICLES : ROUTE_PATHS.VIEW_PROFILE}?${searchParams.toString()}`;
       window.history.replaceState({}, "", newUrl);
     } else {
       // If the type is neither "asc" nor "desc", remove the entire "sort" parameter from the URL

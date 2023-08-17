@@ -1,6 +1,7 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { columns } from "pages/articles/Blogs/data";
+import { useBlogsPageHooks } from "pages/articles/Blogs/hooks";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
@@ -43,6 +44,8 @@ export default function ViewProfilePage(): JSX.Element {
     isRole,
     allReactions
   } = useViewProfilePageHook();
+
+  const { handleSort } = useBlogsPageHooks();
 
   const totalBlogsContent =
     // !userBlogs.length so when user clicked on Load More then 3 Dot loader won't work because their is already data and same case is created for Load More button
