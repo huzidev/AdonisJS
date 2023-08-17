@@ -56,7 +56,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     } else {
       blogs.getBlogsById({ userId: userId, page: 1, filters: search });
     }
-  }, [window.location.search]);
+  }, [window.location.search, window.location.pathname]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
@@ -144,8 +144,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (isRole === "user") {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
-      blogs.getBlogsById({ page: 1, ...search });
-      // blogs.getBlogsById(updatedPayload);
+      // blogs.getBlogsById({ page: 1, ...search });
+      blogs.getBlogsById({...updatedPayload, filters: search});
     }
   }
 
