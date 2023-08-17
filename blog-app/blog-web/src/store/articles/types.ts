@@ -41,12 +41,6 @@ export interface BlogSortReq {
   createdAt?: SortType;
 }
 
-// export interface GetBlogsByIdState {
-//   page: number;
-//   userId: number;
-//   filters?: 
-// }
-
 export interface AllBlogs extends SubState {
   data: Blog[];
   meta: PaginationMeta | null | any;
@@ -54,9 +48,9 @@ export interface AllBlogs extends SubState {
   page?: number;
 }
 
-export interface GetBlogsById extends AllBlogs {
+export interface GetBlogsById {
+ page: number;
   userId: number;
-  page: number;
 }
 
 export interface getBlogById extends SubState {

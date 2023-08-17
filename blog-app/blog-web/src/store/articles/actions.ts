@@ -83,8 +83,7 @@ export const getBlogsById = createAsyncThunk(
     // AllBlogs contains Array of blogs and meta
     try {
       console.log("data", data);
-      const { page } = data;
-      const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`, {params: data});
+      const response = await api.get(`${endpoints.GET_BLOGS + userId}/${data.page}`, {params: data});
       return {
         data : response.data.data.data,
         meta: response.data.data.meta
