@@ -1,4 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
+import { columns } from "pages/articles/Blogs/data";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
