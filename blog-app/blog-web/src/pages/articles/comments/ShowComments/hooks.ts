@@ -5,7 +5,7 @@ import { useComment } from "store/comment";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
-import { AddCommentPayload } from "./types";
+import { AddCommentPayload, AllCommentsState } from "./types";
 
 export function useCommentPageHooks() {
   const comment = useComment();
@@ -16,10 +16,8 @@ export function useCommentPageHooks() {
   const prev = usePrevious(state);
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = blog.state.getBlog.data?.id;
-  // const allComments: any = state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId === null);
-  // const allReplies: any = state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId !== null);
-  const allComments: any = state.getComments.comments;
-  const allReplies: any = state.getComments.replies;
+  const allComments: any = state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId === null);
+  const allReplies: any = state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId !== null);
   const allUsers = user.state.allUser.data;
   const [comments, setComments] = useState<any>(allComments);
   const byMe =
@@ -42,6 +40,8 @@ export function useCommentPageHooks() {
     setAddComment({ ...addComment, userId: loggedInId, articleId: blogId });
   }, [loggedInId, blogId]);
 
+  console.log("allComments", allComments);
+  
 
   useEffect(() => {
     if (prev?.getComments.loading) {

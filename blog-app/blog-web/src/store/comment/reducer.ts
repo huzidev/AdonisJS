@@ -25,8 +25,8 @@ export const commentSlice = createSlice({
             if (action.payload) {
                 const { message, data } = action.payload;
                 if (state.getComments.data) {
-                  const prevComments = JSON.parse(JSON.stringify(state.getComments.comments));
-                  state.getComments.comments = [...prevComments, data];
+                  const prevComments = JSON.parse(JSON.stringify(state.getComments.data));
+                  state.getComments.data = [...prevComments, data];
                 }
                 state.addComment.message = message;
             }
@@ -42,9 +42,9 @@ export const commentSlice = createSlice({
           state.getComments = { loading: false, error: false };
             if (action.payload) {
               const { message, data } = action.payload; 
-              // state.getComments.data = data;
-              state.getComments.comments = data.filter((comment: any) => comment.parentId === null);
-              state.getComments.replies = data.filter((reply: any) => reply.parentId !== null);
+              state.getComments.data = data;
+              // state.getComments.comments = data.filter((comment: any) => comment.parentId === null);
+              // state.getComments.replies = data.filter((reply: any) => reply.parentId !== null);
               state.getComments.message = message;
             }
         })
