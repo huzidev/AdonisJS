@@ -65,10 +65,6 @@ export function useBlogsPageHooks() {
       ? "createdAt" 
       : column === "most popular"
       ? "blogs" : ''
-      // column === ("most recent" || "oldest")
-        // : column === "oldest"
-        // ? "createdAt"
-        // : "";
     const result = typeResult.find((value) => value === type);
 
     // If the type is "asc", add the sort parameter to the URL
