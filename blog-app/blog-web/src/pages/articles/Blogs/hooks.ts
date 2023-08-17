@@ -77,11 +77,12 @@ export function useBlogsPageHooks() {
     if (type === result) {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("sort", JSON.stringify({ [update]: type }));
-      const newUrl = `${currentPath === "onBlogs" ? ROUTE_PATHS.ARTICLES : ROUTE_PATHS.VIEW_PROFILE}?${searchParams.toString()}`;
+      // (params.id === "me" ? "me" : params.id) to put (me) or (:id) of the user according to params.id
+      const newUrl = `${currentPath === "onBlogs" ? ROUTE_PATHS.ARTICLES : ROUTE_PATHS.VIEW_PROFILE + (params.id === "me" ? "me" : params.id)}?${searchParams.toString()}`;
       window.history.replaceState({}, "", newUrl);
     } else {
       // If the type is neither "asc" nor "desc", remove the entire "sort" parameter from the URL
-      const newUrl = `${currentPath === "onBlogs" ? ROUTE_PATHS.ARTICLES : ROUTE_PATHS.VIEW_PROFILE}`;
+      const newUrl = `${currentPath === "onBlogs" ? ROUTE_PATHS.ARTICLES : ROUTE_PATHS.VIEW_PROFILE + (params.id === "me" ? "me" : params.id)}`;
       window.history.replaceState({}, "", newUrl);
     }
     setSortValue({ value: update, type });
