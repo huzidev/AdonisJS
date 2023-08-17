@@ -25,8 +25,6 @@ export default class ArticlesController {
         data: Utils.parseQS(request.qs(), ["sort"]),
       });
       
-      console.log("filters", filters);
-      
       const userId = params.id;
       
       const query = Article.query();
@@ -55,7 +53,6 @@ export default class ArticlesController {
       if (!!filters.sort) {
         filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
-        console.log("filterResultKey", filterResultKey);
         // so when user called the filter on main blogs page then don't run this query only run this join statement when filtersResultKey is username
         if (filterResultKey === "username") {
           query.join("users", "articles.owner_id", "users.id");
