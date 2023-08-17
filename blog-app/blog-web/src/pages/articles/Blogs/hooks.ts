@@ -1,7 +1,7 @@
 import ROUTE_PATHS from "Router/paths";
 import qs from "query-string";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useReactions } from "store/reactions";
@@ -14,7 +14,11 @@ export function useBlogsPageHooks() {
   const blogs = useBlogs();
   const user = useUser();
   const reactions = useReactions();
+  const params: any = useParams();
   const auth = useAuth();
+  const userId = Number(params.id);
+  const loggedInId: any = auth.state.user?.id;
+  const isMe = params.id === "me";
   const state = blogs.state;
   const prev = usePrevious(state);
   const navigate = useNavigate();
@@ -77,7 +81,7 @@ export function useBlogsPageHooks() {
       window.history.replaceState({}, "", newUrl);
     } else {
       // If the type is neither "asc" nor "desc", remove the entire "sort" parameter from the URL
-      const newUrl = `${ROUTE_PATHS.ARTICLES}`;
+      const newUrl = `${currentPath === "onBlogs" ? ROUTE_PATHS.ARTICLES : ROUTE_PATHS.VIEW_PROFILE}`;
       window.history.replaceState({}, "", newUrl);
     }
     setSortValue({ value: update, type });
@@ -101,8 +105,20 @@ export function useBlogsPageHooks() {
     if (!allUsers) {
       user.allUser();
     }
-    
-    blogs.getBlogs({ page: 1, ...search });
+
+    const payloadData = {
+      userId: userId,
+      page: 1,
+    };
+    if (currentPath === "onBlogs") {
+      blogs.getBlogs({ page: 1, ...search });
+    } else if (currentPath === "onProfile") {
+      if (isMe) {
+        blogs.getBlogsById({ page: 1, userId: loggedInId, ...search });
+      } else {
+        blogs.getBlogsById({ page: 1, ...search });
+      }
+    }    
     reactions.getAllReactions();
 
     // so only if loggedIn user's role is user then fetch favorite blogs

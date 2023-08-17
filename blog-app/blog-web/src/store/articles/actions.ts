@@ -78,12 +78,11 @@ export const getBlogs = createAsyncThunk(
 
 export const getBlogsById = createAsyncThunk(
   endpoints.GET_BLOGS + "id",
-  async (data: GetBlogsById): Promise<AllBlogs | null> => {
+  async (data: any): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
     try {
       const { userId, page } = data;
-      const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`);
-      console.log("response for all blogs BY ID", response.data.data);
+      const response = await api.get(`${endpoints.GET_BLOGS + userId}/${page}`, {params: data});
       return {
         data : response.data.data.data,
         meta: response.data.data.meta

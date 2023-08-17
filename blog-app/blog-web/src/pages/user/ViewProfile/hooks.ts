@@ -1,3 +1,4 @@
+import qs from "query-string";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
@@ -37,6 +38,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const lastPageFvrt: number = blogState.getFavoriteBlogs.meta?.lastPage;
   const lastPage: number = blogState.getBlogsById.meta?.lastPage;
 
+  const search: any = qs.parse(window.location.search);
+
   useEffect(() => {
     if (isMe) {
       user.getById(loggedInId);
@@ -57,7 +60,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         if (isRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
         } else {
-          blogs.getBlogsById(payloadData);
+          // blogs.getBlogsById(payloadData);
+        blogs.getBlogsById({ page: 1, ...search });
         }
       }
       if (isMe) {
@@ -71,7 +75,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         if (isLoggedInRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
         } else {
-          blogs.getBlogsById(payloadData);
+          // blogs.getBlogsById(payloadData);
+        blogs.getBlogsById({ page: 1, ...search });
         }
       }
     }
@@ -128,7 +133,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (isRole === "user") {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
-      blogs.getBlogsById(updatedPayload);
+      blogs.getBlogsById({ page: 1, ...search });
+      // blogs.getBlogsById(updatedPayload);
     }
   }
 
