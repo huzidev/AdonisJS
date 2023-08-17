@@ -46,6 +46,13 @@ export interface BlogSortReq {
   createdAt?: SortType;
 }
 
+// export interface GetBlogsByIdState {
+//   page: number;
+//   userId: number;
+//   filters?: 
+// }
+
+
 export interface AllBlogs extends SubState {
   data: Blog[];
   meta: PaginationMeta | null | any;

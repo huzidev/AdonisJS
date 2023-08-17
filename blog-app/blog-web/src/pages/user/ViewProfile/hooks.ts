@@ -53,30 +53,30 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (prevUser?.getUser.loading) {
       if (!isMe) {
         setUserDetails({ ...userDetails, ...userDataById });
-        const payloadData = {
+        const payloadData: any = {
           userId: userId,
           page: 1,
         };
         if (isRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
         } else {
-          // blogs.getBlogsById(payloadData);
-        blogs.getBlogsById({ page: 1, ...search });
+          blogs.getBlogsById(payloadData);
+        // blogs.getBlogsById({ page: 1, ...search });
         }
       }
       if (isMe) {
         // setUserDetails({ ...userDetails, ...auth.state.user });
         setUserDetails({ ...userDetails, ...userDataById });
         // because when user's role is user then we only wanted to fetch favoriteBlogs
-        const payloadData = {
+        const payloadData: any = {
           userId: loggedInId,
           page: 1,
         };
         if (isLoggedInRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
         } else {
-          // blogs.getBlogsById(payloadData);
-        blogs.getBlogsById({ page: 1, ...search });
+          blogs.getBlogsById(payloadData);
+        // blogs.getBlogsById({ page: 1, ...search });
         }
       }
     }
