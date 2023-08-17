@@ -13,7 +13,8 @@ export default function ViewProfilePage(): JSX.Element {
   const auth = useAuth();
   const blogs = useBlogs();
   const user = useUser();
-  const [showModal, setShowModal] = useState(false);
+  const [dropDown, setDropDown] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const userDataById = user.state.getUser?.data;
   const currentRole = auth.state.user?.role;
@@ -124,6 +125,62 @@ export default function ViewProfilePage(): JSX.Element {
               ? `Blogs Liked By ${isMe ? "You" : userDetails.username}`
               : `Blogs Uploaded By ${!isMe ? userDetails.username : "You"}`}
           </h1>
+          {
+          // so if allBlogs length is just 1 then no need to show filters
+          userBlogs.length > 1 && (
+            <div>
+              <button
+                id="dropdownDefaultButton"
+                data-dropdown-toggle="dropdown"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button"
+                onClick={() => setDropDown(!dropDown)}
+              >
+                Filter List{" "}
+                <svg
+                  className="w-2.5 h-2.5 ml-2.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+              <div
+                id="dropdown"
+                className={`z-10 ${
+                  dropDown
+                    ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                    : "hidden"
+                }`}
+              >
+                <ul
+                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownDefaultButton"
+                >
+                  {columns.map((data, columnIndex) => (
+                    // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
+                    <li
+                      onClick={() => handleSort(data.title)}
+                      className="px-5 py-3 cursor-pointer"
+                      key={columnIndex}
+                    >
+                      {/* startCase will make the first letter Capital of any word */}
+                      {startCase(data.title)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )
+        }
         </div>
         <div className="w-11/12 mx-auto flex flex-wrap">
           {(isLoadingBlogs || isLoadingFvrtBlogs) && !userBlogs.length ? (
