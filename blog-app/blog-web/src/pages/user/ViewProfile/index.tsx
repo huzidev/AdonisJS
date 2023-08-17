@@ -284,6 +284,10 @@ export default function ViewProfilePage(): JSX.Element {
                               )}
                             </div>
                           )}
+                          <p>
+                            Uploaded At :{" "}
+                            {new Date(blog.createdAt).toLocaleDateString()}
+                          </p>
                       </div>
                     </div>
                   </div>
