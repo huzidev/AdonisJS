@@ -16,12 +16,15 @@ export function useCommentPageHooks() {
   const prev = usePrevious(state);
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = blog.state.getBlog.data?.id;
-  const allComments: any = comment.state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId === null);
-  const allReplies: any = comment.state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId !== null);
+  const allComments: any = state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId === null);
+  const allReplies: any = state.getComments.data?.filter((comment: AllCommentsState) => comment.parentId !== null);
   const allUsers = user.state.allUser.data;
   const [comments, setComments] = useState<any>(allComments);
   const byMe =
     state.getCommentById.data?.userId === auth.state.user?.id;
+
+  console.log("all comments", state.getComments.data);
+  
 
   const [addComment, setAddComment] = useState<AddCommentPayload>({
     userId: loggedInId,
@@ -40,10 +43,6 @@ export function useCommentPageHooks() {
     setAddComment({ ...addComment, userId: loggedInId, articleId: blogId });
   }, [loggedInId, blogId]);
 
-  useEffect(() => {
-    console.log("allComments", allComments);
-  }, [allComments])
-  
 
   useEffect(() => {
     if (prev?.getComments.loading) {
