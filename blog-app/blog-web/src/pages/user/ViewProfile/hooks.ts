@@ -52,12 +52,12 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
 
   useEffect(() => {
     if (params.id === "me") {
-          blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+      blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
     } else {
-          blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+      blogs.getBlogsById({ userId: userId, page: 1, filters: search });
     }
-  }, [window.location.search])
-  
+  }, [window.location.search]);
+
   useEffect(() => {
     if (prevUser?.getUser.loading) {
       if (!isMe) {
@@ -68,7 +68,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         };
         if (isRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
-        } 
+        }
         // else {
         //   blogs.getBlogsById({ userId: userId, page: 1, filters: search });
         // // blogs.getBlogsById({ page: 1, ...search });
@@ -84,7 +84,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         };
         if (isLoggedInRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
-        } 
+        }
         // else {
         //   blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
         // // blogs.getBlogsById({ page: 1, ...search });
@@ -93,7 +93,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     }
 
     if (prevBlog?.getBlogsById.loading) {
-        setUserBlogs(blogState.getBlogsById.data);
+      setUserBlogs(blogState.getBlogsById.data);
     }
     if (prevBlog?.getFavoriteBlogs.loading) {
       setUserBlogs(blogState.getFavoriteBlogs.data);
@@ -139,7 +139,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   function loadMore() {
     const updatedPayload = {
       userId: isMe ? loggedInId : params.id,
-      page: isRole === "user"? currentPageFvrt + 1 : currentPage + 1,
+      page: isRole === "user" ? currentPageFvrt + 1 : currentPage + 1,
     };
     if (isRole === "user") {
       blogs.getFavoriteBlogs(updatedPayload);
@@ -161,6 +161,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     lastPage,
     isMe,
     isRole,
-    allReactions
+    allReactions,
   };
 }
