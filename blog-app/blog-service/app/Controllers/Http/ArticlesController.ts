@@ -29,13 +29,7 @@ export default class ArticlesController {
       
       const query = Article.query();
 
-      let user;
-      // because for calling username filters we don't have username in articles table therefore created join statement
-      // if user wanted to see allBlogs uploaded by him
-      if (userId) {
-        query.where("owner_id", userId);
-        user = await User.findBy("id", userId);
-      }
+      
 
       const isSort = Object.keys(request.qs())[1];
 
@@ -67,6 +61,14 @@ export default class ArticlesController {
         if (!articleFilters.includes(filterResultKey)) {
           throw invalidURL;
         }
+      }
+
+      let user;
+      // because for calling username filters we don't have username in articles table therefore created join statement
+      // if user wanted to see allBlogs uploaded by him
+      if (userId) {
+        query.where("owner_id", userId);
+        user = await User.findBy("id", userId);
       }
 
       const response = await query
