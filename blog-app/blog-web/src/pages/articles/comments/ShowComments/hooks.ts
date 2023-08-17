@@ -41,8 +41,15 @@ export function useCommentPageHooks() {
   }, [loggedInId, blogId]);
 
   useEffect(() => {
-    setComments(allComments);
-  }, [comments]);
+    console.log("allComments", allComments);
+  }, [allComments])
+  
+
+  useEffect(() => {
+    if (prev?.getComments.loading) {
+      setComments(allComments);
+    }
+  }, [state]);
 
   useEffect(() => {
     if (prev?.editComment.loading) {
