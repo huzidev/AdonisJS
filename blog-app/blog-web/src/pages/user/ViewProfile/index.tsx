@@ -132,7 +132,8 @@ export default function ViewProfilePage(): JSX.Element {
           </h1>
           {
           // so if allBlogs length is just 1 then no need to show filters
-          userBlogs.length > 1 && (
+          // and filter won't be shown when someone clicked on user's profile because user can't add blogs
+          (userBlogs.length > 1 && userDataById?.role !== "user") && (
             <div>
               <button
                 id="dropdownDefaultButton"
