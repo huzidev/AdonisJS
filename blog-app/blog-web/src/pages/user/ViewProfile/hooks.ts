@@ -46,13 +46,17 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     } else {
       user.getById(userId);
     }
-    reactions.getAllReactions();
+    // reactions.getAllReactions();
   }, [userId, loggedInId]);
 
-  // useEffect(() => {
-  //     blogs.getBlogsById({ userId: loggedInId, page: 1, filters: {...search} });
-  // }, [search])
-
+  useEffect(() => {
+    if (params.id === "me") {
+          blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+    } else {
+          blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+    }
+  }, [window.location.search])
+  
   useEffect(() => {
     if (prevUser?.getUser.loading) {
       if (!isMe) {
@@ -63,10 +67,11 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         };
         if (isRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
-        } else {
-          blogs.getBlogsById(payloadData);
-        // blogs.getBlogsById({ page: 1, ...search });
-        }
+        } 
+        // else {
+        //   blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+        // // blogs.getBlogsById({ page: 1, ...search });
+        // }
       }
       if (isMe) {
         // setUserDetails({ ...userDetails, ...auth.state.user });
@@ -78,10 +83,11 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         };
         if (isLoggedInRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
-        } else {
-          blogs.getBlogsById(payloadData);
-        // blogs.getBlogsById({ page: 1, ...search });
-        }
+        } 
+        // else {
+        //   blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+        // // blogs.getBlogsById({ page: 1, ...search });
+        // }
       }
     }
 

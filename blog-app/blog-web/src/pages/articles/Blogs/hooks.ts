@@ -103,19 +103,20 @@ export function useBlogsPageHooks() {
 
   useEffect(() => {
     // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
-    if (!allUsers) {
+    if (!allUsers && currentPath === "onBlogs") {
       user.allUser();
     }
 
     if (currentPath === "onBlogs") {
       blogs.getBlogs({ page: 1, ...search });
-    } else {
-      if (isMe) {
-        blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
-      } else {
-        blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-      }
-    }    
+    } 
+    // else {
+    //   if (isMe) {
+    //     blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+    //   } else {
+    //     blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+    //   }
+    // }    
     reactions.getAllReactions();
 
     // so only if loggedIn user's role is user then fetch favorite blogs
