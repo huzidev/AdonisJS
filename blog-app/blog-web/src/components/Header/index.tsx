@@ -16,7 +16,7 @@ export default function Header(): JSX.Element {
     auth.signOut();
     if (prev?.signOutState.loading) {
       if (!auth.state.signOutState.loading && !auth.state.signOutState.error) {
-        navigate("/");
+        navigate('/');
       }
     }
   }
@@ -26,7 +26,7 @@ export default function Header(): JSX.Element {
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            <Link to="/">Blog App</Link>
+            <Link to='/'>Blog App</Link>
           </span>
           <button
             data-collapse-toggle="navbar-default"
