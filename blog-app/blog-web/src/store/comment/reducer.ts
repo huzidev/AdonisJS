@@ -72,10 +72,10 @@ export const commentSlice = createSlice({
           state.editComment = { loading: false, error: false };
             if (action.payload) {
               const { message, data } = action.payload; 
-              console.log("state.getComment before", state.getComments.data);
-              state.getComments.data = state.getComments.data?.filter((comment: any) => data.find((newValue: any) => comment.id === newValue.id));
-              console.log("state.getComment after", state.getComments.data);
-              // state.editComment.data = data;
+              if (state.getComments.data) {
+                const prevState: any = JSON.parse(JSON.stringify(state.getComments.data));
+                state.getComments.data = [...prevState, data];
+              }
               state.editComment.message = message;
             }
         })
