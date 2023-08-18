@@ -6,7 +6,7 @@ import { AddComment, EditComment } from "App/Validators/CommentValidator";
 export default class CommentsController {
   public async add({ request }: HttpContextContract) {
     try {
-      const body = await request.validate(AddComment);
+      const body: any = await request.validate(AddComment);
 
       console.log("Body", body);
         
