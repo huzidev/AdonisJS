@@ -25,7 +25,7 @@ export default class ArticlesController {
         data: Utils.parseQS(request.qs(), ["sort"]),
       });
 
-      const userId = params.id;
+        const userId = params.id;
       
       const query = Article.query();
 
