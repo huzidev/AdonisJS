@@ -22,9 +22,6 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const allUsers = user.state.allUser.data;
     const byMe =
       state.getCommentById.data?.userId === auth.state.user?.id;
-    const [commentId, setCommentId] = useState<any>({
-      ownerId: null
-    })
 
     const [addComment, setAddComment] = useState<AddCommentPayload>({
       userId: loggedInId,
@@ -57,16 +54,12 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       }
       if (prev?.deleteComment.loading) {
         if (!state.deleteComment.loading && !state.deleteComment.error) {
-          if (commentId.ownerId === auth.state.user?.id) {
-            successNotification("Yours comment deleted successfully");
-          } else{
-            successNotification(state.deleteComment.message);
-          }
+          successNotification(state.deleteComment.message);
         }
       }
       if (prev?.addComment.loading) {
         if (!state.addComment.loading && !state.addComment.error) {
-          successNotification(state.deleteComment.message);
+          successNotification(state.addComment.message);
         }
       }
     }, [state]);
@@ -78,6 +71,5 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       allUsers,
       allReplies,
       blogId,
-      setCommentId
     };
   }
