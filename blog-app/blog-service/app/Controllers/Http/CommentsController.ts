@@ -59,17 +59,20 @@ export default class CommentsController {
     }
   }
 
-  public async edit({ params, request }) {
+  public async edit({ params, request, auth }) {
     try {
       const body = await request.validate(EditComment);
+      const user: any = await User.findBy("id", body.userId);
       const comment: any = await Comment.findBy("id", params.id);
 
-      comment.fill({ ...comment, ...body });
-      comment.merge(body);
+      // only adding content: body.content otherwise it'll update userId as well if admin is updating some users id then due to validation userId it'll also update userId therefore 
+      // put content: body.content sperately for updating comment
+      comment.fill({ ...comment, content: body.content });
+      comment.merge(body.content);
       await comment.save();
-
+      
       return {
-        message: "Comment updated successfully",
+        message: `${user.id === auth.user.id ? 'Yours' : `test`} comment updated successfully`,
         data: comment?.toObject()
       }
 

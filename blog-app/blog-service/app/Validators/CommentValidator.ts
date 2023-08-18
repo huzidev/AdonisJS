@@ -17,7 +17,7 @@ export class AddComment {
 }
 
 export class EditComment {
-  public schema = schema.create(pick(AddComment.schemaMap, ['content']))
+  public schema = schema.create(pick(AddComment.schemaMap, ['userId', 'content']))
   public messages: CustomMessages = {
     required: '{{ field }} is required for edit comment',
   }
