@@ -32,6 +32,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     });
 
     useEffect(() => {
+      // fetching all users to get username and roles for all comments
       user.allUser();
     }, []);
 
