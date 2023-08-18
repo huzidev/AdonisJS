@@ -9,6 +9,8 @@ export const addComment = createAsyncThunk(
   endpoints.ADD_COMMENT,
   async (data: AddCommentPayload) => {
     try {
+      console.log("Received Data", data);
+      
       const response = await api.post(endpoints.ADD_COMMENT, data);
       console.log('Add Comment response', response.data);
       return {

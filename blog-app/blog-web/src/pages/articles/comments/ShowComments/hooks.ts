@@ -28,8 +28,9 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       userId: loggedInId,
       articleId: blogId,
       content: '',
+      parentId: null
     });
-    
+
     useEffect(() => {
       user.allUser();
     }, []);
@@ -38,7 +39,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       if (blogId) {
         comment.getComments(blogId);
       }
-      setAddComment({ ...addComment, userId: loggedInId, articleId: blogId });
+      setAddComment({ ...addComment, articleId: blogId, parentId: null });
     }, [loggedInId, blogId]);
 
     useEffect(() => {

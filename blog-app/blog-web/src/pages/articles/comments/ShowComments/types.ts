@@ -5,11 +5,11 @@ export interface AddCommentPayload {
   userId: number;
   articleId: number;
   content: string;
+  parentId?: number | null;
 }
 
 export interface AllCommentsState extends AddCommentPayload {
   id: number;
-  parentId?: number;
   createdAt: string;
   updatedAt: string;
 }

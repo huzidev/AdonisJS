@@ -3,7 +3,7 @@ import { SubState } from "store/types";
 export interface AddCommentPayload {
   userId: number;
   articleId: number;
-  parentId?: number;
+  parentId?: number | null;
   content: string;
 }
 
