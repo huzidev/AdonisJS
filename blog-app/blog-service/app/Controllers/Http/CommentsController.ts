@@ -14,11 +14,11 @@ export default class CommentsController {
 
       const user: any = await User.findBy("id", userId);
       
-      await Comment.create(body);
+      const data = await Comment.create(body);
 
       return {
         message: `${parentId ? "Reply" : "Comment"} + "added successfully by" + ${user.username}`,
-        data: body
+        data
       };
     } catch (e) {
       throw e;
