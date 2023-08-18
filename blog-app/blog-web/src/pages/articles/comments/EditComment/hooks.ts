@@ -21,13 +21,7 @@ export function useEditCommentPageHooks() {
 
   useEffect(() => {
     if (prev?.getCommentById.loading) {
-      if (!state.getCommentById.loading && !state.getCommentById.error) {
-        if (byMe) {
-          successNotification("Yours comment fetched successfully");
-        } else {
-          successNotification(state.getCommentById.message);
-        }
-      }
+      successNotification(state.getCommentById.message);
     }
   }, [state]);
 }
