@@ -16,7 +16,9 @@ export function useEditCommentPageHooks() {
 
   useEffect(() => {
     if (prev?.getCommentById.loading) {
-      successNotification(state.getCommentById.message);
+      if (!state.getCommentById.loading && !state.getCommentById.error) {
+        successNotification(state.getCommentById.message);
+      }
     }
   }, [state]);
 }

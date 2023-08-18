@@ -44,7 +44,9 @@ import { AddCommentPayload, AllCommentsState } from "./types";
 
     useEffect(() => {
       if (prev?.editComment.loading) {
-        successNotification(state.editComment.message);
+        if (!state.editComment.loading && !state.editComment.error) {
+          successNotification(state.editComment.message);
+        }
       }
       if (prev?.deleteComment.loading) {  
         if (!state.deleteComment.loading && !state.deleteComment.error) {
