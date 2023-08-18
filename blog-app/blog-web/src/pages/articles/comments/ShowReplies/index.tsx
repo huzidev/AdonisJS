@@ -1,5 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -42,11 +42,6 @@ export default function CommentWithReplies({
     allReplies.filter(
       (reply: AllCommentsState) => reply.parentId === comment.id
     );
-
-      useEffect(() => {
-        console.log("Reply state", replyState);
-        console.log("Comment id", comment.id);
-      }, [replyState])
 
   const isAuthorAdmin = uploadedByUserRole === "admin";
   const isAdmin = hasPermission("admin", userData?.role);

@@ -10,7 +10,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
   const comment = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
-  const { addComment, setAddComment, allComments, allUsers, allReplies, blogId } =
+  const { addComment, setAddComment, allComments, allUsers, allReplies, blogId, comments } =
     useCommentPageHooks();
 
   function submit(e: React.FormEvent<HTMLFormElement>) {

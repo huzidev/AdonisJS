@@ -25,6 +25,8 @@ export const commentSlice = createSlice({
             if (action.payload) {
                 const { message, data } = action.payload;
                 if (state.getComments.data) {
+                  console.log("data", data);
+                  
                   const prevComments = JSON.parse(JSON.stringify(state.getComments.data));
                   state.getComments.data = [...prevComments, data];
                 }

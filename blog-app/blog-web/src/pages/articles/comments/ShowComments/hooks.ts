@@ -20,7 +20,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const allComments: any = commentsState?.filter((comment: AllCommentsState) => comment.parentId === null);
     const allReplies: any = commentsState?.filter((comment: AllCommentsState) => comment.parentId !== null);
     const allUsers = user.state.allUser.data;
-    const [comments, setComments] = useState<any>();
+    const [comments, setComments] = useState<any>([]);
     const byMe =
       state.getCommentById.data?.userId === auth.state.user?.id;
 
@@ -31,11 +31,6 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     });
     
     useEffect(() => {
-      console.log("all comments", allComments);
-    }, [commentsState])
-
-
-    useEffect(() => {
       user.allUser();
     }, []);
 
@@ -45,12 +40,6 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       }
       setAddComment({ ...addComment, userId: loggedInId, articleId: blogId });
     }, [loggedInId, blogId]);
-
-    useEffect(() => {
-      if (prev?.getComments.loading) {
-        setComments(allComments);
-      }
-    }, [state]);
 
     useEffect(() => {
       if (prev?.editComment.loading) {
@@ -70,6 +59,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       allComments,
       allUsers,
       allReplies,
-      blogId
+      blogId,
+      comments
     };
   }
