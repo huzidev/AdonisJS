@@ -39,7 +39,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       if (blogId) {
         comment.getComments(blogId);
       }
-      setAddComment({ ...addComment, articleId: blogId, parentId: null });
+      setAddComment({ ...addComment, userId: loggedInId, articleId: blogId, parentId: null });
     }, [loggedInId, blogId]);
 
     useEffect(() => {
