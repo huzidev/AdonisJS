@@ -59,8 +59,6 @@ export const editComment = createAsyncThunk(
   endpoints.EDIT_COMMENT,
   async (data: EditCommentPayload) => {
     try {
-      console.log("Edit comment data", data);
-      
       const response = await api.put(endpoints.EDIT_COMMENT + data.id, data);
       console.log("Edit COMMENT RESP", response.data);
       return response.data;
