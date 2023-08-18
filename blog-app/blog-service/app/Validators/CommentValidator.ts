@@ -5,6 +5,7 @@ export class AddComment {
   public static schemaMap = {
     userId: schema.number(),
     articleId: schema.number(),
+    // number.nullable() because if adding comment then parentId will be nullable if adding reply then parentId will be number
     parentId: schema.number.nullable(),
     content: schema.string({ trim: true }, [rules.minLength(2)]),
   }
