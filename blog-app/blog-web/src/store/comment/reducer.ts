@@ -43,8 +43,6 @@ export const commentSlice = createSlice({
             if (action.payload) {
               const { message, data } = action.payload; 
               state.getComments.data = data;
-              // state.getComments.comments = data.filter((comment: any) => comment.parentId === null);
-              // state.getComments.replies = data.filter((reply: any) => reply.parentId !== null);
               state.getComments.message = message;
             }
         })
