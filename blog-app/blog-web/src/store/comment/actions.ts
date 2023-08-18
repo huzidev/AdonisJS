@@ -20,7 +20,7 @@ export const addComment = createAsyncThunk(
       const err = mapErrorToState(e);
         errorNotification(err);
         console.log("Error", err);
-        throw e
+        throw e;
     }
   }
 );
@@ -35,7 +35,7 @@ export const getComments = createAsyncThunk(
       const err = mapErrorToState(e);
         errorNotification(err);
         console.log("Error", err);
-        throw e
+        throw e;
       }
     }
 );
@@ -50,7 +50,7 @@ export const getCommentById = createAsyncThunk(
       const err = mapErrorToState(e);
         errorNotification(err);
         console.log("Error", err);
-        throw e
+        throw e;
       }
     }
 );
@@ -67,7 +67,7 @@ export const editComment = createAsyncThunk(
       const err = mapErrorToState(e);
         errorNotification(err);
         console.log("Error", err);
-        throw e
+        throw e;
       }
     }
 );
@@ -83,7 +83,7 @@ export const deleteComment = createAsyncThunk(
       const err = mapErrorToState(e);
         errorNotification(err);
         console.log("Error", err);
-        throw e
+        throw e;
       }
     }
 );

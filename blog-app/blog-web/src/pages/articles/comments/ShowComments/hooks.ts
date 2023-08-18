@@ -53,6 +53,15 @@ import { AddCommentPayload, AllCommentsState } from "./types";
           }
         }
       }
+      if (prev?.deleteComment.loading) {
+        if (!state.deleteComment.loading && !state.deleteComment.error) {
+          if (byMe) {
+            successNotification("Yours comment deleted successfully");
+          } else{
+            successNotification(state.deleteComment.message);
+          }
+        }
+      }
     }, [state]);
 
     return {
