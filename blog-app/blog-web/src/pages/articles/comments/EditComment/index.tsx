@@ -20,7 +20,7 @@ export default function EditCommentPage(): JSX.Element {
  
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    comment.editComment({ id: params.id, userId: commentResp!.id, content });
+    comment.editComment({ id: params.id, userId: commentResp!.userId, content });
     navigate(-1);
   }
   useEditCommentPageHooks();
