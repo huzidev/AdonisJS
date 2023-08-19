@@ -3,13 +3,12 @@ import startCase from "lodash/startCase";
 import { columns } from "pages/articles/Blogs/data";
 import { useBlogsPageHooks } from "pages/articles/Blogs/hooks";
 import { useState } from "react";
-import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { LoadingListBlogs, LoadingThreeDots, LoadingUser } from "utils/loading";
+import { LoaderSpin, LoadingListBlogs, LoadingThreeDots, LoadingUser } from "utils/loading";
 import { useViewProfilePageHook } from "./hooks";
 
 export default function ViewProfilePage(): JSX.Element {
@@ -349,16 +348,7 @@ export default function ViewProfilePage(): JSX.Element {
                         Load More{" "}
                         {(isLoadingBlogs || isLoadingFvrtBlogs) &&
                           userBlogs.length && (
-                            <TailSpin
-                              height="28"
-                              width="23"
-                              color="#4fa94d"
-                              ariaLabel="tail-spin-loading"
-                              radius="1"
-                              wrapperStyle={{}}
-                              wrapperClass="pl-4"
-                              visible={true}
-                            />
+                            <LoaderSpin />
                           )}
                       </button>
                     )

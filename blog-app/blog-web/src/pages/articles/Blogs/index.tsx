@@ -1,14 +1,13 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { useState } from "react";
-import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
-import { LoadingListBlogs } from "utils/loading";
+import { LoaderSpin, LoadingListBlogs } from "utils/loading";
 import { columns } from "./data";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
@@ -318,16 +317,7 @@ export default function ViewBlogsPage(): JSX.Element {
           >
             {/* so spinner with load more will only be shown when loading state is true and their is some data because if their is no data then load more will not be shown */}
             Load More {(isLoading && allBlogs.length) && (
-              <TailSpin
-                height="28"
-                width="23"
-                color="#4fa94d"
-                ariaLabel="tail-spin-loading"
-                radius="1"
-                wrapperStyle={{}}
-                wrapperClass="pl-4"
-                visible={true}
-              />
+              <LoaderSpin />
             )}
           </button>
         )}

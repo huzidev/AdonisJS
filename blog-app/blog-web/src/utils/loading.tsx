@@ -1,5 +1,5 @@
 import ContentLoader from "react-content-loader";
-import { ThreeDots } from "react-loader-spinner";
+import { TailSpin, ThreeDots } from "react-loader-spinner";
 
 export function LoadingList() {
   return (
@@ -80,6 +80,21 @@ export function LoadingThreeDots() {
       />
     </div>
   );
+}
+
+export function LoaderSpin() {
+  return (
+    <TailSpin
+      height="28"
+      width="23"
+      color="#4fa94d"
+      ariaLabel="tail-spin-loading"
+      radius="1"
+      wrapperStyle={{}}
+      wrapperClass="pl-4"
+      visible={true}
+    />
+  )
 }
 
 // export function LoadingBlogs() {

@@ -4,6 +4,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
+import { LoaderSpin } from "utils/loading";
 import { booleanValues, userSignInData, userSignUpData } from "./data";
 import { useAuthFormHook } from "./hooks";
 import { AuthSignInPayload, AuthSignUpPayload, BooleanState } from "./types";
@@ -64,8 +65,6 @@ export default function UserFormPage(): JSX.Element {
     }
   }, [currentState])
 
-  console.log("loading", loading);
-  console.log("auth.state.signInState.loading", auth.state.signInState.loading);
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -288,7 +287,7 @@ export default function UserFormPage(): JSX.Element {
           <input
             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             type="submit"
-            value={title + (loading ? "Loading" : '')}
+            value={title + (loading && (<LoaderSpin />))}
            />
         </div>
         <p className="mt-3 text-center text-sm text-gray-500">
