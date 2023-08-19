@@ -37,7 +37,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   let isProtected = !!route?.role;
   let allowedRole = route?.role;
   useEffect(() => {
-    const { initState, user, signOutState  } = auth.state;
+    const { initState, user } = auth.state;
     if (!initState.init && !initState.loading) {
       auth.initUser();
       return;
