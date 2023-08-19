@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { useAuth } from "store/auth";
 import UrlPattern from "url-pattern";
 import { hasPermission } from "utils";
-import { usePrevious } from "utils/hooks";
 
 interface AuthGuardProps {
   children: JSX.Element;
@@ -15,17 +14,17 @@ interface AuthGuardProps {
 // AuthGuard component receives children as its props, which represent the components that need to be rendered inside the AuthGuard
 export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   const [state, setState] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const auth = useAuth();
   const currentPath = window.location.pathname;
   const stateSingOut = auth.state.signOutState;
-  const prev = usePrevious(stateSingOut);
 
   useEffect(() => {
       if (stateSingOut.loading) {
-        setState(false)
+        setLoading(true)
       } else {
-        setState(true)
+        setLoading(false)
       }
   }, [stateSingOut])
 
@@ -81,6 +80,9 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     }
   }, [auth.state.user, auth.state.initState, currentPath]);
   if (!state) {
+    return <PageLoader />;
+  }
+  if (loading) {
     return <PageLoader />;
   }
   return children;
