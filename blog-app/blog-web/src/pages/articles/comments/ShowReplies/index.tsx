@@ -44,6 +44,7 @@ export default function CommentWithReplies({
     );
 
   const isAuthorAdmin = uploadedByUserRole === "admin";
+  const isSuperAdmin = auth.state.user?.role === "super-admin";
   const isAdmin = hasPermission("admin", userData?.role);
 
   return (
@@ -56,7 +57,7 @@ export default function CommentWithReplies({
         {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots */}
         {userData && (isCommentAuthor ||
                 (isAdmin && !isAuthorSuperAdmin) ||
-                (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin)) && (
+                (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
           <button
             id="dropdownComment1Button"
             data-dropdown-toggle="dropdownComment1"
@@ -87,7 +88,7 @@ export default function CommentWithReplies({
             aria-labelledby="dropdownMenuIconHorizontalButton"
           >
             <li>
-              {(isCommentAuthor || (isAdmin && !isAuthorSuperAdmin)) && (
+              {(isCommentAuthor || (isAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
                 <Link
                   to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
                   className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -100,7 +101,7 @@ export default function CommentWithReplies({
               {/* // means if admin is loggedIn or Blog's owner is loggedIn then show delete button BUT not on super-admins and admins comment */}
               {(isCommentAuthor ||
                 (isAdmin && !isAuthorSuperAdmin) ||
-                (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin)) && (
+                (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
                 <button
                   className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   onClick={() => commentFunc.deleteComment(comment.id)}
