@@ -39,8 +39,8 @@ export default function UserFormPage(): JSX.Element {
   const title = isLogInForm ? "Sign In" : "Sign Up";
   const titleReverse = isLogInForm ? "Sign Up" : "Sign In";
   const descReverse = isLogInForm
-    ? "Don't have an account ?"
-    : "Already have an account ?";
+    ? "Don't have an account?"
+    : "Already have an account?";
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -60,7 +60,7 @@ export default function UserFormPage(): JSX.Element {
           alt="Your Company"
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          {title} To You Account
+          {title} To Your Account
         </h2>
       </div>
       {/* MANDATORY to use form otherwise the required property of input will not work */}

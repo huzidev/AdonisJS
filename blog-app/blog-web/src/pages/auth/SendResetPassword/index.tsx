@@ -57,7 +57,7 @@ export default function SendResetPasswordPage(): JSX.Element {
           />
         </form>
         <p className="text-center text-sm text-gray-500">
-          Remembered your account ?
+          Remembered your account?
           <Link
             to={ROUTE_PATHS.AUTH_SIGNIN}
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
