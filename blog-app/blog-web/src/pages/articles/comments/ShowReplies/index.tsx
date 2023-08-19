@@ -57,7 +57,9 @@ export default function CommentWithReplies({
         {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots */}
         {userData && (isCommentAuthor ||
                 (isAdmin && !isAuthorSuperAdmin) ||
-                (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
+                (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) || 
+                // isSuperAdmin when super-admin is loggedIn then show three dots for all users even if some other super-admin has comment then show three dots for that comment as well
+                (isSuperAdmin)) && (
           <button
             id="dropdownComment1Button"
             data-dropdown-toggle="dropdownComment1"
