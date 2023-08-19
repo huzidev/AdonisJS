@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "store/auth";
 import UrlPattern from "url-pattern";
 import { hasPermission } from "utils";
+import { usePrevious } from "utils/hooks";
 
 interface AuthGuardProps {
   children: JSX.Element;
@@ -17,6 +18,16 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   const navigate = useNavigate();
   const auth = useAuth();
   const currentPath = window.location.pathname;
+  const stateSingOut = auth.state.signOutState;
+  const prev = usePrevious(stateSingOut);
+
+  useEffect(() => {
+      if (stateSingOut.loading) {
+        setState(false)
+      } else {
+        setState(true)
+      }
+  }, [stateSingOut])
 
   const route = routes.find((r) =>
     r.exact ? r.path === currentPath : new UrlPattern(r.path).match(currentPath)
@@ -27,7 +38,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   let isProtected = !!route?.role;
   let allowedRole = route?.role;
   useEffect(() => {
-    const { initState, user } = auth.state;
+    const { initState, user, signOutState  } = auth.state;
     if (!initState.init && !initState.loading) {
       auth.initUser();
       return;
