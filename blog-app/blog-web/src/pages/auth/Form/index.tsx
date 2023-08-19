@@ -56,6 +56,7 @@ export default function UserFormPage(): JSX.Element {
   useAuthFormHook();
 
   useEffect(() => {
+    // instead of checking auth.state.singIn.loading OR auth.state.signOut.loading simply create single var for both to manage loading state for showing spin loader
     if (currentState) {
       setLoading(true);
     } else {
