@@ -13,6 +13,7 @@ export default function UserFormPage(): JSX.Element {
   const currentPath = window.location.pathname;
   const [isLogInForm, setIsLogInForm] = useState<boolean>(true);
   const [userLogIn, setUserLogIn] = useState<AuthSignInPayload>(userSignInData);
+  const [loading, setLoading] = useState<boolean>(false);
   const [userSignUp, setUserSignUp] =
     useState<AuthSignUpPayload>(userSignUpData);
   const [booleanState, setBooleanState] = useState<BooleanState>(booleanValues);
@@ -51,6 +52,16 @@ export default function UserFormPage(): JSX.Element {
     }
   }
   useAuthFormHook();
+
+  useEffect(() => {
+    if (auth.state.signInState.loading) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [auth.state])
+
+  console.log("loading", loading);
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -273,7 +284,7 @@ export default function UserFormPage(): JSX.Element {
           <input
             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             type="submit"
-            value={title}
+            value={title + (loading ? "Loading" : '')}
            />
         </div>
         <p className="mt-3 text-center text-sm text-gray-500">
