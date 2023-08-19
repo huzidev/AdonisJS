@@ -1,5 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -16,7 +16,7 @@ export default function CommentWithReplies({
 }: any) {
   const commentFunc = useComment();
   const auth = useAuth();
-  const userData = auth.state.user;
+  const userData: any = auth.state.user;
   const [replyState, setReplyState] = useState<any>({
     id: null
   });
@@ -43,9 +43,18 @@ export default function CommentWithReplies({
       (reply: AllCommentsState) => reply.parentId === comment.id
     );
 
+      useEffect(() => {
+        setReply({ articleId: blogId, userId: userData?.id, parentId: comment.id })
+      }, [])
+
   const isAuthorAdmin = uploadedByUserRole === "admin";
   const isSuperAdmin = auth.state.user?.role === "super-admin";
   const isAdmin = hasPermission("admin", userData?.role);
+
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    commentFunc.addComment({ ...reply });
+  }
 
   return (
     <div>
@@ -119,7 +128,7 @@ export default function CommentWithReplies({
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
         {replyState.id === comment.id ? (
-          <form className="mt-2">
+          <form onSubmit={submit} className="mt-2">
             <input
               id="reply"
               name="reply"
