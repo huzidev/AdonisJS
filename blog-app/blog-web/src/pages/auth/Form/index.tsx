@@ -18,6 +18,8 @@ export default function UserFormPage(): JSX.Element {
     useState<AuthSignUpPayload>(userSignUpData);
   const [booleanState, setBooleanState] = useState<BooleanState>(booleanValues);
 
+  const currentState = isLogInForm ? auth.state.signInState.loading : auth.state.signUpState.loading;
+
   useEffect(() => {
     const stateCondition = currentPath.includes("/sign_in") ? true : false;
     setIsLogInForm(stateCondition);
@@ -54,14 +56,15 @@ export default function UserFormPage(): JSX.Element {
   useAuthFormHook();
 
   useEffect(() => {
-    if (auth.state.signInState.loading) {
+    if (currentState) {
       setLoading(true);
     } else {
       setLoading(false);
     }
-  }, [auth.state])
+  }, [currentState])
 
   console.log("loading", loading);
+  console.log("auth.state.signInState.loading", auth.state.signInState.loading);
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
