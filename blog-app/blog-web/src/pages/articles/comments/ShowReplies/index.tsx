@@ -119,7 +119,7 @@ export default function CommentWithReplies({
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
         {replyState.id === comment.id ? (
-          <div className="mt-2">
+          <form className="mt-2">
             <input
               id="reply"
               name="reply"
@@ -148,7 +148,7 @@ export default function CommentWithReplies({
                 Cancel
               </button>
             </div>
-          </div>
+          </form>
         ) 
         // reply button wouldn't be shown when user has clicked on reply button
         : (
