@@ -51,7 +51,7 @@ export default class CommentsController {
       } else {
         return {
           message: `Comment fetched successfully by id ${params.id}`,
-          data: comment
+          data: comment;
         }
       }
     } catch (e) {
