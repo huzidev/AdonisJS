@@ -61,7 +61,8 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
         toast.error(
           "Insufficient access, you do not have permission to perform this action"
         );
-      } else {
+      } 
+      else {
         setState(true);
       }
     } else {

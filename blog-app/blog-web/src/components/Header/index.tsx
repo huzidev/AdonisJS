@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { hasPermission } from "utils";
@@ -9,17 +10,23 @@ export default function Header(): JSX.Element {
   const auth = useAuth();
   const navigate = useNavigate();
   const user = auth.state.user;
-  const prev = usePrevious(auth.state);  
+  const prev = usePrevious(auth.state);
+  const [signingOut, setSigningOut] = useState<boolean>(false);
   // const value: any = managePaths.find((path) => location.pathname.includes(path));
 
   function signOut() {
+    setSigningOut(true);
     auth.signOut();
+  }
+  
+   useEffect(() => {
     if (prev?.signOutState.loading) {
       if (!auth.state.signOutState.loading && !auth.state.signOutState.error) {
+        setSigningOut(false);
         navigate('/');
       }
     }
-  }
+  }, [auth.state]);
 
   return (
     <div>
