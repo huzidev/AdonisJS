@@ -40,7 +40,6 @@ export default function ViewProfilePage(): JSX.Element {
       document.documentElement.classList.remove("dark");
     }
   }, [theme])
-
   
   const {
     userDetails,
@@ -180,12 +179,12 @@ export default function ViewProfilePage(): JSX.Element {
                 id="dropdown"
                 className={`z-10 ${
                   dropDown
-                    ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 bg-gray-700"
+                    ? "block fixed divide-y divide-gray-100 rounded-lg shadow w-44 bg-gray-700"
                     : "hidden"
                 }`}
               >
                 <ul
-                  className="py-2 text-sm text-gray-700 text-gray-200"
+                  className="py-2 text-sm  text-gray-200"
                   aria-labelledby="dropdownDefaultButton"
                 >
                   {columns.map((data, columnIndex) => (
@@ -214,7 +213,7 @@ export default function ViewProfilePage(): JSX.Element {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                     {/* <img src={ele.image} alt="Thumbnail" /> */}
-                    <div className="h-52 border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700">
+                    <div className="h-52 border rounded-lg shadow bg-gray-800 border-gray-700">
                       <img
                         className="rounded-t-lg"
                         src="/docs/images/blog/image-1.jpg"
@@ -313,7 +312,7 @@ export default function ViewProfilePage(): JSX.Element {
               })}
               {(!isLoadingUser &&
                 (!isLoadingBlogs && userBlogs.length === 0)) && (
-                  <div className="w-full mt-5 py-8 pl-5 border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700">
+                  <div className="w-full mt-5 py-8 pl-5 border rounded-lg shadow bg-gray-800 border-gray-700">
                     <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                       Oops...
                       {/* if clickedUser role is user */}
