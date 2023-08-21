@@ -12,7 +12,8 @@ import { BooleanState } from "./types";
 export default function UserFormPage() {
   const auth = useAuth();
   const user = useUser();
-  const [booleanState, setBooleanState] = useState<BooleanState>(detailsBoolean);
+  const [booleanState, setBooleanState] =
+    useState<BooleanState>(detailsBoolean);
   const isLoading = user.state.getUser.loading;
   // const prevUpdateState = usePrevious(user.state.updateMe);
   // const updateState = user.state.updateMe;
@@ -27,8 +28,8 @@ export default function UserFormPage() {
   //     user.updateUserState(updateState.data!);
   //   }
   // }, [updateState, prevUpdateState]);
-  
-  const { 
+
+  const {
     isMe,
     value,
     isCreate,
@@ -38,7 +39,7 @@ export default function UserFormPage() {
     createUser,
     submit,
     setCreateUser,
-    setUpdateDetailsId 
+    setUpdateDetailsId,
   } = useUserFormHook();
   return (
     <div>
@@ -50,18 +51,23 @@ export default function UserFormPage() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            {isCreate
-              ? "Create User"
-              // using ref Hook value.current so the username field won't re-render when admin edit the username
-              // !isCreate so when user is at editing own info or when admin is edit some user info then loadign will show three dots loader
-              : (!isCreate && isLoading)
-              ? <LoadingThreeDots />
-              : isMe && !isLoading
-              ? "Edit Yours Details" 
-              : `Edit ${value.current}'s Details`} 
+            {isCreate ? (
+              "Create User"
+            ) : // using ref Hook value.current so the username field won't re-render when admin edit the username
+            // !isCreate so when user is at editing own info or when admin is edit some user info then loadign will show three dots loader
+            !isCreate && isLoading ? (
+              <LoadingThreeDots />
+            ) : isMe && !isLoading ? (
+              "Edit Yours Details"
+            ) : (
+              `Edit ${value.current}'s Details`
+            )}
           </h2>
         </div>
-        <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form
+          onSubmit={submit}
+          className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm"
+        >
           <div>
             {/* admin creating the user */}
             {isCreate ? (
@@ -73,7 +79,7 @@ export default function UserFormPage() {
                   Username
                 </label>
                 <div className="mt-2">
-                  <input  
+                  <input
                     id="username"
                     name="username"
                     type="text"
@@ -166,7 +172,10 @@ export default function UserFormPage() {
                 {/* Creaate password length validation error */}
                 <p
                   className={`transition-opacity duration-200 ${
-                    (createUser.password !== createUser.passwordConfirmation && createUser.password.length > 5) ? "opacity-100" : "opacity-0"
+                    createUser.password !== createUser.passwordConfirmation &&
+                    createUser.password.length > 5
+                      ? "opacity-100"
+                      : "opacity-0"
                   } text-red-500`}
                 >
                   Password doesn't match
@@ -204,7 +213,7 @@ export default function UserFormPage() {
                     onClick={() =>
                       setCreateUser({
                         ...createUser,
-                        isActive: !createUser.isActive
+                        isActive: !createUser.isActive,
                       })
                     }
                     onChange={inputHandler}
@@ -227,7 +236,7 @@ export default function UserFormPage() {
                     onClick={() =>
                       setCreateUser({
                         ...createUser,
-                        isVerified: !createUser.isVerified
+                        isVerified: !createUser.isVerified,
                       })
                     }
                   />
@@ -239,17 +248,16 @@ export default function UserFormPage() {
                   </label>
                 </div>
                 <div>
-                  <input 
+                  <input
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    type="submit" 
+                    type="submit"
                     value="Create User"
                   />
                 </div>
               </>
             ) : isLoading ? (
               <LoadingList />
-            )
-            : (!isLoading && isMe) ? (
+            ) : !isLoading && isMe ? (
               <>
                 <label
                   htmlFor="username"
@@ -270,9 +278,11 @@ export default function UserFormPage() {
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" value="" className="sr-only peer" />
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Toggle me</span>
+                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Toggle me
+                    </span>
                   </label>
-                  <input 
+                  <input
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     type="submit"
                     value="Update Details"
@@ -389,7 +399,7 @@ export default function UserFormPage() {
                   </label>
                 </div>
                 <div>
-                  <input 
+                  <input
                     className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     type="submit"
                     value="Update Details"
@@ -403,4 +413,3 @@ export default function UserFormPage() {
     </div>
   );
 }
-  
