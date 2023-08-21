@@ -125,7 +125,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     <div className="flex justify-between">
                       <h5
                         title={blog.title}
-                        className="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white"
+                        className="mb-2 text-2xl font-bold tracking-tight  text-white"
                       >
                         {blog.title.length > 21
                           ? `${blog.title.slice(0, 21)}...`
@@ -192,7 +192,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     </div>
                     <p
                       title={blog.content}
-                      className="mb-3 font-normal text-gray-700 text-gray-400"
+                      className="mb-3 font-normal  text-gray-400"
                     >
                       {blog.content.length > 50
                         ? `${blog.content.slice(0, 50)}...`
@@ -205,7 +205,7 @@ export default function ViewBlogsPage(): JSX.Element {
                       >
                         Read More
                       </Link>
-                      <p>
+                      <p className="text-white">
                         {/* to show Total likes of every blogs and ?? is used if totalCount is undefined means no like then show 0 */}
                         Likes : {allReactions && (allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
                       </p>
@@ -276,7 +276,7 @@ export default function ViewBlogsPage(): JSX.Element {
                         </div>
                       ))}
                     <div className="flex justify-between items-center">
-                      <p>
+                      <p className="text-white">
                         Uploaded At :{" "}
                         {new Date(blog.createdAt).toLocaleDateString()}
                       </p>

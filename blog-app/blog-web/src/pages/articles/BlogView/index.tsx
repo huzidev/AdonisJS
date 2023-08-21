@@ -36,7 +36,7 @@ export default function ViewBlogPage(): JSX.Element {
 
   return (
     <div>
-      <div className="w-2/3 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-2/3 my-8 mx-auto border  rounded-lg shadow bg-gray-800 border-gray-700">
         {owner?.isBanned ? (
           <div className="flex justify-center py-32">
             <p className="text-xl">
@@ -81,21 +81,21 @@ export default function ViewBlogPage(): JSX.Element {
               </>
             )}
             <div className="p-5 flex flex-col items-center">
-              <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 text-white">
                 {blogView.title} {blog.state.getBlog.data?.id}
               </h5>
-              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+              <p className="mb-3 font-normal  text-gray-400">
                 {blogView.content}
               </p>
             </div>
             <div className="flex justify-between mr-3">
-              <div className="flex">
+              <div className="flex text-white">
                 <p>Likes : {allReactions && allReactions.totalLikes}</p>
                 <p className="ml-2">
                   Dislikes : {allReactions && allReactions.totalDislikes}
                 </p>
               </div>
-              <Link to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>
+              <Link className="text-white" to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>
                 Uploaded By : {owner?.username}
               </Link>
             </div>
