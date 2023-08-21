@@ -70,7 +70,7 @@ export default function ViewProfilePage(): JSX.Element {
 
   return (
       <div>
-        <div className={`w-11/12 my-5 mx-auto border bg-blue-800 border-gray-200 rounded-lg shadow ${isDark ? 'dark:bg-blue-800' : 'dark:bg-gray-800'}  dark:border-gray-700`}>
+        <div className={`w-11/12 my-5 mx-auto border bg-gray-800 border-gray-200 rounded-lg shadow ${isDark ? 'dark:bg-blue-800' : 'dark:bg-gray-800'}  dark:border-gray-700`}>
           <div className="p-5">
             {userDataById?.isBanned ? (
               <div className="flex pt-6">

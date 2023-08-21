@@ -27,15 +27,15 @@ export default function Header(): JSX.Element {
 
   return (
     <div>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav className="border-gray-200 bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
             <Link to='/'>Blog App</Link>
           </span>
           <button
             data-collapse-toggle="navbar-default"
             type="button"
-            className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 ml-3 text-sm text-gray rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray text-gray-400 hover:bg-gray focus:ring-gray"
             aria-controls="navbar-default"
             aria-expanded="false"
           >
@@ -55,7 +55,7 @@ export default function Header(): JSX.Element {
             </svg>
           </button>
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white bg-gray-800 md:bg-gray-900 border-gray-700">
               {auth.state.initState.init && links.map((data, dataIndex) =>
                 // user has to be verified to access the links and if user role is "user" then not to show addBlog Page
                 user && (user.role === "blogger" && loggedInPathsBlogger.includes(data.link) || user.role === "user" && loggedInPathsUser.includes(data.link)) && user.isVerified ? (
@@ -64,10 +64,10 @@ export default function Header(): JSX.Element {
                       to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                         // to={data.link}
                         className={`
-                            block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${
+                            block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
                               location.pathname.includes(data.link)
-                                ? "dark:text-blue-500"
-                                : "dark:text-white"
+                                ? "text-blue-500"
+                                : "text-white"
                             }
                           `}
                       >
@@ -79,10 +79,10 @@ export default function Header(): JSX.Element {
                     <Link
                       to={data.link}
                       className={`
-                          block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${
+                          block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
                             location.pathname === data.link
-                              ? "dark:text-blue-500"
-                              : "dark:text-white"
+                              ? "text-blue-500"
+                              : "text-white"
                           }
                         `}
                     >
@@ -97,11 +97,11 @@ export default function Header(): JSX.Element {
                       // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
                       to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                       className={`
-                          block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ${
+                          block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
                             // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
                             location.pathname.includes(data.link)
-                              ? "dark:text-blue-500"
-                              : "dark:text-white"
+                              ? "text-blue-500"
+                              : "text-white"
                           }
                         `}
                     >
@@ -115,7 +115,7 @@ export default function Header(): JSX.Element {
                   <button
                     // onClick={() => auth.signOut()}
                     onClick={signOut}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
                   >
                     SignOut
                   </button>
