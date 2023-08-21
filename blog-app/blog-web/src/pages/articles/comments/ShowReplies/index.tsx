@@ -59,10 +59,10 @@ export default function CommentWithReplies({
   return (
     <div>
       <div className="flex">
-        <p className="inline-flex text-lg items-center mr-3 text-gray-900 dark:text-white">
+        <p className="inline-flex text-lg items-center mr-3  text-white">
           - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
         </p>
-        <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
+        <p className="text-white">{new Date(comment.createdAt).toLocaleDateString()}</p>
         {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots */}
         {userData && (isCommentAuthor ||
                 (isAdmin && !isAuthorSuperAdmin) ||
@@ -72,7 +72,7 @@ export default function CommentWithReplies({
           <button
             id="dropdownComment1Button"
             data-dropdown-toggle="dropdownComment1"
-            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 bg-gray-900 hover:bg-gray-700 focus:ring-gray-600"
             type="button"
             onClick={() => setDropDown({ ...dropDown, holdId: comment.id })}
           >
@@ -92,17 +92,17 @@ export default function CommentWithReplies({
           id="dropdownComment1"
           className={`${
             dropDown.holdId === comment.id ? "block" : "hidden"
-          } z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}
+          } z-10 w-36 rounded divide-y divide-gray-100 shadow bg-gray-700 divide-gray-600`}
         >
           <ul
-            className="py-1 text-sm text-gray-700 dark:text-gray-200"
+            className="py-1 text-sm text-gray-700 text-gray-200"
             aria-labelledby="dropdownMenuIconHorizontalButton"
           >
             <li>
               {(isCommentAuthor || (isAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
                 <Link
                   to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
-                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white"
                 >
                   Edit
                 </Link>
@@ -114,7 +114,7 @@ export default function CommentWithReplies({
                 (isAdmin && !isAuthorSuperAdmin) ||
                 (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
                 <button
-                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white"
                   onClick={() => commentFunc.deleteComment(comment.id)}
                 >
                   Delete
@@ -124,7 +124,7 @@ export default function CommentWithReplies({
           </ul>
         </div>
       </div>
-      <p className="text-gray-500 dark:text-gray-400 ml-6">{comment.content}</p>
+      <p className="text-gray-400 ml-6">{comment.content}</p>
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
         {replyState.id === comment.id ? (
@@ -162,7 +162,7 @@ export default function CommentWithReplies({
         // reply button wouldn't be shown when user has clicked on reply button
         : (
           <button
-            className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-600 hover:bg-green-700 focus:ring-green-800"
             onClick={() => setReplyState({ id: comment.id })}
           >
             Reply

@@ -38,7 +38,7 @@ export default function CommentsPage(props: PropsState): JSX.Element {
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 setAddComment({ ...addComment, content: e.target.value })
               }
-              className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none text-white placeholder-gray-400 bg-gray-800"
+              className="px-0 w-full text-sm text-gray-400 border-0 focus:ring-0 focus:outline-none placeholder-gray-400 bg-gray-800"
               placeholder="Write a comment..."
               required
             ></textarea>
