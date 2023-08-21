@@ -51,7 +51,7 @@ export default function ViewBlogPage(): JSX.Element {
               alt="Thumbnail"
             />
             {auth.state.user && (
-              <>
+              <div className="text-white">
               <button
                 onClick={() =>
                   reaction.addReaction({
@@ -78,10 +78,10 @@ export default function ViewBlogPage(): JSX.Element {
                   ? "Disliked"
                   : "Dislike"}
               </button>
-              </>
+              </div>
             )}
             <div className="p-5 flex flex-col items-center">
-              <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 text-white">
+              <h5 className="mb-4 text-2xl font-bold tracking-tight  text-white">
                 {blogView.title} {blog.state.getBlog.data?.id}
               </h5>
               <p className="mb-3 font-normal  text-gray-400">
