@@ -27,6 +27,11 @@ export const authSlice = createSlice({
             state.initState.loading = false;
             if (action.payload) {
                 state.user = {...action.payload};
+                if (state.user.role === "super-admin") {
+                    state.user.isDark = true;
+                } else {
+                    state.user.isDark = false;
+                }
             }
             state.initState.error = false
         });
