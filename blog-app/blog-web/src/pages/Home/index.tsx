@@ -41,7 +41,7 @@ export default function HomePage() {
                 </p>
               </section>
               <section className="mb-8">
-                <h2 className="text-2xl text-gray-400 text-white font-bold mb-4">Key Features</h2>
+                <h2 className="text-2xl text-white font-bold mb-4">Key Features</h2>
                 <ul className="list-disc list-inside">
                   <li className="text-lg text-gray-400 mb-2">User Registration and Authentication</li>
                   <li className="text-lg text-gray-400 mb-2">Blog Post Creation and Management</li>

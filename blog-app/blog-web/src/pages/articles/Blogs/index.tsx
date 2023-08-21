@@ -33,7 +33,7 @@ export default function ViewBlogsPage(): JSX.Element {
       <div>
         {sortValue.value && (
           <button
-            className="text-white mr-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white mr-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
             onClick={() => handleSort('')}
           >
             Reset Filters
@@ -46,7 +46,7 @@ export default function ViewBlogsPage(): JSX.Element {
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
                 type="button"
                 onClick={() => setDropDown(!dropDown)}
               >
@@ -71,12 +71,12 @@ export default function ViewBlogsPage(): JSX.Element {
                 id="dropdown"
                 className={`z-10 ${
                   dropDown
-                    ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                    ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 bg-gray-700"
                     : "hidden"
                 }`}
               >
                 <ul
-                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                  className="py-2 text-sm text-gray-700 text-gray-200"
                   aria-labelledby="dropdownDefaultButton"
                 >
                   {columns.map((data, columnIndex) => (
@@ -115,7 +115,7 @@ export default function ViewBlogsPage(): JSX.Element {
             return (
             <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
-                <div className="h-52 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div className="h-52 border rounded-lg shadow bg-gray-800 border-gray-700">
                   <img
                     className="rounded-t-lg"
                     src="/docs/images/blog/image-1.jpg"
@@ -125,7 +125,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     <div className="flex justify-between">
                       <h5
                         title={blog.title}
-                        className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                        className="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white"
                       >
                         {blog.title.length > 21
                           ? `${blog.title.slice(0, 21)}...`
@@ -192,7 +192,7 @@ export default function ViewBlogsPage(): JSX.Element {
                     </div>
                     <p
                       title={blog.content}
-                      className="mb-3 font-normal text-gray-700 dark:text-gray-400"
+                      className="mb-3 font-normal text-gray-700 text-gray-400"
                     >
                       {blog.content.length > 50
                         ? `${blog.content.slice(0, 50)}...`
