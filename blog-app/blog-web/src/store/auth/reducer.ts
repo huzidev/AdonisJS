@@ -28,9 +28,11 @@ export const authSlice = createSlice({
             if (action.payload) {
                 state.user = {...action.payload};
                 if (state.user.role === "super-admin") {
-                    state.user.isDark = true;
+                    localStorage.setItem("dark-mode", state.user.role);
                 } else {
-                    state.user.isDark = false;
+                    if (localStorage.getItem("dark-mode")) {
+                        localStorage.removeItem("dakr-mode")
+                    }
                 }
             }
             state.initState.error = false

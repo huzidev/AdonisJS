@@ -19,7 +19,6 @@ export interface User {
     isBanned: boolean;
     createdAt: string;
     updatedAt: string;
-    isDark: boolean;
     role: UserRole;
 }
 
