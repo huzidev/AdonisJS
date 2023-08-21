@@ -61,7 +61,7 @@ export default function HomePage() {
                   </>
                 ) : (
                   <>
-                    <h2 className="text-2xl text-gray-900 dark:text-white font-bold mb-4">Explore Blogs</h2>
+                    <h2 className="text-2xl text-white font-bold mb-4">Explore Blogs</h2>
                       <Link
                         className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
                         to={ROUTE_PATHS.ARTICLES}>
