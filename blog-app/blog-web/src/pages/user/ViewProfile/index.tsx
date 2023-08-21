@@ -2,7 +2,7 @@ import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { columns } from "pages/articles/Blogs/data";
 import { useBlogsPageHooks } from "pages/articles/Blogs/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -13,6 +13,18 @@ import { useViewProfilePageHook } from "./hooks";
 
 export default function ViewProfilePage(): JSX.Element {
   const auth = useAuth();
+  const [isDark, setIsDark] = useState<boolean>();
+
+  console.log("Local storage", localStorage.getItem("dark-mode"));
+  
+  useEffect(() => {
+    if (localStorage.getItem("dark-mode")) {
+      setIsDark(true)
+    } else {
+      setIsDark(false)
+    }
+  }, [])
+
   const blogs = useBlogs();
   const user = useUser();
   const [dropDown, setDropDown] = useState<boolean>(false);
@@ -61,7 +73,7 @@ export default function ViewProfilePage(): JSX.Element {
   return (
     <>
       <div>
-        <div className={`w-11/12 my-5 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}>
+        <div className={`w-11/12 my-5 mx-auto bg-white border border-gray-200 rounded-lg shadow ${isDark ? 'dark:bg-blue-800' : 'dark:bg-gray-800'}  dark:border-gray-700`}>
           <div className="p-5">
             {userDataById?.isBanned ? (
               <div className="flex pt-6">
