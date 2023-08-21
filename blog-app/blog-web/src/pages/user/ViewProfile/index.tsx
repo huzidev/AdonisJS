@@ -13,16 +13,6 @@ import { useViewProfilePageHook } from "./hooks";
 
 export default function ViewProfilePage(): JSX.Element {
   const auth = useAuth();
-  const [isDark, setIsDark] = useState<boolean>();
-
-  useEffect(() => {
-    if (auth.state.user?.isDark) {
-      setIsDark(true)
-    } else {
-      setIsDark(false)
-    }
-  }, [])
-
   const blogs = useBlogs();
   const user = useUser();
   const [dropDown, setDropDown] = useState<boolean>(false);
@@ -37,10 +27,21 @@ export default function ViewProfilePage(): JSX.Element {
   let totalBlogs = blogState.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogState.getFavoriteBlogs.meta?.total;
 
+  const [theme, setTheme] = useState<boolean>(false);
+
   const isLoadingUser = user.state.getUser.loading;
   const isLoadingBlogs = blogState.getBlogsById.loading;
   const isLoadingFvrtBlogs = blogState.getFavoriteBlogs.loading;
 
+  useEffect(() => {
+    if (theme === true) {
+     document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme])
+
+  
   const {
     userDetails,
     userBlogs,
@@ -70,7 +71,7 @@ export default function ViewProfilePage(): JSX.Element {
 
   return (
       <div>
-        <div className={`w-11/12 my-5 mx-auto border bg-gray-800 border-gray-200 rounded-lg shadow ${isDark ? 'bg-blue-800' : 'bg-gray-800'}  border-gray-700`}>
+        <div className={`w-11/12 my-5 mx-auto border bg-gray-800 rounded-lg shadow border-gray-700`}>
           <div className="p-5">
             {userDataById?.isBanned ? (
               <div className="flex pt-6">
@@ -362,6 +363,9 @@ export default function ViewProfilePage(): JSX.Element {
                       </button>
                     )
                 }
+                <button onClick={() => setTheme(!theme)}>
+                  Dark Mode
+                </button>
               </div>
             </>
           )}
