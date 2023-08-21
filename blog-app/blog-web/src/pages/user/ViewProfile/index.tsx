@@ -15,10 +15,8 @@ export default function ViewProfilePage(): JSX.Element {
   const auth = useAuth();
   const [isDark, setIsDark] = useState<boolean>();
 
-  console.log("Local storage", localStorage.getItem("dark-mode"));
-  
   useEffect(() => {
-    if (localStorage.getItem("dark-mode")) {
+    if (auth.state.user?.isDark) {
       setIsDark(true)
     } else {
       setIsDark(false)
