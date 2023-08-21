@@ -28,7 +28,7 @@ export default function HomePage() {
   return (
     <div>
       <div 
-          className="w-11/12 my-8 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          className="w-11/12 my-8 mx-auto  border rounded-lg shadow bg-gray-800 border-gray-700">
           <div className="p-5">
             <h1 className="mb-2 text-3xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
               Welcome {user ? `${user.username}` : "To Blog App"}
