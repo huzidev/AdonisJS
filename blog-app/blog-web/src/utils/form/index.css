@@ -29,3 +29,7 @@
 .form-checkbox-text {
     @apply ml-2 text-sm font-medium cursor-pointer dark:text-white;
 }
+
+.form-input-password {
+    @apply dark:text-white cursor-pointer;
+}

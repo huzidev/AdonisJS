@@ -136,9 +136,9 @@ export default function UserFormPage() {
                     }
                   >
                     {booleanState.valuePass ? (
-                      <RemoveRedEyeOutlinedIcon fontSize="small" className='dark:text-white cursor-pointer' />
+                      <RemoveRedEyeOutlinedIcon fontSize="small" className='form-input-password' />
                     ) : (
-                      <VisibilityOffIcon fontSize="small" className='dark:text-white cursor-pointer' />
+                      <VisibilityOffIcon fontSize="small" className='form-input-password' />
                     )}
                   </span>
                 </div>
@@ -148,7 +148,7 @@ export default function UserFormPage() {
                 >
                   Confirm Password
                 </label>
-                <div className="mt-2 flex items-center ">
+                <div className="mt-2 flex items-center">
                   <input
                     id="cpassword"
                     name="passwordConfirmation"
@@ -167,9 +167,9 @@ export default function UserFormPage() {
                     }
                   >
                     {booleanState.valueConfPass ? (
-                      <RemoveRedEyeOutlinedIcon fontSize="small" className='dark:text-white cursor-pointer' />
+                      <RemoveRedEyeOutlinedIcon fontSize="small" className='form-input-password' />
                     ) : (
-                      <VisibilityOffIcon fontSize="small" className='dark:text-white cursor-pointer' />
+                      <VisibilityOffIcon fontSize="small" className='form-input-password' />
                     )}
                   </span>
                 </div>
