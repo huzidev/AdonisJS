@@ -3,5 +3,5 @@
 @tailwind utilities;    
 
 body {
-    @apply dark:bg-blue-300
+    @apply dark:bg-[#181a1b];
 }

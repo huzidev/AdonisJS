@@ -1,0 +1,3 @@
+.table-data {
+    @apply border-gray-200 bg-white p-5 text-sm;
+}

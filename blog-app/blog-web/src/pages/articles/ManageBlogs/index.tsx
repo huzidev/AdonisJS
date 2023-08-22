@@ -10,6 +10,7 @@ import { useFiltersHook } from "utils/filters";
 import { LoadingList } from "utils/loading";
 import { columns, constKeys } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
+import './styles.css';
 
 export default function ManageBlogsPage() {
   const blogs = useBlogs();
@@ -95,14 +96,14 @@ export default function ManageBlogsPage() {
                     return (
                       // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                       <tr key={userIndex}>
-                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <td className="table-data">
                           <p className="whitespace-no-wrap">{userIndex + 1}</p>
                         </td>
-                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <td className="table-data">
                           <p className="whitespace-no-wrap">{blog.id}</p>
                         </td>
                         {isAdmin && (
-                          <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                          <td className="table-data">
                             <p className="whitespace-no-wrap">
                               {blog.ownerId === uploadedByUserId &&
                                 (uploadedByUserRole === "super-admin"
@@ -111,23 +112,23 @@ export default function ManageBlogsPage() {
                             </p>
                           </td>
                         )}
-                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <td className="table-data">
                           <p className="whitespace-no-wrap">{blog.title}</p>
                         </td>
-                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <td className="table-data">
                           <p className="whitespace-no-wrap">
                             {blog.content.length > 45
                               ? `${blog.content.slice(0, 45)}...`
                               : blog.content}
                           </p>
                         </td>
-                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <td className="table-data">
                           <span className="whitespace-no-wrap">
                             {/* just show dates not time while toLocaleString shows complete date and time */}
                             {new Date(blog.createdAt).toLocaleDateString()}
                           </span>
                         </td>
-                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <td className="table-data">
                           <span
                             className="whitespace-no-wrap"
                             title="Last Update"
@@ -135,7 +136,7 @@ export default function ManageBlogsPage() {
                             {new Date(blog.updatedAt).toLocaleDateString()}
                           </span>
                         </td>
-                        <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                        <td className="table-data">
                           <div className="pl-4">
                             <button
                               className="text-blue-600"
