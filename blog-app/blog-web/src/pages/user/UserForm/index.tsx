@@ -265,7 +265,7 @@ export default function UserFormPage() {
               <>
                 <label
                   htmlFor="username"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="form-heading"
                 >
                   Username
                 </label>
@@ -277,7 +277,7 @@ export default function UserFormPage() {
                     value={updateDetailsMe.username}
                     onChange={inputHandler}
                     required
-                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="form-input"
                   />
                   <label className="mt-4 relative inline-flex items-center cursor-pointer">
                     <input onClick={() => setIsDark(!isDark)} type="checkbox" value="" className="sr-only peer" />
@@ -295,7 +295,7 @@ export default function UserFormPage() {
                     </span>
                   </label>
                   <input
-                    className="flex mt-4 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="form-action mt-4"
                     type="submit"
                     value="Update Details"
                   />
@@ -306,7 +306,7 @@ export default function UserFormPage() {
               <>
                 <label
                   htmlFor="username"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="form-heading"
                 >
                   Username
                 </label>
@@ -318,12 +318,12 @@ export default function UserFormPage() {
                     value={updateDetailsId.username}
                     onChange={inputHandler}
                     required
-                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="form-input"
                   />
                 </div>
                 <label
                   htmlFor="roles"
-                  className="block text-sm font-medium leading-6 my-2 text-gray-900"
+                  className="form-heading mt-2"
                 >
                   Roles
                 </label>
@@ -331,12 +331,12 @@ export default function UserFormPage() {
                   id="roles"
                   name="role" // MANDATORY to use name otherwise the inputHandler won't work
                   value={updateDetailsId.role}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="form-input cursor-pointer"
                   onChange={inputHandler}
                 >
                   {roles.map((role, roleIndex) =>
-                    // if loggedIn user is admin then admin can't update user to super-admin
-                    updateDetailsId.role === "admin" &&
+                    // if loggedIn user is admin then admin can't create user to super-admin
+                    auth.state.user?.role === "admin" &&
                     role === "super-admin" ? null : (
                       <option key={roleIndex} value={role}>
                         {role}
@@ -349,7 +349,7 @@ export default function UserFormPage() {
                     id="checkboxA"
                     type="checkbox"
                     name="isActive"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
+                    className="form-checkbox"
                     checked={updateDetailsId.isActive ? true : false}
                     onClick={() =>
                       setUpdateDetailsId({
@@ -361,7 +361,7 @@ export default function UserFormPage() {
                   />
                   <label
                     htmlFor="checkboxA"
-                    className="ml-2 text-sm font-medium"
+                    className="form-checkbox-text"
                   >
                     {updateDetailsId.isActive ? "Active" : "Not Active"}
                   </label>
@@ -371,7 +371,7 @@ export default function UserFormPage() {
                     id="checkboxB"
                     type="checkbox"
                     name="isBanned"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
+                    className="form-checkbox"
                     checked={updateDetailsId.isBanned ? true : false}
                     onChange={inputHandler}
                     onClick={() =>
@@ -383,7 +383,7 @@ export default function UserFormPage() {
                   />
                   <label
                     htmlFor="checkboxB"
-                    className="ml-2 text-sm font-medium"
+                    className="form-checkbox-text"
                   >
                     {updateDetailsId.isBanned ? "Banned" : "Not Banned"}
                   </label>
@@ -393,7 +393,7 @@ export default function UserFormPage() {
                     id="checkboxV"
                     type="checkbox"
                     name="isVerified"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
+                    className="form-checkbox"
                     checked={updateDetailsId.isVerified ? true : false}
                     onChange={inputHandler}
                     onClick={() =>
@@ -405,14 +405,14 @@ export default function UserFormPage() {
                   />
                   <label
                     htmlFor="checkboxV"
-                    className="ml-2 text-sm font-medium"
+                    className="form-checkbox-text"
                   >
                     {updateDetailsId.isVerified ? "Verified" : "Not Verified"}
                   </label>
                 </div>
                 <div>
                   <input
-                    className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="form-action mt-4"
                     type="submit"
                     value="Update Details"
                   />
