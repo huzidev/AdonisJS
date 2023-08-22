@@ -7,7 +7,7 @@ export default function HomePage() {
   const user = auth.state.user;
 
   return (
-    <div className="dark:darkModeBg">
+    <div>
       <div 
           className="w-11/12 my-8 mx-auto  border rounded-lg shadow bg-gray-800 border-gray-700 dark:bg-#19212c">
           <div className="p-5">

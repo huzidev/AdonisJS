@@ -26,7 +26,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     } else {
       document.documentElement.classList.remove("dark")
     }
-  }, [window.location.pathname])
+  }, [auth.state.initState, window.location.pathname])
 
   console.log("local storage", !!localStorage.getItem("theme"));
 

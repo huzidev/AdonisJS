@@ -20,28 +20,28 @@ export default function AppRouter(): JSX.Element {
   }, [auth.state.initState]);
 
   return (
-    <Router>
-      <Suspense fallback={<PageLoader />}>
-        {isAuthChecked && <Nav />}
-        <Routes>
-          {routes.map(({ Component, ...route }) => {
-            return (
-              <Route
-                {...route}
-                key={route.path}
-                path={route.path}
-                element={
-                  <AuthGuard>
-                    <Component />
-                  </AuthGuard>
-                }
-              />
-            );
-          })}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
-      <ToastContainer />
-    </Router>
+      <Router>
+        <Suspense fallback={<PageLoader />}>
+          {isAuthChecked && <Nav />}
+          <Routes>
+            {routes.map(({ Component, ...route }) => {
+              return (
+                <Route
+                  {...route}
+                  key={route.path}
+                  path={route.path}
+                  element={
+                    <AuthGuard>
+                      <Component />
+                    </AuthGuard>
+                  }
+                />
+              );
+            })}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+        <ToastContainer />
+      </Router>
   );
 }
