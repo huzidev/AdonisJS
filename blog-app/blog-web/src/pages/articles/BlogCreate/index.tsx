@@ -100,7 +100,7 @@ export default function AddBlogPage(): JSX.Element {
           </div>
           <div>
             <input 
-              className="form-action cursor-pointer"
+              className="form-action"
               type="submit" 
               value="Add Blog"
             />

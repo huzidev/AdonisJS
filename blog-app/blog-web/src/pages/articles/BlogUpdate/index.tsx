@@ -132,7 +132,7 @@ export default function UpdateBlogPage(): JSX.Element {
             </div>
             <div>
               <input
-                className="form-action cursor-pointer"
+                className="form-action"
                 type="submit"
                 value="Update Blog"
               />
