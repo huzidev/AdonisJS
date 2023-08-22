@@ -85,10 +85,11 @@ export default function UpdateBlogPage(): JSX.Element {
                   name="title"
                   value={title}
                   type="text"
+                  placeholder={`Edit ${isOwner ? "Yours" : `${ownerName}'s`} Blog title`}
                   required
                   minLength={6}
                   onChange={inputHandler}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white dark:bg-gray-800"
                 />
               </div>
             </div>
@@ -120,7 +121,7 @@ export default function UpdateBlogPage(): JSX.Element {
                     cols={30}
                     rows={10}
                     value={content}
-                    placeholder={`Edit ${isOwner ? "Yours" : `${ownerName}'s`} Blog`}
+                    placeholder={`Edit ${isOwner ? "Yours" : `${ownerName}'s`} Blog content`}
                     required
                     onChange={inputHandler}
                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white dark:bg-gray-800"
