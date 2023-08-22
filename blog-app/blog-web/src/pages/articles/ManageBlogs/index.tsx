@@ -38,6 +38,8 @@ export default function ManageBlogsPage() {
 
   const isLoading = blogs.state.getBlogsList.loading;
     
+    console.log("currentPage", currentPage);
+
   return (
     <div className="table-main">
       <div className="content">
@@ -197,8 +199,7 @@ export default function ManageBlogsPage() {
                       </button>
                       <button
                         className="table-footer-actions mr-2"
-                        onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + 1)
-                        }
+                        onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + 1)}
                       >
                         First
                       </button>
@@ -224,21 +225,22 @@ export default function ManageBlogsPage() {
           }
         </div>
         {
-        !isLoading && !allBlogs.length && (
-          <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h1 className="text-lg mb-6 font-bold tracking-tight text-white"></h1>
-            Oops... {isAdmin ? "No one have" : "You haven't"} uploaded any blog
-            yet.
-            <Link
-              to={ROUTE_PATHS.ARTICLE_CREATE}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-              title="Add Blog"
-            >
-              {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
-              Add Blog
-            </Link>
-          </div>
-        )
+          !isLoading && !allBlogs.length && (
+            <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
+                {/* Oops... {isAdmin ? "No one has" : "You haven't"} uploaded any blog yet. */}
+                Oops... No one has uploaded any blog yet.
+              </h1>
+              <Link
+                to={ROUTE_PATHS.ARTICLE_CREATE}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                title="Add Blog"
+              >
+                {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
+                Add Blog
+              </Link>
+            </div>
+          )
         }
     </div>
   );
