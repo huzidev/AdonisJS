@@ -7,8 +7,8 @@ import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
-import 'utils/global.css';
 import { LoadingList } from "utils/loading";
+import 'utils/table/index.css';
 import { columns, constKeys } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
 
