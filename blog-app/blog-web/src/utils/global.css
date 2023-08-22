@@ -1,0 +1,15 @@
+.table-main {
+    @apply mx-auto max-w-7xl px-4 py-8 sm:px-8;
+}
+
+.headings {
+    @apply flex items-center justify-between pb-6;
+}
+
+.table-header {
+    @apply bg-blue-600 text-left text-xs font-semibold tracking-widest text-white;
+}
+
+.table-content {
+    @apply  border-gray-200 p-5 text-sm dark:bg-[#1f2937] dark:text-gray-400;
+}

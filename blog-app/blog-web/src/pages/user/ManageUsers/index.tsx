@@ -5,11 +5,13 @@ import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
+import 'utils/global.css';
 import { LoadingList } from "utils/loading";
 import {
   columns, constKeys
 } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
+
 
 export default function ManageUsersPage() {
   const user = useUser();
@@ -26,8 +28,8 @@ export default function ManageUsersPage() {
   const isLoading = user.state.getUserPage.loading;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
-      <div className="flex items-center justify-between pb-6">
+    <div className="table-main">
+      <div className="headings">
         <div>
           <h2 className="font-semibold text-gray-700">Manage Users</h2>
           <span className="text-xs text-gray-500">
@@ -59,7 +61,7 @@ export default function ManageUsersPage() {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
+              <tr className="table-header">
                 {columns.map((data, columnIndex) => (
                   // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                   <th
@@ -87,48 +89,48 @@ export default function ManageUsersPage() {
               ) : (allUsers?.map((user, userIndex) => (
                 // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                 <tr key={userIndex}>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <p className="whitespace-no-wrap">{userIndex + 1}</p>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <p className="whitespace-no-wrap">{user.id}</p>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <p className="whitespace-no-wrap">{user.username}</p>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <p className="whitespace-no-wrap">{user.email}</p>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <p className="whitespace-no-wrap">{user.role}</p>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <p className="whitespace-no-wrap">
                       {user.isVerified ? "True" : "False"}
                     </p>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <span className="whitespace-no-wrap">
                       {user.isBanned ? "True" : "False"}
                     </span>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <span className="whitespace-no-wrap">
                       {user.isActive ? "True" : "False"}
                     </span>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <span className="whitespace-no-wrap">
                       {/* just show dates not time while toLocaleString shows complete date and time */}
                       {new Date(user.createdAt).toLocaleDateString()}
                     </span>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <span className="whitespace-no-wrap" title="Last Update">
                       {new Date(user.updatedAt).toLocaleDateString()}
                     </span>
                   </td>
-                  <td className="border-gray-200 bg-white p-5 text-sm">
+                  <td className="table-content">
                     <div>
                       {/* so admin can't get the access to edit super-admin */}
                       {auth.state.user &&

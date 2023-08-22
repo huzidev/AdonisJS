@@ -7,6 +7,7 @@ import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
+import 'utils/global.css';
 import { LoadingList } from "utils/loading";
 import { columns, constKeys } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
@@ -39,8 +40,8 @@ export default function ManageBlogsPage() {
   const isLoading = blogs.state.getBlogsList.loading;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8">
-      <div className="flex items-center justify-between pb-6">
+    <div className="table-main">
+      <div className="headings">
         <div>
           <h2 className="font-semibold text-gray-700">
             {isAdmin ? "Manage Blogs" : "Manage Your Blogs"}
@@ -54,7 +55,7 @@ export default function ManageBlogsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-blue-600 text-left text-xs font-semibold tracking-widest text-white">
+                <tr className="table-header">
                   {columns.map((data, columnIndex) =>
                     // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                     // So uploaded by won't be shown when blogger clikced on manage blogs uploaded by will only be visible when admin state is true
@@ -79,10 +80,10 @@ export default function ManageBlogsPage() {
               <tbody className="text-gray-500">
                 {isLoading ?  (
                   <tr>
-                  <td colSpan={12}>
-                    <LoadingList />
-                  </td>
-                </tr> 
+                    <td colSpan={12}>
+                      <LoadingList />
+                    </td>
+                  </tr> 
                 ) : (
                   allBlogs?.map((blog, userIndex) => {
                     const uploadedByUser = allUsers?.find(
@@ -96,14 +97,14 @@ export default function ManageBlogsPage() {
                     return (
                       // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                       <tr key={userIndex}>
-                        <td className="table-data">
+                        <td className="table-content">
                           <p className="whitespace-no-wrap">{userIndex + 1}</p>
                         </td>
-                        <td className="table-data">
+                        <td className="table-content">
                           <p className="whitespace-no-wrap">{blog.id}</p>
                         </td>
                         {isAdmin && (
-                          <td className="table-data">
+                          <td className="table-content">
                             <p className="whitespace-no-wrap">
                               {blog.ownerId === uploadedByUserId &&
                                 (uploadedByUserRole === "super-admin"
@@ -112,23 +113,23 @@ export default function ManageBlogsPage() {
                             </p>
                           </td>
                         )}
-                        <td className="table-data">
+                        <td className="table-content">
                           <p className="whitespace-no-wrap">{blog.title}</p>
                         </td>
-                        <td className="table-data">
+                        <td className="table-content">
                           <p className="whitespace-no-wrap">
                             {blog.content.length > 45
                               ? `${blog.content.slice(0, 45)}...`
                               : blog.content}
                           </p>
                         </td>
-                        <td className="table-data">
+                        <td className="table-content">
                           <span className="whitespace-no-wrap">
                             {/* just show dates not time while toLocaleString shows complete date and time */}
                             {new Date(blog.createdAt).toLocaleDateString()}
                           </span>
                         </td>
-                        <td className="table-data">
+                        <td className="table-content">
                           <span
                             className="whitespace-no-wrap"
                             title="Last Update"
@@ -136,7 +137,7 @@ export default function ManageBlogsPage() {
                             {new Date(blog.updatedAt).toLocaleDateString()}
                           </span>
                         </td>
-                        <td className="table-data">
+                        <td className="table-content">
                           <div className="flex">
                             <button
                               className="text-blue-600 md:hover:text-blue-500 dark:text-white"
