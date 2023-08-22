@@ -36,7 +36,7 @@ export default function ViewBlogPage(): JSX.Element {
 
   return (
     <div>
-      <div className="w-2/3 my-8 mx-auto border  rounded-lg shadow bg-gray-800 border-gray-700">
+      <div className="w-2/3 my-8 mx-auto border rounded-lg shadow bg-gray-800 border-gray-700">
         {owner?.isBanned ? (
           <div className="flex justify-center py-32">
             <p className="text-xl">

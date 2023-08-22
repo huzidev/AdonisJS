@@ -2,7 +2,7 @@ import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { columns } from "pages/articles/Blogs/data";
 import { useBlogsPageHooks } from "pages/articles/Blogs/hooks";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -27,19 +27,19 @@ export default function ViewProfilePage(): JSX.Element {
   let totalBlogs = blogState.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogState.getFavoriteBlogs.meta?.total;
 
-  const [theme, setTheme] = useState<boolean>(false);
+  // const [theme, setTheme] = useState<boolean>(false);
 
   const isLoadingUser = user.state.getUser.loading;
   const isLoadingBlogs = blogState.getBlogsById.loading;
   const isLoadingFvrtBlogs = blogState.getFavoriteBlogs.loading;
 
-  useEffect(() => {
-    if (theme === true) {
-     document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme])
+  // useEffect(() => {
+  //   if (theme === true) {
+  //    document.documentElement.classList.add("dark");
+  //   } else {
+  //     document.documentElement.classList.remove("dark");
+  //   }
+  // }, [theme])
   
   const {
     userDetails,
@@ -362,9 +362,9 @@ export default function ViewProfilePage(): JSX.Element {
                       </button>
                     )
                 }
-                <button onClick={() => setTheme(!theme)}>
+                {/* <button onClick={() => setTheme(!theme)}>
                   Dark Mode
-                </button>
+                </button> */}
               </div>
             </>
           )}
