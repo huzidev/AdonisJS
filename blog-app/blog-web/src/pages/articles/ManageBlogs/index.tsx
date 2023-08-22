@@ -173,23 +173,36 @@ export default function ManageBlogsPage() {
           </div>
           {
             !isLoading && (
-              <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
-                <span className="text-xs text-gray-600 sm:text-sm">
-                  Showing {currentPage} of {lastPage}
+              <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between dark:bg-gray-800 dark:border-gray-700">
+                <span className="text-xs text-gray-600 sm:text-sm dark:text-white">
+                  Showing {currentPage} of 
+                  <button className="text-blue-300" onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + lastPage)}>
+                    &nbsp;
+                    {lastPage}
+                  </button> 
                 </span>
                 <div className="mt-2 inline-flex sm:mt-0">
                   {currentPage !== 1 && (
-                    <button
-                      className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
-                      onClick={() =>
-                        navigate(
-                          ROUTE_PATHS.ARTICLES_PAGE +
-                            (currentPage! - 1 + window.location.search)
-                        )
-                      }
-                    >
-                      Prev
-                    </button>
+                    <div>
+                      <button
+                        className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
+                        onClick={() =>
+                          navigate(
+                            ROUTE_PATHS.ARTICLES_PAGE +
+                              (currentPage! - 1 + window.location.search)
+                          )
+                        }
+                      >
+                        Prev
+                      </button>
+                      <button
+                        className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
+                        onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + 1)
+                        }
+                      >
+                        First
+                      </button>
+                    </div>
                   )}
                   {currentPage !== lastPage && (
                     <button
