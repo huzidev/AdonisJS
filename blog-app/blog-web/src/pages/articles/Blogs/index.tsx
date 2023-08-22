@@ -29,7 +29,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
   
   return (
-    <div className="w-10/12 m-auto flex flex-col dark:bg-blue-700">
+    <div className="w-10/12 m-auto flex flex-col dark:bg-slate-800">
       <div>
         {sortValue.value && (
           <button
