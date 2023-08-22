@@ -11,7 +11,6 @@ import 'utils/global.css';
 import { LoadingList } from "utils/loading";
 import { columns, constKeys } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
-import './styles.css';
 
 export default function ManageBlogsPage() {
   const blogs = useBlogs();
@@ -140,7 +139,7 @@ export default function ManageBlogsPage() {
                         <td className="table-content">
                           <div className="flex">
                             <button
-                              className="text-blue-600 md:hover:text-blue-500 dark:text-white"
+                              className="table-content-actions"
                               onClick={() =>  
                                 navigate(
                                   (auth.state.user?.role === "admin" &&
@@ -157,7 +156,7 @@ export default function ManageBlogsPage() {
                             </button>
                             {auth.state.user?.role === "super-admin" && (
                               <button
-                                className="text-blue-600 md:hover:text-blue-500 dark:text-white"  
+                                className="table-content-actions"  
                                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
                               >
                                 &nbsp;
@@ -174,8 +173,8 @@ export default function ManageBlogsPage() {
           </div>
           {
             !isLoading && (
-              <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between dark:bg-gray-800 dark:border-gray-700">
-                <span className="text-xs text-gray-600 sm:text-sm dark:text-white">
+              <div className="table-footer">
+                <span className="table-footer-content">
                   Showing {currentPage} of 
                   <button className="text-blue-300" onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + lastPage)}>
                     &nbsp;
@@ -186,7 +185,7 @@ export default function ManageBlogsPage() {
                   {currentPage !== 1 && (
                     <div>
                       <button
-                        className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
+                        className="table-footer-actions mr-2"
                         onClick={() =>
                           navigate(
                             ROUTE_PATHS.ARTICLES_PAGE +
@@ -197,7 +196,7 @@ export default function ManageBlogsPage() {
                         Prev
                       </button>
                       <button
-                        className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
+                        className="table-footer-actions mr-2"
                         onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + 1)
                         }
                       >
@@ -207,7 +206,7 @@ export default function ManageBlogsPage() {
                   )}
                   {currentPage !== lastPage && (
                     <button
-                      className="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
+                      className="table-footer-actions"
                       onClick={() =>
                         navigate(
                           ROUTE_PATHS.ARTICLES_PAGE +

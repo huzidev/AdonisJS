@@ -13,3 +13,19 @@
 .table-content {
     @apply  border-gray-200 p-5 text-sm dark:bg-[#1f2937] dark:text-gray-400;
 }
+
+.table-content-actions {
+    @apply text-blue-600 md:hover:text-blue-500 dark:text-white;
+}
+
+.table-footer-content {
+    @apply text-xs text-gray-600 sm:text-sm dark:text-white;
+}
+
+.table-footer {
+    @apply flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between dark:bg-gray-800 dark:border-gray-700;
+}
+
+.table-footer-actions {
+    @apply h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100;
+}

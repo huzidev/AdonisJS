@@ -136,7 +136,7 @@ export default function ManageUsersPage() {
                       {auth.state.user &&
                       !hasPermission(user.role, auth.state.user.role) ? (
                         <button
-                          className="text-blue-600"
+                          className="table-content-actions"
                           // if admin clicked on own self then redirect to EditProfile instead on EditUser
                           onClick={() =>
                             navigate(ROUTE_PATHS.VIEW_PROFILE + user.id)
@@ -147,7 +147,7 @@ export default function ManageUsersPage() {
                       ) : (
                         <div>
                           <button
-                            className="text-blue-600"
+                            className="table-content-actions"
                             // if admin clicked on own self then redirect to EditProfile instead on EditUser
                             onClick={() =>
                               navigate(
@@ -161,7 +161,7 @@ export default function ManageUsersPage() {
                             Edit
                           </button>
                           <button
-                            className="text-blue-600"
+                            className="table-content-actions"
                             // if admin clicked on own self then redirect to EditProfile instead on EditUser
                             onClick={() =>
                               navigate(
@@ -187,14 +187,14 @@ export default function ManageUsersPage() {
         {
           // only show Next, Prev button when loading is completed
           (!isLoading && allUsers) && (
-          <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
-            <span className="text-xs text-gray-600 sm:text-sm">
+          <div className="table-footer">
+            <span className="table-footer-content">
               Showing {currentPage} of {lastPage}
             </span>
             <div className="mt-2 inline-flex sm:mt-0">
               {currentPage !== 1 && (
                 <button
-                  className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
+                  className="table-footer-actions mr-2"
                   onClick={() =>
                     navigate(
                       ROUTE_PATHS.USERS_PAGE +
@@ -207,7 +207,7 @@ export default function ManageUsersPage() {
               )}
               {currentPage !== lastPage && (
                 <button
-                  className="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100"
+                  className="table-footer-actions"
                   onClick={() =>
                     navigate(
                       ROUTE_PATHS.USERS_PAGE +
