@@ -69,7 +69,7 @@ export default function ViewProfilePage(): JSX.Element {
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
 
   return (
-      <div>
+      <div className="dark:bg-blue-800">
         <div className={`w-11/12 my-5 mx-auto border bg-gray-800 rounded-lg shadow border-gray-700`}>
           <div className="p-5">
             {userDataById?.isBanned ? (
