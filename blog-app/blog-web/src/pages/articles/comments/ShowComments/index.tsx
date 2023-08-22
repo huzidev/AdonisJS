@@ -102,7 +102,7 @@ export default function ShowCommentsPage({
               {(isCommentAuthor || (isAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
                 <Link
                   to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
-                  className="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white dark:text-white"
                 >
                   Edit
                 </Link>
@@ -114,7 +114,7 @@ export default function ShowCommentsPage({
                 (isAdmin && !isAuthorSuperAdmin) ||
                 (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
                 <button
-                  className="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white dark:text-white"
                   onClick={() => commentFunc.deleteComment(comment.id)}
                 >
                   Delete
