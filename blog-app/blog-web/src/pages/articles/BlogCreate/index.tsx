@@ -28,7 +28,7 @@ export default function AddBlogPage(): JSX.Element {
   return (
     <div>
       <div className="main">
-        <div className="main-heading">
+        <div className="form">
           <img
             className="mx-auto h-10 w-auto"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -38,11 +38,11 @@ export default function AddBlogPage(): JSX.Element {
             Add Blog
           </h2>
         </div>
-        <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form onSubmit={submit} className="form mt-6">
           <div className="mb-3">
             <label
               htmlFor="title"
-              className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+              className="form-heading"
             >
               Blog Title
             </label>
@@ -55,7 +55,7 @@ export default function AddBlogPage(): JSX.Element {
                 required
                 minLength={6}
                 onChange={inputHandler}
-                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white dark:bg-gray-800"
+                className="form-input"
                 placeholder="Write your blog title here..."
               />
             </div>
@@ -63,7 +63,7 @@ export default function AddBlogPage(): JSX.Element {
           <div className="mb-3">
             <label
               htmlFor="image"
-              className="block mb-2 text-sm font-medium leading-6 text-gray-900 dark:text-white"
+              className="form-heading mb-2"
             >
               Image
             </label>
@@ -73,14 +73,14 @@ export default function AddBlogPage(): JSX.Element {
               required
               onChange={inputHandler}
               value={image}
-              className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="form-input"
             />
           </div>
           <div className="mb-6">
             <div>
               <label
                 htmlFor="content"
-                className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                className="form-heading"
               >
                 Content
               </label>
@@ -92,7 +92,7 @@ export default function AddBlogPage(): JSX.Element {
                   rows={10}
                   required
                   onChange={inputHandler}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white dark:bg-gray-800"
+                  className="form-input"
                   placeholder="Write yours blog content here..."
                 ></textarea>
               </div>
@@ -100,7 +100,7 @@ export default function AddBlogPage(): JSX.Element {
           </div>
           <div>
             <input 
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="form-action "
               type="submit" 
               value="Add Blog"
             />
