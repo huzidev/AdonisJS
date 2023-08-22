@@ -259,13 +259,13 @@ export default function ViewProfilePage(): JSX.Element {
                               <Link
                                 to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
                                 type="button"
-                                className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                                className="button"
                               >
                                 Edit
                               </Link>
                               <button
                                 type="button"
-                                className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
+                                className="button ml-4"
                                 // onClick={() => blogs.deleteBlog(blog.id)}
                                 onClick={() => {
                                   setDeleteBlogId(blog.id);
