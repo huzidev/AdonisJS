@@ -29,10 +29,10 @@ export default function ManageUsersPage() {
 
   return (
     <div className="table-main">
-      <div className="headings">
+      <div className="content">
         <div>
-          <h2 className="font-semibold text-gray-700">Manage Users</h2>
-          <span className="text-xs text-gray-500">
+          <h2 className="headings-content">Manage Users</h2>
+          <span className="text-content">
             View accounts of registered users
           </span>
         </div>

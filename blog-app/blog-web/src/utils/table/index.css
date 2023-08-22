@@ -2,8 +2,16 @@
     @apply mx-auto max-w-7xl px-4 py-8 sm:px-8;
 }
 
-.headings {
+.content {
     @apply flex items-center justify-between pb-6;
+}
+
+.headings-content {
+    @apply font-semibold text-gray-700 dark:text-white;
+}
+
+.text-content {
+    @apply text-xs text-gray-500 dark:text-white;
 }
 
 .table-header {

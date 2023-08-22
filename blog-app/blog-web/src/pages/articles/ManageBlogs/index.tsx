@@ -37,15 +37,15 @@ export default function ManageBlogsPage() {
   useManageBlogsPageHooks();
 
   const isLoading = blogs.state.getBlogsList.loading;
-
+    
   return (
     <div className="table-main">
-      <div className="headings">
+      <div className="content">
         <div>
-          <h2 className="font-semibold text-gray-700">
+          <h2 className="headings-content">
             {isAdmin ? "Manage Blogs" : "Manage Your Blogs"}
           </h2>
-          <span className="text-xs text-gray-500">
+          <span className="text-content">
             {`View ${isAdmin ? "all uploaded blogs" : "blogs uploaded by you"}`}
           </span>
         </div>
