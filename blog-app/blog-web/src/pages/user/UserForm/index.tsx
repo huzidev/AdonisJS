@@ -194,7 +194,7 @@ export default function UserFormPage() {
                   id="roles"
                   name="role" // MANDATORY to use name otherwise the inputHandler won't work
                   value={createUser.role}
-                  className="form-input"
+                  className="form-input cursor-pointer"
                   onChange={inputHandler}
                 >
                   {roles.map((role, roleIndex) =>
