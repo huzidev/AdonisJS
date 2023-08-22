@@ -90,7 +90,7 @@ export default function UpdateBlogPage(): JSX.Element {
                   required
                   minLength={6}
                   onChange={inputHandler}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white dark:bg-gray-800"
+                  className="form-input"
                 />
               </div>
             </div>
@@ -125,14 +125,14 @@ export default function UpdateBlogPage(): JSX.Element {
                     placeholder={`Edit ${isOwner ? "Yours" : `${ownerName}'s`} Blog content`}
                     required
                     onChange={inputHandler}
-                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white dark:bg-gray-800"
+                    className="form-input"
                   ></textarea>
                 </div>
               </div>
             </div>
             <div>
               <input
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="form-action cursor-pointer"
                 type="submit"
                 value="Update Blog"
               />
