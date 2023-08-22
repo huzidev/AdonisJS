@@ -73,7 +73,7 @@ export default function AddBlogPage(): JSX.Element {
               required
               onChange={inputHandler}
               value={image}
-              className="form-input"
+              className="form-input cursor-pointer"
             />
           </div>
           <div className="mb-6">
@@ -100,7 +100,7 @@ export default function AddBlogPage(): JSX.Element {
           </div>
           <div>
             <input 
-              className="form-action "
+              className="form-action cursor-pointer"
               type="submit" 
               value="Add Blog"
             />
