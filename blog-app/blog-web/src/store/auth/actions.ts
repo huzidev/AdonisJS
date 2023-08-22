@@ -10,10 +10,10 @@ import { AuthSignInPayload, AuthSignUpPayload, User } from "./types";
 export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: AuthSignUpPayload): Promise<User | null>  => {
     try {
         const response = await api.post(endpoints.SIGN_UP, data);
-         if (response.data) {
-            setToken(response.data.token);
-            await storage.setItem(KEYS.TOKEN, response.data.token);
-        }
+        //  if (response.data) {
+        //     setToken(response.data.token);
+        //     await storage.setItem(KEYS.TOKEN, response.data.token);
+        // }
         // localStorage.getItem(KEYS.TOKEN);
         console.log("Sign Up resp", response.data);
         return response.data;
@@ -31,9 +31,9 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: AuthSignI
         if (response.data) {
             const role = response.data.data.role;
             if (role === "super-admin") {
-                await storage.setItem("dark-mode", role + "Hello world");
+                await storage.setItem("theme", "dark");
             } else {
-                storage.removeItem("dark-mode");
+                storage.removeItem("theme");
             }
             setToken(response.data.token);
             await storage.setItem(KEYS.TOKEN, response.data.token);
@@ -72,7 +72,7 @@ export const initUser = createAsyncThunk(endpoints.USER_DETAILS, async (): Promi
         }
         return null;
     } catch (e: any) {
-        await storage.removeItem(KEYS.TOKEN);
+        storage.removeItem(KEYS.TOKEN);
         setToken(null);
         const err = mapErrorToState(e);
         errorNotification(err);
