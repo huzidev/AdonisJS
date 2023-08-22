@@ -1,0 +1,15 @@
+.main {
+    @apply flex min-h-full flex-col justify-center px-6 py-12 lg:px-8;
+}
+
+.main-heading {
+    @apply sm:mx-auto sm:w-full sm:max-w-sm;
+}
+
+.main-heading-content {
+    @apply mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white;
+}
+
+.form {
+    @apply mt-6 sm:mx-auto sm:w-full sm:max-w-sm;
+}
