@@ -136,9 +136,9 @@ export default function UserFormPage() {
                     }
                   >
                     {booleanState.valuePass ? (
-                      <RemoveRedEyeOutlinedIcon fontSize="small" />
+                      <RemoveRedEyeOutlinedIcon fontSize="small" className='dark:text-white cursor-pointer' />
                     ) : (
-                      <VisibilityOffIcon fontSize="small" />
+                      <VisibilityOffIcon fontSize="small" className='dark:text-white cursor-pointer' />
                     )}
                   </span>
                 </div>
@@ -148,7 +148,7 @@ export default function UserFormPage() {
                 >
                   Confirm Password
                 </label>
-                <div className="mt-2 flex items-center">
+                <div className="mt-2 flex items-center ">
                   <input
                     id="cpassword"
                     name="passwordConfirmation"
@@ -156,7 +156,7 @@ export default function UserFormPage() {
                     value={createUser.passwordConfirmation}
                     onChange={inputHandler}
                     required
-                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="form-input"
                   />
                   <span
                     onClick={() =>
@@ -167,9 +167,9 @@ export default function UserFormPage() {
                     }
                   >
                     {booleanState.valueConfPass ? (
-                      <RemoveRedEyeOutlinedIcon fontSize="small" />
+                      <RemoveRedEyeOutlinedIcon fontSize="small" className='dark:text-white cursor-pointer' />
                     ) : (
-                      <VisibilityOffIcon fontSize="small" />
+                      <VisibilityOffIcon fontSize="small" className='dark:text-white cursor-pointer' />
                     )}
                   </span>
                 </div>
@@ -194,7 +194,7 @@ export default function UserFormPage() {
                   id="roles"
                   name="role" // MANDATORY to use name otherwise the inputHandler won't work
                   value={createUser.role}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="form-input"
                   onChange={inputHandler}
                 >
                   {roles.map((role, roleIndex) =>
@@ -212,7 +212,7 @@ export default function UserFormPage() {
                     id="checkbox"
                     type="checkbox"
                     name="isActive"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
+                    className="form-checkbox"
                     checked={createUser.isActive ? true : false}
                     onClick={() =>
                       setCreateUser({
@@ -224,7 +224,7 @@ export default function UserFormPage() {
                   />
                   <label
                     htmlFor="checkbox"
-                    className="ml-2 text-sm font-medium"
+                    className="form-checkbox-text"
                   >
                     {createUser.isActive ? "Active" : "Not Active"}
                   </label>
@@ -234,7 +234,7 @@ export default function UserFormPage() {
                     id="checkboxV"
                     type="checkbox"
                     name="isVerified"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
+                    className="form-checkbox"
                     checked={createUser.isVerified ? true : false}
                     onChange={inputHandler}
                     onClick={() =>
@@ -246,7 +246,7 @@ export default function UserFormPage() {
                   />
                   <label
                     htmlFor="checkboxV"
-                    className="ml-2 text-sm font-medium"
+                    className="form-checkbox-text"
                   >
                     {createUser.isVerified ? "Verified" : "Not Verified"}
                   </label>
