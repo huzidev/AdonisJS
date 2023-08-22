@@ -28,8 +28,6 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     }
   }, [auth.state.initState, window.location.pathname])
 
-  console.log("local storage", !!localStorage.getItem("theme"));
-
   useEffect(() => {
       if (stateSingOut.loading) {
         setLoading(true)

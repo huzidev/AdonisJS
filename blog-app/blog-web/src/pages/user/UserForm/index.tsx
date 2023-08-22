@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
+import 'utils/form/index.css';
 import { LoadingList, LoadingThreeDots } from "utils/loading";
 import { detailsBoolean } from "./data";
 import { useUserFormHook } from "./hooks";
@@ -53,7 +54,7 @@ export default function UserFormPage() {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="main-heading-content">
             {isCreate ? (
               "Create User"
             ) : // using ref Hook value.current so the username field won't re-render when admin edit the username
@@ -69,7 +70,7 @@ export default function UserFormPage() {
         </div>
         <form
           onSubmit={submit}
-          className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm"
+          className="form mt-6"
         >
           <div>
             {/* admin creating the user */}
@@ -77,7 +78,7 @@ export default function UserFormPage() {
               <>
                 <label
                   htmlFor="username"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="form-heading"
                 >
                   Username
                 </label>
@@ -90,12 +91,12 @@ export default function UserFormPage() {
                     onChange={inputHandler}
                     minLength={4}
                     required
-                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="form-input"
                   />
                 </div>
                 <label
                   htmlFor="email"
-                  className="block mt-2 text-sm font-medium leading-6 text-gray-900"
+                  className="form-heading mt-2"
                 >
                   Email
                 </label>
@@ -107,12 +108,12 @@ export default function UserFormPage() {
                     value={createUser.email}
                     onChange={inputHandler}
                     required
-                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="form-input"
                   />
                 </div>
                 <label
                   htmlFor="password"
-                  className="block mt-2 text-sm font-medium leading-6 text-gray-900"
+                  className="form-heading mt-2"
                 >
                   Password
                 </label>
@@ -124,7 +125,7 @@ export default function UserFormPage() {
                     value={createUser.password}
                     onChange={inputHandler}
                     required
-                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="form-input"
                   />
                   <span
                     onClick={() =>
@@ -143,7 +144,7 @@ export default function UserFormPage() {
                 </div>
                 <label
                   htmlFor="cpassword"
-                  className="block mt-2 text-sm font-medium leading-6 text-gray-900"
+                  className="form-heading mt-2"
                 >
                   Confirm Password
                 </label>
@@ -185,7 +186,7 @@ export default function UserFormPage() {
                 </p>
                 <label
                   htmlFor="roles"
-                  className="block text-sm font-medium leading-6 my-2 text-gray-900"
+                  className="form-heading mt-2"
                 >
                   Roles
                 </label>
