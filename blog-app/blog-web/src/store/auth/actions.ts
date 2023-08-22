@@ -31,7 +31,7 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: AuthSignI
         if (response.data) {
             const role = response.data.data.role;
             if (role === "super-admin") {
-                await storage.setItem("dark-mode", role);
+                await storage.setItem("dark-mode", role + "Hello world");
             } else {
                 storage.removeItem("dark-mode");
             }

@@ -10,6 +10,7 @@ import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { LoaderSpin, LoadingListBlogs, LoadingThreeDots, LoadingUser } from "utils/loading";
 import { useViewProfilePageHook } from "./hooks";
+import './styles.css';
 
 export default function ViewProfilePage(): JSX.Element {
   const auth = useAuth();
@@ -69,7 +70,7 @@ export default function ViewProfilePage(): JSX.Element {
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
 
   return (
-      <div className="dark:bg-blue-800">
+      <div className="dark:bg-blue-900">
         <div className={`w-11/12 my-5 mx-auto border bg-gray-800 rounded-lg shadow border-gray-700`}>
           <div className="p-5">
             {userDataById?.isBanned ? (
@@ -87,19 +88,19 @@ export default function ViewProfilePage(): JSX.Element {
                   <LoadingUser />
                 ) : (
                   <>
-                    <h2 className="mb-4 text-xl font-bold tracking-tight text-white">
+                    <h2 className="user-details">
                       Id : {userDetails.id}
                     </h2>
-                    <h2 className="mb-4 text-xl font-bold tracking-tight text-white">
+                    <h2 className="user-details">
                       Name : {userDetails.username + ` (${userDetails.role})`}
                     </h2>
-                    <h2 className="mb-4 text-xl font-bold tracking-tight text-white">
+                    <h2 className="user-details">
                       Email : {userDetails.email}
                     </h2>
-                    <h2 className="mb-4 text-xl font-bold tracking-tight text-white">
+                    <h2 className="user-details">
                       Joined Date : {formatedDate}
                     </h2>
-                    <h2 className="mb-4 text-xl flex font-bold tracking-tight text-white">
+                    <h2 className="user-details">
                       {(isUser && isMe) ||
                       user.state.getUser.data?.role === "user"
                         ? `Total Blogs Liked : `
