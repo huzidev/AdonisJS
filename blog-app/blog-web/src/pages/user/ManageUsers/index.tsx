@@ -6,12 +6,9 @@ import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
 import { LoadingList } from "utils/loading";
-import 'utils/table/index.css';
-import {
-  columns, constKeys
-} from "./data";
+import "utils/table/index.css";
+import { columns, constKeys } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
-
 
 export default function ManageUsersPage() {
   const user = useUser();
@@ -85,142 +82,158 @@ export default function ManageUsersPage() {
                   <td colSpan={12}>
                     <LoadingList />
                   </td>
-                </tr>                
-              ) : (allUsers?.map((user, userIndex) => (
-                // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
-                <tr key={userIndex}>
-                  <td className="table-content">
-                    <p className="whitespace-no-wrap">{userIndex + 1}</p>
-                  </td>
-                  <td className="table-content">
-                    <p className="whitespace-no-wrap">{user.id}</p>
-                  </td>
-                  <td className="table-content">
-                    <p className="whitespace-no-wrap">{user.username}</p>
-                  </td>
-                  <td className="table-content">
-                    <p className="whitespace-no-wrap">{user.email}</p>
-                  </td>
-                  <td className="table-content">
-                    <p className="whitespace-no-wrap">{user.role}</p>
-                  </td>
-                  <td className="table-content">
-                    <p className="whitespace-no-wrap">
-                      {user.isVerified ? "True" : "False"}
-                    </p>
-                  </td>
-                  <td className="table-content">
-                    <span className="whitespace-no-wrap">
-                      {user.isBanned ? "True" : "False"}
-                    </span>
-                  </td>
-                  <td className="table-content">
-                    <span className="whitespace-no-wrap">
-                      {user.isActive ? "True" : "False"}
-                    </span>
-                  </td>
-                  <td className="table-content">
-                    <span className="whitespace-no-wrap">
-                      {/* just show dates not time while toLocaleString shows complete date and time */}
-                      {new Date(user.createdAt).toLocaleDateString()}
-                    </span>
-                  </td>
-                  <td className="table-content">
-                    <span className="whitespace-no-wrap" title="Last Update">
-                      {new Date(user.updatedAt).toLocaleDateString()}
-                    </span>
-                  </td>
-                  <td className="table-content">
-                    <div>
-                      {/* so admin can't get the access to edit super-admin */}
-                      {auth.state.user &&
-                      !hasPermission(user.role, auth.state.user.role) ? (
-                        <button
-                          className="table-content-actions"
-                          // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                          onClick={() =>
-                            navigate(ROUTE_PATHS.VIEW_PROFILE + user.id)
-                          }
-                        >
-                          View Profile
-                        </button>
-                      ) : (
-                        <div>
-                          <button
-                            className="table-content-actions"
-                            // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                            onClick={() =>
-                              navigate(
-                                ROUTE_PATHS.EDIT_USER +
-                                  (user.id === auth.state.user?.id
-                                    ? "me"
-                                    : user.id)
-                              )
-                            }
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="table-content-actions"
-                            // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                            onClick={() =>
-                              navigate(
-                                ROUTE_PATHS.VIEW_PROFILE +
-                                  (user.id === auth.state.user?.id
-                                    ? "me"
-                                    : user.id)
-                              )
-                            }
-                          >
-                            &nbsp;
-                            View
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </td>
                 </tr>
-              )))}
+              ) : (
+                allUsers?.map((user, userIndex) => (
+                  // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
+                  <tr key={userIndex}>
+                    <td className="table-content">
+                      <p className="whitespace-no-wrap">{userIndex + 1}</p>
+                    </td>
+                    <td className="table-content">
+                      <p className="whitespace-no-wrap">{user.id}</p>
+                    </td>
+                    <td className="table-content">
+                      <p className="whitespace-no-wrap">{user.username}</p>
+                    </td>
+                    <td className="table-content">
+                      <p className="whitespace-no-wrap">{user.email}</p>
+                    </td>
+                    <td className="table-content">
+                      <p className="whitespace-no-wrap">{user.role}</p>
+                    </td>
+                    <td className="table-content">
+                      <p className="whitespace-no-wrap">
+                        {user.isVerified ? "True" : "False"}
+                      </p>
+                    </td>
+                    <td className="table-content">
+                      <span className="whitespace-no-wrap">
+                        {user.isBanned ? "True" : "False"}
+                      </span>
+                    </td>
+                    <td className="table-content">
+                      <span className="whitespace-no-wrap">
+                        {user.isActive ? "True" : "False"}
+                      </span>
+                    </td>
+                    <td className="table-content">
+                      <span className="whitespace-no-wrap">
+                        {/* just show dates not time while toLocaleString shows complete date and time */}
+                        {new Date(user.createdAt).toLocaleDateString()}
+                      </span>
+                    </td>
+                    <td className="table-content">
+                      <span className="whitespace-no-wrap" title="Last Update">
+                        {new Date(user.updatedAt).toLocaleDateString()}
+                      </span>
+                    </td>
+                    <td className="table-content">
+                      <div>
+                        {/* so admin can't get the access to edit super-admin */}
+                        {auth.state.user &&
+                        !hasPermission(user.role, auth.state.user.role) ? (
+                          <button
+                            className="table-content-actions"
+                            // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                            onClick={() =>
+                              navigate(ROUTE_PATHS.VIEW_PROFILE + user.id)
+                            }
+                          >
+                            View Profile
+                          </button>
+                        ) : (
+                          <div>
+                            <button
+                              className="table-content-actions"
+                              // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                              onClick={() =>
+                                navigate(
+                                  ROUTE_PATHS.EDIT_USER +
+                                    (user.id === auth.state.user?.id
+                                      ? "me"
+                                      : user.id)
+                                )
+                              }
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="table-content-actions"
+                              // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                              onClick={() =>
+                                navigate(
+                                  ROUTE_PATHS.VIEW_PROFILE +
+                                    (user.id === auth.state.user?.id
+                                      ? "me"
+                                      : user.id)
+                                )
+                              }
+                            >
+                              &nbsp; View
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
         {
           // only show Next, Prev button when loading is completed
-          (!isLoading && allUsers) && (
-          <div className="table-footer">
-            <span className="table-footer-content">
-              Showing {currentPage} of {lastPage}
-            </span>
-            <div className="table-footer-container">
-              {currentPage !== 1 && (
+          !isLoading && allUsers && (
+            <div className="table-footer">
+              <span className="table-footer-content">
+                Showing {currentPage} of 
                 <button
-                  className="table-footer-actions mr-2"
-                  onClick={() =>
-                    navigate(
-                      ROUTE_PATHS.USERS_PAGE +
-                        (currentPage! - 1 + window.location.search)
-                    )
-                  }
+                  className="text-blue-300"
+                  onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + lastPage)}
                 >
-                  Prev
+                  &nbsp;
+                  {lastPage}
                 </button>
-              )}
-              {currentPage !== lastPage && (
-                <button
-                  className="table-footer-actions"
-                  onClick={() =>
-                    navigate(
-                      ROUTE_PATHS.USERS_PAGE +
-                        (currentPage! + 1) +
-                        window.location.search
-                    )
-                  }
-                >
-                  Next
-                </button>
-              )}
+              </span>
+              <div className="table-footer-container">
+                {currentPage !== 1 && (
+                  <div>
+                    <button
+                      className="table-footer-actions mr-2"
+                      onClick={() =>
+                        navigate(
+                          ROUTE_PATHS.USERS_PAGE +
+                            (currentPage! - 1 + window.location.search)
+                        )
+                      }
+                    >
+                      Prev
+                    </button>
+                    <button
+                      className="table-footer-actions mr-2"
+                      onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + 1)}
+                    >
+                      First
+                    </button>
+                  </div>
+                )}
+                {currentPage !== lastPage && (
+                  <button
+                    className="table-footer-actions"
+                    onClick={() =>
+                      navigate(
+                        ROUTE_PATHS.USERS_PAGE +
+                          (currentPage! + 1) +
+                          window.location.search
+                      )
+                    }
+                  >
+                    Next
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
           )
         }
       </div>
