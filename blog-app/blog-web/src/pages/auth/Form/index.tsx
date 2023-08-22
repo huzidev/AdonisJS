@@ -4,6 +4,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
+import 'utils/form/index.css';
 import { LoaderSpin } from "utils/loading";
 import { booleanValues, userSignInData, userSignUpData } from "./data";
 import { useAuthFormHook } from "./hooks";
@@ -66,26 +67,26 @@ export default function UserFormPage(): JSX.Element {
   }, [currentState])
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="main">
+      <div className="form">
         <img
           className="mx-auto h-10 w-auto"
           src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
           alt="Your Company"
         />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 className="main-heading-content">
           {title} To Your Account
         </h2>
       </div>
       {/* MANDATORY to use form otherwise the required property of input will not work */}
       {/* ALSO to use <input type="submit" /> while using form and e.preventDefault() in submit function otherwise the data will append in URL */}
-      <form onSubmit={submit} className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form onSubmit={submit} className="mt-6 form">
         {isLogInForm ? (
           <>
             <div className="mb-3">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="form-heading"
               >
                 Email address
               </label>
@@ -97,7 +98,7 @@ export default function UserFormPage(): JSX.Element {
                   value={userLogIn.email}
                   required
                   onChange={inputHandler}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="form-input"
                 />
               </div>
             </div>
@@ -105,7 +106,7 @@ export default function UserFormPage(): JSX.Element {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="form-heading"
                 >
                   Password
                 </label>
@@ -125,7 +126,7 @@ export default function UserFormPage(): JSX.Element {
                   value={userLogIn.password}
                   onChange={inputHandler}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="form-input"
                 />
                 <span
                   onClick={() =>
@@ -150,7 +151,7 @@ export default function UserFormPage(): JSX.Element {
             <div className="mb-3">
               <label
                 htmlFor="username"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="form-heading"
               >
                 Usernmae
               </label>
@@ -162,14 +163,14 @@ export default function UserFormPage(): JSX.Element {
                   onChange={inputHandler}
                   value={userSignUp.username}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="form-input"
                 />
               </div>
             </div>
             <div className="mb-3">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="form-heading"
               >
                 Email
               </label>
@@ -181,7 +182,7 @@ export default function UserFormPage(): JSX.Element {
                   value={userSignUp.email}
                   onChange={inputHandler}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="form-input"
                 />
               </div>
             </div>
@@ -189,7 +190,7 @@ export default function UserFormPage(): JSX.Element {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="form-heading"
                 >
                   Password
                 </label>
@@ -202,7 +203,7 @@ export default function UserFormPage(): JSX.Element {
                   onChange={inputHandler}
                   minLength={6}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="form-input"
                 />
                 <span
                   onClick={() =>
@@ -224,7 +225,7 @@ export default function UserFormPage(): JSX.Element {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="form-heading"
                 >
                   Confirm Password
                 </label>
@@ -237,7 +238,7 @@ export default function UserFormPage(): JSX.Element {
                   onChange={inputHandler}
                   minLength={6}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="form-input"
                 />
                 <span
                   onClick={() =>
@@ -266,7 +267,7 @@ export default function UserFormPage(): JSX.Element {
               <input
                 id="checkbox"
                 type="checkbox"
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray- dark:border-gray-600"
+                className="form-checkbox"
                 onClick={() =>
                   setUserSignUp({
                     ...userSignUp,
@@ -276,7 +277,7 @@ export default function UserFormPage(): JSX.Element {
               />
               <label
                 htmlFor="checkbox"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="form-checkbox-text"
               >
                 Sign Up As Blogger
               </label>
