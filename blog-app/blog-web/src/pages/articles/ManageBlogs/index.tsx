@@ -155,7 +155,9 @@ export default function ManageBlogsPage() {
                                 : "Edit"} 
                             </button>
                             {auth.state.user?.role === "super-admin" && (
-                              <button>
+                              <button
+                                onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
+                              >
                                 &nbsp;
                                 View Blog
                               </button>
