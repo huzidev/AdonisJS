@@ -75,7 +75,7 @@ export default function UpdateBlogPage(): JSX.Element {
             <div className="mb-3">
               <label
                 htmlFor="title"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
               >
                 Blog Title
               </label>
@@ -111,7 +111,7 @@ export default function UpdateBlogPage(): JSX.Element {
               <div>
                 <label
                   htmlFor="content"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                 >
                   Content
                 </label>

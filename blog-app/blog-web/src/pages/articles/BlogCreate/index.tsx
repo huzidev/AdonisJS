@@ -23,8 +23,6 @@ export default function AddBlogPage(): JSX.Element {
     blog.addBlog(article)
   }
   
-  const flexClass = "flex items-center justify-center";
-
   useCreateBlogPageHooks();
   return (
     <div>
@@ -35,7 +33,7 @@ export default function AddBlogPage(): JSX.Element {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
             Add Blog
           </h2>
         </div>
@@ -43,7 +41,7 @@ export default function AddBlogPage(): JSX.Element {
           <div className="mb-3">
             <label
               htmlFor="title"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
             >
               Blog Title
             </label>
@@ -56,7 +54,7 @@ export default function AddBlogPage(): JSX.Element {
                 required
                 minLength={6}
                 onChange={inputHandler}
-                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white dark:bg-gray-800"
                 placeholder="Write your blog title here..."
               />
             </div>
@@ -64,7 +62,7 @@ export default function AddBlogPage(): JSX.Element {
           <div className="mb-3">
             <label
               htmlFor="image"
-              className="block mb-2 text-sm font-medium leading-6 text-gray-900"
+              className="block mb-2 text-sm font-medium leading-6 text-gray-900 dark:text-white"
             >
               Image
             </label>
@@ -81,7 +79,7 @@ export default function AddBlogPage(): JSX.Element {
             <div>
               <label
                 htmlFor="content"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
               >
                 Content
               </label>
@@ -93,7 +91,7 @@ export default function AddBlogPage(): JSX.Element {
                   rows={10}
                   required
                   onChange={inputHandler}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white dark:bg-gray-800"
                   placeholder="Write yours blog content here..."
                 ></textarea>
               </div>
