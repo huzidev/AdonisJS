@@ -5,30 +5,11 @@ import { useAuth } from "store/auth";
 export default function HomePage() {
   const auth = useAuth();
   const user = auth.state.user;
-  // const sliderRef = useRef<Slider | null>(null);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (sliderRef.current) {
-  //       sliderRef.current.slickNext();
-  //     }
-  //   }, 3000);
-
-  //   return () => clearInterval(interval);
-  // }, []);
-
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1
-  // };
 
   return (
-    <div>
+    <div className="dark:darkModeBg">
       <div 
-          className="w-11/12 my-8 mx-auto  border rounded-lg shadow bg-gray-800 border-gray-700">
+          className="w-11/12 my-8 mx-auto  border rounded-lg shadow bg-gray-800 border-gray-700 dark:bg-#19212c">
           <div className="p-5">
             <h1 className="mb-2 text-3xl text-center font-bold tracking-tight text-white">
               Welcome {user ? `${user.username}` : "To Blog App"}

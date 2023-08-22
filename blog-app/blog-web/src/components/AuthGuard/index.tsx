@@ -21,6 +21,16 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   const stateSingOut = auth.state.signOutState;
 
   useEffect(() => {
+    if (!!localStorage.getItem("theme")) {
+      document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
+    }
+  }, [window.location.pathname])
+
+  console.log("local storage", !!localStorage.getItem("theme"));
+
+  useEffect(() => {
       if (stateSingOut.loading) {
         setLoading(true)
       } else {
