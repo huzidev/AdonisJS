@@ -139,8 +139,8 @@ export default function ManageBlogsPage() {
                         <td className="table-data">
                           <div className="flex">
                             <button
-                              className="text-blue-600"
-                              onClick={() =>
+                              className="text-blue-600 md:hover:text-blue-500 dark:text-white"
+                              onClick={() =>  
                                 navigate(
                                   (auth.state.user?.role === "admin" &&
                                   uploadedByUserRole === "super-admin"
@@ -156,10 +156,11 @@ export default function ManageBlogsPage() {
                             </button>
                             {auth.state.user?.role === "super-admin" && (
                               <button
+                                className="text-blue-600 md:hover:text-blue-500 dark:text-white"  
                                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
                               >
                                 &nbsp;
-                                View Blog
+                                View
                               </button>
                             )}
                           </div>
