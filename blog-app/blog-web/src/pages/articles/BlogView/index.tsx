@@ -5,7 +5,7 @@ import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
-import CommentsPage from "../comments/ShowComments";
+import CommentsPage from "../comments/AddComment";
 import { useGetBlogPageHooks } from "./hooks";
 import { AddReactionState, BlogState } from "./types";
 
