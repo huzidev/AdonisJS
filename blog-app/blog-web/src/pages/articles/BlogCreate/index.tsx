@@ -6,7 +6,7 @@ import { ArticleType } from "./types";
 
 export default function AddBlogPage(): JSX.Element {
   const blog = useBlogs();
-  const initialState: ArticleType = { title: "", image: "", content: "" };
+  const initialState: ArticleType = { title: '', image: '', content: '' };
   const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
 

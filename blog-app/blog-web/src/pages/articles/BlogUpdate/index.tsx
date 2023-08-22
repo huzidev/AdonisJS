@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
+import 'utils/form/index.css';
 import { LoadingList, LoadingThreeDots } from "utils/loading";
 import { updateBlogData } from "./data";
 import { useEditBlogPageHooks } from "./hooks";
@@ -48,19 +49,19 @@ export default function UpdateBlogPage(): JSX.Element {
 
   return (
     <div>
-      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="main">
         {/* show skeleton loading when blogs is in loading state */}
         {isLoadingBlog ? (
           <LoadingList />
         ) : (
           <div>
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="form">
             <img
               className="mx-auto h-10 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt="Your Company"
             />
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
+            <h2 className="main-heading-content">
               {/* show three dots loading when users data is in loading state */}
               {isLoading
                 ? <LoadingThreeDots />
@@ -70,12 +71,12 @@ export default function UpdateBlogPage(): JSX.Element {
           </div>
           <form
             onSubmit={update}
-            className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm"
+            className="form mt-6"
           >
             <div className="mb-3">
               <label
                 htmlFor="title"
-                className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                className="form-heading"
               >
                 Blog Title
               </label>
@@ -96,7 +97,7 @@ export default function UpdateBlogPage(): JSX.Element {
             {/* <div className="mb-3">
               <label
                 htmlFor="image"
-                className="block mb-2 text-sm font-medium leading-6 text-gray-900"
+                className="form-heading"
               >
                 Image
               </label>
@@ -111,7 +112,7 @@ export default function UpdateBlogPage(): JSX.Element {
               <div>
                 <label
                   htmlFor="content"
-                  className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                  className="form-heading"
                 >
                   Content
                 </label>
