@@ -185,6 +185,7 @@ export default function ManageBlogsPage() {
             <span className="table-footer-content">
               Showing {currentPage} of
               <button
+                title="Last page"
                 className="text-blue-300"
                 onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + lastPage)}
               >
