@@ -87,48 +87,48 @@ export default function ManageUsersPage() {
               ) : (allUsers?.map((user, userIndex) => (
                 // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
                 <tr key={userIndex}>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <p className="whitespace-no-wrap">{userIndex + 1}</p>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <p className="whitespace-no-wrap">{user.id}</p>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <p className="whitespace-no-wrap">{user.username}</p>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <p className="whitespace-no-wrap">{user.email}</p>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <p className="whitespace-no-wrap">{user.role}</p>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <p className="whitespace-no-wrap">
                       {user.isVerified ? "True" : "False"}
                     </p>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <span className="whitespace-no-wrap">
                       {user.isBanned ? "True" : "False"}
                     </span>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <span className="whitespace-no-wrap">
                       {user.isActive ? "True" : "False"}
                     </span>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <span className="whitespace-no-wrap">
                       {/* just show dates not time while toLocaleString shows complete date and time */}
                       {new Date(user.createdAt).toLocaleDateString()}
                     </span>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <span className="whitespace-no-wrap" title="Last Update">
                       {new Date(user.updatedAt).toLocaleDateString()}
                     </span>
                   </td>
-                  <td className="border-b border-gray-200 bg-white p-5 text-sm">
+                  <td className="border-gray-200 bg-white p-5 text-sm">
                     <div>
                       {/* so admin can't get the access to edit super-admin */}
                       {auth.state.user &&
@@ -144,35 +144,35 @@ export default function ManageUsersPage() {
                         </button>
                       ) : (
                         <div>
-                        <button
-                          className="text-blue-600"
-                          // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                          onClick={() =>
-                            navigate(
-                              ROUTE_PATHS.EDIT_USER +
-                                (user.id === auth.state.user?.id
-                                  ? "me"
-                                  : user.id)
-                            )
-                          }
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="text-blue-600"
-                          // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                          onClick={() =>
-                            navigate(
-                              ROUTE_PATHS.VIEW_PROFILE +
-                                (user.id === auth.state.user?.id
-                                  ? "me"
-                                  : user.id)
-                            )
-                          }
-                        >
-                          &nbsp;
-                          View
-                        </button>
+                          <button
+                            className="text-blue-600"
+                            // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                            onClick={() =>
+                              navigate(
+                                ROUTE_PATHS.EDIT_USER +
+                                  (user.id === auth.state.user?.id
+                                    ? "me"
+                                    : user.id)
+                              )
+                            }
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="text-blue-600"
+                            // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                            onClick={() =>
+                              navigate(
+                                ROUTE_PATHS.VIEW_PROFILE +
+                                  (user.id === auth.state.user?.id
+                                    ? "me"
+                                    : user.id)
+                              )
+                            }
+                          >
+                            &nbsp;
+                            View
+                          </button>
                         </div>
                       )}
                     </div>

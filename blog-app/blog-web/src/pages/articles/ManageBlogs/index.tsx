@@ -137,7 +137,7 @@ export default function ManageBlogsPage() {
                           </span>
                         </td>
                         <td className="table-data">
-                          <div className="pl-4">
+                          <div className="flex">
                             <button
                               className="text-blue-600"
                               onClick={() =>
@@ -154,6 +154,12 @@ export default function ManageBlogsPage() {
                                 ? "View Blog"
                                 : "Edit"} 
                             </button>
+                            {auth.state.user?.role === "super-admin" && (
+                              <button>
+                                &nbsp;
+                                View Blog
+                              </button>
+                            )}
                           </div>
                         </td>
                       </tr>
