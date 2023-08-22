@@ -276,13 +276,13 @@ export default function ViewProfilePage(): JSX.Element {
                               </button>
                               {showModal && deleteBlogId === blog.id && (
                                 <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
-                                  <div className="bg-white p-8 w-96">
+                                  <div className="bg-gray-900 text-white p-8 w-96">
                                     <p className="text-lg text-center mb-4">
                                       Are you sure you want to delete this blog?
                                     </p>
                                     <div className="flex justify-center space-x-4">
                                       <button
-                                        className="bg-red-500 text-white px-4 py-2 rounded"
+                                        className="modal-buttons"
                                         onClick={() => {
                                           blogs.deleteBlog(blog.id);
                                           setShowModal(false);
@@ -291,7 +291,7 @@ export default function ViewProfilePage(): JSX.Element {
                                         Yes
                                       </button>
                                       <button
-                                        className="bg-gray-500 text-white px-4 py-2 rounded"
+                                        className="modal-buttons"
                                         onClick={() => setShowModal(false)}
                                       >
                                         No
