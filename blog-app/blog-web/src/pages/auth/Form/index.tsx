@@ -4,7 +4,7 @@ import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
-import 'utils/form/index.css';
+import "utils/form/index.css";
 import { LoaderSpin } from "utils/loading";
 import { booleanValues, userSignInData, userSignUpData } from "./data";
 import { useAuthFormHook } from "./hooks";
@@ -20,7 +20,9 @@ export default function UserFormPage(): JSX.Element {
     useState<AuthSignUpPayload>(userSignUpData);
   const [booleanState, setBooleanState] = useState<BooleanState>(booleanValues);
 
-  const currentState = isLogInForm ? auth.state.signInState.loading : auth.state.signUpState.loading;
+  const currentState = isLogInForm
+    ? auth.state.signInState.loading
+    : auth.state.signUpState.loading;
 
   useEffect(() => {
     const stateCondition = currentPath.includes("/sign_in") ? true : false;
@@ -64,7 +66,7 @@ export default function UserFormPage(): JSX.Element {
     } else {
       setLoading(false);
     }
-  }, [currentState])
+  }, [currentState]);
 
   return (
     <div className="main">
@@ -74,9 +76,7 @@ export default function UserFormPage(): JSX.Element {
           src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
           alt="Your Company"
         />
-        <h2 className="main-heading-content">
-          {title} To Your Account
-        </h2>
+        <h2 className="main-heading-content">{title} To Your Account</h2>
       </div>
       {/* MANDATORY to use form otherwise the required property of input will not work */}
       {/* ALSO to use <input type="submit" /> while using form and e.preventDefault() in submit function otherwise the data will append in URL */}
@@ -84,10 +84,7 @@ export default function UserFormPage(): JSX.Element {
         {isLogInForm ? (
           <>
             <div className="mb-3">
-              <label
-                htmlFor="email"
-                className="form-heading"
-              >
+              <label htmlFor="email" className="form-heading">
                 Email address
               </label>
               <div className="mt-2">
@@ -104,15 +101,12 @@ export default function UserFormPage(): JSX.Element {
             </div>
             <div className="my-6">
               <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="form-heading"
-                >
+                <label htmlFor="password" className="form-heading">
                   Password
                 </label>
                 <div className="text-sm">
                   <Link
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                    className="form-auth-action"
                     to={ROUTE_PATHS.SEND_RESET_PASSWORD}
                   >
                     Forgot password?
@@ -138,21 +132,18 @@ export default function UserFormPage(): JSX.Element {
                   title={booleanState.value ? "Hide Password" : "Show Password"}
                 >
                   {booleanState.value ? (
-                    <RemoveRedEyeOutlinedIcon fontSize="small" />
+                    <RemoveRedEyeOutlinedIcon fontSize="small" className="form-input-password" />
                   ) : (
-                    <VisibilityOffIcon fontSize="small" />
+                    <VisibilityOffIcon fontSize="small" className="form-input-password" />
                   )}
                 </span>
               </div>
             </div>
-            </>
+          </>
         ) : (
           <>
             <div className="mb-3">
-              <label
-                htmlFor="username"
-                className="form-heading"
-              >
+              <label htmlFor="username" className="form-heading">
                 Usernmae
               </label>
               <div className="mt-2">
@@ -168,10 +159,7 @@ export default function UserFormPage(): JSX.Element {
               </div>
             </div>
             <div className="mb-3">
-              <label
-                htmlFor="email"
-                className="form-heading"
-              >
+              <label htmlFor="email" className="form-heading">
                 Email
               </label>
               <div className="mt-2">
@@ -188,10 +176,7 @@ export default function UserFormPage(): JSX.Element {
             </div>
             <div className="mb-3">
               <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="form-heading"
-                >
+                <label htmlFor="password" className="form-heading">
                   Password
                 </label>
               </div>
@@ -214,19 +199,22 @@ export default function UserFormPage(): JSX.Element {
                   }
                 >
                   {booleanState.valuePass ? (
-                    <RemoveRedEyeOutlinedIcon fontSize="small" />
+                    <RemoveRedEyeOutlinedIcon
+                      fontSize="small"
+                      className="form-input-password"
+                    />
                   ) : (
-                    <VisibilityOffIcon fontSize="small" />
+                    <VisibilityOffIcon
+                      fontSize="small"
+                      className="form-input-password"
+                    />
                   )}
                 </span>
               </div>
             </div>
             <div className="mb-2">
               <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="form-heading"
-                >
+                <label htmlFor="password" className="form-heading">
                   Confirm Password
                 </label>
               </div>
@@ -249,15 +237,24 @@ export default function UserFormPage(): JSX.Element {
                   }
                 >
                   {booleanState.valueConfPass ? (
-                    <RemoveRedEyeOutlinedIcon fontSize="small" />
+                    <RemoveRedEyeOutlinedIcon
+                      fontSize="small"
+                      className="form-input-password"
+                    />
                   ) : (
-                    <VisibilityOffIcon fontSize="small" />
+                    <VisibilityOffIcon
+                      fontSize="small"
+                      className="form-input-password"
+                    />
                   )}
                 </span>
               </div>
               <p
                 className={`transition-opacity duration-200 ${
-                  (userSignUp.password !== userSignUp.passwordConfirmation && userSignUp.password.length > 5) ? "opacity-100" : "opacity-0"
+                  userSignUp.password !== userSignUp.passwordConfirmation &&
+                  userSignUp.password.length > 5
+                    ? "opacity-100"
+                    : "opacity-0"
                 } text-red-500`}
               >
                 Password doesn't match
@@ -275,29 +272,22 @@ export default function UserFormPage(): JSX.Element {
                   })
                 }
               />
-              <label
-                htmlFor="checkbox"
-                className="form-checkbox-text"
-              >
+              <label htmlFor="checkbox" className="form-checkbox-text">
                 Sign Up As Blogger
               </label>
             </div>
           </>
         )}
         <div>
-           <button 
-            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              {title} {loading && (
-                <LoaderSpin />
-              )}
-           </button>
+          <button className="form-action">
+            {title} {loading && <LoaderSpin />}
+          </button>
         </div>
-        <p className="mt-3 text-center text-sm text-gray-500">
+        <p className="form-message">
           {descReverse}
           <Link
             to={isLogInForm ? ROUTE_PATHS.AUTH_SIGNUP : ROUTE_PATHS.AUTH_SIGNIN}
-            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            className="form-auth-action"
           >
             &nbsp;
             {titleReverse}
