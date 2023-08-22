@@ -181,7 +181,7 @@ export default function ManageBlogsPage() {
                     {lastPage}
                   </button> 
                 </span>
-                <div className="mt-2 inline-flex sm:mt-0">
+                <div className="table-footer-container">
                   {currentPage !== 1 && (
                     <div>
                       <button

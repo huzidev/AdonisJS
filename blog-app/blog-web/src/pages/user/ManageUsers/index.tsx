@@ -191,7 +191,7 @@ export default function ManageUsersPage() {
             <span className="table-footer-content">
               Showing {currentPage} of {lastPage}
             </span>
-            <div className="mt-2 inline-flex sm:mt-0">
+            <div className="table-footer-container">
               {currentPage !== 1 && (
                 <button
                   className="table-footer-actions mr-2"

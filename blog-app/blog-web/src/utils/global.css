@@ -26,6 +26,10 @@
     @apply flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between dark:bg-gray-800 dark:border-gray-700;
 }
 
+.table-footer-container {
+    @apply mt-2 inline-flex sm:mt-0;
+}
+
 .table-footer-actions {
     @apply h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100;
 }
