@@ -8,3 +8,10 @@ body {
 
 /* Change Autocomplete styles in Chrome */
 /* when user selects recommened values for input field then background of the inpuit will not change SPECIALLY in dark-mode */
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover {
+  border: none;
+  -webkit-text-fill-color: white;
+  transition: background-color 5000s ease-in-out
+}
