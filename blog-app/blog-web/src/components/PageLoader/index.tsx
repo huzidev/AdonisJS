@@ -10,6 +10,7 @@ export default function PageLoader(): JSX.Element {
     setState(true);
   }, []);
 
+  let color = !!localStorage.getItem("theme") ? "white" : "black" 
   const flexClass = "flex items-center justify-center";
   return (
     <div className={`inset-0 ${flexClass} fixed`}>
@@ -20,7 +21,7 @@ export default function PageLoader(): JSX.Element {
       >
         <h1 className="text-3xl font-bold mr-1 dark:text-white">{auth.state.signOutState.loading ? "Signing Out" : "Blog App"} </h1>
         <RotatingLines
-          strokeColor="black"
+          strokeColor={color}
           strokeWidth="5"
           animationDuration="0.80"
           width="47"
