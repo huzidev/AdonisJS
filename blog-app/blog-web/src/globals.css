@@ -6,8 +6,8 @@ body {
     @apply dark:bg-[#181a1b];
 }
 
-/* Change Autocomplete styles in Chrome*/
-// when user selects recommened values for input field then background of the inpuit will not change
+/* Change Autocomplete styles in Chrome */
+/* when user selects recommened values for input field then background of the inpuit will not change */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
