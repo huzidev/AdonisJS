@@ -41,3 +41,7 @@
 .form-auth-action {
     @apply font-semibold leading-6 text-indigo-600 hover:text-indigo-500 dark:text-white;
 }
+
+.form-autofill {
+    @apply bg-blue-400;
+}
