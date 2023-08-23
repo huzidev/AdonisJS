@@ -48,7 +48,7 @@ export default function SendResetPasswordPage(): JSX.Element {
               }
               autoComplete="email"
               required
-              className="form-input autofill:bg-yellow-200 "
+              className="form-input"
             />
           </div>
           <input

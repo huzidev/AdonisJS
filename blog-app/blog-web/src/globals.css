@@ -6,7 +6,5 @@ body {
     @apply dark:bg-[#181a1b];
 }
 
+/* Change Autocomplete styles in Chrome */
 /* when user selects recommened values for input field then background of the inpuit will not change SPECIALLY in dark-mode */
-input {
-  @apply autofill:bg-yellow-200;
-}
