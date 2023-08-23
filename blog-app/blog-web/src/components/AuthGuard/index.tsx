@@ -22,6 +22,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
 
   useEffect(() => {
     if (!!localStorage.getItem("theme")) {
+      // will add dark class to main html tag
       document.documentElement.classList.add("dark")
     } else {
       document.documentElement.classList.remove("dark")
