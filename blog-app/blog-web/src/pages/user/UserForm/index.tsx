@@ -15,19 +15,11 @@ import { BooleanState } from "./types";
 export default function UserFormPage() {
   const auth = useAuth();
   const user = useUser();
-  const [isDark, setIsDark] = useState<boolean>(auth.state.isDark ? true : false);
+  const isDark: boolean  = auth.state.isDark ? true : false;
   const [booleanState, setBooleanState] =
     useState<BooleanState>(detailsBoolean);
   const isLoading = user.state.getUser.loading;
 
-  // useEffect(() => {
-  //   if (auth.state.isDark) {
-  //     setIsDark(true)
-  //   } else {
-  //     setIsDark(false)
-  //   }
-  // }, [])
- 
   // const prevUpdateState = usePrevious(user.state.updateMe);
   // const updateState = user.state.updateMe;
   // const x = usePrevious<number>(65162);
@@ -41,22 +33,6 @@ export default function UserFormPage() {
   //     user.updateUserState(updateState.data!);
   //   }
   // }, [updateState, prevUpdateState]);
-
-  function toggleTheme() {
-    // if (isDark) {
-    //   // localStorage.removeItem('theme');
-    //   // document.documentElement.classList.remove("dark")
-    //   // setIsDark(false);
-    //   auth.theme()
-    // } else {
-    //   auth.theme()
-    //   localStorage.setItem('theme', 'dark');
-    //   // will add dark class to main html tag
-    //   document.documentElement.classList.add("dark")
-    //   setIsDark(true);
-    // }
-    auth.theme();
-  }
 
   const {
     isMe,
@@ -306,7 +282,7 @@ export default function UserFormPage() {
                   />
                   <label className="mt-4 relative inline-flex items-center cursor-pointer">
                     <input 
-                      onClick={toggleTheme}
+                      onClick={() => auth.theme()}
                       type="checkbox"
                       defaultChecked={isDark ? true : false}
                       className="sr-only peer" 
