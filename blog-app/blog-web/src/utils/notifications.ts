@@ -24,6 +24,6 @@ export function successNotification(description?: string): void {
     draggable: true,
     progress: undefined,
     // theme: localStorage.getItem('theme') ? 'dark' : 'light',
-    className: 'dark:bg-gray-800 dark:text-white',
+    className: 'dark:bg-gray-800 dark:text-white fill:text-white',
   });
 }

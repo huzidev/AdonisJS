@@ -71,7 +71,7 @@ export default function ViewBlogsPage(): JSX.Element {
                 id="dropdown"
                 className={`z-10 ${
                   dropDown
-                    ? "block fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 bg-gray-700"
+                    ? "block fixed divide-y divide-gray-100 rounded-lg shadow w-44 bg-gray-700"
                     : "hidden"
                 }`}
               >
