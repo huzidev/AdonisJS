@@ -10,6 +10,7 @@ const initialState: AuthState = {
     signOutState:  { ...subState },
     initState:  { ...subState, init: false },
     user: null,
+    // COMPULSORY to do this so when user loggedIn first then automatically it'll check theme from local storage if it's dark then true else false
     isDark: localStorage.getItem('theme') ? true : false
 }
 
@@ -19,14 +20,13 @@ export const authSlice = createSlice({
     reducers: {
         theme: (state) => {
             if (state.isDark) {
-                state.isDark = false;
                 localStorage.removeItem('theme');
                 document.documentElement.classList.remove('dark');
             } else {
-                state.isDark = true;
                 localStorage.setItem('theme', 'dark');
                 document.documentElement.classList.add('dark');
             }
+            state.isDark = !state.isDark;
         }
     },
     extraReducers: (builder) => {
