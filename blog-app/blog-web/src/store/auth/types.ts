@@ -33,6 +33,7 @@ export interface AuthState {
     signUpState: SubState;
     signOutState: SubState;
     initState: AuthInitState;
+    isDark?: boolean;
 }
 
 export const roles = ['user', 'blogger', 'admin', 'super-admin'] as const 

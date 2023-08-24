@@ -9,13 +9,18 @@ const initialState: AuthState = {
     signUpState:  { ...subState },
     signOutState:  { ...subState },
     initState:  { ...subState, init: false },
-    user: null
+    user: null,
+    isDark: false
 }
 
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+        theme: (state) => {
+            state.isDark = !state.isDark
+        }
+    },
     extraReducers: (builder) => {
         // initUser
         builder.addCase(actions.initUser.pending, (state) => {
