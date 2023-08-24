@@ -2,7 +2,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
@@ -15,18 +15,18 @@ import { BooleanState } from "./types";
 export default function UserFormPage() {
   const auth = useAuth();
   const user = useUser();
-  const [isDark, setIsDark] = useState<boolean>(false);
+  const [isDark, setIsDark] = useState<boolean>(auth.state.isDark ? true : false);
   const [booleanState, setBooleanState] =
     useState<BooleanState>(detailsBoolean);
   const isLoading = user.state.getUser.loading;
 
-  useEffect(() => {
-    if (!!localStorage.getItem('theme')) {
-      setIsDark(true)
-    } else {
-      setIsDark(false)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (auth.state.isDark) {
+  //     setIsDark(true)
+  //   } else {
+  //     setIsDark(false)
+  //   }
+  // }, [])
  
   // const prevUpdateState = usePrevious(user.state.updateMe);
   // const updateState = user.state.updateMe;
