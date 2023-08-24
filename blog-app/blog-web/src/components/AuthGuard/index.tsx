@@ -22,12 +22,12 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
 
   // when user changes the path then update dark theme
   useEffect(() => {
-    if (!!localStorage.getItem("theme")) {
+    if (auth.state.isDark) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [window.location.pathname])
+  }, [auth.state.isDark, window.location.pathname])
 
   useEffect(() => {
       if (stateSingOut.loading) {
