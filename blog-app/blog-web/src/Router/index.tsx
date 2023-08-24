@@ -10,7 +10,7 @@ import { useAuth } from "store/auth";
 import routes from "./routes";
 export default function AppRouter(): JSX.Element {
   const auth = useAuth();
-  const [isAuthChecked, setAuthChecked] = useState(false);
+  const [isAuthChecked, setAuthChecked] = useState<boolean>(false);
 
   useEffect(() => {
     // so NAV bar won't be shown when initState is in loading

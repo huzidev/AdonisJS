@@ -28,20 +28,10 @@ export default function ViewProfilePage(): JSX.Element {
   let totalBlogs = blogState.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogState.getFavoriteBlogs.meta?.total;
 
-  // const [theme, setTheme] = useState<boolean>(false);
-
   const isLoadingUser = user.state.getUser.loading;
   const isLoadingBlogs = blogState.getBlogsById.loading;
   const isLoadingFvrtBlogs = blogState.getFavoriteBlogs.loading;
 
-  // useEffect(() => {
-  //   if (theme === true) {
-  //    document.documentElement.classList.add("dark");
-  //   } else {
-  //     document.documentElement.classList.remove("dark");
-  //   }
-  // }, [theme])
-  
   const {
     userDetails,
     userBlogs,
@@ -107,6 +97,12 @@ export default function ViewProfilePage(): JSX.Element {
                         : `Total Blogs : `}{" "}
                       {totalBlogsContent}
                     </h2>
+                    {/* Current theme only be visible when user is on view profile page */}
+                    {isMe && (
+                      <h2 className="user-details">
+                        Current Theme : {auth.state.isDark ? 'Dark' : 'light'}
+                      </h2>
+                    )}
                   </>
                 )}
               </>
