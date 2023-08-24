@@ -3,6 +3,7 @@ import NightsStayIcon from '@mui/icons-material/NightsStay';
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
@@ -42,6 +43,19 @@ export default function UserFormPage() {
   //   }
   // }, [updateState, prevUpdateState]);
 
+  const navigate = useNavigate();
+
+  function toggleTheme() {
+    if (isDark) {
+      localStorage.removeItem('theme');
+      document.documentElement.classList.remove("dark")
+      setIsDark(false);
+    } else {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add("dark")
+      setIsDark(true);
+    }
+  }
 
   const {
     isMe,
@@ -291,7 +305,7 @@ export default function UserFormPage() {
                   />
                   <label className="mt-4 relative inline-flex items-center cursor-pointer">
                     <input 
-                      onClick={() => setIsDark(!isDark)}
+                      onClick={toggleTheme}
                       type="checkbox"
                       defaultChecked={isDark ? true : false}
                       className="sr-only peer" 

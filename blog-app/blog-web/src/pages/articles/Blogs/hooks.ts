@@ -118,7 +118,7 @@ export function useBlogsPageHooks() {
       blogs.getFavoriteBlogs(payload);
     }
   }, [window.location.search]);
-
+  
   useEffect(() => {
     if (prev?.getBlogs.loading) {
       if (!state.getBlogs.loading && !state.getBlogs.error) {
