@@ -11,7 +11,7 @@ export function LoadingList() {
         width={1200}
         height={220}
         viewBox="0 0 1200 220"
-        backgroundColor="#f3f3f3"
+        backgroundColor={isDark ? '#1f2937' : '#f3f3f3'}
         foregroundColor="#ecebeb"
       >
         <rect x="15" y="15" rx="5" ry="5" width="1220" height="25" />
@@ -32,7 +32,7 @@ export function LoadingUser() {
         width={1000}
         height={270}
         viewBox="0 0 1000 270"
-        backgroundColor="#f3f3f3"
+        backgroundColor={isDark ? '#1f2937' : '#f3f3f3'}
         foregroundColor="#ecebeb"
       >
         <rect x="15" y="15" rx="5" ry="5" width="120" height="25" />
