@@ -20,6 +20,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   const currentPath = window.location.pathname;
   const stateSingOut = auth.state.signOutState;
 
+  // when user changes the path then update dark theme
   useEffect(() => {
     if (!!localStorage.getItem("theme")) {
       document.documentElement.classList.add("dark");
