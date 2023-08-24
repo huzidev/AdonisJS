@@ -18,7 +18,15 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         theme: (state) => {
-            state.isDark = !state.isDark
+            if (state.isDark) {
+                state.isDark = false;
+                localStorage.removeItem('theme');
+                document.documentElement.classList.remove('dark');
+            } else {
+                state.isDark = true;
+                localStorage.setItem('theme', 'dark');
+                document.documentElement.classList.add('dark');
+            }
         }
     },
     extraReducers: (builder) => {

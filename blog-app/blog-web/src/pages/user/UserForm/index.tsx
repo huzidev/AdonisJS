@@ -43,16 +43,19 @@ export default function UserFormPage() {
   // }, [updateState, prevUpdateState]);
 
   function toggleTheme() {
-    if (isDark) {
-      localStorage.removeItem('theme');
-      document.documentElement.classList.remove("dark")
-      setIsDark(false);
-    } else {
-      localStorage.setItem('theme', 'dark');
-      // will add dark class to main html tag
-      document.documentElement.classList.add("dark")
-      setIsDark(true);
-    }
+    // if (isDark) {
+    //   // localStorage.removeItem('theme');
+    //   // document.documentElement.classList.remove("dark")
+    //   // setIsDark(false);
+    //   auth.theme()
+    // } else {
+    //   auth.theme()
+    //   localStorage.setItem('theme', 'dark');
+    //   // will add dark class to main html tag
+    //   document.documentElement.classList.add("dark")
+    //   setIsDark(true);
+    // }
+    auth.theme();
   }
 
   const {
