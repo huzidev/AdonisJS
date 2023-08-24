@@ -21,6 +21,7 @@ export const authSlice = createSlice({
         theme: (state) => {
             if (state.isDark) {
                 localStorage.removeItem('theme');
+                // to add dark class in main html
                 document.documentElement.classList.remove('dark');
             } else {
                 localStorage.setItem('theme', 'dark');
