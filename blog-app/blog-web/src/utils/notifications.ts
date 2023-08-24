@@ -9,7 +9,8 @@ export function errorNotification(error: MapErrorToState): void {
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    progress: undefined
+    progress: undefined,
+    theme: localStorage.getItem('theme') ? 'dark' : 'light'
   });
 }
 
@@ -21,6 +22,7 @@ export function successNotification(description?: string): void {
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    progress: undefined
+    progress: undefined,
+    theme: localStorage.getItem('theme') ? 'dark' : 'light'
   });
 }
