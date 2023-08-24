@@ -10,7 +10,7 @@ export function errorNotification(error: MapErrorToState): void {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: localStorage.getItem('theme') ? 'dark' : 'light'
+    className: 'dark:bg-gray-800 dark:text-white'
   });
 }
 
@@ -23,6 +23,7 @@ export function successNotification(description?: string): void {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: localStorage.getItem('theme') ? 'dark' : 'light'
+    // theme: localStorage.getItem('theme') ? 'dark' : 'light'
+    className: 'dark:bg-gray-800 dark:text-white '
   });
 }
