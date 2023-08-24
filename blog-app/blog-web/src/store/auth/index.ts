@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'store/hooks/hooks';
 import * as actions from './actions';
+import { authSlice } from './reducer';
 import { AuthSignInPayload, AuthSignUpPayload, AuthState } from './types';
 
 export function useAuth() {
@@ -12,12 +13,14 @@ export function useAuth() {
   const signIn = (payload: AuthSignInPayload) => dispatch(actions.signIn(payload));
   const signUp = (payload: AuthSignUpPayload) => dispatch(actions.signUp(payload));
   // const updateuser = (payload: User) => dispatch(authSlice.actions.updateUser(payload));
+  const theme = () => dispatch(authSlice.actions.theme());
 
   return {
     state,
     initUser,
     signIn,
     signUp,
-    signOut
+    signOut,
+    theme
   };
 };

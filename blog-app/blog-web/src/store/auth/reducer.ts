@@ -10,7 +10,7 @@ const initialState: AuthState = {
     signOutState:  { ...subState },
     initState:  { ...subState, init: false },
     user: null,
-    isDark: false
+    isDark: localStorage.getItem('theme') ? true : false
 }
 
 export const authSlice = createSlice({

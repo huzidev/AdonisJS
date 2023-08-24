@@ -19,7 +19,6 @@ export interface User {
     isBanned: boolean;
     createdAt: string;
     updatedAt: string;
-    isDark: boolean;
     role: UserRole;
 }
 
@@ -32,8 +31,8 @@ export interface AuthState {
     signInState: SubState;
     signUpState: SubState;
     signOutState: SubState;
-    initState: AuthInitState;
     isDark?: boolean;
+    initState: AuthInitState;
 }
 
 export const roles = ['user', 'blogger', 'admin', 'super-admin'] as const 
