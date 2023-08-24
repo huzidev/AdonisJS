@@ -29,12 +29,6 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: AuthSignI
     try {
         const response = await api.post(endpoints.SIGN_IN, data);
         if (response.data) {
-            const role = response.data.data.role;
-            if (role === "super-admin") {
-                await storage.setItem("theme", "dark");
-            } else {
-                storage.removeItem("theme");
-            }
             setToken(response.data.token);
             await storage.setItem(KEYS.TOKEN, response.data.token);
         }

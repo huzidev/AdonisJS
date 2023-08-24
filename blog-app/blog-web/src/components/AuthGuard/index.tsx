@@ -20,14 +20,13 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   const currentPath = window.location.pathname;
   const stateSingOut = auth.state.signOutState;
 
-  // useEffect(() => {
-  //   if (!!localStorage.getItem("theme")) {
-  //     // will add dark class to main html tag
-  //     document.documentElement.classList.add("dark")
-  //   } else {
-  //     document.documentElement.classList.remove("dark")
-  //   }
-  // }, [auth.state.initState, window.location.pathname])
+  useEffect(() => {
+    if (!!localStorage.getItem("theme")) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [window.location.pathname])
 
   useEffect(() => {
       if (stateSingOut.loading) {

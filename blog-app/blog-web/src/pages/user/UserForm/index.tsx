@@ -3,7 +3,6 @@ import NightsStayIcon from '@mui/icons-material/NightsStay';
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
@@ -43,8 +42,6 @@ export default function UserFormPage() {
   //   }
   // }, [updateState, prevUpdateState]);
 
-  const navigate = useNavigate();
-
   function toggleTheme() {
     if (isDark) {
       localStorage.removeItem('theme');
@@ -52,6 +49,7 @@ export default function UserFormPage() {
       setIsDark(false);
     } else {
       localStorage.setItem('theme', 'dark');
+      // will add dark class to main html tag
       document.documentElement.classList.add("dark")
       setIsDark(true);
     }
