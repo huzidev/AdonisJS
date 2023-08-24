@@ -76,7 +76,7 @@ export default function ViewBlogsPage(): JSX.Element {
                 }`}
               >
                 <ul
-                  className="py-2 text-sm text-gray-700 text-gray-200"
+                  className="py-2 text-sm text-gray-200"
                   aria-labelledby="dropdownDefaultButton"
                 >
                   {columns.map((data, columnIndex) => (

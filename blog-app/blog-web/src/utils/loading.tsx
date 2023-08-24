@@ -1,6 +1,8 @@
 import ContentLoader from "react-content-loader";
 import { TailSpin, ThreeDots } from "react-loader-spinner";
 
+const isDark: boolean = localStorage.getItem('theme') ? true : false;
+
 export function LoadingList() {
   return (
     <div>
@@ -52,7 +54,7 @@ export function LoadingListBlogs() {
         width={1550}
         height={220}
         viewBox="0 0 1550 220"
-        backgroundColor="#f3f3f3"
+        backgroundColor={isDark ? '#1f2937' : '#f3f3f3'}
         foregroundColor="#ecebeb"
       >
         <rect x="15" y="15" rx="5" ry="5" width="1450" height="25" />
