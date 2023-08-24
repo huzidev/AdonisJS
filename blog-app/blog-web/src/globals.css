@@ -3,7 +3,7 @@
 @tailwind utilities;    
 
 body {
-    @apply dark:bg-[#181a1b];
+    @apply dark:bg-[#181a1b] transition-colors duration-700;
 }
 
 /* Change Autocomplete styles in Chrome */
