@@ -15,7 +15,6 @@ import { BooleanState } from "./types";
 export default function UserFormPage() {
   const auth = useAuth();
   const user = useUser();
-  const isDark: boolean  = auth.state.isDark ? true : false;
   const [booleanState, setBooleanState] =
     useState<BooleanState>(detailsBoolean);
   const isLoading = user.state.getUser.loading;
@@ -45,7 +44,9 @@ export default function UserFormPage() {
     submit,
     setCreateUser,
     setUpdateDetailsId,
+    isDark
   } = useUserFormHook();
+  
   return (
     <div>
       <div className="main">

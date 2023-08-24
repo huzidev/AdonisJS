@@ -26,6 +26,7 @@ export function useUserFormHook() {
   const state = user.state;
   const prev = usePrevious(state);
   const navigate = useNavigate();
+  const isDark: boolean  = auth.state.isDark ? true : false;
   
   useEffect(() => {
     if (isMe) {
@@ -131,7 +132,8 @@ export function useUserFormHook() {
     createUser,
     submit,
     setCreateUser,
-    setUpdateDetailsId
+    setUpdateDetailsId,
+    isDark
   }
 
 }
