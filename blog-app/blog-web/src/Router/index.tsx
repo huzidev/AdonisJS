@@ -21,15 +21,20 @@ export default function AppRouter(): JSX.Element {
   }, [auth.state.initState]);
 
   const [isThemeChange, setIsThemeChange] = useState<boolean>(false);
-
-  const currentState = useRef(auth.state.isDark);
+  
+  const authState: any = auth.state.isDark;
+  const currentTheme = useRef(authState);
+  const [currentState, setCurrentState] = useState<boolean>(currentTheme.current);
 
   useEffect(() => {
-    setIsThemeChange(true);
-    setTimeout(() => {
-      setIsThemeChange(false);
-    }, 2000);
-  }, [currentState]);
+    if (currentState !== authState) {
+      setIsThemeChange(true);
+      setTimeout(() => {
+        setCurrentState(authState);
+        setIsThemeChange(false);
+      }, 2000);
+    }
+  }, [auth.state.isDark]);
 
   return (
     <>
