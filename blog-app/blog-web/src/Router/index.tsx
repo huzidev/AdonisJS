@@ -22,14 +22,19 @@ export default function AppRouter(): JSX.Element {
 
   const [isThemeChange, setIsThemeChange] = useState<boolean>(false);
   
+  // initial state of dark theme will be true OR false
   const authState: any = auth.state.isDark;
+  // holds the initial state wouldn't re-render (re-rendering causes error as each time state gets change and matches the authState which shows pop-up theme window every time when user reloads the page)
   const currentTheme = useRef(authState);
+  // holds the currentTheme from useRef to match it with authState and then update when pop-up theme is shown
   const [currentState, setCurrentState] = useState<boolean>(currentTheme.current);
 
   useEffect(() => {
+    // only show pop-up window when currentState !== authState suppose currentState is true(Dark) and authState is also true(Dark) hence only show when they don't matches WHICH means user has toggle the theme
     if (currentState !== authState) {
       setIsThemeChange(true);
       setTimeout(() => {
+        // update the currentState to the new state which user has changed so next time when user toggles the theme it'll show pop-up window again otherwise it'll not show the pop-up window when user toggle the theme
         setCurrentState(authState);
         setIsThemeChange(false);
       }, 2000);
