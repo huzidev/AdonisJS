@@ -3,7 +3,7 @@ import Nav from "components/Header";
 import PageLoader from "components/PageLoader";
 import NotFoundPage from "pages/NotFound";
 import ToggleThemePopUpPage from "pages/theme";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,18 +20,20 @@ export default function AppRouter(): JSX.Element {
     }
   }, [auth.state.initState]);
 
-  const [isChangeTheme, setIsChangeTheme] = useState<boolean>(false);
+  const [isThemeChange, setIsThemeChange] = useState<boolean>(false);
+
+  const currentState = useRef(auth.state.isDark);
 
   useEffect(() => {
-    setIsChangeTheme(true);
+    setIsThemeChange(true);
     setTimeout(() => {
-      setIsChangeTheme(false);
+      setIsThemeChange(false);
     }, 2000);
-  }, [auth.state.isDark]);
+  }, [currentState]);
 
   return (
     <>
-      {isChangeTheme ? (
+      {isThemeChange ? (
         <ToggleThemePopUpPage />
       ) : (
         <Router>
