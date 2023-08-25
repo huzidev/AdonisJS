@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;    
-
+  
 body {
     @apply dark:bg-[#181a1b];
 }
