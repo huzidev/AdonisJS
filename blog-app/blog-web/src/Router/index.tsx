@@ -16,42 +16,48 @@ export default function AppRouter(): JSX.Element {
   useEffect(() => {
     // so NAV bar won't be shown when initState is in loading
     if (!auth.state.initState.loading && auth.state.initState.init) {
-      setAuthChecked(true); 
+      setAuthChecked(true);
     }
-  }, [auth.state.initState]); 
+  }, [auth.state.initState]);
 
   const [isChangeTheme, setIsChangeTheme] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsChangeTheme(!isChangeTheme)
-  }, [auth.state.isDark])
+    setIsChangeTheme(true);
+    setTimeout(() => {
+      setIsChangeTheme(false);
+    }, 2000);
+  }, [auth.state.isDark]);
 
   return (
-      <Router>
-        {isChangeTheme && (
-          <ToggleThemePopUpPage />
-        )}
-        <Suspense fallback={<PageLoader />}>
-          {isAuthChecked && <Nav />}
-          <Routes>
-            {routes.map(({ Component, ...route }) => {
-              return (
-                <Route
-                  {...route}
-                  key={route.path}
-                  path={route.path}
-                  element={
-                    <AuthGuard>
-                      <Component />
-                    </AuthGuard>
-                  }
-                />
-              );
-            })}
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
-        <ToastContainer />
-      </Router>
+    <>
+      {isChangeTheme ? (
+        <ToggleThemePopUpPage />
+      ) : (
+        <Router>
+          <Suspense fallback={<PageLoader />}>
+            {isAuthChecked && <Nav />}
+            <Routes>
+              {routes.map(({ Component, ...route }) => {
+                return (
+                  <Route
+                    {...route}
+                    key={route.path}
+                    path={route.path}
+                    element={
+                      <AuthGuard>
+                        <Component />
+                      </AuthGuard>
+                    }
+                  />
+                );
+              })}
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+          <ToastContainer />
+        </Router>
+      )}
+    </>
   );
 }
