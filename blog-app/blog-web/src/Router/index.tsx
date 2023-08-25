@@ -2,6 +2,7 @@ import AuthGuard from "components/AuthGuard";
 import Nav from "components/Header";
 import PageLoader from "components/PageLoader";
 import NotFoundPage from "pages/NotFound";
+import ToggleThemePopUpPage from "pages/theme";
 import { Suspense, useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -19,8 +20,17 @@ export default function AppRouter(): JSX.Element {
     }
   }, [auth.state.initState]); 
 
+  const [isChangeTheme, setIsChangeTheme] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsChangeTheme(!isChangeTheme)
+  }, [auth.state.isDark])
+
   return (
       <Router>
+        {isChangeTheme && (
+          <ToggleThemePopUpPage />
+        )}
         <Suspense fallback={<PageLoader />}>
           {isAuthChecked && <Nav />}
           <Routes>
