@@ -37,7 +37,7 @@ export default function AppRouter(): JSX.Element {
         // update the currentState to the new state which user has changed so next time when user toggles the theme it'll show pop-up window again otherwise it'll not show the pop-up window when user toggle the theme
         setCurrentState(authState);
         setIsThemeChange(false);
-      }, 2000);
+      }, 3000);
     }
   }, [auth.state.isDark]);
 
