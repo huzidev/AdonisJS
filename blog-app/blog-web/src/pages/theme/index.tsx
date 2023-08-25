@@ -9,18 +9,15 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
     if (props.isDark) {
       setTimeout(() => {
         setDarkTheme(true);
-      }, 300);
+      }, 200);
     } else {
       setTimeout(() => {
         setLightTheme(true);
-      }, 300)
+      }, 200)
     }
   }, [props.isDark]);
 
   return (
-    //   <div
-    //   className={`h-screen flex justify-center items-center transition ease-in-out duration-700 dark:bg-[#181a1b]`}
-    // >
     <div
       className={`h-screen flex justify-center items-center transition ease-in-out duration-700 ${props.isDark ? 'bg-white' : 'bg-[#181a1b]'} ${
         darkTheme && "dark:bg-[#181a1b]"
@@ -30,9 +27,10 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
         <h1 className="dark:text-white">
           Yours Theme has been changed to {props.isDark ? "Dark" : "Light"} Mode
         </h1>
-            <div className={`transition ease-in-out delay-750  ${darkTheme ? 'opacity-1' : 'opacity-0'}`}>
-              <h1 className="text-white">
-                {darkTheme ? 'Moon Icon' : 'Sun Icon'}
+            <div className={`transition ease-in-out delay-750  ${darkTheme || lightTheme ? 'opacity-1' : 'opacity-0'}`}>
+              <h1 className="text-white dark:text-white">
+                {darkTheme && 'Moon Icon'}
+                {lightTheme && 'Sun Icon'}
               </h1>
             </div>
       </div>
