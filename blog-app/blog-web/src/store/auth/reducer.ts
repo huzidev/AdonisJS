@@ -11,7 +11,8 @@ const initialState: AuthState = {
     initState:  { ...subState, init: false },
     user: null,
     // COMPULSORY to do this so when user loggedIn first then automatically it'll check theme from local storage if it's dark then true else false
-    isDark: localStorage.getItem('theme') ? true : false
+    // isDark: localStorage.getItem('theme') ? true : false
+    isDark: ('theme' in localStorage) ? true : false
 }
 
 export const authSlice = createSlice({
