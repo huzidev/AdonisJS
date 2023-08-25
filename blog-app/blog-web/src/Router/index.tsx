@@ -17,7 +17,7 @@ export default function AppRouter(): JSX.Element {
     if (!auth.state.initState.loading && auth.state.initState.init) {
       setAuthChecked(true); 
     }
-  }, [auth.state.initState]);
+  }, [auth.state.initState]); 
 
   return (
       <Router>
