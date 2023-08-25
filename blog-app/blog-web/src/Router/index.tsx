@@ -43,7 +43,7 @@ export default function AppRouter(): JSX.Element {
 
   return (
     <>
-    {/* conditionally rendering when user changes the theme pop-up components will be shown but not the other until isThemeChange state became false if we don't do the conditional rendering then with pop-up window the other components will also been shown at the bottom */}
+    {/* conditionally rendering when user changes the theme pop-up components will be shown but not the other until isThemeChange state became false if we don't do the conditional rendering then with pop-up window the other components will also been shown at the bottom  a */}
       {isThemeChange ? (
         <ToggleThemePopUpPage />
       ) : (
