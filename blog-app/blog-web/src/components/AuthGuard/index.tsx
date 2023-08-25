@@ -27,7 +27,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [auth.state.isDark, window.location.pathname])
+  }, [])
 
   useEffect(() => {
       if (stateSingOut.loading) {
