@@ -1,3 +1,7 @@
 .animation {
     @apply transition ease-in-out duration-700;
 }
+
+.theme-icon {
+    @apply transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100
+}

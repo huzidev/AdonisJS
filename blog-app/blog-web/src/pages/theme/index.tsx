@@ -7,6 +7,7 @@ interface PropsType {
 export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
   const [lightTheme, setLightTheme] = useState<boolean>(false);
+  const [showIcon, setShowIcon] = useState<boolean>(false);
 
   useEffect(() => {
     if (props.isDark) {
@@ -18,23 +19,19 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
         setLightTheme(true);
       }, 200)
     }
+    setTimeout(() => {
+      setShowIcon(true);
+    }, 700)
   }, [props.isDark]);
 
   return (
     <div
-      // className={`h-screen flex justify-center items-center animation ${props.isDark ? 'bg-white' : 'bg-[#181a1b]'} ${
-      //   darkTheme && "dark:bg-[#181a1b]" || lightTheme && "bg-white"}`}
-        className={`h-screen flex justify-center items-center animation 
-          ${props.isDark ? (
-            'bg-white' && darkTheme && 'bg-[#181a1b]'
-          ) : (
-            'bg-[#181a1b]' && lightTheme && 'bg-white'
-          )
-        }`}
+      className={`h-screen flex justify-center items-center animation ${props.isDark ? 'bg-white' : 'bg-[#181a1b]'} ${
+        darkTheme && "dark:bg-[#181a1b]" || lightTheme && "bg-white"}`}
     >
       <div>
         {/* <h1 className={`animation  ${props.isDark || (!darkTheme || !lightTheme) ? 'text-black' : 'text-white'} ${darkTheme && 'text-white' || lightTheme && 'text-blue-300'}`}> */}
-        <h1 className={`animation  ${props.isDark ? (
+        <h1 className={`animation ${props.isDark ? (
           'text-black' && darkTheme && 'text-white'
         ) : (
           'text-white' && lightTheme && 'text-black'
@@ -42,12 +39,20 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
       }`}>
           Yours Theme has been changed to {props.isDark ? "Dark" : "Light"} Mode
         </h1>
-            <div className={`animation   ${darkTheme || lightTheme ? 'opacity-1' : 'opacity-0'}`}>
+        {showIcon && (
+          <div className="container">
+            <input type="checkbox" id="theme-toggle" className={'theme-icon'} />
+            <label htmlFor="theme-toggle"></label>
+          </div>
+        )}
+            {/* <div className={`animation   ${darkTheme || lightTheme ? 'opacity-1' : 'opacity-0'}`}>
               <h1 className="text-white dark:text-white">
-                {darkTheme && 'Moon Icon'}
+                {darkTheme && (
+                  
+                )}
                 {lightTheme && 'Sun Icon'}
               </h1>
-            </div>
+            </div> */}
       </div>
     </div>
   );
