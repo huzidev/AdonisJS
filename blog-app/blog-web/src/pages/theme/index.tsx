@@ -24,9 +24,22 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
     <div
       className={`h-screen flex justify-center items-center animation ${props.isDark ? 'bg-white' : 'bg-[#181a1b]'} ${
         darkTheme && "dark:bg-[#181a1b]" || lightTheme && "bg-white"}`}
+        // className={`h-screen flex justify-center items-center animation 
+        //   ${props.isDark ? (
+        //     'bg-white' && darkTheme && 'bg-[#181a1b]'
+        //   ) : (
+        //     'bg-[#181a1b]' && lightTheme && 'bg-white'
+        //   )
+        // }`}
     >
       <div>
-        <h1 className={`animation  ${props.isDark ? 'text-blue' : 'text-white'} ${darkTheme && 'text-white' || lightTheme && 'text-black'}`}>
+        {/* <h1 className={`animation  ${props.isDark || (!darkTheme || !lightTheme) ? 'text-black' : 'text-white'} ${darkTheme && 'text-white' || lightTheme && 'text-blue-300'}`}> */}
+        <h1 className={`animation  ${props.isDark ? (
+          'text-black' && darkTheme && 'text-white'
+        ) : (
+          'text-white' && lightTheme && 'text-black'
+        )
+      }`}>
           Yours Theme has been changed to {props.isDark ? "Dark" : "Light"} Mode
         </h1>
             <div className={`animation   ${darkTheme || lightTheme ? 'opacity-1' : 'opacity-0'}`}>
