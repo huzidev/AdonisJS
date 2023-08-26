@@ -359,9 +359,6 @@ export default function ViewProfilePage(): JSX.Element {
                       </button>
                     )
                 }
-                {/* <button onClick={() => setTheme(!theme)}>
-                  Dark Mode
-                </button> */}
               </div>
             </>
           )}
