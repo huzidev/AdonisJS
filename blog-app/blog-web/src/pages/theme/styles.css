@@ -11,6 +11,5 @@
 }
 
 .checked-box-shadow {
-  background-color: transparent;
   box-shadow: inset -18px -16px 1px 1px black;
 }
