@@ -41,7 +41,7 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
         </h1>
         {showIcon && (
           <div className="container">
-            <input type="checkbox" id="theme-toggle" className={'theme-icon'} />
+            <input type="checkbox" id="theme-toggle" className={'content-none inline-block cursor-pointer h-20 w-20 rounded-full'} />
             <label htmlFor="theme-toggle"></label>
           </div>
         )}

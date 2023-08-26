@@ -16,7 +16,7 @@ export default function PageLoader(): JSX.Element {
     <div className={`inset-0 ${flexClass} fixed`}>
       <div
         className={`${flexClass} transition ease-in-out delay-750 ${
-          state ? "opacity-1" : "opacity-0"
+          state ? "opacity-100" : "opacity-0"
         }`}
       >
         <h1 className="text-3xl font-bold mr-1 dark:text-white">{auth.state.signOutState.loading ? "Signing Out" : "Blog App"} </h1>

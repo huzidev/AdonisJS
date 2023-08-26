@@ -3,5 +3,10 @@
 }
 
 .theme-icon {
-    @apply transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100
+    @apply transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 bg-orange-400
+}
+
+.checked-box-shadow {
+    background-color: transparent;
+  box-shadow: inset -18px -16px 1px 1px black
 }
