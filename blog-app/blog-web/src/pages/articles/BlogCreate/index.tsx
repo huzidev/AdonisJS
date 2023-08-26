@@ -24,6 +24,8 @@ export default function AddBlogPage(): JSX.Element {
     e.preventDefault();
     blog.addBlog(article)
   }
+
+  const [isClicked, setIsClicked] = useState<boolean>(false);
   
   useCreateBlogPageHooks();
   return (
@@ -108,7 +110,11 @@ export default function AddBlogPage(): JSX.Element {
           </div>
         </form>
       </div>
-      
+      <div className="container">
+            {/* <input onClick={() => setIsClicked(!isClicked)} type="checkbox" id="theme-toggle" className={`custom-checkbox ${isClicked ? 'bg-transparent checked-box-shadow ' : 'bg-orange-400'}`}/> */}
+            <input onClick={() => setIsClicked(!isClicked)} type="checkbox" id="theme-toggle" className='hidden' />
+              <label htmlFor="theme-toggle" className={`custom-checkbox ${isClicked ? 'bg-transparent checked-box-shadow' : 'bg-orange-400'}`}></label>
+          </div>
     </div>
   );
 }
