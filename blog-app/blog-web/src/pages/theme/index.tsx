@@ -7,7 +7,6 @@ interface PropsType {
 export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
   const [lightTheme, setLightTheme] = useState<boolean>(false);
-  const [isClicked, setIsClicked] = useState<boolean>(false);
 
   useEffect(() => {
     if (props.isDark) {
@@ -19,9 +18,6 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
         setLightTheme(true);
       }, 200);
     }
-    setTimeout(() => {
-      setIsClicked(true);
-    }, 200);
   }, [props.isDark]);
 
   return (
