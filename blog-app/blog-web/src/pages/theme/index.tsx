@@ -48,7 +48,9 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
           Yours Theme has been changed to {props.isDark ? "Dark" : "Light"} Mode
         </h1>
           <div className="container">
-              <label htmlFor="theme-toggle" className={`custom-checkbox animation ${props.isDark ? 'bg-orange-400' : 'bg-transparent checked-box-shadow'} ${darkTheme &&'bg-transparent checked-box-shadow' || lightTheme && 'bg-orange-400'}`}></label>
+              <label htmlFor="theme-toggle" className={`custom-checkbox animation ${
+                props.isDark ? (!darkTheme && 'bg-orange-400') || (darkTheme && 'bg-transparent checked-box-shadow') : (!lightTheme && 'bg-transparent checked-box-shadow') || (lightTheme && 'bg-orange-400')
+              }`}></label>
           </div>
       </div>
     </div>
