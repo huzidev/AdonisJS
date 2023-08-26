@@ -21,7 +21,7 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
     }
     setTimeout(() => {
       setIsClicked(true);
-    }, 700)
+    }, 200)
   }, [props.isDark]);
 
   return (
@@ -39,15 +39,8 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
       }`}>
           Yours Theme has been changed to {props.isDark ? "Dark" : "Light"} Mode
         </h1>
-        {isClicked && (
           <div className="container">
-            <input type="checkbox" id="theme-toggle" className={'content-none inline-block cursor-pointer h-20 w-20 rounded-full'} />
-            <label htmlFor="theme-toggle"></label>
-          </div>
-        )}
-            <div className="container">
-            <input onClick={() => setIsClicked(!isClicked)} type="checkbox" id="theme-toggle" className='hidden' />
-              <label htmlFor="theme-toggle" className={`custom-checkbox ${isClicked ? 'bg-transparent checked-box-shadow' : 'bg-orange-400'}`}></label>
+              <label htmlFor="theme-toggle" className={`custom-checkbox animation ${props.isDark ? 'bg-orange-400' : 'bg-transparent checked-box-shadow'} ${darkTheme ? 'bg-transparent checked-box-shadow' : 'bg-orange-400'}`}></label>
           </div>
       </div>
     </div>
