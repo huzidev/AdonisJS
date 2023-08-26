@@ -1,12 +1,15 @@
+.custom-checkbox {
+    @apply content-none inline-block cursor-pointer h-20 w-20 rounded-full transition ease-in-out duration-300
+}
 .animation {
     @apply transition ease-in-out duration-700;
 }
 
 .theme-icon {
-    @apply transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 bg-orange-400
+    @apply transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 bg-orange-400;
 }
 
 .checked-box-shadow {
     background-color: transparent;
-  box-shadow: inset -18px -16px 1px 1px black
+  box-shadow: inset -18px -16px 1px 1px black;
 }

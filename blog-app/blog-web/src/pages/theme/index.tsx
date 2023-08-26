@@ -7,7 +7,7 @@ interface PropsType {
 export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
   const [lightTheme, setLightTheme] = useState<boolean>(false);
-  const [showIcon, setShowIcon] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
 
   useEffect(() => {
     if (props.isDark) {
@@ -20,7 +20,7 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
       }, 200)
     }
     setTimeout(() => {
-      setShowIcon(true);
+      setIsClicked(true);
     }, 700)
   }, [props.isDark]);
 
@@ -39,20 +39,17 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
       }`}>
           Yours Theme has been changed to {props.isDark ? "Dark" : "Light"} Mode
         </h1>
-        {showIcon && (
+        {isClicked && (
           <div className="container">
             <input type="checkbox" id="theme-toggle" className={'content-none inline-block cursor-pointer h-20 w-20 rounded-full'} />
             <label htmlFor="theme-toggle"></label>
           </div>
         )}
-            {/* <div className={`animation   ${darkTheme || lightTheme ? 'opacity-1' : 'opacity-0'}`}>
-              <h1 className="text-white dark:text-white">
-                {darkTheme && (
-                  
-                )}
-                {lightTheme && 'Sun Icon'}
-              </h1>
-            </div> */}
+            <div className="container">
+            {/* <input onClick={() => setIsClicked(!isClicked)} type="checkbox" id="theme-toggle" className={`custom-checkbox ${isClicked ? 'bg-transparent checked-box-shadow ' : 'bg-orange-400'}`}/> */}
+            <input onClick={() => setIsClicked(!isClicked)} type="checkbox" id="theme-toggle" className='hidden' />
+              <label htmlFor="theme-toggle" className={`custom-checkbox ${isClicked ? 'bg-transparent checked-box-shadow' : 'bg-orange-400'}`}></label>
+          </div>
       </div>
     </div>
   );
