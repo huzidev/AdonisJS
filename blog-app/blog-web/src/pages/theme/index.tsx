@@ -24,7 +24,7 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
     <div
       className={`h-screen flex justify-center items-center animation ${
         props.isDark
-          ? (!darkTheme && "bg-white") || (darkTheme && "bg-[#181a1b])
+          ? (!darkTheme && "bg-white") || (darkTheme && "bg-[#181a1b]")
           : (!lightTheme && "bg-[#181a1b]") || (lightTheme && "bg-white")
       }`}
     >
