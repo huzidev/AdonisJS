@@ -128,7 +128,7 @@ export default function ShowCommentsPage({
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
         {replyState.id === comment.id ? (
-          <form onSubmit={submit} className="mt-2">
+          <form onSubmit={submit} className="mt">
             <input
               id="reply"
               name="reply"
