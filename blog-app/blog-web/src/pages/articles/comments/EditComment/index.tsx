@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useComment } from "store/comment";
 import { useEditCommentPageHooks } from "./hooks";
 import { EditCommentPayload } from "./types";
 
-export default function EditCommentPage({ commentV } : any): JSX.Element {
+export default function EditCommentPage({ commentV, commentId, userId } : any): JSX.Element {
   const comment = useComment();
   const params: any = useParams();
   const commentResp = comment.state.getCommentById.data;
-  const [editComment, setEditComment] = useState<EditCommentPayload>({ content: '' });
-  const { content } = editComment;
-  const navigate = useNavigate();
+  const [editComment, setEditComment] = useState<EditCommentPayload>({ 
+    id: commentId,
+    content: '', 
+    userId
+  });
   
   useEffect(() => {
     if (commentResp) {
@@ -20,8 +22,7 @@ export default function EditCommentPage({ commentV } : any): JSX.Element {
  
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    comment.editComment({ id: params.id, userId: commentResp!.userId, content });
-    navigate(-1);
+    comment.editComment(editComment);
   }
   useEditCommentPageHooks();
 

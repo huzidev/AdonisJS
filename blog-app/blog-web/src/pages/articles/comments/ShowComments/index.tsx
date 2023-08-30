@@ -34,6 +34,7 @@ export default function ShowCommentsPage({
     parentId: comment.id,
     content: '',
   });
+
   const isCommentAuthor = comment.userId === userData?.id;
   const uploadedByUserRole = uploadedByUser?.role;
   const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
@@ -140,7 +141,11 @@ export default function ShowCommentsPage({
       </div>
       {
         editState === comment.id ? (
-          <EditCommentPage commentV={comment.content}/>
+          <EditCommentPage 
+            commentV={comment.content}
+            commentId={comment.id}
+            userId={comment.userId}
+          />
         ) : (
           <p className="text-gray-400 ml-6">{comment.content}</p>
         )
