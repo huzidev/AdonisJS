@@ -180,6 +180,7 @@ export default function ShowCommentsPage({
         <div key={reply.id} className="ml-10">
           <div>
             {/* calling <ShowCommentsPage /> component within it self called Recursion */}
+            {/* because of recursion we've to pass the props agin in ShowCommentsPage */}
             <ShowCommentsPage
               comment={reply}
               allUsers={allUsers}
