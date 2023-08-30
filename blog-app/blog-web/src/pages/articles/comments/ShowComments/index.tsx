@@ -239,6 +239,7 @@ export default function ShowCommentsPage({
             onClick={() => {
                 // so if user had clicked on edit comment then first hide that edit comment input then show add comment.id in replyState
                 editState && setEditState(null);
+                // if three-dots drop-down button is visible then hide it
                 dropDown && setDropDown(null);
                 setReplyState(comment.id);
             }}
