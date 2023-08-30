@@ -157,7 +157,7 @@ export default function ShowCommentsPage({
               />
               <button
                 className="bg-gray-300 mt-2 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                onClick={() => setReplyState({ id: null })}
+                onClick={() => setReplyState(null)}
               >
                 Cancel
               </button>
