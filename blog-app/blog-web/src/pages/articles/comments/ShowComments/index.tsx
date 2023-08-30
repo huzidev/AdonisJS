@@ -233,7 +233,14 @@ export default function ShowCommentsPage({
           // reply button wouldn't be shown when user has clicked on reply button
           <button
             className="focus:outline-none text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-600 hover:bg-green-700 focus:ring-green-800"
-            onClick={() => setReplyState(comment.id)}
+            onClick={() => {
+              if (editState) {
+                setEditState(null);
+                setReplyState(comment.id);
+              } else {
+                setReplyState(comment.id);
+              }
+            }}
           >
             Reply
           </button>
