@@ -28,8 +28,8 @@ export interface GetCommentByIdState extends SubState {
 }
 
 export interface EditCommentPayload extends SubState {
-  id: number;
-  userId: number;
+  id: number | null;
+  userId: number | null;
   content: string;
 }
 

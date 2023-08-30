@@ -58,7 +58,8 @@ export default function ShowCommentsPage({
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (isEdit) {
-      commentHook.editComment(editState);
+      commentHook.editComment({ ...editComment });
+      setEditState(false);
     } else {
       commentHook.addComment({ ...reply });
       setReply({ ...reply, content: "" });
@@ -118,12 +119,6 @@ export default function ShowCommentsPage({
               {(isCommentAuthor ||
                 (isAdmin && !isAuthorSuperAdmin) ||
                 isSuperAdmin) && (
-                // <Link
-                //   to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
-                //   className="block py-2 px-4 hover:bg-gray-600 hover:text-white dark:text-white"
-                // >
-                //   Edit
-                // </Link>
                 <button
                   onClick={() => {
                     setIsEdit(true);
