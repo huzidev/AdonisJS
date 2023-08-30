@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComment } from "store/comment";
@@ -11,6 +12,8 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
   const userData = auth.state.user;
   const { addComment, setAddComment, allComments, allUsers, allReplies, blogId } =
     useCommentPageHooks();
+  const [replyState, setReplyState] = useState(null);
+
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -70,6 +73,8 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
                         allReplies={allReplies}
                         blogId={blogId}
                         isBlogOwner={isBlogOwner}
+                        replyState={replyState}
+                        setReplyState={setReplyState}
                       />
                     </div>
                   );

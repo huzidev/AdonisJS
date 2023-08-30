@@ -13,14 +13,17 @@ export default function ShowCommentsPage({
   allReplies,
   isBlogOwner,
   blogId,
+  replyState, 
+  setReplyState,
 }: any) {
   const commentHook = useComment();
   const auth = useAuth();
   const userData: any = auth.state.user;
-  const [replyState, setReplyState] = useState<any>({
-    id: null
-  });
-  
+  // const [replyState, setReplyState] = useState<any>({
+  //   id: null
+  // });
+
+
   const uploadedByUser = allUsers.find(
     (user: User) => user.id === comment.userId
   );
@@ -129,7 +132,7 @@ export default function ShowCommentsPage({
       <p className="text-gray-400 ml-6">{comment.content}</p>
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
-        {replyState.id === comment.id ? (
+        {replyState === comment.id ? (
           <form onSubmit={submit} className="mt-2">
             <input
               id="reply"
@@ -165,7 +168,7 @@ export default function ShowCommentsPage({
         : (
           <button
             className="focus:outline-none text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-600 hover:bg-green-700 focus:ring-green-800"
-            onClick={() => setReplyState({ id: comment.id })}
+            onClick={() => setReplyState(comment.id)}
           >
             Reply
           </button>
