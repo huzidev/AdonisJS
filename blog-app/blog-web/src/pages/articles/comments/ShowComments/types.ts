@@ -15,3 +15,9 @@ export interface ReplyState {
     parentId?: number | null,
     content: string,
 }
+
+export interface EditCommentPayload {
+    id: number | null;
+    userId: number | null;
+    content: string;
+}

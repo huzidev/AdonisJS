@@ -4,8 +4,7 @@ import { User } from "store/auth/types";
 import { useComment } from "store/comment";
 import { hasPermission } from "utils";
 import { AllCommentsState } from "../AddComment/types";
-import EditCommentPage from "../EditComment";
-import { ReplyState } from "./types";
+import { EditCommentPayload, ReplyState } from "./types";
 
 export default function ShowCommentsPage({
   comment,
@@ -23,6 +22,12 @@ export default function ShowCommentsPage({
   const commentHook = useComment();
   const auth = useAuth();
   const userData: any = auth.state.user;
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [editComment, setEditComment] = useState<EditCommentPayload>({ 
+    id: null,
+    userId: null,
+    content: '' 
+  });
 
   const uploadedByUser = allUsers.find(
     (user: User) => user.id === comment.userId
@@ -46,19 +51,19 @@ export default function ShowCommentsPage({
       (reply: AllCommentsState) => reply.parentId === comment.id
     );
 
-  // useEffect(() => {
-  //   setReply({ articleId: blogId, userId: userData?.id, parentId: comment.id });
-  // }, [blogId]);
-
   const isAuthorAdmin = uploadedByUserRole === "admin";
   const isSuperAdmin = auth.state.user?.role === "super-admin";
   const isAdmin = hasPermission("admin", userData?.role);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    commentHook.addComment({ ...reply });
-    setReply({ ...reply, content: '' })
-    setReplyState(null);
+    if (isEdit) {
+      commentHook.editComment(editState)
+    } else {
+      commentHook.addComment({ ...reply });
+      setReply({ ...reply, content: '' })
+      setReplyState(null);
+    }
   }
 
   return (
@@ -117,7 +122,11 @@ export default function ShowCommentsPage({
                 // >
                 //   Edit
                 // </Link>
-                <button onClick={() => setEditState(comment.id)}>
+                <button onClick={() => {
+                  setIsEdit(true);
+                  setEditState(comment.id);
+                  setEditComment({ ...editComment, id: comment.id, userId: comment.userId });
+                }}>
                   Edit
                 </button>
               )}
@@ -141,12 +150,47 @@ export default function ShowCommentsPage({
       </div>
       {/* when user clicked on edit then it'll show input field with value of comment else it'll just show the comment */}
       {editState === comment.id ? (
-          <EditCommentPage 
-            commentV={comment.content}
-            commentId={comment.id}
-            userId={comment.userId}
-            setEditState={setEditState}
-          />
+          // <EditCommentPage 
+          //   commentV={comment.content}
+          //   commentId={comment.id}
+          //   userId={comment.userId}
+          //   setEditState={setEditState}
+          // />
+          <>
+          <form onSubmit={submit}>
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Edit Comment
+            </label>
+            <div className="mt-2">
+              <input
+                id="content"
+                name="content"
+                type="text"
+                placeholder="Edit Comment"
+                value={comment.content}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditComment({ ...editComment, content: e.target.value })}
+                required
+                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white"
+              />
+              <div className="flex">
+                <button 
+                  className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => setEditState(null)}
+                >
+                  Cancel
+                </button>
+                <input
+                  className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  type="submit"
+                  value="Update Comment"
+                />
+              </div>
+            </div>
+          </form>
+          </>
         ) : (
           <p className="text-gray-400 ml-6">{comment.content}</p>
         )
@@ -171,18 +215,18 @@ export default function ShowCommentsPage({
               required
               className="block w-full rounded-md border-0 py-1.5 px-2 text-white bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
-            <div>
+            <div className="flex">
+              <button 
+                  className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => setReplyState(null)}
+                >
+                  Cancel
+                </button>
               <input
                 className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 type="submit"
                 value="reply"
               />
-              <button
-                className="bg-gray-300 mt-2 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                onClick={() => setReplyState(null)}
-              >
-                Cancel
-              </button>
             </div>
           </form>
         ) : (
