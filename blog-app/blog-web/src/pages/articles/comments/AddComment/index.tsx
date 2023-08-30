@@ -1,7 +1,7 @@
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComment } from "store/comment";
-import CommentWithReplies from "../ShowComments";
+import ShowCommentsPage from "../ShowComments";
 import { useCommentPageHooks } from "./hooks";
 import { AllCommentsState, PropsState } from "./types";
 
@@ -53,17 +53,17 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
           <footer className="flex justify-between items-center mb-2">
             <div>
               {allComments &&
-                allComments.map((value: AllCommentsState, index: number) => {
+                allComments.map((comment: AllCommentsState, index: number) => {
                   const uploadedByUser = allUsers &&
-                    allUsers?.find((user: User) => user.id === value.userId);
+                    allUsers?.find((user: User) => user.id === comment.userId);
                   const commentBy = uploadedByUser?.username;
                   const uploadedByUserRole = uploadedByUser?.role;
                   const isBlogOwner = props.ownerId === userData?.id;
                   return (
                     <div key={index}> 
-                      <CommentWithReplies
-                        key={value.id}
-                        comment={value}
+                      <ShowCommentsPage
+                        key={comment.id}
+                        comment={comment}
                         allUsers={allUsers}
                         commentBy={commentBy}
                         uploadedByUserRole={uploadedByUserRole}

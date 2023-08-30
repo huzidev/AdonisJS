@@ -14,12 +14,13 @@ export default function ShowCommentsPage({
   isBlogOwner,
   blogId,
 }: any) {
-  const commentFunc = useComment();
+  const commentHook = useComment();
   const auth = useAuth();
   const userData: any = auth.state.user;
   const [replyState, setReplyState] = useState<any>({
     id: null
   });
+  
   const uploadedByUser = allUsers.find(
     (user: User) => user.id === comment.userId
   );
@@ -53,7 +54,7 @@ export default function ShowCommentsPage({
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    commentFunc.addComment({ ...reply });
+    commentHook.addComment({ ...reply });
   }
 
   return (
@@ -115,7 +116,7 @@ export default function ShowCommentsPage({
                 (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
                 <button
                   className="block py-2 px-4 hover:bg-gray-600 hover:text-white dark:text-white"
-                  onClick={() => commentFunc.deleteComment(comment.id)}
+                  onClick={() => commentHook.deleteComment(comment.id)}
                 >
                   Delete
                 </button>
