@@ -160,12 +160,6 @@ export default function ShowCommentsPage({
       </div>
       {/* when user clicked on edit then it'll show input field with value of comment else it'll just show the comment */}
       {editState === comment.id ? (
-        // <EditCommentPage
-        //   commentV={comment.content}
-        //   commentId={comment.id}
-        //   userId={comment.userId}
-        //   setEditState={setEditState}
-        // />
         <>
           <form onSubmit={submit}>
             <label
@@ -197,7 +191,7 @@ export default function ShowCommentsPage({
                 <input
                   className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   type="submit"
-                  value="Update Comment"
+                  value="Save"
                 />
               </div>
             </div>
