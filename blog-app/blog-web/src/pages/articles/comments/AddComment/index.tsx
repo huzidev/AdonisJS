@@ -25,7 +25,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
   return (
     <section className="bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6">  
           <h2 className="text-lg lg:text-2xl font- text-white">
             Comments ({allComments && allComments.length})
           </h2>

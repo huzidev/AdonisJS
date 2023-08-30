@@ -6,6 +6,7 @@ import { User } from "store/auth/types";
 import { useComment } from "store/comment";
 import { hasPermission } from "utils";
 import { AllCommentsState } from "../AddComment/types";
+import { ReplyState } from "./types";
 
 export default function ShowCommentsPage({
   comment,
@@ -26,7 +27,7 @@ export default function ShowCommentsPage({
     (user: User) => user.id === comment.userId
   );
 
-  const [reply, setReply] = useState<any>({
+  const [reply, setReply] = useState<ReplyState>({
     userId: userData?.id,
     articleId: blogId,
     parentId: comment.id,

@@ -8,3 +8,10 @@ export interface PropsState {
     isBlogOwner: boolean;
     blogId: number;
 }
+
+export interface ReplyState {
+    userId: number,
+    articleId: number,
+    parentId?: number | null,
+    content: string,
+}
