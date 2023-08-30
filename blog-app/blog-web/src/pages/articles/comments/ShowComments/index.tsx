@@ -1,6 +1,4 @@
-import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComment } from "store/comment";
@@ -18,6 +16,8 @@ export default function ShowCommentsPage({
   setReplyState,
   dropDown,
   setDropDown,
+  editState,
+  setEditState
 }: any) {
   const commentHook = useComment();
   const auth = useAuth();
@@ -109,12 +109,15 @@ export default function ShowCommentsPage({
               {(isCommentAuthor ||
                 (isAdmin && !isAuthorSuperAdmin) ||
                 isSuperAdmin) && (
-                <Link
-                  to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
-                  className="block py-2 px-4 hover:bg-gray-600 hover:text-white dark:text-white"
-                >
+                // <Link
+                //   to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
+                //   className="block py-2 px-4 hover:bg-gray-600 hover:text-white dark:text-white"
+                // >
+                //   Edit
+                // </Link>
+                <button onClick={() => setEditState(comment.id)}>
                   Edit
-                </Link>
+                </button>
               )}
             </li>
             <li>
@@ -134,7 +137,22 @@ export default function ShowCommentsPage({
           </ul>
         </div>
       </div>
-      <p className="text-gray-400 ml-6">{comment.content}</p>
+      {
+        editState === comment.id ? (
+          <input
+            id="reply"
+            name="reply"
+            type="text"
+            value={comment.content}
+            placeholder="Edit Comment"
+            onChange={}
+            required
+            className="block w-full rounded-md border-0 py-1.5 px-2 text-white bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        ) : (
+          <p className="text-gray-400 ml-6">{comment.content}</p>
+        )
+      }
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
         {replyState === comment.id ? (
@@ -193,6 +211,8 @@ export default function ShowCommentsPage({
               dropDown={dropDown}
               blogId={blogId}
               setDropDown={setDropDown}
+              editState={editState}
+              setEditState={setEditState}
             />
           </div>
         </div>
