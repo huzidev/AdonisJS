@@ -42,8 +42,8 @@ import { AddCommentPayload, AllCommentsState } from "./types";
 
     useEffect(() => {
       if (prev?.getComments.loading) {
-        if (!state.getComments.loading && !state.getComments.error) {
-          successNotification(state.getComments.message)
+        if (!state.getComments.loading && !state.getComments.error && allComments.length) {
+            successNotification(state.getComments.message)
         }
       }
       if (prev?.editComment.loading) {
