@@ -41,6 +41,11 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     }, [loggedInId, blogId]);
 
     useEffect(() => {
+      if (prev?.getComments.loading) {
+        if (!state.getComments.loading && !state.getComments.error) {
+          successNotification(state.getComments.message)
+        }
+      }
       if (prev?.editComment.loading) {
         if (!state.editComment.loading && !state.editComment.error) {
           successNotification(state.editComment.message);
