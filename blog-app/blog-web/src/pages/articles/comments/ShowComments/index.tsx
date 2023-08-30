@@ -121,6 +121,8 @@ export default function ShowCommentsPage({
                 isSuperAdmin) && (
                 <button
                   onClick={() => {
+                    // if user had clicked on reply then first hide that reply input field then show edit comment field
+                    replyState && (setReplyState(null))
                     setIsEdit(true);
                     setEditState(comment.id);
                     setEditComment({
@@ -234,12 +236,9 @@ export default function ShowCommentsPage({
           <button
             className="focus:outline-none text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-600 hover:bg-green-700 focus:ring-green-800"
             onClick={() => {
-              if (editState) {
-                setEditState(null);
+                // so if user had clicked on edit comment then first hide that edit comment input then show add comment.id in replyState
+                editState && (setEditState(null));
                 setReplyState(comment.id);
-              } else {
-                setReplyState(comment.id);
-              }
             }}
           >
             Reply
