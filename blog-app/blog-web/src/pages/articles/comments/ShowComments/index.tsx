@@ -30,7 +30,7 @@ export default function ShowCommentsPage({
     userId: null,
     articleId: null,
     parentId: null,
-    content: "",
+    content: '',
   });
   const isCommentAuthor = comment.userId === userData?.id;
   const uploadedByUserRole = uploadedByUser?.role;
@@ -54,6 +54,8 @@ export default function ShowCommentsPage({
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     commentHook.addComment({ ...reply });
+    setReply({ ...reply, content: '' })
+    setReplyState(null);
   }
 
   return (
