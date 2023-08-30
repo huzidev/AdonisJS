@@ -176,7 +176,7 @@ export default function ShowCommentsPage({
           </button>
         )}
       </div>
-      {replies.map((reply: any) => (
+      {replies.map((reply: AllCommentsState) => (
         <div key={reply.id} className="ml-10">
           <div>
             {/* calling <ShowCommentsPage /> component within it self called Recursion */}
