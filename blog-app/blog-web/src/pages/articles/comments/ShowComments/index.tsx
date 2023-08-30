@@ -60,7 +60,7 @@ export default function ShowCommentsPage({
     <div>
       <div className="flex">
         <p className="inline-flex text-lg items-center mr-3  text-white">
-          - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
+          - {commentBy} {uploadedByUserRole === "super-admin" && '*'}{" "}
         </p>
         <p className="text-white">{new Date(comment.createdAt).toLocaleDateString()}</p>
         {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots */}
@@ -72,7 +72,7 @@ export default function ShowCommentsPage({
           <button
             id="dropdownComment1Button"
             data-dropdown-toggle="dropdownComment1"
-            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 bg-gray-900 hover:bg-gray-700 focus:ring-gray-600"
+            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 bg-gray-900"
             type="button"
             onClick={() => setDropDown({ ...dropDown, holdId: comment.id })}
           >
@@ -92,17 +92,17 @@ export default function ShowCommentsPage({
           id="dropdownComment1"
           className={`${
             dropDown.holdId === comment.id ? "block" : "hidden"
-          } z-10 w-36 rounded divide-y divide-gray-100 shadow bg-gray-700 divide-gray-600`}
+          } z-10 w-36 rounded divide-y shadow bg-gray-700 divide-gray-600`}
         >
           <ul
-            className="py-1 text-sm text-gray-700 text-gray-200"
+            className="py-1 text-sm  text-gray-200"
             aria-labelledby="dropdownMenuIconHorizontalButton"
           >
             <li>
               {(isCommentAuthor || (isAdmin && !isAuthorSuperAdmin) || (isSuperAdmin)) && (
                 <Link
                   to={ROUTE_PATHS.EDIT_COMMENT + comment.id}
-                  className="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white dark:text-white"
+                  className="block py-2 px-4 hover:bg-gray-600 hover:text-white dark:text-white"
                 >
                   Edit
                 </Link>
@@ -162,7 +162,7 @@ export default function ShowCommentsPage({
         // reply button wouldn't be shown when user has clicked on reply button
         : (
           <button
-            className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-600 hover:bg-green-700 focus:ring-green-800"
+            className="focus:outline-none text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-600 hover:bg-green-700 focus:ring-green-800"
             onClick={() => setReplyState({ id: comment.id })}
           >
             Reply
