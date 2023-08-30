@@ -144,7 +144,8 @@ export default function ShowCommentsPage({
               // so if user is replying to owns comment then show reply yours comment
               placeholder={`Reply to ${
                 isCommentAuthor ? "Yours" : commentBy + `'s`
-              } comment`}
+                // when user is replying to a reply then show Reply to yours/username reply else Reply to yours/username comment
+              } ${comment.parentId ? 'reply' : 'comment'}`}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setReply({ ...reply, content: e.target.value })
               }
