@@ -132,6 +132,7 @@ export default function ShowCommentsPage({
                       ...editComment,
                       id: comment.id,
                       userId: comment.userId,
+                      // also fetching the comment content in the state because we can't directly put comment.content in input value because then onChange wouldn't work
                       content: comment.content
                     });
                   }}
