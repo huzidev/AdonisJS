@@ -125,11 +125,6 @@ const routes: AppRoute[] = [
         role: roles[1],
         path: `${ROUTE_PATHS.ARTICLES_PAGE}:page`,
         Component: ManageBlogsPage
-    },
-    {
-        role: roles[0],
-        path: `${ROUTE_PATHS.EDIT_COMMENT}:id`,
-        Component: EditCommentPage
     }
 ]
 

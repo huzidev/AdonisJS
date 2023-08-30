@@ -19,8 +19,6 @@ const ROUTE_PATHS = {
   ARTICLES_PAGE: '/blog/list/',
   ARTICLES: '/blogs',
   ARTICLE_VIEW: '/blog/',
-
-  EDIT_COMMENT: '/comment/edit/'
 };
 
 export default ROUTE_PATHS;

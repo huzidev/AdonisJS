@@ -4,6 +4,7 @@ import { User } from "store/auth/types";
 import { useComment } from "store/comment";
 import { hasPermission } from "utils";
 import { AllCommentsState } from "../AddComment/types";
+import EditCommentPage from "../EditComment";
 import { ReplyState } from "./types";
 
 export default function ShowCommentsPage({
@@ -139,16 +140,7 @@ export default function ShowCommentsPage({
       </div>
       {
         editState === comment.id ? (
-          <input
-            id="reply"
-            name="reply"
-            type="text"
-            value={comment.content}
-            placeholder="Edit Comment"
-            onChange={}
-            required
-            className="block w-full rounded-md border-0 py-1.5 px-2 text-white bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
+          <EditCommentPage commentV={comment.content}/>
         ) : (
           <p className="text-gray-400 ml-6">{comment.content}</p>
         )
