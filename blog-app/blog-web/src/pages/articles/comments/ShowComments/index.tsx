@@ -187,6 +187,7 @@ export default function ShowCommentsPage({
               replyState={replyState}
               setReplyState={setReplyState}
               dropDown={dropDown}
+              blogId={blogId}
               setDropDown={setDropDown}
             />
           </div>
