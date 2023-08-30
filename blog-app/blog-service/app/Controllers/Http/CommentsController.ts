@@ -17,7 +17,7 @@ export default class CommentsController {
       const data = await Comment.create(body);
 
       return {
-        message: `${parentId ? "Reply" : "Comment"} + "added successfully by" + ${user.username}`,
+        message: `${parentId ? "Reply" : "Comment"} added successfully by ${user.username}`,
         data
       };
     } catch (e) {
