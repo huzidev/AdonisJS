@@ -77,7 +77,8 @@ export default function ShowCommentsPage({
               data-dropdown-toggle="dropdownComment1"
               className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 bg-gray-900"
               type="button"
-              onClick={() => setDropDown(comment.id)}
+              // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
+              onClick={() => setDropDown(dropDown === comment.id ? null : comment.id)}
             >
               <svg
                 className="w-5 h-5"

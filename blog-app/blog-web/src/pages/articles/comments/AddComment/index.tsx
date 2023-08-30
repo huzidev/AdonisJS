@@ -15,7 +15,6 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
   const [replyState, setReplyState] = useState(null);
   const [dropDown, setDropDown] = useState(null);
 
-
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     comment.addComment(addComment);
