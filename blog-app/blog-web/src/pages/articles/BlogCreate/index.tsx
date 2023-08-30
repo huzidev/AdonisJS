@@ -24,8 +24,6 @@ export default function AddBlogPage(): JSX.Element {
     blog.addBlog(article)
   }
 
-  const [isClicked, setIsClicked] = useState<boolean>(false);
-  
   useCreateBlogPageHooks();
   return (
     <div>

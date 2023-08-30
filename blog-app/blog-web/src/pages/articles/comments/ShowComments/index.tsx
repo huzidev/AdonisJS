@@ -139,8 +139,8 @@ export default function ShowCommentsPage({
           </ul>
         </div>
       </div>
-      {
-        editState === comment.id ? (
+      {/* when user clicked on edit then it'll show input field with value of comment else it'll just show the comment */}
+      {editState === comment.id ? (
           <EditCommentPage 
             commentV={comment.content}
             commentId={comment.id}
