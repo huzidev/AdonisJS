@@ -182,6 +182,8 @@ export default function ShowCommentsPage({
               comment={reply}
               allUsers={allUsers}
               allReplies={allReplies}
+              replyState={replyState}
+              setReplyState={setReplyState}
             />
           </div>
         </div>
