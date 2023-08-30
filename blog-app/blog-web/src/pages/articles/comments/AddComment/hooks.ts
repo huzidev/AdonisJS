@@ -20,8 +20,6 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const allComments: any = commentsState?.filter((comment: AllCommentsState) => comment.parentId === null);
     const allReplies: any = commentsState?.filter((comment: AllCommentsState) => comment.parentId !== null);
     const allUsers = user.state.allUser.data;
-    const byMe =
-      state.getCommentById.data?.userId === auth.state.user?.id;
 
     const [addComment, setAddComment] = useState<AddCommentPayload>({
       userId: loggedInId,
