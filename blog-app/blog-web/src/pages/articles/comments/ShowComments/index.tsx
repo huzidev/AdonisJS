@@ -44,9 +44,10 @@ export default function ShowCommentsPage({
       (reply: AllCommentsState) => reply.parentId === comment.id
     );
 
-      useEffect(() => {
+    
+    useEffect(() => {
         setReply({ articleId: blogId, userId: userData?.id, parentId: comment.id })
-      }, [])
+      }, [blogId])
 
   const isAuthorAdmin = uploadedByUserRole === "admin";
   const isSuperAdmin = auth.state.user?.role === "super-admin";
@@ -173,6 +174,7 @@ export default function ShowCommentsPage({
       {replies.map((reply: any) => (
         <div key={reply.id} className="ml-10">
           <div>
+            {/* calling <ShowCommentsPage /> component within it self called Recursion */}
             <ShowCommentsPage
               comment={reply}
               allUsers={allUsers}
