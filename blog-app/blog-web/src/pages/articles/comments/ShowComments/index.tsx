@@ -17,16 +17,16 @@ export default function ShowCommentsPage({
   dropDown,
   setDropDown,
   editState,
-  setEditState
+  setEditState,
 }: any) {
   const commentHook = useComment();
   const auth = useAuth();
   const userData: any = auth.state.user;
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [editComment, setEditComment] = useState<EditCommentPayload>({ 
+  const [editComment, setEditComment] = useState<EditCommentPayload>({
     id: null,
     userId: null,
-    content: '' 
+    content: "",
   });
 
   const uploadedByUser = allUsers.find(
@@ -37,7 +37,7 @@ export default function ShowCommentsPage({
     userId: userData?.id,
     articleId: blogId,
     parentId: comment.id,
-    content: '',
+    content: "",
   });
 
   const isCommentAuthor = comment.userId === userData?.id;
@@ -58,10 +58,10 @@ export default function ShowCommentsPage({
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (isEdit) {
-      commentHook.editComment(editState)
+      commentHook.editComment(editState);
     } else {
       commentHook.addComment({ ...reply });
-      setReply({ ...reply, content: '' })
+      setReply({ ...reply, content: "" });
       setReplyState(null);
     }
   }
@@ -88,7 +88,9 @@ export default function ShowCommentsPage({
               className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 bg-gray-900"
               type="button"
               // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
-              onClick={() => setDropDown(dropDown === comment.id ? null : comment.id)}
+              onClick={() =>
+                setDropDown(dropDown === comment.id ? null : comment.id)
+              }
             >
               <svg
                 className="w-5 h-5"
@@ -122,11 +124,17 @@ export default function ShowCommentsPage({
                 // >
                 //   Edit
                 // </Link>
-                <button onClick={() => {
-                  setIsEdit(true);
-                  setEditState(comment.id);
-                  setEditComment({ ...editComment, id: comment.id, userId: comment.userId });
-                }}>
+                <button
+                  onClick={() => {
+                    setIsEdit(true);
+                    setEditState(comment.id);
+                    setEditComment({
+                      ...editComment,
+                      id: comment.id,
+                      userId: comment.userId,
+                    });
+                  }}
+                >
                   Edit
                 </button>
               )}
@@ -150,13 +158,13 @@ export default function ShowCommentsPage({
       </div>
       {/* when user clicked on edit then it'll show input field with value of comment else it'll just show the comment */}
       {editState === comment.id ? (
-          // <EditCommentPage 
-          //   commentV={comment.content}
-          //   commentId={comment.id}
-          //   userId={comment.userId}
-          //   setEditState={setEditState}
-          // />
-          <>
+        // <EditCommentPage
+        //   commentV={comment.content}
+        //   commentId={comment.id}
+        //   userId={comment.userId}
+        //   setEditState={setEditState}
+        // />
+        <>
           <form onSubmit={submit}>
             <label
               htmlFor="content"
@@ -171,12 +179,14 @@ export default function ShowCommentsPage({
                 type="text"
                 placeholder="Edit Comment"
                 value={comment.content}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditComment({ ...editComment, content: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setEditComment({ ...editComment, content: e.target.value })
+                }
                 required
                 className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white"
               />
               <div className="flex">
-                <button 
+                <button
                   className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   onClick={() => setEditState(null)}
                 >
@@ -190,11 +200,10 @@ export default function ShowCommentsPage({
               </div>
             </div>
           </form>
-          </>
-        ) : (
-          <p className="text-gray-400 ml-6">{comment.content}</p>
-        )
-      }
+        </>
+      ) : (
+        <p className="text-gray-400 ml-6">{comment.content}</p>
+      )}
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
         {replyState === comment.id ? (
@@ -208,7 +217,7 @@ export default function ShowCommentsPage({
               placeholder={`Reply to ${
                 isCommentAuthor ? "Yours" : commentBy + `'s`
                 // when user is replying to a reply then show Reply to yours/username reply else Reply to yours/username comment
-              } ${comment.parentId ? 'reply' : 'comment'}`}
+              } ${comment.parentId ? "reply" : "comment"}`}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setReply({ ...reply, content: e.target.value })
               }
@@ -216,12 +225,12 @@ export default function ShowCommentsPage({
               className="block w-full rounded-md border-0 py-1.5 px-2 text-white bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
             <div className="flex">
-              <button 
-                  className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={() => setReplyState(null)}
-                >
-                  Cancel
-                </button>
+              <button
+                className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={() => setReplyState(null)}
+              >
+                Cancel
+              </button>
               <input
                 className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 type="submit"
