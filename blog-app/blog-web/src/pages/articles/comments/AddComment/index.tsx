@@ -13,6 +13,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
   const { addComment, setAddComment, allComments, allUsers, allReplies, blogId } =
     useCommentPageHooks();
   const [replyState, setReplyState] = useState(null);
+  const [dropDown, setDropDown] = useState(null);
 
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -75,6 +76,8 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
                         isBlogOwner={isBlogOwner}
                         replyState={replyState}
                         setReplyState={setReplyState}
+                        dropDown={dropDown}
+                        setDropDown={setDropDown}
                       />
                     </div>
                   );
