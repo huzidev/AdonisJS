@@ -1,5 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -27,9 +27,9 @@ export default function ShowCommentsPage({
   );
 
   const [reply, setReply] = useState<any>({
-    userId: null,
-    articleId: null,
-    parentId: null,
+    userId: userData?.id,
+    articleId: blogId,
+    parentId: comment.id,
     content: '',
   });
   const isCommentAuthor = comment.userId === userData?.id;
@@ -43,9 +43,9 @@ export default function ShowCommentsPage({
       (reply: AllCommentsState) => reply.parentId === comment.id
     );
 
-  useEffect(() => {
-    setReply({ articleId: blogId, userId: userData?.id, parentId: comment.id });
-  }, [blogId]);
+  // useEffect(() => {
+  //   setReply({ articleId: blogId, userId: userData?.id, parentId: comment.id });
+  // }, [blogId]);
 
   const isAuthorAdmin = uploadedByUserRole === "admin";
   const isSuperAdmin = auth.state.user?.role === "super-admin";
