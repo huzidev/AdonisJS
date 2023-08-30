@@ -16,7 +16,7 @@ export default function ShowCommentsPage({
   setReplyState,
   dropDown,
   setDropDown,
-  editState,
+  editState, 
   setEditState,
 }: any) {
   const commentHook = useComment();
@@ -132,6 +132,7 @@ export default function ShowCommentsPage({
                       ...editComment,
                       id: comment.id,
                       userId: comment.userId,
+                      content: comment.content
                     });
                   }}
                 >
@@ -178,7 +179,7 @@ export default function ShowCommentsPage({
                 name="content"
                 type="text"
                 placeholder="Edit Comment"
-                value={comment.content}
+                value={editComment.content}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setEditComment({ ...editComment, content: e.target.value })
                 }
