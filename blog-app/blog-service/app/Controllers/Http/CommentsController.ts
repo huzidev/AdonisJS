@@ -7,17 +7,10 @@ export default class CommentsController {
   public async add({ request }: HttpContextContract) {
     try {
       const body: any = await request.validate(AddComment);
-
-      console.log("Body", body);
-        
-      const { userId, parentId } = body;
-
-      const user: any = await User.findBy("id", userId);
-      
       const data = await Comment.create(body);
-
       return {
-        message: `${parentId ? "Reply" : "Comment"} added successfully by ${user.username}`,
+        // when user add comment then parentId will be null but when user add reply then parentId will not be null
+        message: `Yours ${body.parentId ? 'reply' : 'comment'} added successfully`,
         data
       };
     } catch (e) {
