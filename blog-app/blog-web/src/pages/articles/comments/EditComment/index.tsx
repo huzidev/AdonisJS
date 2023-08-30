@@ -4,7 +4,7 @@ import { useComment } from "store/comment";
 import { useEditCommentPageHooks } from "./hooks";
 import { EditCommentPayload } from "./types";
 
-export default function EditCommentPage({ commentV, commentId, userId } : any): JSX.Element {
+export default function EditCommentPage({ commentV, commentId, userId, setEditState } : any): JSX.Element {
   const comment = useComment();
   const params: any = useParams();
   const commentResp = comment.state.getCommentById.data;
@@ -49,6 +49,7 @@ export default function EditCommentPage({ commentV, commentId, userId } : any): 
         <div className="flex">
           <button 
             className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={() => setEditState(null)}
           >
             Cancel
           </button>

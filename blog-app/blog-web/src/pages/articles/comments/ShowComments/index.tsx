@@ -145,6 +145,7 @@ export default function ShowCommentsPage({
             commentV={comment.content}
             commentId={comment.id}
             userId={comment.userId}
+            setEditState={setEditState}
           />
         ) : (
           <p className="text-gray-400 ml-6">{comment.content}</p>
