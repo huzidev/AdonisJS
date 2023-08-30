@@ -102,9 +102,11 @@ export default function ViewBlogPage(): JSX.Element {
           </>
         )}
       </div>
-      <div className="w-2/3 my-8 mx-auto">
-        <CommentsPage ownerId={ownerId} />
-      </div>
+      {auth.state.user && (
+        <div className="w-2/3 my-8 mx-auto">
+          <CommentsPage ownerId={ownerId} />
+        </div>
+      )}
     </div>
   );
 }
