@@ -18,6 +18,8 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     comment.addComment(addComment);
+    // after adding comment the text-area for add comment will became empty
+    setAddComment({ ...addComment, content: '' });
   }
 
   return (
