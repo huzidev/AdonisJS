@@ -37,13 +37,18 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       if (blogId) {
         comment.getComments(blogId);
       }
-      setAddComment({ ...addComment, userId: loggedInId, articleId: blogId, parentId: null });
+      setAddComment({ ...addComment });
     }, [loggedInId, blogId]);
+
+    console.log("state comments", state.getComments.data);
+    
 
     useEffect(() => {
       if (prev?.getComments.loading) {
-        if (!state.getComments.loading && !state.getComments.error && allComments.length) {
+        if (!state.getComments.loading && !state.getComments.error) {
+          if (state.getComments.data?.length) {
             successNotification(state.getComments.message)
+          }
         }
       }
       if (prev?.editComment.loading) {
