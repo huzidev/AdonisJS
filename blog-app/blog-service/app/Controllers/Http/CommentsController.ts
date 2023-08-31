@@ -1,4 +1,5 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import { sameValues } from "App/Default/Messages";
 import Comment from "App/Models/Comment";
 import User from "App/Models/User";
 import { AddComment, EditComment } from "App/Validators/CommentValidator";
@@ -59,6 +60,10 @@ export default class CommentsController {
       const comment: any = await Comment.findBy("id", params.id);
 
       const { content, parentId } = body;
+
+      if (content === comment.content) {
+        throw sameValues
+      }
 
       // only adding content: body.content otherwise it'll update userId as well if admin is updating some users id then due to validation userId it'll also update userId therefore 
       // put content: body.content sperately for updating comment

@@ -1,7 +1,7 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { validator } from '@ioc:Adonis/Core/Validator';
 import { dateKeys, userFiltersKeys } from "App/Default/Filters";
-import { emailExist, invalidURL, usernameExist } from "App/Default/Messages";
+import { emailExist, invalidURL, sameValues, usernameExist } from "App/Default/Messages";
 import User from "App/Models/User";
 import Utils from "App/Utils";
 import {
@@ -180,10 +180,7 @@ export default class UsersController {
           body.isVerified === user?.isVerified &&
           body.isBanned === user?.isBanned)
       ) {
-        throw {
-          message: "Can't update, values are same as of before",
-          status: 401,
-        };
+        throw sameValues;
       }
       // once use merge then call the save method
       user?.merge(body);

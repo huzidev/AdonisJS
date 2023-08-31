@@ -27,4 +27,9 @@ export const invalidURL = {
   message: "Invalid URL type", status: 400 
 };
 
+export const sameValues = {
+  message: "Can't update, values are same as of before",
+  status: 401,
+}
+
 export const blogsFetched = "blogs fetched successfully";
