@@ -1,6 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComment } from "store/comment";
@@ -23,6 +23,7 @@ export default function ShowCommentsPage({
 }: any) {
   const commentHook = useComment();
   const auth = useAuth();
+  const navigate = useNavigate();
   const userData: User = auth.state.user!;
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editComment, setEditComment] = useState<EditCommentPayload>({
@@ -73,9 +74,12 @@ export default function ShowCommentsPage({
   return (
     <div>
       <div className="flex">
-        <Link to={ROUTE_PATHS.VIEW_PROFILE + (uploadedByUser.id === userData.id ? 'me' : uploadedByUser.id)} className="inline-flex text-lg items-center mr-3  text-white">
+        <button onClick={() => {navigate(ROUTE_PATHS.VIEW_PROFILE + (uploadedByUser.id === userData.id ? 'me' : uploadedByUser.id))}} className="inline-flex text-lg items-center mr-3  text-white">
           - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
-        </Link>
+        </button>
+        {/* <p className="inline-flex text-lg items-center mr-3  text-white">
+          - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
+        </p> */}
         <p className="text-white">
           {new Date(comment.createdAt).toLocaleDateString()}
         </p>
