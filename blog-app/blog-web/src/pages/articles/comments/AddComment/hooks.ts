@@ -38,6 +38,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     }, []);
 
     useEffect(() => {
+      // prevId?.loading so when user go to new blog page then wait till id is fetched of that blog otherwise the previous blog's comments will fetched first then the new blog's comment
       if (prevId?.loading) {
         if (blogId) {
           comment.getComments(blogId);
