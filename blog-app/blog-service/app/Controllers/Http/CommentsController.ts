@@ -58,14 +58,16 @@ export default class CommentsController {
       const user: any = await User.findBy("id", body.userId);
       const comment: any = await Comment.findBy("id", params.id);
 
+      const { content, parentId } = body;
+
       // only adding content: body.content otherwise it'll update userId as well if admin is updating some users id then due to validation userId it'll also update userId therefore 
       // put content: body.content sperately for updating comment
-      comment.fill({ ...comment, content: body.content });
-      comment.merge(body.content);
+      comment.fill({ ...comment, content });
+      comment.merge(content);
       await comment.save();
       
       return {
-        message: `${user.id === auth.user.id ? 'Yours' : (user.username + `'s`)} comment updated successfully`,
+        message: `${user.id === auth.user.id ? 'Yours' : (user.username + `'s`)} ${parentId ? 'reply' : 'comment'} updated successfully`,
         data: comment?.toObject()
       }
 
