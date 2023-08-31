@@ -2,6 +2,7 @@
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useComment } from "store/comment";
+import { Comment } from "store/comment/types";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
@@ -16,14 +17,12 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const prev = usePrevious(state);
     const prevId = usePrevious(blog.state.getBlog);
     const loggedInId: any = auth.state.user?.id;
-    const blogId: any = blog.state.getBlog.data?.id;
+    const blogId: number = blog.state.getBlog.data?.id!;
     const commentsState = state.getComments.data;
-    const allComments: any = commentsState?.filter((comment: AllCommentsState) => comment.parentId === null);
-    const allReplies: any = commentsState?.filter((comment: AllCommentsState) => comment.parentId !== null);
+    // allComments will either be array of comments or just empty []
+    const allComments: Comment[] = commentsState?.filter((comment: AllCommentsState) => comment.parentId === null) ?? [];
+    const allReplies: Comment[] = commentsState?.filter((comment: AllCommentsState) => comment.parentId !== null) ?? [];
     const allUsers = user.state.allUser.data;
-
-    console.log("blogId", blogId);
-    
 
     const [addComment, setAddComment] = useState<AddCommentPayload>({
       userId: loggedInId,
@@ -32,6 +31,8 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       parentId: null
     });
 
+    console.log("allComments", allComments);
+    
     useEffect(() => {
       // fetching all users to get username and roles for all comments
       user.allUser();
