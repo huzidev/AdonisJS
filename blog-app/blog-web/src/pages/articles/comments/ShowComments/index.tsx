@@ -21,11 +21,12 @@ export default function ShowCommentsPage({
 }: any) {
   const commentHook = useComment();
   const auth = useAuth();
-  const userData: any = auth.state.user;
+  const userData: User = auth.state.user!;
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editComment, setEditComment] = useState<EditCommentPayload>({
     id: null,
     userId: null,
+    parentId: null,
     content: "",
   });
 
@@ -131,7 +132,8 @@ export default function ShowCommentsPage({
                       id: comment.id,
                       userId: comment.userId,
                       // also fetching the comment content in the state because we can't directly put comment.content in input value because then onChange wouldn't work
-                      content: comment.content
+                      content: comment.content,
+                      parentId: comment.parentId
                     });
                   }}
                 >

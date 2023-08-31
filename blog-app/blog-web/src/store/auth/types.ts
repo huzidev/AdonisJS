@@ -11,7 +11,8 @@ export interface AuthSignUpPayload extends AuthSignInPayload {
 }
 
 export interface User {
-    id: number | null;
+    // id: number | null;
+    id: number;
     email: string;
     username: string;
     isActive: boolean;
