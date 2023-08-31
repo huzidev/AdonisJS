@@ -73,7 +73,7 @@ export default function ShowCommentsPage({
   return (
     <div>
       <div className="flex">
-        <Link to={ROUTE_PATHS.VIEW_PROFILE + uploadedByUser.id} className="inline-flex text-lg items-center mr-3  text-white">
+        <Link to={ROUTE_PATHS.VIEW_PROFILE + (uploadedByUser.id === userData.id ? 'me' : uploadedByUser.id)} className="inline-flex text-lg items-center mr-3  text-white">
           - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
         </Link>
         <p className="text-white">
