@@ -62,7 +62,7 @@ export default class CommentsController {
       const { content, parentId } = body;
 
       if (content === comment.content) {
-        throw sameValues
+        throw sameValues;
       }
 
       // only adding content: body.content otherwise it'll update userId as well if admin is updating some users id then due to validation userId it'll also update userId therefore 
