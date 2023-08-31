@@ -29,7 +29,7 @@ export default function ShowCommentsPage({
     content: "",
   });
 
-  const uploadedByUser = allUsers.find(
+  const uploadedByUser = allUsers && allUsers.find(
     (user: User) => user.id === comment.userId
   );
 

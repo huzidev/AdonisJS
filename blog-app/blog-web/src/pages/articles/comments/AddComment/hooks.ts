@@ -14,12 +14,16 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const user = useUser();
     const state = comment.state;
     const prev = usePrevious(state);
+    const prevId = usePrevious(blog.state.getBlog);
     const loggedInId: any = auth.state.user?.id;
     const blogId: any = blog.state.getBlog.data?.id;
     const commentsState = state.getComments.data;
     const allComments: any = commentsState?.filter((comment: AllCommentsState) => comment.parentId === null);
     const allReplies: any = commentsState?.filter((comment: AllCommentsState) => comment.parentId !== null);
     const allUsers = user.state.allUser.data;
+
+    console.log("blogId", blogId);
+    
 
     const [addComment, setAddComment] = useState<AddCommentPayload>({
       userId: loggedInId,
@@ -34,14 +38,13 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     }, []);
 
     useEffect(() => {
-      if (blogId) {
-        comment.getComments(blogId);
+      if (prevId?.loading) {
+        if (blogId) {
+          comment.getComments(blogId);
+        }
       }
       setAddComment({ ...addComment });
     }, [loggedInId, blogId]);
-
-    console.log("state comments", state.getComments.data);
-    
 
     useEffect(() => {
       if (prev?.getComments.loading) {
