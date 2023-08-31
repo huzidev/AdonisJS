@@ -73,8 +73,8 @@ export const commentSlice = createSlice({
             if (action.payload) {
               const { message, data } = action.payload; 
               if (state.getComments.data) {
-                const prevState: any = JSON.parse(JSON.stringify(state.getComments.data));
-                const update = state.getComments.data.map((comment) => comment.id === data.id && (data && comment));
+                // will return the updated value of comment
+                const update = state.getComments.data.map((comment) => comment.id === data.id ? data : comment);
                 state.getComments.data = update;
               }
               state.editComment.message = message;
