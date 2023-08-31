@@ -243,6 +243,7 @@ export default function ShowCommentsPage({
                   editState && setEditState(null);
                   // if three-dots drop-down button is visible then hide it
                   dropDown && setDropDown(null);
+                  // if user had clicked in edit before then isEdit will be true hence when user click on reply make sure to change isEdit to false else it'll send the request to editComment instead of reply
                   isEdit && setIsEdit(false);
                   setReplyState(comment.id);
               }}
