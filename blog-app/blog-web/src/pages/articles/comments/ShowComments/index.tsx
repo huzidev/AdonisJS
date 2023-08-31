@@ -1,4 +1,6 @@
+import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useComment } from "store/comment";
@@ -71,9 +73,9 @@ export default function ShowCommentsPage({
   return (
     <div>
       <div className="flex">
-        <p className="inline-flex text-lg items-center mr-3  text-white">
+        <Link to={ROUTE_PATHS.VIEW_PROFILE + uploadedByUser.id} className="inline-flex text-lg items-center mr-3  text-white">
           - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
-        </p>
+        </Link>
         <p className="text-white">
           {new Date(comment.createdAt).toLocaleDateString()}
         </p>
