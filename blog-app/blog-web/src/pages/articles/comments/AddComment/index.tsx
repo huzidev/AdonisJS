@@ -12,9 +12,9 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
   const userData = auth.state.user;
   const { addComment, setAddComment, allComments, allUsers, allReplies, blogId } =
     useCommentPageHooks();
-  const [replyState, setReplyState] = useState(null);
-  const [editState, setEditState] = useState(null);
-  const [dropDown, setDropDown] = useState(null);
+  const [replyState, setReplyState] = useState<number | null>(null);
+  const [editState, setEditState] = useState<number | null>(null);
+  const [dropDown, setDropDown] = useState<number | null>(null);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

@@ -1,6 +1,7 @@
 export interface PropsState {
   ownerId: number;
 }
+
 export interface AddCommentPayload {
   userId: number;
   articleId: number;

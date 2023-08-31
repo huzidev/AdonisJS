@@ -31,8 +31,6 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       parentId: null
     });
 
-    console.log("allComments", allComments);
-    
     useEffect(() => {
       // fetching all users to get username and roles for all comments
       user.allUser();
