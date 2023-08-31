@@ -24,7 +24,7 @@ export default class CommentsController {
       const response = await Comment.query()
           .where("articleId", articleId)
           .select('*');
-
+      
       return {
         message: "Comments fetched successfully",
         data: response
