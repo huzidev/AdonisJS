@@ -43,7 +43,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
           comment.getComments(blogId);
         }
       }
-      setAddComment({ ...addComment });
+      setAddComment({ ...addComment, articleId: blogId });
     }, [loggedInId, blogId]);
 
     useEffect(() => {
