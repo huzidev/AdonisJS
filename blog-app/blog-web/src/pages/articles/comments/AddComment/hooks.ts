@@ -16,7 +16,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const state = comment.state;
     const prev = usePrevious(state);
     const prevId = usePrevious(blog.state.getBlog);
-    const loggedInId: any = auth.state.user?.id;
+    const loggedInId: number = auth.state.user?.id!;
     const blogId: number = blog.state.getBlog.data?.id!;
     const commentsState = state.getComments.data;
     // allComments will either be array of comments or just empty []
