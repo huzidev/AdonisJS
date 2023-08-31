@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.integer('user_id').unsigned().references('id').inTable('users').notNullable()
       table.integer('article_id').unsigned().references('id').inTable('articles').onDelete('CASCADE').notNullable()
       // nullable because when user clicked on reply then it'll store id of comment else null
+      // onDelete cascade on parent_id as well so when user delete a comment with id then also delete replies related to that comment as well
       table.integer('parent_id').unsigned().nullable().references('id').inTable('comments').onDelete('CASCADE');
       // table.integer('parent_id').unsigned().nullable().references('id').inTable('comments');
       table.string("content", 100).notNullable();
