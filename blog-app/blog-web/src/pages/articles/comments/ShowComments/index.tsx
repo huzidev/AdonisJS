@@ -243,6 +243,7 @@ export default function ShowCommentsPage({
                   editState && setEditState(null);
                   // if three-dots drop-down button is visible then hide it
                   dropDown && setDropDown(null);
+                  isEdit && setIsEdit(false);
                   setReplyState(comment.id);
               }}
             >
