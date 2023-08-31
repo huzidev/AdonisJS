@@ -78,5 +78,6 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       allUsers,
       allReplies,
       blogId,
+      loggedInId
     };
   }
