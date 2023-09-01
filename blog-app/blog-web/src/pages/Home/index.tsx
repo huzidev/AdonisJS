@@ -105,7 +105,7 @@ export default function HomePage() {
             <img
               src={require(`assets/${image.src}`)}
               alt={image.heading}
-              className={`h-[${height}] w-full object-cover`}
+              className={`h-[786px] w-full object-cover`}
             />
             <div className="absolute left-0 top-0 p-6 text-white">
               <h2 className="text-4xl font-bold">{image.heading}</h2>
