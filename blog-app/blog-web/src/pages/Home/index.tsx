@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "store/auth";
 import { slides } from "./data";
 
@@ -6,9 +6,13 @@ export default function HomePage() {
   const auth = useAuth();
   const user = auth.state.user;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [height, setHeight] = useState(window.innerHeight);
-  const [widhth, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight - 64);
+  const [width, setWidth] = useState(window.innerWidth - 64);
 
+  useEffect(() => {
+    setHeight(window.innerHeight - 64);
+    setWidth(window.innerWidth - 64);
+  }, [window.innerHeight, window.innerWidth])
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex: any) =>
@@ -95,14 +99,15 @@ export default function HomePage() {
         {slides.map((image, index: number) => (
           <div
             key={index}
-            className={`carousel-slide h-full w-full flex ${
+            className={`${
               index === currentIndex ? "visible" : "hidden"
             }`}
           >
             <img
               src={require(`assets/${image.src}`)}
               alt={image.heading}
-              className={`h-full w-full object-cover`}
+              className={`object-cover`}
+              style={{ height: `${height}px`, width: `${width}px` }}
             />
             <div className="absolute left-0 top-0 p-6 text-white">
               <h2 className="text-4xl font-bold">{image.heading}</h2>
