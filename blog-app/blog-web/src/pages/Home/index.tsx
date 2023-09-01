@@ -26,7 +26,7 @@ export default function HomePage() {
     return () => {
       window.removeEventListener("resize", updateDimensions);
     };
-  }, [height, width]);
+  }, []);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex: any) =>
@@ -41,52 +41,6 @@ export default function HomePage() {
   };
   return (
     <div>
-      {/* <div 
-          className="w-11/12 my-8 mx-auto  border rounded-lg shadow bg-gray-800 border-gray-700 dark:bg-#19212c">
-          <div className="p-5">
-            <h1 className="mb-2 text-3xl text-center font-bold tracking-tight text-white">
-              Welcome {user ? `${user.username}` : "To Blog App"}
-            </h1>
-             <main className="container mx-auto py-8">
-              <section className="mb-8">
-                <h2 className="text-2xl text-white font-bold mb-4">Introduction</h2>
-                <p className="text-lg text-gray-400 dark:text-gray-400">
-                  This blog app is built using Adonis, React, Redux, TypeScript, MySQL, and NodeJS.
-                </p>
-              </section>
-              <section className="mb-8">
-                <h2 className="text-2xl text-white font-bold mb-4">Key Features</h2>
-                <ul className="list-disc list-inside">
-                  <li className="text-lg text-gray-400 mb-2">User Registration and Authentication</li>
-                  <li className="text-lg text-gray-400 mb-2">Blog Post Creation and Management</li>
-                  <li className="text-lg text-gray-400 mb-2">Responsive Design</li>
-                </ul>
-              </section>
-              <section className="mb-8">
-                {!user ? (
-                  <>
-                    <h2 className="text-2xl text-white font-bold mb-2">Get Started</h2>
-                    <p className="text-lg text-gray-400 mb-4">Sign up to start creating your own blog posts or explore existing posts.</p>
-                    <Link
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                      to={ROUTE_PATHS.AUTH_SIGNUP}>
-                        Sign Up
-                      </Link>
-                  </>
-                ) : (
-                  <>
-                    <h2 className="text-2xl text-white font-bold mb-4">Explore Blogs</h2>
-                      <Link
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                        to={ROUTE_PATHS.ARTICLES}>
-                        Blogs
-                      </Link>
-                  </>
-                )}
-              </section>
-            </main>
-          </div>
-        </div> */}
       <div className="relative">
         <button
           className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
@@ -103,18 +57,26 @@ export default function HomePage() {
         {slides.map((image, index: number) => (
           <div
             key={index}
-            className={`w-full h-full ${
+            style={{ height: `${height}px`, width: `${width}px`, 
+            backgroundImage: `url(assets/${image.src})`
+          }}
+            className={` ${
               index === currentIndex ? "visible" : "hidden"
             }`}
           >
-            <img
+            {/* <img
               src={require(`assets/${image.src}`)}
               alt={image.heading} 
               style={{ height: `${height}px`, width: `${width}px`}}
-            />
-            <div className="w-lg absolute left-0 top-1/3 p-6 text-white">
+            /> */}
+            <div className="w-lg absolute left top-1/3 p-6 text-white">
               <h2 className="text-4xl font-bold font-outline-2">{image.heading}</h2>
-              <p className="mt-2 text-xl font-outline-2">Get to know more about {image.heading} by exploring blogs about {image.heading}</p>
+              <p className="mt-2 text-xl font-outline-2">Explore blogs about {image.heading}</p>
+              <button 
+                className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
+              >
+                {image.heading} Blogs
+              </button>
             </div>
           </div>
         ))}
