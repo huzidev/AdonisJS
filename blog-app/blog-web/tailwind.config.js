@@ -11,7 +11,10 @@ module.exports = {
       },
       width: {
         lg: '1280px',
-       }
+      },
+      backgroundImage: {
+        'asset': "url('assets')",
+      }
     },
   },
   plugins: [

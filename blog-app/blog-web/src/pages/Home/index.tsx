@@ -61,9 +61,9 @@ export default function HomePage() {
           <div
             key={index}
             style={{ height: `${height}px`, width: `${width}px`, 
-              backgroundImage: `url(assets/${image.src})`
+              // backgroundImage: `url(assets/${image.src})})`  
             }}
-            className={` ${
+            className={`${
               index === currentIndex ? "visible" : "hidden"
             }`}
           >
