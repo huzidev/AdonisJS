@@ -76,7 +76,7 @@ export default function HomePage() {
         </button>
         <button
           className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-          onClick={nextSlide}
+          onClick={nextSlide} 
         >
           &gt;
         </button>
@@ -88,7 +88,7 @@ export default function HomePage() {
             }`}
           >
             <img
-              src={`/assets/${image.src}`}
+              src={require(`assets/${image.src}`)}
               alt={image.heading}
               className="w-full h-full object-cover"
             />
