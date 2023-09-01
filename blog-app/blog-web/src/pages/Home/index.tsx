@@ -28,9 +28,12 @@ export default function HomePage() {
   //   }, 3000)
   // }, [currentIndex])
 
-  let height = window.innerHeight;
-  let width = window.innerWidth;
+  let height = window.innerHeight - 64;
+  let width = window.innerWidth - 64;
   
+  console.log("height", height);
+  
+
   return (
     <div>
       {/* <div 
@@ -102,7 +105,7 @@ export default function HomePage() {
             <img
               src={require(`assets/${image.src}`)}
               alt={image.heading}
-              className={`h-[${height}] w-[${width}] object-cover`}
+              className={`h-[${height}] w-full object-cover`}
             />
             <div className="absolute left-0 top-0 p-6 text-white">
               <h2 className="text-4xl font-bold">{image.heading}</h2>
