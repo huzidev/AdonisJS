@@ -6,6 +6,19 @@ body {
     @apply dark:bg-[#181a1b];
 }
 
+@layer base {
+  .font-outline-2 {
+    text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+  }
+  .font-outline-4 {
+    -webkit-text-stroke: 4px black;
+  }
+}
+
 /* Change Autocomplete styles in Chrome */
 /* when user selects recommened values for input field then background of the inpuit will not change SPECIALLY in dark-mode */
 input:-webkit-autofill,
