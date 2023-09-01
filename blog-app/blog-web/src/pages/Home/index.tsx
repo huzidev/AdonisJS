@@ -7,12 +7,26 @@ export default function HomePage() {
   const user = auth.state.user;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [height, setHeight] = useState(window.innerHeight - 64);
-  const [width, setWidth] = useState(window.innerWidth - 64);
+  const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    setHeight(window.innerHeight - 64);
-    setWidth(window.innerWidth - 64);
-  }, [window.innerHeight, window.innerWidth])
+    // Function to update height and width based on window dimensions
+    const updateDimensions = () => {
+      setHeight(window.innerHeight - 64);
+      setWidth(window.innerWidth);
+    };
+
+    // Initial update
+    updateDimensions();
+
+    // Attach event listener to update dimensions on window resize
+    window.addEventListener("resize", updateDimensions);
+
+    // Remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("resize", updateDimensions);
+    };
+  }, [height, width]);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex: any) =>
@@ -96,8 +110,7 @@ export default function HomePage() {
             <img
               src={require(`assets/${image.src}`)}
               alt={image.heading}
-              className={`object-cover`}
-              style={{ height: `${height}px`, width: `${width}px` }}
+              style={{ height: `${height}px`, width: `${width}px`}}
             />
             <div className="absolute left-0 top-0 p-6 text-white">
               <h2 className="text-4xl font-bold">{image.heading}</h2>
