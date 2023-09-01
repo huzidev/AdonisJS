@@ -1,6 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { slides } from "./data";
 
@@ -61,8 +61,8 @@ export default function HomePage() {
           <div
             key={index}
             style={{ height: `${height}px`, width: `${width}px`, 
-            backgroundImage: `url(assets/${image.src})`
-          }}
+              backgroundImage: `url(assets/${image.src})`
+            }}
             className={` ${
               index === currentIndex ? "visible" : "hidden"
             }`}
@@ -81,12 +81,12 @@ export default function HomePage() {
                 >
                   {" "}blogs{" "}   
                 </span>
-                <Link 
+                {/* <Link 
                   to={ROUTE_PATHS.ARTICLES}
                   className="text-blue-500 cursor-pointer"
                 >
                   {" "}blogs{" "}   
-                </Link>
+                </Link> */}
               about {image.heading}</p>
             </div>
           </div>
