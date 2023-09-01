@@ -1,52 +1,42 @@
 export const slides = [
     {
       src: "astronomy.jpg",
-      heading: "Astronomy",
-      description: "Get to know more about Astronomy by exploring blogs about Astronomy",
+      heading: "Astronomy"
     },  
     {
       src: "food.jpg",
-      heading: "Food",
-      description: "Get to know more about Foods and by exploring blogs about Foods",
+      heading: "Food"
     },
     {
       src: "fitness.jpg",
-      heading: "Fitness",
-      description: "Get to know more about Fitness and by exploring blogs about Fitness",
+      heading: "Fitness"
     },
     {
       src: "pets.jpg",
-      heading: "Pets",
-      description: "Get to know more about Pets and by exploring blogs about Pets",
+      heading: "Pets"
     },
     {
       src: "travel.jpg",
-      heading: "Travel",
-      description: "Get to know more about Travel and by exploring blogs about Travel",
+      heading: "Travel"
     },
     {
       src: "sports.jpg",
-      heading: "Sports",
-      description: "Get to know more about Sports and by exploring blogs about Sports",
+      heading: "Sports"
     },
     {
       src: "lifestyle.jpg",
-      heading: "Lifestyle",
-      description: "Get to know more about Lifestyle and by exploring blogs about Lifestyle",
+      heading: "Lifestyle"
     },
     {
       src: "nature.jpg",
-      heading: "Nature",
-      description: "Get to know more about Foods and by exploring blogs about Nature",
+      heading: "Nature"
     },
     {
       src: "business.jpg",
-      heading: "Business",
-      description: "Get to know more about Business and by exploring blogs about Business",
+      heading: "Business"
     },
     {
       src: "sci-fi.jpg",
-      heading: "Sci-Fi",
-      description: "Get to know more about Sci-Fi and by exploring blogs about Sci-Fi",
+      heading: "Sci-Fi"
     },
   ];

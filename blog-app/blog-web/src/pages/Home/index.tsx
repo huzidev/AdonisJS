@@ -94,7 +94,7 @@ export default function HomePage() {
             />
             <div className="absolute left-0 top-0 p-6 text-white">
               <h2 className="text-4xl font-bold">{image.heading}</h2>
-              <p className="mt-2">{image.description}</p>
+              <p className="mt-2">Get to know more about {image.heading} by exploring blogs about {image.heading}</p>
             </div>
           </div>
         ))}
