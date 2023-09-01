@@ -1,10 +1,13 @@
+import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { slides } from "./data";
 
 export default function HomePage() {
   const auth = useAuth();
   const user = auth.state.user;
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [height, setHeight] = useState(window.innerHeight - 64);
   const [width, setWidth] = useState(window.innerWidth);
@@ -71,12 +74,14 @@ export default function HomePage() {
             /> */}
             <div className="w-lg absolute left top-1/3 p-6 text-white">
               <h2 className="text-4xl font-bold font-outline-2">{image.heading}</h2>
-              <p className="mt-2 text-xl font-outline-2">Explore blogs about {image.heading}</p>
-              <button 
-                className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
-              >
-                {image.heading} Blogs
-              </button>
+              <p className="mt-2 text-xl font-outline-2">Explore 
+                <span 
+                  className="text-blue-500 cursor-pointer"
+                  onClick={() => navigate(ROUTE_PATHS.ARTICLES)}
+                >
+                  blogs   
+                </span>
+              about {image.heading}</p>
             </div>
           </div>
         ))}
