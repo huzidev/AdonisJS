@@ -19,6 +19,21 @@ export default function HomePage() {
     );
   };
 
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setCurrentIndex(currentIndex + 1);
+  //     if (currentIndex === slides.length) {
+  //       setCurrentIndex(0);
+  //     }
+  //   }, 3000)
+  // }, [currentIndex])
+
+  let height = window.innerHeight;
+  let width = window.innerWidth;
+  
+  console.log("heihght", height);
+  
+
   return (
     <div>
       {/* <div 
@@ -80,10 +95,10 @@ export default function HomePage() {
         >
           &gt;
         </button>
-        {slides.map((image, index) => (
+        {slides.map((image, index: number) => (
           <div
             key={index}
-            className={`carousel-slide h-screen w-full flex ${
+            className={`carousel-slide h-[${height}] w-[${width}] flex ${
               index === currentIndex ? "visible" : "hidden"
             }`}
           >
