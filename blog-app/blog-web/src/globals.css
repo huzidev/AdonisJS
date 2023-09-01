@@ -14,9 +14,6 @@ body {
     -1px 1px 0 #000,
      1px 1px 0 #000;
   }
-  .font-outline-4 {
-    -webkit-text-stroke: 4px black;
-  }
 }
 
 /* Change Autocomplete styles in Chrome */

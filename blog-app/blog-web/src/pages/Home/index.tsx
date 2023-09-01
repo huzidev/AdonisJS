@@ -112,7 +112,7 @@ export default function HomePage() {
               alt={image.heading} 
               style={{ height: `${height}px`, width: `${width}px`}}
             />
-            <div className="absolute left-0 top-1/3 p-6 text-white">
+            <div className="w-lg absolute left-0 top-1/3 p-6 text-white">
               <h2 className="text-4xl font-bold font-outline-2">{image.heading}</h2>
               <p className="mt-2 text-xl font-outline-2">Get to know more about {image.heading} by exploring blogs about {image.heading}</p>
             </div>
