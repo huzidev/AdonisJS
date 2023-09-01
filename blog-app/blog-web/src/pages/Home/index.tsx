@@ -25,16 +25,6 @@ export default function HomePage() {
       prevIndex === slides.length - 1 ? 0 : prevIndex + 1
     );
   };
-
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setCurrentIndex(currentIndex + 1);
-  //     if (currentIndex === slides.length) {
-  //       setCurrentIndex(0);
-  //     }
-  //   }, 3000)
-  // }, [currentIndex])
-
   return (
     <div>
       {/* <div 
@@ -99,7 +89,7 @@ export default function HomePage() {
         {slides.map((image, index: number) => (
           <div
             key={index}
-            className={`${
+            className={`w-full h-full ${
               index === currentIndex ? "visible" : "hidden"
             }`}
           >
