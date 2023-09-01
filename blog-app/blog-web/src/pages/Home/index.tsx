@@ -31,9 +31,6 @@ export default function HomePage() {
   let height = window.innerHeight;
   let width = window.innerWidth;
   
-  console.log("heihght", height);
-  
-
   return (
     <div>
       {/* <div 
@@ -98,14 +95,14 @@ export default function HomePage() {
         {slides.map((image, index: number) => (
           <div
             key={index}
-            className={`carousel-slide h-[${height}] w-[${width}] flex ${
+            className={`carousel-slide h-full w-full flex ${
               index === currentIndex ? "visible" : "hidden"
             }`}
           >
             <img
               src={require(`assets/${image.src}`)}
               alt={image.heading}
-              className="w-full h-full object-cover"
+              className={`h-[${height}] w-[${width}] object-cover`}
             />
             <div className="absolute left-0 top-0 p-6 text-white">
               <h2 className="text-4xl font-bold">{image.heading}</h2>
