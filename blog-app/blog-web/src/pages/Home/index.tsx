@@ -22,13 +22,13 @@ export default function HomePage() {
   }, []);
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
+    setCurrentIndex((prevIndex: number) =>
       prevIndex === 0 ? slides.length - 1 : prevIndex - 1
     );
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
+    setCurrentIndex((prevIndex: number) =>
       prevIndex === slides.length - 1 ? 0 : prevIndex + 1
     );
   };
@@ -41,18 +41,7 @@ export default function HomePage() {
 
   useEffect(() => {
     slider();
-  }, [])
-
-  // const autoAdvance = () => {
-  //   setTimeout(() => {
-  //     nextSlide();
-  //     autoAdvance();
-  //   }, 4500);
-  // };
-
-  // useEffect(() => {
-  //   autoAdvance(); 
-  // }, []);
+  }, [currentIndex])
 
   return (
     <div>
@@ -70,13 +59,13 @@ export default function HomePage() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="h-6 w-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M15.75 19.5L8.25 12l7.5-7.5"
               />
             </svg>
@@ -96,13 +85,13 @@ export default function HomePage() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="h-6 w-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M8.25 4.5l7.5 7.5-7.5 7.5"
               />
             </svg>
