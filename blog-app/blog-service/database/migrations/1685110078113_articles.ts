@@ -1,12 +1,12 @@
-import BaseSchema from '@ioc:Adonis/Lucid/Schema'
+import BaseSchema from '@ioc:Adonis/Lucid/Schema';
 
 export default class extends BaseSchema {
   protected tableName = 'articles'
 
   public async up () {
     this.schema.alterTable(this.tableName, (table) => {
-      table.renameColumn('custom_id', 'slug')
-      table.integer('owner_id').after('id').unsigned().references('id').inTable('users').onDelete('CASCADE').notNullable()
+      table.renameColumn('custom_id', 'slug');
+      table.integer('owner_id').after('id').unsigned().references('id').inTable('users').onDelete('CASCADE').notNullable();
     })
   }
 
