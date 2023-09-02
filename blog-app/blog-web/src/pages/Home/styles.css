@@ -6,6 +6,10 @@
   animation: fadeOut 1.5s ease-in-out both;
 }
 
+.slider-button {
+  @apply absolute bottom-0 top-0 z-[1] flex w-[10%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition ease-in-out duration-500 hover:bg-[rgba(0,0,0,0.2)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
