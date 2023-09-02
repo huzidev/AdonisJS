@@ -34,9 +34,10 @@ export default function HomePage() {
   };
 
   function slider() {
-    setTimeout(() => {
+    const interval = setTimeout(() => {
       nextSlide();
-    }, 4500)
+    }, 1500)
+    clearInterval(interval)
   }
 
   useEffect(() => {
