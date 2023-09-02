@@ -33,6 +33,16 @@ export default function HomePage() {
     );
   };
 
+  function slider() {
+    setTimeout(() => {
+      nextSlide();
+    }, 4500)
+  }
+
+  useEffect(() => {
+    slider();
+  }, [])
+
   // const autoAdvance = () => {
   //   setTimeout(() => {
   //     nextSlide();
@@ -41,7 +51,7 @@ export default function HomePage() {
   // };
 
   // useEffect(() => {
-  //   autoAdvance(); // Start the auto-advance when the component mounts
+  //   autoAdvance(); 
   // }, []);
 
   return (
