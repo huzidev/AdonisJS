@@ -60,34 +60,37 @@ export default function HomePage() {
         {slides.map((image, index: number) => (
           <div
             key={index}
-            style={{ height: `${height}px`, width: `${width}px`, 
-              // backgroundImage: `url(assets/${image.src})})`  
+            style={{ 
+              height: `${height}px`, 
+              width: `${width}px`, 
             }}
-            className={`flex ${
+            className={` ${ 
               index === currentIndex ? "visible" : "hidden"
             }`}
           >
-            {/* <img
+            <img
               src={require(`assets/${image.src}`)}
               alt={image.heading} 
               style={{ height: `${height}px`, width: `${width}px`}}
-            /> */}
-            <div className="w-lg m-auto text-white">
-              <h2 className="text-4xl font-bold font-outline-2">{image.heading}</h2>
-              <p className="mt-2 text-xl font-outline-2">Explore 
-                <span 
-                  className="text-blue-500 cursor-pointer"
-                  onClick={() => navigate(ROUTE_PATHS.ARTICLES)}
-                >
-                  {" "}blogs{" "}   
-                </span>
-                {/* <Link 
-                  to={ROUTE_PATHS.ARTICLES}
-                  className="text-blue-500 cursor-pointer"
-                >
-                  {" "}blogs{" "}   
-                </Link> */}
-              about {image.heading}</p>
+            />
+            <div className="w-lg m-auto">
+              <div className="absolute top-1/3 m-auto text-white">
+                <h2 className="text-4xl font-bold font-outline-2">{image.heading}</h2>
+                <p className="mt-2 text-xl font-outline-2">Explore 
+                  <span 
+                    className="text-blue-500 cursor-pointer"
+                    onClick={() => navigate(ROUTE_PATHS.ARTICLES)}
+                  >
+                    {" "}blogs{" "}   
+                  </span>
+                  {/* <Link 
+                    to={ROUTE_PATHS.ARTICLES}
+                    className="text-blue-500 cursor-pointer"
+                  >
+                    {" "}blogs{" "}   
+                  </Link> */}
+                about {image.heading}</p>
+              </div>
             </div>
           </div>
         ))}
