@@ -28,7 +28,7 @@ export default function Header(): JSX.Element {
   return (
     <div>
       <nav className="border-gray-200 bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4">
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
             <Link to='/'>Blog App</Link>
           </span>

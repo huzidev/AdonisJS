@@ -63,7 +63,7 @@ export default function HomePage() {
             style={{ height: `${height}px`, width: `${width}px`, 
               // backgroundImage: `url(assets/${image.src})})`  
             }}
-            className={`${
+            className={`flex ${
               index === currentIndex ? "visible" : "hidden"
             }`}
           >
@@ -72,7 +72,7 @@ export default function HomePage() {
               alt={image.heading} 
               style={{ height: `${height}px`, width: `${width}px`}}
             /> */}
-            <div className="w-lg absolute left top-1/3 p-6 text-white">
+            <div className="w-lg m-auto text-white">
               <h2 className="text-4xl font-bold font-outline-2">{image.heading}</h2>
               <p className="mt-2 text-xl font-outline-2">Explore 
                 <span 
