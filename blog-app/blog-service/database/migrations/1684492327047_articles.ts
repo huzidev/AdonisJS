@@ -27,6 +27,7 @@ export default class Articles extends BaseSchema {
       // can't change the datatype to int from string for custom_id because maximum value is of 2147 something and date.now in ms is much greater
       table.string("custom_id", 180).notNullable().unique();
       table.string("title", 100).notNullable();
+      table.string("category", 100).notNullable();
       table.string("image", 100).notNullable();
       // text can be long therefore using text instead of string
       table.text("content").notNullable();
