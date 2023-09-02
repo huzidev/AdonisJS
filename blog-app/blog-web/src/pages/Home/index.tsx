@@ -6,9 +6,9 @@ import "./styles.css";
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [height, setHeight] = useState(window.innerHeight - 64);
-  const [width, setWidth] = useState(window.innerWidth);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [height, setHeight] = useState<number>(window.innerHeight - 64);
+  const [width, setWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -33,15 +33,10 @@ export default function HomePage() {
     );
   };
 
-  function slider() {
-    const interval = setTimeout(() => {
-      nextSlide();
-    }, 1500)
-    clearInterval(interval)
-  }
-
   useEffect(() => {
-    slider();
+    setTimeout(() => {
+      nextSlide();
+    }, 2500)
   }, [currentIndex])
 
   return (
