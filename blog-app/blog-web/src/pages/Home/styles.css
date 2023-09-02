@@ -1,10 +1,9 @@
-/* CSS in a separate .css or .scss file */
 .fade-in {
-  animation: fadeIn 2s ease-in-out both;
+  animation: fadeIn 1.5s ease-in-out both;
 }
 
 .fade-out {
-  animation: fadeOut 2s ease-in-out both;
+  animation: fadeOut 1.5s ease-in-out both;
 }
 
 @keyframes fadeIn {
@@ -24,3 +23,4 @@
     opacity: 0;
   }
 }
+
