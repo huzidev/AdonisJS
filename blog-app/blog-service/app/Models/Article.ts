@@ -3,8 +3,24 @@ import Sort from 'App/Utils/Sort'
 import { DateTime } from 'luxon'
 import User from './User'
 
+export type ArticleCategory = typeof User.roles[number]
+
+
 // model name has to be same as of table name of database but singular form
 export default class Article extends BaseModel {
+  public static categories = [
+    'astronomy', 
+    'fitness', 
+    'business', 
+    'food', 
+    'lifestyle',
+    'nature', 
+    'pets', 
+    'sci-fi', 
+    'sports', 
+    'travel',
+  ] as const 
+
   @column({ isPrimary: true })
   public id: number
 
