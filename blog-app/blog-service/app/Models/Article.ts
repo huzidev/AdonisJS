@@ -1,10 +1,9 @@
-import { BaseModel, BelongsTo, beforeCreate, belongsTo, column, scope } from '@ioc:Adonis/Lucid/Orm'
-import Sort from 'App/Utils/Sort'
-import { DateTime } from 'luxon'
-import User from './User'
+import { BaseModel, BelongsTo, beforeCreate, belongsTo, column, scope } from '@ioc:Adonis/Lucid/Orm';
+import Sort from 'App/Utils/Sort';
+import { DateTime } from 'luxon';
+import User from './User';
 
-export type ArticleCategory = typeof User.roles[number]
-
+export type ArticleCategory = typeof Article.categories[number];
 
 // model name has to be same as of table name of database but singular form
 export default class Article extends BaseModel {
