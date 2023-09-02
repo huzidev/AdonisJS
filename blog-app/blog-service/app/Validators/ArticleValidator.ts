@@ -1,4 +1,5 @@
 import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
+import Article from 'App/Models/Article'
 import Sort from 'App/Utils/Sort'
 
 export class CreateArticle {
@@ -6,8 +7,7 @@ export class CreateArticle {
     title: schema.string({ trim: true }, [rules.minLength(6), rules.regex(/^[a-zA-Z0-9\s]+$/)]),
     content: schema.string({ trim: true }, [rules.minLength(12)]),
     image: schema.string(),
-    category: schema.enum.optional(User.roles),
-
+    category: schema.enum.optional(Article.categories)
   })
 
   public messages: CustomMessages = {
