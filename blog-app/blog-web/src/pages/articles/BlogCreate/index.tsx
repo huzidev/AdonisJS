@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useBlogs } from "store/articles";
-import 'utils/form/index.css';
+import { categories } from "store/articles/types";
+import "utils/form/index.css";
 import { useCreateBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
 
 export default function AddBlogPage(): JSX.Element {
   const blog = useBlogs();
-  const initialState: ArticleType = { title: '', image: '', content: '' };
+  const initialState: ArticleType = { title: "", image: "", content: "" };
   const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
 
@@ -21,7 +22,7 @@ export default function AddBlogPage(): JSX.Element {
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    blog.addBlog(article)
+    blog.addBlog(article);
   }
 
   useCreateBlogPageHooks();
@@ -34,16 +35,11 @@ export default function AddBlogPage(): JSX.Element {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="main-heading-content">
-            Add Blog
-          </h2>
+          <h2 className="main-heading-content">Add Blog</h2>
         </div>
         <form onSubmit={submit} className="form mt-6">
           <div className="mb-3">
-            <label
-              htmlFor="title"
-              className="form-heading"
-            >
+            <label htmlFor="title" className="form-heading">
               Blog Title
             </label>
             <div className="mt-2">
@@ -61,10 +57,28 @@ export default function AddBlogPage(): JSX.Element {
             </div>
           </div>
           <div className="mb-3">
-            <label
-              htmlFor="image"
-              className="form-heading mb-2"
-            >
+            <div className="mt-2">
+              <label htmlFor="roles" className="form-heading mt-2">
+                Roles
+              </label>
+              <select
+                id="roles"
+                name="role" // MANDATORY to use name otherwise the inputHandler won't work
+                className="form-input cursor-pointer"
+              >
+                {categories.map((category, index: number) =>
+                  // if loggedIn user is admin then admin can't create user to super-admin
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="image" className="form-heading mb-2">
               Image
             </label>
             <input
@@ -78,10 +92,7 @@ export default function AddBlogPage(): JSX.Element {
           </div>
           <div className="mb-6">
             <div>
-              <label
-                htmlFor="content"
-                className="form-heading"
-              >
+              <label htmlFor="content" className="form-heading">
                 Content
               </label>
               <div className="mt-2">
@@ -99,11 +110,7 @@ export default function AddBlogPage(): JSX.Element {
             </div>
           </div>
           <div>
-            <input 
-              className="form-action"
-              type="submit" 
-              value="Add Blog"
-            />
+            <input className="form-action" type="submit" value="Add Blog" />
           </div>
         </form>
       </div>

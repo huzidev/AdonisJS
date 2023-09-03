@@ -81,3 +81,17 @@ export interface BlogState {
   addFavoriteBlog: SubState;
   deleteBlog: SubState;
 }
+
+export const categories = [
+    'astronomy', 
+    'fitness', 
+    'business', 
+    'food', 
+    'lifestyle',
+    'nature', 
+    'pets', 
+    'sci-fi', 
+    'sports', 
+    'travel',
+  ] as const 
+export type ArticleCategory = typeof categories[number];
