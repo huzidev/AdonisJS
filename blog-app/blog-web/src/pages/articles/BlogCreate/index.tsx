@@ -59,7 +59,7 @@ export default function AddBlogPage(): JSX.Element {
           <div className="mb-3">
             <div className="mt-2">
               <label htmlFor="roles" className="form-heading mt-2">
-                Roles
+                Roles for blog
               </label>
               <select
                 id="roles"
