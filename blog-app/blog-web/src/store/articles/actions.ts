@@ -136,6 +136,7 @@ export const getBlog = createAsyncThunk(
 export const addBlog = createAsyncThunk(
   endpoints.ADD_BLOG,
   async (data: AddBlogPayload) => {
+    console.log("dataa", data);
     try {
       const response = await api.post(endpoints.ADD_BLOG, data);
       console.log("Add Blog Response", response);

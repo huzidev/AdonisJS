@@ -7,7 +7,7 @@ import { ArticleType } from "./types";
 
 export default function AddBlogPage(): JSX.Element {
   const blog = useBlogs();
-  const initialState: ArticleType = { title: '', image: '', content: '', catergory: '' };
+  const initialState: ArticleType = { title: '', image: '', content: '', category: '' };
   const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
 
@@ -64,7 +64,7 @@ export default function AddBlogPage(): JSX.Element {
               <select
                 id="catergories"
                 name="catergory"
-                value={article.catergory}
+                value={article.category}
                 onChange={inputHandler}
                 className="form-input cursor-pointer"
                 required
