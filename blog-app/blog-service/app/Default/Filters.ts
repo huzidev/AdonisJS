@@ -24,5 +24,6 @@ export const articleFilters = [
   "username",
   "createdAt",
   "updatedAt",
-  "blogs"
+  "blogs",
+  "category"
 ];

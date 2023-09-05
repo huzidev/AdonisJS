@@ -4,6 +4,7 @@ import {
   LucidRow,
   ModelQueryBuilderContract,
 } from "@ioc:Adonis/Lucid/Orm";
+import Article from "App/Models/Article";
 
 export default class Sort {
   public static types = ["asc", "desc"] as const; // sort with ascending order or descending order
@@ -58,6 +59,8 @@ export default class Sort {
           // .where('r.is_like', 1)
           .groupBy("a.id")
           .orderBy("total_likes", "desc");
+      } else if (Article.categories.includes(sort)) {
+        query.from('articles').where(sortKey, sort);
       } else {
         query.orderBy(sortKey, sort); // sequence order first sortKey which can be price, name, rooms, status then sort which is of type rather ascending or descending
       }
