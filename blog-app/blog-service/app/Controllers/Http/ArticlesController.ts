@@ -25,6 +25,8 @@ export default class ArticlesController {
         data: Utils.parseQS(request.qs(), ["sort"]),
       });
 
+      console.log('filters', filters);
+
         const userId = params.id;
       
       const query = Article.query();
@@ -120,7 +122,6 @@ export default class ArticlesController {
     try {
       // body is receiving title, image, content as of request.body, we used request.validate instead of req.body
       const body = await request.validate(CreateArticle);
-      console.log("body", body);
       const blog = await Article.create({
         ...body,
         ownerId: auth.user?.id,
