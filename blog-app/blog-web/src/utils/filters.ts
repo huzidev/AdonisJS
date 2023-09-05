@@ -8,18 +8,10 @@ export function useFiltersHook() {
   const params = useParams();
   const [isUserPage, setIsUserPage] = useState<boolean>();
   const [path, setPath] = useState<string>('');
-  const [field, setField] = useState<string>('');
   const [sortValue, setSortValue] = useState<SortPayload>({
     value: '',
     type: ''
   });
-
-  const data = ['admin', 'super-admin', 'user', 'blogger'];
-
-  useEffect(() => {
-    console.log("sortValue type", sortValue);
-  }, [sortValue])
-  
 
   const locationURL = window.location.pathname;
   useEffect(() => {
@@ -86,18 +78,30 @@ export function useFiltersHook() {
         : (type = "");
     } else {
       // no need to called sortValue.value because role property have no related other field which have same type as of roles
-      notRoleResult.includes(sortValue.type) || !sortValue.type
-        ? (type = "admin")
-        : sortValue.type === "admin"
-        ? (type = "super-admin")
-        : sortValue.type === "super-admin"
-        ? (type = "user")
-        : sortValue.type === "user"
-        ? (type = "blogger")
-        : type = ''
+      if (isUserPage) {
+        notRoleResult.includes(sortValue.type) || !sortValue.type
+          ? (type = "admin")
+          : sortValue.type === "admin"
+          ? (type = "super-admin")
+          : sortValue.type === "super-admin"
+          ? (type = "user")
+          : sortValue.type === "user"
+          ? (type = "blogger")
+          : type = ''
+      } else {
+        notRoleResult.includes(sortValue.type) || !sortValue.type
+          ? (type = "astronomy")
+          : sortValue.type === "astronomy"
+          ? (type = "food")
+          : sortValue.type === "food"
+          ? (type = "pets")
+          : sortValue.type === "pets"
+          ? (type = "nature")
+          : type = ''
+      }
     }
 
-    const result = typeResult.find((value) => value === type);
+    const result = typeResult.find((value: string) => value === type);
 
     // If the type is "asc", add the sort parameter to the URL
     if (type === result) {

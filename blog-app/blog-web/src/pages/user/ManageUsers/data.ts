@@ -1,3 +1,5 @@
+import { categories } from "store/articles/types";
+
 // these columnKeys will be shown at top when Admin clicked on manage users
 const columnsKeys = [
   "sno",
@@ -68,7 +70,7 @@ export const typeResult = [
   "super-admin",
   "user",
   "blogger",
-];
+].concat(categories);
 export const constKeys = ["sno", "actions"];
 
 export const columns = columnsKeys.map((key) => ({
