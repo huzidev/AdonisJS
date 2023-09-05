@@ -9,7 +9,7 @@ import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
 import { LoadingList } from "utils/loading";
-import 'utils/table/index.css';
+import "utils/table/index.css";
 import { columns, constKeys } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
 
@@ -18,18 +18,12 @@ export default function ManageBlogsPage() {
   const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
-  const isAdmin = hasPermission(
-    "admin",
-    auth.state.user?.role
-  );
+  const isAdmin = hasPermission("admin", auth.state.user?.role);
   const search: any = qs.parse(window.location.search);
-  let isFilter; 
+  let isFilter;
   if (search.sort) {
-    // isFilter will holds the value of filter result type and when data is empty related to that filed then it'll show message according to the filter type 
     isFilter = Object.values(JSON.parse(search.sort))[0];
   }
-
-  
 
   const { handleSort } = useFiltersHook();
 
@@ -46,7 +40,7 @@ export default function ManageBlogsPage() {
   useManageBlogsPageHooks();
 
   const isLoading = blogs.state.getBlogsList.loading;
-    
+
   return (
     <div className="table-main">
       <div className="content">
@@ -247,7 +241,7 @@ export default function ManageBlogsPage() {
         <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
             {/* Oops... {isAdmin ? "No one has" : "You haven't"} uploaded any blog yet. */}
-            Oops... {auth.state.user?.role === 'blogger' ? `You haven't` : `No one has`} uploaded any blog yet {!!isFilter && `related to ${isFilter} category`}.
+            {/* Oops... {auth.state.user?.role === 'blogger' ? `You haven't` : `No one has`} uploaded any blog yet {!!isFilter && `related to ${isFilter} category`}. */}
           </h1>
           <Link
             to={ROUTE_PATHS.ARTICLE_CREATE}

@@ -39,7 +39,7 @@ export function useManageBlogsPageHooks(): void {
       user.allUser();
       blogs.getBlogsList({ page: params.page || 1, ...search });
     } else {
-      blogs.getMyList({ payload, ...search });
+      blogs.getMyList({ userId: isMe?.id, page: Number(params.page) || 1, ...search });
     }
   }, [params.page, window.location.search]);
 
