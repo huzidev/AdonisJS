@@ -12,7 +12,7 @@ export default function AddBlogPage(): JSX.Element {
   const { title, image, content } = article;
 
   function inputHandler(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) {
     setArticle({
       ...article,
