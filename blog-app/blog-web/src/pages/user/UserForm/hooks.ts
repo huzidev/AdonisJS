@@ -42,6 +42,7 @@ export function useUserFormHook() {
   }, [params.id, fetchedData]);
 
   function inputHandler(e: React.ChangeEvent) {
+    // creating different because of select options and for input fields
     const { name, value, type, checked } = e.target as HTMLInputElement;
     isCreate ? (
       setCreateUser({

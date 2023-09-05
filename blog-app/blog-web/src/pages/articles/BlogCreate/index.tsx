@@ -7,7 +7,7 @@ import { ArticleType } from "./types";
 
 export default function AddBlogPage(): JSX.Element {
   const blog = useBlogs();
-  const initialState: ArticleType = { title: "", image: "", content: "" };
+  const initialState: ArticleType = { title: '', image: '', content: '', catergory: '' };
   const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
 
@@ -64,10 +64,13 @@ export default function AddBlogPage(): JSX.Element {
               <select
                 id="catergories"
                 name="catergory"
+                value={article.catergory}
+                onChange={inputHandler}
                 className="form-input cursor-pointer"
+                required
               >
                 {categories.map((category, index: number) => (
-                    <option key={index} value={category}>
+                    <option key={index} value={category} onClick={() => setArticle({ ...article, catergory: category })}>
                       {category}
                     </option>
                   )

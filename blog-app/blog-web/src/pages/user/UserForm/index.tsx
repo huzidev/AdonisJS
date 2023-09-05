@@ -341,11 +341,11 @@ export default function UserFormPage() {
                   className="form-input cursor-pointer"
                   onChange={inputHandler}
                 >
-                  {roles.map((role, roleIndex) =>
+                  {roles.map((role, index: number) =>
                     // if loggedIn user is admin then admin can't create user to super-admin
                     auth.state.user?.role === "admin" &&
                     role === "super-admin" ? null : (
-                      <option key={roleIndex} value={role}>
+                      <option key={index} value={role}>
                         {role}
                       </option>
                     )
