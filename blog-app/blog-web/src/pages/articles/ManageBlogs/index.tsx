@@ -24,9 +24,11 @@ export default function ManageBlogsPage() {
   );
   const search: any = qs.parse(window.location.search);
   let isFilter; 
-  if (search) {
+  if (search.sort) {
     isFilter = Object.values(JSON.parse(search.sort))[0];
   }
+
+  
 
   const { handleSort } = useFiltersHook();
 
