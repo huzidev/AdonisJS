@@ -70,7 +70,7 @@ export default function AddBlogPage(): JSX.Element {
                 required
               >
                 {categories.map((category, index: number) => (
-                    <option key={index} value={category} onClick={() => setArticle({ ...article, catergory: category })}>
+                    <option key={index} value={category}>
                       {category}
                     </option>
                   )
