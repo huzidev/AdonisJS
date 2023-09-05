@@ -3,6 +3,7 @@ import { alternateKeys, booleanKeys, dateKeys, notAltResult, notBooleanResult, n
 import { SortPayload } from "pages/user/ManageUsers/types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { categories } from "store/articles/types";
 
 export function useFiltersHook() {
   const params = useParams();
@@ -91,12 +92,20 @@ export function useFiltersHook() {
         ? (type = "false")
         : (type = "");
     } else {
-      // no need to called sortValue.value because role property have no related other field which have same type as of roles
+      if (isUserPage) {
+        // no need to called sortValue.value because role property have no related other field which have same type as of roles
+          notRoleResult.includes(sortValue.type) || !sortValue.type
+            ? (type = "admin")
+            : sortValue.type === data[index]
+            ? index !== data.length - 1 && (type = data[index + 1])
+            : type = ''
+      } else {
         notRoleResult.includes(sortValue.type) || !sortValue.type
-          ? (type = "admin")
-          : sortValue.type === data[index]
-          ? index !== data.length - 1 && (type = data[index + 1])
-          : type = ''
+        ? (type = "astronomy")
+        : sortValue.type === categories[index]
+        ? index !== categories.length - 1 && (type = categories[index + 1])
+        : type = ''
+      }
         // : sortValue.type === "admin"
         // ? (type = "super-admin")
         // : sortValue.type === "super-admin"
@@ -108,15 +117,7 @@ export function useFiltersHook() {
       
       //   if (isUserPage) {
       // } else {
-      //   notRoleResult.includes(sortValue.type) || !sortValue.type
-      //     ? (type = "astronomy")
-      //     : sortValue.type === "astronomy"
-      //     ? (type = "food")
-      //     : sortValue.type === "food"
-      //     ? (type = "pets")
-      //     : sortValue.type === "pets"
-      //     ? (type = "nature")
-      //     : type = ''
+      //   
       // }
     }
 
