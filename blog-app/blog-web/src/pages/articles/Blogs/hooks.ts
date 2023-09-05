@@ -64,6 +64,7 @@ export function useBlogsPageHooks() {
       ? (type = "oldest")
       : column === "most popular"
       ? type = 'popular'
+      // if column value is anywhere between categories values ex: astronomy, food, pet etc then put that value in type of URL
       : categories.find((category) => category === column)
       ? type = column : type = ''
     // becasuse most recent and old blog will be shown according to createdAt date and "" (empty string condition) is for when user clicked on reset filters
