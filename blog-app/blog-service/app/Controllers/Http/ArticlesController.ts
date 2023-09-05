@@ -120,6 +120,7 @@ export default class ArticlesController {
     try {
       // body is receiving title, image, content as of request.body, we used request.validate instead of req.body
       const body = await request.validate(CreateArticle);
+      console.log("body", body);
       const blog = await Article.create({
         ...body,
         ownerId: auth.user?.id,
