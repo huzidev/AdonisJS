@@ -89,7 +89,7 @@ export function useFiltersHook() {
         ? (type = "user")
         : sortValue.type === "user"
         ? (type = "blogger")
-        : (type = "");
+        : (type = "")
     }
 
     const result = typeResult.find((value) => value === type);
