@@ -8,18 +8,21 @@ export function useFiltersHook() {
   const params = useParams();
   const [isUserPage, setIsUserPage] = useState<boolean>();
   const [path, setPath] = useState<string>('');
+  const [field, setField] = useState<string>('');
   const [sortValue, setSortValue] = useState<SortPayload>({
     value: '',
     type: ''
   });
 
+  const data = ['admin', 'super-admin', 'user', 'blogger'];
+
   const locationURL = window.location.pathname;
   useEffect(() => {
     if (locationURL.includes("/user")) {
-      setIsUserPage(true)
+      setIsUserPage(true);
       setPath(ROUTE_PATHS.USERS_PAGE);
     } else {
-      setIsUserPage(false)
+      setIsUserPage(false);
       setPath(ROUTE_PATHS.ARTICLES_PAGE);
     }
   }, [isUserPage, path])
