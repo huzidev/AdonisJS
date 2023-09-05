@@ -8,7 +8,7 @@ export function useFiltersHook() {
   const params = useParams();
   const [isUserPage, setIsUserPage] = useState<boolean>();
   const [path, setPath] = useState<string>('');
-  const [index, setIndex] = useState<any>();
+  const [index, setIndex] = useState<any>(0);
   const [sortValue, setSortValue] = useState<SortPayload>({
   value: '',
   type: ''
@@ -18,8 +18,11 @@ export function useFiltersHook() {
 
   useEffect(() => {
     console.log('sort result', sortValue);
-    setIndex(data.indexOf(sortValue.type))
+    if (sortValue.type) {
+      setIndex(data.indexOf(sortValue.type))
+    }
     console.log('index', index);
+    console.log('len', data.length);
   }, [sortValue, index])
 
   const locationURL = window.location.pathname;
@@ -86,12 +89,16 @@ export function useFiltersHook() {
         ? (type = "false")
         : (type = "");
     } else {
+      if (index !== data.length) {
+        notRoleResult.includes(sortValue.type) || !sortValue.type
+          ? (type = "admin")
+          : sortValue.type === data[index]
+          ? type = data[index + 1]
+          : type = ''
+      } else {
+        type = ''
+      }
       // no need to called sortValue.value because role property have no related other field which have same type as of roles
-      notRoleResult.includes(sortValue.type) || !sortValue.type
-        ? (type = "admin")
-        : sortValue.type === data[index]
-        ? type = data[index + 1]
-        : type = ''
         // : (data.forEach((val, index: number) => sortValue.type.includes(val) ? type = data[index + 1] : type = ''))
         // : sortValue.type === "admin"
         // ? (type = "super-admin")
