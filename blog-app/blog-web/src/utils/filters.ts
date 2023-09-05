@@ -8,6 +8,9 @@ export function useFiltersHook() {
   const params = useParams();
   const [isUserPage, setIsUserPage] = useState<boolean>();
   const [path, setPath] = useState<string>('');
+  // using index to add next value in the filter list for roles and categories
+  // for roles initially type will be admin which is at 0th index hence next index will be 0 + 1 which is 1st index of super-admin
+  // we'll use type = data[index + 1] to put the next value in type for filters list
   const [index, setIndex] = useState<any>(0);
   const [sortValue, setSortValue] = useState<SortPayload>({
   value: '',
@@ -88,13 +91,12 @@ export function useFiltersHook() {
         ? (type = "false")
         : (type = "");
     } else {
+      // no need to called sortValue.value because role property have no related other field which have same type as of roles
         notRoleResult.includes(sortValue.type) || !sortValue.type
           ? (type = "admin")
           : sortValue.type === data[index]
           ? index !== data.length - 1 && (type = data[index + 1])
           : type = ''
-      // no need to called sortValue.value because role property have no related other field which have same type as of roles
-        // : (data.forEach((val, index: number) => sortValue.type.includes(val) ? type = data[index + 1] : type = ''))
         // : sortValue.type === "admin"
         // ? (type = "super-admin")
         // : sortValue.type === "super-admin"
