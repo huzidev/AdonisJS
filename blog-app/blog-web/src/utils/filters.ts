@@ -31,8 +31,11 @@ export function useFiltersHook() {
   useEffect(() => {
     console.log("sort result", sortValue);
     if (sortValue.type) {
-      setIndex(data.indexOf(sortValue.type));
-      setIndex(categories.indexOf(sortValue.type));
+      if (isUserPage) {
+        setIndex(data.indexOf(sortValue.type));
+      } else {
+        setIndex(categories.indexOf(sortValue.type));
+      }
     }
     console.log("index", index);
   }, [sortValue, index]);
