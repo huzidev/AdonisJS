@@ -3,6 +3,7 @@ import qs from "query-string";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
+import { categories } from "store/articles/types";
 import { useAuth } from "store/auth";
 import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
@@ -56,9 +57,6 @@ export function useBlogsPageHooks() {
   function handleSort(column: string) {
     let type: any = '';
     
-    console.log("Column", column);
-    
-
     // most recent will called desc because desc neans from last to first therefore the last belog will be the latest blog and type === "" when user called reset filters
     column === "most recent"
       ? (type = "recent")
@@ -66,7 +64,8 @@ export function useBlogsPageHooks() {
       ? (type = "oldest")
       : column === "most popular"
       ? type = 'popular'
-      : type = ''
+      : categories.find((category) => category === column)
+      ? type = column : type = ''
     // becasuse most recent and old blog will be shown according to createdAt date and "" (empty string condition) is for when user clicked on reset filters
     // because then sortValue.value will be "" and we've statement in UI that only show resetFilters when sortValue.vlaue is not ""
     let update =
