@@ -58,16 +58,15 @@ export default function AddBlogPage(): JSX.Element {
           </div>
           <div className="mb-3">
             <div className="mt-2">
-              <label htmlFor="roles" className="form-heading mt-2">
+              <label htmlFor="catergories" className="form-heading mt-2">
                 Roles for blog
               </label>
               <select
-                id="roles"
-                name="role" // MANDATORY to use name otherwise the inputHandler won't work
+                id="catergories"
+                name="catergory"
                 className="form-input cursor-pointer"
               >
                 {categories.map((category, index: number) => (
-                  // if loggedIn user is admin then admin can't create user to super-admin
                     <option key={index} value={category}>
                       {category}
                     </option>
