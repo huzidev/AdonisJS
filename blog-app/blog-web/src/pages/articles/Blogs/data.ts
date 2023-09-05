@@ -7,7 +7,6 @@ export const columnsKeys = [
   'most popular'
 ];
 
-
 // boolKeys means they'll either be true(yes) or false(no)
 export const altKeys = ['most recent', 'oldest'];
 export const typeResult = ["recent", "oldest", "popular"];
