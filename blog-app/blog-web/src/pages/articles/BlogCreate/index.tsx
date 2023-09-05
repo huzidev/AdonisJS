@@ -7,12 +7,19 @@ import { ArticleType } from "./types";
 
 export default function AddBlogPage(): JSX.Element {
   const blog = useBlogs();
-  const initialState: ArticleType = { title: '', image: '', content: '', category: '' };
+  const initialState: ArticleType = {
+    title: '',
+    image: '',
+    content: '',
+    category: '',
+  };
   const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
 
   function inputHandler(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) {
     setArticle({
       ...article,
@@ -70,11 +77,10 @@ export default function AddBlogPage(): JSX.Element {
                 required
               >
                 {categories.map((category, index: number) => (
-                    <option key={index} value={category}>
-                      {category}
-                    </option>
-                  )
-                )}
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
