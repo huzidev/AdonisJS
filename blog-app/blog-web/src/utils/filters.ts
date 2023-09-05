@@ -91,7 +91,7 @@ export function useFiltersHook() {
         notRoleResult.includes(sortValue.type) || !sortValue.type
           ? (type = "admin")
           : sortValue.type === data[index]
-          ? type = data[index + 1]
+          ? index !== data.length - 1 && (type = data[index + 1])
           : type = ''
       // no need to called sortValue.value because role property have no related other field which have same type as of roles
         // : (data.forEach((val, index: number) => sortValue.type.includes(val) ? type = data[index + 1] : type = ''))
