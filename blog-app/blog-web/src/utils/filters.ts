@@ -91,7 +91,7 @@ export function useFiltersHook() {
         ? (type = "admin")
         : sortValue.type === data[index]
         ? type = data[index + 1]
-        : index === data.length && (type = '')
+        : type = ''
         // : (data.forEach((val, index: number) => sortValue.type.includes(val) ? type = data[index + 1] : type = ''))
         // : sortValue.type === "admin"
         // ? (type = "super-admin")
