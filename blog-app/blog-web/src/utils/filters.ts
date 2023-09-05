@@ -8,10 +8,19 @@ export function useFiltersHook() {
   const params = useParams();
   const [isUserPage, setIsUserPage] = useState<boolean>();
   const [path, setPath] = useState<string>('');
+  const [index, setIndex] = useState<any>();
   const [sortValue, setSortValue] = useState<SortPayload>({
-    value: '',
-    type: ''
+  value: '',
+  type: ''
   });
+
+  const data = ['admin', 'super-admin', 'user', 'blogger'];
+
+  useEffect(() => {
+    console.log('sort result', sortValue);
+    setIndex(data.indexOf(sortValue.type))
+    console.log('index', index);
+  }, [sortValue, index])
 
   const locationURL = window.location.pathname;
   useEffect(() => {
@@ -38,7 +47,7 @@ export function useFiltersHook() {
   }, []);
 
   const handleSort = (column: string) => {
-    let type: any = "";
+    let type: any = '';
 
     // if sortValue is between id, username, createdAt, updatedAt then we can user asc, desc order
     let altKeys = alternateKeys.find((value) => value === column);
@@ -78,27 +87,33 @@ export function useFiltersHook() {
         : (type = "");
     } else {
       // no need to called sortValue.value because role property have no related other field which have same type as of roles
-      if (isUserPage) {
-        notRoleResult.includes(sortValue.type) || !sortValue.type
-          ? (type = "admin")
-          : sortValue.type === "admin"
-          ? (type = "super-admin")
-          : sortValue.type === "super-admin"
-          ? (type = "user")
-          : sortValue.type === "user"
-          ? (type = "blogger")
-          : type = ''
-      } else {
-        notRoleResult.includes(sortValue.type) || !sortValue.type
-          ? (type = "astronomy")
-          : sortValue.type === "astronomy"
-          ? (type = "food")
-          : sortValue.type === "food"
-          ? (type = "pets")
-          : sortValue.type === "pets"
-          ? (type = "nature")
-          : type = ''
-      }
+      notRoleResult.includes(sortValue.type) || !sortValue.type
+        ? (type = "admin")
+        : sortValue.type === data[index]
+        ? type = data[index + 1]
+        : index === data.length && (type = '')
+        // : (data.forEach((val, index: number) => sortValue.type.includes(val) ? type = data[index + 1] : type = ''))
+        // : sortValue.type === "admin"
+        // ? (type = "super-admin")
+        // : sortValue.type === "super-admin"
+        // ? (type = "user")
+        // : sortValue.type === "user"
+        // ? (type = "blogger")
+        // : type = ''
+      
+      
+      //   if (isUserPage) {
+      // } else {
+      //   notRoleResult.includes(sortValue.type) || !sortValue.type
+      //     ? (type = "astronomy")
+      //     : sortValue.type === "astronomy"
+      //     ? (type = "food")
+      //     : sortValue.type === "food"
+      //     ? (type = "pets")
+      //     : sortValue.type === "pets"
+      //     ? (type = "nature")
+      //     : type = ''
+      // }
     }
 
     const result = typeResult.find((value: string) => value === type);
