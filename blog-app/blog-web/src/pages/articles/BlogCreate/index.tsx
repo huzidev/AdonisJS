@@ -59,11 +59,11 @@ export default function AddBlogPage(): JSX.Element {
           <div className="mb-3">
             <div className="mt-2">
               <label htmlFor="catergories" className="form-heading mt-2">
-                Roles for blog
+                Category
               </label>
               <select
                 id="catergories"
-                name="catergory"
+                name="category"
                 value={article.category}
                 onChange={inputHandler}
                 className="form-input cursor-pointer"
