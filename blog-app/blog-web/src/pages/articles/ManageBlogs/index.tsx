@@ -38,8 +38,6 @@ export default function ManageBlogsPage() {
 
   const isLoading = blogs.state.getBlogsList.loading;
     
-    console.log("currentPage", currentPage);
-
   return (
     <div className="table-main">
       <div className="content">

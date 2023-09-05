@@ -1,6 +1,5 @@
 import ROUTE_PATHS from "Router/paths";
 import { alternateKeys, booleanKeys, dateKeys, notAltResult, notBooleanResult, notDateResult, notRoleResult, typeResult } from "pages/user/ManageUsers/data";
-import { SortPayload } from "pages/user/ManageUsers/types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { categories } from "store/articles/types";
@@ -13,7 +12,7 @@ export function useFiltersHook() {
   // for roles initially type will be admin which is at 0th index hence next index will be 0 + 1 which is 1st index of super-admin
   // we'll use type = data[index + 1] to put the next value in type for filters list
   const [index, setIndex] = useState<any>(0);
-  const [sortValue, setSortValue] = useState<SortPayload>({
+  const [sortValue, setSortValue] = useState<any>({
   value: '',
   type: ''
   });
@@ -24,6 +23,7 @@ export function useFiltersHook() {
     console.log('sort result', sortValue);
     if (sortValue.type) {
       setIndex(data.indexOf(sortValue.type))
+      setIndex(categories.indexOf(sortValue.type))
     }
     console.log('index', index);
   }, [sortValue, index])
