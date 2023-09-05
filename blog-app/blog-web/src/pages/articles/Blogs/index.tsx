@@ -79,12 +79,12 @@ export default function ViewBlogsPage(): JSX.Element {
                   className="py-2 text-sm text-gray-200"
                   aria-labelledby="dropdownDefaultButton"
                 >
-                  {columns.map((data, columnIndex) => (
+                  {columns.map((data, index: number) => (
                     // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                     <li
                       onClick={() => handleSort(data.title)}
                       className="px-5 py-3 cursor-pointer"
-                      key={columnIndex}
+                      key={index}
                     >
                       {/* startCase will make the first letter Capital of any word */}
                       {startCase(data.title)}
