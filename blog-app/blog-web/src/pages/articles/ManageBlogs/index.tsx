@@ -57,13 +57,13 @@ export default function ManageBlogsPage() {
           <table className="w-full">
             <thead>
               <tr className="table-header">
-                {columns.map((data, columnIndex) =>
+                {columns.map((data, index: number) =>
                   // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                   // So uploaded by won't be shown when blogger clikced on manage blogs uploaded by will only be visible when admin state is true
                   data.title === "uploadedBy" && !isAdmin ? null : (
                     <th
                       className="px-5 py-3 cursor-pointer"
-                      key={columnIndex}
+                      key={index}
                       onClick={
                         !constKeys.includes(data.key)
                           ? // ternary operator when user clicked on uploadedBy then their is no field named uploadedBy hence send username instead of uploadedBy
@@ -91,7 +91,7 @@ export default function ManageBlogsPage() {
                   </td>
                 </tr>
               ) : (
-                allBlogs?.map((blog, userIndex) => {
+                allBlogs?.map((blog, index: number) => {
                   const uploadedByUser = allUsers?.find(
                     (user: User) => user.id === blog.ownerId
                   );
@@ -102,9 +102,9 @@ export default function ManageBlogsPage() {
                     uploadedByUser && uploadedByUser.username;
                   return (
                     // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
-                    <tr key={userIndex}>
+                    <tr key={index}>
                       <td className="table-content">
-                        <p className="whitespace-no-wrap">{userIndex + 1}</p>
+                        <p className="whitespace-no-wrap">{index + 1}</p>
                       </td>
                       <td className="table-content">
                         <p className="whitespace-no-wrap">{blog.id}</p>
@@ -128,6 +128,9 @@ export default function ManageBlogsPage() {
                             ? `${blog.content.slice(0, 45)}...`
                             : blog.content}
                         </p>
+                      </td>
+                      <td className="table-content">
+                        <p className="whitespace-no-wrap">{blog.category}</p>
                       </td>
                       <td className="table-content">
                         <span className="whitespace-no-wrap">

@@ -4,6 +4,7 @@ const columnsKeys = [
   "uploadedBy",
   "title",
   "content",
+  "category",
   "createdAt",
   "updatedAt",
   "actions",
