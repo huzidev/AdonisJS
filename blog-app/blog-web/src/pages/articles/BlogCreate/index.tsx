@@ -66,7 +66,7 @@ export default function AddBlogPage(): JSX.Element {
                 name="role" // MANDATORY to use name otherwise the inputHandler won't work
                 className="form-input cursor-pointer"
               >
-                {categories.map((category, index: number) =>
+                {categories.map((category, index: number) => (
                   // if loggedIn user is admin then admin can't create user to super-admin
                     <option key={index} value={category}>
                       {category}
