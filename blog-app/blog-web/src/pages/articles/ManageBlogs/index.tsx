@@ -25,6 +25,7 @@ export default function ManageBlogsPage() {
   const search: any = qs.parse(window.location.search);
   let isFilter; 
   if (search.sort) {
+    // isFilter will holds the value of filter result type and when data is empty related to that filed then it'll show message according to the filter type 
     isFilter = Object.values(JSON.parse(search.sort))[0];
   }
 
