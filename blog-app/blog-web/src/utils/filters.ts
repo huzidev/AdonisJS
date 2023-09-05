@@ -16,6 +16,11 @@ export function useFiltersHook() {
 
   const data = ['admin', 'super-admin', 'user', 'blogger'];
 
+  useEffect(() => {
+    console.log("sortValue type", sortValue);
+  }, [sortValue])
+  
+
   const locationURL = window.location.pathname;
   useEffect(() => {
     if (locationURL.includes("/user")) {
@@ -89,7 +94,7 @@ export function useFiltersHook() {
         ? (type = "user")
         : sortValue.type === "user"
         ? (type = "blogger")
-        : (type = "")
+        : type = ''
     }
 
     const result = typeResult.find((value) => value === type);
