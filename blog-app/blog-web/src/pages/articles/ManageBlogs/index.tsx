@@ -1,5 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
+import qs from "query-string";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -21,6 +22,11 @@ export default function ManageBlogsPage() {
     "admin",
     auth.state.user?.role
   );
+  const search: any = qs.parse(window.location.search);
+  let isFilter; 
+  if (search) {
+    isFilter = Object.values(JSON.parse(search.sort))[0];
+  }
 
   const { handleSort } = useFiltersHook();
 
@@ -238,7 +244,7 @@ export default function ManageBlogsPage() {
         <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
             {/* Oops... {isAdmin ? "No one has" : "You haven't"} uploaded any blog yet. */}
-            Oops... No one has uploaded any blog yet.
+            Oops... {auth.state.user?.role === 'blogger' ? `You haven't` : `No one has`} uploaded any blog yet {!!isFilter && `related to ${isFilter} category`}.
           </h1>
           <Link
             to={ROUTE_PATHS.ARTICLE_CREATE}
