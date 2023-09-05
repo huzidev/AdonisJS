@@ -56,6 +56,9 @@ export function useBlogsPageHooks() {
   function handleSort(column: string) {
     let type: any = '';
     
+    console.log("Column", column);
+    
+
     // most recent will called desc because desc neans from last to first therefore the last belog will be the latest blog and type === "" when user called reset filters
     column === "most recent"
       ? (type = "recent")
@@ -70,7 +73,9 @@ export function useBlogsPageHooks() {
       altKeys.includes(column)
       ? "createdAt" 
       : column === "most popular"
-      ? "blogs" : ''
+      ? "blogs"
+      : column !== "most popular" 
+      ? "category" : ''
     const result = typeResult.find((value) => value === type);
 
     // If the type is "asc", add the sort parameter to the URL
