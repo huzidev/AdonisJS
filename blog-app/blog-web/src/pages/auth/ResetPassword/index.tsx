@@ -100,7 +100,7 @@ export default function ResetPasswordPage(): JSX.Element {
                     onClick={() =>
                       setIcon({
                         ...icon,
-                        value: !icon.password,
+                        password: !icon.password,
                       })
                     }
                     title={icon.password ? "Hide Password" : "Show Password"}
@@ -137,7 +137,7 @@ export default function ResetPasswordPage(): JSX.Element {
                     onClick={() =>
                       setIcon({
                         ...icon,
-                        value: !icon.confirmPassword,
+                        confirmPassword: !icon.confirmPassword,
                       })
                     }
                     title={icon.confirmPassword ? "Hide Password" : "Show Password"}
