@@ -162,5 +162,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     isMe,
     isRole,
     allReactions,
+    search
   };
 }

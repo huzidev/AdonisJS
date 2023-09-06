@@ -42,8 +42,14 @@ export default function ViewProfilePage(): JSX.Element {
     lastPage,
     isMe,
     isRole,
-    allReactions
+    allReactions,
+    search
   } = useViewProfilePageHook();
+
+  let isFilter;
+  if (search.sort) {
+    isFilter = Object.values(JSON.parse(search.sort))[0];
+  }
 
   const { handleSort, sortValue } = useBlogsPageHooks();
 
@@ -322,7 +328,7 @@ export default function ViewProfilePage(): JSX.Element {
                           `${
                             isMe ? "You" : userDetails.username
                           } haven't uploaded`}{" "}
-                      any blog yet
+                      any blog {!!isFilter && `related to ${isFilter} category`}
                     </h1>
                     <Link
                       to={

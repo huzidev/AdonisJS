@@ -14,6 +14,10 @@ export type ParamsId = {
     id: string
 }
 
+interface searchReq {
+    sort: string;
+}
+
 export interface ViewProfileStateHandler {
     userDetails: UserDetailState;
     userBlogs: Blog[];
@@ -25,4 +29,5 @@ export interface ViewProfileStateHandler {
     isMe: boolean;
     isRole: string;
     allReactions: any;
+    search: searchReq;
 }
