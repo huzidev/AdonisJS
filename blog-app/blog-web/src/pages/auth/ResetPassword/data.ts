@@ -1,11 +1,11 @@
 import qs from "query-string";
-import { ResetPasswordCode } from "./types";
+import { ResetPasswordState } from "./types";
 
 const params: any = {
   ...qs.parse(window.location.search),
 };
 
-export const resetPasswordState: ResetPasswordCode = {
+export const initialState: ResetPasswordState = {
   email: params.email,
   code: '',
   password: '',

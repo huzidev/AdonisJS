@@ -1,4 +1,4 @@
-export interface ResetPasswordCode {
+export interface ResetPasswordState {
     email: string;
     code: string;
     password: string;

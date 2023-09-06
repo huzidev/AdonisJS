@@ -6,14 +6,14 @@ import { toast } from "react-toastify";
 import { useResetPassword } from "store/resetPassword";
 import 'utils/form/index.css';
 import 'utils/table/index.css';
-import { resetPasswordState } from "./data";
+import { initialState } from "./data";
 import useResetPasswordPageHooks from "./hooks";
-import { ResetPasswordCode } from "./types";
+import { ResetPasswordState } from "./types";
 
 export default function ResetPasswordPage(): JSX.Element {
   const state = useResetPassword();
   const navigate = useNavigate();
-  const [resetState, setResetState] = useState<ResetPasswordCode>(resetPasswordState);
+  const [resetState, setResetState] = useState<ResetPasswordState>(initialState);
   
   let params: any = {
     ...qs.parse(window.location.search),
