@@ -51,8 +51,10 @@ export function useBlogsPageHooks() {
       const key: any = Object.keys(sortValueObj)[0];
       const value: any = Object.values(sortValueObj)[0];
       setSortValue({ value: key, type: value });
+    } else {
+      setSortValue({ value: '', type: '' });
     }
-  }, []);
+  }, [window.location.search]);
 
   function handleSort(column: string) {
     let type: any = '';
