@@ -17,9 +17,6 @@ export function useBlogsPageHooks() {
   const reactions = useReactions();
   const params: any = useParams();
   const auth = useAuth();
-  const userId = Number(params.id);
-  const loggedInId: any = auth.state.user?.id;
-  const isMe = params.id === "me";
   const state = blogs.state;
   const prev = usePrevious(state);
   const navigate = useNavigate();
