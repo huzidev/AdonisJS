@@ -181,7 +181,7 @@ export default function UserFormPage(): JSX.Element {
                   Password
                 </label>
               </div>
-              <div className="mt-2 flex items-center">
+              <div className="form-password-field">
                 <input
                   name="password"
                   type={booleanState.valuePass ? "text" : "password"}
@@ -192,6 +192,7 @@ export default function UserFormPage(): JSX.Element {
                   className="form-input"
                 />
                 <span
+                  className="form-password-icon"
                   onClick={() =>
                     setBooleanState({
                       ...booleanState,
@@ -219,7 +220,7 @@ export default function UserFormPage(): JSX.Element {
                   Confirm Password
                 </label>
               </div>
-              <div className="mt-2 flex items-center">
+              <div className="form-password-field">
                 <input
                   type={booleanState.valueConfPass ? "text" : "password"}
                   name="passwordConfirmation"
@@ -230,6 +231,7 @@ export default function UserFormPage(): JSX.Element {
                   className="form-input"
                 />
                 <span
+                  className="form-password-icon"
                   onClick={() =>
                     setBooleanState({
                       ...booleanState,
