@@ -49,6 +49,10 @@ export default function UserFormPage() {
 
   const password = createUser.password;
   const confirmPassword = createUser.confirmPassword;
+
+  console.log("password", password);
+  console.log("confirmPassword", confirmPassword);
+  
   
   return (
     <div>
@@ -157,9 +161,9 @@ export default function UserFormPage() {
                 <div className="form-password-field">
                   <input
                     id="cpassword"
-                    name="passwordConfirmation"
+                    name="confirmPassword"
                     type={icon.confirmPassword ? "text" : "password"}
-                    value={createUser.passwordConfirmation}
+                    value={createUser.confirmPassword}
                     onChange={inputHandler}
                     required
                     className="form-input"
