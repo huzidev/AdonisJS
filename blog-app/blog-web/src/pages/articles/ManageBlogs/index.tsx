@@ -24,7 +24,6 @@ export default function ManageBlogsPage() {
   if (search.sort) {
     isFilter = Object.values(JSON.parse(search.sort))[0];
   }
-
   const { handleSort } = useFiltersHook();
 
   const dataByMe = blogs.state.getMyList;
