@@ -14,6 +14,7 @@ export const initialAuthSignUp: AuthSignUpPayload = {
 };
 
 export const initialIconValue: IconState = {
+  // value is for signIn page
   value: false,
   password: false,
   confirmPassword: false,
