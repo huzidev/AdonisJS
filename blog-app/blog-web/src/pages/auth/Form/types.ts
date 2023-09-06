@@ -1,5 +1,5 @@
 export interface IconState {
-  value: boolean;
+  value?: boolean;
   password: boolean;
   confirmPassword: boolean;
 }

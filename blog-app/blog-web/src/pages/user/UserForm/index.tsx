@@ -2,21 +2,20 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { initialIconValue } from 'pages/auth/Form/data';
+import { IconState } from 'pages/auth/Form/types';
 import { useState } from "react";
 import { useAuth } from "store/auth";
 import { roles } from "store/auth/types";
 import { useUser } from "store/user";
 import 'utils/form/index.css';
 import { LoadingList, LoadingThreeDots } from "utils/loading";
-import { detailsBoolean } from "./data";
 import { useUserFormHook } from "./hooks";
-import { BooleanState } from "./types";
 
 export default function UserFormPage() {
   const auth = useAuth();
   const user = useUser();
-  const [booleanState, setBooleanState] =
-    useState<BooleanState>(detailsBoolean);
+  const [icon, setIcon] = useState<IconState>(initialIconValue);
   const isLoading = user.state.getUser.loading;
 
   // const prevUpdateState = usePrevious(user.state.updateMe);
@@ -119,25 +118,26 @@ export default function UserFormPage() {
                 >
                   Password
                 </label>
-                <div className="mt-2 flex items-center">
+                <div className="form-password-field">
                   <input
                     id="password"
                     name="password"
-                    type={booleanState.valuePass ? "text" : "password"}
+                    type={icon.password ? "text" : "password"}
                     value={createUser.password}
                     onChange={inputHandler}
                     required
                     className="form-input"
                   />
                   <span
+                    className="form-password-icon"
                     onClick={() =>
-                      setBooleanState({
-                        ...booleanState,
-                        valuePass: !booleanState.valuePass,
+                      setIcon({
+                        ...icon,
+                        password: !icon.password,
                       })
                     }
                   >
-                    {booleanState.valuePass ? (
+                    {icon.password ? (
                       <RemoveRedEyeOutlinedIcon fontSize="small" className='form-input-password' />
                     ) : (
                       <VisibilityOffIcon fontSize="small" className='form-input-password' />
@@ -150,25 +150,26 @@ export default function UserFormPage() {
                 >
                   Confirm Password
                 </label>
-                <div className="mt-2 flex items-center">
+                <div className="form-password-field">
                   <input
                     id="cpassword"
                     name="passwordConfirmation"
-                    type={booleanState.valueConfPass ? "text" : "password"}
+                    type={icon.confirmPassword ? "text" : "password"}
                     value={createUser.passwordConfirmation}
                     onChange={inputHandler}
                     required
                     className="form-input"
                   />
                   <span
+                    className="form-password-icon"
                     onClick={() =>
-                      setBooleanState({
-                        ...booleanState,
-                        valueConfPass: !booleanState.valueConfPass,
+                      setIcon({
+                        ...icon,
+                        confirmPassword: !icon.confirmPassword,
                       })
                     }
                   >
-                    {booleanState.valueConfPass ? (
+                    {icon.confirmPassword ? (
                       <RemoveRedEyeOutlinedIcon fontSize="small" className='form-input-password' />
                     ) : (
                       <VisibilityOffIcon fontSize="small" className='form-input-password' />
