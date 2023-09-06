@@ -253,17 +253,28 @@ export default function UserFormPage(): JSX.Element {
                 </span>
               </div>
               <p
-                className={`transition-opacity duration-200 ${
+                className={`transition-opacity duration-200 pt-2 ${
                   userSignUp.password !== userSignUp.passwordConfirmation &&
-                  userSignUp.password.length > 5
-                    ? "opacity-100"
-                    : "opacity-0"
+                  (userSignUp.password.length > 5 && userSignUp.passwordConfirmation.length > 5)
+                    ? "block"
+                    : "hidden"
                 } text-red-500`}
               >
                 Password doesn't match
               </p>
+              <p
+                className={`transition-opacity duration-200 pt-2 ${
+                  (userSignUp.password.length < 6 && userSignUp.passwordConfirmation.length < 6 && 
+                  (userSignUp.password.length === userSignUp.passwordConfirmation.length && (userSignUp.password.length > 1 && userSignUp.passwordConfirmation.length > 1))
+                  )
+                    ? "block"
+                    : "hidden"
+                } text-red-500`}
+              >
+                Password must be atleast 6 characters long
+              </p>
             </div>
-            <div className="flex items-center mb-4">
+            <div className="flex items-center pt-2 mb-4">
               <input
                 id="checkbox"
                 type="checkbox"
