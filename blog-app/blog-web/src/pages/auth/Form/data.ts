@@ -13,7 +13,7 @@ export const initialAuthSignUp: AuthSignUpPayload = {
   isBlogger: false,
 };
 
-export const initialIconValue: IconState = {
+export const initialIconState: IconState = {
   // value is for signIn page
   value: false,
   password: false,

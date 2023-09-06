@@ -15,7 +15,7 @@ export interface ResetPasswordOtp {
 
 export interface ResetPasswordRequest extends ResetPasswordSendCodeRequest, ResetPasswordOtp {
   password: string; // while resting password needs verification code, password, ConfirmPassword and email for email we've used extends ResetPasswordSendCodeRequest in which type for email is defined
-  passwordConfirmation: string;
+  confirmPassword: string;
 }
 
 export interface ResetPasswordState {

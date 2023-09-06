@@ -2,7 +2,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { initialIconValue } from 'pages/auth/Form/data';
+import { initialIconState } from 'pages/auth/Form/data';
 import { IconState } from 'pages/auth/Form/types';
 import { useState } from "react";
 import { useAuth } from "store/auth";
@@ -15,7 +15,7 @@ import { useUserFormHook } from "./hooks";
 export default function UserFormPage() {
   const auth = useAuth();
   const user = useUser();
-  const [icon, setIcon] = useState<IconState>(initialIconValue);
+  const [icon, setIcon] = useState<IconState>(initialIconState);
   const isLoading = user.state.getUser.loading;
   
 

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import "utils/form/index.css";
 import { LoaderSpin } from "utils/loading";
-import { initialAuthSignIn, initialAuthSignUp, initialIconValue } from "./data";
+import { initialAuthSignIn, initialAuthSignUp, initialIconState } from "./data";
 import { useAuthFormHook } from "./hooks";
 import { AuthSignInPayload, AuthSignUpPayload, IconState } from "./types";
 
@@ -17,7 +17,7 @@ export default function UserFormPage(): JSX.Element {
   const [authLogIn, setAuthLogIn] = useState<AuthSignInPayload>(initialAuthSignIn);
   const [authSignUp, setAuthSignUp] = useState<AuthSignUpPayload>(initialAuthSignUp);
   const [loading, setLoading] = useState<boolean>(false);
-  const [icon, setIcon] = useState<IconState>(initialIconValue);
+  const [icon, setIcon] = useState<IconState>(initialIconState);
 
   const currentState = isLogInForm
     ? auth.state.signInState.loading

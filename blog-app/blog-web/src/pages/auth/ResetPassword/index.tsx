@@ -1,11 +1,15 @@
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ROUTE_PATHS from "Router/paths";
 import qs from "query-string";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useResetPassword } from "store/resetPassword";
-import 'utils/form/index.css';
-import 'utils/table/index.css';
+import "utils/form/index.css";
+import "utils/table/index.css";
+import { initialIconState } from "../Form/data";
+import { IconState } from "../Form/types";
 import { initialState } from "./data";
 import useResetPasswordPageHooks from "./hooks";
 import { ResetPasswordState } from "./types";
@@ -13,8 +17,13 @@ import { ResetPasswordState } from "./types";
 export default function ResetPasswordPage(): JSX.Element {
   const state = useResetPassword();
   const navigate = useNavigate();
-  const [resetState, setResetState] = useState<ResetPasswordState>(initialState);
-  
+  const [resetState, setResetState] =
+    useState<ResetPasswordState>(initialState);
+  const [icon, setIcon] = useState<IconState>(initialIconState);
+
+  const password = resetState.password;
+  const confirmPassword = resetState.confirmPassword;
+
   let params: any = {
     ...qs.parse(window.location.search),
   };
@@ -25,10 +34,10 @@ export default function ResetPasswordPage(): JSX.Element {
     }
     // so if user tries to access resetPassword state without email then navigate user to / homepage
     else {
-      navigate('/')
-      toast.error("You've to provide valid email")
+      navigate("/");
+      toast.error("You've to provide valid email");
     }
-  }, [])
+  }, []);
 
   function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -64,59 +73,132 @@ export default function ResetPasswordPage(): JSX.Element {
       <div className="relative bg-white px-6 mt-10 py-10 shadow-xl mx-auto w-full max-w-lg rounded-2xl dark:bg-gray-900">
         <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
           <div className="flex flex-col items-center justify-center text-center space-y-2">
-              <p className="font-semibold text-3xl dark:text-white">Reset Password</p>
-              <p className="form-message">We have sent a code to your email {resetState.email}</p>
+            <p className="font-semibold text-3xl dark:text-white">
+              Reset Password
+            </p>
+            <p className="form-message">
+              We have sent a code to your email {resetState.email}
+            </p>
           </div>
           <form onSubmit={submit}>
             <div className="flex flex-col space-y-16">
               <div>
-                <label
-                  htmlFor="password"
-                  className="form-heading"
-                >
+                <label htmlFor="password" className="form-heading">
                   New Password
                 </label>
-                <div className="mt-2">
+                <div className="form-password-field">
                   <input
-                    id="password"
                     name="password"
-                    type="password"
+                    type={icon.password ? "text" : "password"}
                     value={resetState.password}
                     onChange={inputHandler}
-                    autoComplete="email"
                     required
                     className="form-input"
                   />
+                  <span
+                    className="form-password-icon"
+                    onClick={() =>
+                      setIcon({
+                        ...icon,
+                        value: !icon.password,
+                      })
+                    }
+                    title={icon.password ? "Hide Password" : "Show Password"}
+                  >
+                    {icon.password ? (
+                      <RemoveRedEyeOutlinedIcon
+                        fontSize="small"
+                        className="form-input-password"
+                      />
+                    ) : (
+                      <VisibilityOffIcon
+                        fontSize="small"
+                        className="form-input-password"
+                      />
+                    )}
+                  </span>
                 </div>
               </div>
               <div>
-                <label
-                  htmlFor="cpassword"
-                  className="form-heading"
-                >
+                <label htmlFor="cpassword" className="form-heading">
                   Confirm New Password
                 </label>
-                <div className="mt-2">
+                <div className="form-password-field">
                   <input
-                    id="cpassword"
-                    name="passwordConfirmation"
-                    type="password"
+                    name="confirmPassword"
+                    type={icon.confirmPassword ? "text" : "password"}
+                    value={resetState.confirmPassword}
                     onChange={inputHandler}
-                    value={resetState.passwordConfirmation}
-                    autoComplete="email"
                     required
                     className="form-input"
                   />
+                  <span
+                    className="form-password-icon"
+                    onClick={() =>
+                      setIcon({
+                        ...icon,
+                        value: !icon.confirmPassword,
+                      })
+                    }
+                    title={icon.confirmPassword ? "Hide Password" : "Show Password"}
+                  >
+                    {icon.confirmPassword ? (
+                      <RemoveRedEyeOutlinedIcon
+                        fontSize="small"
+                        className="form-input-password"
+                      />
+                    ) : (
+                      <VisibilityOffIcon
+                        fontSize="small"
+                        className="form-input-password"
+                      />
+                    )}
+                  </span>
                 </div>
+                <span
+                  className="form-password-icon"
+                  onClick={() =>
+                    setIcon({
+                      ...icon,
+                      confirmPassword: !icon.confirmPassword,
+                    })
+                  }
+                >
+                  {icon.confirmPassword ? (
+                    <RemoveRedEyeOutlinedIcon
+                      fontSize="small"
+                      className="form-input-password"
+                    />
+                  ) : (
+                    <VisibilityOffIcon
+                      fontSize="small"
+                      className="form-input-password"
+                    />
+                  )}
+                </span>
                 <p
-                  className={`transition-opacity duration-200 ${
-                    resetState.password !== resetState.passwordConfirmation ||
-                    resetState.password.length <= 5
-                      ? "opacity-100"
-                      : "opacity-0"
+                  className={`transition-opacity duration-200 pt-2 ${
+                    password !== confirmPassword &&
+                    password.length > 5 &&
+                    confirmPassword.length > 5
+                      ? "block"
+                      : "hidden"
                   } text-red-500`}
                 >
                   Password doesn't match
+                </p>
+                <p
+                  className={`transition-opacity duration-200 pt-2 ${
+                    password.length < 6 &&
+                    confirmPassword.length < 6 &&
+                    password.length === confirmPassword.length &&
+                    password.length > 1 &&
+                    confirmPassword.length > 1
+                      ? "block"
+                      : "hidden"
+                  } text-red-500`}
+                >
+                  Password must be atleast 6 characters long
                 </p>
                 <div className="flex flex-row mt-8 items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
