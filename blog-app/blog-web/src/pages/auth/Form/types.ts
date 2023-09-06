@@ -1,7 +1,7 @@
-export interface BooleanState {
+export interface IconState {
   value: boolean;
-  valuePass: boolean;
-  valueConfPass: boolean;
+  password: boolean;
+  confirmPassword: boolean;
 }
 
 export interface AuthSignInPayload {
@@ -13,6 +13,6 @@ export interface AuthSignUpPayload {
     username: string
     email: string
     password: string
-    passwordConfirmation: string
+    confirmPassword: string
     isBlogger: boolean
 }

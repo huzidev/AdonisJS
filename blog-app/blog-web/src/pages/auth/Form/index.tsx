@@ -6,19 +6,18 @@ import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import "utils/form/index.css";
 import { LoaderSpin } from "utils/loading";
-import { authSignUpData, booleanValues, userSignInData } from "./data";
+import { initialAuthSignIn, initialAuthSignUp, initialIconValue } from "./data";
 import { useAuthFormHook } from "./hooks";
-import { AuthSignInPayload, AuthSignUpPayload, BooleanState } from "./types";
+import { AuthSignInPayload, AuthSignUpPayload, IconState } from "./types";
 
 export default function UserFormPage(): JSX.Element {
   const auth = useAuth();
   const currentPath = window.location.pathname;
   const [isLogInForm, setIsLogInForm] = useState<boolean>(true);
-  const [authLogIn, setAuthLogIn] = useState<AuthSignInPayload>(userSignInData);
+  const [authLogIn, setAuthLogIn] = useState<AuthSignInPayload>(initialAuthSignIn);
+  const [authSignUp, setAuthSignUp] = useState<AuthSignUpPayload>(initialAuthSignUp);
   const [loading, setLoading] = useState<boolean>(false);
-  const [authSignUp, setAuthSignUp] =
-    useState<AuthSignUpPayload>(authSignUpData);
-  const [booleanState, setBooleanState] = useState<BooleanState>(booleanValues);
+  const [icon, setIcon] = useState<IconState>(initialIconValue);
 
   const currentState = isLogInForm
     ? auth.state.signInState.loading
@@ -30,7 +29,7 @@ export default function UserFormPage(): JSX.Element {
   }, [currentPath]);
 
   function inputHandler(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) {
     isLogInForm
       ? setAuthLogIn({
@@ -67,6 +66,9 @@ export default function UserFormPage(): JSX.Element {
       setLoading(false);
     }
   }, [currentState]);
+
+  const password = authSignUp.password;
+  const confirmPassword = authSignUp.confirmPassword;
 
   return (
     <div className="main">
@@ -116,7 +118,7 @@ export default function UserFormPage(): JSX.Element {
               <div className="form-password-field">
                 <input
                   name="password"
-                  type={booleanState.value ? "text" : "password"}
+                  type={icon.value ? "text" : "password"}
                   value={authLogIn.password}
                   onChange={inputHandler}
                   required
@@ -125,14 +127,14 @@ export default function UserFormPage(): JSX.Element {
                 <span
                   className="form-password-icon"
                   onClick={() =>
-                    setBooleanState({
-                      ...booleanState,
-                      value: !booleanState.value,
+                    setIcon({
+                      ...icon,
+                      value: !icon.value,
                     })
                   }
-                  title={booleanState.value ? "Hide Password" : "Show Password"}
+                  title={icon.value ? "Hide Password" : "Show Password"}
                 >
-                  {booleanState.value ? (
+                  {icon.value ? (
                     <RemoveRedEyeOutlinedIcon fontSize="small" className="form-input-password" />
                   ) : (
                     <VisibilityOffIcon fontSize="small" className="form-input-password" />
@@ -184,7 +186,7 @@ export default function UserFormPage(): JSX.Element {
               <div className="form-password-field">
                 <input
                   name="password"
-                  type={booleanState.valuePass ? "text" : "password"}
+                  type={icon.password ? "text" : "password"}
                   value={authSignUp.password}
                   onChange={inputHandler}
                   minLength={6}
@@ -194,13 +196,13 @@ export default function UserFormPage(): JSX.Element {
                 <span
                   className="form-password-icon"
                   onClick={() =>
-                    setBooleanState({
-                      ...booleanState,
-                      valuePass: !booleanState.valuePass,
+                    setIcon({
+                      ...icon,
+                      password: !icon.password,
                     })
                   }
                 >
-                  {booleanState.valuePass ? (
+                  {icon.password ? (
                     <RemoveRedEyeOutlinedIcon
                       fontSize="small"
                       className="form-input-password"
@@ -222,9 +224,9 @@ export default function UserFormPage(): JSX.Element {
               </div>
               <div className="form-password-field">
                 <input
-                  type={booleanState.valueConfPass ? "text" : "password"}
-                  name="passwordConfirmation"
-                  value={authSignUp.passwordConfirmation}
+                  type={icon.confirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={authSignUp.confirmPassword}
                   onChange={inputHandler}
                   minLength={6}
                   required
@@ -233,13 +235,13 @@ export default function UserFormPage(): JSX.Element {
                 <span
                   className="form-password-icon"
                   onClick={() =>
-                    setBooleanState({
-                      ...booleanState,
-                      valueConfPass: !booleanState.valueConfPass,
+                    setIcon({
+                      ...icon,
+                      confirmPassword: !icon.confirmPassword,
                     })
                   }
                 >
-                  {booleanState.valueConfPass ? (
+                  {icon.confirmPassword ? (
                     <RemoveRedEyeOutlinedIcon
                       fontSize="small"
                       className="form-input-password"
@@ -254,8 +256,8 @@ export default function UserFormPage(): JSX.Element {
               </div>
               <p
                 className={`transition-opacity duration-200 pt-2 ${
-                  authSignUp.password !== authSignUp.passwordConfirmation &&
-                  (authSignUp.password.length > 5 && authSignUp.passwordConfirmation.length > 5)
+                  password !== confirmPassword &&
+                  (password.length > 5 && confirmPassword.length > 5)
                     ? "block"
                     : "hidden"
                 } text-red-500`}
@@ -264,9 +266,8 @@ export default function UserFormPage(): JSX.Element {
               </p>
               <p
                 className={`transition-opacity duration-200 pt-2 ${
-                  (authSignUp.password.length < 6 && authSignUp.passwordConfirmation.length < 6 && 
-                  (authSignUp.password.length === authSignUp.passwordConfirmation.length && (authSignUp.password.length > 1 && authSignUp.passwordConfirmation.length > 1))
-                  )
+                  password.length < 6 && confirmPassword.length < 6 && 
+                  (password.length === confirmPassword.length && (password.length > 1 && confirmPassword.length > 1))
                     ? "block"
                     : "hidden"
                 } text-red-500`}

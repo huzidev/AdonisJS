@@ -1,20 +1,20 @@
-import { AuthSignInPayload, AuthSignUpPayload, BooleanState } from "./types";
+import { AuthSignInPayload, AuthSignUpPayload, IconState } from "./types";
 
-export const userSignInData: AuthSignInPayload = {
+export const initialAuthSignIn: AuthSignInPayload = {
   email: '',
   password: '',
 };
 
-export const userSignUpData: AuthSignUpPayload = {
+export const initialAuthSignUp: AuthSignUpPayload = {
   username: '',
   email: '',
   password: '',
-  passwordConfirmation: '',
+  confirmPassword: '',
   isBlogger: false,
 };
 
-export const booleanValues: BooleanState = {
+export const initialIconValue: IconState = {
   value: false,
-  valuePass: false,
-  valueConfPass: false,
+  password: false,
+  confirmPassword: false,
 };

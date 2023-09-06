@@ -7,7 +7,7 @@ export interface AuthSignInPayload {
 
 export interface AuthSignUpPayload extends AuthSignInPayload {
     username: string;
-    passwordConfirmation: string;
+    confirmPassword: string;
 }
 
 export interface User {
