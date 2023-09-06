@@ -72,7 +72,7 @@ export default class UsersController {
 
       let message;
       // so when user asked for filter then notifcation will be according to filter type
-      if (!!filters.sort && response.totalNumber !== 0 && !dateKeys.includes(filterResultKey)) {
+      if (!!filters.sort && response.totalNumber > 1 && !dateKeys.includes(filterResultKey)) {
         message = `Users list fetched by ${
           filterResultKey === "role" 
           ? filters.sort?.role 
@@ -84,13 +84,13 @@ export default class UsersController {
           ? `${filterResultKey} true state`
           : `${filterResultKey} false state`
         } successfully`
-      } else if (!!filters.sort && response.totalNumber !== 0 && dateKeys.includes(filterResultKey)) {
+      } else if (!!filters.sort && response.totalNumber > 1 && dateKeys.includes(filterResultKey)) {
         message = `Users list with ${
           filterResultValue === "oldest" 
           ? `oldest ${filterResultKey === "updatedAt" ? "updated" : ""} users`
           : `recently ${filterResultKey === "createdAt" ? "joined" : "updated"} users`
         } fetched successfully`
-      } else if (response.totalNumber === 0) {
+      } else if (!response.totalNumber) {
          // so if no user is found with specifc role and conditon then show that message in notification
         // if no one us banned then show no user found with isBanned true
         message = `No user found with ${filterResultKey} ${filterResultValue}`
