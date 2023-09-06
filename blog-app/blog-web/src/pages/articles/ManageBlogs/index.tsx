@@ -39,7 +39,7 @@ export default function ManageBlogsPage() {
     : dataByMe.meta?.lastPage;
   useManageBlogsPageHooks();
 
-  const isLoading = state.getBlogsList.loading || state.getMyList.loading;
+  const isLoading = state.getMyList.loading || state.getBlogsList.loading;
 
   return (
     <div className="table-main">
