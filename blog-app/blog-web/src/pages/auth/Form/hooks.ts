@@ -7,6 +7,7 @@ export function useAuthFormHook(): void {
   const auth = useAuth();
   const state = auth.state;
   const prevAuth = usePrevious(state);
+
   useEffect(() => {
     if (prevAuth?.signInState.loading) {
       if (!state?.signInState?.loading && !state.signInState.error) {
@@ -15,8 +16,8 @@ export function useAuthFormHook(): void {
     }
     if (prevAuth?.signUpState.loading) {
       if (!state.signUpState.loading && !state.signUpState.error) {
-       successNotification(state.signUpState.message);
-     }
+        successNotification(state.signUpState.message);
+      }
     }
   }, [state.signInState, state.signUpState]);
 }

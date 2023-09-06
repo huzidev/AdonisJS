@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "store/auth";
 import "utils/form/index.css";
 import { LoaderSpin } from "utils/loading";
-import { booleanValues, userSignInData, userSignUpData } from "./data";
+import { authSignUpData, booleanValues, userSignInData } from "./data";
 import { useAuthFormHook } from "./hooks";
 import { AuthSignInPayload, AuthSignUpPayload, BooleanState } from "./types";
 
@@ -14,10 +14,10 @@ export default function UserFormPage(): JSX.Element {
   const auth = useAuth();
   const currentPath = window.location.pathname;
   const [isLogInForm, setIsLogInForm] = useState<boolean>(true);
-  const [userLogIn, setUserLogIn] = useState<AuthSignInPayload>(userSignInData);
+  const [authLogIn, setAuthLogIn] = useState<AuthSignInPayload>(userSignInData);
   const [loading, setLoading] = useState<boolean>(false);
-  const [userSignUp, setUserSignUp] =
-    useState<AuthSignUpPayload>(userSignUpData);
+  const [authSignUp, setAuthSignUp] =
+    useState<AuthSignUpPayload>(authSignUpData);
   const [booleanState, setBooleanState] = useState<BooleanState>(booleanValues);
 
   const currentState = isLogInForm
@@ -33,12 +33,12 @@ export default function UserFormPage(): JSX.Element {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     isLogInForm
-      ? setUserLogIn({
-          ...userLogIn,
+      ? setAuthLogIn({
+          ...authLogIn,
           [e.target.name]: e.target.value,
         })
-      : setUserSignUp({
-          ...userSignUp,
+      : setAuthSignUp({
+          ...authSignUp,
           [e.target.name]: e.target.value,
         });
   }
@@ -52,9 +52,9 @@ export default function UserFormPage(): JSX.Element {
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (isLogInForm) {
-      auth.signIn(userLogIn);
+      auth.signIn(authLogIn);
     } else {
-      auth.signUp(userSignUp);
+      auth.signUp(authSignUp);
     }
   }
   useAuthFormHook();
@@ -92,7 +92,7 @@ export default function UserFormPage(): JSX.Element {
                   id="email"
                   name="email"
                   type="email"
-                  value={userLogIn.email}
+                  value={authLogIn.email}
                   required
                   onChange={inputHandler}
                   className="form-input"
@@ -117,7 +117,7 @@ export default function UserFormPage(): JSX.Element {
                 <input
                   name="password"
                   type={booleanState.value ? "text" : "password"}
-                  value={userLogIn.password}
+                  value={authLogIn.password}
                   onChange={inputHandler}
                   required
                   className="form-input"
@@ -153,7 +153,7 @@ export default function UserFormPage(): JSX.Element {
                   name="username"
                   type="text"
                   onChange={inputHandler}
-                  value={userSignUp.username}
+                  value={authSignUp.username}
                   required
                   className="form-input"
                 />
@@ -168,7 +168,7 @@ export default function UserFormPage(): JSX.Element {
                   id="email"
                   name="email"
                   type="email"
-                  value={userSignUp.email}
+                  value={authSignUp.email}
                   onChange={inputHandler}
                   required
                   className="form-input"
@@ -185,7 +185,7 @@ export default function UserFormPage(): JSX.Element {
                 <input
                   name="password"
                   type={booleanState.valuePass ? "text" : "password"}
-                  value={userSignUp.password}
+                  value={authSignUp.password}
                   onChange={inputHandler}
                   minLength={6}
                   required
@@ -224,7 +224,7 @@ export default function UserFormPage(): JSX.Element {
                 <input
                   type={booleanState.valueConfPass ? "text" : "password"}
                   name="passwordConfirmation"
-                  value={userSignUp.passwordConfirmation}
+                  value={authSignUp.passwordConfirmation}
                   onChange={inputHandler}
                   minLength={6}
                   required
@@ -254,8 +254,8 @@ export default function UserFormPage(): JSX.Element {
               </div>
               <p
                 className={`transition-opacity duration-200 pt-2 ${
-                  userSignUp.password !== userSignUp.passwordConfirmation &&
-                  (userSignUp.password.length > 5 && userSignUp.passwordConfirmation.length > 5)
+                  authSignUp.password !== authSignUp.passwordConfirmation &&
+                  (authSignUp.password.length > 5 && authSignUp.passwordConfirmation.length > 5)
                     ? "block"
                     : "hidden"
                 } text-red-500`}
@@ -264,8 +264,8 @@ export default function UserFormPage(): JSX.Element {
               </p>
               <p
                 className={`transition-opacity duration-200 pt-2 ${
-                  (userSignUp.password.length < 6 && userSignUp.passwordConfirmation.length < 6 && 
-                  (userSignUp.password.length === userSignUp.passwordConfirmation.length && (userSignUp.password.length > 1 && userSignUp.passwordConfirmation.length > 1))
+                  (authSignUp.password.length < 6 && authSignUp.passwordConfirmation.length < 6 && 
+                  (authSignUp.password.length === authSignUp.passwordConfirmation.length && (authSignUp.password.length > 1 && authSignUp.passwordConfirmation.length > 1))
                   )
                     ? "block"
                     : "hidden"
@@ -280,9 +280,9 @@ export default function UserFormPage(): JSX.Element {
                 type="checkbox"
                 className="form-checkbox"
                 onClick={() =>
-                  setUserSignUp({
-                    ...userSignUp,
-                    isBlogger: !userSignUp.isBlogger,
+                  setAuthSignUp({
+                    ...authSignUp,
+                    isBlogger: !authSignUp.isBlogger,
                   })
                 }
               />
