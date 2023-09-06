@@ -113,7 +113,7 @@ export default function UserFormPage(): JSX.Element {
                   </Link>
                 </div>
               </div>
-              <div className="mt-2 flex items-center">
+              <div className="mt-2 flex items-center relative">
                 <input
                   name="password"
                   type={booleanState.value ? "text" : "password"}
@@ -123,6 +123,7 @@ export default function UserFormPage(): JSX.Element {
                   className="form-input"
                 />
                 <span
+                  className="absolute"
                   onClick={() =>
                     setBooleanState({
                       ...booleanState,
@@ -144,7 +145,7 @@ export default function UserFormPage(): JSX.Element {
           <>
             <div className="mb-3">
               <label htmlFor="username" className="form-heading">
-                Usernmae
+                Username
               </label>
               <div className="mt-2">
                 <input
