@@ -41,3 +41,11 @@
 .form-auth-action {
     @apply font-semibold leading-6 text-indigo-600 hover:text-indigo-500 dark:text-white;
 }
+
+.form-password-field {
+    @apply mt-2 flex items-center relative;
+}
+
+.form-password-icon {
+    @apply absolute right-3 top-1;
+}
