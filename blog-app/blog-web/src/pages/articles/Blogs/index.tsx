@@ -42,8 +42,7 @@ export default function ViewBlogsPage(): JSX.Element {
           </button>
         )}
         {
-          // so if allBlogs length is just 1 then no need to show filters
-          allBlogs.length > 1 && (
+          allBlogs.length >= 1 && (
             <div>
               <button
                 id="dropdownDefaultButton"

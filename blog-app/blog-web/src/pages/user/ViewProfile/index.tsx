@@ -143,7 +143,7 @@ export default function ViewProfilePage(): JSX.Element {
           </h1>
           {sortValue.value && (
             <button
-              className="text-white mr-5  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+              className="text-white mr-5  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
               onClick={() => handleSort('')}
             >
               Reset Filters
@@ -152,12 +152,12 @@ export default function ViewProfilePage(): JSX.Element {
           {
           // so if allBlogs length is just 1 then no need to show filters
           // and filter won't be shown when someone clicked on user's profile because user can't add blogs
-          (userBlogs.length > 1 && userDataById?.role !== "user") && (
+          (userBlogs.length >= 1 && userDataById?.role !== "user") && (
             <div>
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
-                className="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+                className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
                 type="button"
                 onClick={() => setDropDown(!dropDown)}
               >
