@@ -69,7 +69,7 @@ export default function ResetPasswordPage(): JSX.Element {
   }
 
   return (
-    <div>
+    <div className="main">
       <div className="relative bg-white px-6 mt-10 py-10 shadow-xl mx-auto w-full max-w-lg rounded-2xl dark:bg-gray-900">
         <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
           <div className="flex flex-col items-center justify-center text-center space-y-2">
