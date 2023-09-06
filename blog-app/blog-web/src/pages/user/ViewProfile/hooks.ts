@@ -127,9 +127,13 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         const lastPage = blogState.getBlogsById.meta.lastPage;
         if (username) {
           successNotification(
-            `${
-              username === loggedInUser ? "Yours" : username
-            }'s blogs page ${currentPage} of ${lastPage} fetched successfully`
+            blogState.getBlogsById.message?.includes('No') 
+            ? blogState.getBlogsById.message
+            : (
+              `${
+                username === loggedInUser ? "Yours" : username
+              }'s blogs page ${currentPage} of ${lastPage} fetched successfully`
+            )
           );
         }
       }

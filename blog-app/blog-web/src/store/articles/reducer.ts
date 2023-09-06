@@ -103,13 +103,15 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getBlogsById.fulfilled, (state, action) => {
       state.getBlogsById.loading = false;
       if (action.payload) {
-        const { data, meta } = action.payload;
+        const { data, meta, message } = action.payload;
           const cleaned = JSON.parse(JSON.stringify(state.getBlogsById.data));
           state.getBlogsById.data = [...data];
           if (meta.currentPage !== 1) {
             // so when user clicked on load more then previous data remains save and fetches new data
             state.getBlogsById.data = [...cleaned, ...data];
           }
+          
+          state.getBlogsById.message = message
           state.getBlogsById.meta = meta;
         }
       state.getBlogsById.error = false;

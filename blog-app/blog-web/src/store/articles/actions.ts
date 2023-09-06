@@ -87,7 +87,8 @@ export const getBlogsById = createAsyncThunk(
       const response = await api.get(`${endpoints.GET_BLOGS + data.userId}/${data.page}`, {params: data.filters});
       return {
         data : response.data.data.data,
-        meta: response.data.data.meta
+        message: response.data.message,
+        meta: response.data.data.meta,
       };
     } catch (e: any) {
       const err = mapErrorToState(e);
