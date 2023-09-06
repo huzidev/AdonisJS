@@ -82,9 +82,10 @@ export default class ArticlesController {
         };
       }
 
+
       let message;
       // so when user asked for filter then notifcation will be according to filter type
-      if (!!filters.sort && !dateKeys.includes(filterResultKey)) {
+      if (!!filters.sort && !dateKeys.includes(filterResultKey) && response.total > 1) {
         message = `Blogs list fetched by ${
           filterResultValue === "asc" 
           ? `ascending ${filterResultKey}` 
@@ -92,13 +93,17 @@ export default class ArticlesController {
           ? `descending ${filterResultKey}`
           : `${filterResultValue} category`
         } order successfully`
-      } else if (!!filters.sort && dateKeys.includes(filterResultKey)) {
+      } else if (!!filters.sort && dateKeys.includes(filterResultKey) && response.total > 1) {
         message = `${filterResultValue === "recent" 
         ? `Most recently ${filterResultKey === "updatedAt" ? "updated" : "created"}` 
         // so if user clicked on updatedAt oldest then show Oldest blog list fethced successfully therefore passed "" for else condition
         : `Oldest ${filterResultKey === "createdAt" ? "created" : ''}`
       } blogs list fetched successfully`
-      } else {
+      } 
+      else if (!response.total) {
+        message = `No blogs found ${filterResultKey === 'category' && `within ${filterResultValue} category`}`
+      } 
+      else {
         // blogs fetched message is used at multiple places therefore called toUpperCase function here so first letter will be Capital like
         // Blogs fetched successfully
         message = blogsFetched.charAt(0).toUpperCase() + blogsFetched.slice(1).toLowerCase();
