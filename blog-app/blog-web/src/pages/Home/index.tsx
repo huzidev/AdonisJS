@@ -33,11 +33,18 @@ export default function HomePage() {
     );
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      nextSlide();
-    }, 2500)
-  }, [currentIndex])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     nextSlide();
+  //   }, 2500)
+  // }, [currentIndex])
+
+  function addURL(type: string) {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("sort", JSON.stringify({ ['category']: type }));
+    const newUrl = ROUTE_PATHS.ARTICLES + '?' + searchParams.toString();
+    navigate(newUrl);
+  }
 
   return (
     <div>
@@ -120,7 +127,7 @@ export default function HomePage() {
                   Explore
                   <span
                     className="text-blue-500 cursor-pointer"
-                    onClick={() => navigate(ROUTE_PATHS.ARTICLES)}
+                    onClick={() => addURL(image.heading.toLowerCase())}
                   >
                     {" "}
                     blogs{" "}
