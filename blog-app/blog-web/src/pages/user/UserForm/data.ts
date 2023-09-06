@@ -1,4 +1,4 @@
-import { BooleanState, User, UserDetailsEdit } from "./types";
+import { User, UserDetailsEdit } from "./types";
 
 export const detailsMe: UserDetailsEdit = {
     username: ''
@@ -19,10 +19,5 @@ export const detailsCreateUser: User = {
     isVerified: false,
     isActive: false,
     password: '',
-    passwordConfirmation: ''
+    confirmPassword: ''
 }
-
-export const detailsBoolean: BooleanState = {
-    valuePass: false,
-    valueConfPass: false
-  }

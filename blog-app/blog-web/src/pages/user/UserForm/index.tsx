@@ -17,6 +17,7 @@ export default function UserFormPage() {
   const user = useUser();
   const [icon, setIcon] = useState<IconState>(initialIconValue);
   const isLoading = user.state.getUser.loading;
+  
 
   // const prevUpdateState = usePrevious(user.state.updateMe);
   // const updateState = user.state.updateMe;
@@ -45,6 +46,9 @@ export default function UserFormPage() {
     setUpdateDetailsId,
     isDark
   } = useUserFormHook();
+
+  const password = createUser.password;
+  const confirmPassword = createUser.confirmPassword;
   
   return (
     <div>
@@ -176,16 +180,25 @@ export default function UserFormPage() {
                     )}
                   </span>
                 </div>
-                {/* Creaate password length validation error */}
                 <p
-                  className={`transition-opacity duration-200 ${
-                    createUser.password !== createUser.passwordConfirmation &&
-                    createUser.password.length > 5
-                      ? "opacity-100"
-                      : "opacity-0"
+                  className={`transition-opacity duration-200 pt-2 ${
+                    password !== confirmPassword &&
+                    (password.length > 5 && confirmPassword.length > 5)
+                      ? "block"
+                      : "hidden"
                   } text-red-500`}
                 >
                   Password doesn't match
+                </p>
+                <p
+                  className={`transition-opacity duration-200 pt-2 ${
+                    password.length < 6 && confirmPassword.length < 6 && 
+                    (password.length === confirmPassword.length && (password.length > 1 && confirmPassword.length > 1))
+                      ? "block"
+                      : "hidden"
+                  } text-red-500`}
+                >
+                  Password must be atleast 6 characters long
                 </p>
                 <label
                   htmlFor="roles"

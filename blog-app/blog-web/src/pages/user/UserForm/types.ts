@@ -10,7 +10,7 @@ export interface User {
     isVerified: boolean;
     isBanned?: boolean;
     password?: string;
-    passwordConfirmation?: string;
+    confirmPassword?: string;
 }
 
 export interface BooleanState {
