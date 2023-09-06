@@ -18,6 +18,7 @@ export default function ManageBlogsPage() {
   const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
+  const state = blogs.state;
   const isAdmin = hasPermission("admin", auth.state.user?.role);
   const search: any = qs.parse(window.location.search);
   let isFilter;
@@ -26,8 +27,8 @@ export default function ManageBlogsPage() {
   }
   const { handleSort } = useFiltersHook();
 
-  const dataByMe = blogs.state.getMyList;
-  const dataByUser = blogs.state.getBlogsList;
+  const dataByMe = state.getMyList;
+  const dataByUser = state.getBlogsList;
   const allBlogs = isAdmin ? dataByUser.data : dataByMe.data;
   const allUsers = user.state.allUser?.data;
   const currentPage = isAdmin
@@ -38,7 +39,7 @@ export default function ManageBlogsPage() {
     : dataByMe.meta?.lastPage;
   useManageBlogsPageHooks();
 
-  const isLoading = blogs.state.getBlogsList.loading;
+  const isLoading = state.getBlogsList.loading || state.getMyList.loading;
 
   return (
     <div className="table-main">
