@@ -88,7 +88,9 @@ export default class ArticlesController {
         message = `Blogs list fetched by ${
           filterResultValue === "asc" 
           ? `ascending ${filterResultKey}` 
-          : `descending ${filterResultKey}`
+          : filterResultValue === "asc" 
+          ? `descending ${filterResultKey}`
+          : `${filterResultValue} category`
         } order successfully`
       } else if (!!filters.sort && dateKeys.includes(filterResultKey)) {
         message = `${filterResultValue === "recent" 
