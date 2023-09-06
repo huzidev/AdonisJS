@@ -1,5 +1,5 @@
 .main {
-    @apply flex min-h-full flex-col justify-center px-6 py-12 lg:px-8;
+    @apply flex items-center flex-col justify-center px-6 py-12 lg:px-8;
 }
 
 .main-heading-content {
