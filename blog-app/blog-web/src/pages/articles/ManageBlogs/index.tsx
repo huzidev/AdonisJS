@@ -184,7 +184,7 @@ export default function ManageBlogsPage() {
             </tbody>
           </table>
         </div>
-        {!isLoading && (
+        {!isLoading && allBlogs.length && (
           <div className="table-footer">
             <span className="table-footer-content">
               Showing {currentPage} of
@@ -241,7 +241,7 @@ export default function ManageBlogsPage() {
         <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
             {/* Oops... {isAdmin ? "No one has" : "You haven't"} uploaded any blog yet. */}
-            {/* Oops... {auth.state.user?.role === 'blogger' ? `You haven't` : `No one has`} uploaded any blog yet {!!isFilter && `related to ${isFilter} category`}. */}
+            Oops... {auth.state.user?.role === 'blogger' ? `You haven't` : `No one has`} uploaded any blog {!!isFilter && `related to ${isFilter} category`}.
           </h1>
           <Link
             to={ROUTE_PATHS.ARTICLE_CREATE}
