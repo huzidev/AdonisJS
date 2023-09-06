@@ -50,10 +50,6 @@ export default function UserFormPage() {
   const password = createUser.password;
   const confirmPassword = createUser.confirmPassword;
 
-  console.log("password", password);
-  console.log("confirmPassword", confirmPassword);
-  
-  
   return (
     <div>
       <div className="main">
