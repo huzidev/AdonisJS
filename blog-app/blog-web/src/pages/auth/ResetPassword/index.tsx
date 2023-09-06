@@ -209,6 +209,7 @@ export default function ResetPasswordPage(): JSX.Element {
                         type="text"
                         maxLength={1}
                         onChange={handleOtpChange}
+                        onFocus={(e) => e.target.select()}
                       />
                     </div>
                   ))}
