@@ -197,8 +197,8 @@ export default function ViewBlogsPage(): JSX.Element {
                       title={blog.content}
                       className="mb-3 font-normal  text-gray-400"
                     >
-                      {blog.content.length > 50
-                        ? `${blog.content.slice(0, 50)}...`
+                      {blog.content.length > 42
+                        ? `${blog.content.slice(0, 42)}...`
                         : blog.content}
                     </p>
                     {/* <div className="flex justify-between">
