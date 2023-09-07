@@ -1,7 +1,7 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -16,6 +16,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
   const auth = useAuth();
   const user = useUser();
+  const navigate = useNavigate();
   const allUsers = user.state.allUser?.data;
   const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
@@ -29,7 +30,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
   
   return (
-    <div className="w-10/12 m-auto flex flex-col">
+    <div className="w-[1280px] m-auto flex flex-col">
       <div>
         {sortValue.value && (
           <button
@@ -112,7 +113,7 @@ export default function ViewBlogsPage(): JSX.Element {
               uploadedByUser && uploadedByUser.username;
               
             return (
-            <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
+            <div key={blog.id} title="Read More" className="w-[30.33%] mt-8 mx-4 cursor-pointer" onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}>
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
                 <div className="border rounded-lg shadow bg-gray-800 border-gray-700">
                   <img
