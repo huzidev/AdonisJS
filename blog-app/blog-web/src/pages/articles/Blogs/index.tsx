@@ -1,3 +1,5 @@
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -316,6 +318,14 @@ export default function ViewBlogsPage(): JSX.Element {
                           {new Date(blog.createdAt).toLocaleDateString()}
                         </p>
                       </div>
+                    </div>
+                    <div className='mt-2'>
+                      <span>
+                        <ThumbUpOffAltIcon />
+                      </span>
+                      <span>
+                        <ChatBubbleOutlineIcon />
+                      </span>
                     </div>
                   </div>
                 </div>
