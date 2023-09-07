@@ -49,11 +49,10 @@ export default function ResetPasswordPage(): JSX.Element {
     newOtp[index] = e.value;
     setOtp(newOtp);
 
-
     // && e.value means their must be some value in input field then put the focus on next input field
     if (e.nextSibling && e.value) {
       e.nextSibling.focus();
-    } // so when user removes the value from input field then change focus on to previous input field 
+    } // so when user removes the value from input field then change focus on to previous input field
     // index !== 0 means when user reached to first index then don't change the foucs to previousSibling because their will be NO input previous and it'll give error
     else if (!e.value && index !== 0) {
       e.previousSibling.focus();
@@ -217,9 +216,14 @@ export default function ResetPasswordPage(): JSX.Element {
                       name="otp"
                       key={index}
                       value={data}
+                      required
                       maxLength={1}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleOtpChange(e.target, index)}
-                      onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.select()}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleOtpChange(e.target, index)
+                      }
+                      onFocus={(e: React.FocusEvent<HTMLInputElement>) =>
+                        e.target.select()
+                      }
                     />
                   ))}
                   {/* {Array.from({ length: 6 }, (_, index) => (
