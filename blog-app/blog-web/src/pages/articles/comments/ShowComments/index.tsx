@@ -97,7 +97,7 @@ export default function ShowCommentsPage({
             <button
               id="dropdownComment1Button"
               data-dropdown-toggle="dropdownComment1"
-              className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 bg-gray-900"
+              className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 rounded-lg focus:ring-1 focus:outline-none focus:ring-gray-20"
               type="button"
               // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
               onClick={() =>
