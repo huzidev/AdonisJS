@@ -19,7 +19,7 @@ export default class CommentsController {
     }
   }
 
-  public async getAll({ params }: HttpContextContract) {
+  public async getById({ params }: HttpContextContract) {
     try {
       const articleId = params.id;
       const response = await Comment.query()
@@ -32,24 +32,6 @@ export default class CommentsController {
       };
     } catch (e) {
       throw e
-    }
-  }
-
-  public async getById({ params }: HttpContextContract) { 
-    try {
-      const comment = await Comment.findBy("id", params.id);
-      if (!comment) {
-        throw {
-          message: `No comment found by id ${params.id}`
-        }
-      } else {
-        return {
-          message: `Comment fetched successfully by id ${params.id}`,
-          data: comment
-        }
-      }
-    } catch (e) {
-      throw e;
     }
   }
 
