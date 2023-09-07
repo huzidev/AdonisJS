@@ -217,7 +217,6 @@ export default function ViewBlogsPage(): JSX.Element {
                         Read More
                       </Link>
                       <p className="text-white">
-                        {/* to show Total likes of every blogs and ?? is used if totalCount is undefined means no like then show 0 */}
                         {/* Likes : {allReactions && (allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
                       </p>
                     </div> */}
@@ -323,6 +322,7 @@ export default function ViewBlogsPage(): JSX.Element {
                       <span className='border-gray-200 border-[0.5px] w-full flex items-center justify-center'>
                         <ThumbUpOffAltIcon /> 
                         <p className='ml-2'>
+                          {/* to show Total likes of every blogs and ?? is used if totalCount is undefined means no like then show 0 */}
                           {allReactions && (allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
                         </p>
                       </span>

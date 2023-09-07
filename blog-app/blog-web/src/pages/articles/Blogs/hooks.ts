@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { categories } from "store/articles/types";
 import { useAuth } from "store/auth";
+import { useComment } from "store/comment";
 import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
@@ -14,6 +15,7 @@ import { altKeys, initialSortState, typeResult } from "./data";
 export function useBlogsPageHooks() {
   const blogs = useBlogs();
   const user = useUser();
+  const comment = useComment();
   const reactions = useReactions();
   const params: any = useParams();
   const auth = useAuth();
