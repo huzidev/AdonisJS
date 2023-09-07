@@ -26,7 +26,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
   const { loadMore, handleSort, sortValue, isLoading, allReactions, allComments } = useBlogsPageHooks();
-  
+
   return (
     <div className="w-[1500px] m-auto flex flex-col">
       <div>
@@ -88,7 +88,7 @@ export default function ViewBlogsPage(): JSX.Element {
         {isLoading && !allBlogs.length ? (
           <LoadingListBlogs />
         ) : (
-          allBlogs.map((blog: BlogState) => {
+          allBlogs.map((blog: BlogState, index: number) => {
             // allUsers? is mandatory as it can be empty
             const uploadedByUser = allUsers?.find(
               (user: User) => user.id === blog.ownerId
@@ -100,7 +100,8 @@ export default function ViewBlogsPage(): JSX.Element {
               uploadedByUser && uploadedByUser.username;
               
             return (
-            <div key={blog.id} title="Read More" className="w-[30.33%] mt-8 even:mx-4 cursor-pointer" onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}>
+              // ${index % 3 === 1 && 'mx-4'} so margin will only be added on the middle div
+            <div key={blog.id} title="Read More" className={`w-[30.33%] mt-8 ${index % 3 === 1 && 'mx-4'} margin cursor-pointer`} onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}>
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
                 <div className="border rounded-lg shadow bg-gray-800 border-gray-700 relative">
                   <div className="absolute right-0" onClick={(e => e.stopPropagation())}>
