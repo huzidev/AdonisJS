@@ -29,9 +29,6 @@ export default function ViewBlogsPage(): JSX.Element {
 
   const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
   
-  console.log("allComments", allComments);
-  
-
   return (
     <div className="w-[1280px] m-auto flex flex-col">
       <div>
