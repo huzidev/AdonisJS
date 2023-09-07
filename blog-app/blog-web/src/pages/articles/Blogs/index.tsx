@@ -27,7 +27,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
 
-  const { loadMore, handleSort, sortValue, isLoading, allReactions, allComments } = useBlogsPageHooks();
+  const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
   
   console.log("allComments", allComments);
   
