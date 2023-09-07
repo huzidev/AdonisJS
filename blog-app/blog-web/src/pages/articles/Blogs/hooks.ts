@@ -120,6 +120,7 @@ export function useBlogsPageHooks() {
       blogs.getBlogs({ page: 1, ...search });
     } 
     reactions.getAllReactions();
+    comment.getAllComments();
 
     // so only if loggedIn user's role is user then fetch favorite blogs
     if (isUser) {
@@ -153,11 +154,6 @@ export function useBlogsPageHooks() {
       }
     }
   }, [state]);
-
-
-  useEffect(() => {
-    comment.getAllComments();
-  }, [])
 
   const allReactions: any = reactions.state.getAllReactions.data;
   const allComments: any = comment.state.getAllComments.data;
