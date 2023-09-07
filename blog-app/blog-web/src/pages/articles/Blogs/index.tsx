@@ -116,11 +116,11 @@ export default function ViewBlogsPage(): JSX.Element {
             <div key={blog.id} title="Read More" className="w-[30.33%] mt-8 mx-4 cursor-pointer" onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}>
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
                 <div className="border rounded-lg shadow bg-gray-800 border-gray-700 relative">
-                  <div className="absolute right-0">
+                  <div className="absolute right-0" onClick={(e => e.stopPropagation())}>
                     <button
                       id="dropdownComment1Button"
                       data-dropdown-toggle="dropdownComment1"
-                      className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-200 rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50"
+                      className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-200 rounded-lg focus:ring-1 focus:outline-none focus:ring-gray-50"
                       type="button"
                       // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
                     >
@@ -300,7 +300,8 @@ export default function ViewBlogsPage(): JSX.Element {
                     <div className="flex justify-between items-center">
                       <div className="flex items-center w-3/4">
                         <img className="w-10 h-10 rounded-full bg-black" src="/docs/images/people/profile-picture-5.jpg"></img>
-                        <p className="text-white ml-3">
+                        {/* e.stopPropagation() because we've create onClick event on complete div therefore if we didn't use e.stopPropagation() then onClicking useranme it'll fetch user to blog instead of user name therefore uses e.stopPropagation() */}
+                        <p className="text-white ml-3" onClick={(e => e.stopPropagation())}>
                           {isBannedUser ? (
                             <del title="Banned User" className="text-red-600">
                               {uploadedByUsername}
