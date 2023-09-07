@@ -121,13 +121,13 @@ export default function ViewBlogsPage(): JSX.Element {
                     alt="Thumbnail"
                   />
                   <div className="p-5">
-                    <div className="flex justify-between">
-                      <h1 className="mb-2 text-2xl font-bold tracking-tight text-white">
+                    <div className="flex justify-between flex-col">
+                      <h1 className="mb-2 text-xl tracking-tight text-blue-200">
                         {blog.category.charAt(0).toUpperCase() + blog.category.slice(1)}
                       </h1>
                       <h1
                         title={blog.title}
-                        className="mb-2 text-2xl font-bold tracking-tight text-white"
+                        className="mb-2 text-xl font-bold tracking-tight text-white"
                       >
                         {blog.title.length > 21
                           ? `${blog.title.slice(0, 21)}...`
@@ -200,7 +200,7 @@ export default function ViewBlogsPage(): JSX.Element {
                         ? `${blog.content.slice(0, 50)}...`
                         : blog.content}
                     </p>
-                    <div className="flex justify-between">
+                    {/* <div className="flex justify-between">
                       <Link
                         to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
                         className="text-sm font-medium text-center text-white hover:text-blue-500"
@@ -209,9 +209,9 @@ export default function ViewBlogsPage(): JSX.Element {
                       </Link>
                       <p className="text-white">
                         {/* to show Total likes of every blogs and ?? is used if totalCount is undefined means no like then show 0 */}
-                        Likes : {allReactions && (allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
+                        {/* Likes : {allReactions && (allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
                       </p>
-                    </div>
+                    </div> */}
                     {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
                     {(blog.ownerId === userData?.id ||
                       (hasPermission("admin", userData?.role) &&
@@ -278,17 +278,14 @@ export default function ViewBlogsPage(): JSX.Element {
                         </div>
                       ))}
                     <div className="flex justify-between items-center">
+                      <img className="w-10 h-10 rounded-full bg-black" src="/docs/images/people/profile-picture-5.jpg"></img>
                       <p className="text-white">
-                        Uploaded At :{" "}
-                        {new Date(blog.createdAt).toLocaleDateString()}
-                      </p>
-                      <p className="text-white">
-                        Uploaded By :&nbsp;
                         {isBannedUser ? (
                           <del title="Banned User" className="text-red-600">
                             {uploadedByUsername}
                           </del>
                         ) : (
+                          <>
                           <Link
                             to={
                               blog.ownerId === auth.state.user?.id
@@ -300,7 +297,12 @@ export default function ViewBlogsPage(): JSX.Element {
                           >
                             {uploadedByUsername}
                           </Link>
+                          </>
                         )}
+                      </p>
+                      <p className="text-white">
+                        {/* Uploaded At :{" "} */}
+                        {new Date(blog.createdAt).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
