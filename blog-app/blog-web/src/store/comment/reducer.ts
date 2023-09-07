@@ -7,6 +7,7 @@ const initialState: CommentState = {
   addComment: { ...subState },
   deleteComment: { ...subState },
   getById : { ...subState, data: null },
+  getAllComments : { ...subState, data: null },
   editComment : { ...subState, data: null }
 };
 
@@ -47,6 +48,21 @@ export const commentSlice = createSlice({
         })
         builder.addCase(actions.getById.rejected, (state) => {
           state.getById = { loading: false, error: true };
+        });
+        // Get All Comments
+        builder.addCase(actions.getAllComments.pending, (state) => {
+          state.getAllComments = { loading: true, error: false };
+        });
+        builder.addCase(actions.getAllComments.fulfilled, (state, action) => {
+          state.getAllComments = { loading: false, error: false };
+            if (action.payload) {
+              const { message, data } = action.payload; 
+              state.getAllComments.data = data;
+              state.getAllComments.message = message;
+            }
+        })
+        builder.addCase(actions.getAllComments.rejected, (state) => {
+          state.getAllComments = { loading: false, error: true };
         });
         // Delete Comment
         builder.addCase(actions.deleteComment.pending, (state) => {
