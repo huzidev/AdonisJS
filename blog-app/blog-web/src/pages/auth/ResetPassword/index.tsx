@@ -20,6 +20,7 @@ export default function ResetPasswordPage(): JSX.Element {
   const [resetState, setResetState] =
     useState<ResetPasswordState>(initialState);
   const [icon, setIcon] = useState<IconState>(initialIconState);
+  const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
 
   const password = resetState.password;
   const confirmPassword = resetState.confirmPassword;
