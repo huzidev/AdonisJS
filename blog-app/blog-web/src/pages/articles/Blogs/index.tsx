@@ -27,8 +27,11 @@ export default function ViewBlogsPage(): JSX.Element {
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
 
-  const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
+  const { loadMore, handleSort, sortValue, isLoading, allReactions, allComments } = useBlogsPageHooks();
   
+  console.log("allComments", allComments);
+  
+
   return (
     <div className="w-[1280px] m-auto flex flex-col">
       <div>
