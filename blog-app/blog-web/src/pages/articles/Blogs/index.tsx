@@ -130,7 +130,7 @@ export default function ViewBlogsPage(): JSX.Element {
                   />
                   <div className="p-5">
                     <div className="flex justify-between flex-col">
-                      <h1 className="mb-2 text-xl tracking-tight text-blue-200">
+                      <h1 className="tracking-wide text-blue-200">
                         {blog.category.charAt(0).toUpperCase() + blog.category.slice(1)}
                       </h1>
                       <h1
