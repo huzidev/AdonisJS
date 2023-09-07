@@ -114,22 +114,25 @@ export default function ViewBlogsPage(): JSX.Element {
             return (
             <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
-                <div className="h-52 border rounded-lg shadow bg-gray-800 border-gray-700">
+                <div className="border rounded-lg shadow bg-gray-800 border-gray-700">
                   <img
                     className="rounded-t-lg"
-                    src="/docs/images/blog/image-1.jpg"
+                    src={require(`assets/astronomy.jpg`)}
                     alt="Thumbnail"
                   />
                   <div className="p-5">
                     <div className="flex justify-between">
-                      <h5
+                      <h1 className="mb-2 text-2xl font-bold tracking-tight text-white">
+                        {blog.category.charAt(0).toUpperCase() + blog.category.slice(1)}
+                      </h1>
+                      <h1
                         title={blog.title}
-                        className="mb-2 text-2xl font-bold tracking-tight  text-white"
+                        className="mb-2 text-2xl font-bold tracking-tight text-white"
                       >
                         {blog.title.length > 21
                           ? `${blog.title.slice(0, 21)}...`
                           : blog.title}
-                      </h5>
+                      </h1>
                       {
                         // only if loggedIn user's role is user then show heart icon for adding blogs in favorite
                         auth.state.user && auth.state.user.role === "user" && (

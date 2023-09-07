@@ -8,10 +8,10 @@ import { ArticleType } from "./types";
 export default function AddBlogPage(): JSX.Element {
   const blog = useBlogs();
   const initialState: ArticleType = {
-    title: '',
-    image: '',
-    content: '',
-    category: '',
+    title: "",
+    image: "",
+    content: "",
+    category: "",
   };
   const [article, setArticle] = useState(initialState);
   const { title, image, content } = article;
@@ -117,9 +117,7 @@ export default function AddBlogPage(): JSX.Element {
               </div>
             </div>
           </div>
-          <div>
             <input className="form-action" type="submit" value="Add Blog" />
-          </div>
         </form>
       </div>
     </div>
