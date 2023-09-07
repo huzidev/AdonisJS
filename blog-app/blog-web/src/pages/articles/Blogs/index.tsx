@@ -115,7 +115,26 @@ export default function ViewBlogsPage(): JSX.Element {
             return (
             <div key={blog.id} title="Read More" className="w-[30.33%] mt-8 mx-4 cursor-pointer" onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}>
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
-                <div className="border rounded-lg shadow bg-gray-800 border-gray-700">
+                <div className="border rounded-lg shadow bg-gray-800 border-gray-700 relative">
+                  <div className="absolute right-0">
+                    <button
+                      id="dropdownComment1Button"
+                      data-dropdown-toggle="dropdownComment1"
+                      className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 bg-gray-900"
+                      type="button"
+                      // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        aria-hidden="true"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                      </svg>
+                    </button>
+                  </div>
                   <img
                     className="rounded-t-lg"
                     src={require(`assets/astronomy.jpg`)}
