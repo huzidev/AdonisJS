@@ -130,12 +130,12 @@ export default function ViewBlogsPage(): JSX.Element {
                   />
                   <div className="p-5">
                     <div className="flex justify-between flex-col">
-                      <h1 className="tracking-wide text-blue-200">
+                      <h1 className="mb-1 tracking-wide text-blue-200">
                         {blog.category.charAt(0).toUpperCase() + blog.category.slice(1)}
                       </h1>
                       <h1
                         title={blog.title}
-                        className="mb-2 text-xl font-bold tracking-tight text-white"
+                        className="mb-1 text-xl font-semibold text-white"
                       >
                         {blog.title.length > 21
                           ? `${blog.title.slice(0, 21)}...`
