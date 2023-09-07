@@ -279,7 +279,7 @@ export default function ViewBlogsPage(): JSX.Element {
                         </div>
                       ))}
                     <div className="flex justify-between items-center">
-                      <div className="flex items-center w-1/2">
+                      <div className="flex items-center w-3/4">
                         <img className="w-10 h-10 rounded-full bg-black" src="/docs/images/people/profile-picture-5.jpg"></img>
                         <p className="text-white ml-3">
                           {isBannedUser ? (
@@ -303,10 +303,12 @@ export default function ViewBlogsPage(): JSX.Element {
                           )}
                         </p>
                       </div>
-                      <p className="text-white">
-                        {/* Uploaded At :{" "} */}
-                        {new Date(blog.createdAt).toLocaleDateString()}
-                      </p>
+                      <div className="w-1/4">
+                        <p className="text-white">
+                          {/* Uploaded At :{" "} */}
+                          {new Date(blog.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
