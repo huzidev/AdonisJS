@@ -20,7 +20,7 @@ export default function ResetPasswordPage(): JSX.Element {
   const [resetState, setResetState] =
     useState<ResetPasswordState>(initialState);
   const [icon, setIcon] = useState<IconState>(initialIconState);
-  const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
+  const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
 
   const password = resetState.password;
   const confirmPassword = resetState.confirmPassword;
@@ -40,18 +40,15 @@ export default function ResetPasswordPage(): JSX.Element {
     }
   }, []);
 
-  function handleOtpChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    // if user removes any character then the length will not changes
-    // otherwise if we didn't use this suppose user enter the code 2645 and removes the 5 from UI then the 5 will remains stored in ours otp.code state therefore we've used slice() function
-    if (value === "") {
-      setResetState((prevOtp) => ({
-        ...prevOtp,
-        code: prevOtp.code.slice(0, prevOtp.code.length - 1),
-      }));
-    } else {
-      // Concatenate the value with otp.code
-      setResetState((prevOtp) => ({ ...prevOtp, code: prevOtp.code + value }));
+  function handleOtpChange(e: any, index?: number) {
+    if (isNaN(e.value)) {
+      return false;
+    }
+
+    setOtp([...otp.map((data, i) => (i === index ? e.value : data))])
+    
+    if (e.nextSibling) {
+      e.nextSibling.focus();
     }
   }
 
@@ -141,7 +138,9 @@ export default function ResetPasswordPage(): JSX.Element {
                         confirmPassword: !icon.confirmPassword,
                       })
                     }
-                    title={icon.confirmPassword ? "Hide Password" : "Show Password"}
+                    title={
+                      icon.confirmPassword ? "Hide Password" : "Show Password"
+                    }
                   >
                     {icon.confirmPassword ? (
                       <RemoveRedEyeOutlinedIcon
@@ -203,16 +202,19 @@ export default function ResetPasswordPage(): JSX.Element {
                 </p>
                 <div className="flex flex-row mt-8 items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
-                  {otp.map((value, index: number) => (
+                  {otp.map((data, index: number) => (
                     <div className="w-16 h-16" key={index}>
-                    <input
+                      <input
                         className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white"
                         type="text"
+                        name="otp"
+                        key={index}
+                        value={data}
                         maxLength={1}
-                        onChange={handleOtpChange}
-                        onFocus={(e) => e.target.select()}
+                        onChange={(e: any) => handleOtpChange(e.target, index)}
+                        onFocus={(e: any) => e.target.select()}
                       />
-</div>
+                    </div>
                   ))}
                   {/* {Array.from({ length: 6 }, (_, index) => (
                     <div className="w-16 h-16" key={index}>
