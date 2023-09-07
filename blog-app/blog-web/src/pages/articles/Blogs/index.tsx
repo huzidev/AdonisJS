@@ -319,11 +319,14 @@ export default function ViewBlogsPage(): JSX.Element {
                         </p>
                       </div>
                     </div>
-                    <div className='mt-2'>
-                      <span>
-                        <ThumbUpOffAltIcon />
+                    <div className='mt-2 text-white flex justify-around'>
+                      <span className='border-gray-200 border-[0.5px] w-full flex items-center justify-center'>
+                        <ThumbUpOffAltIcon /> 
+                        <p className='ml-2'>
+                          {allReactions && (allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
+                        </p>
                       </span>
-                      <span>
+                      <span className='ml-2 border-gray-200 border-[0.5px] w-full text-center'>
                         <ChatBubbleOutlineIcon />
                       </span>
                     </div>
