@@ -43,7 +43,6 @@ export default class UsersController {
       if (!!filters.sort) {
         filterResultKey = Object.keys(filters.sort!)[0];
         filterResultValue = Object.values(filters.sort!)[0];
-        console.log("FILTER VALUE", filterResultValue);
         // so when user tries to change the value from URL then throw error
         // if filters is according to username and user tries to change the value of username to something else then the error will be shown
           if (!userFiltersKeys.includes(filterResultKey)) {
@@ -66,9 +65,6 @@ export default class UsersController {
       } else {
         response = await query;
       }
-
-      console.log(filterResultKey);
-      
 
       let message;
       // so when user asked for filter then notifcation will be according to filter type

@@ -170,7 +170,6 @@ export default class ArticlesController {
 
       const userRole: any = auth.user?.role;
 
-      console.log("User role", userRole);
       // const articleId: number = params.id;
       // if user didn't change any value and tries to update blog
       if (!article) {

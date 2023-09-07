@@ -13,7 +13,6 @@ export default class AuthController {
         const trx = await Database.transaction()
         try {
             const { isBlogger, ...body } = await request.validate(AuthSignUp);
-            console.log("body", body);
             
             const user = new User();
             const verificationCode = new EmailVerificationCode();
@@ -94,7 +93,6 @@ export default class AuthController {
             throw { message: `Code is already send, please wait a minute before requesting for new code`, status: 422 }
         }
         code?.generateCode()
-        console.log("verification code is", code?.code);
         
         // if already a code is present but isExpired so new code will be appear instead of that old expired code in ours database when user asked for verifyEmailSendCode
         // if user is already verified then user can't asked for newVerification code because of middleware("auth:no_verify")
@@ -158,7 +156,6 @@ export default class AuthController {
         const trx = await Database.transaction()
         try {
             const body = await request.validate(AuthVerifyEmailVerificationCode);
-            console.log("body", body);
             
             let verificationCode = await EmailVerificationCode.query()
                 .where('userId', auth.user!.id)
@@ -209,9 +206,6 @@ export default class AuthController {
                 // this allows preloads to make relationship with two tables and to be executed in a single query()
                 .preload("user", (query) => query.where("isActive", true)) // using Preload here to check if user is Active or Not
                 .first()
-                console.log("body", body);
-                
-                console.log("verifcaiton code", verificationCode);
                 
             if (!verificationCode || verificationCode?.user?.email !== body.email) {
                 throw { message: 'Invalid Code', status: 404 }
