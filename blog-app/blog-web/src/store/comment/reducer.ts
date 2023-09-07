@@ -6,8 +6,7 @@ import { CommentState } from "./types";
 const initialState: CommentState = {
   addComment: { ...subState },
   deleteComment: { ...subState },
-  getComments : { ...subState, data: null },
-  getCommentById : { ...subState, data: null },
+  getById : { ...subState, data: null },
   editComment : { ...subState, data: null }
 };
 
@@ -24,9 +23,9 @@ export const commentSlice = createSlice({
             state.addComment = { loading: false, error: false };
             if (action.payload) {
                 const { message, data } = action.payload;
-                if (state.getComments.data) {
-                  const prevComments = JSON.parse(JSON.stringify(state.getComments.data));
-                  state.getComments.data = [...prevComments, data];
+                if (state.getById.data) {
+                  const prevComments = JSON.parse(JSON.stringify(state.getById.data));
+                  state.getById.data = [...prevComments, data];
                 }
                 state.addComment.message = message;
             }
@@ -34,54 +33,20 @@ export const commentSlice = createSlice({
         builder.addCase(actions.addComment.rejected, (state) => {
           state.addComment = { loading: false, error: true };
         });
-        // Get All Comments
-        builder.addCase(actions.getComments.pending, (state) => {
-          state.getComments = { loading: true, error: false };
+        // Get Comments By Id
+        builder.addCase(actions.getById.pending, (state) => {
+          state.getById = { loading: true, error: false };
         });
-        builder.addCase(actions.getComments.fulfilled, (state, action) => {
-          state.getComments = { loading: false, error: false };
+        builder.addCase(actions.getById.fulfilled, (state, action) => {
+          state.getById = { loading: false, error: false };
             if (action.payload) {
               const { message, data } = action.payload; 
-              state.getComments.data = data;
-              state.getComments.message = message;
+              state.getById.data = data;
+              state.getById.message = message;
             }
         })
-        builder.addCase(actions.getComments.rejected, (state) => {
-          state.getComments = { loading: false, error: true };
-        });
-        // Get Comment By Id
-        builder.addCase(actions.getCommentById.pending, (state) => {
-          state.getCommentById = { loading: true, error: false };
-        });
-        builder.addCase(actions.getCommentById.fulfilled, (state, action) => {
-          state.getCommentById = { loading: false, error: false };
-            if (action.payload) {
-              const { message, data } = action.payload; 
-              state.getCommentById.data = data;
-              state.getCommentById.message = message;
-            }
-        })
-        builder.addCase(actions.getCommentById.rejected, (state) => {
-          state.getCommentById = { loading: false, error: true };
-        });
-        // Edit Comment
-        builder.addCase(actions.editComment.pending, (state) => {
-          state.editComment = { loading: true, error: false };
-        });
-        builder.addCase(actions.editComment.fulfilled, (state, action) => {
-          state.editComment = { loading: false, error: false };
-            if (action.payload) {
-              const { message, data } = action.payload; 
-              if (state.getComments.data) {
-                // will return the updated value of comment
-                const update = state.getComments.data.map((comment) => comment.id === data.id ? data : comment);
-                state.getComments.data = update;
-              }
-              state.editComment.message = message;
-            }
-        })
-        builder.addCase(actions.editComment.rejected, (state) => {
-          state.editComment = { loading: false, error: true };
+        builder.addCase(actions.getById.rejected, (state) => {
+          state.getById = { loading: false, error: true };
         });
         // Delete Comment
         builder.addCase(actions.deleteComment.pending, (state) => {
@@ -91,8 +56,8 @@ export const commentSlice = createSlice({
           state.deleteComment = { loading: false, error: false };
           if (action.payload) {
           const { response, message } = action.payload;
-          state.getComments.data = JSON.parse(JSON.stringify(
-            state.getComments.data?.filter(
+          state.getById.data = JSON.parse(JSON.stringify(
+            state.getById.data?.filter(
               (comment) => comment.id !== response.id
             ))) 
             state.deleteComment.message = message;

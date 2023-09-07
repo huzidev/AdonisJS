@@ -25,7 +25,7 @@ export const addComment = createAsyncThunk(
   }
 );
 
-export const getComments = createAsyncThunk(
+export const getById = createAsyncThunk(
   endpoints.GET_COMMENTS,
   async (articleId: number) => {
     try {
@@ -40,19 +40,20 @@ export const getComments = createAsyncThunk(
     }
 );
 
-export const getCommentById = createAsyncThunk(
-  endpoints.GET_COMMENT,
-  async (id: number) => {
+export const getAllComments = createAsyncThunk(
+  endpoints.GET_ALL_COMMENTS,
+  async () => {
     try {
-      const response = await api.get(endpoints.GET_COMMENT + id);
+      const response = await api.get(endpoints.GET_ALL_COMMENTS);
+      console.log('GET ALL Comments RESPONSE', response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);
         console.log("Error", err);
-        throw e;
-      }
+        throw e
     }
+  }
 );
 
 export const editComment = createAsyncThunk(

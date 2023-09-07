@@ -35,8 +35,7 @@ export interface EditCommentPayload extends SubState {
 
 export interface CommentState {
   addComment: SubState;
-  getComments: GetCommentsState;
-  getCommentById: GetCommentByIdState;
+  getById: GetCommentsState;
   editComment: GetCommentByIdState;
   deleteComment: SubState;
 }

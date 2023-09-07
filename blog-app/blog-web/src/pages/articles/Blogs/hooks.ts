@@ -155,7 +155,6 @@ export function useBlogsPageHooks() {
   }, [state]);
 
   const allReactions: any = reactions.state.getAllReactions.data;
-  const allComments: any = comment.state.getComments.data; 
 
   return {
     sortValue,
@@ -163,6 +162,5 @@ export function useBlogsPageHooks() {
     handleSort,
     isLoading,
     allReactions,
-    allComments
   };
 }
