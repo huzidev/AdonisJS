@@ -203,7 +203,18 @@ export default function ResetPasswordPage(): JSX.Element {
                 </p>
                 <div className="flex flex-row mt-8 items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
-                  {Array.from({ length: 6 }, (_, index) => (
+                  {otp.map((value, index: number) => (
+                    <div className="w-16 h-16" key={index}>
+                    <input
+                        className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white"
+                        type="text"
+                        maxLength={1}
+                        onChange={handleOtpChange}
+                        onFocus={(e) => e.target.select()}
+                      />
+</div>
+                  ))}
+                  {/* {Array.from({ length: 6 }, (_, index) => (
                     <div className="w-16 h-16" key={index}>
                       <input
                         className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white"
@@ -213,7 +224,7 @@ export default function ResetPasswordPage(): JSX.Element {
                         onFocus={(e) => e.target.select()}
                       />
                     </div>
-                  ))}
+                  ))} */}
                 </div>
               </div>
               <div className="flex flex-col space-y-5">
