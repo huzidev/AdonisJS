@@ -41,6 +41,8 @@ export default class CommentsController {
       const response: any = await Database.from("comments")
         .select('article_id')
         .count('id as comment_count')
+        // where parent_id is null because we only needs comment length not comment + replies length
+        .whereNull('parent_id')
         .groupBy('article_id')
         // .orderBy('article_id', 'desc');
       
