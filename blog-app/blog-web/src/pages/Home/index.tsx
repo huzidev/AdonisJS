@@ -106,10 +106,10 @@ export default function HomePage() {
         {slides.map((image, index) => (
           <div
             key={index}
-            style={{
-              height: `${height}px`,
-              width: `${width}px`,
-            }}
+            // style={{
+            //   height: `${height}px`,
+            //   width: `${width}px`,
+            // }}
             className={`${index === currentIndex ? "visible" : "hidden"}`}
           >
             <img
