@@ -5,6 +5,7 @@ export default function CommentRoutes() {
   Route.group(() => {
     Route.post("/add", `${path}.add`).middleware("auth");
     Route.get("/get/:id", `${path}.getById`).where("id", /^[0-9]+$/);
+    Route.get("/get_all", `${path}.getAllComments`);
     Route.put("/edit/:id", `${path}.edit`)
       .where("id", /^[0-9]+$/)
       .middleware("auth");

@@ -1,4 +1,5 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import Database from "@ioc:Adonis/Lucid/Database";
 import { sameValues } from "App/Default/Messages";
 import Comment from "App/Models/Comment";
 import User from "App/Models/User";
@@ -32,6 +33,23 @@ export default class CommentsController {
       };
     } catch (e) {
       throw e
+    }
+  }
+
+  public async getAllComments() {
+    try {
+      const response: any = await Database.from("comments")
+        .select('article_id')
+        .count('id as comment_count')
+        .groupBy('article_id')
+        // .orderBy('like_count', 'desc');
+      
+      return {
+        message: "All comments fethced successfully",
+        data: response,
+      };
+    } catch (e) {
+      throw e;
     }
   }
 
