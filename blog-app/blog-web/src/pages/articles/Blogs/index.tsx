@@ -278,28 +278,30 @@ export default function ViewBlogsPage(): JSX.Element {
                         </div>
                       ))}
                     <div className="flex justify-between items-center">
-                      <img className="w-10 h-10 rounded-full bg-black" src="/docs/images/people/profile-picture-5.jpg"></img>
-                      <p className="text-white">
-                        {isBannedUser ? (
-                          <del title="Banned User" className="text-red-600">
-                            {uploadedByUsername}
-                          </del>
-                        ) : (
-                          <>
-                          <Link
-                            to={
-                              blog.ownerId === auth.state.user?.id
-                                ? ROUTE_PATHS.VIEW_PROFILE + "me"
-                                : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId
-                            }
-                            type="button"
-                            className="text-sm font-medium text-center text-white hover:text-blue-500"
-                          >
-                            {uploadedByUsername}
-                          </Link>
-                          </>
-                        )}
-                      </p>
+                      <div className="flex items-center w-1/2">
+                        <img className="w-10 h-10 rounded-full bg-black" src="/docs/images/people/profile-picture-5.jpg"></img>
+                        <p className="text-white ml-3">
+                          {isBannedUser ? (
+                            <del title="Banned User" className="text-red-600">
+                              {uploadedByUsername}
+                            </del>
+                          ) : (
+                            <>
+                            <Link
+                              to={
+                                blog.ownerId === auth.state.user?.id
+                                  ? ROUTE_PATHS.VIEW_PROFILE + "me"
+                                  : ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId
+                              }
+                              type="button"
+                              className="text-sm font-medium text-center text-white hover:text-blue-500"
+                            >
+                              {uploadedByUsername}
+                            </Link>
+                            </>
+                          )}
+                        </p>
+                      </div>
                       <p className="text-white">
                         {/* Uploaded At :{" "} */}
                         {new Date(blog.createdAt).toLocaleDateString()}
