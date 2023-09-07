@@ -49,11 +49,13 @@ export default function ResetPasswordPage(): JSX.Element {
     newOtp[index] = e.value;
     setOtp(newOtp);
 
+
     // && e.value means their must be some value in input field then put the focus on next input field
     if (e.nextSibling && e.value) {
       e.nextSibling.focus();
     } // so when user removes the value from input field then change focus on to previous input field 
-    else if (!e.value) {
+    // index !== 0 means when user reached to first index then don't change the foucs to previousSibling because their will be NO input previous and it'll give error
+    else if (!e.value && index !== 0) {
       e.previousSibling.focus();
     }
   }
