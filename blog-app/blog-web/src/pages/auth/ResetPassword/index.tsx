@@ -20,7 +20,7 @@ export default function ResetPasswordPage(): JSX.Element {
   const [resetState, setResetState] =
     useState<ResetPasswordState>(initialState);
   const [icon, setIcon] = useState<IconState>(initialIconState);
-  const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
+  const [otp, setOtp] = useState(new Array(6).fill(""));
 
   const password = resetState.password;
   const confirmPassword = resetState.confirmPassword;
@@ -203,9 +203,8 @@ export default function ResetPasswordPage(): JSX.Element {
                 <div className="flex flex-row mt-8 items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
                   {otp.map((data, index: number) => (
-                    <div className="w-16 h-16" key={index}>
                       <input
-                        className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white"
+                        className="w-16 h-16 flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white"
                         type="text"
                         name="otp"
                         key={index}
@@ -214,7 +213,6 @@ export default function ResetPasswordPage(): JSX.Element {
                         onChange={(e: any) => handleOtpChange(e.target, index)}
                         onFocus={(e: any) => e.target.select()}
                       />
-                    </div>
                   ))}
                   {/* {Array.from({ length: 6 }, (_, index) => (
                     <div className="w-16 h-16" key={index}>
