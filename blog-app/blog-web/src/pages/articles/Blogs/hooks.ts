@@ -154,7 +154,13 @@ export function useBlogsPageHooks() {
     }
   }, [state]);
 
+
+  useEffect(() => {
+    comment.getAllComments();
+  }, [])
+
   const allReactions: any = reactions.state.getAllReactions.data;
+  const allComments: any = comment.state.getAllComments.data;
 
   return {
     sortValue,
@@ -162,5 +168,6 @@ export function useBlogsPageHooks() {
     handleSort,
     isLoading,
     allReactions,
+    allComments
   };
 }

@@ -27,8 +27,11 @@ export default function ViewBlogsPage(): JSX.Element {
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
 
-  const { loadMore, handleSort, sortValue, isLoading, allReactions } = useBlogsPageHooks();
+  const { loadMore, handleSort, sortValue, isLoading, allReactions, allComments } = useBlogsPageHooks();
   
+  console.log("allComments", allComments);
+  
+
   return (
     <div className="w-[1280px] m-auto flex flex-col">
       <div>
@@ -326,8 +329,12 @@ export default function ViewBlogsPage(): JSX.Element {
                           {allReactions && (allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
                         </p>
                       </span>
-                      <span className='ml-2 border-gray-200 border-[0.5px] w-full text-center'>
+                      <span className='ml-2 border-gray-200 border-[0.5px] w-full flex items-center justify-center'>
                         <ChatBubbleOutlineIcon />
+                        <p className='ml-2'>
+                          {/* to show Total likes of every blogs and ?? is used if totalCount is undefined means no like then show 0 */}
+                          {allComments && (allComments.filter((value: any) => value.articleId === blog.id)[0]?.commentCount ?? "0")}
+                        </p>
                       </span>
                     </div>
                   </div>
