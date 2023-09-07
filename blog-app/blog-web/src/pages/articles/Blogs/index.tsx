@@ -7,7 +7,6 @@ import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
-import { hasPermission } from "utils";
 import { LoaderSpin, LoadingListBlogs } from "utils/loading";
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
@@ -29,7 +28,7 @@ export default function ViewBlogsPage(): JSX.Element {
   const { loadMore, handleSort, sortValue, isLoading, allReactions, allComments } = useBlogsPageHooks();
   
   return (
-    <div className="w-[1280px] m-auto flex flex-col">
+    <div className="w-[1500px] m-auto flex flex-col">
       <div>
         {sortValue.value && (
           <button
@@ -101,7 +100,7 @@ export default function ViewBlogsPage(): JSX.Element {
               uploadedByUser && uploadedByUser.username;
               
             return (
-            <div key={blog.id} title="Read More" className="w-[30.33%] mt-8 mx-4 cursor-pointer" onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}>
+            <div key={blog.id} title="Read More" className="w-[30.33%] mt-8 even:mx-4 cursor-pointer" onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}>
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
                 <div className="border rounded-lg shadow bg-gray-800 border-gray-700 relative">
                   <div className="absolute right-0" onClick={(e => e.stopPropagation())}>
@@ -220,7 +219,7 @@ export default function ViewBlogsPage(): JSX.Element {
                       </p>
                     </div> */}
                     {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
-                    {(blog.ownerId === userData?.id ||
+                    {/* {(blog.ownerId === userData?.id ||
                       (hasPermission("admin", userData?.role) &&
                         uploadedByUserRole !== "super-admin") 
                       // ||hasPermission("super-admin", userData?.role)
@@ -283,7 +282,7 @@ export default function ViewBlogsPage(): JSX.Element {
                             </div>
                           )}
                         </div>
-                      ))}
+                      ))} */}
                     <div className="flex justify-between items-center">
                       <div className="flex items-center w-3/4">
                         <img className="w-10 h-10 rounded-full bg-black" src="/docs/images/people/profile-picture-5.jpg"></img>
