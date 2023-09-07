@@ -20,7 +20,7 @@ export default function ResetPasswordPage(): JSX.Element {
   const [resetState, setResetState] =
     useState<ResetPasswordState>(initialState);
   const [icon, setIcon] = useState<IconState>(initialIconState);
-  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
 
   const password = resetState.password;
   const confirmPassword = resetState.confirmPassword;
@@ -40,15 +40,21 @@ export default function ResetPasswordPage(): JSX.Element {
     }
   }, []);
 
-  function handleOtpChange(e: any, index?: number) {
+  function handleOtpChange(e: any, index: number) {
     if (isNaN(e.value)) {
       return false;
     }
 
-    setOtp([...otp.map((data, i) => (i === index ? e.value : data))])
-    
-    if (e.nextSibling) {
+    const newOtp = [...otp];
+    newOtp[index] = e.value;
+    setOtp(newOtp);
+
+    // && e.value means their must be some value in input field then put the focus on next input field
+    if (e.nextSibling && e.value) {
       e.nextSibling.focus();
+    } // so when user removes the value from input field then change focus on to previous input field 
+    else if (!e.value) {
+      e.previousSibling.focus();
     }
   }
 
@@ -203,16 +209,16 @@ export default function ResetPasswordPage(): JSX.Element {
                 <div className="flex flex-row mt-8 items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
                   {otp.map((data, index: number) => (
-                      <input
-                        className="w-16 h-16 flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white"
-                        type="text"
-                        name="otp"
-                        key={index}
-                        value={data}
-                        maxLength={1}
-                        onChange={(e: any) => handleOtpChange(e.target, index)}
-                        onFocus={(e: any) => e.target.select()}
-                      />
+                    <input
+                      className="w-16 h-16 flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white"
+                      type="text"
+                      name="otp"
+                      key={index}
+                      value={data}
+                      maxLength={1}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleOtpChange(e.target, index)}
+                      onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.select()}
+                    />
                   ))}
                   {/* {Array.from({ length: 6 }, (_, index) => (
                     <div className="w-16 h-16" key={index}>
