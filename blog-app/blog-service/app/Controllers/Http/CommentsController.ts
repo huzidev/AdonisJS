@@ -42,7 +42,7 @@ export default class CommentsController {
         .select('article_id')
         .count('id as comment_count')
         .groupBy('article_id')
-        // .orderBy('like_count', 'desc');
+        // .orderBy('article_id', 'desc');
       
       return {
         message: "All comments fethced successfully",
