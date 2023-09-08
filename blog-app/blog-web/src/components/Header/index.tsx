@@ -11,11 +11,6 @@ export default function Header(): JSX.Element {
   const navigate = useNavigate();
   const user = auth.state.user;
   const prev = usePrevious(auth.state);
-  // const value: any = managePaths.find((path) => location.pathname.includes(path));
-
-  function signOut() {
-    auth.signOut();
-  }
   
    useEffect(() => {
     if (prev?.signOutState.loading) {
@@ -112,9 +107,8 @@ export default function Header(): JSX.Element {
               {user && (
                 <li>
                   <button
-                    // onClick={() => auth.signOut()}
-                    onClick={signOut}
-                    className="block py-2 pl-3 pr-4 rounded  md:border-0  md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
+                    onClick={() => auth.signOut()}
+                    className="block py-2 pl-3 pr-4 rounded  md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
                   >
                     SignOut
                   </button>

@@ -83,7 +83,7 @@ export default function ViewBlogsPage(): JSX.Element {
           )
         }
       </div>
-      <div className=" flex flex-wrap">
+      <div className="flex flex-wrap">
         {/* if their is some data in allBlogs then don't show skeleton loading because then load more spinner will run while fetching data */}
         {isLoading && !allBlogs.length ? (
           <LoadingListBlogs />
@@ -101,7 +101,7 @@ export default function ViewBlogsPage(): JSX.Element {
               
             return (
               // ${index % 3 === 1 && 'mx-4'} so margin will only be added on the middle div
-            <div key={blog.id} title="Read More" className={`w-[30.33%] mt-8 ${index % 3 === 1 && 'mx-4'} margin cursor-pointer`} onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}>
+            <div key={blog.id} title="Read More" className={`w-[32%] mt-8 ${index % 3 === 1 && 'mx-4'} margin cursor-pointer`} onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}>
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
                 <div className="border rounded-lg shadow bg-gray-800 border-gray-700 relative">
                   <div className="absolute right-0" onClick={(e => e.stopPropagation())}>
