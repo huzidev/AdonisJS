@@ -91,7 +91,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
   if (!state) {
     return <PageLoader />;
   }
-  if (loading) {
+  if (!loading) {
     return <PageLoader />;
   }
   return children;

@@ -19,7 +19,7 @@ export default function PageLoader(): JSX.Element {
           state ? "opacity-100" : "opacity-0"
         }`}
       >
-        <h1 className="text-3xl font-bold mr-1 dark:text-white">{auth.state.signOutState.loading ? "Signing Out new" : "Blog App"} </h1>
+        <h1 className="text-3xl font-bold mr-1 dark:text-white">{auth.state.signOutState.loading ? "Signing Out" : "Blog App"} </h1>
         <RotatingLines
           strokeColor={color}
           strokeWidth="5"
