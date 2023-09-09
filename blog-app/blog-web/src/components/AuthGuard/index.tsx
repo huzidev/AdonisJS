@@ -57,6 +57,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
       setState(true);
     }
 
+    // when user clicked on SignOut button then no matter on which path user is just navigate user to home-page
     if (auth.state.signOutState.loading) {
       navigate('/');
     }
