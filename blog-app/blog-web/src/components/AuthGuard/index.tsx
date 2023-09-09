@@ -54,7 +54,11 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
 
     if (initState.init) {
       // so loader won't be shown when data is fetched
-      setState(true)
+      setState(true);
+    }
+
+    if (auth.state.signOutState.loading) {
+      navigate('/');
     }
 
     // if user is not loggedIn and tries to access paths like edit user, create user etc
@@ -87,7 +91,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     } else {
       setState(true);
     }
-  }, [auth.state.user, auth.state.initState, currentPath]);
+  }, [auth.state.user, auth.state.initState, auth.state.signOutState, currentPath]);
   if (!state) {
     return <PageLoader />;
   }
