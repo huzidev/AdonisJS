@@ -21,7 +21,7 @@ export const signUp = createAsyncThunk(endpoints.SIGN_UP, async (data: AuthSignU
         console.log("Error", e);
         const err = mapErrorToState(e);
         errorNotification(err);
-        throw e
+        throw e;
     }
 });
 
@@ -39,7 +39,7 @@ export const signIn = createAsyncThunk(endpoints.SIGN_IN, async (data: AuthSignI
         const err = mapErrorToState(e);
         errorNotification(err);
         console.log("Error", err);
-        throw e
+        throw e;
     }
 });
 
