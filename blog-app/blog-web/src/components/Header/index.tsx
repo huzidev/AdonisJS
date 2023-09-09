@@ -11,14 +11,14 @@ export default function Header(): JSX.Element {
   const navigate = useNavigate();
   const user = auth.state.user;
   const prev = usePrevious(auth.state);
-  
+
    useEffect(() => {
     if (prev?.signOutState.loading) {
       if (!auth.state.signOutState.loading && !auth.state.signOutState.error) {
         navigate('/');
       }
     }
-  }, [auth.state]);
+  }, [auth.state.signOutState]);
 
   return (
     <div>

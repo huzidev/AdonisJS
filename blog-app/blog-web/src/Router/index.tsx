@@ -15,10 +15,17 @@ export default function AppRouter(): JSX.Element {
 
   useEffect(() => {
     // so NAV bar won't be shown when initState is in loading
-    if (!auth.state.initState.loading && auth.state.initState.init) {
+    console.log("Init state", auth.state.initState);
+    console.log("Signout state", auth.state.signOutState.loading);
+    console.log("auth state", isAuthChecked);
+    
+    if (auth.state.signOutState.loading) {
+      setAuthChecked(false);
+    }
+    if (!auth.state.initState.loading && auth.state.initState.init && !auth.state.signOutState.loading) {
       setAuthChecked(true);
     }
-  }, [auth.state.initState]);
+  }, [auth.state.initState, auth.state.signOutState]);
 
   const [isThemeChange, setIsThemeChange] = useState<boolean>(false);
   
