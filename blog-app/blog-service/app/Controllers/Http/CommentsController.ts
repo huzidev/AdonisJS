@@ -44,7 +44,7 @@ export default class CommentsController {
         // where parent_id is null because we only needs comment length not comment + replies length
         .whereNull('parent_id')
         .groupBy('article_id')
-        // .orderBy('article_id', 'desc');
+        // .orderBy('article_id', 'desc')
       
       return {
         message: "All comments fethced successfully",
