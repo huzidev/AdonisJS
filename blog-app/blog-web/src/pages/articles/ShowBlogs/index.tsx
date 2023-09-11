@@ -328,9 +328,9 @@ export default function ShowBlogs(props: any): JSX.Element {
                           className="text-white ml-3"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          {isBannedUser || props.userDetails && props.userDetails.isBanned ? (
+                          {isBannedUser || (props.userDetails && props.userDetails.isBanned) ? (
                             <del onClick={() => navigate(ROUTE_PATHS.VIEW_PROFILE + blog.ownerId)} title="Banned User" className="text-red-600">
-                              {isViewProfile ? (props.userDetails && props.userDetails.username) : uploadedByUsername}
+                              {isViewProfile && props.userDetails.role !== 'user' ? (props.userDetails && props.userDetails.username) : uploadedByUsername}
                             </del>
                           ) : (
                             <>
