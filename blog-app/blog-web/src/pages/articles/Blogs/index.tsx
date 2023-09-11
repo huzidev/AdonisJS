@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
-import ShowBlogs from "../ShowBlogs";
+import ShowBlogs from "../ShowBlogs/ShowBlogs";
 import { columns } from "./data";
 import { useBlogsPageHooks } from "./hooks";
 
