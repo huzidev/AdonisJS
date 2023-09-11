@@ -71,6 +71,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         };
         if (isRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
+          console.log("is clicked user");
         }
         // else {
         //   blogs.getBlogsById({ userId: userId, page: 1, filters: search });
@@ -87,6 +88,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         };
         if (isLoggedInRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
+          console.log("I'm user");
         }
         // else {
         //   blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
