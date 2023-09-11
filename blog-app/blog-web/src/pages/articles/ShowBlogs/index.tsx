@@ -429,9 +429,26 @@ export default function ShowBlogs(props: any): JSX.Element {
             </div>
           )
       ) : (
-        <div>
-          No one has uploaded any blog yet
-        </div>
+        !props.isLoading && props.allBlogs.length === 0 && (
+        <div className="w-full mt-5 py-8 pl-5 border rounded-lg shadow bg-gray-800 border-gray-700">
+              <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
+                Oops... No one has uploaded any blog yet
+                {!!props.isFilter && `related to ${props.isFilter} category`}
+              </h1>
+              <Link
+                to={
+                  isMe && !isUser
+                    ? ROUTE_PATHS.ARTICLE_CREATE
+                    : ROUTE_PATHS.ARTICLES
+                }
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+              >
+                {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
+                {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+              </Link>
+            </div>
+        )
       )
         }
       {isViewProfile ? (

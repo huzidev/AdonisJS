@@ -1,3 +1,4 @@
+import qs from "query-string";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
@@ -22,7 +23,13 @@ export default function ViewBlogsPage(): JSX.Element {
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
   const lastPageBlogs: any = blogs.state.getBlogs.meta?.lastPage;
   const { loadMore, handleSort, sortValue, isLoading, allReactions, allComments } = useBlogsPageHooks();
+  const search: any = qs.parse(window.location.search);
 
+
+  let isFilter;
+  if (search.sort) {
+    isFilter = Object.values(JSON.parse(search.sort))[0];
+  }
 
   return (
     <div>
@@ -38,6 +45,7 @@ export default function ViewBlogsPage(): JSX.Element {
         lastPageBlogs={lastPageBlogs}
         loadMore={loadMore}
         favoriteBlogs={favoriteBlogs}
+        isFilter={isFilter}
       />
     </div>
     // <div className="w-[1500px] m-auto flex flex-col">
