@@ -334,7 +334,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                           onClick={(e) => e.stopPropagation()}
                         >
                           {isBannedUser ? (
-                            <del title="Banned User" className="text-red-600">
+                            <del onClick={() => navigate(ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId)} title="Banned User" className="text-red-600">
                               {uploadedByUsername}
                             </del>
                           ) : (
