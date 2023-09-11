@@ -159,6 +159,9 @@ export default function ViewProfilePage(): JSX.Element {
             loadMore={loadMore}
             favoriteBlogs={userBlogs}
             userDataById={userDataById}
+            isLoadingFvrtBlogs={isLoadingFvrtBlogs}
+            totalBlogs={totalBlogs}
+            totalFvrtBlogs={totalFvrtBlogs}
           />
         </div>
           {sortValue.value && (

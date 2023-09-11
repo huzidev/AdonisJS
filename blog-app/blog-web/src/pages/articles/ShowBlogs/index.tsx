@@ -2,7 +2,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -22,6 +22,16 @@ export default function ShowBlogs(props: any): JSX.Element {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
+  const [isViewProfile, setIsViewProfile] = useState<boolean>();
+  const currentPath = window.location.pathname;
+
+  useEffect(() => {
+    if (currentPath.includes("user/view")) {
+      setIsViewProfile(true);
+    } else {
+      setIsViewProfile(false);
+    }
+  }, [window.location.pathname]);
 
   console.log("sort value", props.sortValue);
 
@@ -31,14 +41,14 @@ export default function ShowBlogs(props: any): JSX.Element {
         {props.sortValue.value && (
           <button
             className="text-white mr-5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
-            onClick={() => props.handleSort('')}
+            onClick={() => props.handleSort("")}
           >
             Reset Filters
           </button>
         )}
         {/* so if allBlogs length is just 1 then no need to show filters
         and filter won't be shown when someone clicked on user's profile because user can't add blogs */}
-        {(props.allBlogs.length >= 1 && props.userDataById?.role !== "user") && (
+        {props.allBlogs.length >= 1 && props.userDataById?.role !== "user" && (
           <div>
             <button
               id="dropdownDefaultButton"
@@ -380,18 +390,47 @@ export default function ShowBlogs(props: any): JSX.Element {
         )}
         {/* if both currentPage is = to lastPage means final page hence no more fetching after that */}
       </div>
-      <div className="mt-5">
+      {isViewProfile ? (
+        <div className="w-11/12 m-auto mt-5">
+          {/* so load more button will only be visible when their is currentPage OR props.currentPageFvrt and if currentPage and lastPage values 
+          became equal then don't show load more button anymore
+          */}
+          {
+            // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
+            !props.isLoading &&
+              (props.isRole === "user"
+                ? props.currentPageFvrt !== props.lastPageFvrt
+                : props.currentPageBlogs !== props.lastPageBlogs) &&
+              (props.isRole === "user"
+                ? props.totalFvrtBlogs > 15
+                : props.totalBlogs > 15) && (
+                <button
+                  className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
+                  onClick={props.loadMore}
+                >
+                  {/* so spinner with load more will only be shown when loading state is true and their is some data because if their is no data then load more will not be shown */}
+                  Load More{" "}
+                  {(props.isLoading || props.isLoadingFvrtBlogs) &&
+                    props.allBlogs.length && <LoaderSpin />}
+                </button>
+              )
+          }
+        </div>
+      ) : (
+        <div className="mt-5">
         {props.currentPageBlogs !== props.lastPageBlogs && (
-          <button
-            className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
-            onClick={props.loadMore}
-          >
-            {/* so spinner with load more will only be shown when loading state is true and their is some data because if their is no data then load more will not be shown */}
-            Load More{" "}
-            {props.isLoading && props.allBlogs.length && <LoaderSpin />}
-          </button>
-        )}
-      </div>
+            <button
+              className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
+              onClick={props.loadMore}
+            >
+              {/* so spinner with load more will only be shown when loading state is true and their is some data because if their is no data then load more will not be shown */}
+              Load More {(props.isLoading && props.allBlogs.length) && (
+                <LoaderSpin />
+              )}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
