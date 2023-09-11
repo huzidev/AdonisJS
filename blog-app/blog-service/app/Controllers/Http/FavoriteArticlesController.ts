@@ -26,16 +26,14 @@ export default class FavoriteArticlesController {
     public async get({ params }: HttpContextContract) {
         try {
             const userId = params.id;
-            const response = await Article.query()
-            .join('favorite_articles as f', 'articles.id', '=', 'f.article_id')
-            .select('*', 'f.article_id')
-            .where('f.user_id', userId)
-            .paginate(params.page || 1, 15)
-
-            console.log("response", response);
-            return response;
+            const response: any = await Article.query()
+                .join('favorite_articles as f', 'articles.id', '=', 'f.article_id')
+                .select('articles.*')
+                .where('f.user_id', userId)
+                .paginate(params.page || 1, 15)
+            
+            return response
         } catch (e) {
-            throw e;
         }
     }
 
