@@ -73,7 +73,7 @@ export default function ViewProfilePage(): JSX.Element {
           <div className="p-5">
             {userDataById?.isBanned ? (
               <div className="flex pt-6">
-                <p className="text-xl">
+                <p className="text-xl dark:text-white">
                   User <b>{userDataById?.username}</b> Is Banned from this web
                 </p>
               </div>
