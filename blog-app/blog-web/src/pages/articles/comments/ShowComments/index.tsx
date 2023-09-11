@@ -20,6 +20,7 @@ export default function ShowCommentsPage({
   setDropDown,
   editState,
   setEditState,
+  userDetails
 }: any) {
   const commentHook = useComment();
   const auth = useAuth();
@@ -245,7 +246,8 @@ export default function ShowCommentsPage({
           </form>
         ) : (
           // reply button wouldn't be shown when user has clicked on reply button and Reply button will only be visible when user is loggedIn
-          userData && (
+          // if blog owner is banned then reply button wouldn't be shown
+          userData && (userDetails && !userDetails.isBanned) && (
             <button
               className="focus:outline-none text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-600 hover:bg-green-700 focus:ring-green-800"
               onClick={() => {

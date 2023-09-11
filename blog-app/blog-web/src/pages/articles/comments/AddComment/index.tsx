@@ -31,7 +31,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
             Comments ({allComments && allComments.length})
           </h2>
         </div>
-        {/* add comment field will only be visible if user is loggedIn */}
+        {/* add comment field will only be visible if user is loggedIn and if blog owner is banned then user can't add the comment */}
         {loggedInId && (userDetails && !userDetails.isBanned) && (
           <form className="mb-6" onSubmit={submit}>
             <div className="py-2 px-4 mb-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800 ">
@@ -84,6 +84,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
                         dropDown={dropDown}
                         setDropDown={setDropDown}
                         editState={editState}
+                        userDetails={userDetails}
                         setEditState={setEditState}
                       />
                     </div>
