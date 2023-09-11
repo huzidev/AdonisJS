@@ -52,7 +52,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     // reactions.getAllReactions();
   }, [userId, loggedInId]);
 
-  console.log("is Role", isRole);
+  console.log("isRole", isRole);
   
 
   useEffect(() => {
@@ -61,10 +61,10 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
       blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
     } // so if user clicked on some user with role = user profile then fetch don't fetch blogs
     // just fetch favortite blogs whoms condition is created below
-    else if (params.id !== "me" && (isRole && isRole !== 'user')) {
+    if (params.id !== "me" && (isRole && isRole !== 'user')) {
       blogs.getBlogsById({ userId: userId, page: 1, filters: search });
     }
-  }, [window.location.search, window.location.pathname]);
+  }, [window.location.search, window.location.pathname, isRole]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
