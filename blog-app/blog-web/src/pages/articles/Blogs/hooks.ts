@@ -123,7 +123,7 @@ export function useBlogsPageHooks() {
     comment.getAllComments();
 
     // so only if loggedIn user's role is user then fetch favorite blogs
-    if (isUser) {
+    if (isUser && currentPath === 'onBlogs') {
       blogs.getFavoriteBlogs(payload);
     }
   }, [window.location.search]);
