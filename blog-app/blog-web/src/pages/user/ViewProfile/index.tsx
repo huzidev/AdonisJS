@@ -150,6 +150,8 @@ export default function ViewProfilePage(): JSX.Element {
             allBlogs={userBlogs}
             columns={columns}
             isLoading={isLoadingUser}
+            isLoadingBlogs={isLoadingBlogs}
+            isLoadingFvrtBlogs={isLoadingFvrtBlogs}
             allReactions={allReactions}
             allComments={allComments}
             currentPageBlogs={currentPage}
@@ -160,9 +162,10 @@ export default function ViewProfilePage(): JSX.Element {
             loadMore={loadMore}
             favoriteBlogs={userBlogs}
             userDataById={userDataById}
-            isLoadingFvrtBlogs={isLoadingFvrtBlogs}
             totalBlogs={totalBlogs}
             totalFvrtBlogs={totalFvrtBlogs}
+            userDetails={userDetails}
+            isFilter={isFilter}
           />
         </div>
           {sortValue.value && (

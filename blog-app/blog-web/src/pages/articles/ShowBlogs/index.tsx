@@ -3,7 +3,7 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
@@ -24,9 +24,14 @@ export default function ShowBlogs(props: any): JSX.Element {
   const [dropDown, setDropDown] = useState<boolean>(false);
   const [isViewProfile, setIsViewProfile] = useState<boolean>();
   const currentPath = window.location.pathname;
+  const params = useParams();
+  const isMe = params.id === "me";
+  const isUser = auth.state.user?.role === "user";
 
   useEffect(() => {
-    currentPath.includes("user/view") ? setIsViewProfile(true) : setIsViewProfile(false);
+    currentPath.includes("user/view")
+      ? setIsViewProfile(true)
+      : setIsViewProfile(false);
   }, [window.location.pathname]);
 
   return (
@@ -98,7 +103,10 @@ export default function ShowBlogs(props: any): JSX.Element {
       </div>
       <div className="flex flex-wrap">
         {/* if their is some data in props.allBlogs then don't show skeleton loading because then load more spinner will run while fetching data */}
-        {props.isLoading && !props.allBlogs.length ? (
+        {isViewProfile ? (
+          (props.isLoadingBlogs || props.isLoadingFvrtBlogs) &&
+          !props.allBlogs.length
+        ) : props.isLoading && !props.allBlogs.length ? (
           <LoadingListBlogs />
         ) : (
           props.allBlogs.map((blog: any, index: number) => {
@@ -384,6 +392,39 @@ export default function ShowBlogs(props: any): JSX.Element {
         )}
         {/* if both currentPage is = to lastPage means final page hence no more fetching after that */}
       </div>
+      {!props.isLoading &&
+        !props.isLoadingBlogs &&
+        props.allBlogs.length === 0 && (
+          <div className="w-full mt-5 py-8 pl-5 border rounded-lg shadow bg-gray-800 border-gray-700">
+            <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
+              Oops...
+              {/* if clickedUser role is user */}
+              {user.state.getUser.data?.role === "user" && !isMe
+                ? `${props.userDetails.username} haven't Liked`
+                : // if LoggedIn user's role is user and path includes "me"
+                isUser && isMe
+                ? "You haven't Liked"
+                : // if user role is not user and path includes "me" then show You haven't Uploaded any blog yet
+                  `${
+                    isMe ? "You" : props.userDetails.username
+                  } haven't uploaded`}{" "}
+              any blog{" "}
+              {!!props.isFilter && `related to ${props.isFilter} category`}
+            </h1>
+            <Link
+              to={
+                isMe && !isUser
+                  ? ROUTE_PATHS.ARTICLE_CREATE
+                  : ROUTE_PATHS.ARTICLES
+              }
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+              title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+            >
+              {/* if path includes "me" and loggedIn user role is not "user" then show add blog in brief if user role is not user then show add blog and if user clikced on someone else then show Explore Blogs */}
+              {isMe && !isUser ? "Add Blog" : "Explore Blogs"}
+            </Link>
+          </div>
+        )}
       {isViewProfile ? (
         <div className="w-11/12 m-auto mt-5">
           {/* so load more button will only be visible when their is currentPage OR props.currentPageFvrt and if currentPage and lastPage values 
@@ -404,7 +445,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                 >
                   {/* so spinner with load more will only be shown when loading state is true and their is some data because if their is no data then load more will not be shown */}
                   Load More{" "}
-                  {(props.isLoading || props.isLoadingFvrtBlogs) &&
+                  {(props.isLoadingBlogs || props.isLoadingFvrtBlogs) &&
                     props.allBlogs.length && <LoaderSpin />}
                 </button>
               )
@@ -412,15 +453,14 @@ export default function ShowBlogs(props: any): JSX.Element {
         </div>
       ) : (
         <div className="mt-5">
-        {props.currentPageBlogs !== props.lastPageBlogs && (
+          {props.currentPageBlogs !== props.lastPageBlogs && (
             <button
               className="bg-blue-500 flex items-center justify-center hover:bg-blue-600 text-white px-4 py-2 rounded"
               onClick={props.loadMore}
             >
               {/* so spinner with load more will only be shown when loading state is true and their is some data because if their is no data then load more will not be shown */}
-              Load More {(props.isLoading && props.allBlogs.length) && (
-                <LoaderSpin />
-              )}
+              Load More{" "}
+              {props.isLoading && props.allBlogs.length && <LoaderSpin />}
             </button>
           )}
         </div>
