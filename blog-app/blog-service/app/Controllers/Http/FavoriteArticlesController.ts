@@ -19,23 +19,22 @@ export default class FavoriteArticlesController {
                 message: `Blog by ${user?.username} added to favorite list successfully!` 
             };
         } catch (e) {
-            throw e
+            throw e;
         }
     }
 
     public async get({ params }: HttpContextContract) {
         try {
-        const userId = params.id;
-        const body = await FavoriteArticle.query()
-            .where("user_id", userId)
-            .select("article_id");
-        const response = await Article.query().where("id", body.id).paginate(params.page || 1, 15);
-        console.log("response", response);
-        return response;
+            const userId = params.id;
+            const query = FavoriteArticle.query()
+                .where("user_id", userId)
+                .select("article_id");
+            const response = await Article.query().whereIn("id", query).paginate(params.page || 1, 15);
+            console.log("response", response);
+            return response;
         } catch (e) {
             throw e;
         }
-        
     }
 
     public async remove({ request }: HttpContextContract) {
