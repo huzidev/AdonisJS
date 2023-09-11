@@ -160,7 +160,6 @@ export default function ViewProfilePage(): JSX.Element {
             lastPageFvrt={lastPageFvrt}
             lastPageBlogs={lastPage}
             loadMore={loadMore}
-            favoriteBlogs={userBlogs}
             userDataById={userDataById}
             totalBlogs={totalBlogs}
             totalFvrtBlogs={totalFvrtBlogs}
@@ -239,7 +238,7 @@ export default function ViewProfilePage(): JSX.Element {
             <LoadingListBlogs />
           ) : (
             <>
-              { userBlogs.map((blog: any) => {
+              {userBlogs.map((blog: any) => {
                 return (
                   <div key={blog.id} className="w-[30.33%] mt-8 mx-4">
                     {/* <img src={ele.image} alt="Thumbnail" /> */}
