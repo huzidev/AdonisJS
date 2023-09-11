@@ -344,7 +344,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 type="button"
                                 className="text-sm font-medium text-center text-white hover:text-blue-500"
                               >
-                                {isViewProfile && !isUser ? (props.userDetails && props.userDetails.username) : uploadedByUsername}
+                              {isViewProfile && props.userDetails.role !== 'user' ? (props.userDetails && props.userDetails.username) : uploadedByUsername}
                               </Link>
                             </>
                           )}
