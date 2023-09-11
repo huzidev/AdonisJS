@@ -1,5 +1,4 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import Article from 'App/Models/Article';
 import FavoriteArticle from 'App/Models/FavoriteArticle';
 import User from 'App/Models/User';
 import { AddFavoriteArticle, RemoveFavoriteArticle } from 'App/Validators/FavoriteArticleValidator';
@@ -26,10 +25,12 @@ export default class FavoriteArticlesController {
     public async get({ params }: HttpContextContract) {
         try {
             const userId = params.id;
-            const query = FavoriteArticle.query()
-                .where("user_id", userId)
-                .select("article_id");
-            const response = await Article.query().whereIn("id", query).paginate(params.page || 1, 15);
+            const response = await FavoriteArticle.query()
+            .where('favorite_articles.user_id', userId)
+            .leftJoin('articles as a', 'favorite_articles.article_id', '=', 'a.id')
+            .select('*')
+            .paginate(params.page || 1, 15)
+
             console.log("response", response);
             return response;
         } catch (e) {
