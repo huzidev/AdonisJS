@@ -190,20 +190,23 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 ? "text-red-500"
                                 : "text-gray-500"
                             }`}
-                            onClick={() =>
-                              favBlogs.find(
-                                (favoriteBlog: any) =>
-                                  favoriteBlog.id === blog.id
-                              )
-                                ? blogs.removeFavoriteBlog({
-                                    articleId: blog.id,
-                                    ownerId: blog.ownerId,
-                                  })
-                                : blogs.addFavoriteBlog({
-                                    userId: auth.state.user?.id,
-                                    articleId: blog.id,
-                                    ownerId: blog.ownerId,
-                                  })
+                            onClick={(e) => 
+                              {
+                                e.stopPropagation()
+                                favBlogs.find(
+                                  (favoriteBlog: any) =>
+                                    favoriteBlog.id === blog.id
+                                )
+                                  ? blogs.removeFavoriteBlog({
+                                      articleId: blog.id,
+                                      ownerId: blog.ownerId,
+                                    })
+                                  : blogs.addFavoriteBlog({
+                                      userId: auth.state.user?.id,
+                                      articleId: blog.id,
+                                      ownerId: blog.ownerId,
+                                    })
+                              }
                             }
                           >
                             <svg
