@@ -30,6 +30,10 @@ export default function ShowBlogs(props: any): JSX.Element {
   const favBlogs = blogs.state.getFavoriteBlogs.data;
 
   useEffect(() => {
+    user.allUser();
+  }, [])
+ 
+  useEffect(() => {
     currentPath.includes("user/view")
       ? setIsViewProfile(true)
       : setIsViewProfile(false);
