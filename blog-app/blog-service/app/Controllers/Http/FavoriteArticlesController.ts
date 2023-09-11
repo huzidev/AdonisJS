@@ -24,12 +24,18 @@ export default class FavoriteArticlesController {
     }
 
     public async get({ params }: HttpContextContract) {
+        try {
         const userId = params.id;
-        const query = FavoriteArticle.query()
+        const body = await FavoriteArticle.query()
             .where("user_id", userId)
             .select("article_id");
-        const response = await Article.query().whereIn("id", query).paginate(params.page || 1, 15);
+        const response = await Article.query().where("id", body.id).paginate(params.page || 1, 15);
+        console.log("response", response);
         return response;
+        } catch (e) {
+            throw e;
+        }
+        
     }
 
     public async remove({ request }: HttpContextContract) {
@@ -40,7 +46,7 @@ export default class FavoriteArticlesController {
             await article?.delete();
             return { message: `Blog by ${user?.username} removed from favorite list successfully!`, id: body.articleId };
         } catch (e) {
-            throw e
+            throw e;
         }
     }
 
