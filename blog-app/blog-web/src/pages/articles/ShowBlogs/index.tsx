@@ -212,7 +212,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                               viewBox="0 0 20 20"
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              {props.allBlogs.find(
+                              {favBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
                               ) ? (
