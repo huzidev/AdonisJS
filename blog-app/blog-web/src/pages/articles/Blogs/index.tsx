@@ -25,7 +25,6 @@ export default function ViewBlogsPage(): JSX.Element {
   const { loadMore, handleSort, sortValue, isLoading, allReactions, allComments } = useBlogsPageHooks();
   const search: any = qs.parse(window.location.search);
 
-
   let isFilter;
   if (search.sort) {
     isFilter = Object.values(JSON.parse(search.sort))[0];
