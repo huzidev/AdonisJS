@@ -35,7 +35,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const [userDetails, setUserDetails] =
     useState<UserDetailState>(userDetailsData);
   const [userBlogs, setUserBlogs] = useState<Blog[]>([]);
-  const [favBlogs, setFavBlogs] = useState<Blog[]>([]);
   const currentPage: number = blogState.getBlogsById.meta?.currentPage;
   const currentPageFvrt: number = blogState.getFavoriteBlogs.meta?.currentPage;
   const lastPageFvrt: number = blogState.getFavoriteBlogs.meta?.lastPage;
@@ -100,8 +99,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
       setUserBlogs(blogState.getBlogsById.data);
     }
     if (prevBlog?.getFavoriteBlogs.loading && isRole === 'user') {
-      setFavBlogs(blogState.getFavoriteBlogs.data);
-      // favBlogs = blogState.getFavoriteBlogs.data;
+      setUserBlogs(blogState.getFavoriteBlogs.data);
     }
 
     if (prevUser?.getUser.loading) {
@@ -173,7 +171,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     isRole,
     allReactions,
     search,
-    allComments,
-    favBlogs
+    allComments
   };
 }

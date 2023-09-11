@@ -27,6 +27,7 @@ export default function ShowBlogs(props: any): JSX.Element {
   const params = useParams();
   const isMe = params.id === "me";
   const isUser = auth.state.user?.role === "user";
+  const favBlogs = blogs.state.getFavoriteBlogs.data;
 
   useEffect(() => {
     currentPath.includes("user/view")
@@ -180,7 +181,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                         auth.state.user && auth.state.user.role === "user" && (
                           <div
                             title={
-                              (props.favoriteBlogs.find(
+                              (favBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
                               )
@@ -188,7 +189,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 : "Add to") + " favorite"
                             }
                             className={`p-2 rounded-full transition-colors duration-300 ${
-                              props.favoriteBlogs.find(
+                              favBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
                               )
@@ -196,7 +197,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 : "text-gray-500"
                             }`}
                             onClick={() =>
-                              props.favoriteBlogs.find(
+                              favBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
                               )
