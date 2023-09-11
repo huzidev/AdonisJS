@@ -30,6 +30,10 @@ export default function ShowBlogs(props: any): JSX.Element {
   const favBlogs = blogs.state.getFavoriteBlogs.data;
 
   useEffect(() => {
+    user.allUser();
+  }, [])
+
+  useEffect(() => {
     currentPath.includes("user/view")
       ? setIsViewProfile(true)
       : setIsViewProfile(false);
@@ -334,7 +338,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                           className="text-white ml-3"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          {isViewProfile ? props.userDetails && props.userDetails.isBanned : isBannedUser ? (
+                          {isBannedUser || props.userDetails && props.userDetails.isBanned ? (
                             <del onClick={() => navigate(ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId)} title="Banned User" className="text-red-600">
                               {isViewProfile ? (props.userDetails && props.userDetails.username) : uploadedByUsername}
                             </del>
