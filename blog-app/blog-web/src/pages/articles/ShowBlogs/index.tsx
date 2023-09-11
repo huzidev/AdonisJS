@@ -329,7 +329,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                           onClick={(e) => e.stopPropagation()}
                         >
                           {isBannedUser || props.userDetails && props.userDetails.isBanned ? (
-                            <del onClick={() => navigate(ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId)} title="Banned User" className="text-red-600">
+                            <del onClick={() => navigate(ROUTE_PATHS.VIEW_PROFILE + blog.ownerId)} title="Banned User" className="text-red-600">
                               {isViewProfile ? (props.userDetails && props.userDetails.username) : uploadedByUsername}
                             </del>
                           ) : (
@@ -339,8 +339,8 @@ export default function ShowBlogs(props: any): JSX.Element {
                                   blog.ownerId === auth.state.user?.id
                                     ? ROUTE_PATHS.VIEW_PROFILE + "me"
                                     : ROUTE_PATHS.VIEW_PROFILE +
-                                      (isViewProfile ? params.id : uploadedByUserId)
-                                }
+                                      blog.ownerId
+                                    }
                                 type="button"
                                 className="text-sm font-medium text-center text-white hover:text-blue-500"
                               >

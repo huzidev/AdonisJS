@@ -112,9 +112,9 @@ export function useBlogsPageHooks() {
   useEffect(() => {
     // if their is already blogs fetched means they were saved in our redux state hence no need to fetched the blogs again
     // && currentPath === "onBlogs" so only fetch allUsers when user is on blogs page if user is on View Profile page then don't fetch allUsers
-    if (!allUsers && currentPath === "onBlogs") {
-      user.allUser();
-    }
+    // if (!allUsers && currentPath === "onBlogs") {
+    //   user.allUser();
+    // }
 
     if (currentPath === "onBlogs") {
       blogs.getBlogs({ page: 1, ...search });
