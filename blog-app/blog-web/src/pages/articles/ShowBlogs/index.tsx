@@ -103,10 +103,12 @@ export default function ShowBlogs(props: any): JSX.Element {
       </div>
       <div className="flex flex-wrap">
         {/* if their is some data in props.allBlogs then don't show skeleton loading because then load more spinner will run while fetching data */}
-        {isViewProfile ? (
-          (props.isLoadingBlogs || props.isLoadingFvrtBlogs) &&
-          !props.allBlogs.length
-        ) : props.isLoading && !props.allBlogs.length ? (
+        {(
+          isViewProfile
+            ? (props.isLoadingBlogs || props.isLoadingFvrtBlogs) &&
+              !props.allBlogs.length
+            : props.isLoading && !props.allBlogs.length
+        ) ? (
           <LoadingListBlogs />
         ) : (
           props.allBlogs.map((blog: any, index: number) => {
