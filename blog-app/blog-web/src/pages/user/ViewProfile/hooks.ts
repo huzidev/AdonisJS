@@ -52,9 +52,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     // reactions.getAllReactions();
   }, [userId, loggedInId]);
 
-  console.log("isRole", isRole);
-  
-
   useEffect(() => {
     // if user clicked on viewProfile and loggedIn user is user then don't fetch blogs as user can't upload blogs
     if (params.id === "me" && isLoggedInRole !== 'user') {
