@@ -97,7 +97,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (prevBlog?.getBlogsById.loading) {
       setUserBlogs(blogState.getBlogsById.data);
     }
-    if (prevBlog?.getFavoriteBlogs.loading) {
+    if (prevBlog?.getFavoriteBlogs.loading && isRole === 'user') {
       setUserBlogs(blogState.getFavoriteBlogs.data);
     }
 
