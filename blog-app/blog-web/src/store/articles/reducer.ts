@@ -260,7 +260,7 @@ export const blogSlice = createSlice({
       if (action.payload) {
         const { message, data } = action.payload
         // because by default data state.getBlogs.data is in form of this Proxy(Array) {0: {…}} therefore used JSON.parse
-          const cleaned = JSON.parse(JSON.stringify(state.getBlogs.data.find((blog) => blog.id === data.articleId)));
+          const cleaned = JSON.parse(JSON.stringify(state.getBlogs.data!.find((blog : any) => blog.id === data.articleId)));
           const prevBlog = JSON.parse(JSON.stringify(state.getFavoriteBlogs.data));
           state.getFavoriteBlogs.data = [...prevBlog, cleaned];
         state.addFavoriteBlog.message = message;
