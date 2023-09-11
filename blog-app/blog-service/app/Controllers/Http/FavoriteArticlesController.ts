@@ -28,9 +28,8 @@ export default class FavoriteArticlesController {
             const userId = params.id;
             const response = await Article.query()
             .join('favorite_articles as f', 'articles.id', '=', 'f.article_id')
-            .select('*')
+            .select('*', 'f.article_id')
             .where('f.user_id', userId)
-            .select('f.article_id')
             .paginate(params.page || 1, 15)
 
             console.log("response", response);

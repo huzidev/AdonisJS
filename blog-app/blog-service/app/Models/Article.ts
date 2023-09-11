@@ -1,6 +1,7 @@
 import { BaseModel, BelongsTo, beforeCreate, belongsTo, column, scope } from '@ioc:Adonis/Lucid/Orm';
 import Sort from 'App/Utils/Sort';
 import { DateTime } from 'luxon';
+import FavoriteArticle from './FavoriteArticle';
 import User from './User';
 
 export type ArticleCategory = typeof Article.categories[number];
@@ -47,6 +48,11 @@ export default class Article extends BaseModel {
     foreignKey: "ownerId" 
   })
   public owner: BelongsTo<typeof User>
+
+  @belongsTo(() => FavoriteArticle, {
+    foreignKey: "articleId" 
+  })
+  public articleId: BelongsTo<typeof FavoriteArticle>
   
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
