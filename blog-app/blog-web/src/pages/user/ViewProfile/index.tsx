@@ -2,7 +2,7 @@ import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { columns } from "pages/articles/Blogs/data";
 import { useBlogsPageHooks } from "pages/articles/Blogs/hooks";
-import ShowBlogs from "pages/articles/ShowBlogs/ShowBlogs";
+import ShowBlogs from "pages/articles/ShowBlogs/index";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";

@@ -2,7 +2,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -28,12 +28,7 @@ export default function ShowBlogs(props: any): JSX.Element {
   const isUser = auth.state.user?.role === "user";
   const favBlogs = blogs.state.getFavoriteBlogs.data;
 
-  useEffect(() => {
-    user.allUser();
-  }, [])
-
   const { isViewProfile } = useShowBlogsHook();
-
   return (
     <div className="w-[1500px] m-auto flex flex-col">
       <div>
@@ -344,7 +339,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                   blog.ownerId === auth.state.user?.id
                                     ? ROUTE_PATHS.VIEW_PROFILE + "me"
                                     : ROUTE_PATHS.VIEW_PROFILE +
-                                      uploadedByUserId
+                                      (isViewProfile ? params.id : uploadedByUserId)
                                 }
                                 type="button"
                                 className="text-sm font-medium text-center text-white hover:text-blue-500"
