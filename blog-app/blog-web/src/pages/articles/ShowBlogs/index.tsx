@@ -27,7 +27,7 @@ export default function ShowBlogs(props: any): JSX.Element {
 
   useEffect(() => {
     currentPath.includes("user/view") ? setIsViewProfile(true) : setIsViewProfile(false);
-  }, [currentPath]);
+  }, [window.location.pathname]);
 
   return (
     <div className="w-[1500px] m-auto flex flex-col">

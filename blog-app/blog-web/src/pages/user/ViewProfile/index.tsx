@@ -44,7 +44,8 @@ export default function ViewProfilePage(): JSX.Element {
     isMe,
     isRole,
     allReactions,
-    search
+    search,
+    allComments
   } = useViewProfilePageHook();
 
   let isFilter;
@@ -150,7 +151,7 @@ export default function ViewProfilePage(): JSX.Element {
             columns={columns}
             isLoading={isLoadingUser}
             allReactions={allReactions}
-            // allComments={allComments}
+            allComments={allComments}
             currentPageBlogs={currentPage}
             isRole={isRole}
             currentPageFvrt={currentPageFvrt}
