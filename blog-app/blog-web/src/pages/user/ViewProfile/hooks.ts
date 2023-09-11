@@ -73,7 +73,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         };
         if (isRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
-          console.log("is clicked user");
+          // fetching all users when clicked user's role is user so we can see all the username the user have liked
+          user.allUser();
         }
         // else {
         //   blogs.getBlogsById({ userId: userId, page: 1, filters: search });
@@ -90,7 +91,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         };
         if (isLoggedInRole === "user") {
           blogs.getFavoriteBlogs(payloadData);
-          console.log("I'm user");
+          // fetching all users when loggedIn user's role is user so we can see all the username the user have liked on ViewProfile page
+          user.allUser();
         }
         // else {
         //   blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
