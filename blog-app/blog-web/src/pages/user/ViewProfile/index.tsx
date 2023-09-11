@@ -148,6 +148,7 @@ export default function ViewProfilePage(): JSX.Element {
             sortValue={sortValue}
             handleSort={handleSort}
             allBlogs={userBlogs}
+            favoriteBlogs={userBlogs}
             columns={columns}
             isLoading={isLoadingUser}
             isLoadingBlogs={isLoadingBlogs}

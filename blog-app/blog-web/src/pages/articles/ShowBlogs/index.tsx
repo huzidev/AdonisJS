@@ -180,7 +180,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                         auth.state.user && auth.state.user.role === "user" && (
                           <div
                             title={
-                              (props.allBlogs.find(
+                              (props.favoriteBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
                               )
@@ -188,7 +188,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 : "Add to") + " favorite"
                             }
                             className={`p-2 rounded-full transition-colors duration-300 ${
-                              props.allBlogs.find(
+                              props.favoriteBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
                               )
@@ -196,7 +196,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 : "text-gray-500"
                             }`}
                             onClick={() =>
-                              props.allBlogs.find(
+                              props.favoriteBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
                               )
