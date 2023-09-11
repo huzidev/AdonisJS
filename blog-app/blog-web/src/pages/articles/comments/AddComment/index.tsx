@@ -10,7 +10,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
   const comment = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
-  const { addComment, setAddComment, allComments, allUsers, allReplies, blogId, loggedInId } =
+  const { addComment, setAddComment, allComments, allUsers, allReplies, blogId, loggedInId, userDetails } =
     useCommentPageHooks();
   const [replyState, setReplyState] = useState<number | null>(null);
   const [editState, setEditState] = useState<number | null>(null);
@@ -32,7 +32,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
           </h2>
         </div>
         {/* add comment field will only be visible if user is loggedIn */}
-        {loggedInId && (
+        {loggedInId && (userDetails && !userDetails.isBanned) && (
           <form className="mb-6" onSubmit={submit}>
             <div className="py-2 px-4 mb-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800 ">
               <label htmlFor="comment" className="sr-only">

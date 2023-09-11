@@ -23,6 +23,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const allComments: Comment[] = commentsState?.filter((comment: AllCommentsState) => comment.parentId === null) ?? [];
     const allReplies: Comment[] = commentsState?.filter((comment: AllCommentsState) => comment.parentId !== null) ?? [];
     const allUsers = user.state.allUser.data;
+    const userDetails = user.state.getUser.data;
 
     const [addComment, setAddComment] = useState<AddCommentPayload>({
       userId: loggedInId,
@@ -78,6 +79,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       allUsers,
       allReplies,
       blogId,
-      loggedInId
+      loggedInId,
+      userDetails
     };
   }
