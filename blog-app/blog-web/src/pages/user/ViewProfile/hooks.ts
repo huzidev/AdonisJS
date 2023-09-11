@@ -53,9 +53,10 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   }, [userId, loggedInId]);
 
   useEffect(() => {
-    if (params.id === "me") {
+    // if user clicked on viewProfile and loggedIn user is user then don't fetch blogs as user can't upload blogs
+    if (params.id === "me" && isLoggedInRole !== 'user') {
       blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
-    } else {
+    } else if (params.id !== "me") {
       blogs.getBlogsById({ userId: userId, page: 1, filters: search });
     }
   }, [window.location.search, window.location.pathname]);
