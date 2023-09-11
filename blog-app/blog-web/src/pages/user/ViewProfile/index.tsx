@@ -45,8 +45,11 @@ export default function ViewProfilePage(): JSX.Element {
     isRole,
     allReactions,
     search,
-    allComments
+    allComments,
+    favBlogs
   } = useViewProfilePageHook();
+
+  console.log("favBlogs", favBlogs);
 
   let isFilter;
   if (search.sort) {
@@ -148,7 +151,7 @@ export default function ViewProfilePage(): JSX.Element {
             sortValue={sortValue}
             handleSort={handleSort}
             allBlogs={userBlogs}
-            favoriteBlogs={userBlogs}
+            favoriteBlogs={favBlogs}
             columns={columns}
             isLoading={isLoadingUser}
             isLoadingBlogs={isLoadingBlogs}

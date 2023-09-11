@@ -31,4 +31,5 @@ export interface ViewProfileStateHandler {
     allReactions: any;
     search: searchReq;
     allComments: any;
+    favBlogs: any;
 }
