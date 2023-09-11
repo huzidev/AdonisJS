@@ -1,6 +1,7 @@
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ROUTE_PATHS from "Router/paths";
+import startCase from "lodash/startCase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
@@ -8,6 +9,7 @@ import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { LoaderSpin, LoadingListBlogs } from "utils/loading";
+import { columns } from './data';
 import { useBlogsPageHooks } from "./hooks";
 import { BlogState } from "./types";
 
@@ -77,6 +79,17 @@ export default function ViewBlogsPage(): JSX.Element {
                   className="py-2 text-sm text-gray-200"
                   aria-labelledby="dropdownDefaultButton"
                 >
+                  {columns.map((data, index: number) => (
+                    // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
+                    <li
+                      onClick={() => handleSort(data.title)}
+                      className="px-5 py-3 cursor-pointer"
+                      key={index}
+                    >
+                      {/* startCase will make the first letter Capital of any word */}
+                      {startCase(data.title)}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
