@@ -2,6 +2,7 @@ import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { columns } from "pages/articles/Blogs/data";
 import { useBlogsPageHooks } from "pages/articles/Blogs/hooks";
+import ShowBlogs from "pages/articles/ShowBlogs";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
@@ -141,6 +142,25 @@ export default function ViewProfilePage(): JSX.Element {
               ? `Blogs Liked By ${isMe ? "You" : userDetails.username}`
               : `Blogs Uploaded By ${!isMe ? userDetails.username : "You"}`}
           </h1>
+          <div>
+          <ShowBlogs 
+            sortValue={sortValue}
+            handleSort={handleSort}
+            allBlogs={userBlogs}
+            columns={columns}
+            isLoading={isLoadingUser}
+            allReactions={allReactions}
+            // allComments={allComments}
+            currentPageBlogs={currentPage}
+            isRole={isRole}
+            currentPageFvrt={currentPageFvrt}
+            lastPageFvrt={lastPageFvrt}
+            lastPageBlogs={lastPage}
+            loadMore={loadMore}
+            favoriteBlogs={userBlogs}
+            userDataById={userDataById}
+          />
+        </div>
           {sortValue.value && (
             <button
               className="text-white mr-5  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"

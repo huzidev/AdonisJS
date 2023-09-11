@@ -30,4 +30,5 @@ export interface ViewProfileStateHandler {
     isRole: string;
     allReactions: any;
     search: searchReq;
+    allComments: any;
 }

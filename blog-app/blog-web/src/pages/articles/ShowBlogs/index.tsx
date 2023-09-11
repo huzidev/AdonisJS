@@ -36,7 +36,9 @@ export default function ShowBlogs(props: any): JSX.Element {
             Reset Filters
           </button>
         )}
-        {props.allBlogs.length >= 1 && (
+        {/* so if allBlogs length is just 1 then no need to show filters
+        and filter won't be shown when someone clicked on user's profile because user can't add blogs */}
+        {(props.allBlogs.length >= 1 && props.userDataById?.role !== "user") && (
           <div>
             <button
               id="dropdownDefaultButton"
