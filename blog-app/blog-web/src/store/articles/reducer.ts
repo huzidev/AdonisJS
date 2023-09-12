@@ -266,6 +266,9 @@ export const blogSlice = createSlice({
             const prevBlog = JSON.parse(JSON.stringify(state.getFavoriteBlogs.data));
             // data will have all the details of the article that has been added to favorite therefore we simply added the data with the previous blogs
             state.getFavoriteBlogs.data = [...prevBlog, data];
+            const prevAllFavBlogs = JSON.parse(JSON.stringify(state.getAllFavoriteBlogs.data));
+            // data will have all the details of the article that has been added to favorite therefore we simply added the data with the previous blogs
+            state.getAllFavoriteBlogs.data = [...prevAllFavBlogs, data];
         state.addFavoriteBlog.message = message;
       }
       state.addFavoriteBlog.error = false;
@@ -284,6 +287,11 @@ export const blogSlice = createSlice({
         const { message, id } = action.payload;
           state.getFavoriteBlogs.data = JSON.parse(JSON.stringify(
             state.getFavoriteBlogs.data.filter(
+             (blog) => blog.id !== id
+           )
+          ))
+          state.getAllFavoriteBlogs.data = JSON.parse(JSON.stringify(
+            state.getAllFavoriteBlogs.data.filter(
              (blog) => blog.id !== id
            )
           ))
