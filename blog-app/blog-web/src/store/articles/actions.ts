@@ -104,6 +104,7 @@ export const getFavoriteBlogs = createAsyncThunk(
   async (data: GetBlogsById): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
     try {
+      
       const { userId, page } = data;
       const response = await api.get(
         `${endpoints.GET_FAVORITE_BLOGS + userId}/${page}`
@@ -137,7 +138,6 @@ export const getBlog = createAsyncThunk(
 export const addBlog = createAsyncThunk(
   endpoints.ADD_BLOG,
   async (data: AddBlogPayload) => {
-    console.log("dataa", data);
     try {
       const response = await api.post(endpoints.ADD_BLOG, data);
       console.log("Add Blog Response", response);

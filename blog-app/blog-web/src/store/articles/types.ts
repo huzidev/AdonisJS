@@ -47,6 +47,7 @@ export interface AllBlogs extends SubState {
   meta: PaginationMeta | null | any;
   filters?: boolean;
   page?: number;
+  articleId?: number;
 }
 
 export interface FiltersType {

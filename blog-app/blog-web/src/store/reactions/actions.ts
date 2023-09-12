@@ -41,7 +41,6 @@ export const getAllReactions = createAsyncThunk(
   async () => {
     try {
       const response = await api.get(endpoints.ALL_REACTIONS);
-      console.log('GET ALL REACTIONS RESPONSE', response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);

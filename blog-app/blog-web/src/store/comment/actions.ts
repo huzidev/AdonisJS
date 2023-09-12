@@ -45,7 +45,6 @@ export const getAllComments = createAsyncThunk(
   async () => {
     try {
       const response = await api.get(endpoints.GET_ALL_COMMENTS);
-      console.log('GET ALL Comments RESPONSE', response);
       return response.data;
     } catch (e: any) {
       const err = mapErrorToState(e);
