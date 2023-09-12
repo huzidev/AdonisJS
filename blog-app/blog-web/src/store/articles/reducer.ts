@@ -262,9 +262,9 @@ export const blogSlice = createSlice({
           // because by default data state.getBlogs.data is in form of this Proxy(Array) {0: {…}} therefore used JSON.parse
             // const cleaned = JSON.parse(JSON.stringify(state.getBlogs.data.find((blog : any) => blog.id === data.articleId)));
             const prevBlog = JSON.parse(JSON.stringify(state.getFavoriteBlogs.data));
-            console.log("prev blogs", prevBlog);
+            // data will have all the details of the article that has been added to favorite therefore we simply added the data with the previous blogs
+            state.getFavoriteBlogs.data = [...prevBlog, data];
             
-            state.getFavoriteBlogs.data = [...prevBlog];
         state.addFavoriteBlog.message = message;
       }
       state.addFavoriteBlog.error = false;
