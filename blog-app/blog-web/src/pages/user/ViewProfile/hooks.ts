@@ -67,11 +67,11 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (prevUser?.getUser.loading) {
       if (!isMe) {
         setUserDetails({ ...userDetails, ...userDataById });
-        const payloadData: any = {
-          userId: userId,
-          page: 1,
-        };
-        if (isRole === "user") {
+        if (isRole === "user" || isLoggedInRole === "user") {
+          const payloadData: any = {
+            userId: isRole === "user" ? userId : loggedInId,
+            page: 1,
+          };
           blogs.getFavoriteBlogs(payloadData);
           // fetching all users when clicked user's role is user so we can see all the username the user have liked
           user.allUser();
