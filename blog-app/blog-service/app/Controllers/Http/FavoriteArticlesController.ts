@@ -12,10 +12,13 @@ export default class FavoriteArticlesController {
 
             // for owner of blog info so we can get owner name and then show the owner name in notification
             const user = await User.findBy("id", body.ownerId);
+            // to get the details of the article that has been added to favorite blogs
+            const article = await Article.findBy('id', body.articleId);
             
             await FavoriteArticle.create({articleId, userId});
+
             return { 
-                data: body, 
+                data: article, 
                 message: `Blog by ${user?.username} added to favorite list successfully!` 
             };
         } catch (e) {
