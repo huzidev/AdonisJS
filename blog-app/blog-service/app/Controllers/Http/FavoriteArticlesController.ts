@@ -37,6 +37,7 @@ export default class FavoriteArticlesController {
             
             return response
         } catch (e) {
+            throw e;
         }
     }
 
