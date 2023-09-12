@@ -44,10 +44,9 @@ export interface BlogSortReq {
 
 export interface AllBlogs extends SubState {
   data: Blog[];
-  meta: PaginationMeta | null | any;
+  meta?: PaginationMeta | null | any;
   filters?: boolean;
   page?: number;
-  articleId?: number;
 }
 
 export interface FiltersType {
@@ -61,7 +60,7 @@ export interface GetBlogsByIdTest {
 }
 
 export interface GetBlogsById {
-  page: number
+  page?: number
   userId: number;
 }
 
@@ -76,6 +75,7 @@ export interface BlogState {
   getBlogsById: AllBlogs;
   getMyList: AllBlogs;
   getFavoriteBlogs: AllBlogs;
+  getAllFavoriteBlogs: AllBlogs;
   removeFavoriteBlog: SubState;
   getBlog: getBlogById;
   updateBlog: getBlogById;

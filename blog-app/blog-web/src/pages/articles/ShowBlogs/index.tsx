@@ -26,9 +26,10 @@ export default function ShowBlogs(props: any): JSX.Element {
   const params = useParams();
   const isMe = params.id === "me";
   const isUser = auth.state.user?.role === "user";
-  const favBlogs = blogs.state.getFavoriteBlogs.data;
-
+  
   const { isViewProfile } = useShowBlogsHook();
+  const favBlogs = isViewProfile && !isMe ? blogs.state.getAllFavoriteBlogs.data : blogs.state.getFavoriteBlogs.data;
+  
   return (
     <div className="w-[1500px] m-auto flex flex-col">
       <div>

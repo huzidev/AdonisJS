@@ -7,6 +7,7 @@ const initialState: BlogState = {
   getBlogsById: { ...subState, data: [], meta: null },
   getMyList: { ...subState, data: [], meta: null },
   getFavoriteBlogs: { ...subState, data: [], meta: null },
+  getAllFavoriteBlogs: { ...subState, data: [] },
   getBlogs: {
     ...subState,
     data: [],
@@ -291,6 +292,23 @@ export const blogSlice = createSlice({
     });
     builder.addCase(actions.removeFavoriteBlog.rejected, (state) => {
       state.removeFavoriteBlog = { loading: false, error: true };
+    });
+    // Get All Favorite Blogs
+    builder.addCase(actions.getAllFavoriteBlogs.pending, (state) => {
+      state.getAllFavoriteBlogs.loading = true;
+      state.getAllFavoriteBlogs.error = false;
+    });
+    builder.addCase(actions.getAllFavoriteBlogs.fulfilled, (state, action) => {
+      state.getAllFavoriteBlogs.loading = false;
+      if (action.payload) {
+        const { data } = action.payload;
+        state.getAllFavoriteBlogs.data = data;
+      }
+      state.getAllFavoriteBlogs.error = false;
+    });
+    builder.addCase(actions.getAllFavoriteBlogs.rejected, (state) => {
+      state.getAllFavoriteBlogs.loading = false;
+      state.getAllFavoriteBlogs.error = true;
     });
   },
 });

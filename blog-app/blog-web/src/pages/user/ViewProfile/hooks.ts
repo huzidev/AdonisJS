@@ -60,6 +60,10 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     // just fetch favortite blogs whoms condition is created below
     if (params.id !== "me" && (isRole && isRole !== 'user')) {
       blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+      // if user clicked on someones else profile and loggedIn user is of role user hence fetch all the favoriteBlogs of that loggedIn user
+      if (isLoggedInRole  === 'user') {
+        blogs.getAllFavoriteBlogs({ userId: loggedInId });
+      }
     }
   }, [window.location.search, window.location.pathname, isRole]);
 
@@ -67,12 +71,28 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (prevUser?.getUser.loading) {
       if (!isMe) {
         setUserDetails({ ...userDetails, ...userDataById });
-        if (isRole === "user" || isLoggedInRole === "user") {
-          const payloadData: any = {
-            userId: isRole === "user" ? userId : loggedInId,
+        // if (isRole === "user" || isLoggedInRole === "user") {
+        //   const payloadData: any = {
+        //     // if clicked profile is of user then fetch 
+        //     userId: isRole === "user" ? userId : loggedInId,
+        //     page: 1,
+        //   };
+        //   blogs.getFavoriteBlogs(payloadData);
+        //   // fetching all users when clicked user's role is user so we can see all the username the user have liked
+        //   user.allUser();
+        // } 
+        if (isRole === 'user' && isLoggedInRole === 'user') {
+          const payloadForClicked: any = {
+            // if clicked profile is of user then fetch 
+            userId: userId,
             page: 1,
           };
-          blogs.getFavoriteBlogs(payloadData);
+          blogs.getFavoriteBlogs(payloadForClicked);
+          const payloadForLoggedIn: any = {
+            // if clicked profile is of user then fetch 
+            userId: loggedInId
+          };
+          blogs.getAllFavoriteBlogs(payloadForLoggedIn);
           // fetching all users when clicked user's role is user so we can see all the username the user have liked
           user.allUser();
         }
@@ -91,7 +111,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         }
       }
     }
-
 
     if (prevBlog?.getBlogsById.loading) {
       setUserBlogs(blogState.getBlogsById.data);
