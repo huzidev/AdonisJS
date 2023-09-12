@@ -3,7 +3,7 @@ import startCase from "lodash/startCase";
 import { columns } from "pages/articles/Blogs/data";
 import { useBlogsPageHooks } from "pages/articles/Blogs/hooks";
 import ShowBlogs from "pages/articles/ShowBlogs/index";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -28,21 +28,6 @@ export default function ViewProfilePage(): JSX.Element {
   const isAdmin = userDataById?.role === "admin";
   let totalBlogs = blogState.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogState.getFavoriteBlogs.meta?.total;
-
-  const [totalBlogsContent, setTotalBlogsContent] = useState<number>();
-
-  useEffect(() => {
-    setTotalBlogsContent((isLoadingBlogs || isLoadingFvrtBlogs) && !userBlogs.length ? (
-      <LoadingThreeDots />
-    ) : userDataById?.role === "user" ? (
-      totalFvrtBlogs
-    ) : (
-      totalBlogs
-    ))
-  }, [totalBlogs, totalFvrtBlogs])
-
-  console.log("totalFvrtBlogs", totalFvrtBlogs);
-  
 
   const isLoadingUser = user.state.getUser.loading;
   const isLoadingBlogs = blogState.getBlogsById.loading;
@@ -70,15 +55,15 @@ export default function ViewProfilePage(): JSX.Element {
 
   const { handleSort, sortValue } = useBlogsPageHooks();
 
-  // const totalBlogsContent =
-  //   // !userBlogs.length so when user clicked on Load More then 3 Dot loader won't work because their is already data and same case is created for Load More button
-  //   (isLoadingBlogs || isLoadingFvrtBlogs) && !userBlogs.length ? (
-  //     <LoadingThreeDots />
-  //   ) : userDataById?.role === "user" ? (
-  //     totalFvrtBlogs
-  //   ) : (
-  //     totalBlogs
-  //   );
+  const totalBlogsContent =
+    // !userBlogs.length so when user clicked on Load More then 3 Dot loader won't work because their is already data and same case is created for Load More button
+    (isLoadingBlogs || isLoadingFvrtBlogs) && !userBlogs.length ? (
+      <LoadingThreeDots />
+    ) : userDataById?.role === "user" ? (
+      totalFvrtBlogs
+    ) : (
+      totalBlogs
+    );
 
   const formatedDate = new Date(userDetails.createdAt).toLocaleString();
 
