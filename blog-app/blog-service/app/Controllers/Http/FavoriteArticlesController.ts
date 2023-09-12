@@ -16,7 +16,6 @@ export default class FavoriteArticlesController {
             const article = await Article.findBy('id', body.articleId);
             
             await FavoriteArticle.create({articleId, userId});
-
             return { 
                 data: article, 
                 message: `Blog by ${user?.username} added to favorite list successfully!` 
