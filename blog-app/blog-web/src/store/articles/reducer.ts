@@ -260,12 +260,12 @@ export const blogSlice = createSlice({
       state.addFavoriteBlog.loading = false;
       if (action.payload) {
         const { message, data } = action.payload;
-          // because by default data state.getBlogs.data is in form of this Proxy(Array) {0: {…}} therefore used JSON.parse
+          console.log("data", data);
+            // because by default data state.getBlogs.data is in form of this Proxy(Array) {0: {…}} therefore used JSON.parse
             // const cleaned = JSON.parse(JSON.stringify(state.getBlogs.data.find((blog : any) => blog.id === data.articleId)));
             const prevBlog = JSON.parse(JSON.stringify(state.getFavoriteBlogs.data));
             // data will have all the details of the article that has been added to favorite therefore we simply added the data with the previous blogs
             state.getFavoriteBlogs.data = [...prevBlog, data];
-            
         state.addFavoriteBlog.message = message;
       }
       state.addFavoriteBlog.error = false;
@@ -282,11 +282,11 @@ export const blogSlice = createSlice({
       // to update the getFavoriteBlogs field when removed the blog
       if (action.payload) {
         const { message, id } = action.payload;
-        state.getFavoriteBlogs.data = JSON.parse(JSON.stringify(
-          state.getFavoriteBlogs.data.filter(
-           (blog) => blog.id !== id
-         )
-        ))
+          state.getFavoriteBlogs.data = JSON.parse(JSON.stringify(
+            state.getFavoriteBlogs.data.filter(
+             (blog) => blog.id !== id
+           )
+          ))
         state.removeFavoriteBlog.message = message;
       }
     });
