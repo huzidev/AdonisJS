@@ -259,15 +259,15 @@ export const blogSlice = createSlice({
       state.addFavoriteBlog.loading = false;
       if (action.payload) {
         const { message, data } = action.payload;
-        console.log("data for add reducer", data);
-        
           // because by default data state.getBlogs.data is in form of this Proxy(Array) {0: {…}} therefore used JSON.parse
-            const cleaned = JSON.parse(JSON.stringify(state.getFavoriteBlogs.data.find((blog : any) => blog.id === data.articleId)));
+            // const cleaned = JSON.parse(JSON.stringify(state.getBlogs.data.find((blog : any) => blog.id === data.articleId)));
             const prevBlog = JSON.parse(JSON.stringify(state.getFavoriteBlogs.data));
-            state.getFavoriteBlogs.data = [...prevBlog, cleaned];
+            console.log("prev blogs", prevBlog);
+            
+            state.getFavoriteBlogs.data = [...prevBlog];
         state.addFavoriteBlog.message = message;
       }
-      state.addFavoriteBlog.error = false
+      state.addFavoriteBlog.error = false;
     });
     builder.addCase(actions.addFavoriteBlog.rejected, (state) => {
       state.addFavoriteBlog = { loading: false, error: true };

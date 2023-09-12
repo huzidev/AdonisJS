@@ -60,7 +60,6 @@ export const getBlogs = createAsyncThunk(
   async (data: any): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
     try {
-      console.log("data", data);
       const response = await api.get(endpoints.GET_BLOGS + data.page, {params: data});
       const filtersApplied = data.sort !== undefined;
       return {
@@ -83,7 +82,6 @@ export const getBlogsById = createAsyncThunk(
   async (data: GetBlogsByIdTest): Promise<AllBlogs | null> => {
     // AllBlogs contains Array of blogs and meta
     try {
-      console.log("data", data);
       const response = await api.get(`${endpoints.GET_BLOGS + data.userId}/${data.page}`, {params: data.filters});
       return {
         data : response.data.data.data,
