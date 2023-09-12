@@ -8,7 +8,9 @@ export default function FavoriteArticlesRoutes() {
       .where("id", /^[0-9]+$/)
       .middleware("auth");
     Route.get("/get_favorite_article/:id/:page", `${path}.get`)
-        .where("id", /^[0-9]+$/)
-        .where("page", /^[0-9]+$/)
+      .where("id", /^[0-9]+$/)
+      .where("page", /^[0-9]+$/)
+    Route.get("/get_favorite_article/:id", `${path}.get`)
+      .where("id", /^[0-9]+$/)
   }).prefix("/article");
 }
