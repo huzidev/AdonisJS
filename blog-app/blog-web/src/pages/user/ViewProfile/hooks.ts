@@ -52,31 +52,24 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     // reactions.getAllReactions();
   }, [userId, loggedInId]);
 
-  // useEffect(() => {
-  //   // if user clicked on viewProfile and loggedIn user is user then don't fetch blogs as user can't upload blogs
-  //   // if (params.id === "me" && isLoggedInRole !== 'user') {
-  //   //   blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
-  //   // } // so if user clicked on some user with role = user profile then fetch don't fetch blogs
-  //   // just fetch favortite blogs whoms condition is created below
-  //   if (params.id !== "me" && (isRole && isRole !== 'user')) {
-  //     blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-  //     // if user clicked on someones else profile and loggedIn user is of role user hence fetch all the favoriteBlogs of that loggedIn user
-  //     if (isLoggedInRole  === 'user') {
-  //       blogs.getAllFavoriteBlogs({ userId: loggedInId });
-  //     }
-  //   }
-  // }, [window.location.pathname, window.location.search]);
+  useEffect(() => {
+    // if user clicked on viewProfile and loggedIn user is user then don't fetch blogs as user can't upload blogs
+    if (params.id === "me" && isLoggedInRole !== 'user') {
+      blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+    } // so if user clicked on some user with role = user profile then fetch don't fetch blogs
+    // just fetch favortite blogs whoms condition is created below
+    if (params.id !== "me" && (isRole && isRole !== 'user')) {
+      blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+      // if user clicked on someones else profile and loggedIn user is of role user hence fetch all the favoriteBlogs of that loggedIn user
+      if (isLoggedInRole  === 'user') {
+        blogs.getAllFavoriteBlogs({ userId: loggedInId });
+      }
+    }
+  }, [window.location.pathname, window.location.search, isRole]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
       if (!isMe) {
-        if (isRole && isRole !== 'user') {
-          blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-          // if user clicked on someones else profile and loggedIn user is of role user hence fetch all the favoriteBlogs of that loggedIn user
-          if (isLoggedInRole  === 'user') {
-            blogs.getAllFavoriteBlogs({ userId: loggedInId });
-          }
-        }
         setUserDetails({ ...userDetails, ...userDataById });
         if (isRole === 'user') {
           const payloadForClicked: any = {
@@ -98,10 +91,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
       }
       if (isMe) {
         setUserDetails({ ...userDetails, ...userDataById });
-        if (isLoggedInRole !== 'user') {
-          blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
-        }
-
         // because when user's role is user then we only wanted to fetch favoriteBlogs
         const payloadData: any = {
           userId: loggedInId,
