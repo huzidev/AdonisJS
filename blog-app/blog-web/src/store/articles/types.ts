@@ -27,13 +27,8 @@ export interface Blog extends AddBlogPayload {
   owner: User;
 }
 
-export interface AddFavoriteBlogPayload {
+export interface FavoriteBlogPayload {
   userId: number | null | undefined;
-  articleId: number;
-  ownerId: number;
-}
-
-export interface RemoveFavoriteBlogPayload {
   articleId: number;
   ownerId: number;
 }

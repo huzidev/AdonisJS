@@ -201,6 +201,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                   ? blogs.removeFavoriteBlog({
                                       articleId: blog.id,
                                       ownerId: blog.ownerId,
+                                      userId: auth.state.user?.id
                                     })
                                   : blogs.addFavoriteBlog({
                                       userId: auth.state.user?.id,

@@ -5,12 +5,11 @@ import { errorNotification } from "utils/notifications";
 import * as endpoints from "./endpoints";
 import {
   AddBlogPayload,
-  AddFavoriteBlogPayload,
   AllBlogs,
+  FavoriteBlogPayload,
   GetBlogPayload,
   GetBlogsById,
   GetBlogsByIdTest,
-  RemoveFavoriteBlogPayload,
   UpdateBlogPayload
 } from "./types";
 
@@ -168,7 +167,7 @@ export const addBlog = createAsyncThunk(
 
 export const addFavoriteBlog = createAsyncThunk(
   endpoints.ADD_FAVORITE_BLOG,
-  async (data: AddFavoriteBlogPayload) => {
+  async (data: FavoriteBlogPayload) => {
     try {
       const response = await api.post(endpoints.ADD_FAVORITE_BLOG, data);
       console.log("RESPONSE FOR ADD FAVORITE", response);
@@ -184,9 +183,8 @@ export const addFavoriteBlog = createAsyncThunk(
 
 export const removeFavoriteBlog = createAsyncThunk(
   endpoints.REMOVE_FAVORITE_BLOG,
-  async (data: RemoveFavoriteBlogPayload) => {
+  async (data: FavoriteBlogPayload) => {
     console.log("DATA", data);
-    
     try {
       const response = await api.delete(endpoints.REMOVE_FAVORITE_BLOG + data.articleId, {data});
       console.log("RESPONSE FOR REMOVE FAVORITE", response);
