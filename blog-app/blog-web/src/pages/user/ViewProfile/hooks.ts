@@ -52,36 +52,33 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     // reactions.getAllReactions();
   }, [userId, loggedInId]);
 
-  useEffect(() => {
-    // if user clicked on viewProfile and loggedIn user is user then don't fetch blogs as user can't upload blogs
-    if (params.id === "me" && isLoggedInRole !== 'user') {
-      blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
-    } // so if user clicked on some user with role = user profile then fetch don't fetch blogs
-    // just fetch favortite blogs whoms condition is created below
-    if (params.id !== "me" && (isRole && isRole !== 'user')) {
-      blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-      // if user clicked on someones else profile and loggedIn user is of role user hence fetch all the favoriteBlogs of that loggedIn user
-      if (isLoggedInRole  === 'user') {
-        blogs.getAllFavoriteBlogs({ userId: loggedInId });
-      }
-    }
-  }, [window.location.search, window.location.pathname, isRole]);
+  // useEffect(() => {
+  //   // if user clicked on viewProfile and loggedIn user is user then don't fetch blogs as user can't upload blogs
+  //   // if (params.id === "me" && isLoggedInRole !== 'user') {
+  //   //   blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+  //   // } // so if user clicked on some user with role = user profile then fetch don't fetch blogs
+  //   // just fetch favortite blogs whoms condition is created below
+  //   if (params.id !== "me" && (isRole && isRole !== 'user')) {
+  //     blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+  //     // if user clicked on someones else profile and loggedIn user is of role user hence fetch all the favoriteBlogs of that loggedIn user
+  //     if (isLoggedInRole  === 'user') {
+  //       blogs.getAllFavoriteBlogs({ userId: loggedInId });
+  //     }
+  //   }
+  // }, [window.location.pathname, window.location.search]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
       if (!isMe) {
+        if (isRole && isRole !== 'user') {
+          blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+          // if user clicked on someones else profile and loggedIn user is of role user hence fetch all the favoriteBlogs of that loggedIn user
+          if (isLoggedInRole  === 'user') {
+            blogs.getAllFavoriteBlogs({ userId: loggedInId });
+          }
+        }
         setUserDetails({ ...userDetails, ...userDataById });
-        // if (isRole === "user" || isLoggedInRole === "user") {
-        //   const payloadData: any = {
-        //     // if clicked profile is of user then fetch 
-        //     userId: isRole === "user" ? userId : loggedInId,
-        //     page: 1,
-        //   };
-        //   blogs.getFavoriteBlogs(payloadData);
-        //   // fetching all users when clicked user's role is user so we can see all the username the user have liked
-        //   user.allUser();
-        // } 
-        if (isRole === 'user' && isLoggedInRole === 'user') {
+        if (isRole === 'user') {
           const payloadForClicked: any = {
             // if clicked profile is of user then fetch 
             userId: userId,
@@ -92,13 +89,19 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
             // if clicked profile is of user then fetch 
             userId: loggedInId
           };
-          blogs.getAllFavoriteBlogs(payloadForLoggedIn);
+          if (isLoggedInRole === 'user') {
+            blogs.getAllFavoriteBlogs(payloadForLoggedIn);
+          }
           // fetching all users when clicked user's role is user so we can see all the username the user have liked
           user.allUser();
         }
       }
       if (isMe) {
         setUserDetails({ ...userDetails, ...userDataById });
+        if (isLoggedInRole !== 'user') {
+          blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+        }
+
         // because when user's role is user then we only wanted to fetch favoriteBlogs
         const payloadData: any = {
           userId: loggedInId,
