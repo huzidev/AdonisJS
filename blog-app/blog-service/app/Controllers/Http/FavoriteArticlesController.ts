@@ -48,13 +48,11 @@ export default class FavoriteArticlesController {
   public async remove({ request }: HttpContextContract) {
     try {
       const body = await request.validate(RemoveFavoriteArticle);
-      console.log("body", body);
-      
       const user = await User.findBy("id", body.ownerId);
-      const article = await FavoriteArticle.findBy(
-        "article_id",
-        body.articleId
-      );
+      const article = await FavoriteArticle.query()
+        .where("article_id", body.articleId)
+        .andWhere("userId", body.userId)
+        .first();
       await article?.delete();
       return {
         message: `Blog by ${user?.username} removed from favorite list successfully!`,
