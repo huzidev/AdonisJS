@@ -3,8 +3,8 @@ import Article from "App/Models/Article";
 import FavoriteArticle from "App/Models/FavoriteArticle";
 import User from "App/Models/User";
 import {
-    AddFavoriteArticle,
-    RemoveFavoriteArticle,
+  AddFavoriteArticle,
+  RemoveFavoriteArticle,
 } from "App/Validators/FavoriteArticleValidator";
 
 export default class FavoriteArticlesController {
@@ -48,6 +48,8 @@ export default class FavoriteArticlesController {
   public async remove({ request }: HttpContextContract) {
     try {
       const body = await request.validate(RemoveFavoriteArticle);
+      console.log("body", body);
+      
       const user = await User.findBy("id", body.ownerId);
       const article = await FavoriteArticle.findBy(
         "article_id",

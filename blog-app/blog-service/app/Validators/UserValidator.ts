@@ -1,7 +1,7 @@
-import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
-import User from 'App/Models/User'
-import Sort from 'App/Utils/Sort'
-import pick from 'lodash/pick'
+import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator';
+import User from 'App/Models/User';
+import Sort from 'App/Utils/Sort';
+import pick from 'lodash/pick';
 
 // when admin is updating a user
 export class UserUpdate {
