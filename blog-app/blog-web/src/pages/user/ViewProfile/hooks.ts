@@ -65,7 +65,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         blogs.getAllFavoriteBlogs({ userId: loggedInId });
       }
     }
-  }, [window.location.pathname, window.location.search, isRole]);
+  }, [window.location.pathname, window.location.search]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
