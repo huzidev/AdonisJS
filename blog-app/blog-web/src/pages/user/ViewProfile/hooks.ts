@@ -39,13 +39,11 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const currentPageFvrt: number = blogState.getFavoriteBlogs.meta?.currentPage;
   const lastPageFvrt: number = blogState.getFavoriteBlogs.meta?.lastPage;
   const lastPage: number = blogState.getBlogsById.meta?.lastPage;
-
   const search: any = qs.parse(window.location.search);
 
+
   useEffect(() => {
-    if (isMe) {
-      user.getById(loggedInId);
-    } else {
+    if (!isMe) {
       user.getById(userId);
     }
     // since we've used useBlogsPageHooks() therefore getAllReactions() functions is created in that hook therefore no need to call that hook here
@@ -72,6 +70,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
 
   useEffect(() => {
     if (isMe) {
+      setUserDetails({ ...userDetails, ...auth.state.user })
       if (isLoggedInRole === "user") {
         const payloadData: any = {
           userId: loggedInId,
@@ -95,17 +94,19 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   }, [window.location.search, window.location.pathname]);
 
   useEffect(() => {
-    if (isRole === "user" && !isMe) {
-      const payloadForClicked: any = {
-        // if clicked profile is of user then fetch
-        userId: userId,
-        page: 1,
-      };
-      blogs.getFavoriteBlogs(payloadForClicked);
-      // fetching all users when clicked user's role is user so we can see all the username the user have liked
-      user.allUser();
-    } if (isRole !== 'user' && !isMe) {
-        blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+    if (isRole) {
+      if (isRole === "user" && !isMe) {
+        const payloadForClicked: any = {
+          // if clicked profile is of user then fetch
+          userId: userId,
+          page: 1,
+        };
+        blogs.getFavoriteBlogs(payloadForClicked);
+        // fetching all users when clicked user's role is user so we can see all the username the user have liked
+        user.allUser();
+      } if (isRole !== 'user' && !isMe) {
+          blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+      }
     }
   }, [isRole])
  
@@ -132,7 +133,11 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
-      setUserDetails({ ...userDetails, ...userDataById });
+      if (isMe) {
+        setUserDetails({ ...userDetails, ...auth.state.user })
+      } else {
+        setUserDetails({ ...userDetails, ...userDataById });
+      }
       // if (!isMe) {
       //   if (isRole === "user") {
       //     const payloadForClicked: any = {
@@ -227,7 +232,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
 
   const allReactions: any = reactions.state.getAllReactions.data;
   const allComments: any = comment.state.getAllComments.data;
-
+  
   return {
     userDetails,
     userBlogs,
