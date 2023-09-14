@@ -41,7 +41,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const lastPage: number = blogState.getBlogsById.meta?.lastPage;
   const search: any = qs.parse(window.location.search);
 
-
   useEffect(() => {
     if (!isMe) {
       user.getById(userId);
@@ -174,7 +173,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (prevBlog?.getBlogsById.loading) {
       setUserBlogs(blogState.getBlogsById.data);
     }
-    if (prevBlog?.getFavoriteBlogs.loading && isRole === "user") {
+    if (prevBlog?.getFavoriteBlogs.loading && (isRole === "user" || isLoggedInRole === 'user')) {
       setUserBlogs(blogState.getFavoriteBlogs.data);
     }
 

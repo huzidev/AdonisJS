@@ -53,9 +53,6 @@ export default function ViewProfilePage(): JSX.Element {
     isFilter = Object.values(JSON.parse(search.sort))[0];
   }
 
-  // console.log("userDetaiks index", userDetails);
-  
-
   const { handleSort, sortValue } = useBlogsPageHooks();
 
   const totalBlogsContent =
