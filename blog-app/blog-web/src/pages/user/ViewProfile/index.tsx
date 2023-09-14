@@ -20,12 +20,10 @@ export default function ViewProfilePage(): JSX.Element {
   const [dropDown, setDropDown] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
-  const userDataById = user.state.getUser?.data;
   const currentRole = auth.state.user?.role;
   const isAdminRole = hasPermission("admin", currentRole);
   const blogState = blogs.state;
   const isUser = currentRole === "user";
-  const isAdmin = userDataById?.role === "admin";
   let totalBlogs = blogState.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogState.getFavoriteBlogs.meta?.total;
 
@@ -45,8 +43,10 @@ export default function ViewProfilePage(): JSX.Element {
     isRole,
     allReactions,
     search,
-    allComments
+    allComments,
   } = useViewProfilePageHook();
+
+  const isAdmin = userDetails?.role === "admin";
 
   let isFilter;
   if (search.sort) {
@@ -59,7 +59,7 @@ export default function ViewProfilePage(): JSX.Element {
     // !userBlogs.length so when user clicked on Load More then 3 Dot loader won't work because their is already data and same case is created for Load More button
     (isLoadingBlogs || isLoadingFvrtBlogs) && !userBlogs.length ? (
       <LoadingThreeDots />
-    ) : userDataById?.role === "user" ? (
+    ) : userDetails?.role === "user" ? (
       totalFvrtBlogs
     ) : (
       totalBlogs
@@ -71,10 +71,10 @@ export default function ViewProfilePage(): JSX.Element {
       <div>
         <div className={`w-11/12 my-5 mx-auto border bg-gray-800 rounded-lg shadow border-gray-700`}>
           <div className="p-5">
-            {userDataById?.isBanned ? (
+            {userDetails?.isBanned ? (
               <div className="flex pt-6">
                 <p className="text-xl dark:text-white">
-                  User <b>{userDataById?.username}</b> Is Banned from this web
+                  User <b>{userDetails?.username}</b> Is Banned from this web
                 </p>
               </div>
             ) : (
@@ -115,15 +115,15 @@ export default function ViewProfilePage(): JSX.Element {
                 )}
               </>
             )}
-            {/* userDataById?.role !== "super-admin" so admin can't see edit button on super-admin's profile and  can't edit super-admin details */}
+            {/* userDetails?.role !== "super-admin" so admin can't see edit button on super-admin's profile and  can't edit super-admin details */}
             {!isLoadingUser &&
               (isMe ||
                 (!isAdmin && currentRole === "super-admin") ||
-                (isAdminRole && userDataById?.role !== "super-admin")) && (
+                (isAdminRole && userDetails?.role !== "super-admin")) && (
                 <Link
                   to={
                     // if path paths doesn't have me then this means admin is on user view profile page hence send the admin to edit user by details
-                    ROUTE_PATHS.EDIT_USER + `${isMe ? "me" : userDataById?.id}`
+                    ROUTE_PATHS.EDIT_USER + `${isMe ? "me" : userDetails?.id}`
                   }
                   type="button"
                   className="text-white bg-gray-800 font-medium text-sm py-2.5"
@@ -161,10 +161,10 @@ export default function ViewProfilePage(): JSX.Element {
             lastPageFvrt={lastPageFvrt}
             lastPageBlogs={lastPage}
             loadMore={loadMore}
-            userDataById={userDataById}
+            userDetails={userDetails}
             totalBlogs={totalBlogs}
             totalFvrtBlogs={totalFvrtBlogs}
-            userDetails={userDetails}
+            // userDetails={userDetails}
             isFilter={isFilter}
           />
         </div>
@@ -179,7 +179,7 @@ export default function ViewProfilePage(): JSX.Element {
           {
           // so if allBlogs length is just 1 then no need to show filters
           // and filter won't be shown when someone clicked on user's profile because user can't add blogs
-          (userBlogs.length >= 1 && userDataById?.role !== "user") && (
+          (userBlogs.length >= 1 && userDetails?.role !== "user") && (
             <div>
               <button
                 id="dropdownDefaultButton"
@@ -281,9 +281,9 @@ export default function ViewProfilePage(): JSX.Element {
                         {(blog.ownerId === auth.state.user?.id ||
                           (!isAdmin && currentRole === "super-admin") ||
                           (isAdminRole &&
-                            userDataById?.role !== "super-admin")) &&
+                            userDetails?.role !== "super-admin")) &&
                           // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
-                          !userDataById?.isBanned && (
+                          !userDetails?.isBanned && (
                             <div>
                               <Link
                                 to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}

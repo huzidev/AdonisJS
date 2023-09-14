@@ -91,23 +91,23 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
       }
     }
   }, [window.location.search, window.location.pathname]);
-
+  
   useEffect(() => {
-    if (isRole) {
-      if (isRole === "user" && !isMe) {
-        const payloadForClicked: any = {
-          // if clicked profile is of user then fetch
-          userId: userId,
-          page: 1,
-        };
-        blogs.getFavoriteBlogs(payloadForClicked);
-        // fetching all users when clicked user's role is user so we can see all the username the user have liked
-        user.allUser();
-      } if (isRole !== 'user' && !isMe) {
-          blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-      }
+    if (prevUser?.getUser.loading) {
+        if (isRole === "user" && !isMe) {
+          const payloadForClicked: any = {
+            // if clicked profile is of user then fetch
+            userId: userId,
+            page: 1,
+          };
+          blogs.getFavoriteBlogs(payloadForClicked);
+          // fetching all users when clicked user's role is user so we can see all the username the user have liked
+          user.allUser();
+        } if (isRole !== 'user' && !isMe) {
+            blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+        }
     }
-  }, [isRole])
+  }, [userState])
  
   // useEffect(() => {
   //   if (isRole) {

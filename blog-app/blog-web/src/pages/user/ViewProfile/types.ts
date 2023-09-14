@@ -6,6 +6,7 @@ export interface UserDetailState {
     email: string;
     createdAt: string;
     role: string;
+    isBanned: boolean;
 }
 
 // while using interface it's giving error
@@ -31,4 +32,5 @@ export interface ViewProfileStateHandler {
     allReactions: any;
     search: searchReq;
     allComments: any;
+    // userDataById: any
 }

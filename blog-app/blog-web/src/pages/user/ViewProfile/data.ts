@@ -5,5 +5,6 @@ export const userDetailsData: UserDetailState = {
     username: '',
     email: '',
     createdAt: '',
-    role: ''
+    role: '',
+    isBanned: false
 }
