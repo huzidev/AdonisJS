@@ -52,64 +52,124 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     // reactions.getAllReactions();
   }, [userId, loggedInId]);
 
-  useEffect(() => {
-    if (isRole) {
-      // if user clicked on viewProfile and loggedIn user is user then don't fetch blogs as user can't upload blogs
-      if (params.id === "me" && isLoggedInRole !== 'user') {
-        blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
-      } // so if user clicked on some user with role = user profile then fetch don't fetch blogs
-      // just fetch favortite blogs whoms condition is created below
-      if (params.id !== "me" && isRole !== 'user') {
-        console.log("Run");
-        blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-        // if user clicked on someones else profile and loggedIn user is of role user hence fetch all the favoriteBlogs of that loggedIn user
-        if (isLoggedInRole  === 'user') {
-          blogs.getAllFavoriteBlogs({ userId: loggedInId });
-        }
-      }
-    }
-  }, [window.location.pathname, window.location.search, isRole]);
+  // useEffect(() => {
+  //   if (isRole) {
+  //     // if user clicked on viewProfile and loggedIn user is user then don't fetch blogs as user can't upload blogs
+  //     if (params.id === "me" && isLoggedInRole !== 'user') {
+  //       blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+  //     } // so if user clicked on some user with role = user profile then fetch don't fetch blogs
+  //     // just fetch favortite blogs whoms condition is created below
+  //     if (params.id !== "me" && isRole !== 'user') {
+  //       console.log("Run");
+  //       blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+  //       // if user clicked on someones else profile and loggedIn user is of role user hence fetch all the favoriteBlogs of that loggedIn user
+  //       if (isLoggedInRole  === 'user') {
+  //         blogs.getAllFavoriteBlogs({ userId: loggedInId });
+  //       }
+  //     }
+  //   }
+  // }, [window.location.pathname, window.location.search, isRole]);
 
   useEffect(() => {
-    if (prevUser?.getUser.loading) {
-      if (!isMe) {
-        setUserDetails({ ...userDetails, ...userDataById });
-        if (isRole === 'user') {
-          const payloadForClicked: any = {
-            // if clicked profile is of user then fetch 
-            userId: userId,
-            page: 1,
-          };
-          blogs.getFavoriteBlogs(payloadForClicked);
-          const payloadForLoggedIn: any = {
-            // if clicked profile is of user then fetch 
-            userId: loggedInId
-          };
-          if (isLoggedInRole === 'user') {
-            blogs.getAllFavoriteBlogs(payloadForLoggedIn);
-          }
-          // fetching all users when clicked user's role is user so we can see all the username the user have liked
-          user.allUser();
-        }
-      }
-      if (isMe) {
-        setUserDetails({ ...userDetails, ...userDataById });
-        // because when user's role is user then we only wanted to fetch favoriteBlogs
+    if (isMe) {
+      if (isLoggedInRole === "user") {
         const payloadData: any = {
           userId: loggedInId,
           page: 1,
         };
-        if (isLoggedInRole === "user") {
-          blogs.getFavoriteBlogs(payloadData);
-          // fetching all users when loggedIn user's role is user so we can see all the username the user have liked on ViewProfile page
-          user.allUser();
-        }
+        blogs.getFavoriteBlogs(payloadData);
+        // fetching all users when loggedIn user's role is user so we can see all the username the user have liked on ViewProfile page
+        user.allUser();
+      } else {
+        blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
       }
+    } else {
+      if (isLoggedInRole === "user") {
+        const payloadForLoggedIn: any = {
+          // if clicked profile is of user then fetch
+          userId: loggedInId,
+        };
+        blogs.getAllFavoriteBlogs(payloadForLoggedIn);
+      }
+    }
+  }, [window.location.search, window.location.pathname]);
+
+  useEffect(() => {
+    if (isRole === "user" && !isMe) {
+      const payloadForClicked: any = {
+        // if clicked profile is of user then fetch
+        userId: userId,
+        page: 1,
+      };
+      blogs.getFavoriteBlogs(payloadForClicked);
+      // fetching all users when clicked user's role is user so we can see all the username the user have liked
+      user.allUser();
+    } if (isRole !== 'user' && !isMe) {
+        blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+    }
+  }, [isRole])
+ 
+  // useEffect(() => {
+  //   if (isRole) {
+  //     if (params.id === "me") {
+  //       // Fetch blogs for the logged-in user's own profile
+  //       if (isLoggedInRole !== "user") {
+  //         blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
+  //       }
+  //     } else if (params.id !== "me") {
+  //       // Fetch blogs for someone else's profile
+  //       if (isRole !== "user") {
+  //         console.log("Run");
+  //         blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+  //       }
+  //       // Fetch favorite blogs for the logged-in user if they are of role 'user'
+  //       if (isLoggedInRole === "user") {
+  //         blogs.getAllFavoriteBlogs({ userId: loggedInId });
+  //       }
+  //     }
+  //   }
+  // }, [window.location.pathname, window.location.search, isRole]);
+
+  useEffect(() => {
+    if (prevUser?.getUser.loading) {
+      setUserDetails({ ...userDetails, ...userDataById });
+      // if (!isMe) {
+      //   if (isRole === "user") {
+      //     const payloadForClicked: any = {
+      //       // if clicked profile is of user then fetch
+      //       userId: userId,
+      //       page: 1,
+      //     };
+      //     blogs.getFavoriteBlogs(payloadForClicked);
+      //     const payloadForLoggedIn: any = {
+      //       // if clicked profile is of user then fetch
+      //       userId: loggedInId,
+      //     };
+      //     if (isLoggedInRole === "user") {
+      //       blogs.getAllFavoriteBlogs(payloadForLoggedIn);
+      //     }
+      //     // fetching all users when clicked user's role is user so we can see all the username the user have liked
+      //     user.allUser();
+      //   }
+      // }
+      // if (isMe) {
+      //   setUserDetails({ ...userDetails, ...userDataById });
+      //   // // because when user's role is user then we only wanted to fetch favoriteBlogs
+      //   // const payloadData: any = {
+      //   //   userId: loggedInId,
+      //   //   page: 1,
+      //   // };
+      //   // if (isLoggedInRole === "user") {
+      //   //   blogs.getFavoriteBlogs(payloadData);
+      //   //   // fetching all users when loggedIn user's role is user so we can see all the username the user have liked on ViewProfile page
+      //   //   user.allUser();
+      //   // }
+      // }
     }
     if (prevBlog?.getBlogsById.loading) {
       setUserBlogs(blogState.getBlogsById.data);
     }
-    if (prevBlog?.getFavoriteBlogs.loading && isRole === 'user') {
+    if (prevBlog?.getFavoriteBlogs.loading && isRole === "user") {
       setUserBlogs(blogState.getFavoriteBlogs.data);
     }
 
@@ -126,7 +186,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         }
       } // when user tries to change the URL example if user changes view/:id id of the user which doesn't exist then show error
       else if (!userState.getUser.loading && userState.getUser.error) {
-        navigate('/');
+        navigate("/");
       }
     }
     if (prevBlog?.deleteBlog.loading) {
@@ -141,13 +201,11 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         const lastPage = blogState.getBlogsById.meta.lastPage;
         if (username) {
           successNotification(
-            blogState.getBlogsById.message?.includes('No') 
-            ? blogState.getBlogsById.message
-            : (
-              `${
-                username === loggedInUser ? "Yours" : username
-              }'s blogs page ${currentPage} of ${lastPage} fetched successfully`
-            )
+            blogState.getBlogsById.message?.includes("No")
+              ? blogState.getBlogsById.message
+              : `${
+                  username === loggedInUser ? "Yours" : username
+                }'s blogs page ${currentPage} of ${lastPage} fetched successfully`
           );
         }
       }
@@ -163,7 +221,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
       // filters: search so when user clicked on load more then result will be according to filters
-      blogs.getBlogsById({...updatedPayload, filters: search});
+      blogs.getBlogsById({ ...updatedPayload, filters: search });
     }
   }
 
@@ -182,6 +240,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     isRole,
     allReactions,
     search,
-    allComments
+    allComments,
   };
 }
