@@ -51,7 +51,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
 
   useEffect(() => {
     if (isMe) {
-      setUserDetails({ ...userDetails, ...auth.state.user })
+      setUserDetails({ ...userDetails, ...auth.state.user });
       if (isLoggedInRole === "user") {
         const payloadData: any = {
           userId: loggedInId,
@@ -73,28 +73,29 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
       }
     }
   }, [window.location.search, window.location.pathname]);
-  
+
   useEffect(() => {
     if (prevUser?.getUser.loading) {
-        if (isRole === "user" && !isMe) {
-          const payloadForClicked: any = {
-            // if clicked profile is of user then fetch
-            userId: userId,
-            page: 1,
-          };
-          blogs.getFavoriteBlogs(payloadForClicked);
-          // fetching all users when clicked user's role is user so we can see all the username the user have liked
-          user.allUser();
-        } if (isRole !== 'user' && !isMe) {
-            blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-        }
+      if (isRole === "user" && !isMe) {
+        const payloadForClicked: any = {
+          // if clicked profile is of user then fetch
+          userId: userId,
+          page: 1,
+        };
+        blogs.getFavoriteBlogs(payloadForClicked);
+        // fetching all users when clicked user's role is user so we can see all the username the user have liked
+        user.allUser();
+      }
+      if (isRole !== "user" && !isMe) {
+        blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+      }
     }
-  }, [userState])
+  }, [window.location.search, window.location.pathname, userState]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
       if (isMe) {
-        setUserDetails({ ...userDetails, ...auth.state.user })
+        setUserDetails({ ...userDetails, ...auth.state.user });
       } else {
         setUserDetails({ ...userDetails, ...userDataById });
       }
@@ -102,7 +103,10 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (prevBlog?.getBlogsById.loading) {
       setUserBlogs(blogState.getBlogsById.data);
     }
-    if (prevBlog?.getFavoriteBlogs.loading && (isRole === "user" || isLoggedInRole === 'user')) {
+    if (
+      prevBlog?.getFavoriteBlogs.loading &&
+      (isRole === "user" || isLoggedInRole === "user")
+    ) {
       setUserBlogs(blogState.getFavoriteBlogs.data);
     }
 
@@ -160,7 +164,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
 
   const allReactions: any = reactions.state.getAllReactions.data;
   const allComments: any = comment.state.getAllComments.data;
-  
+
   return {
     userDetails,
     userBlogs,
