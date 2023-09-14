@@ -8,6 +8,7 @@ import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
+import { hasPermission } from "utils";
 import { LoaderSpin, LoadingListBlogs } from "utils/loading";
 import { useShowBlogsHook } from "./hooks";
 // import { props.columns } from './data';
@@ -24,7 +25,7 @@ export default function ShowBlogs(props: any): JSX.Element {
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
   const [isSettings, setIsSettings] = useState<any>({
-    blogId: null
+    blogId: null,
   });
   const params = useParams();
   const isMe = params.id === "me";
@@ -137,96 +138,100 @@ export default function ShowBlogs(props: any): JSX.Element {
                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
               >
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
-                <div 
-                className="border rounded-lg shadow bg-gray-800 border-gray-700 relative">
-                  <div
-                    className="absolute right-0 hover:border-white hover:border-2"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsSettings({ blogId: blog.id });
-                    }}
-                  >
-                    <button
-                      id="dropdownComment1Button"
-                      data-dropdown-toggle="dropdownComment1"
-                      className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-200 rounded-lg focus:ring-1 focus:outline-none focus:ring-gray-50"
-                      type="button"
-                      // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        aria-hidden="true"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                      </svg>
-                    </button>
-                  </div>
-                  {
-                    isSettings.blogId === blog.id && (
-                      <div>
-                        <ul
-                          className="absolute right-0 top-7 block divide-y divide-gray-100 rounded-lg shadow bg-gray-300"
-                          aria-labelledby="dropdownDefaultButton"
-                          onClick={(e) => e.stopPropagation()}
+                <div className="border rounded-lg shadow bg-gray-800 border-gray-700 relative">
+                  {(blog.ownerId === userData?.id ||
+                      (hasPermission("admin", userData?.role) &&
+                        uploadedByUserRole !== "super-admin") 
+                      // ||hasPermission("super-admin", userData?.role)
+                      ) && (
+                        <>
+                        <div
+                          className="absolute right-0 hover:border-white hover:border-2"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsSettings({ blogId: blog.id });
+                          }}
                         >
-                          <li>
-                            <Link
-                              to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
-                              type="button"
-                              className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                          <button
+                            id="dropdownComment1Button"
+                            data-dropdown-toggle="dropdownComment1"
+                            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-200 rounded-lg focus:ring-1 focus:outline-none focus:ring-gray-50"
+                            type="button"
+                            // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
+                          >
+                            <svg
+                              className="w-5 h-5"
+                              aria-hidden="true"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                              xmlns="http://www.w3.org/2000/svg"
                             >
-                              Edit
-                            </Link>
-                          </li>
-                          <li>
-                            <button
-                              type="button"
-                              className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
-                              // onClick={() => blogs.deleteBlog(blog.id)}
-                              onClick={() => {
-                                setDeleteBlogId(blog.id);
-                                setShowModal(true);
-                              }}
+                              <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                            </svg>
+                          </button>
+                        </div>
+                        <>
+                        {isSettings.blogId === blog.id && (
+                          <div>
+                            <ul
+                              className="absolute right-0 top-7 block divide-y divide-gray-100 rounded-lg shadow bg-gray-300"
+                              aria-labelledby="dropdownDefaultButton"
+                              onClick={(e) => e.stopPropagation()}
                             >
-                              Delete
-                            </button>
-                          </li>
-                          {showModal && deleteBlogId === blog.id && (
-                            <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
-                              <div className="bg-white p-8 w-96">
-                                <p className="text-lg text-center mb-4">
-                                  Are you sure you want to delete this blog?
-                                </p>
-                                <div className="flex justify-center space-x-4">
-                                  <button
-                                    className="bg-red-500 text-white px-4 py-2 rounded"
-                                    onClick={() => {
-                                      blogs.deleteBlog(blog.id);
-                                      setShowModal(false);
-                                    }}
-                                  >
-                                    Yes
-                                  </button>
-                                  <button
-                                    className="bg-gray-500 text-white px-4 py-2 rounded"
-                                    onClick={() => setShowModal(false)}
-                                  >
-                                    No
-                                  </button>
+                              <li>
+                                <Link
+                                  to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                                  type="button"
+                                  className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                                >
+                                  Edit
+                                </Link>
+                              </li>
+                              <li>
+                                <button
+                                  type="button"
+                                  className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
+                                  // onClick={() => blogs.deleteBlog(blog.id)}
+                                  onClick={() => {
+                                    setDeleteBlogId(blog.id);
+                                    setShowModal(true);
+                                  }}
+                                >
+                                  Delete
+                                </button>
+                              </li>
+                              {showModal && deleteBlogId === blog.id && (
+                                <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
+                                  <div className="bg-white p-8 w-96">
+                                    <p className="text-lg text-center mb-4">
+                                      Are you sure you want to delete this blog?
+                                    </p>
+                                    <div className="flex justify-center space-x-4">
+                                      <button
+                                        className="bg-red-500 text-white px-4 py-2 rounded"
+                                        onClick={() => {
+                                          blogs.deleteBlog(blog.id);
+                                          setShowModal(false);
+                                        }}
+                                      >
+                                        Yes
+                                      </button>
+                                      <button
+                                        className="bg-gray-500 text-white px-4 py-2 rounded"
+                                        onClick={() => setShowModal(false)}
+                                      >
+                                        No
+                                      </button>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                          )}
-                          {/* <li className="px-5 cursor-pointer text-black">
-                            {startCase("hello")}
-                          </li> */}
-                        </ul>
-                      </div>
-                    )
-                  }
+                              )}
+                            </ul>
+                          </div>
+                        )}
+                        </>
+                        </>
+                      )}
                   <img
                     className="rounded-t-lg"
                     src={require(`assets/astronomy.jpg`)}
