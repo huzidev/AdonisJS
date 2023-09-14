@@ -168,12 +168,61 @@ export default function ShowBlogs(props: any): JSX.Element {
                     isSettings.blogId === blog.id && (
                       <div>
                         <ul
-                          className="absolute right-0 top-7 bg-white w-16"
+                          className="absolute right-0 top-7 block divide-y divide-gray-100 rounded-lg shadow bg-gray-300"
                           aria-labelledby="dropdownDefaultButton"
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          <li className="px-5 cursor-pointer text-black">
-                            {startCase("hello")}
+                          <li>
+                            <Link
+                              to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
+                              type="button"
+                              className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                            >
+                              Edit
+                            </Link>
                           </li>
+                          <li>
+                            <button
+                              type="button"
+                              className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
+                              // onClick={() => blogs.deleteBlog(blog.id)}
+                              onClick={() => {
+                                setDeleteBlogId(blog.id);
+                                setShowModal(true);
+                              }}
+                            >
+                              Delete
+                            </button>
+                          </li>
+                          {showModal && deleteBlogId === blog.id && (
+                            <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
+                              <div className="bg-white p-8 w-96">
+                                <p className="text-lg text-center mb-4">
+                                  Are you sure you want to delete this blog?
+                                </p>
+                                <div className="flex justify-center space-x-4">
+                                  <button
+                                    className="bg-red-500 text-white px-4 py-2 rounded"
+                                    onClick={() => {
+                                      blogs.deleteBlog(blog.id);
+                                      setShowModal(false);
+                                    }}
+                                  >
+                                    Yes
+                                  </button>
+                                  <button
+                                    className="bg-gray-500 text-white px-4 py-2 rounded"
+                                    onClick={() => setShowModal(false)}
+                                  >
+                                    No
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          {/* <li className="px-5 cursor-pointer text-black">
+                            {startCase("hello")}
+                          </li> */}
                         </ul>
                       </div>
                     )
