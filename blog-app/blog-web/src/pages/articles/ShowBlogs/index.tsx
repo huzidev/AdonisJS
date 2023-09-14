@@ -23,13 +23,17 @@ export default function ShowBlogs(props: any): JSX.Element {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
+  const [isSettings, setIsSettings] = useState<boolean>(false);
   const params = useParams();
   const isMe = params.id === "me";
   const isUser = auth.state.user?.role === "user";
-  
+
   const { isViewProfile } = useShowBlogsHook();
-  const favBlogs = isViewProfile && !isMe ? blogs.state.getAllFavoriteBlogs.data : blogs.state.getFavoriteBlogs.data;
-  
+  const favBlogs =
+    isViewProfile && !isMe
+      ? blogs.state.getAllFavoriteBlogs.data
+      : blogs.state.getFavoriteBlogs.data;
+
   return (
     <div className="w-[1500px] m-auto flex flex-col">
       <div>
@@ -142,6 +146,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                       // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
                     >
                       <svg
+                      onClick={() => setIsSettings(!isSettings)}
                         className="w-5 h-5"
                         aria-hidden="true"
                         fill="currentColor"
@@ -152,18 +157,21 @@ export default function ShowBlogs(props: any): JSX.Element {
                       </svg>
                     </button>
                   </div>
+                  {
+                    isSettings && (
+                      <div>
                         <ul
-                        className="absolute right-0 top-7 bg-white w-16"
+                          className="absolute right-0 top-7 bg-white w-16"
                           aria-labelledby="dropdownDefaultButton"
                         >
-                          <li
-                            className="px-5 cursor-pointer text-black"
-                            key={index}
-                          >
+                          <li className="px-5 cursor-pointer text-black" key={index}>
                             {/* startCase will make the first letter Capital of any word */}
-                            {startCase('hello')}
+                            {startCase("hello")}
                           </li>
                         </ul>
+                      </div>
+                    )
+                  }
                   <img
                     className="rounded-t-lg"
                     src={require(`assets/astronomy.jpg`)}
@@ -203,25 +211,23 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 ? "text-red-500"
                                 : "text-gray-500"
                             }`}
-                            onClick={(e) => 
-                              {
-                                e.stopPropagation()
-                                favBlogs.find(
-                                  (favoriteBlog: any) =>
-                                    favoriteBlog.id === blog.id
-                                )
-                                  ? blogs.removeFavoriteBlog({
-                                      userId: auth.state.user?.id,
-                                      articleId: blog.id,
-                                      ownerId: blog.ownerId
-                                    })
-                                  : blogs.addFavoriteBlog({
-                                      userId: auth.state.user?.id,
-                                      articleId: blog.id,
-                                      ownerId: blog.ownerId
-                                    })
-                              }
-                            }
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              favBlogs.find(
+                                (favoriteBlog: any) =>
+                                  favoriteBlog.id === blog.id
+                              )
+                                ? blogs.removeFavoriteBlog({
+                                    userId: auth.state.user?.id,
+                                    articleId: blog.id,
+                                    ownerId: blog.ownerId,
+                                  })
+                                : blogs.addFavoriteBlog({
+                                    userId: auth.state.user?.id,
+                                    articleId: blog.id,
+                                    ownerId: blog.ownerId,
+                                  });
+                            }}
                           >
                             <svg
                               className="w-6 h-6"
@@ -345,9 +351,22 @@ export default function ShowBlogs(props: any): JSX.Element {
                           className="text-white ml-3"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          {isBannedUser || (props.userDetails && props.userDetails.isBanned) ? (
-                            <del onClick={() => navigate(ROUTE_PATHS.VIEW_PROFILE + blog.ownerId)} title="Banned User" className="text-red-600">
-                              {isViewProfile && props.userDetails.role !== 'user' ? (props.userDetails && props.userDetails.username) : uploadedByUsername}
+                          {isBannedUser ||
+                          (props.userDetails && props.userDetails.isBanned) ? (
+                            <del
+                              onClick={() =>
+                                navigate(
+                                  ROUTE_PATHS.VIEW_PROFILE + blog.ownerId
+                                )
+                              }
+                              title="Banned User"
+                              className="text-red-600"
+                            >
+                              {isViewProfile &&
+                              props.userDetails.role !== "user"
+                                ? props.userDetails &&
+                                  props.userDetails.username
+                                : uploadedByUsername}
                             </del>
                           ) : (
                             <>
@@ -355,13 +374,16 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 to={
                                   blog.ownerId === auth.state.user?.id
                                     ? ROUTE_PATHS.VIEW_PROFILE + "me"
-                                    : ROUTE_PATHS.VIEW_PROFILE +
-                                      blog.ownerId
-                                    }
+                                    : ROUTE_PATHS.VIEW_PROFILE + blog.ownerId
+                                }
                                 type="button"
                                 className="text-sm font-medium text-center text-white hover:text-blue-500"
                               >
-                              {isViewProfile && props.userDetails.role !== 'user' ? (props.userDetails && props.userDetails.username) : uploadedByUsername}
+                                {isViewProfile &&
+                                props.userDetails.role !== "user"
+                                  ? props.userDetails &&
+                                    props.userDetails.username
+                                  : uploadedByUsername}
                               </Link>
                             </>
                           )}
@@ -406,8 +428,8 @@ export default function ShowBlogs(props: any): JSX.Element {
         )}
         {/* if both currentPage is = to lastPage means final page hence no more fetching after that */}
       </div>
-      {isViewProfile ? (
-        !props.isLoading &&
+      {isViewProfile
+        ? !props.isLoading &&
           !props.isLoadingBlogs &&
           props.allBlogs.length === 0 && (
             <div className="w-full mt-5 py-8 pl-5 border rounded-lg shadow bg-gray-800 border-gray-700">
@@ -440,17 +462,15 @@ export default function ShowBlogs(props: any): JSX.Element {
               </Link>
             </div>
           )
-      ) : (
-        !props.isLoading && props.allBlogs.length === 0 && (
-        <div className="w-full mt-5 py-8 pl-5 border rounded-lg shadow bg-gray-800 border-gray-700">
+        : !props.isLoading &&
+          props.allBlogs.length === 0 && (
+            <div className="w-full mt-5 py-8 pl-5 border rounded-lg shadow bg-gray-800 border-gray-700">
               <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
                 Oops... No one has uploaded any blog
                 {!!props.isFilter && ` related to ${props.isFilter} category`}
               </h1>
               <Link
-                to={
-                 ROUTE_PATHS.ARTICLE_CREATE
-                }
+                to={ROUTE_PATHS.ARTICLE_CREATE}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
                 title={isMe && !isUser ? "Add Blog" : "Explore Blogs"}
               >
@@ -458,9 +478,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                 Add Blog
               </Link>
             </div>
-        )
-      )
-        }
+          )}
       {isViewProfile ? (
         <div className="w-11/12 m-auto mt-5">
           {/* so load more button will only be visible when their is currentPage OR props.currentPageFvrt and if currentPage and lastPage values 
