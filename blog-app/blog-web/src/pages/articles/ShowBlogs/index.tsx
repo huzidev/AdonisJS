@@ -170,7 +170,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                         {isSettings === blog.id && (
                           <div>
                             <ul
-                              className="absolute right-0 top-7 block divide-y divide-gray-100 rounded-lg shadow bg-gray-300"
+                              className="absolute right-0 top-7 block divide-gray-100 rounded-lg shadow bg-gray-300"
                               aria-labelledby="dropdownDefaultButton"
                               onClick={(e) => e.stopPropagation()}
                             >
