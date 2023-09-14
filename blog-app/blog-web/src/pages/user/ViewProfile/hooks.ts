@@ -75,7 +75,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   }, [window.location.search, window.location.pathname]);
 
   useEffect(() => {
-    if (prevUser?.getUser.loading) {
+    if (prevUser?.getUser.loading || search.sort) {
       if (isRole === "user" && !isMe) {
         const payloadForClicked: any = {
           // if clicked profile is of user then fetch
