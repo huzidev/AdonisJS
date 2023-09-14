@@ -35,8 +35,6 @@ export default function ShowBlogs(props: any): JSX.Element {
       ? blogs.state.getAllFavoriteBlogs.data
       : blogs.state.getFavoriteBlogs.data;
 
-  console.log("Is settings", isSettings);
-
   return (
     <div className="w-[1500px] m-auto flex flex-col">
       <div>
@@ -180,7 +178,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 <Link
                                   to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
                                   type="button"
-                                  className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                                  className="text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center"
                                 >
                                   Edit
                                 </Link>
@@ -188,7 +186,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                               <li>
                                 <button
                                   type="button"
-                                  className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
+                                  className="text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center"
                                   // onClick={() => blogs.deleteBlog(blog.id)}
                                   onClick={() => {
                                     setDeleteBlogId(blog.id);
