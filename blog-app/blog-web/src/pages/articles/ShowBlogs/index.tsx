@@ -24,9 +24,7 @@ export default function ShowBlogs(props: any): JSX.Element {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
-  const [isSettings, setIsSettings] = useState<any>({
-    blogId: null,
-  });
+  const [isSettings, setIsSettings] = useState<number | null>(null);
   const params = useParams();
   const isMe = params.id === "me";
   const isUser = auth.state.user?.role === "user";
@@ -149,7 +147,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                           className="absolute right-0 hover:border-white hover:border-2"
                           onClick={(e) => {
                             e.stopPropagation();
-                            setIsSettings({ blogId: blog.id });
+                            setIsSettings( isSettings === blog.id ? null : blog.id );
                           }}
                         >
                           <button
@@ -171,7 +169,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                           </button>
                         </div>
                         <>
-                        {isSettings.blogId === blog.id && (
+                        {isSettings === blog.id && (
                           <div>
                             <ul
                               className="absolute right-0 top-7 block divide-y divide-gray-100 rounded-lg shadow bg-gray-300"
