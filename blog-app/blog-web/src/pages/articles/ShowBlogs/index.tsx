@@ -23,7 +23,9 @@ export default function ShowBlogs(props: any): JSX.Element {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const [dropDown, setDropDown] = useState<boolean>(false);
-  const [isSettings, setIsSettings] = useState<boolean>(false);
+  const [isSettings, setIsSettings] = useState<any>({
+    blogId: null
+  });
   const params = useParams();
   const isMe = params.id === "me";
   const isUser = auth.state.user?.role === "user";
@@ -33,6 +35,8 @@ export default function ShowBlogs(props: any): JSX.Element {
     isViewProfile && !isMe
       ? blogs.state.getAllFavoriteBlogs.data
       : blogs.state.getFavoriteBlogs.data;
+
+  console.log("Is settings", isSettings);
 
   return (
     <div className="w-[1500px] m-auto flex flex-col">
@@ -133,10 +137,14 @@ export default function ShowBlogs(props: any): JSX.Element {
                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
               >
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
-                <div className="border rounded-lg shadow bg-gray-800 border-gray-700 relative">
+                <div 
+                className="border rounded-lg shadow bg-gray-800 border-gray-700 relative">
                   <div
-                    className="absolute right-0"
-                    onClick={(e) => e.stopPropagation()}
+                    className="absolute right-0 hover:border-white hover:border-2"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsSettings({ blogId: blog.id });
+                    }}
                   >
                     <button
                       id="dropdownComment1Button"
@@ -146,7 +154,6 @@ export default function ShowBlogs(props: any): JSX.Element {
                       // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
                     >
                       <svg
-                      onClick={() => setIsSettings(!isSettings)}
                         className="w-5 h-5"
                         aria-hidden="true"
                         fill="currentColor"
@@ -158,14 +165,13 @@ export default function ShowBlogs(props: any): JSX.Element {
                     </button>
                   </div>
                   {
-                    isSettings && (
+                    isSettings.blogId === blog.id && (
                       <div>
                         <ul
                           className="absolute right-0 top-7 bg-white w-16"
                           aria-labelledby="dropdownDefaultButton"
                         >
-                          <li className="px-5 cursor-pointer text-black" key={index}>
-                            {/* startCase will make the first letter Capital of any word */}
+                          <li className="px-5 cursor-pointer text-black">
                             {startCase("hello")}
                           </li>
                         </ul>
