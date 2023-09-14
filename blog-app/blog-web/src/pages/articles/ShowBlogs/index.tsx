@@ -152,6 +152,18 @@ export default function ShowBlogs(props: any): JSX.Element {
                       </svg>
                     </button>
                   </div>
+                        <ul
+                        className="absolute right-0 top-7 bg-white w-16"
+                          aria-labelledby="dropdownDefaultButton"
+                        >
+                          <li
+                            className="px-5 cursor-pointer text-black"
+                            key={index}
+                          >
+                            {/* startCase will make the first letter Capital of any word */}
+                            {startCase('hello')}
+                          </li>
+                        </ul>
                   <img
                     className="rounded-t-lg"
                     src={require(`assets/astronomy.jpg`)}
