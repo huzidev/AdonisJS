@@ -122,7 +122,6 @@ export const getAllFavoriteBlogs = createAsyncThunk(
       const response = await api.get(
         `${endpoints.GET_FAVORITE_BLOGS_LIST + data.userId}`
       );
-      console.log("response for fav blogs", response);
       return {
         data: response.data.response
       };
