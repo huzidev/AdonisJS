@@ -31,27 +31,39 @@ export default class FavoriteArticlesController {
   public async get({ params }: HttpContextContract) {
     try {
       const { articleId, id } = params;
-      const response = Article.query().join(
+      
+      const query = Article.query().join(
         "favorite_articles as f",
         "articles.id",
         "=",
         "f.article_id"
       );
-      // if user clicked on a blogView page then their will be articleId in params
+
+      // if user clicked on a blogView page then there will be articleId in params
+      let response;
       if (params.articleId) {
-        return await response
-          .where("f.user_id", id)
-          .andWhere("article_id", articleId);
-      } // if user clikced on ViewProfile or some other user profile then their will be no articleId in params 
+        response = await query.where("f.user_id", id).andWhere("article_id", articleId);
+      }
+      // if user clicked on ViewProfile or on some other user profile then their will be no aritcleId in params 
       else {
-        response.select("*").where("f.user_id", id)
+        query.select("*").where("f.user_id", id);
         if (params.page) {
-          return await response.paginate(params.page, 15);
-        } else if (params.articleId) {
+          response = await query.paginate(params.page || 1, 15);
         } else {
-          return await response;
+          response = await query;
         }
       }
+
+      return {
+        response,
+        message: `${
+          params.articleId
+            ? `Blog by id ${params.articleId} `
+            : params.page
+            ? `Yours all blogs list`
+            : "Yours blogs"
+        } fetched successfully`,
+      };
     } catch (e) {
       throw e;
     }
