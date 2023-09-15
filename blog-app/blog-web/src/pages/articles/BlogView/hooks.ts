@@ -67,7 +67,6 @@ export function useGetBlogPageHooks() {
         navigate('/');
       }
     }
-    console.log("state.getBlog.message", state.getBlog.message);
   }, [state]);
 
 }

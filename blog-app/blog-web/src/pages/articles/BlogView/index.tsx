@@ -1,5 +1,5 @@
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ export default function ViewBlogPage(): JSX.Element {
   const blog = useBlogs();
   const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
-  const initialState: BlogState = { title: '', image: '', content: '' };
+  const initialState: BlogState = { title: "", image: "", content: "" };
   const [blogView, setBlogView] = useState(initialState);
   const allReactions: any = reaction.state.getReactions.data;
   const ownerId: any = blog.state.getBlog.data?.ownerId;
@@ -36,13 +36,19 @@ export default function ViewBlogPage(): JSX.Element {
 
   useGetBlogPageHooks();
 
+  console.log("blog resp", blog.state.getFavoriteBlog.data);
+
   return (
     <div>
       <div className="w-2/3 my-8 mx-auto border rounded-lg shadow bg-gray-800 border-gray-700">
         {owner?.isBanned ? (
           <div className="flex justify-center py-32">
             <p className="text-xl dark:text-white">
-              User <Link to={ROUTE_PATHS.VIEW_PROFILE + ownerId}><b>{owner?.username}</b></Link> Is Banned from this web
+              User{" "}
+              <Link to={ROUTE_PATHS.VIEW_PROFILE + ownerId}>
+                <b>{owner?.username}</b>
+              </Link>{" "}
+              Is Banned from this web
             </p>
           </div>
         ) : (
@@ -60,12 +66,17 @@ export default function ViewBlogPage(): JSX.Element {
                       reaction.addReaction({
                         ...reactState,
                         // so if user liked a blog then Liked will be shown instead of like because user has already liked the blog and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
-                        isLike: allReactionsState && allReactions.user.isLike ? false : true,
+                        isLike:
+                          allReactionsState && allReactions.user.isLike
+                            ? false
+                            : true,
                         isDislike: false,
                       })
                     }
                   >
-                    {allReactionsState && allReactions.user.isLike ? "Liked" : "Like"}
+                    {allReactionsState && allReactions.user.isLike
+                      ? "Liked"
+                      : "Like"}
                   </button>
                   <button
                     className="ml-5"
@@ -73,7 +84,10 @@ export default function ViewBlogPage(): JSX.Element {
                       reaction.addReaction({
                         ...reactState,
                         isLike: false,
-                        isDislike: allReactionsState && allReactions.user.isDislike ? false : true,
+                        isDislike:
+                          allReactionsState && allReactions.user.isDislike
+                            ? false
+                            : true,
                       })
                     }
                   >
@@ -82,9 +96,14 @@ export default function ViewBlogPage(): JSX.Element {
                       : "Dislike"}
                   </button>
                 </div>
-              <div className='absolute right-2'>
-                 <FavoriteIcon /> <FavoriteBorderIcon />
-              </div>
+                <div className="absolute right-2">
+                  {/* if the blog on which user clicked is already in favorite then show Heart Icon else not */}
+                  {blog.state.getFavoriteBlog.data ? (
+                    <FavoriteIcon />
+                  ) : (
+                    <FavoriteBorderIcon />
+                  )}
+                </div>
               </div>
             )}
             <div className="p-5 flex flex-col items-center">
@@ -102,7 +121,10 @@ export default function ViewBlogPage(): JSX.Element {
                   Dislikes : {allReactions && allReactions.totalDislikes}
                 </p>
               </div>
-              <Link className="text-white" to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}>
+              <Link
+                className="text-white"
+                to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}
+              >
                 Uploaded By : {owner?.username}
               </Link>
             </div>
