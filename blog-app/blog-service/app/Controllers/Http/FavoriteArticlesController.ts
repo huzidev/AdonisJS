@@ -60,7 +60,7 @@ export default class FavoriteArticlesController {
       let response;
       // if user clicked on a blogView page then there will be articleId in params
       if (params.articleId) {
-        response = await FavoriteArticle.query().select('article_id').where('user_id', id).andWhere('article_id', articleId);
+        response = await FavoriteArticle.query().select('article_id as id').where('user_id', id).andWhere('article_id', articleId).first();
       } else {
         if (params.page) {
           response = await query.select("*", "articles.id").paginate(params.page || 1, 15);
