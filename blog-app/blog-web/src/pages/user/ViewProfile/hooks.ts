@@ -152,9 +152,9 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   function loadMore() {
     const updatedPayload = {
       userId: isMe ? loggedInId : params.id,
-      page: isRole === "user" ? currentPageFvrt + 1 : currentPage + 1,
+      page: (isRole === "user" || isLoggedInRole === 'user') ? currentPageFvrt + 1 : currentPage + 1,
     };
-    if (isRole === "user") {
+    if (isRole === "user" || isLoggedInRole === 'user') {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
       // filters: search so when user clicked on load more then result will be according to filters

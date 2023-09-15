@@ -531,10 +531,10 @@ export default function ShowBlogs(props: any): JSX.Element {
           {
             // totalBlogs and totalFvrtBlogs conditon so load more button won't be shown when user have total blogs length less than 15
             !props.isLoading &&
-              (props.isRole === "user"
+              (props.userDetails.role === "user"
                 ? props.currentPageFvrt !== props.lastPageFvrt
                 : props.currentPageBlogs !== props.lastPageBlogs) &&
-              (props.isRole === "user"
+              (props.userDetails.role === "user"
                 ? props.totalFvrtBlogs > 15
                 : props.totalBlogs > 15) && (
                 <button
