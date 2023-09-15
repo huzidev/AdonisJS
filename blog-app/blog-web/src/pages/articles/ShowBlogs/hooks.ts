@@ -19,6 +19,7 @@ export function useShowBlogsHook() {
   }, [currentPath]);
 
   return {
-    isViewProfile
+    isViewProfile,
+    currentPath
   }
 }

@@ -28,7 +28,6 @@ export function useBlogsPageHooks() {
   const [sortValue, setSortValue] = useState(initialSortState);
   const payload: any = {
     userId: auth.state.user?.id,
-    page: 1
   };
 
   const currentPageBlogs: any = blogs.state.getBlogs.meta?.currentPage;
@@ -98,15 +97,15 @@ export function useBlogsPageHooks() {
   
   function loadMore() {
     blogs.getBlogs({ page: currentPageBlogs + 1, ...search });
-    if (isUser) {
-      if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
-        let loggedInId: any = auth.state.user?.id
-        blogs.getFavoriteBlogs({
-          page: currentPageFvrtBlogs + 1,
-          userId: loggedInId
-        });
-      }
-    }
+    // if (isUser) {
+    //   if (currentPageFvrtBlogs !== lastPageFvrtBlogs) {
+    //     let loggedInId: any = auth.state.user?.id
+    //     blogs.getFavoriteBlogs({
+    //       page: currentPageFvrtBlogs + 1,
+    //       userId: loggedInId
+    //     });
+    //   }
+    // }
   }
 
   useEffect(() => {
@@ -124,7 +123,7 @@ export function useBlogsPageHooks() {
 
     // so only if loggedIn user's role is user then fetch favorite blogs
     if (isUser && currentPath === 'onBlogs') {
-      blogs.getFavoriteBlogs(payload);
+      blogs.getAllFavoriteBlogs(payload);
     }
   }, [window.location.search]);
   

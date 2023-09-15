@@ -12,7 +12,6 @@ export default function ViewBlogsPage(): JSX.Element {
   const auth = useAuth();
   const user = useUser();
   const allUsers = user.state.allUser?.data;
-  const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
   const userData = auth.state.user;
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -41,7 +40,6 @@ export default function ViewBlogsPage(): JSX.Element {
         currentPageBlogs={currentPageBlogs}
         lastPageBlogs={lastPageBlogs}
         loadMore={loadMore}
-        favoriteBlogs={favoriteBlogs}
         isFilter={isFilter}
       />
     </div>
