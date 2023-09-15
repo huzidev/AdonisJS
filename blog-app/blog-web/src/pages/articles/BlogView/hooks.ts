@@ -52,12 +52,6 @@ export function useGetBlogPageHooks(): void {
     if (prevReact?.loading) {
       reaction.getReactions({ articleId: blogId, userId: loggedInId });
     }
-    // if (prevFavorite?.loading) {
-    //   blog.getFavoriteBlog({
-    //   userId: loggedInId,
-    //   articleId: blogId
-    // });
-    // }
   }, [reaction.state.addReaction])
 
   useEffect(() => {
