@@ -7,10 +7,13 @@ export default function FavoriteArticlesRoutes() {
     Route.delete("/remove_favorite_article/:id", `${path}.remove`)
       .where("id", /^[0-9]+$/)
       .middleware("auth");
-    Route.get("/get_favorite_article/:id/:page", `${path}.get`)
+    Route.get("/get_favorite_articles/:id/:page", `${path}.get`)
       .where("id", /^[0-9]+$/)
       .where("page", /^[0-9]+$/)
-    Route.get("/get_favorite_article/:id", `${path}.get`)
+    Route.get("/get_favorite_articles_list/:id", `${path}.get`)
       .where("id", /^[0-9]+$/)
+    Route.get("/get_favorite_article/:id/:articleId", `${path}.get`)
+      .where("id", /^[0-9]+$/)
+      .where("articleId", /^[0-9]+$/)
   }).prefix("/article");
 }
