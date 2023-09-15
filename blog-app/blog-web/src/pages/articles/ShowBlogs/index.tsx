@@ -32,6 +32,7 @@ export default function ShowBlogs(props: any): JSX.Element {
   const isUser = auth.state.user?.role === "user";
 
   const { isViewProfile } = useShowBlogsHook();
+  
   const favBlogs =
     isViewProfile && !isMe
       ? blogs.state.getAllFavoriteBlogs.data
