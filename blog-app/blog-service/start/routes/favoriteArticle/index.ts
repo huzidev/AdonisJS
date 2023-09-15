@@ -9,11 +9,11 @@ export default function FavoriteArticlesRoutes() {
       .middleware("auth");
     Route.get("/get_favorite_articles/:id/:page", `${path}.get`)
       .where("id", /^[0-9]+$/)
-      .where("page", /^[0-9]+$/)
+      .where("page", /^[0-9]+$/);
     Route.get("/get_favorite_articles_list/:id", `${path}.get`)
-      .where("id", /^[0-9]+$/)
+      .where("id", /^[0-9]+$/);
     Route.get("/get_favorite_article/:id/:articleId", `${path}.get`)
       .where("id", /^[0-9]+$/)
-      .where("articleId", /^[0-9]+$/)
+      .where("articleId", /^[0-9]+$/);
   }).prefix("/article");
 }

@@ -30,15 +30,27 @@ export default class FavoriteArticlesController {
 
   public async get({ params }: HttpContextContract) {
     try {
-      const userId = params.id;
-      const response = Article.query()
-        .join("favorite_articles as f", "articles.id", "=", "f.article_id")
-        .select("articles.*")
-        .where("f.user_id", userId);
-      if (params.page) {
-        return await response.paginate(params.page, 15);
-      } else {
-        return await response;
+      const { articleId, id } = params;
+      const response = Article.query().join(
+        "favorite_articles as f",
+        "articles.id",
+        "=",
+        "f.article_id"
+      );
+      // if user clicked on a blogView page then their will be articleId in params
+      if (params.articleId) {
+        return await response
+          .where("f.user_id", id)
+          .andWhere("article_id", articleId);
+      } // if user clikced on ViewProfile or some other user profile then their will be no articleId in params 
+      else {
+        response.select("*").where("f.user_id", id)
+        if (params.page) {
+          return await response.paginate(params.page, 15);
+        } else if (params.articleId) {
+        } else {
+          return await response;
+        }
       }
     } catch (e) {
       throw e;
