@@ -132,7 +132,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                 title="Read More"
                 className={`w-[32%] mt-8 ${
                   index % 3 === 1 && "mx-4"
-                } margin cursor-pointer`}
+                } margin`}
                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
               >
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
@@ -261,7 +261,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 ? "Remove From"
                                 : "Add to") + " favorite"
                             }
-                            className={`p-2 rounded-full transition-colors duration-300 ${
+                            className={`p-2 rounded-full w-10 transition-colors duration-300 cursor-pointer ${
                               favBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
