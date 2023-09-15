@@ -55,16 +55,13 @@ export default class FavoriteArticlesController {
         "articles.id",
         "=",
         "f.article_id"
-      );
+      ).select("*").where("f.user_id", id);
 
-      // if user clicked on a blogView page then there will be articleId in params
       let response;
+      // if user clicked on a blogView page then there will be articleId in params
       if (params.articleId) {
-        response = await query.where("f.user_id", id).andWhere("article_id", articleId).first();
-      }
-      // if user clicked on ViewProfile or on some other user profile then their will be no aritcleId in params 
-      else {
-        query.select("*").where("f.user_id", id);
+        response = await FavoriteArticle.query().select('article_id').where('user_id', id).andWhere('article_id', articleId);
+      } else {
         if (params.page) {
           response = await query.paginate(params.page || 1, 15);
         } else {
