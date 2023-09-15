@@ -116,11 +116,11 @@ export const getFavoriteBlogs = createAsyncThunk(
 );
 
 export const getAllFavoriteBlogs = createAsyncThunk(
-  endpoints.GET_FAVORITE_BLOGS + 'id',
+  endpoints.GET_FAVORITE_BLOGS_LIST,
   async (data: GetBlogsById): Promise<AllBlogs | null> => {
     try {
       const response = await api.get(
-        `${endpoints.GET_FAVORITE_BLOGS + data.userId}`
+        `${endpoints.GET_FAVORITE_BLOGS_LIST + data.userId}`
       );
       return {
         data: response.data
