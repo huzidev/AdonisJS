@@ -30,7 +30,7 @@ export interface Blog extends AddBlogPayload {
 export interface FavoriteBlogPayload {
   userId: number | null | undefined;
   articleId: number;
-  ownerId: number;
+  ownerId?: number;
 }
 
 export interface BlogSortReq {
