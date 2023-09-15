@@ -28,6 +28,24 @@ export default class FavoriteArticlesController {
     }
   }
 
+  // public async get({ params }: HttpContextContract) {
+  //   try {
+  //     const userId = params.id;
+  //     const response = Article.query()
+  //       .join("favorite_articles as f", "articles.id", "=", "f.article_id")
+  //       .select("articles.*")
+  //       .where("f.user_id", userId);
+  //     if (params.page) {
+  //       return await response.paginate(params.page, 15);
+  //     } else {
+  //       return await response;
+  //     }
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
+
+  
   public async get({ params }: HttpContextContract) {
     try {
       const { articleId, id } = params;
@@ -42,7 +60,7 @@ export default class FavoriteArticlesController {
       // if user clicked on a blogView page then there will be articleId in params
       let response;
       if (params.articleId) {
-        response = await query.where("f.user_id", id).andWhere("article_id", articleId);
+        response = await query.where("f.user_id", id).andWhere("article_id", articleId).first();
       }
       // if user clicked on ViewProfile or on some other user profile then their will be no aritcleId in params 
       else {
@@ -67,7 +85,7 @@ export default class FavoriteArticlesController {
     } catch (e) {
       throw e;
     }
-  }
+  }	
 
   public async remove({ request }: HttpContextContract) {
     try {
