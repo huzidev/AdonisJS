@@ -36,8 +36,6 @@ export default function ViewBlogPage(): JSX.Element {
 
   useGetBlogPageHooks();
 
-  console.log("blog resp", blog.state.getFavoriteBlog.data);
-
   return (
     <div>
       <div className="w-2/3 my-8 mx-auto border rounded-lg shadow bg-gray-800 border-gray-700">
@@ -99,9 +97,13 @@ export default function ViewBlogPage(): JSX.Element {
                 <div className="absolute right-2">
                   {/* if the blog on which user clicked is already in favorite then show Heart Icon else not */}
                   {blog.state.getFavoriteBlog.data ? (
-                    <FavoriteIcon />
+                    <span title="Remove From Favortie">
+                      <FavoriteIcon />
+                    </span>
                   ) : (
-                    <FavoriteBorderIcon />
+                    <span title="Add To Favortie">
+                      <FavoriteBorderIcon />
+                    </span>
                   )}
                 </div>
               </div>
