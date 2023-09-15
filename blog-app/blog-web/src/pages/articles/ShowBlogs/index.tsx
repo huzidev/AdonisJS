@@ -37,8 +37,6 @@ export default function ShowBlogs(props: any): JSX.Element {
       ? blogs.state.getAllFavoriteBlogs.data
       : blogs.state.getFavoriteBlogs.data;
       
-  console.log("Fav blogs", favBlogs);
-
   return (
     <div className="w-[1500px] m-auto flex flex-col">
       <div>
