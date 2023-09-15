@@ -152,8 +152,10 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   function loadMore() {
     const updatedPayload = {
       userId: isMe ? loggedInId : params.id,
+      // isMe && isLoggedInRole === 'user' if user is on ViewProfile page and loggedIn user's role is user then put the next currentPageFvrt number
       page: (isRole === "user" || (isMe && isLoggedInRole === 'user')) ? currentPageFvrt + 1 : currentPage + 1,
     };
+    // isMe && isLoggedInRole === 'user' if user is on viewProfilePage and loggedIn user's role is user then fetch the favoriteBlogs of that user
     if (isRole === "user" || (isMe && isLoggedInRole === 'user')) {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
