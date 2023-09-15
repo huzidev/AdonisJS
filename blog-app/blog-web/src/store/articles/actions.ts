@@ -96,6 +96,60 @@ export const getBlogsById = createAsyncThunk(
   }
 );
 
+export const getFavoriteBlog = createAsyncThunk(
+  endpoints.GET_FAVORITE_BLOG + "id",
+  async (id: number) => {
+    // AllBlogs contains Array of blogs and meta
+    try {
+      const response = await api.get(endpoints.GET_FAVORITE_BLOG + id);
+      return response
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
+    }
+  }
+);
+
+// export const getFavoriteBlogs = createAsyncThunk(
+//   endpoints.GET_FAVORITE_BLOGS,
+//   async (data: GetBlogsById): Promise<AllBlogs | null> => {
+//     // AllBlogs contains Array of blogs and meta
+//     try {
+//       const { userId, page } = data;
+//       const response = await api.get(
+//         `${endpoints.GET_FAVORITE_BLOGS + userId}/${page}`
+//       );
+//       return response.data;
+//     } catch (e: any) {
+//       const err = mapErrorToState(e);
+//         errorNotification(err);
+//         console.log("Error", err);
+//         throw e
+//     }
+//   }
+// );
+
+// export const getAllFavoriteBlogs = createAsyncThunk(
+//   endpoints.GET_FAVORITE_BLOGS + 'id',
+//   async (data: GetBlogsById): Promise<AllBlogs | null> => {
+//     try {
+//       const response = await api.get(
+//         `${endpoints.GET_FAVORITE_BLOGS_LIST + data.userId}`
+//       );
+//       return {
+//         data: response.data
+//       };
+//     } catch (e: any) {
+//       const err = mapErrorToState(e);
+//         errorNotification(err);
+//         console.log("Error", err);
+//         throw e
+//     }
+//   }
+// );
+
 export const getFavoriteBlogs = createAsyncThunk(
   endpoints.GET_FAVORITE_BLOGS,
   async (data: GetBlogsById): Promise<AllBlogs | null> => {
@@ -122,8 +176,6 @@ export const getAllFavoriteBlogs = createAsyncThunk(
       const response = await api.get(
         `${endpoints.GET_FAVORITE_BLOGS_LIST + data.userId}`
       );
-      console.log("response", response);
-      
       return {
         data: response.data.response
       };

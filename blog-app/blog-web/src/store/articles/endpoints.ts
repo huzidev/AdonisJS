@@ -1,5 +1,6 @@
 export const GET_BLOGS = "/article/list/";
 export const GET_FAVORITE_BLOGS = "/article/get_favorite_articles/";
+export const GET_FAVORITE_BLOG = "/article/get_favorite_article/";
 export const GET_FAVORITE_BLOGS_LIST = "/article/get_favorite_articles_list/";
 export const ADD_FAVORITE_BLOG = "/article/add_favorite_article";
 export const REMOVE_FAVORITE_BLOG = "/article/remove_favorite_article/";
