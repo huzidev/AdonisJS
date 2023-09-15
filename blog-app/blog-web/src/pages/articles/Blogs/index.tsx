@@ -1,6 +1,5 @@
 import qs from "query-string";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
@@ -12,7 +11,6 @@ export default function ViewBlogsPage(): JSX.Element {
   const blogs = useBlogs();
   const auth = useAuth();
   const user = useUser();
-  const navigate = useNavigate();
   const allUsers = user.state.allUser?.data;
   const favoriteBlogs = blogs.state.getFavoriteBlogs?.data;
   const allBlogs = blogs.state.getBlogs?.data;
