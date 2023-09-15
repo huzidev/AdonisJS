@@ -310,6 +310,7 @@ export const blogSlice = createSlice({
       state.getAllFavoriteBlogs.loading = false;
       if (action.payload) {
         const { data } = action.payload;
+        console.log("data", data);
         state.getAllFavoriteBlogs.data = data;
       }
       state.getAllFavoriteBlogs.error = false;

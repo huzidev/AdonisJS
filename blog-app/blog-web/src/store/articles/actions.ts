@@ -105,7 +105,7 @@ export const getFavoriteBlogs = createAsyncThunk(
       const response = await api.get(
         `${endpoints.GET_FAVORITE_BLOGS + userId}/${page}`
       );
-      return response.data;
+      return response.data.response;
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);
@@ -122,8 +122,9 @@ export const getAllFavoriteBlogs = createAsyncThunk(
       const response = await api.get(
         `${endpoints.GET_FAVORITE_BLOGS_LIST + data.userId}`
       );
+      console.log("response for fav blogs", response);
       return {
-        data: response.data
+        data: response.data.response
       };
     } catch (e: any) {
       const err = mapErrorToState(e);
