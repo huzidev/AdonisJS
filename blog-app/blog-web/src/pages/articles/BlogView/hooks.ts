@@ -7,7 +7,7 @@ import { useUser } from "store/user";
 import { usePrevious } from "utils/hooks";
 import { successNotification } from "utils/notifications";
 
-export function useGetBlogPageHooks() {
+export function useGetBlogPageHooks(): void {
   const params: any = useParams();
   const blog = useBlogs();
   const reaction = useReactions();
@@ -25,7 +25,6 @@ export function useGetBlogPageHooks() {
   // seprately making with different useEffect because while creating in same useEffect as of ownerId it's fetching data multiple times
   useEffect(() => {
     blog.getBlog(params.slug);
-    
   }, []);
 
   useEffect(() => {
@@ -68,5 +67,4 @@ export function useGetBlogPageHooks() {
       }
     }
   }, [state]);
-
 }

@@ -97,7 +97,13 @@ export default function ViewBlogPage(): JSX.Element {
                 <div className="absolute right-2">
                   {/* if the blog on which user clicked is already in favorite then show Heart Icon else not */}
                   {blog.state.getFavoriteBlog.data ? (
-                    <span title="Remove From Favortie">
+                    <span
+                    onClick={() => blog.addFavoriteBlog({
+                      userId: auth.state.user?.id,
+                      articleId: blog.id,
+                      ownerId: blog.ownerId,
+                    })} 
+                    title="Remove From Favortie">
                       <FavoriteIcon />
                     </span>
                   ) : (
