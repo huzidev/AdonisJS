@@ -1,3 +1,5 @@
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -51,33 +53,38 @@ export default function ViewBlogPage(): JSX.Element {
               alt="Thumbnail"
             />
             {auth.state.user && (
-              <div className="text-white">
-              <button
-                onClick={() =>
-                  reaction.addReaction({
-                    ...reactState,
-                    // so if user liked a blog then Liked will be shown instead of like because user has already liked the blog and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
-                    isLike: allReactionsState && allReactions.user.isLike ? false : true,
-                    isDislike: false,
-                  })
-                }
-              >
-                {allReactionsState && allReactions.user.isLike ? "Liked" : "Like"}
-              </button>
-              <button
-                className="ml-5"
-                onClick={() =>
-                  reaction.addReaction({
-                    ...reactState,
-                    isLike: false,
-                    isDislike: allReactionsState && allReactions.user.isDislike ? false : true,
-                  })
-                }
-              >
-                {allReactionsState && allReactions.user.isDislike
-                  ? "Disliked"
-                  : "Dislike"}
-              </button>
+              <div className="text-white flex">
+                <div>
+                  <button
+                    onClick={() =>
+                      reaction.addReaction({
+                        ...reactState,
+                        // so if user liked a blog then Liked will be shown instead of like because user has already liked the blog and when user again clicked on that liked button then the state will change to false again from true just like youtube like button
+                        isLike: allReactionsState && allReactions.user.isLike ? false : true,
+                        isDislike: false,
+                      })
+                    }
+                  >
+                    {allReactionsState && allReactions.user.isLike ? "Liked" : "Like"}
+                  </button>
+                  <button
+                    className="ml-5"
+                    onClick={() =>
+                      reaction.addReaction({
+                        ...reactState,
+                        isLike: false,
+                        isDislike: allReactionsState && allReactions.user.isDislike ? false : true,
+                      })
+                    }
+                  >
+                    {allReactionsState && allReactions.user.isDislike
+                      ? "Disliked"
+                      : "Dislike"}
+                  </button>
+                </div>
+              <div>
+                 <FavoriteIcon /> <FavoriteBorderIcon />
+              </div>
               </div>
             )}
             <div className="p-5 flex flex-col items-center">
