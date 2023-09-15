@@ -19,6 +19,7 @@ const initialState: BlogState = {
     meta: null,
   },
   getBlog: { ...subState, data: null },
+  getFavoriteBlog: { ...subState, data: null },
   updateBlog: { ...subState, data: null },
   deleteBlog: { ...subState },
   addBlog: { ...subState },
@@ -317,6 +318,23 @@ export const blogSlice = createSlice({
     builder.addCase(actions.getAllFavoriteBlogs.rejected, (state) => {
       state.getAllFavoriteBlogs.loading = false;
       state.getAllFavoriteBlogs.error = true;
+    });
+    // Get Favorite Blog
+    builder.addCase(actions.getFavoriteBlog.pending, (state) => {
+      state.getFavoriteBlog.loading = true;
+      state.getFavoriteBlog.error = false;
+    });
+    builder.addCase(actions.getFavoriteBlog.fulfilled, (state, action) => {
+      state.getFavoriteBlog.loading = false;
+      if (action.payload) {
+        const { data } = action.payload;
+        state.getFavoriteBlog.data = data;
+      }
+      state.getFavoriteBlog.error = false;
+    });
+    builder.addCase(actions.getFavoriteBlog.rejected, (state) => {
+      state.getFavoriteBlog.loading = false;
+      state.getFavoriteBlog.error = true;
     });
   },
 });

@@ -73,6 +73,7 @@ export interface BlogState {
   getAllFavoriteBlogs: AllBlogs;
   removeFavoriteBlog: SubState;
   getBlog: getBlogById;
+  getFavoriteBlog: getBlogById;
   updateBlog: getBlogById;
   addBlog: SubState;
   addFavoriteBlog: SubState;
