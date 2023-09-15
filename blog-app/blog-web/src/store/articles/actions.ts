@@ -102,7 +102,9 @@ export const getFavoriteBlog = createAsyncThunk(
     // AllBlogs contains Array of blogs and meta
     try {
       const response = await api.get(endpoints.GET_FAVORITE_BLOG + data.userId + "/" + data.articleId);
-      return response
+      return {
+        data: response.data.response
+      } 
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);
