@@ -98,7 +98,7 @@ export default function ViewBlogPage(): JSX.Element {
                   {/* if the blog on which user clicked is already in favorite then show Heart Icon else not */}
                   {blog.state.getFavoriteBlog.data ? (
                     <span
-                    onClick={() => blog.addFavoriteBlog({
+                    onClick={() => blog.removeFavoriteBlog({
                       userId: auth.state.user?.id,
                       articleId: getBlog.id,
                       ownerId
@@ -108,7 +108,7 @@ export default function ViewBlogPage(): JSX.Element {
                     </span>
                   ) : (
                     <span 
-                    onClick={() => blog.removeFavoriteBlog({
+                    onClick={() => blog.addFavoriteBlog({
                       userId: auth.state.user?.id,
                       articleId: getBlog.id,
                       ownerId
