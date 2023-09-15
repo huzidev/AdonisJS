@@ -55,7 +55,9 @@ export default class FavoriteArticlesController {
         "articles.id",
         "=",
         "f.article_id"
-      ).select("*").where("f.user_id", id);
+      )
+      .select("*", "articles.id")
+      .where("f.user_id", id);
 
       let response;
       // if user clicked on a blogView page then there will be articleId in params
