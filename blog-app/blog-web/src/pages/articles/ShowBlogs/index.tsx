@@ -1,4 +1,6 @@
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
@@ -285,29 +287,14 @@ export default function ShowBlogs(props: any): JSX.Element {
                                   });
                             }}
                           >
-                            <svg
-                              className="w-6 h-6"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
                               {favBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
                               ) ? (
-                                <path
-                                  fillRule="evenodd"
-                                  clipRule="evenodd"
-                                  d="M17.725 5.275a5.5 5.5 0 1 0-7.778 0L10 6.293l-.947-.948a5.5 5.5 0 1 0-7.778 7.778l.947.947L10 18.243l6.725-6.725.947-.947a5.5 5.5 0 0 0 0-7.778z"
-                                />
+                                <FavoriteIcon />
                               ) : (
-                                <path
-                                  fillRule="evenodd"
-                                  clipRule="evenodd"
-                                  d="M17.725 5.275a5.5 5.5 0 1 0-7.778 0L10 6.293l-.947-.948a5.5 5.5 0 1 0-7.778 7.778l.947.947L10 18.243l6.725-6.725.947-.947a5.5 5.5 0 0 0 0-7.778l-.947-.947z"
-                                />
+                                <FavoriteBorderIcon />
                               )}
-                            </svg>
                           </div>
                         )
                       }
