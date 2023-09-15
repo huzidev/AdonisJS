@@ -53,7 +53,7 @@ export default function ViewBlogPage(): JSX.Element {
               alt="Thumbnail"
             />
             {auth.state.user && (
-              <div className="text-white flex">
+              <div className="text-white flex relative">
                 <div>
                   <button
                     onClick={() =>
@@ -82,7 +82,7 @@ export default function ViewBlogPage(): JSX.Element {
                       : "Dislike"}
                   </button>
                 </div>
-              <div>
+              <div className='absolute right-2'>
                  <FavoriteIcon /> <FavoriteBorderIcon />
               </div>
               </div>
