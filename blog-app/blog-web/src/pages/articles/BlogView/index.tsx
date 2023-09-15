@@ -100,14 +100,21 @@ export default function ViewBlogPage(): JSX.Element {
                     <span
                     onClick={() => blog.addFavoriteBlog({
                       userId: auth.state.user?.id,
-                      articleId: blog.id,
-                      ownerId: blog.ownerId,
+                      articleId: getBlog.id,
+                      ownerId
                     })} 
                     title="Remove From Favortie">
                       <FavoriteIcon />
                     </span>
                   ) : (
-                    <span title="Add To Favortie">
+                    <span 
+                    onClick={() => blog.removeFavoriteBlog({
+                      userId: auth.state.user?.id,
+                      articleId: getBlog.id,
+                      ownerId
+                    })} 
+                    title="Add To Favortie"
+                    >
                       <FavoriteBorderIcon />
                     </span>
                   )}
