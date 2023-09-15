@@ -30,11 +30,11 @@ export default function ShowBlogs(props: any): JSX.Element {
   const params = useParams();
   const isMe = params.id === "me";
   const isUser = auth.state.user?.role === "user";
-  const { isViewProfile } = useShowBlogsHook();
+  const { isViewProfile, currentPath } = useShowBlogsHook();
   
   const favBlogs =
   // isViewProfile && !isMe means user has clicked on some other user's profile 
-    isViewProfile && !isMe || window.location.pathname.includes('/blogs')
+    isViewProfile && !isMe || currentPath.includes('/blogs')
       ? blogs.state.getAllFavoriteBlogs.data
       : blogs.state.getFavoriteBlogs.data;
       
