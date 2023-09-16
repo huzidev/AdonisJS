@@ -218,7 +218,6 @@ export default function ViewProfilePage(): JSX.Element {
                   aria-labelledby="dropdownDefaultButton"
                 >
                   {columns.map((data, columnIndex) => (
-                    // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                     <li
                       onClick={() => handleSort(data.title)}
                       className="px-5 py-3 cursor-pointer"
