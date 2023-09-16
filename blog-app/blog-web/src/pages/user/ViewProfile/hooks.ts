@@ -89,8 +89,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
       if (isRole !== "user" && !isMe) {
         blogs.getBlogsById({ userId: userId, page: 1, filters: search });
       }
-    }
-  }, [window.location.search, window.location.pathname, userState]);
+    } 
+  }, [userState, window.location.search]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
