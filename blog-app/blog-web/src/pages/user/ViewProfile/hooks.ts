@@ -77,6 +77,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     }
   }, [window.location.search, window.location.pathname]);
 
+  // seprately creating condition for getBlogsById else if user clicked on user whose role is user then getBlogById was running which should not
+  // because when clicked user's role is user then fetch favorite blogs list of that user
   useEffect(() => {
     if (isRole && isRole !== 'user') {
       blogs.getBlogsById({ userId: userId, page: 1, filters: search });
