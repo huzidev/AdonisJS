@@ -96,24 +96,6 @@ export const getBlogsById = createAsyncThunk(
   }
 );
 
-export const getFavoriteBlog = createAsyncThunk(
-  endpoints.GET_FAVORITE_BLOG + "id",
-  async (data: FavoriteBlogPayload) => {
-    // AllBlogs contains Array of blogs and meta
-    try {
-      const response = await api.get(endpoints.GET_FAVORITE_BLOG + data.userId + "/" + data.articleId);
-      return {
-        data: response.data.response
-      } 
-    } catch (e: any) {
-      const err = mapErrorToState(e);
-        errorNotification(err);
-        console.log("Error", err);
-        throw e
-    }
-  }
-);
-
 export const getFavoriteBlogs = createAsyncThunk(
   endpoints.GET_FAVORITE_BLOGS,
   async (data: GetBlogsById): Promise<AllBlogs | null> => {
@@ -124,6 +106,24 @@ export const getFavoriteBlogs = createAsyncThunk(
         `${endpoints.GET_FAVORITE_BLOGS + userId}/${page}`
       );
       return response.data.response;
+    } catch (e: any) {
+      const err = mapErrorToState(e);
+        errorNotification(err);
+        console.log("Error", err);
+        throw e
+    }
+  }
+);
+
+export const getFavoriteBlog = createAsyncThunk(
+  endpoints.GET_FAVORITE_BLOG + "id",
+  async (data: FavoriteBlogPayload) => {
+    // AllBlogs contains Array of blogs and meta
+    try {
+      const response = await api.get(endpoints.GET_FAVORITE_BLOG + data.userId + "/" + data.articleId);
+      return {
+        data: response.data.response
+      } 
     } catch (e: any) {
       const err = mapErrorToState(e);
         errorNotification(err);

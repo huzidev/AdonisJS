@@ -64,6 +64,9 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
       }
     } else {
+      // if (window.location.pathname.includes('user/view') && (isRole !== 'user')) {
+      //   blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+      // }
       if (isLoggedInRole === "user") {
         const payloadForLoggedIn: any = {
           // if clicked profile is of user then fetch
@@ -75,7 +78,13 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   }, [window.location.search, window.location.pathname]);
 
   useEffect(() => {
-    if (prevUser?.getUser.loading || search.sort) {
+    if (isRole && isRole !== 'user') {
+      blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+    }
+  }, [window.location.search, isRole])
+ 
+  useEffect(() => {
+    if (prevUser?.getUser.loading) {
       if (isRole === "user" && !isMe) {
         const payloadForClicked: any = {
           // if clicked profile is of user then fetch
@@ -86,9 +95,9 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         // fetching all users when clicked user's role is user so we can see all the username the user have liked
         user.allUser();
       }
-      if (isRole !== "user" && !isMe) {
-        blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-      }
+      // if (isRole !== "user" && !isMe && !blogs.state.getBlogsById.data) {
+      //   blogs.getBlogsById({ userId: userId, page: 1, filters: search });
+      // }
     } 
   }, [userState, window.location.search]);
 
