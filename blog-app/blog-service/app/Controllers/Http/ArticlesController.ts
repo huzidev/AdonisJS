@@ -25,7 +25,7 @@ export default class ArticlesController {
         data: Utils.parseQS(request.qs(), ["sort"]),
       });
 
-        const userId = params.id;
+      const userId = params.id;
       
       const query = Article.query();
 
@@ -81,7 +81,6 @@ export default class ArticlesController {
           status: 404,
         };
       }
-
 
       let message;
       // so when user asked for filter then notifcation will be according to filter type
