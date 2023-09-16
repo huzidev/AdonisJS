@@ -94,7 +94,7 @@ export default function ViewBlogPage(): JSX.Element {
                       : "Dislike"}
                   </button>
                 </div>
-                <div className="absolute right-2">
+                <div className="absolute right-2 cursor-pointer">
                   {/* if the blog on which user clicked is already in favorite then show Heart Icon else not */}
                   {blog.state.getFavoriteBlog.data ? (
                     <span
