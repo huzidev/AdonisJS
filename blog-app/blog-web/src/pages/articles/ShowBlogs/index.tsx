@@ -316,6 +316,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                         Read More
                       </Link>
                       <p className="text-white">
+                        {/* to show Total likes of every blogs and ?? is used if totalCount is undefined means no like then show 0 */}
                         {/* Likes : {props.allReactions && (props.allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
                       </p>
                     </div> */}
