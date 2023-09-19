@@ -51,7 +51,7 @@ export default function ShowBlogs(props: any): JSX.Element {
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
-                className="filter-actions"
+                className="filter-actions hover:bg-blue-700 mr-2"
                 type="button"
                 onClick={() => setDropDown(!dropDown)}
               >
@@ -72,16 +72,14 @@ export default function ShowBlogs(props: any): JSX.Element {
                   />
                 </svg>
               </button>
-              {/* {props.sortValue.value && ( */}
                 <button
-                  className="filter-actions"
+                  className={`filter-actions ${props.sortValue.value ? '' : 'disabled:opacity-75'}`}
                   disabled={props.sortValue.value ? false : true}
                   onClick={() => props.handleSort("")}
                 >
                   Reset Filters
                 </button>
             </div>
-            {/* )} */}
             <div
               id="dropdown"
               className={`z-10 ${
