@@ -51,6 +51,9 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   }, [userId, loggedInId]);
 
   useEffect(() => {
+    // so each time when user clicked on some other user's profile then change the isRole to '' so every time updated roles will stored in isRole state
+    // otherwise previous role will stay saved in isRole state and if user clicked on user with role blogger then user with role user then first role === blogger
+    // code runs then role === user code will run
     if (isRole) {
       setIsRole('');
     }
