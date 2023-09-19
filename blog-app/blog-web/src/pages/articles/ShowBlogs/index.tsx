@@ -190,7 +190,6 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 <button
                                   type="button"
                                   className="text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center"
-                                  // onClick={() => blogs.deleteBlog(blog.id)}
                                   onClick={() => {
                                     setDeleteBlogId(blog.id);
                                     setShowModal(true);
@@ -308,83 +307,6 @@ export default function ShowBlogs(props: any): JSX.Element {
                         ? `${blog.content.slice(0, 42)}...`
                         : blog.content}
                     </p>
-                    {/* <div className="flex justify-between">
-                      <Link
-                        to={ROUTE_PATHS.ARTICLE_VIEW + blog.slug}
-                        className="text-sm font-medium text-center text-white hover:text-blue-500"
-                      >
-                        Read More
-                      </Link>
-                      <p className="text-white">
-                        {/* to show Total likes of every blogs and ?? is used if totalCount is undefined means no like then show 0 */}
-                        {/* Likes : {props.allReactions && (props.allReactions.filter((value: any) => value.articleId === blog.id)[0]?.likeCount ?? "0")}
-                      </p>
-                    </div> */}
-                    {/* Only if ownerId of blog matches loggedIn user id OR admin and super-admin can Edit and Delete AND if loggedIn user is admin then admin Can't update or delte blog by super-admin */}
-                    {/* {(blog.ownerId === userData?.id ||
-                      (hasPermission("admin", userData?.role) &&
-                        uploadedByUserRole !== "super-admin") 
-                      // ||hasPermission("super-admin", userData?.role)
-                      ) &&
-                      // if user is banned then edit and delete button won't be shown just view profile button will show to update user details for admin and super-admin
-                      (isBannedUser ? (
-                        <div>
-                          <Link
-                            to={ROUTE_PATHS.VIEW_PROFILE + uploadedByUserId}
-                            type="button"
-                            className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                          >
-                            View Profile
-                          </Link>
-                        </div>
-                      ) : (
-                        <div>
-                          <Link
-                            to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
-                            type="button"
-                            className="text-white bg-gray-800 font-medium text-sm py-2.5"
-                          >
-                            Edit
-                          </Link>
-                          <button
-                            type="button"
-                            className="text-white bg-gray-800 font-medium text-sm ml-4 py-2.5"
-                            // onClick={() => blogs.deleteBlog(blog.id)}
-                            onClick={() => {
-                              setDeleteBlogId(blog.id);
-                              setShowModal(true);
-                            }}
-                          >
-                            Delete
-                          </button>
-                          {showModal && deleteBlogId === blog.id && (
-                            <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
-                              <div className="bg-white p-8 w-96">
-                                <p className="text-lg text-center mb-4">
-                                  Are you sure you want to delete this blog?
-                                </p>
-                                <div className="flex justify-center space-x-4">
-                                  <button
-                                    className="bg-red-500 text-white px-4 py-2 rounded"
-                                    onClick={() => {
-                                      blogs.deleteBlog(blog.id);
-                                      setShowModal(false);
-                                    }}
-                                  >
-                                    Yes
-                                  </button>
-                                  <button
-                                    className="bg-gray-500 text-white px-4 py-2 rounded"
-                                    onClick={() => setShowModal(false)}
-                                  >
-                                    No
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      ))} */}
                     <div className="flex justify-between items-center">
                       <div className="flex items-center w-3/4">
                         <img
