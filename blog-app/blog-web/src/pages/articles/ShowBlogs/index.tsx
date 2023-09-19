@@ -44,7 +44,7 @@ export default function ShowBlogs(props: any): JSX.Element {
       <div>
         {/* so if allBlogs length is just 1 then no need to show filters
         and filter won't be shown when someone clicked on user's profile because user can't add blogs */}
-        {props.allBlogs.length >= 1 && props.userDetails?.role !== "user" && (
+        {(props.allBlogs.length === 0 && props.sortValue.value) && props.userDetails?.role !== "user" && (
           <div className="relative mb-8 mt-2.5">
             <div className="absolute right-0">
               <button
