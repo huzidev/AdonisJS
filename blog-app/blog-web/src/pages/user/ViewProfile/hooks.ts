@@ -30,7 +30,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const isMe = params.id === "me";
   const userId = Number(params.id);
   const loggedInId: any = auth.state.user?.id;
-  const isRole: any = userState.getUser.data?.role;
+  const [isRole, setIsRole] = useState<any>('');
+  // const isRole: any = userState.getUser.data?.role;
   const isLoggedInRole: any = auth.state.user?.role;
   const [userDetails, setUserDetails] =
     useState<UserDetailState>(userDetailsData);
@@ -50,6 +51,12 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   }, [userId, loggedInId]);
 
   useEffect(() => {
+    if (isRole) {
+      setIsRole('');
+    }
+  }, [])
+
+  useEffect(() => {
     if (isMe) {
       setUserDetails({ ...userDetails, ...auth.state.user });
       if (isLoggedInRole === "user") {
@@ -64,9 +71,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         blogs.getBlogsById({ userId: loggedInId, page: 1, filters: search });
       }
     } else {
-      // if (window.location.pathname.includes('user/view') && (isRole !== 'user')) {
-      //   blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-      // }
       if (isLoggedInRole === "user") {
         const payloadForLoggedIn: any = {
           // if clicked profile is of user then fetch
@@ -97,6 +101,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         // fetching all users when clicked user's role is user so we can see all the username the user have liked
         user.allUser();
       }
+      setIsRole(userState.getUser.data?.role)
       // if (isRole !== "user" && !isMe && !blogs.state.getBlogsById.data) {
       //   blogs.getBlogsById({ userId: userId, page: 1, filters: search });
       // }
