@@ -26,8 +26,6 @@ export default function ViewProfilePage(): JSX.Element {
   let totalBlogs = blogState.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogState.getFavoriteBlogs.meta?.total;
 
-  console.log("totalBlogs",totalBlogs);
-  
   const isLoadingUser = user.state.getUser.loading;
   const isLoadingBlogs = blogState.getBlogsById.loading;
   const isLoadingFvrtBlogs = blogState.getFavoriteBlogs.loading;

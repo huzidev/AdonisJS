@@ -91,8 +91,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     }
   }, [window.location.search, isRole]);
 
-  console.log("isRole", isRole);
-
   useEffect(() => {
     if (prevUser?.getUser.loading) {
       // setIsRole is for checking conditions when user has clicked on user's profile whose role is not user then fetch blogsById of that user
