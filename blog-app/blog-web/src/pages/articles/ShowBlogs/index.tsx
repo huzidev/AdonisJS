@@ -131,8 +131,8 @@ export default function ShowBlogs(props: any): JSX.Element {
               <div
                 key={blog.id}
                 title="Read More"
-                className={`w-[32%] mt-8 ${
-                  index % 3 === 1 && "mx-4"
+                className={`w-[32.5%] mt-8 ${
+                  index % 3 === 1 ? "mx-4" : ''
                 } margin`}
                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
               >
