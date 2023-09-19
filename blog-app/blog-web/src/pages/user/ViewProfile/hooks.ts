@@ -95,7 +95,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (prevUser?.getUser.loading) {
       // setIsRole is for checking conditions when user has clicked on user's profile whose role is not user then fetch blogsById of that user
       setIsRole(userState.getUser.data?.role);
-      // not using isRole
+      // not using isRole for checking isRole === user because when the clickedUser role is storing in isRole state the JS will run rest of that code and then isRole will be empty
       if (userState.getUser.data?.role === "user" && !isMe) {
         const payloadForClicked: any = {
           // if clicked profile is of user then fetch
