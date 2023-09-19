@@ -54,7 +54,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     if (isRole) {
       setIsRole('');
     }
-  }, [])
+  }, [window.location.pathname])
 
   useEffect(() => {
     if (isMe) {
@@ -89,9 +89,14 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     }
   }, [window.location.search, isRole])
  
+  console.log("isRole", isRole);
+
   useEffect(() => {
     if (prevUser?.getUser.loading) {
-      if (isRole === "user" && !isMe) {
+      // setIsRole is for checking conditions when user has clicked on user's profile whose role is not user then fetch blogsById of that user
+      setIsRole(userState.getUser.data?.role);
+      // not using isRole
+      if (userState.getUser.data?.role === "user" && !isMe) {
         const payloadForClicked: any = {
           // if clicked profile is of user then fetch
           userId: userId,
@@ -101,12 +106,8 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         // fetching all users when clicked user's role is user so we can see all the username the user have liked
         user.allUser();
       }
-      setIsRole(userState.getUser.data?.role)
-      // if (isRole !== "user" && !isMe && !blogs.state.getBlogsById.data) {
-      //   blogs.getBlogsById({ userId: userId, page: 1, filters: search });
-      // }
     } 
-  }, [userState, window.location.search]);
+  }, [userState, window.location.search, isRole]);
 
   useEffect(() => {
     if (prevUser?.getUser.loading) {
