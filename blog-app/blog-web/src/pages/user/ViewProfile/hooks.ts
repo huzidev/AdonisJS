@@ -31,7 +31,6 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const userId = Number(params.id);
   const loggedInId: any = auth.state.user?.id;
   const [isRole, setIsRole] = useState<any>('');
-  // const isRole: any = userState.getUser.data?.role;
   const isLoggedInRole: any = auth.state.user?.role;
   const [userDetails, setUserDetails] =
     useState<UserDetailState>(userDetailsData);
@@ -55,9 +54,9 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     // otherwise previous role will stay saved in isRole state and if user clicked on user with role blogger then user with role user then first role === blogger
     // code runs then role === user code will run
     if (isRole) {
-      setIsRole('');
+      setIsRole("");
     }
-  }, [window.location.pathname])
+  }, [window.location.pathname]);
 
   useEffect(() => {
     if (isMe) {
@@ -87,11 +86,11 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   // seprately creating condition for getBlogsById else if user clicked on user whose role is user then getBlogById was running which should not
   // because when clicked user's role is user then fetch favorite blogs list of that user
   useEffect(() => {
-    if (isRole && isRole !== 'user') {
+    if (isRole && isRole !== "user") {
       blogs.getBlogsById({ userId: userId, page: 1, filters: search });
     }
-  }, [window.location.search, isRole])
- 
+  }, [window.location.search, isRole]);
+
   console.log("isRole", isRole);
 
   useEffect(() => {
@@ -110,7 +109,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
         // fetching all users when clicked user's role is user so we can see all the username the user have liked
         user.allUser();
       }
-    } 
+    }
   }, [userState, window.location.search, isRole]);
 
   useEffect(() => {
@@ -174,10 +173,13 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     const updatedPayload = {
       userId: isMe ? loggedInId : params.id,
       // isMe && isLoggedInRole === 'user' if user is on ViewProfile page and loggedIn user's role is user then put the next currentPageFvrt number
-      page: (isRole === "user" || (isMe && isLoggedInRole === 'user')) ? currentPageFvrt + 1 : currentPage + 1,
+      page:
+        isRole === "user" || (isMe && isLoggedInRole === "user")
+          ? currentPageFvrt + 1
+          : currentPage + 1,
     };
     // isMe && isLoggedInRole === 'user' if user is on viewProfilePage and loggedIn user's role is user then fetch the favoriteBlogs of that user
-    if (isRole === "user" || (isMe && isLoggedInRole === 'user')) {
+    if (isRole === "user" || (isMe && isLoggedInRole === "user")) {
       blogs.getFavoriteBlogs(updatedPayload);
     } else {
       // filters: search so when user clicked on load more then result will be according to filters
