@@ -13,6 +13,7 @@ import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { LoaderSpin, LoadingListBlogs } from "utils/loading";
 import { useShowBlogsHook } from "./hooks";
+import './styles.css';
 // import { props.columns } from './data';
 // import { BlogState } from "./types";
 
@@ -45,12 +46,12 @@ export default function ShowBlogs(props: any): JSX.Element {
         {/* so if allBlogs length is just 1 then no need to show filters
         and filter won't be shown when someone clicked on user's profile because user can't add blogs */}
         {props.allBlogs.length >= 1 && props.userDetails?.role !== "user"  && (
-          <div className="relative mb-8">
+          <div className="relative mb-8 mt-2.5">
             <div className="absolute right-0">
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
-                className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+                className="filter-actions"
                 type="button"
                 onClick={() => setDropDown(!dropDown)}
               >
@@ -73,7 +74,7 @@ export default function ShowBlogs(props: any): JSX.Element {
               </button>
               {/* {props.sortValue.value && ( */}
                 <button
-                  className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+                  className="filter-actions"
                   disabled={props.sortValue.value ? false : true}
                   onClick={() => props.handleSort("")}
                 >
