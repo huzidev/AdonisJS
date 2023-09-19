@@ -44,22 +44,24 @@ export default function ShowBlogs(props: any): JSX.Element {
   
   return (
     <div className="w-[1500px] m-auto flex flex-col">
-      <div>
+      <div className="relative mb-8 mt-2.5 bg-blue-100">
         {
           isViewProfile && (
-            <h1 className="text-2xl font-bold tracking-tight dark:text-white">
-              {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
-              {/* isLoadingUser ? "" so when userState is in loading then don't show anything otherwise it'll show Blogs Uploaded while user state is in loading */}
-              {props.isLoading
-                ? ''
-                : (isUser && isMe) || props.isRole === "user"
-                ? `Blogs Liked By ${isMe ? "You" : props.userDetails.username}`
-                : `Blogs Uploaded By ${!isMe ? props.userDetails.username : "You"}`}
-            </h1>
+            <div className="absolute">
+              <h1 className="text-2xl font-bold tracking-tight dark:text-white">
+                {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
+                {/* isLoadingUser ? "" so when userState is in loading then don't show anything otherwise it'll show Blogs Uploaded while user state is in loading */}
+                {props.isLoading
+                  ? ''
+                  : (isUser && isMe) || props.isRole === "user"
+                  ? `Blogs Liked By ${isMe ? "You" : props.userDetails.username}`
+                  : `Blogs Uploaded By ${!isMe ? props.userDetails.username : "You"}`}
+              </h1>
+            </div>
           )
         }
         {(props.allBlogs.length === 0 && props.sortValue.value) || props.userDetails?.role !== "user" && (
-          <div className="relative mb-8 mt-2.5">
+          <div>
             <div className="absolute right-0">
               <button
                 id="dropdownDefaultButton"
