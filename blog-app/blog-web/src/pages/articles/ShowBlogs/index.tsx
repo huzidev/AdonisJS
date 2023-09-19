@@ -73,7 +73,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                 </svg>
               </button>
                 <button
-                  className={`filter-actions ${props.sortValue.value ? '' : 'disabled:opacity-75'}`}
+                  className={`filter-actions ${props.sortValue.value ? '' : 'disabled:opacity-60'}`}
                   disabled={props.sortValue.value ? false : true}
                   onClick={() => props.handleSort("")}
                 >
