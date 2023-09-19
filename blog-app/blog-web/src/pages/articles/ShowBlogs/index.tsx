@@ -42,10 +42,9 @@ export default function ShowBlogs(props: any): JSX.Element {
   return (
     <div className="w-[1500px] m-auto flex flex-col">
       <div>
-        
         {/* so if allBlogs length is just 1 then no need to show filters
         and filter won't be shown when someone clicked on user's profile because user can't add blogs */}
-        {props.allBlogs.length >= 1 && props.userDetails?.role !== "user"  && (
+        {props.allBlogs.length >= 1 && props.userDetails?.role !== "user" && (
           <div className="relative mb-8 mt-2.5">
             <div className="absolute right-0">
               <button
@@ -55,7 +54,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                 type="button"
                 onClick={() => setDropDown(!dropDown)}
               >
-                Filter List{" "}
+                Filters{" "}
                 <svg
                   className="w-2.5 h-2.5 ml-2.5"
                   aria-hidden="true"

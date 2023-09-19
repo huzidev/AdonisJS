@@ -159,7 +159,6 @@ export default function ViewProfilePage(): JSX.Element {
             userDetails={userDetails}
             totalBlogs={totalBlogs}
             totalFvrtBlogs={totalFvrtBlogs}
-            // userDetails={userDetails}
             isFilter={isFilter}
           />
         </div>
