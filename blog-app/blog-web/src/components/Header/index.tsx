@@ -39,69 +39,74 @@ export default function Header(): JSX.Element {
           </button>
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">
-              {auth.state.initState.init && links.map((data, dataIndex) =>
-                // user has to be verified to access the links and if user role is "user" then not to show addBlog Page
-                user && (user.role === "blogger" && loggedInPathsBlogger.includes(data.link) || user.role === "user" && loggedInPathsUser.includes(data.link)) && user.isVerified ? (
-                    <li key={dataIndex}>
-                      <Link
-                      to={managePaths.includes(data.link) ? data.link + "1" : data.link }
-                        className={`
-                            block py-2 pl-3 pr-4  rounded  md:border-0  md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
-                              location.pathname.includes(data.link)
-                                ? "text-blue-500"
-                                : "text-white"
-                            }
-                          `}
+              {
+                !auth.state.user?.isBanned ? (
+                  auth.state.initState.init && links.map((data, dataIndex) =>
+                    // user has to be verified to access the links and if user role is "user" then not to show addBlog Page
+                    user && (user.role === "blogger" && loggedInPathsBlogger.includes(data.link) || user.role === "user" && loggedInPathsUser.includes(data.link)) && user.isVerified ? (
+                        <li key={dataIndex}>
+                          <Link
+                          to={managePaths.includes(data.link) ? data.link + "1" : data.link }
+                            className={`
+                                block py-2 pl-3 pr-4  rounded  md:border-0  md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
+                                  location.pathname.includes(data.link)
+                                    ? "text-blue-500"
+                                    : "text-white"
+                                }
+                              `}
+                          >
+                            {data.title}
+                          </Link>
+                        </li>
+                    ) : !user && loggedOutPaths.includes(data.link) ? (
+                      <li key={dataIndex}>
+                        <Link
+                          to={data.link}
+                          className={`
+                              block py-2 pl-3 pr-4  rounded  md:border-0  md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
+                                location.pathname === data.link
+                                  ? "text-blue-500"
+                                  : "text-white"
+                              }
+                            `}
+                        >
+                          {data.title}
+                        </Link>
+                      </li>
+                      // only admin and super-admin can see Manage Users page
+                    ) : user && hasPermission("admin", user.role) && adminPaths.includes(data.link) && user?.isVerified && (
+                      <li key={dataIndex}>
+                        <Link
+                        // so whem user clicked on manageUsers or manageBlogs then add 1 at end of URL which is page 1 for pagination
+                          // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
+                          to={managePaths.includes(data.link) ? data.link + "1" : data.link }
+                          className={`
+                              block py-2 pl-3 pr-4  rounded  md:border-0 md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
+                                // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
+                                location.pathname.includes(data.link)
+                                  ? "text-blue-500"
+                                  : "text-white"
+                              }
+                            `}
+                        >
+                          {data.title}
+                        </Link>
+                      </li>
+                    )
+                  )
+                ) : (
+                  user && (
+                    <li>
+                      <button
+                        onClick={() => auth.signOut()}
+                        className="block py-2 pl-3 pr-4 rounded  md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
                       >
-                        {data.title}
-                      </Link>
+                        SignOut
+                      </button>
                     </li>
-                ) : !user && loggedOutPaths.includes(data.link) ? (
-                  <li key={dataIndex}>
-                    <Link
-                      to={data.link}
-                      className={`
-                          block py-2 pl-3 pr-4  rounded  md:border-0  md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
-                            location.pathname === data.link
-                              ? "text-blue-500"
-                              : "text-white"
-                          }
-                        `}
-                    >
-                      {data.title}
-                    </Link>
-                  </li>
-                  // only admin and super-admin can see Manage Users page
-                ) : user && hasPermission("admin", user.role) && adminPaths.includes(data.link) && user?.isVerified && (
-                  <li key={dataIndex}>
-                    <Link
-                    // so whem user clicked on manageUsers or manageBlogs then add 1 at end of URL which is page 1 for pagination
-                      // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
-                      to={managePaths.includes(data.link) ? data.link + "1" : data.link }
-                      className={`
-                          block py-2 pl-3 pr-4  rounded  md:border-0 md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
-                            // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
-                            location.pathname.includes(data.link)
-                              ? "text-blue-500"
-                              : "text-white"
-                          }
-                        `}
-                    >
-                      {data.title}
-                    </Link>
-                  </li>
+                  )
                 )
-              )}
-              {user && (
-                <li>
-                  <button
-                    onClick={() => auth.signOut()}
-                    className="block py-2 pl-3 pr-4 rounded  md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
-                  >
-                    SignOut
-                  </button>
-                </li>
-              )}
+              }
             </ul>
           </div>
         </div>
