@@ -69,7 +69,7 @@ export default function ShowBlogs(props: any): JSX.Element {
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
-                className="filter-actions hover:bg-blue-700 mr-2 w-32"
+                className="filter-actions hover:bg-blue-700 mr-2"
                 type="button"
                 onClick={() => setDropDown(!dropDown)}
               >
@@ -126,7 +126,6 @@ export default function ShowBlogs(props: any): JSX.Element {
                   Reset Filters
                 </button>
             </div>
-          
           </div>
         )}
       </div>
