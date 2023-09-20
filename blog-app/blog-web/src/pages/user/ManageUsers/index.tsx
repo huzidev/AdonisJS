@@ -192,18 +192,19 @@ export default function ManageUsersPage(): JSX.Element {
             <div className="table-footer">
               <span className="table-footer-content">
                 Showing {currentPage} of {lastPage}
-                
               </span>
               <div className="table-footer-container">
                 {currentPage !== 1 && (
                   <div>
                     <button
+                    title="First page"
                       className="table-footer-actions mr-2"
                       onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + 1)}
                     >
                       <KeyboardDoubleArrowLeftIcon />
                     </button>
                     <button
+                    title="Prev page"
                       className="table-footer-actions mr-2"
                       onClick={() =>
                         navigate(
@@ -219,6 +220,7 @@ export default function ManageUsersPage(): JSX.Element {
                 {currentPage !== lastPage && (
                   <>
                     <button
+                    title="Next page"
                       className="table-footer-actions"
                       onClick={() =>
                         navigate(

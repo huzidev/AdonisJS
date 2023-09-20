@@ -198,6 +198,14 @@ export default function ManageBlogsPage(): JSX.Element {
                 <div>
                   <button
                     className="table-footer-actions mr-2"
+                    title="First Page"
+                    onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + 1)}
+                  >
+                    <KeyboardDoubleArrowLeftIcon />
+                  </button>
+                  <button
+                    className="table-footer-actions mr-2"
+                    title="Prev Page"
                     onClick={() =>
                       navigate(
                         ROUTE_PATHS.ARTICLES_PAGE +
@@ -207,18 +215,13 @@ export default function ManageBlogsPage(): JSX.Element {
                   >
                     <KeyboardArrowLeftIcon />
                   </button>
-                  <button
-                    className="table-footer-actions mr-2"
-                    onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + 1)}
-                  >
-                    <KeyboardDoubleArrowLeftIcon />
-                  </button>
                 </div>
               )}
               {currentPage !== lastPage && (
                 <>
                   <button
                     className="table-footer-actions"
+                    title="Next Page"
                     onClick={() =>
                       navigate(
                         ROUTE_PATHS.ARTICLES_PAGE +
@@ -230,8 +233,8 @@ export default function ManageBlogsPage(): JSX.Element {
                     <KeyboardArrowRightIcon />
                   </button>
                   <button
+                    className='table-footer-actions'
                     title="Last page"
-                    className="text-blue-300"
                     onClick={() =>
                       navigate(ROUTE_PATHS.ARTICLES_PAGE + lastPage)
                     }
