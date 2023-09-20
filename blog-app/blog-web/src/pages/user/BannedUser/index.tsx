@@ -11,8 +11,9 @@ export default function BannedUserPage(): JSX.Element {
     Navigate(ROUTE_PATHS.HOME); // Redirect to home page after signing out
   }
   return (
-    <div className="dark:bg-[#181a1b]">
-      <div className="max-w-md mx-auto p-6 shadow-lg rounded-lg bg-gray-800">
+    // <div className="dark:bg-[#181a1b] flex items-center justify-center h-screen">
+    <div className="dark:bg-[#181a1b] relative h-screen bg-black">
+      <div className="max-w-md absolute translate-y-[50%] mx-auto p-6 shadow-lg rounded-lg bg-gray-800">
         <h1 className="text-4xl font-bold mb-6 text-white">Banned User</h1>
         <p className="text-lg text-gray-400 mb-8 ">
           Cannot process, You are banned from the web.
