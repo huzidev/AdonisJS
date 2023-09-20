@@ -69,7 +69,7 @@ export default function ShowBlogs(props: any): JSX.Element {
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
-                className="filter-actions hover:bg-blue-700 mr-2"
+                className="filter-actions hover:bg-blue-700 mr-2 w-32"
                 type="button"
                 onClick={() => setDropDown(!dropDown)}
               >
@@ -90,6 +90,31 @@ export default function ShowBlogs(props: any): JSX.Element {
                   />
                 </svg>
               </button>
+                <div
+                  id="dropdown"
+                  className={`z-10 ${
+                    dropDown
+                      ? "block absolute divide-y divide-gray-100 rounded-lg shadow w-32 bg-gray-700"
+                      : "hidden"
+                  }`}
+                >
+                  <ul
+                    className="py-2 text-sm text-gray-200"
+                    aria-labelledby="dropdownDefaultButton"
+                  >
+                    {props.columns.map((data: any, index: number) => (
+                      // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
+                      <li
+                        onClick={() => props.handleSort(data.title)}
+                        className="px-5 py-3 cursor-pointer"
+                        key={index}
+                      >
+                        {/* startCase will make the first letter Capital of any word */}
+                        {startCase(data.title)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <button
                   className={`filter-actions cursor-pointer ${props.sortValue.value ? '' : 'cursor-not-allowed disabled:opacity-60'}`}
                   disabled={props.sortValue.value ? false : true}
@@ -98,31 +123,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                   Reset Filters
                 </button>
             </div>
-            <div
-              id="dropdown"
-              className={`z-10 ${
-                dropDown
-                  ? "block fixed divide-y divide-gray-100 rounded-lg shadow w-44 bg-gray-700"
-                  : "hidden"
-              }`}
-            >
-              <ul
-                className="py-2 text-sm text-gray-200"
-                aria-labelledby="dropdownDefaultButton"
-              >
-                {props.columns.map((data: any, index: number) => (
-                  // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
-                  <li
-                    onClick={() => props.handleSort(data.title)}
-                    className="px-5 py-3 cursor-pointer"
-                    key={index}
-                  >
-                    {/* startCase will make the first letter Capital of any word */}
-                    {startCase(data.title)}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          
           </div>
         )}
       </div>
