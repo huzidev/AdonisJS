@@ -233,7 +233,7 @@ export default function ManageBlogsPage(): JSX.Element {
                     <KeyboardArrowRightIcon />
                   </button>
                   <button
-                    className='table-footer-actions'
+                    className="table-footer-actions"
                     title="Last page"
                     onClick={() =>
                       navigate(ROUTE_PATHS.ARTICLES_PAGE + lastPage)
