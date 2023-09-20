@@ -38,7 +38,7 @@ export default function ShowBlogs(props: any): JSX.Element {
     isViewProfile && !isMe || currentPath.includes('/blogs')
       ? blogs.state.getAllFavoriteBlogs.data
       : blogs.state.getFavoriteBlogs.data;
-      
+
   return (
     <div className="w-[1500px] m-auto flex flex-col">
       <div className="relative mb-8 mt-4">
@@ -61,7 +61,9 @@ export default function ShowBlogs(props: any): JSX.Element {
               </h1> 
             </div>
         }
-        {(props.allBlogs.length === 0 && props.sortValue.value) || props.userDetails?.role !== "user" && (
+        {/* Only show filters and reset filter when user selects filters therefore the value will stored in sortValue.value BUT
+        if user haven't uploaded any blog then don't show filters and reset filter button also NOT to show filters when clicked on user with user role */}
+        {((props.allBlogs.length && props.allBlogs.length === 0) && props.sortValue.value) || props.userDetails?.role !== "user" && (
           <div>
             <div className="absolute right-0">
               <button
