@@ -29,7 +29,6 @@ export function useFiltersHook() {
   const data = ["admin", "super-admin", "user", "blogger"];
 
   useEffect(() => {
-    console.log("sort result", sortValue);
     if (sortValue.type) {
       if (isUserPage) {
         setIndex(data.indexOf(sortValue.type));
