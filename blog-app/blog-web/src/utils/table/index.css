@@ -11,7 +11,7 @@
 }
 
 .text-content {
-    @apply text-xs text-gray-500 dark:text-white;
+    @apply text-sm text-gray-500 dark:text-white;
 }
 
 .table-header {
@@ -39,5 +39,5 @@
 }
 
 .table-footer-actions {
-    @apply h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100;
+    @apply dark:text-white pr-2;
 }

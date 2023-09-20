@@ -1,3 +1,7 @@
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import { useNavigate } from "react-router-dom";
@@ -187,19 +191,18 @@ export default function ManageUsersPage(): JSX.Element {
           !isLoading && allUsers && (
             <div className="table-footer">
               <span className="table-footer-content">
-                Showing {currentPage} of 
-                <button
-                  title="Last page"
-                  className="text-blue-300"
-                  onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + lastPage)}
-                >
-                  &nbsp;
-                  {lastPage}
-                </button>
+                Showing {currentPage} of {lastPage}
+                
               </span>
               <div className="table-footer-container">
                 {currentPage !== 1 && (
                   <div>
+                    <button
+                      className="table-footer-actions mr-2"
+                      onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + 1)}
+                    >
+                      <KeyboardDoubleArrowLeftIcon />
+                    </button>
                     <button
                       className="table-footer-actions mr-2"
                       onClick={() =>
@@ -209,29 +212,32 @@ export default function ManageUsersPage(): JSX.Element {
                         )
                       }
                     >
-                      Prev
-                    </button>
-                    <button
-                      className="table-footer-actions mr-2"
-                      onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + 1)}
-                    >
-                      First
+                      <KeyboardArrowLeftIcon />
                     </button>
                   </div>
                 )}
                 {currentPage !== lastPage && (
-                  <button
-                    className="table-footer-actions"
-                    onClick={() =>
-                      navigate(
-                        ROUTE_PATHS.USERS_PAGE +
-                          (currentPage! + 1) +
-                          window.location.search
-                      )
-                    }
+                  <>
+                    <button
+                      className="table-footer-actions"
+                      onClick={() =>
+                        navigate(
+                          ROUTE_PATHS.USERS_PAGE +
+                            (currentPage! + 1) +
+                            window.location.search
+                        )
+                      }
+                    >
+                      <KeyboardArrowRightIcon />
+                    </button>
+                    <button
+                    title="Last page"
+                    className='table-footer-actions'
+                    onClick={() => navigate(ROUTE_PATHS.USERS_PAGE + lastPage)}
                   >
-                    Next
+                    <KeyboardDoubleArrowRightIcon />
                   </button>
+                  </>
                 )}
               </div>
             </div>
