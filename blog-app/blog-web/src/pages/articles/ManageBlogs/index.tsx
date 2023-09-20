@@ -1,5 +1,4 @@
 import qs from "query-string";
-import { useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
@@ -14,7 +13,6 @@ export default function ManageBlogsPage(): JSX.Element {
   const blogs = useBlogs();
   const user = useUser();
   const auth = useAuth();
-  const navigate = useNavigate();
   const state = blogs.state;
   const isAdmin = hasPermission("admin", auth.state.user?.role);
   const search: any = qs.parse(window.location.search);

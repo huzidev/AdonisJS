@@ -1,5 +1,6 @@
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
+import ManageRecords from "pages/articles/ManageRecords";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
@@ -25,6 +26,18 @@ export default function ManageUsersPage() {
   const isLoading = user.state.getUserPage.loading;
 
   return (
+    <>
+    <div>
+      <ManageRecords 
+        handleSort={handleSort}
+        allUsers={allUsers}
+        currentPage={currentPage}
+        lastPage={lastPage}
+        isLoading={isLoading}
+        columns={columns}
+        constKeys={constKeys}
+      />
+    </div>
     <div className="table-main">
       <div className="content">
         <div>
@@ -239,5 +252,6 @@ export default function ManageUsersPage() {
         }
       </div>
     </div>
+    </>
   );
 }

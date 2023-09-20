@@ -9,16 +9,31 @@ import "utils/table/index.css";
 export default function ManageRecords(props: any) {
   const auth = useAuth();
   const navigate = useNavigate();
+  const isUsersPage = window.location.pathname.includes('/user/list/') ? true : false;
+
+  console.log("is user page", isUsersPage);
 
   return (
     <div className="table-main">
       <div className="content">
         <div>
           <h2 className="headings-content">
-            {props.isAdmin ? "Manage Blogs" : "Manage Your Blogs"}
+            {
+                isUsersPage ? (
+                    "Manage Users"
+                ) : (
+                    props.isAdmin ? "Manage Blogs" : "Manage Your Blogs"
+                )
+            }
           </h2>
           <span className="text-content">
-            {`View ${props.isAdmin ? "all uploaded blogs" : "blogs uploaded by you"}`}
+            {
+                isUsersPage ? (
+                    "View accounts of registered users"
+                ) : (
+                    `View ${props.isAdmin ? "all uploaded blogs" : "blogs uploaded by you"}`
+                )
+            }
           </span>
         </div>
       </div>
