@@ -1,3 +1,7 @@
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import qs from "query-string";
@@ -187,15 +191,7 @@ export default function ManageBlogsPage(): JSX.Element {
         {!isLoading && allBlogs.length && (
           <div className="table-footer">
             <span className="table-footer-content">
-              Showing {currentPage} of
-              <button
-                title="Last page"
-                className="text-blue-300"
-                onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + lastPage)}
-              >
-                &nbsp;
-                {lastPage}
-              </button>
+              Showing {currentPage} of {lastPage}
             </span>
             <div className="table-footer-container">
               {currentPage !== 1 && (
@@ -209,29 +205,40 @@ export default function ManageBlogsPage(): JSX.Element {
                       )
                     }
                   >
-                    Prev
+                    <KeyboardArrowLeftIcon />
                   </button>
                   <button
                     className="table-footer-actions mr-2"
                     onClick={() => navigate(ROUTE_PATHS.ARTICLES_PAGE + 1)}
                   >
-                    First
+                    <KeyboardDoubleArrowLeftIcon />
                   </button>
                 </div>
               )}
               {currentPage !== lastPage && (
-                <button
-                  className="table-footer-actions"
-                  onClick={() =>
-                    navigate(
-                      ROUTE_PATHS.ARTICLES_PAGE +
-                        (currentPage! + 1) +
-                        window.location.search
-                    )
-                  }
-                >
-                  Next
-                </button>
+                <>
+                  <button
+                    className="table-footer-actions"
+                    onClick={() =>
+                      navigate(
+                        ROUTE_PATHS.ARTICLES_PAGE +
+                          (currentPage! + 1) +
+                          window.location.search
+                      )
+                    }
+                  >
+                    <KeyboardArrowRightIcon />
+                  </button>
+                  <button
+                    title="Last page"
+                    className="text-blue-300"
+                    onClick={() =>
+                      navigate(ROUTE_PATHS.ARTICLES_PAGE + lastPage)
+                    }
+                  >
+                    <KeyboardDoubleArrowRightIcon />
+                  </button>
+                </>
               )}
             </div>
           </div>
@@ -241,7 +248,9 @@ export default function ManageBlogsPage(): JSX.Element {
         <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
             {/* Oops... {isAdmin ? "No one has" : "You haven't"} uploaded any blog yet. */}
-            Oops... {auth.state.user?.role === 'blogger' ? `You haven't` : `No one has`} uploaded any blog {!!isFilter && `related to ${isFilter} category`}.
+            Oops...{" "}
+            {auth.state.user?.role === "blogger" ? `You haven't` : `No one has`}{" "}
+            uploaded any blog {!!isFilter && `related to ${isFilter} category`}.
           </h1>
           <Link
             to={ROUTE_PATHS.ARTICLE_CREATE}
