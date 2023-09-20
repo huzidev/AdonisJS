@@ -39,9 +39,6 @@ export default function ShowBlogs(props: any): JSX.Element {
       ? blogs.state.getAllFavoriteBlogs.data
       : blogs.state.getFavoriteBlogs.data;
       
-  console.log('props.sortValue.value', props.sortValue.value);
-  console.log('props.allBlogs.length', props.allBlogs.length);
-  
   return (
     <div className="w-[1500px] m-auto flex flex-col">
       <div className="relative mb-8 mt-4">
