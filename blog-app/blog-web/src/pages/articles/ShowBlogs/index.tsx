@@ -118,7 +118,10 @@ export default function ShowBlogs(props: any): JSX.Element {
                 <button
                   className={`filter-actions cursor-pointer ${props.sortValue.value ? '' : 'cursor-not-allowed disabled:opacity-60'}`}
                   disabled={props.sortValue.value ? false : true}
-                  onClick={() => props.handleSort("")}
+                  onClick={() => {
+                    props.handleSort("");
+                    setDropDown(false);
+                  }}
                 >
                   Reset Filters
                 </button>
