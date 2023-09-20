@@ -44,7 +44,7 @@ export default function ShowBlogs(props: any): JSX.Element {
   
   return (
     <div className="w-[1500px] m-auto flex flex-col">
-      <div className="relative mb-8 mt-4 bg-blue-100">
+      <div className="relative mb-8 mt-4">
         {
             <div className="absolute">
               <h1 className="text-2xl font-bold tracking-tight dark:text-white">
@@ -92,7 +92,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                 </svg>
               </button>
                 <button
-                  className={`filter-actions ${props.sortValue.value ? '' : 'disabled:opacity-60'}`}
+                  className={`filter-actions cursor-pointer ${props.sortValue.value ? '' : 'cursor-not-allowed disabled:opacity-60'}`}
                   disabled={props.sortValue.value ? false : true}
                   onClick={() => props.handleSort("")}
                 >
