@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { hasPermission } from "utils";
+import 'utils/responsive.css';
 import { adminPaths, links, loggedInPathsBlogger, loggedInPathsUser, loggedOutPaths, managePaths } from "./data";
+import './styles.css';
 
 export default function Header(): JSX.Element {
   const location = useLocation();
@@ -27,7 +29,7 @@ export default function Header(): JSX.Element {
   return (
     <div>
       <nav className="bg-gray-900">
-        <div className="full:w-[1500px] 3xl:w-[1200px] 2xl:w-[900px] xl:w-[900px] lg:w-[900px] m-auto flex items-center justify-between mx-auto py-4">
+        <div className="responsive m-auto flex items-center justify-between mx-auto py-4">
           <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
             <Link to='/'>Blog App</Link>
           </span>
@@ -35,9 +37,9 @@ export default function Header(): JSX.Element {
             className="HAMBURGER-ICON space-y-2 hidden xs:block z-20 cursor-pointer"
             onClick={toggleSidebar}
           >
-            <span className={`block h-0.5 w-8 bg-white transition duration-300 ease-in-out ${isOpen ? 'rotate-45 translate-y-2.5': ''}`}></span>
-            <span className={`block h-0.5 w-8 bg-white transition duration-300 ease-in-out ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
-            <span className={`block h-0.5 w-8 bg-white transition duration-300 ease-in-out ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
+            <span className={`ham-menu ${isOpen ? 'rotate-45 translate-y-2.5': ''}`}></span>
+            <span className={`ham-menu ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
+            <span className={`ham-menu ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
           </div>
             <ul className={`${width > 1000 ? 'font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700' : `z-10 fixed leading-[45px] top-0 right-0 h-screen lg-w-[20%] xs:w-[40%] pt-[64px] pl-6 bg-gray-900 transition duration-300 ease-in-out ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
