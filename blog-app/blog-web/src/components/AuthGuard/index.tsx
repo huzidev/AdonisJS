@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "store/auth";
 import UrlPattern from "url-pattern";
 import { hasPermission } from "utils";
+import { errorMessage } from "utils/notifications";
 
 interface AuthGuardProps {
   children: JSX.Element;
@@ -65,7 +66,7 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     // if user is not loggedIn and tries to access paths like edit user, create user etc
     if (isProtected && !user && !initState.loading) {
       navigate('/');
-      toast.error("You can't access the requested path kindly signin first");
+      errorMessage("You can't access the requested path kindly signin first");
     } else if (user) {
       const { isVerified, isBanned } = user;
       // when user is loggedIn and tries to acces signIn OR signUp path AND check if user isVerified and Not Banned

@@ -27,3 +27,16 @@ export function successNotification(description?: string): void {
     className: 'dark:bg-gray-800 dark:text-white fill:text-white',
   });
 }
+
+export function errorMessage(message: string): void {
+  toast.error(message, {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    className: 'dark:bg-gray-800 dark:text-white'
+  });
+}
