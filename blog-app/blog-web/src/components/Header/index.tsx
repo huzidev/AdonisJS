@@ -32,14 +32,14 @@ export default function Header(): JSX.Element {
             <Link to='/'>Blog App</Link>
           </span>
           <div
-            className="HAMBURGER-ICON space-y-2 hidden lg:block z-20"
+            className="HAMBURGER-ICON space-y-2 hidden lg:block z-20 cursor-pointer"
             onClick={toggleSidebar}
           >
-            <span className="block h-0.5 w-8 bg-white"></span>
-            <span className="block h-0.5 w-8 bg-white"></span>
-            <span className="block h-0.5 w-8 bg-white"></span>
+            <span className={`block h-0.5 w-8 bg-white transition duration-300 ease-in-out ${isOpen ? 'rotate-45 translate-y-2.5': ''}`}></span>
+            <span className={`block h-0.5 w-8 bg-white transition duration-300 ease-in-out ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
+            <span className={`block h-0.5 w-8 bg-white transition duration-300 ease-in-out ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
           </div>
-            <ul className={`${`z-10 fixed top-0 right-0 h-screen w-[20%] bg-gray-900 transition duration-300 ease-in-out ${
+            <ul className={`${`z-10 fixed leading-[45px] top-0 right-0 h-screen w-[20%] pt-[64px] pl-8 bg-gray-900 transition duration-300 ease-in-out ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}>
                   {auth.state.initState.init && links.map((data, index: number) => (
@@ -51,7 +51,7 @@ export default function Header(): JSX.Element {
                             <Link
                             to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                               className={`
-                                  block py-2 pl-3 pr-4  rounded  md:border-0  md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
+                                  block py-2 pl-3 pr-4 rounded  md:border-0 md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
                                     location.pathname.includes(data.link)
                                       ? "text-blue-500"
                                       : "text-white"
