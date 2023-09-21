@@ -12,6 +12,7 @@ import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { LoaderSpin, LoadingListBlogs } from "utils/loading";
+import 'utils/responsive.css';
 import { useShowBlogsHook } from "./hooks";
 import './styles.css';
 // import { props.columns } from './data';
@@ -40,7 +41,7 @@ export default function ShowBlogs(props: any): JSX.Element {
       : blogs.state.getFavoriteBlogs.data;
 
   return (
-    <div className="w-[1500px] m-auto flex flex-col">
+    <div className="responsive m-auto flex flex-col">
       <div className="relative mb-8 mt-4">
         {
             <div className="absolute">

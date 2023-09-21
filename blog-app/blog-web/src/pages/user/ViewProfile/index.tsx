@@ -9,6 +9,7 @@ import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { LoadingThreeDots, LoadingUser } from "utils/loading";
+import 'utils/responsive.css';
 import { useViewProfilePageHook } from "./hooks";
 import "./styles.css";
 
@@ -69,7 +70,7 @@ export default function ViewProfilePage(): JSX.Element {
   return (
     <div>
       <div
-        className={`w-[1500px] my-5 mx-auto border bg-gray-800 rounded-lg shadow border-gray-700`}
+        className={`responsive my-5 mx-auto border bg-gray-800 rounded-lg shadow border-gray-700`}
       >
         <div className="p-5">
           {userDetails?.isBanned ? (
@@ -128,31 +129,29 @@ export default function ViewProfilePage(): JSX.Element {
             )}
         </div>
       </div>
-      <div className="w-[1500px] mx-auto">
-        <div>
-          <ShowBlogs
-            sortValue={sortValue}
-            handleSort={handleSort}
-            allBlogs={userBlogs}
-            favoriteBlogs={userBlogs}
-            columns={columns}
-            isLoading={isLoadingUser}
-            isLoadingBlogs={isLoadingBlogs}
-            isLoadingFvrtBlogs={isLoadingFvrtBlogs}
-            allReactions={allReactions}
-            allComments={allComments}
-            currentPageBlogs={currentPage}
-            isRole={isRole}
-            currentPageFvrt={currentPageFvrt}
-            lastPageFvrt={lastPageFvrt}
-            lastPageBlogs={lastPage}
-            loadMore={loadMore}
-            userDetails={userDetails}
-            totalBlogs={totalBlogs}
-            totalFvrtBlogs={totalFvrtBlogs}
-            isFilter={isFilter}
-          />
-        </div>
+      <div>
+        <ShowBlogs
+          sortValue={sortValue}
+          handleSort={handleSort}
+          allBlogs={userBlogs}
+          favoriteBlogs={userBlogs}
+          columns={columns}
+          isLoading={isLoadingUser}
+          isLoadingBlogs={isLoadingBlogs}
+          isLoadingFvrtBlogs={isLoadingFvrtBlogs}
+          allReactions={allReactions}
+          allComments={allComments}
+          currentPageBlogs={currentPage}
+          isRole={isRole}
+          currentPageFvrt={currentPageFvrt}
+          lastPageFvrt={lastPageFvrt}
+          lastPageBlogs={lastPage}
+          loadMore={loadMore}
+          userDetails={userDetails}
+          totalBlogs={totalBlogs}
+          totalFvrtBlogs={totalFvrtBlogs}
+          isFilter={isFilter}
+        />
       </div>
     </div>
   );
