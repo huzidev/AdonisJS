@@ -14,12 +14,12 @@ export function useUserFormHook() {
   const params = useParams();
   const [updateDetailsMe, setUpdateDetailsMe] = useState<UserDetailsEdit>(detailsMe);
   const [createUser, setCreateUser] = useState<any>(detailsCreateUser);
-  const isMe = window.location.pathname.includes("/me");
+  const isMe: boolean = window.location.pathname.includes("/me");
   const value = useRef('');
   const loggedInId: any = auth.state.user?.id;
   const fetchedData: any = user.state.getUser?.data;
   const [updateDetailsId, setUpdateDetailsId] = useState<User>(detailsId);
-  const isCreate = window.location.pathname.includes("create");
+  const isCreate: boolean = window.location.pathname.includes("create");
   const userRole = user.state.getUser.data?.role;
   const authRole = auth.state.user?.role;
   const state = user.state;
