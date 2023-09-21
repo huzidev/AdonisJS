@@ -9,9 +9,10 @@ module.exports = {
       'sm': '640px',
       'md': '768px',
       'lg': '1024px',
-      'xl': { 'max': '1280px' },
-      '2xl': { 'min': '1281px', 'max': '1400px' },
-      '3xl': { 'max': '1700px' }
+      'xl': { 'min': '1025px', 'max': '1280px' },
+      '2xl': { 'min': '1279px', 'max': '1400px' },
+      '3xl': { 'min': '1401px', 'max': '1800px' },
+      'full': { 'min': '1801px' }
     },
     extend: {
       boxShadow: {
