@@ -10,8 +10,7 @@ export default function NotFoundPage(): JSX.Element {
         items-center
         justify-center
         h-screen
-        bg-white 
-        dark:bg-gray-800 
+        dark:bg-black
         dark:border-gray-700
       "
     >

@@ -24,7 +24,7 @@ export default function UserFormPage(): JSX.Element {
     : auth.state.signUpState.loading;
 
   useEffect(() => {
-    const stateCondition = currentPath.includes("/sign_in") ? true : false;
+    const stateCondition: boolean = currentPath.includes("/sign_in") ? true : false;
     setIsLogInForm(stateCondition);
   }, [currentPath]);
 
@@ -42,9 +42,9 @@ export default function UserFormPage(): JSX.Element {
         });
   }
 
-  const title = isLogInForm ? "Sign In" : "Sign Up";
-  const titleReverse = isLogInForm ? "Sign Up" : "Sign In";
-  const descReverse = isLogInForm
+  const title: string = isLogInForm ? "Sign In" : "Sign Up";
+  const titleReverse: string = isLogInForm ? "Sign Up" : "Sign In";
+  const descReverse: string = isLogInForm
     ? "Don't have an account?"
     : "Already have an account?";
 
