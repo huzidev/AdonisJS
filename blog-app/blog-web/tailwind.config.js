@@ -6,12 +6,12 @@ module.exports = {
   darkMode: "class",
   theme: {
     screens : {
-      'sm': { 'min': '640px' },
-      'md': { 'min': '768px' },
-      'lg': { 'min': '1024px' },
-      'xl': { 'min': '1280px' },
-      '2xl': { 'max': '1400px' },
-      '3xl': { 'max': '1700px' },
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': { 'max': '1280px' },
+      '2xl': { 'min': '1281px', 'max': '1400px' },
+      '3xl': { 'max': '1700px' }
     },
     extend: {
       boxShadow: {
