@@ -28,6 +28,7 @@ export default function AppRouter(): JSX.Element {
   
   // initial state of dark theme will be true OR false
   const authState: any = auth.state.isDark;
+  
   // holds the initial state wouldn't re-render (re-rendering causes error as each time state gets change and matches the authState which shows pop-up theme window every time when user reloads the page)
   const currentTheme = useRef(authState);
   // holds the currentTheme from useRef to match it with authState and then update when pop-up theme is shown
