@@ -116,7 +116,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                   </ul>
                 </div>
                 <button
-                  className={`filter-actions cursor-pointer ${props.sortValue.value ? '' : 'cursor-not-allowed disabled:opacity-60'}`}
+                  className={`filter-actions ${props.sortValue.value ? 'cursor-pointer' : 'cursor-not-allowed disabled:opacity-60'}`}
                   disabled={props.sortValue.value ? false : true}
                   onClick={() => {
                     props.handleSort("");

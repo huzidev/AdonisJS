@@ -5,7 +5,6 @@ import { useAuth } from "store/auth";
 export default function NotFoundPage(): JSX.Element {
   const auth = useAuth();
   const navigate = useNavigate();
-  console.log("auth", auth.state.isDark);
   
   return (
     <div
