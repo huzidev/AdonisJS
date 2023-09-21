@@ -10,7 +10,6 @@ export default function Header(): JSX.Element {
   const user = auth.state.user;
   const isBanned = user?.isBanned;
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
   function toggleSidebar() {
     setIsOpen(!isOpen);
   }
@@ -18,7 +17,7 @@ export default function Header(): JSX.Element {
   return (
     <div>
       <nav className="bg-gray-900">
-        <div className="w-[1500px] 3xl:w-[1200px] m-auto flex items-center justify-between mx-auto py-4">
+        <div className="w-[1500px] 3xl:w-[1200px] 2xl:w-[1000px] m-auto flex items-center justify-between mx-auto py-4">
           <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
             <Link to='/'>Blog App</Link>
             <button className="text-white" onClick={toggleSidebar}>
