@@ -4,9 +4,9 @@ import ROUTE_PATHS from "Router/paths";
 import qs from "query-string";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useResetPassword } from "store/resetPassword";
 import "utils/form/index.css";
+import { errorMessage } from "utils/notifications";
 import "utils/table/index.css";
 import { initialIconState } from "../Form/data";
 import { IconState } from "../Form/types";
@@ -36,7 +36,7 @@ export default function ResetPasswordPage(): JSX.Element {
     // so if user tries to access resetPassword state without email then navigate user to / homepage
     else {
       navigate("/");
-      toast.error("You've to provide valid email");
+      errorMessage("You've to provide valid email");
     }
   }, []);
 

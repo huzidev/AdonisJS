@@ -1,13 +1,12 @@
 import ROUTE_PATHS from "Router/paths";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { usePrevious } from "utils/hooks";
-import { successNotification } from "utils/notifications";
+import { errorMessage, successNotification } from "utils/notifications";
 
 export function useEditBlogPageHooks(): void {
   const blog = useBlogs();
@@ -58,11 +57,11 @@ export function useEditBlogPageHooks(): void {
         ownerId !== auth.state.user?.id
         // !userRole when user is not loggedIn
       ) {
-        toast.error("Insufficient Access, You can't edit someone else blog");
+        errorMessage("Insufficient Access, You can't edit someone else blog");
         navigate(ROUTE_PATHS.ARTICLES);
       }
       if (authRole === "admin" && userRole === "super-admin") {
-        toast.error("Insufficient Access, You can't edit super-admin's blog");
+        errorMessage("Insufficient Access, You can't edit super-admin's blog");
         navigate(ROUTE_PATHS.ARTICLES);
       }
     } 

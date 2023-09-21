@@ -66,7 +66,6 @@ export default function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     if (isProtected && !user && !initState.loading) {
       navigate('/');
       errorMessage("You can't access the requested path kindly signin first");
-      errorMessage("You can't access the requested path kindly signin first");
     } else if (user) {
       const { isVerified, isBanned } = user;
       // when user is loggedIn and tries to acces signIn OR signUp path AND check if user isVerified and Not Banned
