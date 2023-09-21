@@ -1,18 +1,15 @@
 import ROUTE_PATHS from "Router/paths";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "store/auth";
 
 export default function NotFoundPage(): JSX.Element {
+  const auth = useAuth();
   const navigate = useNavigate();
+  console.log("auth", auth.state.isDark);
+  
   return (
     <div
-      className="
-        flex
-        items-center
-        justify-center
-        h-screen
-        dark:bg-black
-        dark:border-gray-700
-      "
+      className={`flex items-center justify-center h-screen ${auth.state.isDark ? 'bg-[#181a1b]' : 'bg-white'}`}
     >
       <div className="px-40 py-20 rounded-md shadow-xl bg-gray-800 border-gray-700">
         <div className="flex flex-col items-center">
