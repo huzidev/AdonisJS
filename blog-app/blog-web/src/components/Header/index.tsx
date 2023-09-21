@@ -21,9 +21,13 @@ export default function Header(): JSX.Element {
         <div className="w-[1500px] m-auto flex items-center justify-between mx-auto py-4">
           <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
             <Link to='/'>Blog App</Link>
+            <button className="text-white" onClick={toggleSidebar}>
+            On  
+          </button>
           </span>
-          <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">
+            <ul className={`${window.innerWidth > 2100 ? 'font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700' : `fixed top-0 right-0 h-screen w-[20%] bg-gray-900 transition duration-300 ease-in-out ${
+              isOpen ? 'translate-x-0' : 'translate-x-full'
+            }`} `}>
                   {auth.state.initState.init && links.map((data, index: number) => (
                     // user has to be verified to access the links and if user role is "user" then not to show addBlog Page
                     // so if user is banned then don't show header paths Except the SignOut path
@@ -92,7 +96,6 @@ export default function Header(): JSX.Element {
                   )}
                 )
             </ul>
-          </div>
         </div>
       </nav>
     </div>
