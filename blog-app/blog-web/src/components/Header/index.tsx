@@ -34,7 +34,7 @@ export default function Header(): JSX.Element {
             <Link to='/'>Blog App</Link>
           </span>
           <div
-            className="space-y-2 hidden xs:block z-20 cursor-pointer"
+            className="space-y-2 hidden ham:block z-20 cursor-pointer"
             onClick={toggleSidebar}
           >
             <span className={`ham-menu ${isOpen ? 'rotate-45 translate-y-2.5': ''}`}></span>
