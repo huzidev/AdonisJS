@@ -72,7 +72,6 @@ export default function UserFormPage(): JSX.Element {
 
   return (
     <div className="main">
-      <div className="form-cover">
         <div className="form">
           <h2 className="main-heading-content">{title} To Your Account</h2>
         </div>
@@ -305,7 +304,6 @@ export default function UserFormPage(): JSX.Element {
             </Link>
           </p>
         </form>
-      </div>
     </div>
   );
 }
