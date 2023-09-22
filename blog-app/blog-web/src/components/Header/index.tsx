@@ -34,14 +34,14 @@ export default function Header(): JSX.Element {
             <Link to='/'>Blog App</Link>
           </span>
           <div
-            className="HAMBURGER-ICON space-y-2 hidden xs:block z-20 cursor-pointer"
+            className="space-y-2 hidden xs:block z-20 cursor-pointer"
             onClick={toggleSidebar}
           >
             <span className={`ham-menu ${isOpen ? 'rotate-45 translate-y-2.5': ''}`}></span>
             <span className={`ham-menu ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
             <span className={`ham-menu ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
           </div>
-            <ul className={`${width > 1000 ? 'font-medium flex flex-col p-4 mt-4 border bg-gray-800 border-gray-700' : `z-10 fixed leading-[45px] top-0 right-0 h-screen lg-w-[20%] xs:w-[40%] pt-[64px] pl-6 bg-gray-900 transition duration-300 ease-in-out ${
+            <ul className={`${width > 1000 ? 'font-medium flex border-gray-700' : `z-10 fixed leading-[45px] top-0 right-0 h-screen lg-w-[20%] xs:w-[40%] pt-[64px] pl-6 bg-gray-900 transition duration-300 ease-in-out ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}>
                   {auth.state.initState.init && links.map((data, index: number) => (
@@ -86,7 +86,7 @@ export default function Header(): JSX.Element {
                             // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
                             to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                             className={`
-                                block py-2 pl-3 pr-4 rounded  hover:bg-gray-700 hover:text-white  ${
+                                block py-2 pl-3 pr-4 rounded hover:bg-gray-700 hover:text-white  ${
                                   // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
                                   location.pathname.includes(data.link)
                                     ? "text-blue-500"
