@@ -25,7 +25,7 @@ export default function Header(): JSX.Element {
     window.addEventListener("resize", updateWindowDimensions);
     return () => window.removeEventListener("resize", updateWindowDimensions) 
   }, []);
-  // 
+  
   return (
     <div>
       <nav className="bg-gray-900">
