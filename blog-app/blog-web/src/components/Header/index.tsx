@@ -104,7 +104,7 @@ export default function Header(): JSX.Element {
                     <li>
                       <button
                         onClick={() => auth.signOut()}
-                        className="block py-2 pl-3 pr-4 rounded text-white hover:bg-gray-700 hover:text-white "
+                        className="nav-element"
                       >
                         SignOut
                       </button>

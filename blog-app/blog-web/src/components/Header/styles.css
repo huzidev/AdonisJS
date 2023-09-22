@@ -1,5 +1,5 @@
 .ham-menu {
-    @apply block h-0.5 w-8 bg-white transition duration-300 ease-in-out
+    @apply block h-0.5 w-8 bg-white transition duration-300 ease-in-out;
 }
 
 .side-bar {
