@@ -41,7 +41,7 @@ export default function Header(): JSX.Element {
             <span className={`ham-menu ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
             <span className={`ham-menu ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
           </div>
-            <ul className={`${width > 1000 ? 'font-medium flex border-gray-700' : `z-10 fixed leading-[45px] top-0 right-0 h-screen lg-w-[20%] xs:w-[40%] pt-[64px] pl-6 bg-gray-900 transition duration-300 ease-in-out ${
+            <ul className={`${width > 1000 ? 'font-medium flex border-gray-700' : `z-10 fixed leading-[45px] top-0 right-0 h-screen w-[25%] xs:w-[35%] xxs:w-[37%] pt-[64px] pl-6 bg-gray-900 transition duration-300 ease-in-out ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}>
                   {auth.state.initState.init && links.map((data, index: number) => (
