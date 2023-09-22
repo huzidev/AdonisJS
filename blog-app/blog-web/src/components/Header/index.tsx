@@ -41,7 +41,7 @@ export default function Header(): JSX.Element {
             <span className={`ham-menu ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
             <span className={`ham-menu ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
           </div>
-            <ul className={`${width > 1000 ? 'font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700' : `z-10 fixed leading-[45px] top-0 right-0 h-screen lg-w-[20%] xs:w-[40%] pt-[64px] pl-6 bg-gray-900 transition duration-300 ease-in-out ${
+            <ul className={`${width > 1000 ? 'font-medium flex flex-col p-4 mt-4 border bg-gray-800 border-gray-700' : `z-10 fixed leading-[45px] top-0 right-0 h-screen lg-w-[20%] xs:w-[40%] pt-[64px] pl-6 bg-gray-900 transition duration-300 ease-in-out ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}>
                   {auth.state.initState.init && links.map((data, index: number) => (
@@ -53,7 +53,7 @@ export default function Header(): JSX.Element {
                             <Link
                             to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                               className={`
-                                  block py-2 pl-3 pr-4 rounded  md:border-0 md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
+                                  block py-2 pl-3 pr-4 rounded   hover:bg-gray-700 hover:text-white  ${
                                     location.pathname.includes(data.link)
                                       ? "text-blue-500"
                                       : "text-white"
@@ -68,7 +68,7 @@ export default function Header(): JSX.Element {
                           <Link
                             to={data.link}
                             className={`
-                                block py-2 pl-3 pr-4 text-l rounded  md:border-0 md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
+                                block py-2 pl-3 pr-4 text-l rounded   hover:bg-gray-700 hover:text-white  ${
                                   location.pathname === data.link
                                     ? "text-blue-500"
                                     : "text-white"
@@ -86,7 +86,7 @@ export default function Header(): JSX.Element {
                             // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
                             to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                             className={`
-                                block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent ${
+                                block py-2 pl-3 pr-4 rounded  hover:bg-gray-700 hover:text-white  ${
                                   // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
                                   location.pathname.includes(data.link)
                                     ? "text-blue-500"
@@ -104,7 +104,7 @@ export default function Header(): JSX.Element {
                     <li>
                       <button
                         onClick={() => auth.signOut()}
-                        className="block py-2 pl-3 pr-4 rounded  md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
+                        className="block py-2 pl-3 pr-4 rounded text-white hover:bg-gray-700 hover:text-white "
                       >
                         SignOut
                       </button>
