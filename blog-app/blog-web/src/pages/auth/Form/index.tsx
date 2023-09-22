@@ -73,11 +73,6 @@ export default function UserFormPage(): JSX.Element {
   return (
     <div className="main">
       <div className="form">
-        <img
-          className="mx-auto h-10 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt="Your Company"
-        />
         <h2 className="main-heading-content">{title} To Your Account</h2>
       </div>
       {/* MANDATORY to use form otherwise the required property of input will not work */}
