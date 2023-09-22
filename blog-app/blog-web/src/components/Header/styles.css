@@ -1,3 +1,7 @@
 .ham-menu {
     @apply block h-0.5 w-8 bg-white transition duration-300 ease-in-out
 }
+
+.side-bar {
+    @apply z-10 fixed leading-[45px] top-0 right-0 h-screen w-[25%] xs:w-[35%] xxs:w-[37%] pt-[64px] pl-6 bg-gray-900 transition duration-300 ease-in-out;
+}
