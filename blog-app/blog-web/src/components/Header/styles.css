@@ -5,3 +5,7 @@
 .side-bar {
     @apply z-10 fixed leading-[45px] top-0 right-0 h-screen w-[25%] xs:w-[35%] xxs:w-[37%] pt-[64px] pl-6 bg-gray-900 transition duration-300 ease-in-out;
 }
+
+.nav-element {
+    @apply block py-2 pl-3 pr-4 rounded hover:bg-gray-700 hover:text-white;
+}

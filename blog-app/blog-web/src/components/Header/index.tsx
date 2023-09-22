@@ -53,7 +53,7 @@ export default function Header(): JSX.Element {
                             <Link
                             to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                               className={`
-                                  block py-2 pl-3 pr-4 rounded   hover:bg-gray-700 hover:text-white  ${
+                                  nav-element  ${
                                     location.pathname.includes(data.link)
                                       ? "text-blue-500"
                                       : "text-white"
@@ -68,7 +68,7 @@ export default function Header(): JSX.Element {
                           <Link
                             to={data.link}
                             className={`
-                                block py-2 pl-3 pr-4 text-l rounded   hover:bg-gray-700 hover:text-white  ${
+                                nav-element  ${
                                   location.pathname === data.link
                                     ? "text-blue-500"
                                     : "text-white"
@@ -86,7 +86,7 @@ export default function Header(): JSX.Element {
                             // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
                             to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                             className={`
-                                block py-2 pl-3 pr-4 rounded hover:bg-gray-700 hover:text-white  ${
+                                nav-element  ${
                                   // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
                                   location.pathname.includes(data.link)
                                     ? "text-blue-500"
