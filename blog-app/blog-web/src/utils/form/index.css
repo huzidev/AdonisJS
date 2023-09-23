@@ -1,5 +1,4 @@
 .main {
-    @apply absolute top-[45%] translate-y-[-50%] w-full px-6 py-12;
 }
 
 .main-heading-content {
