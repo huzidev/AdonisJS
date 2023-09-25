@@ -20,7 +20,7 @@ export default function Header(): JSX.Element {
   useEffect(() => {
     const updateWindowDimensions = () => {
       const newWidth = window.innerWidth;
-      setWidth(newWidth)
+      setWidth(newWidth);
     };
     window.addEventListener("resize", updateWindowDimensions);
     return () => window.removeEventListener("resize", updateWindowDimensions) 
