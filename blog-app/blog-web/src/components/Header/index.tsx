@@ -41,7 +41,7 @@ export default function Header(): JSX.Element {
             <span className={`ham-menu ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
             <span className={`ham-menu ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
           </div>
-            <ul className={`${width > 1000 'ham:font-medium flex border-gray-700' : `side-bar ${
+            <ul className={`${`font-medium flex border-gray-700 side-bar ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}>
                   {auth.state.initState.init && links.map((data, index: number) => (
