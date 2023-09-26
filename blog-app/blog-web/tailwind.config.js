@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     screens : {
       'ham': { 'max': '1000px'},
+      'menu': { 'min': '1000px'},
       'xxs': { 'max': '349px' },
       'xs': { 'min': '350px', 'max': '449px'},
       'sm': { 'min': '450px', 'max': '650px' },
