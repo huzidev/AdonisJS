@@ -18,6 +18,9 @@ module.exports = {
       '3xl': { 'min': '1401px', 'max': '1800px' },
       'full': { 'min': '1801px' }
     },
+    colors: {
+      'darkBG': '#1f2937'
+    },
     extend: {
       boxShadow: {
         'inner': 'inset -18px -16px 1px 1px #fff',
