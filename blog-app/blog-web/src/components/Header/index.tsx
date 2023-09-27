@@ -41,12 +41,12 @@ export default function Header(): JSX.Element {
             <span className={`ham-menu ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
             <span className={`ham-menu ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
           </div>
-            <ul className={`${width > 1000 ? 'font-medium flex' : `side-bar ${
-              isOpen ? 'translate-x-0' : 'translate-x-full'
-            }`} `}>
-              {/* <ul className={`${`menu:font-medium menu:flex menu:border-white side-bar ${
+            {/* <ul className={`${width > 1000 ? 'font-medium flex' : `side-bar ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}> */}
+              <ul className={`${`menu:font-medium menu:flex side-bar ${
+              isOpen ? 'translate-x-0' : 'translate-x-full'
+            }`} `}>
                   {auth.state.initState.init && links.map((data, index: number) => (
                     // user has to be verified to access the links and if user role is "user" then not to show addBlog Page
                     // so if user is banned then don't show header paths Except the SignOut path
