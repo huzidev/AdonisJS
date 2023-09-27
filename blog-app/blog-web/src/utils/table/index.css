@@ -39,7 +39,7 @@
 }
 
 .table-footer-container {
-    @apply mt-2 inline-flex sm:mt-0;
+    @apply inline-flex;
 }
 
 .table-footer-actions {
