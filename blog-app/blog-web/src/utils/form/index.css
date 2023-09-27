@@ -1,5 +1,5 @@
 .main {
-    @apply w-full px-6 py-12;
+    @apply bg-blue-50 w-full px-6 py-12;
 }
 
 .main-heading-content {
