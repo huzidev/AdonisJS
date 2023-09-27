@@ -2,8 +2,12 @@
     @apply w-[1500px] mx-auto py-8;
 }
 
+.flex-class {
+    @apply flex items-center justify-between;
+}
+
 .content {
-    @apply flex items-center justify-between pb-6;
+    @apply flex-class pb-6;
 }
 
 .headings-content {
@@ -19,7 +23,7 @@
 }
 
 .table-content {
-    @apply border-gray-200 p-5 text-sm dark:bg-[#1f2937] dark:text-gray-400;
+    @apply border-gray-200 p-5 text-sm dark:bg-darkBG dark:text-gray-400;
 }
 
 .table-content-actions {
@@ -31,7 +35,7 @@
 }
 
 .table-footer {
-    @apply flex items-center justify-between border-t px-5 py-5 dark:bg-gray-800 dark:border-gray-700;
+    @apply flex-class border-t px-5 py-5 dark:bg-gray-800 dark:border-gray-700;
 }
 
 .table-footer-container {
