@@ -3,7 +3,7 @@
 }
 
 .main-heading-content {
-    @apply mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white;
+    @apply mt-10 text-center text-2xl xs:text-xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white;
 }
 
 .form {
