@@ -18,10 +18,11 @@ module.exports = {
       '3xl': { 'min': '1401px', 'max': '1800px' },
       'full': { 'min': '1801px' }
     },
-    colors: {
-      'darkBG': '#1f2937'
-    },
     extend: {
+      // if creating custom name for colors then create it in Extend path else it'll give error
+      colors: {
+        'darkBG': '#1f2937'
+      },
       boxShadow: {
         'inner': 'inset -18px -16px 1px 1px #fff',
       },
