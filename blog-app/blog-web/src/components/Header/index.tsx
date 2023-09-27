@@ -44,7 +44,7 @@ export default function Header(): JSX.Element {
             {/* <ul className={`${width > 1000 ? 'font-medium flex' : `side-bar ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}> */}
-              <ul className={`${`menu:font-medium menu:flex side-bar ${
+              <ul className={`${`menu:flex side-bar ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}>
                   {auth.state.initState.init && links.map((data, index: number) => (
@@ -56,7 +56,7 @@ export default function Header(): JSX.Element {
                             <Link
                             to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                               className={`
-                                  nav-element  ${
+                                  nav-element ${
                                     location.pathname.includes(data.link)
                                       ? "text-blue-500"
                                       : "text-white"
