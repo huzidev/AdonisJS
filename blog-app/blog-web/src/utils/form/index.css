@@ -1,5 +1,5 @@
 .main {
-    @apply relative bg-blue-50 h-[500px] w-full px-6 py-12;
+    @apply px-6 py-12;
 }
 
 .main-heading-content {
