@@ -162,27 +162,6 @@ export default function ResetPasswordPage(): JSX.Element {
                     )}
                   </span>
                 </div>
-                <span
-                  className="form-password-icon"
-                  onClick={() =>
-                    setIcon({
-                      ...icon,
-                      confirmPassword: !icon.confirmPassword,
-                    })
-                  }
-                >
-                  {icon.confirmPassword ? (
-                    <RemoveRedEyeOutlinedIcon
-                      fontSize="small"
-                      className="form-input-password"
-                    />
-                  ) : (
-                    <VisibilityOffIcon
-                      fontSize="small"
-                      className="form-input-password"
-                    />
-                  )}
-                </span>
                 <p
                   className={`transition-opacity duration-200 pt-2 ${
                     password !== confirmPassword &&
