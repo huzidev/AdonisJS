@@ -15,6 +15,12 @@ export default function Header(): JSX.Element {
   function toggleSidebar() {
     setIsOpen(!isOpen);
   }
+
+  // close side-bar when user changes the path
+  useEffect(() => {
+    setIsOpen(false);
+  }, [window.location.pathname])
+
   const [width, setWidth] = useState<number>(window.innerWidth);
   
   useEffect(() => {
