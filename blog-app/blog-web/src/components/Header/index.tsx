@@ -71,7 +71,7 @@ export default function Header(): JSX.Element {
                           <Link
                             to={data.link}
                             className={`
-                                nav-element  ${
+                                nav-element ${
                                   location.pathname === data.link
                                     ? "text-blue-500"
                                     : "text-white"
@@ -89,7 +89,7 @@ export default function Header(): JSX.Element {
                             // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
                             to={managePaths.includes(data.link) ? data.link + "1" : data.link }
                             className={`
-                                nav-element  ${
+                                nav-element ${
                                   // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
                                   location.pathname.includes(data.link)
                                     ? "text-blue-500"
@@ -107,7 +107,7 @@ export default function Header(): JSX.Element {
                     <li>
                       <button
                         onClick={() => auth.signOut()}
-                        className="nav-element"
+                        className="nav-element text-white"
                       >
                         SignOut
                       </button>
