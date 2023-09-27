@@ -7,5 +7,5 @@
 }
 
 .nav-element {
-    @apply block py-2 pl-3 pr-4 rounded hover:bg-gray-700 hover:text-white;
+    @apply block py-2 pl-3 pr-4 rounded;
 }
