@@ -74,9 +74,11 @@ export default function ResetPasswordPage(): JSX.Element {
     state.resetPassword({ ...resetState });
   }
 
-  let passLength: number = password.length;
-  let confirmPassLength: number = confirmPassword.length;
   let otpLength: number = otp.filter((val: any) => val).length;
+  let validation: boolean = otpLength === 6 && (password === confirmPassword && (password.length && confirmPassword.length >= 6)) ? true : false;
+
+  console.log("validation", validation);
+  
 
   return (
     <div className="main">
@@ -168,8 +170,8 @@ export default function ResetPasswordPage(): JSX.Element {
                 <p
                   className={`transition-opacity duration-200 pt-2 ${
                     password !== confirmPassword &&
-                    passLength > 5 &&
-                    confirmPassLength > 5
+                    password.length > 5 &&
+                    confirmPassword.length > 5
                       ? "block"
                       : "hidden"
                   } text-red-500`}
@@ -178,11 +180,11 @@ export default function ResetPasswordPage(): JSX.Element {
                 </p>
                 <p
                   className={`transition-opacity duration-200 pt-2 ${
-                    passLength < 6 &&
-                    confirmPassLength < 6 &&
-                    passLength === confirmPassLength &&
-                    passLength > 1 &&
-                    confirmPassLength > 1
+                    password.length < 6 &&
+                    confirmPassword.length < 6 &&
+                    password.length === confirmPassword.length &&
+                    password.length > 1 &&
+                    confirmPassword.length > 1
                       ? "block"
                       : "hidden"
                   } text-red-500`}
@@ -224,8 +226,8 @@ export default function ResetPasswordPage(): JSX.Element {
               <div className="flex flex-col">
                 <div>
                   <input
-                    className={`flex-class w-full ${(otpLength === 6 && (password === confirmPassword && (passLength && confirmPassLength >= 6))) ? 'cursor-pointer' : 'cursor-not-allowed'} border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm`}
-                    disabled={otpLength === 6 ? true : false}
+                    className={`flex-class w-full ${validation ? 'cursor-pointer' : 'cursor-not-allowed'} border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm`}
+                    disabled={validation ? true : false}
                     type="submit"
                     value="Change Password"
                   />
