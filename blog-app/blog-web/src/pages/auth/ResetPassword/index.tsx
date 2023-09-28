@@ -190,7 +190,7 @@ export default function ResetPasswordPage(): JSX.Element {
                   {/* Array.from() to create an array of the length provided */}
                   {otp.map((data, index: number) => (
                     <input
-                      className="w-16 h-16 flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white"
+                      className="otp-input"
                       type="text"
                       name="otp"
                       key={index}
