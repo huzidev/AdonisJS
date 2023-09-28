@@ -90,7 +90,7 @@ export default function ResetPasswordPage(): JSX.Element {
             </p>
           </div>
           <form onSubmit={submit}>
-            <div className="flex flex-col space-y-16">
+            <div className="flex flex-col space-y-8">
               <div>
                 <label htmlFor="password" className="form-heading">
                   New Password
