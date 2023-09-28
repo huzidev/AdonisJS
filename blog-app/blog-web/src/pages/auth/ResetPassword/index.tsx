@@ -188,7 +188,7 @@ export default function ResetPasswordPage(): JSX.Element {
                 >
                   Password must be atleast 6 characters long
                 </p>
-                <div className="flex otp:flex-wrap order-2 items-center justify-between mt-8 mx-auto w-full">
+                <div className="flex flex-wrap order-2 items-center justify-between mt-8 mx-auto w-full">
                   {/* Array.from() to create an array of the length provided */}
                   {otp.map((data, index: number) => (
                     <input
