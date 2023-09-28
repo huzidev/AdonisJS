@@ -225,12 +225,13 @@ export default function ResetPasswordPage(): JSX.Element {
               </div>
               <div className="flex flex-col">
                 <div>
-                  <input
+                  <button
                     className={`flex-class w-full ${validation ? 'cursor-pointer' : 'cursor-not-allowed disabled:opacity-60'} border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm`}
-                    disabled={validation ? true : false}
+                    disabled={validation ? false : true}
                     type="submit"
-                    value="Change Password"
-                  />
+                  >
+                    Change Password
+                  </button>
                 </div>
                 <div className="flex-class text-sm font-medium space-x-1">
                   <p className="form-message">
