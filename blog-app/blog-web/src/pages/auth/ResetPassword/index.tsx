@@ -221,8 +221,8 @@ export default function ResetPasswordPage(): JSX.Element {
               <div className="flex flex-col">
                 <div>
                   <input
-                    className={`flex-class w-full ${otp.length !== 6 ? 'disabled' : 'cursor-pointer'} border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm`}
-                    disabled={otp.length !== 6}
+                    className={`flex-class w-full ${(otpLength === 6 && password !== confirmPassword) ? 'cursor-pointer' : 'cursor-not-allowed'} border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm`}
+                    disabled={otpLength === 6 ? true : false}
                     type="submit"
                     value="Change Password"
                   />
