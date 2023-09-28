@@ -77,9 +77,6 @@ export default function ResetPasswordPage(): JSX.Element {
   let otpLength: number = otp.filter((val: any) => val).length;
   let validation: boolean = otpLength === 6 && (password === confirmPassword && (password.length && confirmPassword.length >= 6)) ? true : false;
 
-  console.log("validation", validation);
-  
-
   return (
     <div className="main">
       <div className="relative bg-white px-6 py-10 shadow-xl mx-auto max-w-lg rounded-2xl dark:bg-gray-900">
@@ -224,7 +221,6 @@ export default function ResetPasswordPage(): JSX.Element {
                 </div>
               </div>
               <div className="flex flex-col">
-                <div>
                   <button
                     className={`flex-class w-full ${validation ? 'cursor-pointer' : 'cursor-not-allowed disabled:opacity-60'} border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm`}
                     disabled={validation ? false : true}
@@ -232,7 +228,6 @@ export default function ResetPasswordPage(): JSX.Element {
                   >
                     Change Password
                   </button>
-                </div>
                 <div className="flex-class text-sm font-medium space-x-1">
                   <p className="form-message">
                     Remembered your account ?
