@@ -80,7 +80,7 @@ export default function ResetPasswordPage(): JSX.Element {
   return (
     <div className="main">
       <div className="relative bg-white px-6 py-10 shadow-xl mx-auto max-w-lg rounded-2xl dark:bg-gray-900">
-        <div className="mx-auto flex max-w-md flex-col space-y-6">
+        <div className="mx-auto flex max-w-md flex-col space-y-2">
           <div className="text-center">
             <p className="font-semibold text-3xl dark:text-white">
               Reset Password
@@ -230,7 +230,7 @@ export default function ResetPasswordPage(): JSX.Element {
                   </button>
                 <div className="flex-class text-sm font-medium space-x-1">
                   <p className="form-message">
-                    Remembered your account ?
+                    Remembered your account?
                     <Link
                       to={ROUTE_PATHS.AUTH_SIGNIN}
                       className="form-auth-action"
