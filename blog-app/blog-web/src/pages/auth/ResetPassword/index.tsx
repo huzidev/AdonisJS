@@ -216,16 +216,16 @@ export default function ResetPasswordPage(): JSX.Element {
                   ))} */}
                 </div>
               </div>
-              <div className="flex flex-col space-y-5">
+              <div className="flex flex-col">
                 <div>
                   <input
-                    className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
+                    className="flex-row-class w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
                     // disabled={otp.length !== 6}
                     type="submit"
                     value="Change Password"
                   />
                 </div>
-                <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1">
+                <div className="flex-row-class text-sm font-medium space-x-1">
                   <p className="form-message">
                     Remembered your account ?
                     <Link
@@ -240,7 +240,7 @@ export default function ResetPasswordPage(): JSX.Element {
               </div>
             </div>
           </form>
-          <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500 dark:text-gray-400">
+          <div className="flex-row-class text-sm font-medium space-x-1 text-gray-500 dark:text-gray-400">
             <p>Didn't recieved code?</p>
             <button
               className="form-auth-action"
