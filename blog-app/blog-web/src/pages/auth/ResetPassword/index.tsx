@@ -22,6 +22,7 @@ export default function ResetPasswordPage(): JSX.Element {
     useState<ResetPasswordState>(initialState);
   const [icon, setIcon] = useState<IconState>(initialIconState);
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
+  console.log('otp', otp.length);
 
   const password = resetState.password;
   const confirmPassword = resetState.confirmPassword;
@@ -220,8 +221,8 @@ export default function ResetPasswordPage(): JSX.Element {
               <div className="flex flex-col">
                 <div>
                   <input
-                    className="flex-class w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
-                    // disabled={otp.length !== 6}
+                    className={`flex-class w-full ${otp.length !== 6 ? 'disabled' : 'cursor-pointer'} border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm`}
+                    disabled={otp.length !== 6}
                     type="submit"
                     value="Change Password"
                   />
