@@ -3,5 +3,5 @@
 }
 
 .otp-input {
-    @apply w-16 h-16 sm:w-14 sm:h-14 xs:w-12 xs:h-12 flex-class flex-col px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white;
+    @apply w-16 h-16 sm:w-14 sm:h-14 px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700 dark:bg-gray-800 dark:text-white;
 }   
