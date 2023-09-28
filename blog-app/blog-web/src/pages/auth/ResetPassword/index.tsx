@@ -123,9 +123,7 @@ export default function ResetPasswordPage(): JSX.Element {
                     )}
                   </span>
                 </div>
-              </div>
-              <div>
-                <label htmlFor="cpassword" className="form-heading">
+                <label htmlFor="cpassword" className="form-heading mt-6">
                   Confirm New Password
                 </label>
                 <div className="form-password-field">
