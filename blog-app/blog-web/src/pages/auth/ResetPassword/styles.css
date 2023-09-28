@@ -1,3 +1,3 @@
-.flex-row-class {
-    @apply flex flex-row items-center justify-center text-center;
+.flex-class {
+    @apply flex items-center justify-center text-center;
 }

@@ -184,7 +184,7 @@ export default function ResetPasswordPage(): JSX.Element {
                 >
                   Password must be atleast 6 characters long
                 </p>
-                <div className="flex flex-row mt-8 items-center justify-between mx-auto w-full max-w">
+                <div className="flex mt-8 items-center justify-between mx-auto w-full max-w">
                   {/* Array.from() to create an array of the length provided */}
                   {otp.map((data, index: number) => (
                     <input
@@ -219,13 +219,13 @@ export default function ResetPasswordPage(): JSX.Element {
               <div className="flex flex-col">
                 <div>
                   <input
-                    className="flex-row-class w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
+                    className="flex items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
                     // disabled={otp.length !== 6}
                     type="submit"
                     value="Change Password"
                   />
                 </div>
-                <div className="flex-row-class text-sm font-medium space-x-1">
+                <div className="flex items-center justify-center text-center text-sm font-medium space-x-1">
                   <p className="form-message">
                     Remembered your account ?
                     <Link
@@ -240,7 +240,7 @@ export default function ResetPasswordPage(): JSX.Element {
               </div>
             </div>
           </form>
-          <div className="flex-row-class text-sm font-medium space-x-1 text-gray-500 dark:text-gray-400">
+          <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500 dark:text-gray-400">
             <p>Didn't recieved code?</p>
             <button
               className="form-auth-action"
