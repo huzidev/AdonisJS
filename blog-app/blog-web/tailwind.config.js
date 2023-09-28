@@ -9,6 +9,7 @@ module.exports = {
       'ham': { 'max': '1000px'},
       'menu': { 'min': '1000px'},
       'xxs': { 'max': '349px' },
+      'otp': { 'max': '410px' },
       'xs': { 'min': '350px', 'max': '449px'},
       'sm': { 'min': '450px', 'max': '650px' },
       'md': { 'min': '651px', 'max': '800px' },

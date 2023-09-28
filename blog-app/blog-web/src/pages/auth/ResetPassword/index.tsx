@@ -80,7 +80,7 @@ export default function ResetPasswordPage(): JSX.Element {
   return (
     <div className="main">
       <div className="relative bg-white px-6 py-10 shadow-xl mx-auto max-w-lg rounded-2xl dark:bg-gray-900">
-        <div className="mx-auto flex max-w-md flex-col space-y-2">
+        <div className="mx-auto flex max-w-md flex-col space-y-3">
           <div className="text-center">
             <p className="font-semibold text-3xl dark:text-white">
               Reset Password
@@ -128,7 +128,7 @@ export default function ResetPasswordPage(): JSX.Element {
                   </span>
                 </div>
                 <label htmlFor="cpassword" className="form-heading mt-6">
-                  Confirm New Password
+                  Confirm Password
                 </label>
                 <div className="form-password-field">
                   <input
@@ -222,7 +222,7 @@ export default function ResetPasswordPage(): JSX.Element {
               </div>
               <div className="flex flex-col">
                   <button
-                    className={`flex-class w-full ${validation ? 'cursor-pointer' : 'cursor-not-allowed disabled:opacity-60'} border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm`}
+                    className={`form-action ${validation ? 'cursor-pointer' : 'cursor-not-allowed disabled:opacity-60'}`}
                     disabled={validation ? false : true}
                     type="submit"
                   >
