@@ -22,17 +22,17 @@ export default function HomePage() {
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  const prevSlide = () => {
+  function prevSlide() {
     setCurrentIndex((prevIndex: number) =>
       prevIndex === 0 ? slides.length - 1 : prevIndex - 1
     );
-  };
+  }
 
-  const nextSlide = () => {
+  function nextSlide() {
     setCurrentIndex((prevIndex: number) =>
       prevIndex === slides.length - 1 ? 0 : prevIndex + 1
     );
-  };
+  }
 
   // useEffect(() => {
   //   setTimeout(() => {
