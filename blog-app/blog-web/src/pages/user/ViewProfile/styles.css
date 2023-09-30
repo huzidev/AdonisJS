@@ -1,5 +1,5 @@
 .user-details {
-  @apply mb-4 text-xl lg:text-lg md:text-lg sm:text-sm x font-bold tracking-tight text-white;
+  @apply mb-4 text-xl lg:text-lg md:text-lg sm:text-sm font-bold tracking-tight text-white;
 }
 
 .button {
