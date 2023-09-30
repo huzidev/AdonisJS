@@ -1,5 +1,5 @@
 .main {
-    @apply absolute left-1/2 -translate-x-1/2 top-[20%] w-full;
+    @apply absolute left-1/2 -translate-x-1/2 top-[17%] w-full px-6 py-2;
 }
 
 .main-heading-content {
