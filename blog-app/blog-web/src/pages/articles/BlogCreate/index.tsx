@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useBlogs } from "store/articles";
-import { categories } from "store/articles/types";
 import "utils/form/index.css";
 import { useCreateBlogPageHooks } from "./hooks";
 import { ArticleType } from "./types";
@@ -35,7 +34,7 @@ export default function AddBlogPage(): JSX.Element {
   useCreateBlogPageHooks();
   return (
     <div>
-      <div className="main">
+      {/* <div className="main">
         <div className="form">
           <h2 className="main-heading-content">Add Blog</h2>
         </div>
@@ -114,6 +113,23 @@ export default function AddBlogPage(): JSX.Element {
           </div>
             <input className="form-action" type="submit" value="Add Blog" />
         </form>
+      </div> */}
+      <div
+        className={`h-screen flex justify-center items-center animation bg-white`}
+      >
+        <div>
+          <div className="container text-center">
+            <label
+              htmlFor="theme-toggle"
+              className={`custom-checkbox animation bg-orange-400`}
+            ></label>
+          </div>
+          <h1
+            className={`animation`}
+          >
+            Yours Theme has been changed to Light Mode
+          </h1>
+        </div>
       </div>
     </div>
   );

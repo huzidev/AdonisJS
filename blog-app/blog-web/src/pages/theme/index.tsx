@@ -29,7 +29,7 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
       }`}
     >
       <div>
-        <div className="container">
+        <div className="container text-center">
           <label
             htmlFor="theme-toggle"
             className={`custom-checkbox animation ${
@@ -42,7 +42,7 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
           ></label>
         </div>
         <h1
-          className={`animation ${
+          className={`animation text-xl ${
             props.isDark
               ? (!darkTheme && "text-black") || (darkTheme && "text-white")
               : (!lightTheme && "text-white") || (lightTheme && "text-black")
