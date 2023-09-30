@@ -71,7 +71,7 @@ export default function UserFormPage(): JSX.Element {
   const confirmPassword = authSignUp.confirmPassword;
 
   return (
-    <div className="main">
+    <div className="main mt-6">
         <div className="form">
           <h2 className="main-heading-content">{title} To Your Account</h2>
         </div>
