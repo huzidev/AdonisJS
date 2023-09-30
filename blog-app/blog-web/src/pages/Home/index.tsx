@@ -119,11 +119,11 @@ export default function HomePage() {
               style={{ height: `${height}px`, width: `${width}px` }}
               className={`fade-in`} // Apply the fade-in animation
             />
-              <div className="bg-blue-100 responsive mx-auto absolute top-1/3 left-1/2 -translate-x-1/2 text-white">
-                <h2 className={`text-4xl font-bold font-outline-2 fade-in`}>
+              <div className="responsive mx-auto absolute top-1/3 left-1/2 -translate-x-1/2 text-white">
+                <h2 className={`text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-lg xxs:text-lg font-bold font-outline-2 fade-in`}>
                   {image.heading}
                 </h2>
-                <p className={`mt-2 text-xl font-outline-2 fade-in`}>
+                <p className={`mt-2 text-xl lg:text-lg md:text-lg sm:text-lg xs:text-sm xxs:text-sm font-outline-2 fade-in`}>
                   Explore
                   <span
                     className="text-blue-500 cursor-pointer"
