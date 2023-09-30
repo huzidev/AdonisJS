@@ -35,13 +35,8 @@ export default function AddBlogPage(): JSX.Element {
   useCreateBlogPageHooks();
   return (
     <div>
-      <div className="main">
+      <div className="main mt-0">
         <div className="form">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
           <h2 className="main-heading-content">Add Blog</h2>
         </div>
         <form onSubmit={submit} className="form mt-6">

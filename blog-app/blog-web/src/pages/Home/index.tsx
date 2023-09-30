@@ -13,7 +13,7 @@ export default function HomePage() {
 
   useEffect(() => {
     function updateDimensions() {
-      setHeight(window.innerHeight - 72);
+      setHeight(window.innerHeight);
       setWidth(window.innerWidth);
     }
 
