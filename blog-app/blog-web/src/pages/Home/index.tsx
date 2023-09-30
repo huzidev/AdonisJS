@@ -8,12 +8,12 @@ import "./styles.css";
 export default function HomePage() {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [height, setHeight] = useState<number>(window.innerHeight - 64);
+  const [height, setHeight] = useState<number>(window.innerHeight - 72);
   const [width, setWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
     const updateDimensions = () => {
-      setHeight(window.innerHeight - 64);
+      setHeight(window.innerHeight - 72);
       setWidth(window.innerWidth);
     };
 
@@ -116,7 +116,7 @@ export default function HomePage() {
             <img
               src={require(`assets/${image.src}`)} // Added .default to fix image loading
               alt={image.heading}
-              // style={{ height: `${height}px`, width: `${width}px`}}
+              style={{ height: `${height}px`, width: `${width}px`}}
               className={`fade-in h-screen w-screen`} // Apply the fade-in animation
             />
               <div className="responsive mx-auto absolute top-[40%] left-1/2 -translate-x-1/2 text-white">
