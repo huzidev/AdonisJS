@@ -290,7 +290,9 @@ export default function UserFormPage() {
                     required
                     className="form-input"
                   />
-                  <label className="mt-6 relative inline-flex items-center cursor-pointer">
+                  <label 
+                    className="mt-6 relative inline-flex items-center cursor-pointer"
+                  >
                     <input 
                       onClick={() => auth.theme()}
                       type="checkbox"

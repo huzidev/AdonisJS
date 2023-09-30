@@ -29,15 +29,6 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
       }`}
     >
       <div>
-        <h1
-          className={`animation ${
-            props.isDark
-              ? (!darkTheme && "text-black") || (darkTheme && "text-white")
-              : (!lightTheme && "text-white") || (lightTheme && "text-black")
-          }`}
-        >
-          Yours Theme has been changed to {props.isDark ? "Dark" : "Light"} Mode
-        </h1>
         <div className="container">
           <label
             htmlFor="theme-toggle"
@@ -50,6 +41,15 @@ export default function ToggleThemePopUpPage(props: PropsType): JSX.Element {
             }`}
           ></label>
         </div>
+        <h1
+          className={`animation ${
+            props.isDark
+              ? (!darkTheme && "text-black") || (darkTheme && "text-white")
+              : (!lightTheme && "text-white") || (lightTheme && "text-black")
+          }`}
+        >
+          Yours Theme has been changed to {props.isDark ? "Dark" : "Light"} Mode
+        </h1>
       </div>
     </div>
   );
