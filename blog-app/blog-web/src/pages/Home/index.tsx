@@ -12,10 +12,10 @@ export default function HomePage() {
   const [width, setWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
-    const updateDimensions = () => {
+    function updateDimensions() {
       setHeight(window.innerHeight - 72);
       setWidth(window.innerWidth);
-    };
+    }
 
     updateDimensions();
     window.addEventListener("resize", updateDimensions);
