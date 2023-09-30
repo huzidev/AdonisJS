@@ -35,7 +35,7 @@ export default function AddBlogPage(): JSX.Element {
   useCreateBlogPageHooks();
   return (
     <div>
-      <div className="main mt-0">
+      <div className="main">
         <div className="form">
           <h2 className="main-heading-content">Add Blog</h2>
         </div>
