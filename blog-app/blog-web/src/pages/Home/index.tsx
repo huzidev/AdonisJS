@@ -104,7 +104,7 @@ export default function HomePage() {
             Next
           </span>
         </button>
-        {slides.map((image, index) => (
+        {slides.map((image, index: number) => (
           <div
             key={index}
             // style={{
