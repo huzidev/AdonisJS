@@ -116,7 +116,7 @@ export default function HomePage() {
             <img
               src={require(`assets/${image.src}`)} // Added .default to fix image loading
               alt={image.heading}
-              style={{ height: `${height}px`, width: `${width}px` }}
+              style={{ height: `${height}px`, width: `${width}px`}}
               className={`fade-in`} // Apply the fade-in animation
             />
               <div className="responsive mx-auto absolute top-[40%] left-1/2 -translate-x-1/2 text-white">
