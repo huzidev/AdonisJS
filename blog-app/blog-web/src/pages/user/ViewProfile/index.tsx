@@ -23,7 +23,7 @@ export default function ViewProfilePage(): JSX.Element {
   const currentRole = auth.state.user?.role;
   const isAdminRole = hasPermission("admin", currentRole);
   const blogState = blogs.state;
-  const isUser = currentRole === "user";
+  const isUser: boolean = currentRole === "user";
   let totalBlogs = blogState.getBlogsById.meta?.total;
   let totalFvrtBlogs = blogState.getFavoriteBlogs.meta?.total;
 
@@ -81,8 +81,8 @@ export default function ViewProfilePage(): JSX.Element {
             </div>
           ) : (
             <>
-              <h1 className="mb-4 text-2xl text-center font-bold tracking-tight text-white">
-                User Profile
+              <h1 className="mb-4 text-2xl ham:text-lg text-center font-bold tracking-tight text-white">
+                User's Profile
               </h1>
               {isLoadingUser ? (
                 <LoadingUser />
