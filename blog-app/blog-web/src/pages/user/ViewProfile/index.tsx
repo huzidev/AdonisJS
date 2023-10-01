@@ -122,7 +122,7 @@ export default function ViewProfilePage(): JSX.Element {
                   ROUTE_PATHS.EDIT_USER + `${isMe ? "me" : userDetails?.id}`
                 }
                 type="button"
-                className="text-white bg-gray-800 font-medium text-sm py-2.5"
+                className="text-white bg-gray-800 font-medium text-sm xxs:text-xs py-2.5"
               >
                 Edit
               </Link>
