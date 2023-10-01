@@ -27,7 +27,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
   const username = userState.getUser.data?.username;
   const loggedInUser = auth.state.user?.username;
   const userDataById = user.state.getUser?.data;
-  const isMe = params.id === "me";
+  const isMe: boolean = params.id === "me";
   const userId = Number(params.id);
   const loggedInId: any = auth.state.user?.id;
   const [isRole, setIsRole] = useState<any>('');
