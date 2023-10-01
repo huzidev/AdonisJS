@@ -59,7 +59,7 @@ export default function ManageUsersPage(): JSX.Element {
           </div>
         </div>
       </div>
-      <div className="overflow-auto rounded-lg border">
+      <div className="table-container">
         <table className="w-full">
           <thead>
             <tr className="table-header">
@@ -185,6 +185,7 @@ export default function ManageUsersPage(): JSX.Element {
             )}
           </tbody>
         </table>
+      </div>
         {
           // only show Next, Prev button when loading is completed
           !isLoading && allUsers && (
@@ -246,7 +247,6 @@ export default function ManageUsersPage(): JSX.Element {
             </div>
           )
         }
-      </div>
     </div>
   );
 }

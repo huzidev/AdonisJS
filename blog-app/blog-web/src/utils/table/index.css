@@ -10,6 +10,10 @@
     @apply flex-class pb-6;
 }
 
+.table-container {
+    @apply overflow-auto rounded-t-lg border; 
+}
+
 .headings-content {
     @apply font-semibold text-gray-700 dark:text-white;
 }
@@ -35,7 +39,7 @@
 }
 
 .table-footer {
-    @apply flex-class border-t px-5 py-5 dark:bg-gray-800 dark:border-gray-700;
+    @apply flex-class rounded-b-lg border-x border-b px-5 py-5 dark:bg-gray-800 dark:border-gray-200;
 }
 
 .table-footer-container {
