@@ -5,7 +5,7 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import qs from "query-string";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -33,6 +33,11 @@ export default function ManageBlogsPage(): JSX.Element {
     isFilter = Object.values(JSON.parse(search.sort))[0];
   }
   const { handleSort } = useFiltersHook();
+
+  // so the focus will be removed when user go to next blog's list page
+  useEffect(() => {
+    setClicked(null);
+  }, [window.location.pathname]);
 
   const dataByMe = state.getMyList;
   const dataByUser = state.getBlogsList;

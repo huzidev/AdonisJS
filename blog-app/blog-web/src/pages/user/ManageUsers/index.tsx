@@ -5,7 +5,7 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { useUser } from "store/user";
@@ -23,6 +23,11 @@ export default function ManageUsersPage(): JSX.Element {
   const navigate = useNavigate();
   const { handleSort } = useFiltersHook();
   const [clicked, setClicked] = useState<number | null>(null);
+
+  // so the focus will be removed when user go to next user's list page
+  useEffect(() => {
+    setClicked(null);
+  }, [window.location.pathname]);
 
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;
