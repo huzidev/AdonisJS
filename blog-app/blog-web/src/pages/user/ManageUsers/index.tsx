@@ -71,7 +71,7 @@ export default function ManageUsersPage(): JSX.Element {
                       ? () => handleSort(data.key)
                       : undefined
                   }
-                  className={`px-5 py-3 cursor-pointer`}
+                  className={`px-5 py-3 ${index === 0 ? '' : 'cursor-pointer'}`}
                   key={index}
                 >
                   {/* startCase will make the first letter Capital of any word */}

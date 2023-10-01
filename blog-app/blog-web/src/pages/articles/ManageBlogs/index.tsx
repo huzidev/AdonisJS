@@ -67,7 +67,7 @@ export default function ManageBlogsPage(): JSX.Element {
                   // So uploaded by won't be shown when blogger clikced on manage blogs uploaded by will only be visible when admin state is true
                   data.title === "uploadedBy" && !isAdmin ? null : (
                     <th
-                      className="px-5 py-3 cursor-pointer"
+                      className={`px-5 py-3 ${index === 0 ? '' : 'cursor-pointer'}`}
                       key={index}
                       onClick={
                         !constKeys.includes(data.key)
