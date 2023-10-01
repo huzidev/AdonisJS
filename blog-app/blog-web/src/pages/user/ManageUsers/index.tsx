@@ -10,6 +10,7 @@ import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
 import { LoadingList } from "utils/loading";
+import "utils/responsive.css";
 import "utils/table/index.css";
 import { columns, constKeys } from "./data";
 import { useManageUsersPageHooks } from "./hooks";
@@ -29,7 +30,7 @@ export default function ManageUsersPage(): JSX.Element {
   const isLoading = user.state.getUserPage.loading;
 
   return (
-    <div className="table-main">
+    <div className="table-main responsive">
       <div className="content">
         <div>
           <h2 className="headings-content">Manage Users</h2>
@@ -58,7 +59,7 @@ export default function ManageUsersPage(): JSX.Element {
           </div>
         </div>
       </div>
-      <div className="overflow-y-hidden overflow-x-auto rounded-lg border">
+      <div className="overflow-auto rounded-lg border">
         <table className="w-full">
           <thead>
             <tr className="table-header">
