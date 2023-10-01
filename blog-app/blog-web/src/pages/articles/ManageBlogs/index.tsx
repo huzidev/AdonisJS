@@ -152,7 +152,7 @@ export default function ManageBlogsPage(): JSX.Element {
                         </span>
                       </td>
                       <td className="table-content">
-                        <div className="flex">
+                        <div className="flex flex-col full:flex-row">
                           <button
                             className="table-content-actions"
                             onClick={() =>
