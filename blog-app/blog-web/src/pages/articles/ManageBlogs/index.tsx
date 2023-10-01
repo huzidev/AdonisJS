@@ -58,7 +58,7 @@ export default function ManageBlogsPage(): JSX.Element {
           </span>
         </div>
       </div>
-      <div className="overflow-auto rounded-lg border">
+      <div className="table-container">
           <table className="w-full">
             <thead>
               <tr className="table-header">
@@ -187,6 +187,7 @@ export default function ManageBlogsPage(): JSX.Element {
               )}
             </tbody>
           </table>
+      </div>
         {!isLoading && allBlogs.length && (
           <div className="table-footer">
             <span className="table-footer-content">
@@ -245,7 +246,6 @@ export default function ManageBlogsPage(): JSX.Element {
             </div>
           </div>
         )}
-      </div>
       {!isLoading && !allBlogs.length && (
         <div className="w-full mt-5 py-8 pl-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <h1 className="text-lg mb-6 font-bold tracking-tight text-white">
