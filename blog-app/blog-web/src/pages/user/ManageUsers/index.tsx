@@ -147,7 +147,7 @@ export default function ManageUsersPage(): JSX.Element {
                           View Profile
                         </button>
                       ) : (
-                        <div className="">
+                        <div className="flex flex-col full:flex-row">
                           <button
                             className="table-content-actions"
                             // if admin clicked on own self then redirect to EditProfile instead on EditUser
