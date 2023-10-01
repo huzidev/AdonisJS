@@ -88,11 +88,11 @@ export default function ManageUsersPage(): JSX.Element {
                 </td>
               </tr>
             ) : (
-              allUsers?.map((user, userIndex) => (
-                // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
-                <tr key={userIndex}>
+              allUsers?.map((user, index: number) => (
+                // key={index} always add at top of JSX since tr is the main parent therefore pass key={index} here If we've covered it in <div> or in <></> and then tries to pass key={index} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
+                <tr key={index}>
                   <td className="table-content">
-                    <p className="whitespace-no-wrap">{userIndex + 1}</p>
+                    <p className="whitespace-no-wrap">{index + 1}</p>
                   </td>
                   <td className="table-content">
                     <p className="whitespace-no-wrap">{user.id}</p>
