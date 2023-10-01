@@ -22,7 +22,6 @@ export default function ManageUsersPage(): JSX.Element {
   const navigate = useNavigate();
   const { handleSort } = useFiltersHook();
   const [clicked, setClicked] = useState<number | null>(null);
-  console.log("Index", clicked);
 
   const allUsers = user.state.getUserPage?.data;
   let currentPage = user.state.getUserPage.meta?.currentPage;
@@ -93,7 +92,7 @@ export default function ManageUsersPage(): JSX.Element {
             ) : (
               allUsers?.map((user, index: number) => (
                 // key={index} always add at top of JSX since tr is the main parent therefore pass key={index} here If we've covered it in <div> or in <></> and then tries to pass key={index} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
-                <tr key={index} onClick={() => setClicked(index)} className="focus:border focus:border-black">
+                <tr key={index} onClick={() => setClicked(index)} className={`${clicked === index ? 'border' : ''}`}>
                   <td className="table-content">
                     <p className="whitespace-no-wrap">{index + 1}</p>
                   </td>
