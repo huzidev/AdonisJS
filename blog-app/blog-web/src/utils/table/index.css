@@ -1,5 +1,5 @@
 .table-main {
-    @apply w-[1500px] mx-auto py-8;
+    @apply mx-auto py-8;
 }
 
 .flex-class {
