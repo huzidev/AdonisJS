@@ -47,9 +47,9 @@ export default function ManageUsersPage(): JSX.Element {
           </span>
         </div>
         <div className="flex items-center justify-between">
-          <div className="">
+          <div className="xs:mt-2 xxs:mt-2">
             <button
-              className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700"
+              className="flex items-center gap-2 rounded-md bg-blue-600 px-4 xs:px-3 xxs:px-3 py-2 text-sm xs:text-xs xxs:text-xs font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700"
               title="Create User"
               onClick={() => navigate(ROUTE_PATHS.USER_CREATE)}
             >
