@@ -19,7 +19,7 @@
 }
 
 .text-content {
-    @apply text-sm text-gray-500 dark:text-white;
+    @apply text-sm xs:text-xs xxs:text-xs text-gray-500 dark:text-white;
 }
 
 .table-header {
@@ -27,7 +27,7 @@
 }
 
 .table-content {
-    @apply border-gray-200 px-5 py-5 lg:py-4 md:py-3 sm:py-3 xs:py-2     text-sm dark:bg-darkBG dark:text-gray-400;
+    @apply border-gray-200 px-5 py-5 lg:py-4 md:py-3 sm:py-3 xs:py-2 xxs:py-1 text-sm dark:bg-darkBG dark:text-gray-400;
 }
 
 .table-content-actions {
