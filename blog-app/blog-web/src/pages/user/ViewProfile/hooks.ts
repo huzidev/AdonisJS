@@ -54,7 +54,7 @@ export function useViewProfilePageHook(): ViewProfileStateHandler {
     // otherwise previous role will stay saved in isRole state and if user clicked on user with role blogger then user with role user then first role === blogger
     // code runs then role === user code will run
     if (isRole) {
-      setIsRole("");
+      setIsRole('');
     }
   }, [window.location.pathname]);
 
