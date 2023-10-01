@@ -73,7 +73,8 @@ export default function ManageUsersPage(): JSX.Element {
                       ? () => handleSort(data.key)
                       : undefined
                   }
-                  className={`px-5 py-3 ${index === 0 ? '' : 'cursor-pointer'}`}
+                  // Not to show cursor-pointer on Sno and Actions
+                  className={`px-5 py-3 ${index === 0 || data.key === 'actions' ? '' : 'cursor-pointer'}`}
                   key={index}
                 >
                   {/* startCase will make the first letter Capital of any word */}
