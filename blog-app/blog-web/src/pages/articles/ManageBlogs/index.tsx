@@ -5,6 +5,7 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import ROUTE_PATHS from "Router/paths";
 import startCase from "lodash/startCase";
 import qs from "query-string";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
@@ -23,6 +24,7 @@ export default function ManageBlogsPage(): JSX.Element {
   const user = useUser();
   const auth = useAuth();
   const navigate = useNavigate();
+  const [clicked, setClicked] = useState<number | null>(null);
   const state = blogs.state;
   const isAdmin = hasPermission("admin", auth.state.user?.role);
   const search: any = qs.parse(window.location.search);
@@ -67,7 +69,8 @@ export default function ManageBlogsPage(): JSX.Element {
                   // So uploaded by won't be shown when blogger clikced on manage blogs uploaded by will only be visible when admin state is true
                   data.title === "uploadedBy" && !isAdmin ? null : (
                     <th
-                      className={`px-5 py-3 ${index === 0 ? '' : 'cursor-pointer'}`}
+                      // Not to show cursor-pointer on Sno and Actions
+                      className={`px-5 py-3 ${index === 0 || data.key === 'actions' ? '' : 'cursor-pointer'}`}
                       key={index}
                       onClick={
                         !constKeys.includes(data.key)
@@ -107,7 +110,7 @@ export default function ManageBlogsPage(): JSX.Element {
                     uploadedByUser && uploadedByUser.username;
                   return (
                     // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
-                    <tr key={index}>
+                    <tr key={index} onClick={() => setClicked(index)} className={`${clicked === index ? 'border' : ''}`}>
                       <td className="table-content">
                         <p className="whitespace-no-wrap">{index + 1}</p>
                       </td>
