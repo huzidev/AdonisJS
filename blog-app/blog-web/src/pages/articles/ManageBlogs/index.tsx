@@ -13,6 +13,7 @@ import { useUser } from "store/user";
 import { hasPermission } from "utils";
 import { useFiltersHook } from "utils/filters";
 import { LoadingList } from "utils/loading";
+import "utils/responsive.css";
 import "utils/table/index.css";
 import { columns, constKeys } from "./data";
 import { useManageBlogsPageHooks } from "./hooks";
@@ -46,7 +47,7 @@ export default function ManageBlogsPage(): JSX.Element {
   const isLoading = state.getMyList.loading || state.getBlogsList.loading;
 
   return (
-    <div className="table-main">
+    <div className="table-main responsive">
       <div className="content">
         <div>
           <h2 className="headings-content">
@@ -57,8 +58,7 @@ export default function ManageBlogsPage(): JSX.Element {
           </span>
         </div>
       </div>
-      <div className="overflow-y-hidden rounded-lg border">
-        <div className="overflow-x-auto">
+      <div className="overflow-auto rounded-lg border">
           <table className="w-full">
             <thead>
               <tr className="table-header">
@@ -187,7 +187,6 @@ export default function ManageBlogsPage(): JSX.Element {
               )}
             </tbody>
           </table>
-        </div>
         {!isLoading && allBlogs.length && (
           <div className="table-footer">
             <span className="table-footer-content">
