@@ -7,7 +7,7 @@
 }
 
 .content {
-    @apply flex-class xs:flex-col xs:items-start  pb-6;
+    @apply flex-class xs:flex-col xs:items-start pb-6;
 }
 
 .table-container {
