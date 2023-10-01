@@ -46,7 +46,7 @@ export default function ViewProfilePage(): JSX.Element {
     allComments,
   } = useViewProfilePageHook();
 
-  const isAdmin = userDetails?.role === "admin";
+  const isAdmin: boolean = userDetails?.role === "admin";
 
   let isFilter;
   if (search.sort) {
