@@ -58,134 +58,132 @@ export default function ManageUsersPage(): JSX.Element {
           </div>
         </div>
       </div>
-      <div className="overflow-y-hidden rounded-lg border">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="table-header">
-                {columns.map((data, columnIndex) => (
-                  // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
-                  <th
-                    onClick={
-                      !constKeys.includes(data.key)
-                        ? () => handleSort(data.key)
-                        : undefined
-                    }
-                    className="px-5 py-3 cursor-pointer"
-                    key={columnIndex}
-                  >
-                    {/* startCase will make the first letter Capital of any word */}
-                    {startCase(data.title)}
-                  </th>
-                ))}
+      <div className="overflow-y-hidden overflow-x-auto rounded-lg border">
+        <table className="w-full">
+          <thead>
+            <tr className="table-header">
+              {columns.map((data, columnIndex) => (
+                // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
+                <th
+                  onClick={
+                    !constKeys.includes(data.key)
+                      ? () => handleSort(data.key)
+                      : undefined
+                  }
+                  className="px-5 py-3 cursor-pointer"
+                  key={columnIndex}
+                >
+                  {/* startCase will make the first letter Capital of any word */}
+                  {startCase(data.title)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="text-gray-500">
+            {isLoading ? (
+              <tr>
+                <td colSpan={12}>
+                  <LoadingList />
+                </td>
               </tr>
-            </thead>
-            <tbody className="text-gray-500">
-              {isLoading ? (
-                <tr>
-                  <td colSpan={12}>
-                    <LoadingList />
+            ) : (
+              allUsers?.map((user, userIndex) => (
+                // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
+                <tr key={userIndex}>
+                  <td className="table-content">
+                    <p className="whitespace-no-wrap">{userIndex + 1}</p>
                   </td>
-                </tr>
-              ) : (
-                allUsers?.map((user, userIndex) => (
-                  // key={userIndex} always add at top of JSX since tr is the main parent therefore pass key={userIndex} here If we've covered it in <div> or in <></> and then tries to pass key={userIndex} in tr then we'll get the error because then div and <></> will the main parent and will be at the top of JSX
-                  <tr key={userIndex}>
-                    <td className="table-content">
-                      <p className="whitespace-no-wrap">{userIndex + 1}</p>
-                    </td>
-                    <td className="table-content">
-                      <p className="whitespace-no-wrap">{user.id}</p>
-                    </td>
-                    <td className="table-content">
-                      <p className="whitespace-no-wrap">{user.username}</p>
-                    </td>
-                    <td className="table-content">
-                      <p className="whitespace-no-wrap">{user.email}</p>
-                    </td>
-                    <td className="table-content">
-                      <p className="whitespace-no-wrap">{user.role}</p>
-                    </td>
-                    <td className="table-content">
-                      <p className="whitespace-no-wrap">
-                        {user.isVerified ? "True" : "False"}
-                      </p>
-                    </td>
-                    <td className="table-content">
-                      <span className="whitespace-no-wrap">
-                        {user.isBanned ? "True" : "False"}
-                      </span>
-                    </td>
-                    <td className="table-content">
-                      <span className="whitespace-no-wrap">
-                        {user.isActive ? "True" : "False"}
-                      </span>
-                    </td>
-                    <td className="table-content">
-                      <span className="whitespace-no-wrap">
-                        {/* just show dates not time while toLocaleString shows complete date and time */}
-                        {new Date(user.createdAt).toLocaleDateString()}
-                      </span>
-                    </td>
-                    <td className="table-content">
-                      <span className="whitespace-no-wrap" title="Last Update">
-                        {new Date(user.updatedAt).toLocaleDateString()}
-                      </span>
-                    </td>
-                    <td className="table-content">
-                      <div>
-                        {/* so admin can't get the access to edit super-admin */}
-                        {auth.state.user &&
-                        !hasPermission(user.role, auth.state.user.role) ? (
+                  <td className="table-content">
+                    <p className="whitespace-no-wrap">{user.id}</p>
+                  </td>
+                  <td className="table-content">
+                    <p className="whitespace-no-wrap">{user.username}</p>
+                  </td>
+                  <td className="table-content">
+                    <p className="whitespace-no-wrap">{user.email}</p>
+                  </td>
+                  <td className="table-content">
+                    <p className="whitespace-no-wrap">{user.role}</p>
+                  </td>
+                  <td className="table-content">
+                    <p className="whitespace-no-wrap">
+                      {user.isVerified ? "True" : "False"}
+                    </p>
+                  </td>
+                  <td className="table-content">
+                    <span className="whitespace-no-wrap">
+                      {user.isBanned ? "True" : "False"}
+                    </span>
+                  </td>
+                  <td className="table-content">
+                    <span className="whitespace-no-wrap">
+                      {user.isActive ? "True" : "False"}
+                    </span>
+                  </td>
+                  <td className="table-content">
+                    <span className="whitespace-no-wrap">
+                      {/* just show dates not time while toLocaleString shows complete date and time */}
+                      {new Date(user.createdAt).toLocaleDateString()}
+                    </span>
+                  </td>
+                  <td className="table-content">
+                    <span className="whitespace-no-wrap" title="Last Update">
+                      {new Date(user.updatedAt).toLocaleDateString()}
+                    </span>
+                  </td>
+                  <td className="table-content">
+                    <div>
+                      {/* so admin can't get the access to edit super-admin */}
+                      {auth.state.user &&
+                      !hasPermission(user.role, auth.state.user.role) ? (
+                        <button
+                          className="table-content-actions"
+                          // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                          onClick={() =>
+                            navigate(ROUTE_PATHS.VIEW_PROFILE + user.id)
+                          }
+                        >
+                          View Profile
+                        </button>
+                      ) : (
+                        <div>
                           <button
                             className="table-content-actions"
                             // if admin clicked on own self then redirect to EditProfile instead on EditUser
                             onClick={() =>
-                              navigate(ROUTE_PATHS.VIEW_PROFILE + user.id)
+                              navigate(
+                                ROUTE_PATHS.EDIT_USER +
+                                  (user.id === auth.state.user?.id
+                                    ? "me"
+                                    : user.id)
+                              )
                             }
                           >
-                            View Profile
+                            Edit
                           </button>
-                        ) : (
-                          <div>
-                            <button
-                              className="table-content-actions"
-                              // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                              onClick={() =>
-                                navigate(
-                                  ROUTE_PATHS.EDIT_USER +
-                                    (user.id === auth.state.user?.id
-                                      ? "me"
-                                      : user.id)
-                                )
-                              }
-                            >
-                              Edit
-                            </button>
-                            <button
-                              className="table-content-actions"
-                              // if admin clicked on own self then redirect to EditProfile instead on EditUser
-                              onClick={() =>
-                                navigate(
-                                  ROUTE_PATHS.VIEW_PROFILE +
-                                    (user.id === auth.state.user?.id
-                                      ? "me"
-                                      : user.id)
-                                )
-                              }
-                            >
-                              &nbsp; View
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                          <button
+                            className="table-content-actions"
+                            // if admin clicked on own self then redirect to EditProfile instead on EditUser
+                            onClick={() =>
+                              navigate(
+                                ROUTE_PATHS.VIEW_PROFILE +
+                                  (user.id === auth.state.user?.id
+                                    ? "me"
+                                    : user.id)
+                              )
+                            }
+                          >
+                            &nbsp; View
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
         {
           // only show Next, Prev button when loading is completed
           !isLoading && allUsers && (
