@@ -63,7 +63,7 @@ export default function ManageUsersPage(): JSX.Element {
         <table className="w-full">
           <thead>
             <tr className="table-header">
-              {columns.map((data, columnIndex) => (
+              {columns.map((data, index: number) => (
                 // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
                 <th
                   onClick={
@@ -71,8 +71,8 @@ export default function ManageUsersPage(): JSX.Element {
                       ? () => handleSort(data.key)
                       : undefined
                   }
-                  className="px-5 py-3 cursor-pointer"
-                  key={columnIndex}
+                  className={`px-5 py-3 cursor-pointer`}
+                  key={index}
                 >
                   {/* startCase will make the first letter Capital of any word */}
                   {startCase(data.title)}
@@ -147,7 +147,7 @@ export default function ManageUsersPage(): JSX.Element {
                           View Profile
                         </button>
                       ) : (
-                        <div>
+                        <div className="">
                           <button
                             className="table-content-actions"
                             // if admin clicked on own self then redirect to EditProfile instead on EditUser
