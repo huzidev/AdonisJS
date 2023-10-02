@@ -62,7 +62,7 @@ export default function ViewBlogPage(): JSX.Element {
               alt="Thumbnail"
             />
             {auth.state.user && (
-              <div className="text-white flex w-full absolute top-0">
+              <div className="text-white flex w-full absolute top-2">
                 <div>
                   <button
                     onClick={() =>
