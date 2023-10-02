@@ -149,7 +149,7 @@ export default function ViewBlogPage(): JSX.Element {
                 className="text-white"
                 to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}
               >
-                Uploaded By : {owner?.username}
+                Uploaded By : <span className="hover:text-blue-400">{owner?.username}</span> 
               </Link>
             </div>
           </>
