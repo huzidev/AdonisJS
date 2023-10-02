@@ -7,6 +7,7 @@ import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
+import "utils/responsive.css";
 import CommentsPage from "../comments/AddComment";
 import { useGetBlogPageHooks } from "./hooks";
 import { AddReactionState, BlogState } from "./types";
@@ -37,8 +38,8 @@ export default function ViewBlogPage(): JSX.Element {
   useGetBlogPageHooks();
 
   return (
-    <div>
-      <div className="w-2/3 my-8 mx-auto border rounded-lg shadow bg-gray-800 border-gray-700">
+    <div className="responsive mx-auto">
+      <div className="my-8 border rounded-lg shadow bg-gray-800 border-gray-700">
         {owner?.isBanned ? (
           <div className="flex justify-center py-32">
             <p className="text-xl dark:text-white">
