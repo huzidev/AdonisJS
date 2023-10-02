@@ -1,5 +1,6 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -74,7 +75,7 @@ export default function ViewBlogPage(): JSX.Element {
                     }
                   >
                     {allReactionsState && allReactions.user.isLike
-                      ? "Liked"
+                      ? <ThumbUpOffAltIcon />
                       : "Like"}
                   </button>
                   <button
