@@ -94,31 +94,33 @@ export default function ViewBlogPage(): JSX.Element {
                       : "Dislike"}
                   </button>
                 </div>
-                <div className="absolute right-2 cursor-pointer">
-                  {/* if the blog on which user clicked is already in favorite then show Heart Icon else not */}
-                  {blog.state.getFavoriteBlog.data ? (
-                    <span
-                    onClick={() => blog.removeFavoriteBlog({
-                      userId: auth.state.user?.id,
-                      articleId: getBlog.id,
-                      ownerId
-                    })} 
-                    title="Remove From Favortie">
-                      <FavoriteIcon />
-                    </span>
-                  ) : (
-                    <span 
-                    onClick={() => blog.addFavoriteBlog({
-                      userId: auth.state.user?.id,
-                      articleId: getBlog.id,
-                      ownerId
-                    })} 
-                    title="Add To Favortie"
-                    >
-                      <FavoriteBorderIcon />
-                    </span>
-                  )}
-                </div>
+                {auth.state.user.role === 'user' && (
+                  <div className="absolute right-2 cursor-pointer">
+                    {/* if the blog on which user clicked is already in favorite then show Heart Icon else not */}
+                    {blog.state.getFavoriteBlog.data ? (
+                      <span
+                      onClick={() => blog.removeFavoriteBlog({
+                        userId: auth.state.user?.id,
+                        articleId: getBlog.id,
+                        ownerId
+                      })} 
+                      title="Remove From Favortie">
+                        <FavoriteIcon />
+                      </span>
+                    ) : (
+                      <span 
+                      onClick={() => blog.addFavoriteBlog({
+                        userId: auth.state.user?.id,
+                        articleId: getBlog.id,
+                        ownerId
+                      })} 
+                      title="Add To Favortie"
+                      >
+                        <FavoriteBorderIcon />
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
             )}
             <div className="p-5 flex flex-col items-center">
