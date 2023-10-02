@@ -1,5 +1,7 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ROUTE_PATHS from "Router/paths";
@@ -94,8 +96,9 @@ export default function ViewBlogPage(): JSX.Element {
                     }
                   >
                     {allReactionsState && allReactions.user.isDislike
-                      ? "Disliked"
-                      : "Dislike"}
+                      ? <ThumbDownAltIcon />
+                      : <ThumbDownOffAltIcon />
+                    }
                   </button>
                 </div>
                 {auth.state.user.role === 'user' && (
