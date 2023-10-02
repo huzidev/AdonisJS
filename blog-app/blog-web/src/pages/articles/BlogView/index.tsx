@@ -56,13 +56,13 @@ export default function ViewBlogPage(): JSX.Element {
           </div>
         ) : (
           <>
+          <div className="rounded-t-lg relative">
             <img
-              className="rounded-t-lg max-w-full"
               src={require(`assets/astronomy.jpg`)}
               alt="Thumbnail"
             />
             {auth.state.user && (
-              <div className="text-white flex relative">
+              <div className="text-white flex w-full absolute top-0">
                 <div>
                   <button
                     onClick={() =>
@@ -130,6 +130,7 @@ export default function ViewBlogPage(): JSX.Element {
                 )}
               </div>
             )}
+          </div>
             <div className="p-5 w-[90%] mx-auto flex flex-col text-center">
               <h5 className="mb-4 text-2xl font-bold tracking-tight  text-white">
                 {blogView.title} {blog.state.getBlog.data?.id}
