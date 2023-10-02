@@ -57,8 +57,8 @@ export default function ViewBlogPage(): JSX.Element {
         ) : (
           <>
             <img
-              className="rounded-t-lg"
-              src="/docs/images/blog/image-1.jpg"
+              className="rounded-t-lg h-1/3 w-full"
+              src={require(`assets/astronomy.jpg`)}
               alt="Thumbnail"
             />
             {auth.state.user && (
@@ -83,7 +83,7 @@ export default function ViewBlogPage(): JSX.Element {
                       }
                   </button>
                   <button
-                    className="ml-5"
+                    className="ml-2"
                     onClick={() =>
                       reaction.addReaction({
                         ...reactState,
