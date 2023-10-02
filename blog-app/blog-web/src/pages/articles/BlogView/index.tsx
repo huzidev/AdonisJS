@@ -57,7 +57,7 @@ export default function ViewBlogPage(): JSX.Element {
         ) : (
           <>
             <img
-              className="rounded-t-lg h-1/3 w-full"
+              className="rounded-t-lg"
               src={require(`assets/astronomy.jpg`)}
               alt="Thumbnail"
             />
