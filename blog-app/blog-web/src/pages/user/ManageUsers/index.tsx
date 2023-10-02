@@ -54,7 +54,7 @@ export default function ManageUsersPage(): JSX.Element {
               onClick={() => navigate(ROUTE_PATHS.USER_CREATE)}
             >
               <ContactPageIcon />
-              Create
+              Create User
             </button>
           </div>
         </div>
