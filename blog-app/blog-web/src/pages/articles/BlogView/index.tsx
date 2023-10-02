@@ -149,7 +149,7 @@ export default function ViewBlogPage(): JSX.Element {
           </>
         )}
       </div>
-      <div className="w-2/3 my-8 mx-auto">
+      <div className="my-8">
         <CommentsPage ownerId={ownerId} />
       </div>
     </div>
