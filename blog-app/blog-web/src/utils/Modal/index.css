@@ -2,18 +2,22 @@
     @apply absolute right-0 hover:border-white;
 }
 
+.modal-container {
+    @apply fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm;
+}
+
 .modal-button {
     @apply inline-flex items-center p-2 text-sm font-medium text-center text-gray-200 rounded-lg focus:ring-1 focus:outline-none focus:ring-gray-50;
 }
 
 .modal-menu {
-    @apply absolute right-0 top-8 block divide-gray-100 rounded-lg shadow bg-gray-300;
+    @apply absolute right-0 top-9;
 }
 
 .modal-actions {
-    @apply text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center;
+    @apply text-white bg-gray-800 font-medium text-sm py-2.5 px-4 w-full text-center;
 }
 
 .modal-button-actions {
-    @apply text-white px-4 py-2 rounded;
+    @apply text-white px-6 py-1 rounded;
 }

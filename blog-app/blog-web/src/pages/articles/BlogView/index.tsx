@@ -206,9 +206,9 @@ export default function ViewBlogPage(): JSX.Element {
                                   </button>
                                 </li>
                                 {isDelete && (
-                                  <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
-                                    <div className="bg-white p-8 w-96 dark:text-white dark:bg-darkBG rounded-lg">
-                                      <p className="text-lg text-center mb-4">
+                                  <div className="modal-container">
+                                    <div className="p-8 w-96 dark:text-white bg-darkBG rounded-lg">
+                                      <p className="text-lg text-center mb-">
                                         Are you sure you want to delete this blog?
                                       </p>
                                       <div className="flex justify-center space-x-4">
