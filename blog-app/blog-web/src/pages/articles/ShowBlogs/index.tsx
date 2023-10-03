@@ -226,7 +226,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                               </li>
                               {showModal && deleteBlogId === blog.id && (
                                 <div className="modal-container">
-                                  <div className="bg-white p-8 w-96 dark:text-white dark:bg-darkBG rounded-lg">
+                                  <div className="modal-content">
                                     <p className="text-lg text-center mb-4">
                                       Are you sure you want to delete this blog?
                                     </p>

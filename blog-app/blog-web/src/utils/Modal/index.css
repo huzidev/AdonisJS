@@ -6,6 +6,10 @@
     @apply fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm;
 }
 
+.modal-content {
+    @apply p-8 w-96 dark:text-white bg-darkBG rounded-lg;
+}
+
 .modal-button {
     @apply inline-flex items-center p-2 text-sm font-medium text-center text-gray-200 rounded-lg focus:ring-1 focus:outline-none focus:ring-gray-50;
 }
