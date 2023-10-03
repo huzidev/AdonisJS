@@ -337,7 +337,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                         <img
                           className="w-10 h-10 rounded-full bg-black"
                           src="/docs/images/people/profile-picture-5.jpg"
-                        ></img>
+                        />
                         {/* e.stopPropagation() because we've create onClick event on complete div therefore if we didn't use e.stopPropagation() then onClicking useranme it'll fetch user to blog instead of user name therefore uses e.stopPropagation() */}
                         <p
                           className="text-white ml-3"
