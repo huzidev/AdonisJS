@@ -198,7 +198,7 @@ export default function ViewBlogPage(): JSX.Element {
                                     type="button"
                                     className="modal-actions"
                                     onClick={() => {
-                                      setIsDelete(!isDelete);
+                                      setIsDelete(true);
                                       setShowModal(true);
                                     }}
                                   >
@@ -223,7 +223,10 @@ export default function ViewBlogPage(): JSX.Element {
                                         </button>
                                         <button
                                           className="bg-gray-500 modal-button-actions"
-                                          onClick={() => setShowModal(false)}
+                                          onClick={() => {
+                                            setShowModal(false); 
+                                            setIsDelete(false);
+                                          }}
                                         >
                                           No
                                         </button>
