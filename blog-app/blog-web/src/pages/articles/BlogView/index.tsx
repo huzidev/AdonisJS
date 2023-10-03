@@ -142,7 +142,7 @@ export default function ViewBlogPage(): JSX.Element {
                 {blogView.content}
               </p>
             </div>
-            <div className="flex justify-between mr-3">
+            <div className="flex justify-between mr-3 ml-2">
               <div className="flex text-white">
                 <p>Likes : {allReactions && allReactions.totalLikes}</p>
                 <p className="ml-2">
