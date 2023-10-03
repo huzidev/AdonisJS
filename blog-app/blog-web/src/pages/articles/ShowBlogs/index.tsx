@@ -199,7 +199,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                         {isSettings === blog.id && (
                           <div>
                             <ul
-                              className="absolute right-0 top-7 block divide-gray-100 rounded-lg shadow bg-gray-300"
+                              className="modal-menu"
                               aria-labelledby="dropdownDefaultButton"
                               onClick={(e) => e.stopPropagation()}
                             >
@@ -207,7 +207,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 <Link
                                   to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
                                   type="button"
-                                  className="text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center"
+                                  className="modal-menu-actions"
                                 >
                                   Edit
                                 </Link>
@@ -215,7 +215,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                               <li>
                                 <button
                                   type="button"
-                                  className="text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center"
+                                  className="modal-menu-actions"
                                   onClick={() => {
                                     setDeleteBlogId(blog.id);
                                     setShowModal(true);
@@ -232,7 +232,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                     </p>
                                     <div className="flex justify-center space-x-4">
                                       <button
-                                        className="bg-red-500 text-white px-4 py-2 rounded"
+                                        className="bg-red-500 modal-menu-actions"
                                         onClick={() => {
                                           blogs.deleteBlog(blog.id);
                                           setShowModal(false);
@@ -241,7 +241,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                         Yes
                                       </button>
                                       <button
-                                        className="bg-gray-500 text-white px-4 py-2 rounded"
+                                        className="bg-gray-500 modal-menu-actions"
                                         onClick={() => setShowModal(false)}
                                       >
                                         No

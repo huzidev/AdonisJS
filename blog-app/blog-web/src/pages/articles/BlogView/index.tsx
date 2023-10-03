@@ -188,7 +188,7 @@ export default function ViewBlogPage(): JSX.Element {
                                   <Link
                                     to={ROUTE_PATHS.ARTICLE_UPDATE + getBlog?.slug}
                                     type="button"
-                                    className="text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center"
+                                    className="modal-menu-actions"
                                   >
                                     Edit
                                   </Link>
@@ -196,7 +196,7 @@ export default function ViewBlogPage(): JSX.Element {
                                 <li>
                                   <button
                                     type="button"
-                                    className="text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center"
+                                    className="modal-menu-actions"
                                     onClick={() => {
                                       setDeleteBlogId(getBlog.id);
                                       setShowModal(true);
@@ -211,9 +211,9 @@ export default function ViewBlogPage(): JSX.Element {
                                       <p className="text-lg text-center mb-4">
                                         Are you sure you want to delete this blog?
                                       </p>
-                                      <div className="flex justify-center space-x-4">
+                                      <div className="flex justify-center space-x-6">
                                         <button
-                                          className="bg-red-500 text-white px-4 py-2 rounded"
+                                          className="bg-red-500 modal-menu-actions"
                                           onClick={() => {
                                             blog.deleteBlog(getBlog.id);
                                             setShowModal(false);
@@ -222,7 +222,7 @@ export default function ViewBlogPage(): JSX.Element {
                                           Yes
                                         </button>
                                         <button
-                                          className="bg-gray-500 text-white px-4 py-2 rounded"
+                                          className="bg-gray-500 modal-menu-actions"
                                           onClick={() => setShowModal(false)}
                                         >
                                           No
