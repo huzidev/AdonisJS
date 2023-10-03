@@ -11,6 +11,7 @@ import { useAuth } from "store/auth";
 import { User } from "store/auth/types";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
+import 'utils/Modal/index.css';
 import { LoaderSpin, LoadingListBlogs } from "utils/loading";
 import 'utils/responsive.css';
 import { useShowBlogsHook } from "./hooks";
@@ -170,7 +171,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                       ) && (
                         <>
                         <div
-                          className="absolute right-0 hover:border-white hover:border-2"
+                          className="menu"
                           onClick={(e) => {
                             e.stopPropagation();
                             setIsSettings( isSettings === blog.id ? null : blog.id );
