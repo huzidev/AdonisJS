@@ -12,6 +12,7 @@ import { useAuth } from "store/auth";
 import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
 import { hasPermission } from "utils";
+import 'utils/Modal/index.css';
 import "utils/responsive.css";
 import CommentsPage from "../comments/AddComment";
 import { useGetBlogPageHooks } from "./hooks";
@@ -155,7 +156,7 @@ export default function ViewBlogPage(): JSX.Element {
                       // ||hasPermission("super-admin", userData?.role)
                       <>
                         <div
-                          className="absolute right-0 hover:border-white hover:border-2"
+                          className="menu"
                           onClick={() => setShowModal(!showModal)}
                         >
                           <button
