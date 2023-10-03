@@ -207,7 +207,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 <Link
                                   to={ROUTE_PATHS.ARTICLE_UPDATE + blog.slug}
                                   type="button"
-                                  className="modal-menu-actions"
+                                  className="modal-actions"
                                 >
                                   Edit
                                 </Link>
@@ -215,7 +215,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                               <li>
                                 <button
                                   type="button"
-                                  className="modal-menu-actions"
+                                  className="modal-actions"
                                   onClick={() => {
                                     setDeleteBlogId(blog.id);
                                     setShowModal(true);
@@ -232,7 +232,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                     </p>
                                     <div className="flex justify-center space-x-4">
                                       <button
-                                        className="bg-red-500 modal-menu-actions"
+                                        className="bg-red-500 modal-button-actions"
                                         onClick={() => {
                                           blogs.deleteBlog(blog.id);
                                           setShowModal(false);
@@ -241,7 +241,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                         Yes
                                       </button>
                                       <button
-                                        className="bg-gray-500 modal-menu-actions"
+                                        className="bg-gray-500 modal-button-actions"
                                         onClick={() => setShowModal(false)}
                                       >
                                         No
