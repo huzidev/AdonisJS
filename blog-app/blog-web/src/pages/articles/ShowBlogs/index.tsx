@@ -156,7 +156,7 @@ export default function ShowBlogs(props: any): JSX.Element {
               <div
                 key={blog.id}
                 title="Read More"
-                className={`w-[32.5%] mt-8 ${
+                className={`w-[32.5%] relative mt-8 ${
                   index % 3 === 1 ? "mx-4" : ''
                 } margin`}
                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
@@ -286,7 +286,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 ? "Remove From"
                                 : "Add to") + " favorite"
                             }
-                            className={`p-2 rounded-full w-10 transition-colors duration-300 cursor-pointer ${
+                            className={`p-2 absolute top-0 right-1 rounded-full w-10 transition-colors duration-300 cursor-pointer ${
                               favBlogs.find(
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
