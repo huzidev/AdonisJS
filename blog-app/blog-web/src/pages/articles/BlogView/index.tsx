@@ -63,7 +63,7 @@ export default function ViewBlogPage(): JSX.Element {
             />
             {auth.state.user && (
               <div className="text-white flex w-full absolute top-2">
-                <div>
+                <div className="ml-2">
                   <button
                     onClick={() =>
                       reaction.addReaction({
