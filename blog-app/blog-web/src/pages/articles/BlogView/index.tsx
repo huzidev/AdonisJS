@@ -66,6 +66,7 @@ export default function ViewBlogPage(): JSX.Element {
               <div className="text-white flex w-full absolute top-2">
                 <div className="ml-2">
                   <button
+                  title={allReactionsState && allReactions.user.isLike ? 'Remove like' : 'like'}
                     onClick={() =>
                       reaction.addReaction({
                         ...reactState,
@@ -84,6 +85,7 @@ export default function ViewBlogPage(): JSX.Element {
                       }
                   </button>
                   <button
+                    title={allReactionsState && allReactions.user.isDislike ? 'Remove Dislike' : 'Dislike'}
                     className="ml-2"
                     onClick={() =>
                       reaction.addReaction({
