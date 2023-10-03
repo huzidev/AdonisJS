@@ -24,7 +24,7 @@ export default function ViewBlogPage(): JSX.Element {
   const loggedInId: any = auth.state.user?.id;
   const reaction = useReactions();
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
+  const [isDelete, setIsDelete] = useState<boolean>(false);
   const blog = useBlogs();
   const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
@@ -188,7 +188,7 @@ export default function ViewBlogPage(): JSX.Element {
                                   <Link
                                     to={ROUTE_PATHS.ARTICLE_UPDATE + getBlog?.slug}
                                     type="button"
-                                    className="modal-menu-actions"
+                                    className="modal-actions"
                                   >
                                     Edit
                                   </Link>
@@ -196,24 +196,24 @@ export default function ViewBlogPage(): JSX.Element {
                                 <li>
                                   <button
                                     type="button"
-                                    className="modal-menu-actions"
+                                    className="modal-actions"
                                     onClick={() => {
-                                      setDeleteBlogId(getBlog.id);
+                                      setIsDelete(!isDelete);
                                       setShowModal(true);
                                     }}
                                   >
                                     Delete
                                   </button>
                                 </li>
-                                {showModal && deleteBlogId === getBlog.id && (
+                                {isDelete && (
                                   <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
                                     <div className="bg-white p-8 w-96 dark:text-white dark:bg-darkBG rounded-lg">
                                       <p className="text-lg text-center mb-4">
                                         Are you sure you want to delete this blog?
                                       </p>
-                                      <div className="flex justify-center space-x-6">
+                                      <div className="flex justify-center space-x-4">
                                         <button
-                                          className="bg-red-500 modal-menu-actions"
+                                          className="bg-red-500 modal-button-actions"
                                           onClick={() => {
                                             blog.deleteBlog(getBlog.id);
                                             setShowModal(false);
@@ -222,7 +222,7 @@ export default function ViewBlogPage(): JSX.Element {
                                           Yes
                                         </button>
                                         <button
-                                          className="bg-gray-500 modal-menu-actions"
+                                          className="bg-gray-500 modal-button-actions"
                                           onClick={() => setShowModal(false)}
                                         >
                                           No
