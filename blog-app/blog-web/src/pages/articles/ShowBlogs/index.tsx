@@ -180,7 +180,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                           <button
                             id="dropdownComment1Button"
                             data-dropdown-toggle="dropdownComment1"
-                            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-200 rounded-lg focus:ring-1 focus:outline-none focus:ring-gray-50"
+                            className="modal-button"
                             type="button"
                             // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
                           >
