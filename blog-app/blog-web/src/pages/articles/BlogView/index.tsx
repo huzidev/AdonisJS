@@ -94,7 +94,7 @@ export default function ViewBlogPage(): JSX.Element {
                         isDislike:
                           allReactionsState && allReactions.user.isDislike
                             ? false
-                            : true,
+                            : true
                       })
                     }
                   >
