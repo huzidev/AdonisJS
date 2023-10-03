@@ -22,6 +22,8 @@ export default function ViewBlogPage(): JSX.Element {
   const auth = useAuth();
   const loggedInId: any = auth.state.user?.id;
   const reaction = useReactions();
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [deleteBlogId, setDeleteBlogId] = useState<number | null>(null);
   const blog = useBlogs();
   const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
@@ -31,7 +33,7 @@ export default function ViewBlogPage(): JSX.Element {
   const ownerId: any = blog.state.getBlog.data?.ownerId;
   const reactState: AddReactionState = {
     userId: loggedInId,
-    articleId: getBlog?.id,
+    articleId: getBlog?.id
   };
   // to check that allReactions must not be null and allReactions.user must also not be null otherwise it'll show error if we just check allReactions
   const allReactionsState = allReactions && allReactions.user;
@@ -136,7 +138,61 @@ export default function ViewBlogPage(): JSX.Element {
                         owner?.role !== "super-admin") 
                       // ||hasPermission("super-admin", userData?.role)
                       ) && (
-                        <h1>Helo</h1>
+                        <div>
+                            <ul
+                              className="absolute right-0 top-7 block divide-gray-100 rounded-lg shadow bg-gray-300"
+                              aria-labelledby="dropdownDefaultButton"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <li>
+                                <Link
+                                  to={ROUTE_PATHS.ARTICLE_UPDATE + getBlog?.slug}
+                                  type="button"
+                                  className="text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center"
+                                >
+                                  Edit
+                                </Link>
+                              </li>
+                              <li>
+                                <button
+                                  type="button"
+                                  className="text-white bg-gray-800 font-medium text-sm py-2.5 px-3 w-full text-center"
+                                  onClick={() => {
+                                    setDeleteBlogId(getBlog.id);
+                                    setShowModal(true);
+                                  }}
+                                >
+                                  Delete
+                                </button>
+                              </li>
+                              {showModal && deleteBlogId === getBlog.id && (
+                                <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
+                                  <div className="bg-white p-8 w-96">
+                                    <p className="text-lg text-center mb-4">
+                                      Are you sure you want to delete this blog?
+                                    </p>
+                                    <div className="flex justify-center space-x-4">
+                                      <button
+                                        className="bg-red-500 text-white px-4 py-2 rounded"
+                                        onClick={() => {
+                                          blog.deleteBlog(getBlog.id);
+                                          setShowModal(false);
+                                        }}
+                                      >
+                                        Yes
+                                      </button>
+                                      <button
+                                        className="bg-gray-500 text-white px-4 py-2 rounded"
+                                        onClick={() => setShowModal(false)}
+                                      >
+                                        No
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                            </ul>
+                          </div>
                 )}
               </div>
             )}
