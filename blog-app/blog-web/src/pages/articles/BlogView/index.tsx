@@ -11,6 +11,7 @@ import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useReactions } from "store/reactions";
 import { useUser } from "store/user";
+import { hasPermission } from "utils";
 import "utils/responsive.css";
 import CommentsPage from "../comments/AddComment";
 import { useGetBlogPageHooks } from "./hooks";
@@ -104,13 +105,13 @@ export default function ViewBlogPage(): JSX.Element {
                     }
                   </button>
                 </div>
-                {auth.state.user.role === 'user' && (
+                {auth.state.user.role === 'user' ? (
                   <div className="absolute right-2 cursor-pointer">
                     {/* if the blog on which user clicked is already in favorite then show Heart Icon else not */}
                     {blog.state.getFavoriteBlog.data ? (
                       <span
                       onClick={() => blog.removeFavoriteBlog({
-                        userId: auth.state.user?.id,
+                        userId: loggedInId,
                         articleId: getBlog.id,
                         ownerId
                       })} 
@@ -120,7 +121,7 @@ export default function ViewBlogPage(): JSX.Element {
                     ) : (
                       <span 
                       onClick={() => blog.addFavoriteBlog({
-                        userId: auth.state.user?.id,
+                        userId: loggedInId,
                         articleId: getBlog.id,
                         ownerId
                       })} 
@@ -130,6 +131,12 @@ export default function ViewBlogPage(): JSX.Element {
                       </span>
                     )}
                   </div>
+                ) : (loggedInId === ownerId ||
+                      (hasPermission("admin", auth.state.user?.role) &&
+                        owner?.role !== "super-admin") 
+                      // ||hasPermission("super-admin", userData?.role)
+                      ) && (
+                        <h1>Helo</h1>
                 )}
               </div>
             )}
