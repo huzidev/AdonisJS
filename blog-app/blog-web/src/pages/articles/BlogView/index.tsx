@@ -251,7 +251,7 @@ export default function ViewBlogPage(): JSX.Element {
               <h5 className="mb-4 text-2xl font-bold tracking-tight  text-white">
                 {blogView.title} {blog.state.getBlog.data?.id}
               </h5>
-              <p className="mb-3 font-normal text-gray-400">
+              <p className="mb-3 leading-relaxed font-normal text-gray-400">
                 {blogView.content}
               </p>
             </div>
