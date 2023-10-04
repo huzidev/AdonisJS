@@ -81,9 +81,9 @@ export default function ShowCommentsPage({
                 (uploadedByUser.id === userData.id ? "me" : uploadedByUser.id)
             );
           }}
-          className="inline-flex text-lg items-center mr-3  text-white"
+          className="flex text-lg items-center mr-3 text-white"
         >
-          - {commentBy} {uploadedByUserRole === "super-admin" && "*"}{" "}
+            - &nbsp;<span className="hover:text-blue-400">{commentBy}</span> {uploadedByUserRole === "super-admin" && "*"}{" "}
         </button>
         <p className="text-white">
           {new Date(comment.createdAt).toLocaleDateString()}
