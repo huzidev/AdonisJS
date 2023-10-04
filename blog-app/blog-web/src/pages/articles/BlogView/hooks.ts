@@ -48,7 +48,9 @@ export function useGetBlogPageHooks(): void {
       }
     
       reaction.getReactions({ articleId: blogId, userId: loggedInId });
-    } else if (blogId && !auth.state.user) {
+    } 
+    // if user is not loggedIn 
+    else if (blogId && !auth.state.user) {
       reaction.getReactions({ articleId: blogId });
     }
   }, [blogId])
