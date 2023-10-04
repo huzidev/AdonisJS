@@ -64,11 +64,11 @@ export function useGetBlogPageHooks(): void {
     }
     if (prevFavorite?.loading) {
       blog.getFavoriteBlog({
-      userId: loggedInId,
-      articleId: blogId
-    });
+        userId: loggedInId,
+        articleId: blogId
+      });
     }
-  }, [reaction.state.addReaction, blog.state.addFavoriteBlog, blog.state.removeFavoriteBlog])
+  }, [reaction.state.addReaction, state.addFavoriteBlog, state.removeFavoriteBlog])
 
   useEffect(() => {
     if (prev?.getBlog.loading) {
@@ -83,5 +83,5 @@ export function useGetBlogPageHooks(): void {
         navigate('/');
       }
     }
-  }, [state]);
+  }, [state.getBlog]);
 }
