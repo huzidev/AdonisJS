@@ -120,10 +120,10 @@ export default function ShowCommentsPage({
           id="dropdownComment1"
           className={`${
             dropDown === comment.id ? "block" : "hidden"
-          } z-10 w-36 rounded divide-y shadow bg-gray-700 divide-gray-600`}
+          } w-20 rounded shadow bg-gray-700`}
         >
           <ul
-            className="py-1 text-sm  text-gray-200"
+            className="py-1 text-sm text-white"
             aria-labelledby="dropdownMenuIconHorizontalButton"
           >
             <li>
