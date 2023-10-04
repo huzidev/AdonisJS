@@ -34,8 +34,10 @@ import { AddCommentPayload, AllCommentsState } from "./types";
 
     useEffect(() => {
       // fetching all users to get username and roles for all comments
-      user.allUser();
-    }, []);
+      if (prev?.getAllComments.loading) {
+        user.allUser();
+      }
+    }, [state.getAllComments]);
 
     useEffect(() => {
       // prevId?.loading so when user go to new blog page then wait till id is fetched of that blog otherwise the previous blog's comments will fetched first then the new blog's comment
