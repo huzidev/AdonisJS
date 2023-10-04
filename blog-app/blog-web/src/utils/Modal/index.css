@@ -1,4 +1,4 @@
-.menu {
+.menu-a {
     @apply absolute right-0 hover:border-white;
 }
 
@@ -11,7 +11,7 @@
 }
 
 .modal-button {
-    @apply inline-flex items-center p-2 text-sm font-medium text-center text-gray-200 rounded-lg;
+    @apply flex items-center p-2 text-sm font-medium text-center text-gray-200 rounded-lg;
 }
 
 .modal-menu {
