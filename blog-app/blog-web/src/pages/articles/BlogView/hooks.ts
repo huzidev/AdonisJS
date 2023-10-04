@@ -30,7 +30,8 @@ export function useGetBlogPageHooks(): void {
 
   useEffect(() => {
     // Fetch user data by id when blog is load successfully
-    if (prev?.getBlog.loading) {
+    // no need to fetch user by id if user is on own blog because then auth.state will stored the loggedIn user's details 
+    if (prev?.getBlog.loading && !byMe) {
       user.getById(ownerId);
     }
   }, [state.getBlog])

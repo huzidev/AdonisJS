@@ -28,7 +28,8 @@ export default function ViewBlogPage(): JSX.Element {
   const blog = useBlogs();
   const navigate = useNavigate();
   const getBlog: any = blog.state.getBlog?.data;
-  const owner = user.state.getUser.data;
+  const isMe: boolean = loggedInId === (getBlog && getBlog.ownerId);
+  const owner = isMe ? auth.state.user : user.state.getUser.data;
   const initialState: BlogState = { title: "", image: "", content: "" };
   const [blogView, setBlogView] = useState(initialState);
   const allReactions: any = reaction.state.getReactions.data;
