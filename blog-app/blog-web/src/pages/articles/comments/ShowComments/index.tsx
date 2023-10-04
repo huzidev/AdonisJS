@@ -46,9 +46,9 @@ export default function ShowCommentsPage({
     content: "",
   });
 
-  const isCommentAuthor = comment.userId === userData?.id;
+  const isCommentAuthor: boolean = comment.userId === userData?.id;
   const uploadedByUserRole = uploadedByUser?.role;
-  const isAuthorSuperAdmin = uploadedByUserRole === "super-admin";
+  const isAuthorSuperAdmin: boolean = uploadedByUserRole === "super-admin";
   const commentBy = uploadedByUser?.username;
 
   const replies =
@@ -57,9 +57,9 @@ export default function ShowCommentsPage({
       (reply: AllCommentsState) => reply.parentId === comment.id
     );
 
-  const isAuthorAdmin = uploadedByUserRole === "admin";
-  const isSuperAdmin = auth.state.user?.role === "super-admin";
-  const isAdmin = hasPermission("admin", userData?.role);
+  const isAuthorAdmin: boolean = uploadedByUserRole === "admin";
+  const isSuperAdmin: boolean = auth.state.user?.role === "super-admin";
+  const isAdmin: boolean = hasPermission("admin", userData?.role);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -75,6 +75,7 @@ export default function ShowCommentsPage({
 
   return (
     <div>
+      <div className='relative'>
       <div className="flex items-center">
         <button
           onClick={() => {
@@ -118,11 +119,12 @@ export default function ShowCommentsPage({
               </svg>
             </button>
           )}
+      </div>
         <div
           id="dropdownComment1"
           className={`${
             dropDown === comment.id ? "block" : "hidden"
-          } w-20 rounded shadow bg-gray-700`}
+          } w-20 rounded absolute right-0 shadow bg-gray-700`}
         >
           <ul
             className="py-1 text-center text-sm text-white"
