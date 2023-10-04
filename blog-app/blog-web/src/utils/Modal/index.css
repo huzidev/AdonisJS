@@ -19,7 +19,7 @@
 }
 
 .modal-actions {
-    @apply text-white bg-gray-800 font-medium text-sm py-2.5 px-4 w-full text-center;
+    @apply text-white bg-gray-800 font-medium text-sm py-2.5 px-4 w-full text-center transition hover:bg-gray-600;
 }
 
 .modal-button-actions {

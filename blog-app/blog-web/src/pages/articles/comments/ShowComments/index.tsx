@@ -131,6 +131,7 @@ export default function ShowCommentsPage({
                 (isAdmin && !isAuthorSuperAdmin) ||
                 isSuperAdmin) && (
                 <button
+                  className="block py-2 w-full px-4 hover:bg-gray-600 hover:text-white dark:text-white"
                   onClick={() => {
                     // if user had clicked on reply then first hide that reply input field then show edit comment field
                     replyState && setReplyState(null);
