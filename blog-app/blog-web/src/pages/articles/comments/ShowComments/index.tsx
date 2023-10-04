@@ -182,18 +182,19 @@ export default function ShowCommentsPage({
               Edit Comment
             </label>
             <div className="mt-2">
-              <input
-                id="content"
-                name="content"
-                type="text"
-                placeholder="Edit Comment"
-                value={editComment.content}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setEditComment({ ...editComment, content: e.target.value })
-                }
-                required
-                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white"
-              />
+              <div className='comment-field'>
+                <textarea
+                    id="content"
+                    name="content"
+                    placeholder="Edit Comment"
+                    value={editComment.content}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                      setEditComment({ ...editComment, content: e.target.value })
+                    }
+                    required
+                    className="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none placeholder-gray-400 bg-gray-800"
+                  />
+              </div>
               <div className="flex">
                 <button
                   className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -217,7 +218,7 @@ export default function ShowCommentsPage({
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
         {replyState === comment.id ? (
           <form onSubmit={submit}>
-            <div className="p-2 my-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800">
+            <div className="comment-field">
               <textarea
                   name="reply"
                   rows={1}
