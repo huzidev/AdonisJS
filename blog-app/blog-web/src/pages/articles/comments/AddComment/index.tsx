@@ -47,7 +47,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
             </div>
             <button
               type="submit"
-              className="text-white focus:ring-2 focus:outline-none font-medium rounded-lg text-sm w-32 py-2.5 inline-flex items-center justify-center bg-blue-600 focus:ring-blue-800"
+              className="text-white focus:ring-2 focus:outline-none font-medium rounded-lg text-sm w-32 py-2.5 inline-flex items-center justify-center bg-blue-600 focus:ring-blue-800 transition hover:bg-blue-700"
             >
               Post comment
             </button>
