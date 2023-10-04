@@ -6,7 +6,7 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ROUTE_PATHS from "Router/paths";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "store/articles";
 import { useAuth } from "store/auth";
 import { useReactions } from "store/reactions";
@@ -26,6 +26,7 @@ export default function ViewBlogPage(): JSX.Element {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isDelete, setIsDelete] = useState<boolean>(false);
   const blog = useBlogs();
+  const navigate = useNavigate();
   const getBlog: any = blog.state.getBlog?.data;
   const owner = user.state.getUser.data;
   const initialState: BlogState = { title: "", image: "", content: "" };
@@ -217,6 +218,7 @@ export default function ViewBlogPage(): JSX.Element {
                                           onClick={() => {
                                             blog.deleteBlog(getBlog.id);
                                             setShowModal(false);
+                                            navigate('/blogs');
                                           }}
                                         >
                                           Yes
