@@ -1,3 +1,4 @@
+import MessageIcon from '@mui/icons-material/Message';
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -215,7 +216,7 @@ export default function ShowCommentsPage({
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
         {replyState === comment.id ? (
-          <form onSubmit={submit} className="mt-2">
+          <form onSubmit={submit}>
             <input
               id="reply"
               name="reply"
@@ -251,7 +252,7 @@ export default function ShowCommentsPage({
           // if blog owner is banned then reply button wouldn't be shown
           userData && (userDetails && !userDetails.isBanned) && (
             <button
-              className="focus:outline-none text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-600 hover:bg-green-700 focus:ring-green-800"
+              className="focus:outline-none text-white focus:ring-2 font-medium rounded-lg text-sm px-5 py-2 mt-2 mb-2 transition bg-green-600 hover:bg-green-700 focus:ring-green-800"
               onClick={() => {
                 // so if user had clicked on edit comment then first hide that edit comment input then show add comment.id in replyState
                 editState && setEditState(null);
@@ -263,6 +264,7 @@ export default function ShowCommentsPage({
               }}
             >
               Reply
+              <MessageIcon />
             </button>
           )
         )}
