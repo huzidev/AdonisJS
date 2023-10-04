@@ -235,16 +235,16 @@ export default function ShowCommentsPage({
                 />
             </div>
             <div className="flex">
-              <button
-                className="action-button"
-                onClick={() => setReplyState(null)}
-              >
-                Cancel
-              </button>
               <input
                 className="action-button"
+                onClick={() => setReplyState(null)}
                 type="submit"
-                value="reply"
+                value="Cancel"
+              />
+              <input
+                className="action-button ml-2"
+                type="submit"
+                value="Reply"
               />
             </div>
           </form>
