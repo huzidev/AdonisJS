@@ -54,12 +54,12 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
           </form>
         )}
         <div className="flex justify-between items-center">  
-          <h2 className="text-lg lg:text-2xl font- text-white">
+          <h2 className="text-xl text-white">
             Comments ({allComments && allComments.length})
           </h2>
         </div>
-        <article className="p-6 mb-6 text-base rounded-lg bg-gray-900">
-          <footer className="flex justify-between items-center mb-2">
+        <div className="px-6 my-4 text-base rounded-lg bg-gray-900">
+          <div className="flex justify-between items-center mb-2">
             <div>
               {allComments &&
                 allComments.map((comment: AllCommentsState, index: number) => {
@@ -91,8 +91,8 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
                   );
                 })}
             </div>
-          </footer>
-        </article>
+          </div>
+        </div>
       </div>
     </section>
   );
