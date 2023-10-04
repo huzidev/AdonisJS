@@ -175,12 +175,6 @@ export default function ShowCommentsPage({
       {editState === comment.id ? (
         <>
           <form onSubmit={submit}>
-            <label
-              htmlFor="content"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Edit Comment
-            </label>
             <div className="mt-2">
               <div className='comment-field'>
                 <textarea
