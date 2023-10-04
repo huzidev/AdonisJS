@@ -197,14 +197,14 @@ export default function ShowCommentsPage({
                   />
               </div>
               <div className="flex">
-                <button
-                  className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={() => setEditState(null)}
-                >
-                  Cancel
-                </button>
                 <input
-                  className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => setEditState(null)}
+                  className="action-button"
+                  type="submit"
+                  value="Cancel"
+                />
+                <input
+                  className="action-button ml-2"
                   type="submit"
                   value="Save"
                 />
