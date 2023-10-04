@@ -73,7 +73,7 @@ export default function ShowCommentsPage({
 
   return (
     <div>
-      <div className="flex">
+      <div className="flex items-center">
         <button
           onClick={() => {
             navigate(
@@ -81,11 +81,11 @@ export default function ShowCommentsPage({
                 (uploadedByUser.id === userData.id ? "me" : uploadedByUser.id)
             );
           }}
-          className="flex text-lg items-center mr-3 text-white"
+          className="text-lg mr-2 text-white"
         >
             - &nbsp;<span className="hover:text-blue-400">{commentBy}</span> {uploadedByUserRole === "super-admin" && "*"}{" "}
         </button>
-        <p className="text-white">
+        <p className="text-gray-400">
           {new Date(comment.createdAt).toLocaleDateString()}
         </p>
         {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots */}
