@@ -259,13 +259,12 @@ export default function ViewBlogPage(): JSX.Element {
                   Dislikes : {allReactions && allReactions.totalDislikes}
                 </p>
               </div>
-              <Link
+              <span
                 className="text-white"
-                to={ROUTE_PATHS.VIEW_PROFILE + owner?.id}
               >
                 Uploaded By :{" "}
-                <span className="hover:text-blue-400">{owner?.username}</span>
-              </Link>
+                <Link to={ROUTE_PATHS.VIEW_PROFILE + owner?.id} className="hover:text-blue-400">{owner?.username}</Link>
+              </span>
             </div>
           </>
         )}
