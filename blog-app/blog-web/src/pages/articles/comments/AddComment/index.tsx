@@ -28,7 +28,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
       <div className="max-w-2xl mx-auto px-4">
         {/* add comment field will only be visible if user is loggedIn and if blog owner is banned then user can't add the comment */}
         {loggedInId && (userDetails && !userDetails.isBanned) && (
-          <form className="mb-6" onSubmit={submit}>
+          <form className="mb-4" onSubmit={submit}>
             <div className="py-2 px-2 mb-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800 ">
               <label htmlFor="comment" className="sr-only">
                 Your comment
@@ -43,11 +43,11 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
                 className="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none placeholder-gray-400 bg-gray-800"
                 placeholder="Write a comment..."
                 required
-              ></textarea>
+              />
             </div>
             <button
               type="submit"
-              className="text-white focus:ring-2 focus:outline-none font-medium rounded-lg text-sm w-32 py-2.5 inline-flex items-center justify-center bg-blue-600 focus:ring-blue-800 transition hover:bg-blue-700"
+              className="text-white focus:ring-2 focus:outline-none font-medium rounded-lg text-sm w-32 py-2 bg-blue-600 focus:ring-blue-800 transition hover:bg-blue-700"
             >
               Post comment
             </button>
