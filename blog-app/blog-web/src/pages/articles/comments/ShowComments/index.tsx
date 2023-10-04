@@ -218,31 +218,31 @@ export default function ShowCommentsPage({
         {replyState === comment.id ? (
           <form onSubmit={submit}>
             <div className="p-2 my-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800">
-            <textarea
-                name="reply"
-                rows={1}
-                value={reply.content}
-                // so if user is replying to owns comment then show reply yours comment
-                placeholder={`Reply to ${
-                  isCommentAuthor ? "Yours" : commentBy + `'s`
-                  // when user is replying to a reply then show Reply to yours/username reply else Reply to yours/username comment
-                } ${comment.parentId ? "reply" : "comment"}`}
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                  setReply({ ...reply, content: e.target.value })
-                }
-                className="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none placeholder-gray-400 bg-gray-800"
-                required
-              />
-              </div>
+              <textarea
+                  name="reply"
+                  rows={1}
+                  value={reply.content}
+                  // so if user is replying to owns comment then show reply yours comment
+                  placeholder={`Reply to ${
+                    isCommentAuthor ? "Yours" : commentBy + `'s`
+                    // when user is replying to a reply then show Reply to yours/username reply else Reply to yours/username comment
+                  } ${comment.parentId ? "reply" : "comment"}`}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                    setReply({ ...reply, content: e.target.value })
+                  }
+                  className="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none placeholder-gray-400 bg-gray-800"
+                  required
+                />
+            </div>
             <div className="flex">
               <button
-                className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="action-button"
                 onClick={() => setReplyState(null)}
               >
                 Cancel
               </button>
               <input
-                className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="action-button"
                 type="submit"
                 value="reply"
               />
