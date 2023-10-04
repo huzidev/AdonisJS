@@ -86,7 +86,7 @@ export default function ShowCommentsPage({
           }}
           className="text-lg mr-2 text-white"
         >
-          - &nbsp;<span className="hover:text-blue-400">{commentBy}</span> {uploadedByUserRole === "super-admin" && "*"}{" "}
+          - &nbsp;<span className="transition hover:text-blue-400">{commentBy}</span> {uploadedByUserRole === "super-admin" && "*"}{" "}
         </button>
         <p className="text-gray-400">
           {new Date(comment.createdAt).toLocaleDateString()}
