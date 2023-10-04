@@ -211,7 +211,7 @@ export default function ShowCommentsPage({
           </form>
         </>
       ) : (
-        <p className="text-gray-400 ml-6">{comment.content}</p>
+        <p className="text-gray-400 ml-4">{comment.content}</p>
       )}
       <div>
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
@@ -251,11 +251,13 @@ export default function ShowCommentsPage({
           // reply button wouldn't be shown when user has clicked on reply button and Reply button will only be visible when user is loggedIn
           // if blog owner is banned then reply button wouldn't be shown
           userData && (userDetails && !userDetails.isBanned) && (
-            <div className="flex items-center mt-4 space-x-4">
+            <div className="flex items-center mt-2 space-x-4">
                 <button type="button"
-                    className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                    className="text-gray-500 dark:text-gray-400 font-medium">
                     <MessageIcon />
-                    Reply
+                    <span className='ml-2 text-lg hover:underline'>
+                      Reply
+                    </span>
                 </button>
             </div>
             // <button
