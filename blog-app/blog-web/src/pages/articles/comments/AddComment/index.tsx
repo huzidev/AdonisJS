@@ -26,10 +26,15 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
   return (
     <section className="bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
+        <div className="flex justify-between items-center">  
+          <h2 className="text-2xl text-white">
+            Comments ({allComments && allComments.length})
+          </h2>
+        </div>
         {/* add comment field will only be visible if user is loggedIn and if blog owner is banned then user can't add the comment */}
         {loggedInId && (userDetails && !userDetails.isBanned) && (
           <form className="mb-4" onSubmit={submit}>
-            <div className="py-2 px-2 mb-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800 ">
+            <div className="py-2 px-2 my-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800 ">
               <label htmlFor="comment" className="sr-only">
                 Your comment
               </label>
@@ -53,11 +58,6 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
             </button>
           </form>
         )}
-        <div className="flex justify-between items-center">  
-          <h2 className="text-2xl text-white">
-            Comments ({allComments && allComments.length})
-          </h2>
-        </div>
         <div className="my-2 text-base rounded-lg bg-gray-900">
           <div className="flex justify-between items-center mb-2">
             <div>
