@@ -34,7 +34,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
         {/* add comment field will only be visible if user is loggedIn and if blog owner is banned then user can't add the comment */}
         {loggedInId && (userDetails && !userDetails.isBanned) && (
           <form className="mb-4" onSubmit={submit}>
-            <div className="py-2 px-2 my-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800 ">
+            <div className="py-2 px-2 my-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800">
               <label htmlFor="comment" className="sr-only">
                 Your comment
               </label>
