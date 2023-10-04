@@ -9,3 +9,7 @@
 .comment-field {
     @apply p-2 my-4 rounded-lg rounded-t-lg border border-gray-400 bg-gray-800;
 }
+
+.text-area {
+    @apply w-full text-sm text-white border-0 focus:ring-0 focus:outline-none placeholder-gray-400 bg-gray-800;
+}

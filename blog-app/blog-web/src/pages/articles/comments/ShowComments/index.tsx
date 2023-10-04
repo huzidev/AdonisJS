@@ -185,6 +185,7 @@ export default function ShowCommentsPage({
               <div className='comment-field'>
                 <textarea
                     id="content"
+                    rows={1}
                     name="content"
                     placeholder="Edit Comment"
                     value={editComment.content}
@@ -192,7 +193,7 @@ export default function ShowCommentsPage({
                       setEditComment({ ...editComment, content: e.target.value })
                     }
                     required
-                    className="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none placeholder-gray-400 bg-gray-800"
+                    className="text-area"
                   />
               </div>
               <div className="flex">
@@ -231,7 +232,7 @@ export default function ShowCommentsPage({
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                     setReply({ ...reply, content: e.target.value })
                   }
-                  className="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none placeholder-gray-400 bg-gray-800"
+                  className="text-area"
                   required
                 />
             </div>
