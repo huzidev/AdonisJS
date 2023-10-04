@@ -217,22 +217,22 @@ export default function ShowCommentsPage({
         {/* so reply input will only be shown for those comment on which user clicked for reply otherwise due to map reply field will be shown to every comments */}
         {replyState === comment.id ? (
           <form onSubmit={submit}>
-            <input
-              id="reply"
-              name="reply"
-              type="text"
-              value={reply.content}
-              // so if user is replying to owns comment then show reply yours comment
-              placeholder={`Reply to ${
-                isCommentAuthor ? "Yours" : commentBy + `'s`
-                // when user is replying to a reply then show Reply to yours/username reply else Reply to yours/username comment
-              } ${comment.parentId ? "reply" : "comment"}`}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setReply({ ...reply, content: e.target.value })
-              }
-              required
-              className="block w-full rounded-md border-0 py-1.5 px-2 text-white bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
+            <textarea
+                name="reply"
+                rows={6}
+                value={reply.content}
+                // so if user is replying to owns comment then show reply yours comment
+                placeholder={`Reply to ${
+                  isCommentAuthor ? "Yours" : commentBy + `'s`
+                  // when user is replying to a reply then show Reply to yours/username reply else Reply to yours/username comment
+                } ${comment.parentId ? "reply" : "comment"}`}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setReply({ ...reply, content: e.target.value })
+                }
+                className="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none placeholder-gray-400 bg-gray-800"
+                required
+              />
+           
             <div className="flex">
               <button
                 className="flex mt-6 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
