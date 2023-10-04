@@ -101,7 +101,7 @@ export default function ShowCommentsPage({
             <button
               id="dropdownComment1Button"
               data-dropdown-toggle="dropdownComment1"
-              className="p-2 text-gray-400"
+              className="p-2 text-gray-400 absolute right-0 bottom-0"
               type="button"
               // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
               onClick={() =>
@@ -109,7 +109,7 @@ export default function ShowCommentsPage({
               }
             >
               <svg
-                className="w-5 h-5"
+                className="w-5 h-5 "
                 aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -124,7 +124,7 @@ export default function ShowCommentsPage({
           id="dropdownComment1"
           className={`${
             dropDown === comment.id ? "block" : "hidden"
-          } w-20 rounded absolute right-0 shadow bg-gray-700`}
+          } w-20 rounded absolute top-6 right-0 shadow bg-gray-700`}
         >
           <ul
             className="py-1 text-center text-sm text-white"
