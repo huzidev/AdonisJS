@@ -251,21 +251,27 @@ export default function ShowCommentsPage({
           // reply button wouldn't be shown when user has clicked on reply button and Reply button will only be visible when user is loggedIn
           // if blog owner is banned then reply button wouldn't be shown
           userData && (userDetails && !userDetails.isBanned) && (
-            <button
-              className="focus:outline-none text-white focus:ring-2 font-medium rounded-lg text-sm px-5 py-2 mt-2 mb-2 transition bg-green-600 hover:bg-green-700 focus:ring-green-800"
-              onClick={() => {
-                // so if user had clicked on edit comment then first hide that edit comment input then show add comment.id in replyState
-                editState && setEditState(null);
-                // if three-dots drop-down button is visible then hide it
-                dropDown && setDropDown(null);
-                // if user had clicked in edit before then isEdit will be true hence when user click on reply make sure to change isEdit to false else it'll send the request to editComment instead of reply
-                isEdit && setIsEdit(false);
-                setReplyState(comment.id);
-              }}
-            >
-              Reply
-              <MessageIcon />
-            </button>
+            <div className="flex items-center mt-4 space-x-4">
+                <button type="button"
+                    className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                    <MessageIcon />
+                    Reply
+                </button>
+            </div>
+            // <button
+            //   className="focus:outline-none text-white focus:ring-2 font-medium rounded-lg text-sm px-5 py-2 mt-2 mb-2 transition bg-green-600 hover:bg-green-700 focus:ring-green-800"
+            //   onClick={() => {
+            //     // so if user had clicked on edit comment then first hide that edit comment input then show add comment.id in replyState
+            //     editState && setEditState(null);
+            //     // if three-dots drop-down button is visible then hide it
+            //     dropDown && setDropDown(null);
+            //     // if user had clicked in edit before then isEdit will be true hence when user click on reply make sure to change isEdit to false else it'll send the request to editComment instead of reply
+            //     isEdit && setIsEdit(false);
+            //     setReplyState(comment.id);
+            //   }}
+            // >
+            //   Reply
+            // </button>
           )
         )}
       </div>
