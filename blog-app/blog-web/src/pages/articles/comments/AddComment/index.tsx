@@ -54,11 +54,11 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
           </form>
         )}
         <div className="flex justify-between items-center">  
-          <h2 className="text-xl text-white">
+          <h2 className="text-2xl text-white">
             Comments ({allComments && allComments.length})
           </h2>
         </div>
-        <div className="px-6 my-4 text-base rounded-lg bg-gray-900">
+        <div className="my-2 text-base rounded-lg bg-gray-900">
           <div className="flex justify-between items-center mb-2">
             <div>
               {allComments &&
