@@ -29,10 +29,11 @@ export function useGetBlogPageHooks(): void {
   }, []);
 
   useEffect(() => {
-    if (ownerId) {
+    // Fetch user data by id when blog is load successfully
+    if (prev?.getBlog.loading) {
       user.getById(ownerId);
     }
-  }, [ownerId])
+  }, [state.getBlog])
 
   useEffect(() => {
     // when user is loggedIn then getReactions with loggedIn user id to show like/liked button to check whether user has already liked the blog or not
