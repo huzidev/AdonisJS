@@ -158,7 +158,7 @@ export default function ViewBlogPage(): JSX.Element {
                       // ||hasPermission("super-admin", userData?.role)
                       <>
                         <div
-                          className="menu-a"
+                          className="drop-down"
                           onClick={() => setShowModal(!showModal)}
                         >
                           <button

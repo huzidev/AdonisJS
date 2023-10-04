@@ -1,4 +1,4 @@
-.menu-a {
+.drop-down {
     @apply absolute right-0 hover:border-white;
 }
 
