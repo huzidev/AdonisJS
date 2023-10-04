@@ -18,7 +18,11 @@ export function useGetBlogPageHooks(): void {
   const navigate = useNavigate();
   const prevReact = usePrevious(reaction.state.addReaction);
   const ownerId: any = state.getBlog.data?.ownerId;
-  const prevFavorite = usePrevious(blog.state.getFavoriteBlog.data?.id ? blog.state.removeFavoriteBlog : blog.state.addFavoriteBlog);
+  const prevFavorite = usePrevious(
+    blog.state.getFavoriteBlog.data?.id
+      ? blog.state.removeFavoriteBlog
+      : blog.state.addFavoriteBlog
+  );
   const byMe = ownerId === auth.state.user?.id;
   const loggedInId: any = auth.state.user?.id;
   const blogId: any = state.getBlog.data?.id;
@@ -29,35 +33,6 @@ export function useGetBlogPageHooks(): void {
   }, []);
 
   useEffect(() => {
-    // Fetch user data by id when blog is load successfully
-    // no need to fetch user by id if user is on own blog because then auth.state will stored the loggedIn user's details 
-    if (prev?.getBlog.loading && !byMe) {
-      user.getById(ownerId);
-    }
-  }, [state.getBlog])
-
-  useEffect(() => {
-    // when user is loggedIn then getReactions with loggedIn user id to show like/liked button to check whether user has already liked the blog or not
-    if (prev?.getBlog.loading) {
-      if (blogId && auth.state.user) {
-        // only fetch favortieBlog when loggedIn user's role is user
-        if (auth.state.user.role === 'user') {
-            blog.getFavoriteBlog({
-              userId: loggedInId,
-              articleId: blogId
-          });
-        }
-      
-        reaction.getReactions({ articleId: blogId, userId: loggedInId });
-      } 
-      // if user is not loggedIn 
-      else if (blogId && !auth.state.user) {
-        reaction.getReactions({ articleId: blogId });
-      }
-    }
-  }, [state.getBlog])
-
-  useEffect(() => {
     // when user clikced on like or dislike button then fetch the updated data
     if (prevReact?.loading) {
       reaction.getReactions({ articleId: blogId, userId: loggedInId });
@@ -65,22 +40,46 @@ export function useGetBlogPageHooks(): void {
     if (prevFavorite?.loading) {
       blog.getFavoriteBlog({
         userId: loggedInId,
-        articleId: blogId
+        articleId: blogId,
       });
     }
-  }, [reaction.state.addReaction, state.addFavoriteBlog, state.removeFavoriteBlog])
+  }, [
+    reaction.state.addReaction,
+    state.addFavoriteBlog,
+    state.removeFavoriteBlog,
+  ]);
 
   useEffect(() => {
     if (prev?.getBlog.loading) {
+      // Fetch user data by id when blog is load successfully
+      // no need to fetch user by id if user is on own blog because then auth.state will stored the loggedIn user's details
+      if (!byMe) {
+        user.getById(ownerId);
+      }
+      // when user is loggedIn then getReactions with loggedIn user id to show like/liked button to check whether user has already liked the blog or not
+      if (blogId && auth.state.user) {
+        // only fetch favortieBlog when loggedIn user's role is user
+        if (auth.state.user.role === "user") {
+          blog.getFavoriteBlog({
+            userId: loggedInId,
+            articleId: blogId,
+          });
+        }
+        reaction.getReactions({ articleId: blogId, userId: loggedInId });
+      }
+      // if user is not loggedIn
+      else if (blogId && !auth.state.user) {
+        reaction.getReactions({ articleId: blogId });
+      }
       if (!state.getBlog.loading && !state.getBlog.error) {
         if (byMe) {
           successNotification("Blog by you fetched successfully");
         } else {
           successNotification(state.getBlog.message);
         }
-      } // if user tries to change to URL id which doesn't exist in database 
+      } // if user tries to change to URL id which doesn't exist in database
       else if (!state.getBlog.loading && state.getBlog.error) {
-        navigate('/');
+        navigate("/");
       }
     }
   }, [state.getBlog]);
