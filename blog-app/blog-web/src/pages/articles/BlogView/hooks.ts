@@ -38,22 +38,24 @@ export function useGetBlogPageHooks(): void {
 
   useEffect(() => {
     // when user is loggedIn then getReactions with loggedIn user id to show like/liked button to check whether user has already liked the blog or not
-    if (blogId && auth.state.user) {
-      // only fetch favortieBlog when loggedIn user's role is user
-      if (auth.state.user.role === 'user') {
-          blog.getFavoriteBlog({
-            userId: loggedInId,
-            articleId: blogId
-        });
+    if (prev?.getBlog.loading) {
+      if (blogId && auth.state.user) {
+        // only fetch favortieBlog when loggedIn user's role is user
+        if (auth.state.user.role === 'user') {
+            blog.getFavoriteBlog({
+              userId: loggedInId,
+              articleId: blogId
+          });
+        }
+      
+        reaction.getReactions({ articleId: blogId, userId: loggedInId });
+      } 
+      // if user is not loggedIn 
+      else if (blogId && !auth.state.user) {
+        reaction.getReactions({ articleId: blogId });
       }
-    
-      reaction.getReactions({ articleId: blogId, userId: loggedInId });
-    } 
-    // if user is not loggedIn 
-    else if (blogId && !auth.state.user) {
-      reaction.getReactions({ articleId: blogId });
     }
-  }, [blogId])
+  }, [state.getBlog])
 
   useEffect(() => {
     // when user clikced on like or dislike button then fetch the updated data
