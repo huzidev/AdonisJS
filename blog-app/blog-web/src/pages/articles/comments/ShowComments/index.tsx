@@ -6,6 +6,7 @@ import { User } from "store/auth/types";
 import { useComment } from "store/comment";
 import { hasPermission } from "utils";
 import { AllCommentsState } from "../AddComment/types";
+import "./index.css";
 import { EditCommentPayload, ReplyState } from "./types";
 
 export default function ShowCommentsPage({
@@ -83,7 +84,7 @@ export default function ShowCommentsPage({
           }}
           className="text-lg mr-2 text-white"
         >
-            - &nbsp;<span className="hover:text-blue-400">{commentBy}</span> {uploadedByUserRole === "super-admin" && "*"}{" "}
+          - &nbsp;<span className="hover:text-blue-400">{commentBy}</span> {uploadedByUserRole === "super-admin" && "*"}{" "}
         </button>
         <p className="text-gray-400">
           {new Date(comment.createdAt).toLocaleDateString()}
@@ -123,7 +124,7 @@ export default function ShowCommentsPage({
           } w-20 rounded shadow bg-gray-700`}
         >
           <ul
-            className="py-1 text-sm text-white"
+            className="py-1 text-center text-sm text-white"
             aria-labelledby="dropdownMenuIconHorizontalButton"
           >
             <li>
@@ -131,7 +132,7 @@ export default function ShowCommentsPage({
                 (isAdmin && !isAuthorSuperAdmin) ||
                 isSuperAdmin) && (
                 <button
-                  className="block py-2 w-full px-4 hover:bg-gray-600 hover:text-white dark:text-white"
+                  className="py-2 w-full hover:bg-gray-600 hover:text-white dark:text-white"
                   onClick={() => {
                     // if user had clicked on reply then first hide that reply input field then show edit comment field
                     replyState && setReplyState(null);
@@ -159,7 +160,7 @@ export default function ShowCommentsPage({
                 (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) ||
                 isSuperAdmin) && (
                 <button
-                  className="block py-2 px-4 hover:bg-gray-600 hover:text-white dark:text-white"
+                  className="block py-2 w-full hover:bg-gray-600 hover:text-white dark:text-white"
                   onClick={() => commentHook.deleteComment(comment.id)}
                 >
                   Delete
