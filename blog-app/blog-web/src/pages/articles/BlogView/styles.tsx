@@ -16,6 +16,7 @@ import 'utils/Modal/index.css';
 import "utils/responsive.css";
 import CommentsPage from "../comments/AddComment";
 import { useGetBlogPageHooks } from "./hooks";
+import "./styles.css";
 import { AddReactionState, BlogState } from "./types";
 
 export default function ViewBlogPage(): JSX.Element {
@@ -255,7 +256,7 @@ export default function ViewBlogPage(): JSX.Element {
                 {blogView.content}
               </p>
             </div>
-            <div className="flex xs:flex-col xs:leading-relaxed xxs:flex-col xxs:leading-relaxed justify-between mr-3 ml-2">
+            <div className="footer-container">
               <div className="flex xs:flex-col xxs:flex-col text-white">
                 <p>Likes : {allReactions && allReactions.totalLikes}</p>
                 <p className="ml-2 xs:m-0 xxs:m-0">
