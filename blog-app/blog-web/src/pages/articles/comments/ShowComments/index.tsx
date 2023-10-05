@@ -86,13 +86,13 @@ export default function ShowCommentsPage({
                   (uploadedByUser.id === userData.id ? "me" : uploadedByUser.id)
               );
             }}
-            className="text-lg mr-2 text-white"
+            className="text-lg mr-2 flex text-white"
           >
             - &nbsp;
             <span className="transition hover:text-blue-400">{commentBy}</span>{" "}
             {uploadedByUserRole === "super-admin" && "*"}{" "}
           {/* to show pen icon beside owner name of the blog */}
-            {(uploadedByUser && uploadedByUser.id === ownerId) && <CreateIcon className='text-xs' />}
+            {(uploadedByUser && uploadedByUser.id === ownerId) && <CreateIcon titleAccess='Author' />}
           </button>
           <p className="text-gray-400">
             {new Date(comment.createdAt).toLocaleDateString()}
