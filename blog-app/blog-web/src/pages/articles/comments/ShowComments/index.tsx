@@ -285,6 +285,8 @@ export default function ShowCommentsPage({
               allReplies={allReplies}
               replyState={replyState}
               setReplyState={setReplyState}
+              // mandatory to call userDetails here for recursion to show reply button on Replies and check whether the user is banned or NOT
+              userDetails={userDetails}
               dropDown={dropDown}
               blogId={blogId}
               setDropDown={setDropDown}
