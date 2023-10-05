@@ -22,7 +22,8 @@ export default function ShowCommentsPage({
   setDropDown,
   editState,
   setEditState,
-  userDetails
+  userDetails,
+  index
 }: any) {
   const commentHook = useComment();
   const auth = useAuth();
@@ -270,7 +271,7 @@ export default function ShowCommentsPage({
             </div>
           )
         )}
-        <hr className="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700" />
+        <hr className="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700" /> 
       </div>
       {replies.map((reply: AllCommentsState) => (
         <div key={reply.id} className="ml-10">
@@ -283,6 +284,11 @@ export default function ShowCommentsPage({
               allReplies={allReplies}
               replyState={replyState}
               setReplyState={setReplyState}
+              isCommentAuthor={isCommentAuthor}
+              isAuthorAdmin={isAuthorAdmin}
+              isBlogOwner={isBlogOwner}
+              isAuthorSuperAdmin={isAuthorSuperAdmin}
+              isAdmin={isAdmin}
               // mandatory to call userDetails here for recursion to show reply button on Replies and check whether the user is banned or NOT
               userDetails={userDetails}
               dropDown={dropDown}
