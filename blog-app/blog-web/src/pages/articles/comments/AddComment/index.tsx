@@ -10,7 +10,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
   const comment = useComment();
   const auth = useAuth();
   const userData = auth.state.user;
-  const { addComment, setAddComment, allComments, allUsers, allReplies, blogId, loggedInId, userDetails } =
+  const { addComment, setAddComment, allComments, allUsers, allReplies, blogId, loggedInId, userDetails, ownerId } =
     useCommentPageHooks();
   const [replyState, setReplyState] = useState<number | null>(null);
   const [editState, setEditState] = useState<number | null>(null);
@@ -22,7 +22,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
     // after adding comment the text-area for add comment will became empty
     setAddComment({ ...addComment, content: '' });
   }
-
+  
   return (
     <section className="bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
@@ -68,6 +68,7 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
                     <div key={index}> 
                       <ShowCommentsPage
                         key={comment.id}
+                        ownerId={ownerId}
                         comment={comment}
                         allUsers={allUsers}
                         commentBy={commentBy}

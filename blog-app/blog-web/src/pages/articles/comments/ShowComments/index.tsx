@@ -1,3 +1,4 @@
+import CreateIcon from '@mui/icons-material/Create';
 import MessageIcon from "@mui/icons-material/Message";
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
@@ -23,6 +24,7 @@ export default function ShowCommentsPage({
   editState,
   setEditState,
   userDetails,
+  ownerId
 }: any) {
   const commentHook = useComment();
   const auth = useAuth();
@@ -89,6 +91,7 @@ export default function ShowCommentsPage({
             - &nbsp;
             <span className="transition hover:text-blue-400">{commentBy}</span>{" "}
             {uploadedByUserRole === "super-admin" && "*"}{" "}
+            {(uploadedByUser && uploadedByUser.id === ownerId) && <CreateIcon className='text-xs' />}
           </button>
           <p className="text-gray-400">
             {new Date(comment.createdAt).toLocaleDateString()}
@@ -293,6 +296,7 @@ export default function ShowCommentsPage({
               blogId={blogId}
               setDropDown={setDropDown}
               editState={editState}
+              ownerId={ownerId}
               setEditState={setEditState}
             />
           </div>

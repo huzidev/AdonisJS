@@ -18,6 +18,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const prevId = usePrevious(blog.state.getBlog);
     const loggedInId: number = auth.state.user?.id!;
     const blogId: number = blog.state.getBlog.data?.id!;
+    const ownerId: number = blog.state.getBlog.data?.ownerId!;
     const commentsState = state.getById.data;
     // allComments will either be array of comments or just empty []
     const allComments: Comment[] = commentsState?.filter((comment: AllCommentsState) => comment.parentId === null) ?? [];
@@ -83,6 +84,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       allReplies,
       blogId,
       loggedInId,
-      userDetails
+      userDetails,
+      ownerId
     };
   }
