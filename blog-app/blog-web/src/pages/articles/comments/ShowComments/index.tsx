@@ -132,7 +132,7 @@ export default function ShowCommentsPage({
           id="dropdownComment1"
           className={`${
             dropDown === comment.id ? "block" : "hidden"
-          } w-20 rounded absolute top-6 right-0 shadow bg-gray-700`}
+          } w-20 rounded absolute top-6 md:top-14 right-0 shadow bg-gray-700`}
         >
           <ul
             className="py-1 text-center text-sm text-white"
