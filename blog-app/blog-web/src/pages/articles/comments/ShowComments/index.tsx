@@ -177,7 +177,6 @@ export default function ShowCommentsPage({
       {editState === comment.id ? (
         <>
           <form onSubmit={submit}>
-            <div className="mt-2">
               <div className='comment-field'>
                 <textarea
                     id="content"
@@ -205,7 +204,6 @@ export default function ShowCommentsPage({
                   value="Save"
                 />
               </div>
-            </div>
           </form>
         </>
       ) : (
