@@ -197,7 +197,7 @@ export default function ShowCommentsPage({
                 className="text-area"
               />
             </div>
-            <div className="flex">
+            <div className="flex sm:flex-col">
               <input
                 onClick={() => setEditState(null)}
                 className="action-button"
@@ -205,7 +205,7 @@ export default function ShowCommentsPage({
                 value="Cancel"
               />
               <input
-                className="action-button ml-2"
+                className="action-button ml-2 sm:mt-2"
                 type="submit"
                 value="Save"
               />
@@ -236,7 +236,7 @@ export default function ShowCommentsPage({
                 required
               />
             </div>
-            <div className="flex">
+            <div className="flex sm:flex-col">
               <input
                 className="action-button"
                 onClick={() => setReplyState(null)}
@@ -244,7 +244,7 @@ export default function ShowCommentsPage({
                 value="Cancel"
               />
               <input
-                className="action-button ml-2"
+                className="action-button ml-2 sm:mt-2"
                 type="submit"
                 value="Reply"
               />
