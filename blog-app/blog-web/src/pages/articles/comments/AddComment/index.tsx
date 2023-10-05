@@ -67,7 +67,6 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
                   return (
                     <div key={index}> 
                       <ShowCommentsPage
-                        index={index}
                         key={comment.id}
                         comment={comment}
                         allUsers={allUsers}
