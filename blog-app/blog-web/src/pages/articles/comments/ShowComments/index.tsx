@@ -205,7 +205,7 @@ export default function ShowCommentsPage({
                 value="Cancel"
               />
               <input
-                className="action-button ml-2 sm:mt-2"
+                className="action-button ml-2 sm:mt-2 xs:mt-2"
                 type="submit"
                 value="Save"
               />
@@ -236,7 +236,7 @@ export default function ShowCommentsPage({
                 required
               />
             </div>
-            <div className="flex sm:flex-col">
+            <div className="flex sm:flex-col xs:flex-col">
               <input
                 className="action-button"
                 onClick={() => setReplyState(null)}
@@ -244,7 +244,7 @@ export default function ShowCommentsPage({
                 value="Cancel"
               />
               <input
-                className="action-button ml-2 sm:mt-2"
+                className="action-button ml-2 sm:mt-2 xs:mt-2"
                 type="submit"
                 value="Reply"
               />
