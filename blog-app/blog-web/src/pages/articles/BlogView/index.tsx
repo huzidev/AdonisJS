@@ -255,10 +255,10 @@ export default function ViewBlogPage(): JSX.Element {
                 {blogView.content}
               </p>
             </div>
-            <div className="flex xs:flex-col xs:leading-relaxed justify-between mr-3 ml-2">
-              <div className="flex xs:flex-col text-white">
+            <div className="flex xs:flex-col xs:leading-relaxed xxs:flex-col xxs:leading-relaxed justify-between mr-3 ml-2">
+              <div className="flex xs:flex-col xxs:flex-col text-white">
                 <p>Likes : {allReactions && allReactions.totalLikes}</p>
-                <p className="ml-2 xs:m-0">
+                <p className="ml-2 xs:m-0 xxs:m-0">
                   Dislikes : {allReactions && allReactions.totalDislikes}
                 </p>
               </div>
