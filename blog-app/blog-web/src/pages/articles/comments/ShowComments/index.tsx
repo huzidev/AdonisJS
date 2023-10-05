@@ -79,24 +79,26 @@ export default function ShowCommentsPage({
     <div>
       <div className="relative">
         <div className="flex items-center">
-          <button
-            onClick={() => {
-              navigate(
-                ROUTE_PATHS.VIEW_PROFILE +
-                  (uploadedByUser.id === userData.id ? "me" : uploadedByUser.id)
-              );
-            }}
-            className="text-lg mr-2 flex items-center text-white"
-          >
-            - &nbsp;
-            <span className="transition hover:text-blue-400 mr-2">{commentBy}</span>
-            {uploadedByUserRole === "super-admin" && "*"}
-            {/* to show pen icon beside owner name of the blog */}
-            {(uploadedByUser && uploadedByUser.id === ownerId) && <CreateIcon titleAccess='Author' />}
-          </button>
-          <p className="text-gray-400">
-            {new Date(comment.createdAt).toLocaleDateString()}
-          </p>
+          <div className='flex md:flex-col md:mb-2'>
+            <button
+              onClick={() => {
+                navigate(
+                  ROUTE_PATHS.VIEW_PROFILE +
+                    (uploadedByUser.id === userData.id ? "me" : uploadedByUser.id)
+                );
+              }}
+              className="text-lg mr-2 flex items-center text-white"
+            >
+              - &nbsp;
+              <span className="transition hover:text-blue-400 mr-2">{commentBy}</span>
+              {uploadedByUserRole === "super-admin" && "*"}
+              {/* to show pen icon beside owner name of the blog */}
+              {(uploadedByUser && uploadedByUser.id === ownerId) && <CreateIcon titleAccess='Author' />}
+            </button>
+            <p className="text-gray-400 md:ml-4">
+              {new Date(comment.createdAt).toLocaleDateString()}
+            </p>
+          </div>
           {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots */}
           {userData &&
             (isCommentAuthor ||
@@ -236,7 +238,7 @@ export default function ShowCommentsPage({
                 required
               />
             </div>
-            <div className="flex sm:flex-col xs:flex-col">
+            <div className="flex md:flex-col sm:flex-col xs:flex-col">
               <input
                 className="action-button"
                 onClick={() => setReplyState(null)}
@@ -244,7 +246,7 @@ export default function ShowCommentsPage({
                 value="Cancel"
               />
               <input
-                className="action-button ml-2 sm:mt-2 xs:mt-2"
+                className="action-button ml-2 md:mt-2 sm:mt-2 xs:mt-2"
                 type="submit"
                 value="Reply"
               />
