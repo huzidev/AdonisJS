@@ -171,7 +171,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                       ) && (
                         <>
                         <div
-                          className="menu"
+                          className="drop-down"
                           onClick={(e) => {
                             e.stopPropagation();
                             setIsSettings( isSettings === blog.id ? null : blog.id );
