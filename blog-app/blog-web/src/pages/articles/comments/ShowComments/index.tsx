@@ -1,4 +1,4 @@
-import MessageIcon from '@mui/icons-material/Message';
+import MessageIcon from "@mui/icons-material/Message";
 import ROUTE_PATHS from "Router/paths";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ export default function ShowCommentsPage({
   editState,
   setEditState,
   userDetails,
-  index
+  index,
 }: any) {
   const commentHook = useComment();
   const auth = useAuth();
@@ -76,51 +76,53 @@ export default function ShowCommentsPage({
 
   return (
     <div>
-      <div className='relative'>
-      <div className="flex items-center">
-        <button
-          onClick={() => {
-            navigate(
-              ROUTE_PATHS.VIEW_PROFILE +
-                (uploadedByUser.id === userData.id ? "me" : uploadedByUser.id)
-            );
-          }}
-          className="text-lg mr-2 text-white"
-        >
-          - &nbsp;<span className="transition hover:text-blue-400">{commentBy}</span> {uploadedByUserRole === "super-admin" && "*"}{" "}
-        </button>
-        <p className="text-gray-400">
-          {new Date(comment.createdAt).toLocaleDateString()}
-        </p>
-        {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots */}
-        {userData &&
-          (isCommentAuthor ||
-            (isAdmin && !isAuthorSuperAdmin) ||
-            (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) ||
-            // isSuperAdmin when super-admin is loggedIn then show three dots for all users even if some other super-admin has comment then show three dots for that comment as well
-            isSuperAdmin) && (
-            <button
-              id="dropdownComment1Button"
-              data-dropdown-toggle="dropdownComment1"
-              className="p-2 text-gray-400 absolute right-0 bottom-0"
-              type="button"
-              // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
-              onClick={() =>
-                setDropDown(dropDown === comment.id ? null : comment.id)
-              }
-            >
-              <svg
-                className="w-5 h-5 "
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
+      <div className="relative">
+        <div className="flex items-center">
+          <button
+            onClick={() => {
+              navigate(
+                ROUTE_PATHS.VIEW_PROFILE +
+                  (uploadedByUser.id === userData.id ? "me" : uploadedByUser.id)
+              );
+            }}
+            className="text-lg mr-2 text-white"
+          >
+            - &nbsp;
+            <span className="transition hover:text-blue-400">{commentBy}</span>{" "}
+            {uploadedByUserRole === "super-admin" && "*"}{" "}
+          </button>
+          <p className="text-gray-400">
+            {new Date(comment.createdAt).toLocaleDateString()}
+          </p>
+          {/* three dots button will only be visible when user is loggedIn or if loggedIn user is admin and comment/reply author is super-admin then don't show three dots */}
+          {userData &&
+            (isCommentAuthor ||
+              (isAdmin && !isAuthorSuperAdmin) ||
+              (isBlogOwner && !isAuthorAdmin && !isAuthorSuperAdmin) ||
+              // isSuperAdmin when super-admin is loggedIn then show three dots for all users even if some other super-admin has comment then show three dots for that comment as well
+              isSuperAdmin) && (
+              <button
+                id="dropdownComment1Button"
+                data-dropdown-toggle="dropdownComment1"
+                className="p-2 text-gray-400 absolute right-0 bottom-0"
+                type="button"
+                // when user clicked on three-dots drop-down first then add comment.id in it and when user clicked again on three-dots drop-down then add null so three-dots drop-down get hidden
+                onClick={() =>
+                  setDropDown(dropDown === comment.id ? null : comment.id)
+                }
               >
-                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-              </svg>
-            </button>
-          )}
-      </div>
+                <svg
+                  className="w-5 h-5 "
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                </svg>
+              </button>
+            )}
+        </div>
         <div
           id="dropdownComment1"
           className={`${
@@ -178,33 +180,33 @@ export default function ShowCommentsPage({
       {editState === comment.id ? (
         <>
           <form onSubmit={submit}>
-              <div className='comment-field'>
-                <textarea
-                    id="content"
-                    rows={1}
-                    name="content"
-                    placeholder="Edit Comment"
-                    value={editComment.content}
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                      setEditComment({ ...editComment, content: e.target.value })
-                    }
-                    required
-                    className="text-area"
-                  />
-              </div>
-              <div className="flex">
-                <input
-                  onClick={() => setEditState(null)}
-                  className="action-button"
-                  type="submit"
-                  value="Cancel"
-                />
-                <input
-                  className="action-button ml-2"
-                  type="submit"
-                  value="Save"
-                />
-              </div>
+            <div className="comment-field">
+              <textarea
+                id="content"
+                rows={1}
+                name="content"
+                placeholder="Edit Comment"
+                value={editComment.content}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setEditComment({ ...editComment, content: e.target.value })
+                }
+                required
+                className="text-area"
+              />
+            </div>
+            <div className="flex">
+              <input
+                onClick={() => setEditState(null)}
+                className="action-button"
+                type="submit"
+                value="Cancel"
+              />
+              <input
+                className="action-button ml-2"
+                type="submit"
+                value="Save"
+              />
+            </div>
           </form>
         </>
       ) : (
@@ -216,20 +218,20 @@ export default function ShowCommentsPage({
           <form onSubmit={submit}>
             <div className="comment-field">
               <textarea
-                  name="reply"
-                  rows={1}
-                  value={reply.content}
-                  // so if user is replying to owns comment then show reply yours comment
-                  placeholder={`Reply to ${
-                    isCommentAuthor ? "Yours" : commentBy + `'s`
-                    // when user is replying to a reply then show Reply to yours/username reply else Reply to yours/username comment
-                  } ${comment.parentId ? "reply" : "comment"}`}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                    setReply({ ...reply, content: e.target.value })
-                  }
-                  className="text-area"
-                  required
-                />
+                name="reply"
+                rows={1}
+                value={reply.content}
+                // so if user is replying to owns comment then show reply yours comment
+                placeholder={`Reply to ${
+                  isCommentAuthor ? "Yours" : commentBy + `'s`
+                  // when user is replying to a reply then show Reply to yours/username reply else Reply to yours/username comment
+                } ${comment.parentId ? "reply" : "comment"}`}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setReply({ ...reply, content: e.target.value })
+                }
+                className="text-area"
+                required
+              />
             </div>
             <div className="flex">
               <input
@@ -248,8 +250,10 @@ export default function ShowCommentsPage({
         ) : (
           // reply button wouldn't be shown when user has clicked on reply button and Reply button will only be visible when user is loggedIn
           // if blog owner is banned then reply button wouldn't be shown
-          userData && (userDetails && !userDetails.isBanned) && (
-            <div 
+          userData &&
+          userDetails &&
+          !userDetails.isBanned && (
+            <div
               className="flex items-center w-20 mt-2 space-x-4"
               onClick={() => {
                 // so if user had clicked on edit comment then first hide that edit comment input then show add comment.id in replyState
@@ -260,18 +264,18 @@ export default function ShowCommentsPage({
                 isEdit && setIsEdit(false);
                 setReplyState(comment.id);
               }}
+            >
+              <button
+                type="button"
+                className="text-gray-500 dark:text-gray-400 font-medium"
               >
-                <button type="button"
-                    className="text-gray-500 dark:text-gray-400 font-medium">
-                    <MessageIcon />
-                    <span className='ml-2 text-lg hover:underline'>
-                      Reply
-                    </span>
-                </button>
+                <MessageIcon />
+                <span className="ml-2 text-lg hover:underline">Reply</span>
+              </button>
             </div>
           )
         )}
-        <hr className="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700" /> 
+        <hr className="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700" />
       </div>
       {replies.map((reply: AllCommentsState) => (
         <div key={reply.id} className="ml-10">
