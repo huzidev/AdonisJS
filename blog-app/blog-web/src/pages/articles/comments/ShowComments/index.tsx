@@ -91,6 +91,7 @@ export default function ShowCommentsPage({
             - &nbsp;
             <span className="transition hover:text-blue-400">{commentBy}</span>{" "}
             {uploadedByUserRole === "super-admin" && "*"}{" "}
+          {/* to show pen icon beside owner name of the blog */}
             {(uploadedByUser && uploadedByUser.id === ownerId) && <CreateIcon className='text-xs' />}
           </button>
           <p className="text-gray-400">
