@@ -288,6 +288,8 @@ export default function ShowCommentsPage({
             <ShowCommentsPage
               comment={reply}
               allUsers={allUsers}
+              isCommentAuthor={isCommentAuthor}
+              isBlogOwner={isBlogOwner}
               allReplies={allReplies}
               replyState={replyState}
               setReplyState={setReplyState}
