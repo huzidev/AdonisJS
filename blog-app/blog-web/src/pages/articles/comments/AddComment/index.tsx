@@ -23,6 +23,9 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
     setAddComment({ ...addComment, content: '' });
   }
   
+  console.log("userDetails add comment", userDetails);
+  
+
   return (
     <section className="bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">

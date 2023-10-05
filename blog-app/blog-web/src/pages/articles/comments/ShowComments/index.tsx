@@ -48,6 +48,9 @@ export default function ShowCommentsPage({
     content: "",
   });
 
+  console.log("userDetails", userDetails);
+  
+
   const isCommentAuthor: boolean = comment.userId === userData?.id;
   const uploadedByUserRole = uploadedByUser?.role;
   const isAuthorSuperAdmin: boolean = uploadedByUserRole === "super-admin";
