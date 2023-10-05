@@ -22,9 +22,6 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
     // after adding comment the text-area for add comment will became empty
     setAddComment({ ...addComment, content: '' });
   }
-  
-  console.log("userDetails add comment", userDetails);
-  
 
   return (
     <section className="bg-gray-900 py-8 lg:py-16">

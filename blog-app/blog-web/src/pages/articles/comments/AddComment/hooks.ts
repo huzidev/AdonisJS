@@ -16,7 +16,6 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const state = comment.state;
     const prev = usePrevious(state);
     const prevId = usePrevious(blog.state.getBlog);
-    const prevUser = usePrevious(user.state.allUser);
     const loggedInId: number = auth.state.user?.id!;
     const blogId: number = blog.state.getBlog.data?.id!;
     const ownerId: number = blog.state.getBlog.data?.ownerId!;
@@ -25,8 +24,8 @@ import { AddCommentPayload, AllCommentsState } from "./types";
     const allComments: Comment[] = commentsState?.filter((comment: AllCommentsState) => comment.parentId === null) ?? [];
     const allReplies: Comment[] = commentsState?.filter((comment: AllCommentsState) => comment.parentId !== null) ?? [];
     const allUsers = user.state.allUser.data;
-    const [userDetails, setUserDetails] = useState<any>();
-    // const userDetails = user.state.getUser.data;
+    // const [userDetails, setUserDetails] = useState<any>();
+    const userDetails = loggedInId === ownerId ? auth.state.user : user.state.getUser.data;
 
     const [addComment, setAddComment] = useState<AddCommentPayload>({
       userId: loggedInId,
@@ -42,12 +41,6 @@ import { AddCommentPayload, AllCommentsState } from "./types";
         user.allUser();
       }
     }, [state.getById]);
-
-    useEffect(() => {
-      if (prevUser?.loading) {
-        setUserDetails(user.state.allUser.data);
-      }
-    }, [user.state.allUser])
 
     useEffect(() => {
       // prevId?.loading so when user go to new blog page then wait till id is fetched of that blog otherwise the previous blog's comments will fetched first then the new blog's comment
