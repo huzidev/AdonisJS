@@ -79,7 +79,7 @@ export default function ShowCommentsPage({
     <div>
       <div className="relative">
         <div className="flex items-center">
-          <div className='flex md:flex-col md:mb-2'>
+          <div className='flex md:flex-col sm:flex-col md:mb-2 sm:mb-2'>
             <button
               onClick={() => {
                 navigate(
@@ -95,7 +95,7 @@ export default function ShowCommentsPage({
               {/* to show pen icon beside owner name of the blog */}
               {(uploadedByUser && uploadedByUser.id === ownerId) && <CreateIcon titleAccess='Author' />}
             </button>
-            <p className="text-gray-400 md:ml-4">
+            <p className="text-gray-400 md:ml-4 sm:ml-4">
               {new Date(comment.createdAt).toLocaleDateString()}
             </p>
           </div>
