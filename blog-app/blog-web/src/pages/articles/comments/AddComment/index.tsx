@@ -58,9 +58,8 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
             </button>
           </form>
         )}
-        <div className="my-2 text-base rounded-lg bg-gray-900">
-          <div className="flex justify-between items-center mb-2">
-            <div>
+          <div className="my-2 text-base rounded-lg bg-gray-900 flex justify-between items-center">
+            <div className="w-full">
               {allComments &&
                 allComments.map((comment: AllCommentsState, index: number) => {
                   const uploadedByUser = allUsers &&
@@ -92,7 +91,6 @@ export default function AddCommentPage(props: PropsState): JSX.Element {
                 })}
             </div>
           </div>
-        </div>
       </div>
     </section>
   );
