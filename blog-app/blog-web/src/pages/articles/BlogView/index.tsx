@@ -249,7 +249,7 @@ export default function ViewBlogPage(): JSX.Element {
               )}
             </div>
             <div className="p-5 w-[90%] mx-auto flex flex-col text-center">
-              <h5 className="mb-4 text-2xl font-bold tracking-tight  text-white">
+              <h5 className="mb-4 text-2xl font-bold tracking-tight text-white">
                 {blogView.title} {blog.state.getBlog.data?.id}
               </h5>
               <p className="mb-3 leading-relaxed font-normal text-gray-400">
@@ -257,7 +257,7 @@ export default function ViewBlogPage(): JSX.Element {
               </p>
             </div>
             <div className="footer-container">
-              <div className="flex xs:flex-col xxs:flex-col text-white">
+              <div className="footer-content">
                 <p>Likes : {allReactions && allReactions.totalLikes}</p>
                 <p className="ml-2 xs:m-0 xxs:m-0">
                   Dislikes : {allReactions && allReactions.totalDislikes}

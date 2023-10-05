@@ -1,3 +1,7 @@
 .footer-container {
     @apply flex xs:flex-col xs:leading-relaxed xxs:flex-col xxs:leading-relaxed justify-between mr-3 ml-2;
 }
+
+.footer-content {
+    @apply flex xs:flex-col xxs:flex-col text-white;
+}
