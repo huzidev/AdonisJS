@@ -43,7 +43,7 @@ export default function ShowBlogs(props: any): JSX.Element {
 
   return (
     <div className="responsive m-auto flex flex-col">
-      <div className="relative flex xs:flex-col justify-between mt-4">
+      <div className="relative flex xs:flex-col xxs:flex-col justify-between mt-4">
         {
             <div>
               <h1 className="text-2xl font-bold tracking-tight dark:text-white">
@@ -67,7 +67,7 @@ export default function ShowBlogs(props: any): JSX.Element {
         if user haven't uploaded any blog then don't show filters and reset filter button also NOT to show filters when clicked on user with user role */}
         {((props.allBlogs.length && props.allBlogs.length === 0) && props.sortValue.value) || props.userDetails?.role !== "user" && (
           <div>
-            <div className="">
+            <div className="xs:mt-2 xxs:mt-2">
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
