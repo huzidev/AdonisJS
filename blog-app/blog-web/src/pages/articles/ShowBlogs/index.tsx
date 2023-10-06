@@ -331,7 +331,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                         {blog.content}
                     </p>
                     <div className="flex justify-between items-center">
-                      <div className="flex items-center w-3/4">
+                      <div className="flex items-center">
                         <img
                           className="w-10 h-10 rounded-full bg-black"
                           src="/docs/images/people/profile-picture-5.jpg"
@@ -379,7 +379,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                           )}
                         </p>
                       </div>
-                      <div className="w-1/4">
+                      <div>
                         <p className="text-white">
                           {/* Uploaded At :{" "} */}
                           {new Date(blog.createdAt).toLocaleDateString()}
