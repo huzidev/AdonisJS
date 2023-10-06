@@ -31,8 +31,8 @@ export default function ShowBlogs(props: any): JSX.Element {
   const [dropDown, setDropDown] = useState<boolean>(false);
   const [isSettings, setIsSettings] = useState<number | null>(null);
   const params = useParams();
-  const isMe = params.id === "me";
-  const isUser = auth.state.user?.role === "user";
+  const isMe: boolean = params.id === "me";
+  const isUser: boolean = auth.state.user?.role === "user";
   const { isViewProfile, currentPath } = useShowBlogsHook();
   
   const favBlogs =
