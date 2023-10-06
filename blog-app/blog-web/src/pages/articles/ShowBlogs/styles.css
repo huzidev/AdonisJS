@@ -2,7 +2,7 @@
     @apply text-white focus:ring-2 focus:outline-none font-medium rounded-lg text-sm w-32 py-2.5 inline-flex items-center justify-center transition bg-blue-600 focus:ring-blue-800;
 }
 
-@media screen(2xl), screen(xl) {
+@media screen(2xl), screen(xl), screen(lg), screen(md) {
     .responsive-items {
         @apply w-[49.5%]
     }
