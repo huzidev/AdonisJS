@@ -151,7 +151,6 @@ export default function ShowBlogs(props: any): JSX.Element {
             const uploadedByUserId = uploadedByUser && uploadedByUser.id;
             const uploadedByUsername =
               uploadedByUser && uploadedByUser.username;
-
             return (
               // ${index % 3 === 1 && 'mx-4'} so margin will only be added on the middle div
               <div
@@ -512,9 +511,6 @@ export default function ShowBlogs(props: any): JSX.Element {
           )}
         </div>
       )}
-      <div className="test">
-            Hello
-      </div>
     </div>
   );
 }
