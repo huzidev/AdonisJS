@@ -269,11 +269,12 @@ export default function ShowBlogs(props: any): JSX.Element {
                       </h1>
                       <h1
                         title={blog.title}
-                        className="mb-1 text-xl font-semibold text-white"
+                        className="mb-1 text-xl truncate font-semibold text-white"
                       >
-                        {blog.title.length > 21
+                        {/* {blog.title.length > 21
                           ? `${blog.title.slice(0, 21)}...`
-                          : blog.title}
+                          : blog.title} */}
+                          {blog.title}
                       </h1>
                       {
                         // only if loggedIn user's role is user then show heart icon for adding blogs in favorite
