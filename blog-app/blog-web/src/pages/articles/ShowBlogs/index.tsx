@@ -327,7 +327,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                     </div>
                     <p
                       title={blog.content}
-                      className="mb-3 font-normal  text-gray-400"
+                      className="mb-3 font-normal text-gray-400"
                     >
                       {blog.content.length > 42
                         ? `${blog.content.slice(0, 42)}...`
