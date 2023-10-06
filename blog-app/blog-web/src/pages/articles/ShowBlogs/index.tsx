@@ -43,9 +43,9 @@ export default function ShowBlogs(props: any): JSX.Element {
 
   return (
     <div className="responsive m-auto flex flex-col">
-      <div className="relative mb-8 mt-4">
+      <div className="relative flex xs:flex-col justify-between mt-4">
         {
-            <div className="absolute">
+            <div>
               <h1 className="text-2xl font-bold tracking-tight dark:text-white">
                 {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
                 {/* isLoadingUser ? "" so when userState is in loading then don't show anything otherwise it'll show Blogs Uploaded while user state is in loading */}
@@ -67,7 +67,7 @@ export default function ShowBlogs(props: any): JSX.Element {
         if user haven't uploaded any blog then don't show filters and reset filter button also NOT to show filters when clicked on user with user role */}
         {((props.allBlogs.length && props.allBlogs.length === 0) && props.sortValue.value) || props.userDetails?.role !== "user" && (
           <div>
-            <div className="absolute right-0">
+            <div className="">
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
