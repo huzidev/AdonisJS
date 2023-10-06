@@ -19,3 +19,9 @@
         @apply w-[100%]
     }
 }
+
+@media screen(sm), screen(xs), screen(xxs) {
+    .content-heading {
+        @apply text-xl
+    }
+}

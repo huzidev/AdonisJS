@@ -45,8 +45,8 @@ export default function ShowBlogs(props: any): JSX.Element {
     <div className="responsive m-auto flex flex-col">
       <div className="relative flex xs:flex-col xxs:flex-col justify-between mt-4">
         {
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight dark:text-white">
+          <div className="my-auto">
+            <h1 className="text-2xl content-heading sm:truncate font-bold tracking-tight dark:text-white">
               {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
               {/* isLoadingUser ? "" so when userState is in loading then don't show anything otherwise it'll show Blogs Uploaded while user state is in loading */}
               {
