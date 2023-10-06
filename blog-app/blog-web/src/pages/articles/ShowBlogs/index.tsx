@@ -45,89 +45,87 @@ export default function ShowBlogs(props: any): JSX.Element {
     <div className="responsive m-auto flex flex-col">
       <div className="relative flex xs:flex-col xxs:flex-col justify-between mt-4">
         {
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight dark:text-white">
-                {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
-                {/* isLoadingUser ? "" so when userState is in loading then don't show anything otherwise it'll show Blogs Uploaded while user state is in loading */}
-                {
-                  isViewProfile ? (
-                    props.isLoading
-                      ? ''
-                      : (isUser && isMe) || props.isRole === "user"
-                      ? `Blogs Liked By ${isMe ? "You" : props.userDetails.username}`
-                      : `Blogs Uploaded By ${!isMe ? props.userDetails.username : "You"}`
-                  ) : (
-                    (!props.isFilter ? 'All' : startCase(props.isFilter)) + ' Blogs'
-                  )
-                }
-              </h1> 
-            </div>
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight dark:text-white">
+              {/* if role is user then user can't upload the blogs hence show blogs Liked by you else if blogger loggedIn then show blogs Uploaded by You */}
+              {/* isLoadingUser ? "" so when userState is in loading then don't show anything otherwise it'll show Blogs Uploaded while user state is in loading */}
+              {
+                isViewProfile ? (
+                  props.isLoading
+                    ? ''
+                    : (isUser && isMe) || props.isRole === "user"
+                    ? `Blogs Liked By ${isMe ? "You" : props.userDetails.username}`
+                    : `Blogs By ${!isMe ? props.userDetails.username : "You"}`
+                ) : (
+                  (!props.isFilter ? 'All' : startCase(props.isFilter)) + ' Blogs'
+                )
+              }
+            </h1> 
+          </div>
         }
         {/* Only show filters and reset filter when user selects filters therefore the value will stored in sortValue.value BUT
         if user haven't uploaded any blog then don't show filters and reset filter button also NOT to show filters when clicked on user with user role */}
         {((props.allBlogs.length && props.allBlogs.length === 0) && props.sortValue.value) || props.userDetails?.role !== "user" && (
-          <div>
-            <div className="xs:mt-2 xxs:mt-2">
-              <button
-                id="dropdownDefaultButton"
-                data-dropdown-toggle="dropdown"
-                className="filter-actions hover:bg-blue-700 mr-2"
-                type="button"
-                onClick={() => setDropDown(!dropDown)}
+          <div className="xs:mt-2 xxs:mt-2">
+            <button
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              className="filter-actions hover:bg-blue-700 mr-2"
+              type="button"
+              onClick={() => setDropDown(!dropDown)}
+            >
+              Filters{" "}
+              <svg
+                className="w-2.5 h-2.5 ml-2.5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
               >
-                Filters{" "}
-                <svg
-                  className="w-2.5 h-2.5 ml-2.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+              <div
+                id="dropdown"
+                className={`z-10 ${
+                  dropDown
+                    ? "block absolute divide-y divide-gray-100 rounded-lg shadow w-32 bg-gray-700"
+                    : "hidden"
+                }`}
+              >
+                <ul
+                  className="py-2 text-sm text-gray-200"
+                  aria-labelledby="dropdownDefaultButton"
                 >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
+                  {props.columns.map((data: any, index: number) => (
+                    // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
+                    <li
+                      onClick={() => props.handleSort(data.title)}
+                      className="px-5 py-3 cursor-pointer"
+                      key={index}
+                    >
+                      {/* startCase will make the first letter Capital of any word */}
+                      {startCase(data.title)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <button
+                className={`filter-actions ${props.sortValue.value ? 'cursor-pointer' : 'cursor-not-allowed disabled:opacity-60'}`}
+                disabled={props.sortValue.value ? false : true}
+                onClick={() => {
+                  props.handleSort("");
+                  setDropDown(false);
+                }}
+              >
+                Reset Filters
               </button>
-                <div
-                  id="dropdown"
-                  className={`z-10 ${
-                    dropDown
-                      ? "block absolute divide-y divide-gray-100 rounded-lg shadow w-32 bg-gray-700"
-                      : "hidden"
-                  }`}
-                >
-                  <ul
-                    className="py-2 text-sm text-gray-200"
-                    aria-labelledby="dropdownDefaultButton"
-                  >
-                    {props.columns.map((data: any, index: number) => (
-                      // because we don't wanna put onClick filters on sno and actions field therefore using constKeys conditions
-                      <li
-                        onClick={() => props.handleSort(data.title)}
-                        className="px-5 py-3 cursor-pointer"
-                        key={index}
-                      >
-                        {/* startCase will make the first letter Capital of any word */}
-                        {startCase(data.title)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <button
-                  className={`filter-actions ${props.sortValue.value ? 'cursor-pointer' : 'cursor-not-allowed disabled:opacity-60'}`}
-                  disabled={props.sortValue.value ? false : true}
-                  onClick={() => {
-                    props.handleSort("");
-                    setDropDown(false);
-                  }}
-                >
-                  Reset Filters
-                </button>
-            </div>
           </div>
         )}
       </div>
