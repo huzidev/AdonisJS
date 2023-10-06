@@ -1,4 +1,4 @@
-@media screen(md), screen(sm) {
+@media screen(md), screen(sm), screen(xs), screen(xxs) {
     .filter-responsive {
         @apply w-24 py-2
     }
