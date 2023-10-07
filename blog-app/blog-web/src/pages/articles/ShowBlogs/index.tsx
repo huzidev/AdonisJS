@@ -288,7 +288,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                                 (favoriteBlog: any) =>
                                   favoriteBlog.id === blog.id
                               )
-                                ? "text-red-500"
+                                ? "text-"
                                 : "text-gray-500"
                             }`}
                             onClick={(e) => {
