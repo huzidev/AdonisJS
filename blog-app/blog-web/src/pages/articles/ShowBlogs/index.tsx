@@ -278,7 +278,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                             title={
                               (favBlogs.find(
                                 (favoriteBlog: any) =>
-                                  favoriteBlog.id === blog
+                                  favoriteBlog.id === blog.id
                               )
                                 ? "Remove From"
                                 : "Add to") + " favorite"
