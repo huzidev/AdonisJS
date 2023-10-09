@@ -1,6 +1,6 @@
 import CreateIcon from '@mui/icons-material/Create';
 import MessageIcon from "@mui/icons-material/Message";
-import ROUTE_PATHS from "Router/paths";
+import ROUTE_PATHS from 'Router/paths';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/auth";
@@ -84,7 +84,9 @@ export default function ShowCommentsPage({
               onClick={() => {
                 navigate(
                   ROUTE_PATHS.VIEW_PROFILE +
-                    (uploadedByUser.id === userData.id ? "me" : uploadedByUser.id)
+                  // userData to only check uploadedByUser.id === userData.id this condition if user is loggedIn 
+                  // if their is no userData means user is not loggedIn
+                    ((userData && uploadedByUser.id === userData.id) ? "me" : uploadedByUser.id)
                 );
               }}
               className="text-lg mr-2 flex items-center text-white"
