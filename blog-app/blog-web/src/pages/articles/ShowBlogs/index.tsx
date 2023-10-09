@@ -330,7 +330,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                         : blog.content} */}
                         {blog.content}
                     </p>
-                    <div className="flex justify-between items-center">
+                    <div className="flex xxs:flex-col xxs:items-start justify-between items-center">
                       <div className="flex items-center">
                         <img
                           className="w-10 h-10 rounded-full bg-black"
