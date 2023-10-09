@@ -79,7 +79,6 @@ export default function AddBlogPage(): JSX.Element {
               </select>
             </div>
           </div>
-
           <div className="mb-3">
             <label htmlFor="image" className="form-heading mb-2">
               Image
