@@ -116,13 +116,6 @@ export function useFiltersHook() {
           : sortValue.type === data[index]
           ? index !== data.length - 1 && (type = data[index + 1])
           : (type = "");
-          // : sortValue.type === "admin"
-          // ? (type = "super-admin")
-          // : sortValue.type === "super-admin"
-          // ? (type = "user")
-          // : sortValue.type === "user"
-          // ? (type = "blogger")
-          // : type = ''
       } else {
         notRoleResult.includes(sortValue.type) || !sortValue.type
           ? (type = "astronomy")

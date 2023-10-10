@@ -14,6 +14,7 @@ import { hasPermission } from "utils";
 import 'utils/Modal/index.css';
 import { LoaderSpin, LoadingListBlogs } from "utils/loading";
 import 'utils/responsive.css';
+import { screen } from "utils/screen";
 import { useShowBlogsHook } from "./hooks";
 import './styles.css';
 // import { props.columns } from './data';
@@ -40,6 +41,10 @@ export default function ShowBlogs(props: any): JSX.Element {
     isViewProfile && !isMe || currentPath.includes('/blogs')
       ? blogs.state.getAllFavoriteBlogs.data
       : blogs.state.getFavoriteBlogs.data;
+
+  const window = screen();
+  console.log("Window", window);
+  
 
   return (
     <div className="responsive m-auto flex flex-col">
