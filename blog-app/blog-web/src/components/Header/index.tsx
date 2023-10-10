@@ -38,7 +38,7 @@ export default function Header(): JSX.Element {
             <span className={`ham-menu ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
             <span className={`ham-menu ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
           </div>
-            <ul className={`${screen.width > 1000 ? 'font-medium font flex' : `side-bar ${
+            <ul className={`${screen > 1000 ? 'font-medium font flex' : `side-bar ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}>
               {/* <ul className={`${`menu:flex side-bar ${

@@ -42,8 +42,7 @@ export default function ShowBlogs(props: any): JSX.Element {
       ? blogs.state.getAllFavoriteBlogs.data
       : blogs.state.getFavoriteBlogs.data;
 
-  const window = useScreen();
-  console.log("Window", window);
+  const screen = useScreen();
   
 
   return (
