@@ -150,11 +150,11 @@ export default function ShowBlogs(props: any): JSX.Element {
             const uploadedByUsername =
               uploadedByUser && uploadedByUser.username;
             return (
-              // ${index % 3 === 1 && 'mx-4'} so margin will only be added on the middle div
+              // ${index % 3 === 1 && 'mx-[.5%]'} so margin will only be added on the middle div
               <div
                 key={blog.id}
                 title="Read More"
-                className={`w-[33.33%] ${index % 3 === 1 && 'mx-2'} responsive-items relative mt-8`}
+                className={`w-[33%] ${index % 3 === 1 && 'mx-[.5%]'} responsive-items relative mt-8`}
                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
               >
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
