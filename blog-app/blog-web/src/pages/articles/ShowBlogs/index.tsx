@@ -43,7 +43,6 @@ export default function ShowBlogs(props: any): JSX.Element {
       : blogs.state.getFavoriteBlogs.data;
 
   const screen = useScreen();
-  
 
   return (
     <div className="responsive m-auto flex flex-col">
@@ -158,7 +157,7 @@ export default function ShowBlogs(props: any): JSX.Element {
               <div
               title="Read More"
                 key={blog.id}
-                className={`w-[33%]  responsive-items relative mt-8`}
+                className={`w-[33%] ${screen > 1400 ? index % 3 === 1 && 'mx-[.5%]' : 'mx-[.5%]'} responsive-items relative mt-8`}
                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
               >
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
