@@ -129,7 +129,7 @@ export default function ShowBlogs(props: any): JSX.Element {
           </div>
         )}
       </div>
-      <div className="flex flex-wrap justify-between">
+      <div className="flex flex-wrap">
         {/* if their is some data in props.allBlogs then don't show skeleton loading because then load more spinner will run while fetching data */}
         {(
           isViewProfile
@@ -154,7 +154,7 @@ export default function ShowBlogs(props: any): JSX.Element {
               <div
                 key={blog.id}
                 title="Read More"
-                className={`w-[33%] responsive-items relative mt-8`}
+                className={`w-[33.33%] ${index % 3 === 1 && 'mx-2'} responsive-items relative mt-8`}
                 onClick={() => navigate(ROUTE_PATHS.ARTICLE_VIEW + blog.slug)}
               >
                 {/* <img src={ele.image} alt="Thumbnail" /> */}
