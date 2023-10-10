@@ -3,12 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "store/auth";
 import { hasPermission } from "utils";
 import 'utils/responsive.css';
+import { useScreen } from "utils/screen";
 import { adminPaths, links, loggedInPathsBlogger, loggedInPathsUser, loggedOutPaths, managePaths } from "./data";
 import './styles.css';
 
 export default function Header(): JSX.Element {
   const location = useLocation();
   const auth = useAuth();
+  const screen = useScreen();
   const user = auth.state.user;
   const isBanned = user?.isBanned;
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -21,17 +23,6 @@ export default function Header(): JSX.Element {
     setIsOpen(false);
   }, [window.location.pathname])
 
-  const [width, setWidth] = useState<number>(window.innerWidth);
-  
-  useEffect(() => {
-    const updateWindowDimensions = () => {
-      const newWidth = window.innerWidth;
-      setWidth(newWidth);
-    };
-    window.addEventListener("resize", updateWindowDimensions);
-    return () => window.removeEventListener("resize", updateWindowDimensions) 
-  }, []);
-  
   return (
     <div>
       <nav className="bg-gray-900">
@@ -47,7 +38,7 @@ export default function Header(): JSX.Element {
             <span className={`ham-menu ${isOpen ? 'opacity-0': 'opacity-100'}`}></span>
             <span className={`ham-menu ${isOpen ? '-rotate-45 -translate-y-2.5': ''}`}></span>  
           </div>
-            <ul className={`${width > 1000 ? 'font-medium font flex' : `side-bar ${
+            <ul className={`${screen.width > 1000 ? 'font-medium font flex' : `side-bar ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}>
               {/* <ul className={`${`menu:flex side-bar ${
