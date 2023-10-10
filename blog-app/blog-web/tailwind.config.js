@@ -16,6 +16,7 @@ module.exports = {
       'xl': { 'min': '1001px', 'max': '1280px' },
       '2xl': { 'min': '1281px', 'max': '1400px' },
       '3xl': { 'min': '1401px', 'max': '1800px' },
+      'margin': { 'min': '1401px' },
       'full': { 'min': '1801px' }
     },
     extend: {
