@@ -55,7 +55,7 @@ export default function ShowBlogs(props: any): JSX.Element {
                     ? ''
                     : (isUser && isMe) || props.isRole === "user"
                     ? `Blogs Liked By ${isMe ? "You" : props.userDetails.username}`
-                    : `Blogs By ${!isMe ? props.userDetails.username : "You"}`
+                    : `${startCase(props.isFilter)} Blogs By ${!isMe ? props.userDetails.username : "You"}`
                 ) : (
                   (!props.isFilter ? 'All' : startCase(props.isFilter)) + ' Blogs'
                 )
