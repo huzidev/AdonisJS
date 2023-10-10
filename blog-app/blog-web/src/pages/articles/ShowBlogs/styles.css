@@ -25,9 +25,3 @@
         @apply text-xl
     }
 }
-
-@media screen(full), screen(3xl) {
-    .margin {
-        @apply mx-[.5%]
-    }
-}
