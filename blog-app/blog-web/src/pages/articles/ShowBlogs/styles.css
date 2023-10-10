@@ -10,7 +10,7 @@
 
 @media screen(2xl), screen(xl), screen(lg) {
     .responsive-items {
-        @apply w-[49.5%]
+        @apply w-[49%]
     }
 }
 
