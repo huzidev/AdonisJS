@@ -15,7 +15,7 @@ export const reactionSlice = createSlice({
   reducers: {
     reactions: (state) => {
       if (state.addReaction) {
-        state.getReactions = state.getReactions
+        state.getReactions = state.getReactions;
       }
     }
   },
