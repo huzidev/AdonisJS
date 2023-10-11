@@ -31,6 +31,7 @@ import { AddCommentPayload, AllCommentsState } from "./types";
       userId: loggedInId,
       articleId: blogId,
       content: '',
+      // parentId is for replies only
       parentId: null
     });
 
