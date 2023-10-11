@@ -41,76 +41,72 @@ export default function Header(): JSX.Element {
             <ul className={`${screen > 1000 ? 'font-medium font flex' : `side-bar ${
               isOpen ? 'translate-x-0' : 'translate-x-full'
             }`} `}>
-              {/* <ul className={`${`menu:flex side-bar ${
-              isOpen ? 'translate-x-0' : 'translate-x-full'
-            }`} `}> */}
-                  {auth.state.initState.init && links.map((data, index: number) => (
-                    // user has to be verified to access the links and if user role is "user" then not to show addBlog Page
-                    // so if user is banned then don't show header paths Except the SignOut path
-                    !isBanned && (
-                      user && (user.role === "blogger" && loggedInPathsBlogger.includes(data.link) || user.role === "user" && loggedInPathsUser.includes(data.link)) && user.isVerified ? (
-                          <li key={index}>
-                            <Link
-                            to={managePaths.includes(data.link) ? data.link + "1" : data.link }
-                              className={`
-                                  nav-element ${
-                                    location.pathname.includes(data.link)
-                                      ? "text-blue-500"
-                                      : "text-white"
-                                  }
-                                `}
-                            >
-                              {data.title}
-                            </Link>
-                          </li>
-                      ) : !user && loggedOutPaths.includes(data.link) ? (
-                        <li key={index}>
-                          <Link
-                            to={data.link}
-                            className={`
-                                nav-element ${
-                                  location.pathname === data.link
-                                    ? "text-blue-500"
-                                    : "text-white"
-                                }
-                              `}
-                          >
-                            {data.title}
-                          </Link>
-                        </li>
-                        // only admin and super-admin can see Manage Users page
-                      ) : user && hasPermission("admin", user.role) && adminPaths.includes(data.link) && user?.isVerified && (
-                        <li key={index}>
-                          <Link
-                          // so whem user clicked on manageUsers or manageBlogs then add 1 at end of URL which is page 1 for pagination
-                            // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
-                            to={managePaths.includes(data.link) ? data.link + "1" : data.link }
-                            className={`
-                                nav-element ${
-                                  // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
-                                  location.pathname.includes(data.link)
-                                    ? "text-blue-500"
-                                    : "text-white"
-                                }
-                              `}
-                          >
-                            {data.title}
-                          </Link>
-                        </li>
-                      )
-                    )
-                  ))} 
-                  {user && (
-                    <li>
-                      <button
-                        onClick={() => auth.signOut()}
-                        className="nav-element text-white"
+              {auth.state.initState.init && links.map((data, index: number) => (
+                // user has to be verified to access the links and if user role is "user" then not to show addBlog Page
+                // so if user is banned then don't show header paths Except the SignOut path
+                !isBanned && (
+                  user && (user.role === "blogger" && loggedInPathsBlogger.includes(data.link) || user.role === "user" && loggedInPathsUser.includes(data.link)) && user.isVerified ? (
+                      <li key={index}>
+                        <Link
+                        to={managePaths.includes(data.link) ? data.link + "1" : data.link }
+                          className={`
+                              nav-element ${
+                                location.pathname.includes(data.link)
+                                  ? "text-blue-500"
+                                  : "text-white"
+                              }
+                            `}
+                        >
+                          {data.title}
+                        </Link>
+                      </li>
+                  ) : !user && loggedOutPaths.includes(data.link) ? (
+                    <li key={index}>
+                      <Link
+                        to={data.link}
+                        className={`
+                            nav-element ${
+                              location.pathname === data.link
+                                ? "text-blue-500"
+                                : "text-white"
+                            }
+                          `}
                       >
-                        SignOut
-                      </button>
+                        {data.title}
+                      </Link>
                     </li>
-                  )}
+                    // only admin and super-admin can see Manage Users page
+                  ) : user && hasPermission("admin", user.role) && adminPaths.includes(data.link) && user?.isVerified && (
+                    <li key={index}>
+                      <Link
+                      // so whem user clicked on manageUsers or manageBlogs then add 1 at end of URL which is page 1 for pagination
+                        // to={!location.pathname.includes(value) ? data.link + "1" : data.link}
+                        to={managePaths.includes(data.link) ? data.link + "1" : data.link }
+                        className={`
+                            nav-element ${
+                              // so only clicked URL text will changed to blue which shows that user clicked OR user is on that page
+                              location.pathname.includes(data.link)
+                                ? "text-blue-500"
+                                : "text-white"
+                            }
+                          `}
+                      >
+                        {data.title}
+                      </Link>
+                    </li>
+                  )
                 )
+              ))} 
+              {user && (
+                <li>
+                  <button
+                    onClick={() => auth.signOut()}
+                    className="nav-element text-white"
+                  >
+                    SignOut
+                  </button>
+                </li>
+              )}
             </ul>
         </div>
       </nav>
