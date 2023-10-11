@@ -64,6 +64,21 @@ export const commentSlice = createSlice({
         builder.addCase(actions.getAllComments.rejected, (state) => {
           state.getAllComments = { loading: false, error: true };
         });
+        // Edit Comment
+        builder.addCase(actions.editComment.pending, (state) => {
+          state.editComment = { loading: true, error: false };
+        });
+        builder.addCase(actions.editComment.fulfilled, (state, action) => {
+          state.editComment = { loading: false, error: false };
+            if (action.payload) {
+              const { message, data } = action.payload; 
+              state.editComment.data = data;
+              state.editComment.message = message;
+            }
+        })
+        builder.addCase(actions.editComment.rejected, (state) => {
+          state.editComment = { loading: false, error: true };
+        });
         // Delete Comment
         builder.addCase(actions.deleteComment.pending, (state) => {
           state.deleteComment = { loading: true, error: false };
