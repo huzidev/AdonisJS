@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/hooks/hooks";
 import * as actions from "./actions";
-import { reactionSlice } from "./reducer";
 import { AddReactionPayload, GetReactionPayload, ReactionState } from "./types";
 
 export const useReactions = () => {
@@ -10,13 +9,11 @@ export const useReactions = () => {
   const getAllReactions = () => dispatch(actions.getAllReactions());
   const addReaction = (payload: AddReactionPayload) => dispatch(actions.addReaction(payload));
   const getReactions = (payload: GetReactionPayload) => dispatch(actions.getReactions(payload));
-  const reactions = () => dispatch(reactionSlice.actions.reactions());
 
   return {
     state,
     addReaction,
     getReactions,
-    getAllReactions,
-    reactions
+    getAllReactions
   };
 };
