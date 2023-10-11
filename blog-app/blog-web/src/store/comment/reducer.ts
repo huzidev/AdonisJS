@@ -71,8 +71,11 @@ export const commentSlice = createSlice({
         builder.addCase(actions.editComment.fulfilled, (state, action) => {
           state.editComment = { loading: false, error: false };
             if (action.payload) {
-              const { message, data } = action.payload; 
-              state.editComment.data = data;
+              const { message, data } = action.payload;
+              // fetch all comments except the one which has to be edit
+              const prevComments = JSON.parse(JSON.stringify(state.getById.data?.filter((val) => val.id !== data.id)));
+              // append prevComments except the one which has been updated and concat the updated comment with the previous comments
+              state.getById.data = [...prevComments, data]
               state.editComment.message = message;
             }
         })
