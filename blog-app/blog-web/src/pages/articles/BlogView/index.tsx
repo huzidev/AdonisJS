@@ -52,8 +52,8 @@ export default function ViewBlogPage(): JSX.Element {
     <div className="responsive mx-auto">
       <div className="my-8 border rounded-lg shadow bg-gray-800 border-gray-700">
         {owner?.isBanned ? (
-          <div className="flex justify-center py-32">
-            <p className="text-xl dark:text-white">
+          <div className="flex justify-center text-white py-32">
+            <p className="text-xl">
               User{" "}
               <Link to={ROUTE_PATHS.VIEW_PROFILE + ownerId}>
                 <b>{owner?.username}</b>
