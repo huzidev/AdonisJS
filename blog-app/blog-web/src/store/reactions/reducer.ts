@@ -12,7 +12,13 @@ const initialState: ReactionState = {
 export const reactionSlice = createSlice({
   name: "reactions",
   initialState,
-  reducers: {},
+  reducers: {
+    reactions: (state) => {
+      if (state.addReaction) {
+        state.getReactions = state.getReactions
+      }
+    }
+  },
   extraReducers: (builder) => {
     // Add Reactions (Likes, Dislikes)
     builder.addCase(actions.addReaction.pending, (state) => {
