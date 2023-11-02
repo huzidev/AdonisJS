@@ -70,7 +70,7 @@ export default function AppRouter(): JSX.Element {
                   />
                 );
               })}
-              <Route path="*" element={<NotFoundPage />} />
+              <Route path='*' element={<NotFoundPage />} />
             </Routes>
           </Suspense>
           <ToastContainer />
