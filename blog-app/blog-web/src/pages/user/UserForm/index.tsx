@@ -12,7 +12,7 @@ import 'utils/form/index.css';
 import { LoadingList, LoadingThreeDots } from "utils/loading";
 import { useUserFormHook } from "./hooks";
 
-export default function UserFormPage() {
+export default function UserFormPage(): JSX.Element {
   const auth = useAuth();
   const user = useUser();
   const [icon, setIcon] = useState<IconState>(initialIconState);
